@@ -1,5 +1,6 @@
 .App {
-  text-align: center;
+  text-align: left;
+
 }
 
 .App-logo {
@@ -35,4 +36,55 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.Hero {
+  padding: 100px;
+  background-color: aliceblue;
+}
+
+.Hero > div {
+  max-width: 400px;
+  background-color: white;
+}
+
+.CTAbutton {
+  padding: 10px;
+  margin: 10px;
+  background-color: greenyellow;
+}
+
+.grid--4 {
+  
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -10px;
+}
+
+.cardTitle, .cardDesc, .cardPrice {
+  
+  margin-bottom: 10px;
+}
+
+
+.cardContent {
+  background-color: whitesmoke;
+}
+
+.coursecard {
+  background-color: beige;
+  flex-basis: calc(24% - 10px);
+  margin-left: 20px;
+  margin-bottom: 16px;
+  min-width: 450px;
+}
+
+.coursecard > section {
+  padding: 10px;
+  margin: 4px;
+  background-color: white;
+}
+
+.coursecard:hover {
+  
 }
