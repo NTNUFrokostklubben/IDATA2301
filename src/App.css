@@ -54,29 +54,46 @@
   background-color: greenyellow;
 }
 
+.grid {
+  align-items: center;
+}
+
 .grid--4 {
   
   display: flex;
   flex-wrap: wrap;
-  margin-left: -10px;
 }
 
 .cardTitle, .cardDesc, .cardPrice {
+  padding: 4px;
   
-  margin-bottom: 10px;
 }
 
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.cardImage {
+  object-fit: contain;
+  height: 200px;
+  width: 100%;
+  /*background-color: whitesmoke;*/
+}
 
 .cardContent {
-  background-color: whitesmoke;
+  
 }
 
 .coursecard {
-  background-color: beige;
+  text-decoration: none;
+  border: 2px solid #1C6EA4;
+  border-radius: 8px;
   flex-basis: calc(24% - 10px);
   margin-left: 20px;
   margin-bottom: 16px;
   min-width: 450px;
+  max-width: 450px;
 }
 
 .coursecard > section {
@@ -86,5 +103,5 @@
 }
 
 .coursecard:hover {
-  
+  box-shadow: 2px 2px 2px 2px #282c34;
 }
