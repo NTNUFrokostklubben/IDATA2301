@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="filters">
+    <form action="http://localhost:6655" method="GET">
+        <section id="difficulty">
+            <p>Difficulty level</p>
+            <label><input type="checkbox"> Beginner</label>
+            <label><input type="checkbox"> Intermediate</label>
+            <label><input type="checkbox"> Expert</label>
+        </section>
+        <section id="size">
+            <p>Course size</p>
+            <p>ECTS credits</p>
+            <label>Min <input placeholder="Min" type="number"></label>
+            <span> - </span>
+            <label><input placeholder="Max" type="number"> Max</label>
+        </section>
+        <section id="category">
+            <p>Category</p>
+            <label><input type="checkbox"> Information Technologies</label>
+            <label><input type="checkbox"> Digital Marketing</label>
+            <label><input type="checkbox"> Business and Entrepenaurship</label>
+            <label><input type="checkbox"> Data Science and Analytics</label>
+        </section>
+        <section id="ratings">
+            <p>Ratings</p>
+            <label>Min rating <input placeholder="Min rating" type="number"></label>
+            <span> - </span>
+            <label><input placeholder="Max rating" type="number"> Max rating</label>
+        </section>
+        <section id="price">
+            <p>Price</p>
+            <label>Min price <input placeholder="Min price" type="number"></label>
+            <span> - </span>
+            <label><input placeholder="Max price" type="number"> Max price</label>
+        </section>
+        <section id="dates">
+            <p>Course Start</p>
+            <label>From <input type="date"></label>
+            <label>To <input type="date"></label>
+        </section>
+        <button type="submit">Filter</button>
+    </form>
+</div>
+<br>
+<div class="results">
+    <section id="resultsinfo">
+        <h1>3 results for "Lorem Ipsum"</h1>
+        <label>Sort by <select type="dropdown">
+            <option>Most Relevant</option>
+            <option>Price Ascending</option>
+            <option>Price Descending</option>
+            <option>Highest Reviewed</option>
+            <option>Newest</option>
+        </select></label>
+    </section>
+    <br>
+    <section id="results">
+        <section id="course1">
+            
+            <h2>Search Engine Optimization</h2>
+            <img src="https://picsum.photos/300/200" alt="">
+            <p>Tailored for marketers, business owners, and digital enthusiasts looking to refine their online
+                presence</p>
+            <p>Adobe • Apple • Google • Microsoft • Amazon</p>
+            <span><b>4.2</b>
+                <img width="24" src="../../public/icons/star-sharp.svg" alt="">
+                <img width="24" src="../../public/icons/star-sharp.svg" alt="">
+            <img width="24" src="../../public/icons/star-sharp.svg" alt="">
+            <img width="24" src="../../public/icons/star-sharp.svg" alt="">
+            <img width="24" src="../../public/icons/star-half-sharp.svg" alt="">
+                (601)
+            </span>
+            <p>4 hours per week • Intermediate • 2 ECTS credits </p>
+        </section>
+        <br>
+        <section id="course2">
+            
+            <h2>Azure Cloud Fundamentals</h2>
+            <img src="https://picsum.photos/300/201" alt="">
+            <p>Embark on your cloud computing journey with our beginner-level online course, "Azure Fundamentals,"
+                meticulously crafted to prepare you for the AZ-900 exam</p>
+            <p>Microsoft • NTNU • Pearson</p>
+            <span><b>3.4</b>
+                <img width="24" src="../../public/icons/star-sharp.svg" alt="">
+                <img width="24" src="../../public/icons/star-sharp.svg" alt="">
+            <img width="24" src="../../public/icons/star-sharp.svg" alt="">
+            <img width="24" src="../../public/icons/star-half-sharp.svg" alt="">
+            <img width="24" src="../../public/icons/star-half-sharp.svg" alt="">
+                (152)
+            </span>
+            <p>10 hours per week • Beginner • 2 ECTS credits</p>
+        </section>
+        <br>
+        <section id="course3">
+
+            <h2>Databricks fundamentals</h2>
+            <img src="https://picsum.photos/300/202" alt="">
+            <p>Designed for individuals new to the world of big data and analytics, this course offers a comprehensive
+                introduction to the essential concepts of Databricks</p>
+            <p>NTNU • University of Oslo • University of Bergen</p>
+            <span><b>5.0</b>
+                <img width="24" src="../../public/icons/star-sharp.svg" alt="">
+                <img width="24" src="../../public/icons/star-sharp.svg" alt="">
+            <img width="24" src="../../public/icons/star-sharp.svg" alt="">
+            <img width="24" src="../../public/icons/star-sharp.svg" alt="">
+            <img width="24" src="../../public/icons/star-sharp.svg" alt="">
+                (16)
+            </span>
+            <p>10 hours per week • Beginner • 2 ECTS credits</p>
+        </section>
+        
+    </section>
+</div>
+</body>
+</html>
