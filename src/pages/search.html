@@ -5,6 +5,25 @@
     <title>Title</title>
 </head>
 <body>
+<section id="navbar">
+    <nav>
+        <a class="active" href="/src/pages/Index.html"><img width="30" height="30" src="/public/logo.svg" alt=""></a>
+        <label for="courseDropDown">Courses:</label>
+        <select name="courseDropDown" id="courseDropDown">
+            <option value="course1">Course 1</option>
+            <option value="course2">Course 2</option>
+            <option value="course3">Course 3</option>
+            <option value="course4">Course 4</option>
+            <option value="course5">Course 5</option>
+        </select>
+
+        <label for="searchIcon"><img id="searchIcon" width="20" height="20" src="/public/icons/search-sharp.svg" alt="search icon"></label>
+        <label for="search"><input type="text" id="search" name="search"></label>
+        <a href=""><img width="20" height="20" id="cart" src="/public/icons/cart-sharp.svg" alt="shopping cart"></a>
+        <a href="">login in</a>
+        <a href="">sign up</a>
+    </nav>
+</section>
 <div class="filters">
     <form action="http://localhost:6655" method="GET">
         <section id="difficulty">
