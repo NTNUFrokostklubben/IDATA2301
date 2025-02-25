@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  text-align: left;
 }
 
 .App-logo {
@@ -14,14 +14,14 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #86b6c2;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: #242C2E;
 }
 
 .App-link {
@@ -35,4 +35,73 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.Hero {
+  padding: 100px;
+  background-color: #b0d7e0;
+}
+
+.Hero > div {
+  max-width: 400px;
+  background-color: white;
+}
+
+.CTAbutton {
+  padding: 10px;
+  margin: 10px;
+  background-color: #4f7e8a;
+  color: #F5F5F5;
+}
+
+.grid {
+  align-items: center;
+}
+
+.grid--4 {
+  
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.cardTitle, .cardDesc, .cardPrice {
+  padding: 4px;
+  
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.cardImage {
+  object-fit: contain;
+  height: 200px;
+  width: 100%;
+  /*background-color: whitesmoke;*/
+}
+
+.cardContent {
+  
+}
+
+.coursecard {
+  text-decoration: none;
+  border: 2px solid #1C6EA4;
+  border-radius: 2px;
+  flex-basis: calc(24% - 10px);
+  margin-left: 20px;
+  margin-bottom: 16px;
+  min-width: 350px;
+  max-width: 350px;
+}
+
+.coursecard > section {
+  padding: 10px;
+  margin: 4px;
+  background-color: white;
+}
+
+.coursecard:hover {
+  box-shadow: 2px 2px 2px 2px #282c34;
 }
