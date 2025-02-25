@@ -12,13 +12,13 @@
     --highlight: #D9E1F4;
     --cta: #455993;
     --background: #DAF0F4;
+    --shadow: rgba(0,0,0,0.2);
 }
 .tienne-regular {
     font-family: "Tienne", serif;
     font-weight: 400;
     font-style: normal;
 }
-
 .tienne-bold {
     font-family: "Tienne", serif;
     font-weight: 700;
@@ -33,14 +33,18 @@
 #menu-navbar{
     background-color: var(--primary);
     display: flex;
-    justify-content: flex-start;
+    justify-content: left;
     align-items: center;
     min-height: 4rem;
     max-height: 5rem;
+    padding: 0.2rem;
 }
 #logo-icon{
     height: 3rem;
     width: 3rem;
+}
+#triangle-icon{
+    rotate: 180deg;
 }
 nav li {
     list-style-type: none;
@@ -53,7 +57,7 @@ nav li {
     display: flow;
     color: var(--textBlack);
     padding: 1rem;
-    font-size: 16px;
+    font-size: large;
     border: none;
     background-color: var(--primary);
 }
@@ -67,13 +71,13 @@ nav li {
     position: absolute;
     background-color: var(--primary);
     min-width: 10rem;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px var(--shadow);
     z-index: 1;
 }
 
 /* Links inside the dropdown */
 .dropdown-content a {
-    color: black;
+    color: var(--textBlack);
     padding: 12px 1rem;
     font-size: 1rem;
     text-decoration: none;
@@ -98,8 +102,9 @@ nav li {
 }
 .search-container #form_search{
     background-color: var(--textWhite);
-    width: 29rem;
-    height: 44px;
+    min-width: 35rem;
+    max-width: 55rem;
+    max-height: 3rem;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -111,27 +116,40 @@ nav li {
 .search-container #search_btn{
     all: unset;
     cursor: pointer;
-    width: 20rem;
+    width: 2rem;
     height: 4rem;
 }
 .search-container #search_btn #searchIcon{
     display: flow;
     align-items: center;
+    padding: 0.5rem;
+}
+#login-signup{
+    display: flow;
+    align-items: center;
+    justify-content: center;
 }
 #login-btn{
-    background-color: rgb(135, 183, 195);
+    background-color: var(--textWhite);
     color: var(--textBlack);
-    padding: 0.5rem 1rem;
-    border: none;
-    cursor: pointer;
 }
 #signup-btn{
-    background-color: rgb(135, 183, 195);
-    color: var(--textBlack);
-    padding: 0.5rem 1rem;
-    border: none;
-    cursor: pointer;
+    background-color: var(--cta);
+    color: var(--textWhite);
 }
+#login-btn, #signup-btn{
+    border: 1px solid var(--textBlack);
+    cursor: pointer;
+    font-size: large;
+    width: 8rem;
+    height: 3rem;
+    text-align: center;
+    text-decoration: none;
+}
+#login-btn #signup-btn:hover{
+    box-shadow: 0px 8px 16px 0px var(--shadow)
+}
+
 
 
 

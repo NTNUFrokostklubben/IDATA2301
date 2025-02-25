@@ -19,7 +19,7 @@
       </li>
       <li>
         <div class="dropdown">
-          <button class="drop-btn">Courses</button>
+          <button class="drop-btn">Courses <img id="triangle-icon" width="12" height="12" src="/public/icons/triangle-sharp.svg" alt="search icon"></button>
           <div class="dropdown-content">
             <a href="#">Course 1</a>
             <a href="#">Course 2</a>
@@ -33,24 +33,23 @@
       <li>
         <div class="search-container">
           <form id="form_search" role="search">
-            <input type="text" placeholder="Search.." name="search">
             <button type="submit" id="search_btn">
               <img id="searchIcon" width="20" height="20" src="/public/icons/search-sharp.svg" alt="search icon">
             </button>
+            <input type="text" placeholder="Search.." name="search">
           </form>
         </div>
       </li>
       <li>
-        <a href=""><img width="30" height="30" id="cart" src="/public/icons/cart-sharp.svg" alt="shopping cart"></a>
+        <a href=""><img width="40" height="40" id="cart" src="/public/icons/cart-sharp.svg" alt="shopping cart"></a>
       </li>
       <li>
-        <button id="login-btn">Log in</button>
-      </li>
-      <li>
-        <button id="signup-btn">Sign up</button>
+        <div id="login-signup-btn">
+          <button id="login-btn" alt="Log in" href="#">Log in</button>
+          <button id="signup-btn" alt="Sign up" href="#">Sign up</button>
+        </div>
       </li>
     </ul>
-    <!--<label for="searchIcon"></label>-->
   </nav>
 </section>
 
