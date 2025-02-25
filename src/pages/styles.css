@@ -1,4 +1,4 @@
-*{
+* {
     margin: 0;
     font-size: 16px;
     color: var(--textBlack);
@@ -14,6 +14,7 @@
     --cta: #455993;
     --background: #DAF0F4;
 }
+
 .tienne-regular {
     font-family: "Tienne", serif;
     font-weight: 400;
@@ -32,7 +33,7 @@
     font-style: normal;
 }
 
-#menu-navbar{
+#menu-navbar {
     background-color: var(--primary);
     display: flex;
     justify-content: flex-start;
@@ -40,14 +41,17 @@
     min-height: 4rem;
     max-height: 5rem;
 }
-#logo-icon{
+
+#logo-icon {
     height: 3rem;
     width: 3rem;
 }
+
 nav li {
     list-style-type: none;
     padding-inline-start: 0;
 }
+
 #menu-navbar > li {
     margin: 2rem
 }
@@ -64,7 +68,9 @@ nav li {
     min-width: 24rem;
     width: 24rem;
     max-width: 24rem;
+    box-shadow: var(--textBlack) 0 2rem 1rem ;
 }
+
 
 .results {
     display: flex;
@@ -79,37 +85,113 @@ nav li {
     justify-content: center;
 }
 
-.infotext {
-    color: #242C2E88;
+#resultsinfo {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    margin: 1rem 0;
 }
 
-.rating {
-    margin: 0 1rem;
+#resultsinfo h2 {
+    font-size: 2rem;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+#resultsinfo .input-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+#resultsinfo .input-wrapper label {
+    position: absolute;
+
+    top: -2rem;
+    left: 0rem;
 }
 
 .card {
     display: flex;
     flex-flow: column;
     margin: 1rem;
-    border: #242C2E 1px solid;
+    border: var(--textBlack) 1px solid;
     border-radius: 3px;
     width: 20rem;
+}
+
+.card .infotext {
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 0.7rem;
+    text-align: center;
+}
+
+.card .course-img {
+    width: 100%;
+    height: 12rem;
+    object-fit: cover;
+}
+
+.card .card-footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
 }
 
 .card h2 {
     margin: 1rem;
 }
 
-.card .course-img {
-    width: 100%;
-    height: 10rem;
-    object-fit: cover;
+.rating {
+    margin: 1rem 1rem;
+}
+
+.rating b {
+    font-size: 1.5rem;
+}
+
+
+
+
+
+
+
+@supports (-webkit-line-clamp: 3) {
+    .card .card-desc {
+        display: -webkit-box; /* Required for line clamping */
+        -webkit-box-orient: vertical; /* Required for line clamping */
+        -webkit-line-clamp: 3; /* Limit to 3 lines */
+        overflow: hidden; /* Hide overflow */
+        text-overflow: ellipsis; /* Add ellipsis */
+    }
+}
+
+@supports not (-webkit-line-clamp: 3) {
+ .card .card-desc {
+    position: relative;
+    max-height: 4.5em; /* Adjust based on line height and number of lines */
+    line-height: 1.5em; /* Adjust based on your design */
+    overflow: hidden;
+  }
+
+  .card .card-desc::after {
+    content: '...';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: white; /* Match the background color */
+    padding-left: 5px; /* Add some spacing */
+  }
 }
 
 section {
     margin: 2rem 0;
 
-    border-bottom: #242C2E 1px solid;
+}
+
+.filter-header {
+    display: flex;
+    justify-content: space-between;
+    padding-right: 1rem;
+    background-color: var(--highlight);
 }
 
 #difficulty {
@@ -128,7 +210,7 @@ section {
     display: inline-block;
 }
 
-.input-wrapper label{
+.input-wrapper label {
     position: absolute;
 
     top: -1rem;
@@ -138,6 +220,12 @@ section {
 .numfield {
     width: 6rem;
     height: 2rem;
+}
+
+.filter-dropdown {
+    color: var(--textBlack);
+    height: 4rem;
+    width: 12rem;
 }
 
 
@@ -165,8 +253,8 @@ label {
 }
 
 .cta-button {
-    background-color: #455993;
-    color: #F5F5F5;
+    background-color: var(--cta);
+    color: var(--textWhite);
     height: 3rem;
     width: 7rem;
 }
@@ -179,17 +267,19 @@ label {
     border: none;
     background-color: var(--primary);
 }
-.dropdown{
+
+.dropdown {
     position: relative;
     display: inline-block;
 }
+
 /* (Hidden by Default) */
 .dropdown-content {
     display: none;
     position: absolute;
     background-color: var(--primary);
     min-width: 10rem;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
 }
 
@@ -203,22 +293,29 @@ label {
 }
 
 /* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: var(--background);}
+.dropdown-content a:hover {
+    background-color: var(--background);
+}
 
 /* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {display: block;}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .drop-btn {background-color: var(--primary);}
+.dropdown:hover .drop-btn {
+    background-color: var(--primary);
+}
 
-.search-container input[type=text]{
+.search-container input[type=text] {
     all: unset;
     color: var(--textBlack);
     height: 100%;
     width: 100%;
     padding: 0.5rem 0.8rem;
 }
-.search-container #form_search{
+
+.search-container #form_search {
     background-color: var(--textWhite);
     width: 29rem;
     height: 44px;
@@ -226,28 +323,33 @@ label {
     flex-direction: row;
     align-items: center;
 }
+
 ::placeholder {
     color: var(--textBlack);
     opacity: 0.7;
 }
-.search-container #search_btn{
+
+.search-container #search_btn {
     all: unset;
     cursor: pointer;
     width: 20rem;
     height: 4rem;
 }
-.search-container #search_btn #searchIcon{
+
+.search-container #search_btn #searchIcon {
     display: flow;
     align-items: center;
 }
-#login-btn{
+
+#login-btn {
     background-color: rgb(135, 183, 195);
     color: var(--textBlack);
     padding: 0.5rem 1rem;
     border: none;
     cursor: pointer;
 }
-#signup-btn{
+
+#signup-btn {
     background-color: rgb(135, 183, 195);
     color: var(--textBlack);
     padding: 0.5rem 1rem;
