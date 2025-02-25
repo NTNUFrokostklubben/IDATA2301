@@ -133,11 +133,18 @@ nav li {
     background-color: var(--textWhite);
     color: var(--textBlack);
 }
-#signup-btn{
+.cfa{
     background-color: var(--cta);
     color: var(--textWhite);
 }
-#login-btn, #signup-btn{
+#free-btn{
+    display: flow;
+    justify-content: center;
+    margin-top: 2rem;
+    padding: 1rem;
+    width: 10rem;
+}
+#login-btn, .cfa{
     border: 1px solid var(--textBlack);
     cursor: pointer;
     font-size: large;
@@ -149,7 +156,35 @@ nav li {
 #login-btn #signup-btn:hover{
     box-shadow: 0px 8px 16px 0px var(--shadow)
 }
+.heroMainPage{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    background-color: var(--background);
+    height: 60vh;
+    flex-wrap: wrap;
+}
+.hero-main-box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--textWhite);
+    box-shadow: 0px 8px 16px 0px var(--shadow);
+    padding: 3rem;
+    width: 30rem;
+    height: 10rem;
 
+}
+.heroMainText{
+    font-size: x-large;
+    text-align: center;
+}
+.heroMainImage{
+    display: flex;
+    align-self: flex-end;
+
+}
 
 
 
