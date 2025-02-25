@@ -1,0 +1,385 @@
+* {
+    margin: 0;
+    font-size: 16px;
+    color: var(--textBlack);
+    border-radius: 3px;
+    font-family: "Tienne", serif;
+
+    /* Colours used*/
+    --textBlack: #242C2E;
+    --textWhite: #F5F5F5;
+    --primary: #86b6c2;
+    --contrast: #4D7E8A;
+    --highlight: #D9E1F4;
+    --cta: #455993;
+    --background: #DAF0F4;
+    --shadow: rgba(0,0,0,0.2);
+}
+
+.tienne-regular {
+    font-family: "Tienne", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+.tienne-bold {
+    font-family: "Tienne", serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.tienne-black {
+    font-family: "Tienne", serif;
+    font-weight: 900;
+    font-style: normal;
+}
+
+#menu-navbar {
+    background-color: var(--primary);
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    min-height: 4rem;
+    max-height: 5rem;
+    padding: 0.2rem;
+}
+
+#logo-icon {
+    height: 3rem;
+    width: 3rem;
+}
+
+#triangle-icon{
+    rotate: 180deg;
+}
+
+nav li {
+    list-style-type: none;
+    padding-inline-start: 0;
+}
+
+#menu-navbar > li {
+    margin: 2rem
+}
+
+
+.page {
+    display: flex;
+    flex-flow: row;
+}
+
+.filters {
+    display: flex;
+    flex-flow: column;
+    min-width: 24rem;
+    width: 24rem;
+    max-width: 24rem;
+    box-shadow: var(--shadow) 0 2rem 1rem;
+}
+
+
+.results {
+    display: flex;
+    flex-flow: column;
+    margin: 0 3rem;
+}
+
+#results {
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#resultsinfo {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    margin: 1rem 0;
+}
+
+#resultsinfo h2 {
+    font-size: 2rem;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+#resultsinfo .input-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+#resultsinfo .input-wrapper label {
+    position: absolute;
+
+    top: -2rem;
+    left: 0rem;
+}
+
+.card {
+    display: flex;
+    flex-flow: column;
+    margin: 1rem;
+    border: var(--textBlack) 1px solid;
+    border-radius: 3px;
+    width: 20rem;
+}
+
+.card:hover {
+    box-shadow: 0px 8px 16px 0px var(--shadow);
+}
+
+.card .infotext {
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 0.7rem;
+    text-align: center;
+}
+
+.card .course-img {
+    width: 100%;
+    height: 12rem;
+    object-fit: cover;
+}
+
+.card .card-footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+.card h2 {
+    margin: 1rem;
+}
+
+.rating {
+    margin: 1rem 1rem;
+
+}
+
+.rating b {
+    font-size: 1rem;
+}
+
+
+
+
+
+
+
+@supports (-webkit-line-clamp: 3) {
+    .card .card-desc {
+        display: -webkit-box; /* Required for line clamping */
+        -webkit-box-orient: vertical; /* Required for line clamping */
+        -webkit-line-clamp: 3; /* Limit to 3 lines */
+        overflow: hidden; /* Hide overflow */
+        text-overflow: ellipsis; /* Add ellipsis */
+    }
+}
+
+@supports not (-webkit-line-clamp: 3) {
+ .card .card-desc {
+    position: relative;
+    max-height: 4.5em; /* Adjust based on line height and number of lines */
+    line-height: 1.5em; /* Adjust based on your design */
+    overflow: hidden;
+  }
+
+  .card .card-desc::after {
+    content: '...';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: white; /* Match the background color */
+    padding-left: 5px; /* Add some spacing */
+  }
+}
+
+section {
+    margin: 2rem 0;
+
+}
+
+.filter-header {
+    display: flex;
+    justify-content: space-between;
+    padding-right: 1rem;
+    background-color: var(--highlight);
+}
+
+#difficulty {
+    display: flex;
+    flex-flow: column;
+}
+
+.input-field-container {
+    display: flex;
+    flex-flow: row;
+    margin: 2rem 0;
+}
+
+.input-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.input-wrapper label {
+    position: absolute;
+
+    top: -1rem;
+    left: 1rem;
+}
+
+.numfield {
+    width: 6rem;
+    height: 2rem;
+}
+
+.filter-dropdown {
+    color: var(--textBlack);
+    height: 4rem;
+    width: 12rem;
+}
+
+
+#category {
+    display: flex;
+    flex-flow: column;
+}
+
+p {
+    margin: 1rem 1rem;
+}
+
+input {
+    margin: 0.4rem 1rem;
+}
+
+label {
+    vertical-align: center;
+
+}
+
+.cb {
+    height: 2rem;
+    width: 2rem;
+}
+
+.cta-button {
+    background-color: var(--cta);
+    color: var(--textWhite);
+    height: 3rem;
+    width: 7rem;
+}
+
+.drop-btn {
+    display: flow;
+    color: var(--textBlack);
+    padding: 1rem;
+    font-size: large;
+    border: none;
+    background-color: var(--primary);
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--primary);
+    min-width: 10rem;
+    box-shadow: 0px 8px 16px 0px var(--shadow);
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: var(--textBlack);
+    padding: 12px 1rem;
+    font-size: 1rem;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+    background-color: var(--background);
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .drop-btn {
+    background-color: var(--primary);
+}
+
+.search-container input[type=text] {
+    all: unset;
+    color: var(--textBlack);
+    height: 100%;
+    width: 100%;
+    padding: 0.5rem 0.8rem;
+}
+
+.search-container #form_search {
+    background-color: var(--textWhite);
+    min-width: 35rem;
+    max-width: 55rem;
+    max-height: 3rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+::placeholder {
+    color: var(--textBlack);
+    opacity: 0.7;
+}
+
+.search-container #search_btn {
+    all: unset;
+    cursor: pointer;
+    width: 2rem;
+    height: 4rem;
+}
+
+.search-container #search_btn #searchIcon {
+    display: flow;
+    align-items: center;
+    padding: 0.5rem;
+}
+#login-signup{
+    display: flow;
+    align-items: center;
+    justify-content: center;
+}
+
+#login-btn{
+    background-color: var(--textWhite);
+    color: var(--textBlack);
+}
+
+#signup-btn{
+    background-color: var(--cta);
+    color: var(--textWhite);
+}
+#login-btn, #signup-btn{
+    border: 1px solid var(--textBlack);
+    cursor: pointer;
+    font-size: large;
+    width: 8rem;
+    height: 3rem;
+    text-align: center;
+    text-decoration: none;
+}
+#login-btn #signup-btn:hover{
+    box-shadow: 0px 8px 16px 0px var(--shadow)
+}
+
+
+
+
