@@ -1,0 +1,21 @@
+*{
+    margin: 0;
+    font-size: 10px;
+}
+#menu-navbar{
+    background-color: rgb(135, 183, 195);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+#logo-image{
+    min-height: 4rem;
+    display: block;
+}
+nav li {
+    list-style-type: none;
+    padding-inline-start: 0;
+}
+#menu-navbar > li {
+    margin: 2rem
+}

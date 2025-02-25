@@ -8,22 +8,35 @@
 <body>
 <section id="navbar">
   <nav>
-    <a class="active" href="/src/pages/Index.html"><img width="30" height="30" src="/public/logo.svg" alt=""></a>
-    <label for="courseDropDown">Courses:</label>
-    <select name="courseDropDown" id="courseDropDown">
-      <option value="course1">Course 1</option>
-      <option value="course2">Course 2</option>
-      <option value="course3">Course 3</option>
-      <option value="course4">Course 4</option>
-      <option value="course5">Course 5</option>
-    </select>
-    <!--<a href="">Courses</a> <img id="courseArrow" width="8" height="8" src="/public/icons/arrow-down-sharp.svg" alt="search icon">-->
-
-    <label for="searchIcon"><img id="searchIcon" width="20" height="20" src="/public/icons/search-sharp.svg" alt="search icon"></label>
-    <label for="search"><input type="text" id="search" name="search"></label>
-    <a href=""><img width="20" height="20" id="cart" src="/public/icons/cart-sharp.svg" alt="shopping cart"></a>
-    <a href="">login in</a>
-    <a href="">sign up</a>
+    <ul id="menu-navbar">
+      <li id="logo-item">
+        <a class="active" href="/src/pages/Index.html">
+          <img width="30" height="30" src="/public/logo.svg" alt="">
+        </a>
+      </li>
+      <li>
+        <label for="courseDropDown">Courses:</label>
+        <select name="courseDropDown" id="courseDropDown">
+          <option value="course1">Course 1</option>
+          <option value="course2">Course 2</option>
+          <option value="course3">Course 3</option>
+          <option value="course4">Course 4</option>
+          <option value="course5">Course 5</option>
+        </select>
+      </li>
+      <li>
+        <input type="text" plaseholder="Search..">
+      </li>
+      <li>
+        <a href=""><img width="20" height="20" id="cart" src="/public/icons/cart-sharp.svg" alt="shopping cart"></a>
+      </li>
+      <li>
+        <a href="">Login in</a>
+        <!-- TODO  -->
+      </li>
+      <li> <a href="">Sign up</a></li>
+    </ul>
+    <!--<label for="searchIcon"><img id="searchIcon" width="20" height="20" src="/public/icons/search-sharp.svg" alt="search icon"></label>-->
   </nav>
 </section>
 
