@@ -1,7 +1,29 @@
 *{
     margin: 0;
-    font-size: 10px;
+    font-size: 16px;
+    font-family: 'tienne';
+    color: #242C2E;
+    border-radius: 3px;
 }
+
+.tienne-regular {
+  font-family: "Tienne", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.tienne-bold {
+  font-family: "Tienne", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.tienne-black {
+  font-family: "Tienne", serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
 #menu-navbar{
     background-color: rgb(135, 183, 195);
     display: flex;
@@ -18,4 +40,122 @@ nav li {
 }
 #menu-navbar > li {
     margin: 2rem
+}
+
+.page {
+    display: flex;
+    flex-flow: row;
+}
+
+.filters {
+    display: flex;
+    flex-flow: column;
+    min-width: 24rem;
+    width: 24rem;
+    max-width: 24rem;
+}
+
+.results {
+    display: flex;
+    flex-flow: column;
+    margin: 0 3rem;
+}
+
+#results {
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.infotext {
+    color: #242C2E88;
+}
+
+.rating {
+    margin: 0 1rem;
+}
+
+.card {
+    display: flex;
+    flex-flow: column;
+    margin: 1rem;
+    border: #242C2E 1px solid;
+    border-radius: 3px;
+    width: 20rem;
+}
+
+.card h2 {
+    margin: 1rem;
+}
+
+.card .course-img {
+    width: 100%;
+    height: 10rem;
+    object-fit: cover;
+}
+
+section {
+    margin: 2rem 0;
+
+    border-bottom: #242C2E 1px solid;
+}
+
+#difficulty {
+    display: flex;
+    flex-flow: column;
+}
+
+.input-field-container {
+    display: flex;
+    flex-flow: row;
+    margin: 2rem 0;
+}
+
+.input-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.input-wrapper label{
+    position: absolute;
+
+    top: -1rem;
+    left: 1rem;
+}
+
+.numfield {
+    width: 6rem;
+    height: 2rem;
+}
+
+
+#category {
+    display: flex;
+    flex-flow: column;
+}
+
+p {
+    margin: 1rem 1rem;
+}
+
+input {
+    margin: 0.4rem 1rem;
+}
+
+label {
+    vertical-align: center;
+
+}
+
+.cb {
+    height: 2rem;
+    width: 2rem;
+}
+
+.cta-button {
+    background-color: #455993;
+    color: #F5F5F5;
+    height: 3rem;
+    width: 7rem;
 }
