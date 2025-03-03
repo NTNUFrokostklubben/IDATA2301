@@ -1,6 +1,9 @@
 @import "styles.css";
 
-
+#dashboard {
+    display: flex;
+    flex-flow: column;
+}
 
 .filters {
     display: flex;
@@ -9,6 +12,42 @@
     width: 24rem;
     max-width: 24rem;
     box-shadow: var(--shadow) 0 2rem 1rem;
+}
+
+.filter-header {
+    display: flex;
+    justify-content: space-between;
+    padding-right: 1rem;
+    background-color: var(--highlight);
+}
+
+.filters p {
+    margin: 1rem 0.5rem;
+}
+
+.filters ul {
+    border-radius: 0px;
+    background-color: #eaeaea;
+    padding: 0.5rem 0;
+}
+
+.filters li {
+    background-color: #eaeaea;
+    padding: 0.5rem 1rem;
+}
+
+.filters li:hover {
+    background-color: var(--highlight);
+}
+
+button {
+    background-color: transparent;
+    border: none;
+}
+
+
+section {
+    margin: 2rem 0;
 }
 
 #course-info{
