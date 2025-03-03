@@ -3,8 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="login.css">
 </head>
 <body>
+<div class="page">
+  <h1>
+    Log In
+  </h1>
+  <form action="http://localhost:6655/login" method="POST">
+    <section id="credentials">
+      <div class="input-wrapper">
+        <label for="email">Email</label>
+        <input type="text" id="email" name="email" required>
+      </div>
+      <div class="input-wrapper">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+      </div>
+    </section>
+    <section id="CTA">
+      <button class="cta-button" type="submit">Log In</button>
+<!--      TODO: Implement redirect to Signup modal (probably just build component again in react) -->
+      <button class="cta-button secondary-button" type="submit">Sign up instead</button>
+    </section>
+  </form>
+</div>
 
 </body>
 </html>
