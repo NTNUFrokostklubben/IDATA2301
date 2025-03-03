@@ -1,0 +1,58 @@
+.container {
+    display: grid ;
+    background-image: url("/public/aboutHeroBG.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    grid-template-columns: 500px 350px 1fr;
+
+
+}
+
+.herotext{
+    width: 350px;
+    align-self: center;
+}
+#hero2{
+    display: flex;
+    align-self: flex-end;
+
+}
+.blurbTitle{
+
+    padding: 0;
+    margin: 0px ;
+}
+
+#blurb{
+    display: flex;
+    flex-direction: column;
+    padding-left: 50px;
+    padding-right: 50px;
+
+
+}
+#reviewTitle{
+    display: flex;
+    justify-content: center;
+}
+
+
+.review{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    padding-left: 50px;
+
+
+}
+.text, .name{
+    color: white;
+    width: 150px;
+}
+.oneRev{
+    width: 170px;
+    padding-left: 20px;
+    background-color: #507d8c;
+    box-shadow: #b4afbc 5px 0px 5px 5px;
+}

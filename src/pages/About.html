@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>about page for learniverse</title>
+    <link rel="stylesheet" href="About.css">
 </head>
 <body>
 <section id="navbar">
@@ -22,20 +23,13 @@
 
 <section id="heroWorker">
     <div class="container">
-    <picture class="img">
+    <picture class="img" id="hero2">
         <source srcset="/public/images/businessWoman.png" type="image/png">
         <img width="286" height="419" src="/public/images/businessWoman.png" alt="a worker working on a computer">
     </picture>
-    <p class="text">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+    <p class="herotext">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
         magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
         consequat."</p>
-    <style>
-        .container {
-            display: grid;
-            align-items: center;
-            grid-template-columns: 1fr 1fr 1fr;
-            column-gap: 5px;}
-    </style>
     </div>
 </section>
 
@@ -60,24 +54,27 @@
     </style>
 </section>
 <section id="reviews">
-    <h1>what our students say</h1>
+    <h1 id="reviewTitle">what our students say</h1>
     <div class="review">
-        <p class="text">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+
+        <div class="oneRev"><p class="text">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+            tempor incididunt
             ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
             nisi ut aliquip ex ea commodo consequat."</p>
-        <p class="name">- John Doe</p>
-        <p class="text">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+            <p class="name">- John Doe
+            </p></div>
+        <div class="oneRev"><p class="text">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
             ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
             nisi ut aliquip ex ea commodo consequat."</p>
-        <p class="name">- John Doe</p>
-        <p class="text">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+            <p class="name">- John Doe</p></div>
+        <div class="oneRev"><p class="text">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
             ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
             nisi ut aliquip ex ea commodo consequat."</p>
-        <p class="name">- John Doe</p>
-        <p class="text">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+            <p class="name">- John Doe</p></div>
+        <div class="oneRev"><p class="text">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
             ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
             nisi ut aliquip ex ea commodo consequat."</p>
-        <p class="name">- John Doe</p>
+            <p class="name">- John Doe</p></div>
     </div>
 </section>
 <section id="contacts">
