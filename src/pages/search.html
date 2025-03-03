@@ -3,138 +3,208 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="search.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tienne:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
 <section id="navbar">
     <nav>
-        <a class="active" href="/src/pages/Index.html"><img width="30" height="30" src="/public/logo.svg" alt=""></a>
-        <label for="courseDropDown">Courses:</label>
-        <select name="courseDropDown" id="courseDropDown">
-            <option value="course1">Course 1</option>
-            <option value="course2">Course 2</option>
-            <option value="course3">Course 3</option>
-            <option value="course4">Course 4</option>
-            <option value="course5">Course 5</option>
-        </select>
-
-        <label for="searchIcon"><img id="searchIcon" width="20" height="20" src="/public/icons/search-sharp.svg" alt="search icon"></label>
-        <label for="search"><input type="text" id="search" name="search"></label>
-        <a href=""><img width="20" height="20" id="cart" src="/public/icons/cart-sharp.svg" alt="shopping cart"></a>
-        <a href="">login in</a>
-        <a href="">sign up</a>
+        <ul id="menu-navbar">
+            <li id="logo-item">
+                <a class="active" href="/src/pages/Index.html">
+                    <img width="30" height="30" src="/public/logo.svg" alt="">
+                </a>
+            </li>
+            <li>
+                <label for="courseDropDown">Courses:</label>
+                <select name="courseDropDown" id="courseDropDown">
+                    <option value="course1">Course 1</option>
+                    <option value="course2">Course 2</option>
+                    <option value="course3">Course 3</option>
+                    <option value="course4">Course 4</option>
+                    <option value="course5">Course 5</option>
+                </select>
+            </li>
+            <li>
+                <input type="text" plaseholder="Search..">
+            </li>
+            <li>
+                <a href=""><img width="20" height="20" id="cart" src="/public/icons/cart-sharp.svg" alt="shopping cart"></a>
+            </li>
+            <li>
+                <a href="">Login in</a>
+                <!-- TODO  -->
+            </li>
+            <li><a href="">Sign up</a></li>
+        </ul>
+        <!--<label for="searchIcon"><img id="searchIcon" width="20" height="20" src="/public/icons/search-sharp.svg" alt="search icon"></label>-->
     </nav>
 </section>
-<div class="filters">
-    <form action="http://localhost:6655" method="GET">
-        <section id="difficulty">
-            <p>Difficulty level</p>
-            <label><input type="checkbox"> Beginner</label>
-            <label><input type="checkbox"> Intermediate</label>
-            <label><input type="checkbox"> Expert</label>
-        </section>
-        <section id="size">
-            <p>Course size</p>
-            <p>ECTS credits</p>
-            <label>Min <input placeholder="Min" type="number"></label>
-            <span> - </span>
-            <label><input placeholder="Max" type="number"> Max</label>
-        </section>
-        <section id="category">
-            <p>Category</p>
-            <label><input type="checkbox"> Information Technologies</label>
-            <label><input type="checkbox"> Digital Marketing</label>
-            <label><input type="checkbox"> Business and Entrepenaurship</label>
-            <label><input type="checkbox"> Data Science and Analytics</label>
-        </section>
-        <section id="ratings">
-            <p>Ratings</p>
-            <label>Min rating <input placeholder="Min rating" type="number"></label>
-            <span> - </span>
-            <label><input placeholder="Max rating" type="number"> Max rating</label>
-        </section>
-        <section id="price">
-            <p>Price</p>
-            <label>Min price <input placeholder="Min price" type="number"></label>
-            <span> - </span>
-            <label><input placeholder="Max price" type="number"> Max price</label>
-        </section>
-        <section id="dates">
-            <p>Course Start</p>
-            <label>From <input type="date"></label>
-            <label>To <input type="date"></label>
-        </section>
-        <button type="submit">Filter</button>
-    </form>
-</div>
-<br>
-<div class="results">
-    <section id="resultsinfo">
-        <h1>3 results for "Lorem Ipsum"</h1>
-        <label>Sort by <select type="dropdown">
-            <option>Most Relevant</option>
-            <option>Price Ascending</option>
-            <option>Price Descending</option>
-            <option>Highest Reviewed</option>
-            <option>Newest</option>
-        </select></label>
-    </section>
-    <br>
-    <section id="results">
-        <section id="course1">
-            
-            <h2>Search Engine Optimization</h2>
-            <img src="https://picsum.photos/300/200" alt="">
-            <p>Tailored for marketers, business owners, and digital enthusiasts looking to refine their online
-                presence</p>
-            <p>Adobe • Apple • Google • Microsoft • Amazon</p>
-            <span><b>4.2</b>
-                <img width="24" src="../../public/icons/star-sharp.svg" alt="">
-                <img width="24" src="../../public/icons/star-sharp.svg" alt="">
-            <img width="24" src="../../public/icons/star-sharp.svg" alt="">
-            <img width="24" src="../../public/icons/star-sharp.svg" alt="">
-            <img width="24" src="../../public/icons/star-half-sharp.svg" alt="">
-                (601)
-            </span>
-            <p>4 hours per week • Intermediate • 2 ECTS credits </p>
-        </section>
-        <br>
-        <section id="course2">
-            
-            <h2>Azure Cloud Fundamentals</h2>
-            <img src="https://picsum.photos/300/201" alt="">
-            <p>Embark on your cloud computing journey with our beginner-level online course, "Azure Fundamentals,"
-                meticulously crafted to prepare you for the AZ-900 exam</p>
-            <p>Microsoft • NTNU • Pearson</p>
-            <span><b>3.4</b>
-                <img width="24" src="../../public/icons/star-sharp.svg" alt="">
-                <img width="24" src="../../public/icons/star-sharp.svg" alt="">
-            <img width="24" src="../../public/icons/star-sharp.svg" alt="">
-            <img width="24" src="../../public/icons/star-half-sharp.svg" alt="">
-            <img width="24" src="../../public/icons/star-half-sharp.svg" alt="">
-                (152)
-            </span>
-            <p>10 hours per week • Beginner • 2 ECTS credits</p>
-        </section>
-        <br>
-        <section id="course3">
 
-            <h2>Databricks fundamentals</h2>
-            <img src="https://picsum.photos/300/202" alt="">
-            <p>Designed for individuals new to the world of big data and analytics, this course offers a comprehensive
-                introduction to the essential concepts of Databricks</p>
-            <p>NTNU • University of Oslo • University of Bergen</p>
-            <span><b>5.0</b>
-                <img width="24" src="../../public/icons/star-sharp.svg" alt="">
-                <img width="24" src="../../public/icons/star-sharp.svg" alt="">
-            <img width="24" src="../../public/icons/star-sharp.svg" alt="">
-            <img width="24" src="../../public/icons/star-sharp.svg" alt="">
-            <img width="24" src="../../public/icons/star-sharp.svg" alt="">
-                (16)
-            </span>
-            <p>10 hours per week • Beginner • 2 ECTS credits</p>
+<div class="page">
+    <div class="filters">
+        <form action="http://localhost:6655" method="GET">
+            <section id="difficulty">
+                <div class="filter-header">
+                    <p>Difficulty level</p>
+                    <img width="12" src="../../public/icons/triangle-sharp.svg" alt="">
+                </div>
+                <label><input class="" type="checkbox"> Beginner</label>
+                <label><input class="" type="checkbox"> Intermediate</label>
+                <label><input class="" type="checkbox"> Expert</label>
+            </section>
+            <section id="size">
+                <div class="filter-header">
+                    <p>Course size</p>
+                    <img width="12" src="../../public/icons/triangle-sharp.svg" alt="">
+                </div>
+                <p>ECTS credits</p>
+                <div class="input-field-container">
+                    <div class="input-wrapper">
+                        <label for="min-size">Min</label>
+                        <input class="" id="min-size" placeholder="Min" type="number">
+                    </div>
+                    <span> - </span>
+                    <div class="input-wrapper">
+                        <label for="max-size">Max</label>
+                        <input class="" id="max-size" placeholder="Max" type="number">
+                    </div>
+                </div>
+            </section>
+            <section id="category">
+                <div class="filter-header">
+                    <p>Category</p>
+                    <img width="12" src="../../public/icons/triangle-sharp.svg" alt="">
+                </div>
+                <label><input class="" type="checkbox"> Information Technologies</label>
+                <label><input class="" type="checkbox"> Digital Marketing</label>
+                <label><input class="" type="checkbox"> Business and Entrepenaurship</label>
+                <label><input class="" type="checkbox"> Data Science and Analytics</label>
+            </section>
+            <section id="ratings">
+                <div class="filter-header">
+                    <p>Ratings</p>
+                    <img width="12" src="../../public/icons/triangle-sharp.svg" alt="">
+                </div>
+                <div class="input-field-container">
+                    <div class="input-wrapper">
+                        <label for="min-rating">Min rating</label>
+                        <input id="min-rating" class="" placeholder="Min" type="number">
+                    </div>
+                    <span> - </span>
+
+                    <div class="input-wrapper">
+                        <label for="max-rating">Max rating</label>
+                        <input id="max-rating" class="" placeholder="Max" type="number">
+                    </div>
+                </div>
+            </section>
+            <section id="price">
+                <div class="filter-header">
+                    <p>Price</p>
+                    <img width="12" src="../../public/icons/triangle-sharp.svg" alt="">
+                </div>
+                <div class="input-field-container">
+                    <div class="input-wrapper">
+                        <label for="min-price">Min price</label>
+                        <input id="min-price" class="" placeholder="Min" type="number">
+                    </div>
+                    <span> - </span>
+                    <div class="input-wrapper">
+                        <label for="max-price">Max price</label>
+                        <input id="max-price" class="" placeholder="Max price" type="number">
+                    </div>
+                </div>
+            </section>
+            <section id="dates">
+                <div class="filter-header">
+                    <p>Course Start</p>
+                    <img width="12" src="../../public/icons/triangle-sharp.svg" alt="">
+                </div>
+                <div class="input-field-container">
+                    <div class="input-wrapper"><label for="from-date">From</label>
+                        <input id="from-date" type="date"></div>
+                    <span> - </span>
+                    <div class="input-wrapper"><label for="to-date">To</label>
+                        <input id="to-date" type="date"></div>
+                </div>
+            </section>
+            <button class="cta-button" type="submit">Filter</button>
+        </form>
+    </div>
+    <div class="results">
+        <section id="resultsinfo">
+            <h2>3 results for "Lorem Ipsum"</h2>
+            <div class="input-wrapper">
+                <label for="filter-ropdown">Sort by</label>
+                <select class="filter-dropdown" id="filter-ropdown" type="dropdown">
+                    <option>Most Relevant</option>
+                    <option>Price Ascending</option>
+                    <option>Price Descending</option>
+                    <option>Highest Reviewed</option>
+                    <option>Newest</option>
+                </select>
+            </div>
         </section>
-        
-    </section>
+        <section id="results">
+            <section class="card" id="course1">
+                <img class="course-img" src="https://picsum.photos/300/200?random=1" alt="">
+                <h2>Search Engine Optimization</h2>
+                <p class="card-desc">Tailored for marketers, business owners, and digital enthusiasts looking to refine
+                    their online
+                    presence</p>
+                <p class="infotext">4 hours per week • Intermediate • 2 ECTS credits</p>
+                <div class="card-footer">
+                    <div class="rating">
+                      <span>
+                        <img width="24" src="../../public/icons/star-sharp.svg" alt="">
+                        <b>4.2</b>
+                        (601)
+                      </span>
+                    </div>
+                    <p id="price1">10 000 NOK</p>
+                </div>
+            </section>
+            <section class="card" id="course2">
+                <img class="course-img" src="https://picsum.photos/300/200?random=2" alt="">
+                <h2>Azure Cloud Fundamentals</h2>
+                <p class="card-desc">Embark on your cloud computing journey with our beginner-level online course,
+                    "Azure Fundamentals,"
+                    meticulously crafted to prepare you for the AZ-900 exam</p>
+                <p class="infotext">10 hours per week • Beginner • 2 ECTS credits</p>
+                <div class="card-footer">
+                    <div class="rating">
+
+                        <img width="24" src="../../public/icons/star-sharp.svg" alt="">
+                        <b>3.4</b>
+                        (152)
+
+                    </div>
+                    <p id="price2">10 000 NOK</p>
+                </div>
+            </section>
+            <section class="card" id="course3">
+                <img class="course-img" src="https://picsum.photos/300/200?random=3" alt="">
+                <h2>Databricks Fundamentals</h2>
+                <p class="card-desc">Designed for individuals new to the world of big data and analytics, this course
+                    offers a
+                    comprehensive introduction to the essential concepts of Databricks</p>
+                <p class="infotext">10 hours per week • Beginner • 2 ECTS credits</p>
+                <div class="card-footer">
+                    <div class="rating">
+                      <span>
+                        <img width="24" src="../../public/icons/star-sharp.svg" alt="">
+                        <b>5.0</b>
+                        (16)
+                      </span>
+                    </div>
+                    <p id="price3">10 000 NOK</p>
+                </div>
+            </section>
+        </section>
+    </div>
 </div>
 </body>
 </html>

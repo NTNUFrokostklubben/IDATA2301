@@ -1,6 +1,7 @@
 *{
     margin: 0;
     font-size: 16px;
+    color: var(--textBlack);
     border-radius: 3px;
     font-family: "Tienne", serif;
 
@@ -39,7 +40,8 @@
     max-height: 5rem;
     padding: 0.2rem;
 }
-#logo-icon{
+
+#logo-icon {
     height: 3rem;
     width: 3rem;
 }
@@ -53,6 +55,22 @@ nav li {
 #menu-navbar > li {
     margin: 2rem
 }
+
+
+.page {
+    display: flex;
+    flex-flow: row;
+}
+
+
+
+.cta-button {
+    background-color: var(--cta);
+    color: var(--textWhite);
+    height: 3rem;
+    width: 7rem;
+}
+
 .drop-btn {
     display: flow;
     color: var(--textBlack);
@@ -61,10 +79,12 @@ nav li {
     border: none;
     background-color: var(--primary);
 }
-.dropdown{
+
+.dropdown {
     position: relative;
     display: inline-block;
 }
+
 /* (Hidden by Default) */
 .dropdown-content {
     display: none;
@@ -85,22 +105,29 @@ nav li {
 }
 
 /* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: var(--background);}
+.dropdown-content a:hover {
+    background-color: var(--background);
+}
 
 /* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {display: block;}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .drop-btn {background-color: var(--primary);}
+.dropdown:hover .drop-btn {
+    background-color: var(--primary);
+}
 
-.search-container input[type=text]{
+.search-container input[type=text] {
     all: unset;
     color: var(--textBlack);
     height: 100%;
     width: 100%;
     padding: 0.5rem 0.8rem;
 }
-.search-container #form_search{
+
+.search-container #form_search {
     background-color: var(--textWhite);
     min-width: 35rem;
     max-width: 55rem;
@@ -109,17 +136,20 @@ nav li {
     flex-direction: row;
     align-items: center;
 }
+
 ::placeholder {
     color: var(--textBlack);
     opacity: 0.7;
 }
-.search-container #search_btn{
+
+.search-container #search_btn {
     all: unset;
     cursor: pointer;
     width: 2rem;
     height: 4rem;
 }
-.search-container #search_btn #searchIcon{
+
+.search-container #search_btn #searchIcon {
     display: flow;
     align-items: center;
     padding: 0.5rem;
@@ -129,22 +159,17 @@ nav li {
     align-items: center;
     justify-content: center;
 }
+
 #login-btn{
     background-color: var(--textWhite);
     color: var(--textBlack);
 }
-.cfa{
+
+#signup-btn{
     background-color: var(--cta);
     color: var(--textWhite);
 }
-#free-btn{
-    display: flow;
-    justify-content: center;
-    margin-top: 2rem;
-    padding: 1rem;
-    width: 10rem;
-}
-#login-btn, .cfa{
+#login-btn, #signup-btn{
     border: 1px solid var(--textBlack);
     cursor: pointer;
     font-size: large;
@@ -156,35 +181,7 @@ nav li {
 #login-btn #signup-btn:hover{
     box-shadow: 0px 8px 16px 0px var(--shadow)
 }
-.heroMainPage{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    background-color: var(--background);
-    height: 60vh;
-    flex-wrap: wrap;
-}
-.hero-main-box{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: var(--textWhite);
-    box-shadow: 0px 8px 16px 0px var(--shadow);
-    padding: 3rem;
-    width: 30rem;
-    height: 10rem;
 
-}
-.heroMainText{
-    font-size: x-large;
-    text-align: center;
-}
-.heroMainImage{
-    display: flex;
-    align-self: flex-end;
-
-}
 
 
 
