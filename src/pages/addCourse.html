@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="addcourse.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tienne:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="page">
+    <div class="filters">
+<!--        TODO: CHANGE TAG AND IMPLEMENT SIDEBAR FOR ADMINS-->
+    </div>
+    <div>
+        <form action="http://localhost:6655" method="POST">
+            <section id="course-info">
+                <div class="input-wrapper"><label for="course-name">Course Name</label>
+                    <input type="text" id="course-name" name="course-name" required></div>
+
+                <div class="input-wrapper"><label for="course-description">Course Description</label>
+                    <textarea id="course-description" name="course-description" required></textarea></div>
+
+                <div class="group-3">
+                    <div class="input-wrapper">
+                        <label for="difficulty-level">Difficulty Level</label>
+                        <select name="difficulty-level" id="difficulty-level" required>
+                            <option value="0">Beginner</option>
+                            <option value="1">Intermediate</option>
+                            <option value="2">Expert</option>
+                        </select></div>
+
+                    <div class="input-wrapper"><label for="course-credits">ECTS Credits</label>
+                        <input type="number" id="course-credits" name="course-credits" required></div>
+
+                    <div class="input-wrapper"><label for="course-duration">Duration</label>
+                        <input type="number" id="course-duration" name="course-duration" required></div>
+                </div>
+
+                <div class="group-2">
+                    <div class="input-wrapper"><label for="related-certification">Related Certification</label>
+                        <input type="text" id="related-certification" name="related-certification" required></div>
+
+                    <div class="input-wrapper"><label for="course-category">Category</label>
+                        <select name="course-category" id="course-category" required>
+                            <option value="it">Information Technologies</option>
+                            <option value="dm">Digital Marketing</option>
+                            <option value="be">Business and Entrepreneurship</option>
+                            <option value="dsa">Data Science and Analytics</option>
+                        </select></div>
+                </div>
+
+                <div class="group-2">
+                    <div class="input-wrapper"><label for="course-price">Price</label>
+                        <input type="number" id="course-price" name="course-price" required></div>
+
+                    <div class="input-wrapper"><label for="price-currency">Currency</label>
+                        <select name="price-currency" id="price-currency" required>
+                            <option value="usd">USD</option>
+                            <option value="eur">EUR</option>
+                            <option value="nok">NOK</option>
+                        </select></div>
+                </div>
+
+                <div class="group-2">
+<!--                    TODO: Replace with calendar modal later (javascript component)-->
+                    <div class="input-wrapper"><label for="course-date">Start Date</label>
+                        <input type="date" id="course-date" name="course-date" required></div>
+
+<!--                    TODO: Add preview of uploaded image (javascript component)-->
+                    <div class="input-wrapper">
+                    <label for="course-image">Course Image</label>
+                    <input type="file" id="course-image" name="course-image" required>
+                    </div>
+                </div>
+
+                <div class="input-wrapper"><label for="course-keywords">Keywords separated by comma</label>
+                    <input type="text" id="course-keywords" name="course-keywords" required></div>
+
+                <button class="cta-button" type="submit">Add Course</button>
+            </section>
+        </form>
+    </div>
+</div>
+</body>
+</html>
