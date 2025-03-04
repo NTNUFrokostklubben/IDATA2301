@@ -1,4 +1,3 @@
-import CourseCard from "../component/coursecard";
 import Card from "../component/card/card";
 
 export default function Index() {
@@ -22,13 +21,12 @@ export default function Index() {
                 <p>
                     consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 </p>
-                <div className={"grid grid--4"}>
-                    <Card name={"Azure Cloud Fundamentals"} path={"https://picsum.photos/300/200?random=2"}/>
-                    <Card name={"Azure Cloud Fundamentals"} path={"https://picsum.photos/300/200?random=3"}/>
-                    <Card name={"Azure Cloud Fundamentals"} path={"https://picsum.photos/300/200?random=4"}/>
-                    <Card name={"Azure Cloud Fundamentals"} path={"https://picsum.photos/300/200?random=5"}/>
-                    
-                </div>
+                <h1>Temporary links to pages</h1>
+                <ul>
+                    <li><a href={"/search"}>search/filters</a></li>
+                    <li><a href={"/admin/course/add"}>add course</a></li>
+                </ul>
+
 
             </section>
         </div>

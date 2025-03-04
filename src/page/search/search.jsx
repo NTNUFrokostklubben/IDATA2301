@@ -10,7 +10,7 @@ export default function Search() {
                     <section id="difficulty">
                         <div className="filter-header">
                             <p>Difficulty level</p>
-                            <img width="12" src="../../public/icons/triangle-sharp.svg" alt=""/>
+                            <img width="12" src="/icons/triangle-sharp.svg" alt=""/>
                         </div>
                         <label><input className="" type="checkbox"/> Beginner</label>
                         <label><input className="" type="checkbox"/> Intermediate</label>
@@ -19,7 +19,7 @@ export default function Search() {
                     <section id="size">
                         <div className="filter-header">
                             <p>Course size</p>
-                            <img width="12" src="../../public/icons/triangle-sharp.svg" alt=""/>
+                            <img width="12" src="/icons/triangle-sharp.svg" alt=""/>
                         </div>
                         <p>ECTS credits</p>
                         <div className="input-field-container">
@@ -37,7 +37,7 @@ export default function Search() {
                     <section id="category">
                         <div className="filter-header">
                             <p>Category</p>
-                            <img width="12" src="../../public/icons/triangle-sharp.svg" alt=""/>
+                            <img width="12" src="/icons/triangle-sharp.svg" alt=""/>
                         </div>
                         <label><input className="" type="checkbox"/> Information Technologies</label>
                         <label><input className="" type="checkbox"/> Digital Marketing</label>
@@ -47,7 +47,7 @@ export default function Search() {
                     <section id="ratings">
                         <div className="filter-header">
                             <p>Ratings</p>
-                            <img width="12" src="../../public/icons/triangle-sharp.svg" alt=""/>
+                            <img width="12" src="/icons/triangle-sharp.svg" alt=""/>
                         </div>
                         <div className="input-field-container">
                             <div className="input-wrapper">
@@ -65,7 +65,7 @@ export default function Search() {
                     <section id="price">
                         <div className="filter-header">
                             <p>Price</p>
-                            <img width="12" src="../../public/icons/triangle-sharp.svg" alt=""/>
+                            <img width="12" src="/icons/triangle-sharp.svg" alt=""/>
                         </div>
                         <div className="input-field-container">
                             <div className="input-wrapper">
@@ -82,7 +82,7 @@ export default function Search() {
                     <section id="dates">
                         <div className="filter-header">
                             <p>Course Start</p>
-                            <img width="12" src="../../public/icons/triangle-sharp.svg" alt=""/>
+                            <img width="12" src="/icons/triangle-sharp.svg" alt=""/>
                         </div>
                         <div className="input-field-container">
                             <div className="input-wrapper"><label htmlFor="from-date">From</label>
