@@ -129,3 +129,15 @@ input[type="text"], input[type="number"], input[type="date"], select, textarea {
     font-size: 1rem;
 }
 
+@media (max-width: 850px) {
+
+    .page {
+        display: flex;
+        flex-flow: column;
+    }
+
+    .filters {
+        display: none;
+    }
+}
+
