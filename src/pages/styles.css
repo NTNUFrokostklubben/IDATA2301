@@ -1,3 +1,4 @@
+/* Default styling */
 *{
     margin: 0;
     font-size: 16px;
@@ -31,6 +32,8 @@
     font-weight: 900;
     font-style: normal;
 }
+
+/* Nav Bar*/
 #menu-navbar{
     background-color: var(--primary);
     display: flex;
@@ -45,30 +48,29 @@
     height: 3rem;
     width: 3rem;
 }
+
 #triangle-icon{
     rotate: 180deg;
 }
+
 nav li {
     list-style-type: none;
     padding-inline-start: 0;
 }
+
 #menu-navbar > li {
     margin: 2rem
 }
-
 
 .page {
     display: flex;
     flex-flow: row;
 }
 
-
-
 .cta-button {
     background-color: var(--cta);
     color: var(--textWhite);
-    height: 3rem;
-    width: 7rem;
+    border: 1px solid var(--textBlack);
 }
 
 .drop-btn {
@@ -154,6 +156,7 @@ nav li {
     align-items: center;
     padding: 0.5rem;
 }
+
 #login-signup{
     display: flow;
     align-items: center;
@@ -166,8 +169,8 @@ nav li {
 }
 
 #signup-btn{
-    background-color: var(--cta);
-    color: var(--textWhite);
+    height: 3rem;
+    width: 7rem;
 }
 #login-btn, #signup-btn{
     border: 1px solid var(--textBlack);
@@ -181,6 +184,7 @@ nav li {
 #login-btn #signup-btn:hover{
     box-shadow: 0px 8px 16px 0px var(--shadow)
 }
+
 
 
 
