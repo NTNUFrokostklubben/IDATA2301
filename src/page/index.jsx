@@ -1,8 +1,8 @@
-import Card from "../component/card/card";
+
 
 export default function Index() {
     return (
-        <div className={"App"}>
+        <div >
             <section id={"hero"} className={"Hero"}>
                 <div>
                     <p>
