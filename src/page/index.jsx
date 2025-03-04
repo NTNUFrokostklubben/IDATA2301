@@ -1,4 +1,5 @@
 import CourseCard from "../component/coursecard";
+import Card from "../component/card/card";
 
 export default function Index() {
     return (
@@ -22,15 +23,10 @@ export default function Index() {
                     consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 </p>
                 <div className={"grid grid--4"}>
-                    <CourseCard name={"AWS"} path={"courses/AWS.png"}/>
-                    <CourseCard name={"Machine Learning"} path={"courses/machine_learning.jpg"}/>
-                    <CourseCard name={"Azure"} path={"courses/azure.png"}/>
-                    <CourseCard name={"Databricks"} path={"courses/Databricks_Logo.png"}/>
-                    <CourseCard name={"dotnet"} path={"courses/dotnet.jpg"}/>
-                    <CourseCard name={"SQL"} path={"courses/SQL.jpg"}/>
-                    <CourseCard name={"Java"} path={"courses/Java.png"}/>
-                    <CourseCard name={"Image Recognition"} path={"courses/ImageRecognition.jpg"}/>
-                    <CourseCard name={"SEO"} path={"courses/SEO.png"}/>
+                    <Card name={"Azure Cloud Fundamentals"} path={"https://picsum.photos/300/200?random=2"}/>
+                    <Card name={"Azure Cloud Fundamentals"} path={"https://picsum.photos/300/200?random=3"}/>
+                    <Card name={"Azure Cloud Fundamentals"} path={"https://picsum.photos/300/200?random=4"}/>
+                    <Card name={"Azure Cloud Fundamentals"} path={"https://picsum.photos/300/200?random=5"}/>
                     
                 </div>
 
