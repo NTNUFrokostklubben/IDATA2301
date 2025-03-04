@@ -38,3 +38,9 @@
 .admin-sidebar li:hover {
     background-color: var(--highlight);
 }
+
+@media (max-width: 900px) {
+    .admin-sidebar {
+        display: none;
+    }
+}
