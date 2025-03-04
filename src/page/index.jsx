@@ -1,8 +1,8 @@
-import CourseCard from "../component/coursecard";
+
 
 export default function Index() {
     return (
-        <div className={"App"}>
+        <div >
             <section id={"hero"} className={"Hero"}>
                 <div>
                     <p>
@@ -21,18 +21,12 @@ export default function Index() {
                 <p>
                     consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 </p>
-                <div className={"grid grid--4"}>
-                    <CourseCard name={"AWS"} path={"courses/AWS.png"}/>
-                    <CourseCard name={"Machine Learning"} path={"courses/machine_learning.jpg"}/>
-                    <CourseCard name={"Azure"} path={"courses/azure.png"}/>
-                    <CourseCard name={"Databricks"} path={"courses/Databricks_Logo.png"}/>
-                    <CourseCard name={"dotnet"} path={"courses/dotnet.jpg"}/>
-                    <CourseCard name={"SQL"} path={"courses/SQL.jpg"}/>
-                    <CourseCard name={"Java"} path={"courses/Java.png"}/>
-                    <CourseCard name={"Image Recognition"} path={"courses/ImageRecognition.jpg"}/>
-                    <CourseCard name={"SEO"} path={"courses/SEO.png"}/>
-                    
-                </div>
+                <h1>Temporary links to pages</h1>
+                <ul>
+                    <li><a href={"/search"}>search/filters</a></li>
+                    <li><a href={"/admin/course/add"}>add course</a></li>
+                </ul>
+
 
             </section>
         </div>

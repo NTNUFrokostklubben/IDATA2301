@@ -1,44 +1,5 @@
-@import "styles.css";
 
-#dashboard {
-    display: flex;
-    flex-flow: column;
-}
 
-.filters {
-    display: flex;
-    flex-flow: column;
-    min-width: 24rem;
-    width: 24rem;
-    max-width: 24rem;
-    box-shadow: var(--shadow) 0 2rem 1rem;
-}
-
-.filter-header {
-    display: flex;
-    justify-content: space-between;
-    padding-right: 1rem;
-    background-color: var(--highlight);
-}
-
-.filters p {
-    margin: 1rem 0.5rem;
-}
-
-.filters ul {
-    border-radius: 0px;
-    background-color: #eaeaea;
-    padding: 0.5rem 0;
-}
-
-.filters li {
-    background-color: #eaeaea;
-    padding: 0.5rem 1rem;
-}
-
-.filters li:hover {
-    background-color: var(--highlight);
-}
 
 button {
     background-color: transparent;
@@ -83,17 +44,35 @@ section {
     flex: 1 1 calc(33.33% - 0.7rem); /* Three columns with gap */
 }
 
-input[type="text"], input[type="number"], input[type="date"], select, textarea {
+#course-info input[type="text"],
+#course-info input[type="number"],
+#course-info input[type="date"],
+#course-info select,
+#course-info textarea {
     width: 100%;
     height: 2.5rem;
-    padding: 0.5rem;
+    margin: 1rem 1rem;
     box-sizing: border-box;
     border: 1px solid var(--shadow);
     font-size: 1rem;
 }
 
-textarea {
+#course-info input[type="file"] {
+    width: 100%;
+    height: 2.5rem;
+    margin: 1rem 1rem;
+    box-sizing: border-box;
+    font-size: 1rem;
+
+}
+
+#course-info textarea {
     height: 10rem;
+    /*padding-left: 2rem;*/
+}
+
+#course-info .cta-button {
+    margin: 1rem 1rem;
 }
 
 .input-wrapper {
@@ -107,5 +86,9 @@ textarea {
     .group-2 .input-wrapper,
     .group-3 .input-wrapper {
         flex: 1 1 100%;
+    }
+
+    .admin-sidebar {
+        display: none;
     }
 }

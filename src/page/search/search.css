@@ -1,5 +1,4 @@
-@import "styles.css";
-@import "card.css";
+
 
 .filters {
     display: flex;
@@ -84,9 +83,8 @@ section {
     left: 1rem;
 }
 
-input[type="number"] {
+.filters input[type="number"] {
     width: 8rem;
-    height: 2rem;
 }
 
 .filter-dropdown {
@@ -127,6 +125,10 @@ input[type="text"], input[type="number"], input[type="date"], select, textarea {
     box-sizing: border-box;
     border: 1px solid var(--shadow);
     font-size: 1rem;
+}
+
+.filter-header .collapsed {
+    display: none;
 }
 
 @media (max-width: 850px) {
