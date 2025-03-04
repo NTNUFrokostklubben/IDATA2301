@@ -1,11 +1,18 @@
 import './App.css';
 import Index from "./page";
+import Search from "./page/search/search";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import Layout from "./page/layout";
 
 function App() {
   return (
-    <div>
-      <Index/>
-    </div>
+    <BrowserRouter>
+        <Routes>
+            <Route path="/" element={<Layout/>}/>
+            <Route index element={<Index/>}/>
+            <Route path="search" element={<Search/>}/>
+        </Routes>
+    </BrowserRouter>
   );
 }
 

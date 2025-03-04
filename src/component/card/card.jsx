@@ -18,7 +18,7 @@ export default function Card(props) {
     return (
         <section className="card" id="course2">
             <img className="course-img" src={cardImg.path} alt=""/>
-            <b>Azure Cloud Fundamentals</b>
+            <b>{props.name}</b>
             <p className="card-desc">Embark on your cloud computing journey with our beginner-level online course,
                 "Azure Fundamentals,"
                 meticulously crafted to prepare you for the AZ-900 exam</p>
