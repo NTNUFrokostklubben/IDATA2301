@@ -117,5 +117,15 @@ label {
 input[type=checkbox] {
     height: 2rem;
     width: 2rem;
+    outline-color: olivedrab;
+}
+
+input[type="text"], input[type="number"], input[type="date"], select, textarea {
+    /*width: 100%;*/
+    height: 2.5rem;
+    padding: 0.5rem;
+    box-sizing: border-box;
+    border: 1px solid var(--shadow);
+    font-size: 1rem;
 }
 
