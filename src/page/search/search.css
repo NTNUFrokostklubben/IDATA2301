@@ -127,6 +127,10 @@ input[type="text"], input[type="number"], input[type="date"], select, textarea {
     font-size: 1rem;
 }
 
+.filter-header .collapsed {
+    display: none;
+}
+
 @media (max-width: 850px) {
 
     .page {
