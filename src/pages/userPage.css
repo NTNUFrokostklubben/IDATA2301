@@ -1,0 +1,42 @@
+@import "styles.css";
+
+html{
+    background-color: var(--background);
+
+}
+#user-caret{
+    margin-left:20px;
+    margin-top: 20px;
+    display: flex;
+    background-color: white;
+    width: 250px;
+    height: 300px;
+    justify-content: center;
+
+}
+
+#caret{
+    display: flex;
+    flex-direction: column;
+
+    width: 250px;
+    height: 300px;
+    justify-content: center;
+    align-items: center;
+}
+
+#image{
+    border-radius: 50%;
+}
+#user-icon{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+#edit{
+    padding-top: 10px;
+    padding-right: 10px;
+    width: 25px;
+    justify-self: flex-start;
+    align-self: flex-start;
+}
