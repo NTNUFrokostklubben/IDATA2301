@@ -5,6 +5,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Layout from "./page/layout";
 import CourseAdd from "./page/admin/course/add/courseAdd";
 import AdminNav from "./page/admin/adminNav";
+import CourseIndex from "./page/admin/course/courseIndex";
 
 function App() {
     return (
@@ -15,6 +16,7 @@ function App() {
                     <Route path={"search"} element={<Search/>}/>
                 </Route>
                 <Route path={"/admin"} element={<AdminNav/>}>
+                    <Route index element={<CourseIndex/>}/>
                     <Route path={"course/add"} element={<CourseAdd/>}/>
                 </Route>
             </Routes>

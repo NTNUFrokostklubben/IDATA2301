@@ -99,7 +99,7 @@ export default function CourseAdd() {
                                 </select></div>
 
                             <div className="input-wrapper"><label htmlFor="course-credits">ECTS Credits</label>
-                                <input type="number" id="course-credits" name="credits" required/></div>
+                                <input type="number" step={".5"} id="course-credits" name="credits" required/></div>
 
                             <div className="input-wrapper"><label htmlFor="course-duration">Duration</label>
                                 <input type="number" id="course-duration" name="hoursWeek" required/></div>

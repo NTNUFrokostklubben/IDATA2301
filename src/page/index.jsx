@@ -24,7 +24,7 @@ export default function Index() {
                 <h1>Temporary links to pages</h1>
                 <ul>
                     <li><a href={"/search"}>search/filters</a></li>
-                    <li><a href={"/admin/course/add"}>add course</a></li>
+                    <li><a href={"/admin"}>Admin</a></li>
                 </ul>
 
 

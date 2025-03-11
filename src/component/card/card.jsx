@@ -16,7 +16,7 @@ export default function Card(props) {
     const cardImg =  new image(props.name, props.path)
 
     return (
-        <section className="card" id="course2">
+        <section className="card">
             <img className="course-img" src={cardImg.path} alt=""/>
             <b>{props.name}</b>
             <p className="card-desc">Embark on your cloud computing journey with our beginner-level online course,
