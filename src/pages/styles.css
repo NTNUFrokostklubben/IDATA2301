@@ -1,5 +1,4 @@
 
-
 * {
     margin: 0;
     font-size: 16px;
@@ -15,7 +14,7 @@
     --highlight: #D9E1F4;
     --cta: #455993;
     --background: #DAF0F4;
-    --shadow: rgba(0,0,0,0.2);
+    --shadow: rgba(0, 0, 0, 0.2);
 }
 
 .tienne-regular {
@@ -23,6 +22,7 @@
     font-weight: 400;
     font-style: normal;
 }
+
 .tienne-bold {
     font-family: "Tienne", serif;
     font-weight: 700;
@@ -83,7 +83,7 @@ small {
     width: 3rem;
 }
 
-#triangle-icon{
+#triangle-icon {
     rotate: 180deg;
 }
 
@@ -101,7 +101,6 @@ nav li {
     display: flex;
     flex-flow: row;
 }
-
 
 
 .cta-button {
@@ -194,22 +193,24 @@ nav li {
     align-items: center;
     padding: 0.5rem;
 }
-#login-signup{
+
+#login-signup {
     display: flow;
     align-items: center;
     justify-content: center;
 }
 
-#login-btn{
+#login-btn {
     background-color: var(--textWhite);
     color: var(--textBlack);
 }
 
-#signup-btn{
+#signup-btn {
     background-color: var(--cta);
     color: var(--textWhite);
 }
-#login-btn, #signup-btn{
+
+#login-btn, #signup-btn {
     border: 1px solid var(--textBlack);
     cursor: pointer;
     font-size: large;
@@ -218,7 +219,8 @@ nav li {
     text-align: center;
     text-decoration: none;
 }
-#login-btn #signup-btn:hover{
+
+#login-btn #signup-btn:hover {
     box-shadow: 0px 8px 16px 0px var(--shadow)
 }
 

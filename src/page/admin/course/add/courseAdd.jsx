@@ -10,10 +10,10 @@ export default function CourseAdd() {
 
         const value = Object.fromEntries(data.entries());
 
-        console.log({ value });
+        console.log({value});
     }
 
-    return(
+    return (
         <div className="page">
             <div>
                 <form onSubmit={handleSubmit} action="http://localhost:6655" method="POST">
