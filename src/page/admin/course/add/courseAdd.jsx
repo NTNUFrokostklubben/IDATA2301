@@ -1,22 +1,87 @@
 import "./courseAdd.css";
+import {Form} from "react-router-dom";
 
 export default function CourseAdd() {
 
+    /**
+     * Handle API call for uploading images.
+     *
+     * @param image image to upload
+     * @returns {Promise<string|null>} Image URL if upload success or Null
+     */
+    async function handleImageUpload(image) {
+        // TODO: Refactor this into a "common utils" type file so users can upload images using same method
+        const formData = new FormData();
+        formData.append('file', image);
 
+        const imageOptions = {
+            method: "POST",
+            body: formData
+        }
+        const response = await fetch("http://localhost:8080/api/images/upload", imageOptions);
+
+        if (!response.ok) {
+            console.log("Error uploading image");
+            return null;
+        }
+
+        const imageUrl = await response.text();
+        console.log(imageUrl)
+        return imageUrl;
+    }
+
+
+    /**
+     * Handles form submission after successful Image Upload for Course
+     *
+     * @param data form data with correct image URL
+     * @returns {Promise<ReadableStream<Uint8Array>|null>} Created course or null if no course created
+     */
+    async function handleFormSubmission(data) {
+        const value = Object.fromEntries(data.entries());
+        console.log(value);
+
+        const requestOptions = {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(value)
+        };
+
+        const response = await fetch("http://localhost:8080/api/course", requestOptions)
+
+        if (!response.ok) {
+            console.log("Error submitting form");
+            return null;
+        }
+
+        const responseBody = response.body;
+        return responseBody;
+    }
+
+    /**
+     * Handle event when form is submitted in any way
+     *
+     * @param event Submission event from HTML form.
+     */
     function handleSubmit(event) {
         event.preventDefault();
 
         const data = new FormData(event.target);
+        const image = data.get("imgLink")
 
-        const value = Object.fromEntries(data.entries());
+        handleImageUpload(image).then(r => {
+            data.set("imgLink", r);
+            // TODO: Change alert to something better. Check for success.
+            handleFormSubmission(data).then(alert("Submitted Form"));
+        });
 
-        console.log({ value });
+
     }
 
-    return(
+    return (
         <div className="page">
             <div>
-                <form onSubmit={handleSubmit} action="http://localhost:6655" method="POST">
+                <form onSubmit={handleSubmit} action="http://localhost:3000/course" method="POST">
                     <section id="course-info">
                         <div className="input-wrapper"><label htmlFor="course-name">Course Name</label>
                             <input type="text" id="course-name" name="title" required/></div>
