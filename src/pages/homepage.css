@@ -6,7 +6,7 @@
     justify-content: space-around;
     align-items: center;
     background-color: var(--background);
-    height: 60vh;
+    height: 40rem;
     flex-wrap: wrap;
 }
 
@@ -26,7 +26,7 @@
     text-align: center;
 }
 
-.heroMainImage{
+#hero-main-image{
     display: flex;
     align-self: flex-end;
 }
@@ -40,42 +40,142 @@
     text-decoration: none;
     margin-top: 1rem;
 }
-#course-content h2{
-    text-align: left;
-    font-size: x-large;
-    margin-left: 1rem;
-}
-#course-content p{
-    text-align: left;
-    font-size: large;
-    margin-left: 1rem;
-}
 #course-content{
     min-height: 500px;
     background-color: var(--textWhite);
 }
-.card{
+.section-subheading{
+    padding: 0.5rem;
+    font-weight: normal;
+}
+#course-cards-section{
     display: flex;
-    flex-flow: column;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+}
+#course-cards-section .arrow{
+    align-content: center;
+    border: none;
+    cursor: pointer;
+}
+#course-cards-section #arrow-left-btn ,#arrow-right-btn{
+    border: none;
+}
+#collection-cards{
+    display: flex;
+    flex-wrap: nowrap;
+    grid-gap: 10px;
+}
+.card{
     margin: 1rem;
     border: var(--textBlack) 1px solid;
     border-radius: 3px;
-    width: 20rem;
+    width: 25rem;
 }
 
 .card:hover {
     box-shadow: 0px 8px 16px 0px var(--shadow);
 }
-
+.card .card-desc{
+    text-align: left;
+    padding: 0.5rem;
+}
 .card p {
-    color: rgba(0, 0, 0, 0.5);
-    font-size: 0.7rem;
-    text-align: center;
+    text-align: left;
+    padding: 1rem;
 }
 card img {
-    width: 100%;
-    object-fit: cover;
-    padding: 5px;
+    justify-content: center;
+    align-content: flex-start;
+    padding: 0.5rem;
 }
+#cart{
+    margin-left: 0;
+    margin-right: 3rem;
+}
+#course-content-heading{
+    padding: 0.5rem;
+}
+@supports (-webkit-line-clamp: 3) {
+    .card .card-desc {
+        display: -webkit-box; /* Required for line clamping */
+        -webkit-box-orient: vertical; /* Required for line clamping */
+        -webkit-line-clamp: 3; /* Limit to 3 lines */
+        overflow: hidden; /* Hide overflow */
+        text-overflow: ellipsis; /* Add ellipsis */
+    }
+}
+
+@supports not (-webkit-line-clamp: 3) {
+    .card .card-desc {
+        position: relative;
+        max-height: 4.5em; /* Adjust based on line height and number of lines */
+        line-height: 1.5em; /* Adjust based on your design */
+        overflow: hidden;
+    }
+
+    .card .card-desc::after {
+        content: '...';
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        background: white; /* Match the background color */
+        padding-left: 5px; /* Add some spacing */
+    }
+}
+/* Collabrotators */
+#collaborators-section{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--background);
+    height: 40rem;
+}
+collaborator-logos{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-gap: 1rem;
+    justify-content: center;
+    margin: 0;
+    align-items: flex-end;
+}
+
+
+
+
+
+/*
+TODO make this more smooth!!
+ */
+@media (max-width: 2800px) {
+    #course6{
+        display: none;
+    }
+}
+@media (max-width: 2350px) {
+    #course5, #course6{
+        display: none;
+    }
+}
+@media (max-width: 1900px) {
+    #course4, #course5, #course6{
+        display: none;
+    }
+}
+@media (max-width: 1500px) {
+    #course3, #course4, #course5, #course6{
+        display: none;
+    }
+}
+@media (max-width: 1000px) {
+    #course2, #course3, #course4, #course5, #course6{
+        display: none;
+    }
+    #hero-main-image{
+        display: none;
+    }
+}
+
+
 
 
