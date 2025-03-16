@@ -134,19 +134,32 @@ card img {
 #collaborators-section{
     display: flex;
     flex-direction: column;
+    flex-wrap: nowrap;
     background-color: var(--background);
-    height: 40rem;
+    height: 30rem;
 }
-collaborator-logos{
+#collaborator-logos {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    grid-gap: 1rem;
-    justify-content: center;
-    margin: 0;
-    align-items: flex-end;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 1rem;
+    justify-content: start;
+    align-items: center;
+    margin: auto;
+    width: 85%;
+    height: 80%;
 }
 
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 150px;
+}
+
+.logo img {
+    max-width: 100%;
+    height: auto;
+}
 
 /*
 TODO make this more smooth!!
