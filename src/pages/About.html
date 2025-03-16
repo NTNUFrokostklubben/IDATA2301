@@ -7,15 +7,48 @@
 <body>
 <section id="navbar">
     <nav>
-        <a class="active" href="/src/pages/Index.html"><img width="30" height="30" src="/public/logo.svg" alt=""></a>
-        <a href="">Courses</a> <img id="courseArrow" width="8" height="8" src="/public/icons/arrow-down-sharp.svg" alt="search icon">
-        <label for="searchIcon"><img id="searchIcon" width="20" height="20" src="/public/icons/search-sharp.svg" alt="search icon"></label>
+        <ul id="menu-navbar">
+            <li id="logo-image">
+                <a class="active" href="/src/pages/Index.html">
+                    <img id="logo-icon" src="/public/logo.svg" alt="Learniverse Logo">
+                </a>
+            </li>
+            <li>
+                <div class="dropdown">
+                    <button class="drop-btn">Courses <img id="triangle-icon" width="12" height="12" src="/public/icons/triangle-sharp.svg"></button>
+                    <div class="dropdown-content">
+                        <a href="#">Course 1</a>
+                        <a href="#">Course 2</a>
+                        <a href="#">Course 3</a>
+                        <a href="#">Course 4</a>
+                        <a href="#">Course 5</a>
+                        <a href="#">Course 6</a>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="search-container">
+                    <form id="form_search" role="search">
+                        <button type="submit" id="search_btn">
+                            <img id="searchIcon" width="20" height="20" src="/public/icons/search-sharp.svg" alt="search icon">
+                        </button>
+                        <input type="text" placeholder="Search.." name="search">
+                    </form>
+                </div>
+            </li>
+            <li>
+                <div id="cart">
+                    <a href=""><img id="cart_img" src="/public/icons/cart-sharp.svg" alt="shopping cart"></a>
+                </div>
 
-        <label for="search"><input type="text" id="search" name="search"></label>
-
-        <a href=""><img width="20" height="20" id="cart" src="/public/icons/cart-sharp.svg" alt="shopping cart"></a>
-        <a href="">login in</a>
-        <a href="">sign up</a>
+            </li>
+            <li>
+                <div id="login-signup-btn">
+                    <button id="login-btn" alt="Log in" href="#">Log in</button>
+                    <button class="cta-button" id="signup-btn" alt="Sign up" href="#">Sign up</button>
+                </div>
+            </li>
+        </ul>
     </nav>
 </section>
 

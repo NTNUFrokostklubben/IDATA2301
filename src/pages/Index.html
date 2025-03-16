@@ -9,52 +9,49 @@
     <link href="https://fonts.googleapis.com/css2?family=Tienne:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
-<section id="navbar">
-  <nav>
-    <ul id="menu-navbar">
-      <li id="logo-image">
-        <a class="active" href="/src/pages/Index.html">
-          <img id="logo-icon" src="/public/logo.svg" alt="Learniverse Logo">
-        </a>
-      </li>
-      <li>
-        <div class="dropdown">
-          <button class="drop-btn">Courses <img id="triangle-icon" width="12" height="12" src="/public/icons/triangle-sharp.svg"></button>
-          <div class="dropdown-content">
-            <a href="#">Course 1</a>
-            <a href="#">Course 2</a>
-            <a href="#">Course 3</a>
-            <a href="#">Course 4</a>
-            <a href="#">Course 5</a>
-            <a href="#">Course 6</a>
-          </div>
-        </div>
-      </li>
-      <li>
-        <div class="search-container">
-          <form id="form_search" role="search">
-            <button type="submit" id="search_btn">
-              <img id="searchIcon" width="20" height="20" src="/public/icons/search-sharp.svg" alt="search icon">
-            </button>
-            <input type="text" placeholder="Search.." name="search">
-          </form>
-        </div>
-      </li>
-      <li>
-        <a href=""><img width="40" height="40" id="cart" src="/public/icons/cart-sharp.svg" alt="shopping cart"></a>
-      </li>
-      <li>
-        <div id="login-signup-btn">
-          <button id="login-btn" alt="Log in" href="#">Log in</button>
-          <button class="cta-button" id="signup-btn" alt="Sign up" href="#">Sign up</button>
-        </div>
-      </li>
-    </ul>
-  </nav>
-</section>
-
-
 <main>
+    <nav id="menu-navbar">
+        <li id="logo-image">
+          <a class="active" href="/src/pages/Index.html">
+            <img id="logo-icon" src="/public/logo.svg" alt="Learniverse Logo">
+          </a>
+        </li>
+        <li>
+          <div class="dropdown">
+            <button class="drop-btn">Courses <img id="triangle-icon" width="12" height="12" src="/public/icons/triangle-sharp.svg"></button>
+            <div class="dropdown-content">
+              <a href="#">Course 1</a>
+              <a href="#">Course 2</a>
+              <a href="#">Course 3</a>
+              <a href="#">Course 4</a>
+              <a href="#">Course 5</a>
+              <a href="#">Course 6</a>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="search-container">
+            <form id="form_search" role="search">
+              <button type="submit" id="search_btn">
+                <img id="searchIcon" width="20" height="20" src="/public/icons/search-sharp.svg" alt="search icon">
+              </button>
+              <input type="text" placeholder="Search.." name="search">
+            </form>
+          </div>
+        </li>
+        <li>
+          <div id="cart">
+            <a href=""><img id="cart_img" src="/public/icons/cart-sharp.svg" alt="shopping cart"></a>
+          </div>
+
+        </li>
+        <li>
+          <div id="login-signup-btn">
+            <button id="login-btn" alt="Log in" href="#">Log in</button>
+            <button class="cta-button" id="signup-btn" alt="Sign up" href="#">Sign up</button>
+          </div>
+        </li>
+    </nav>
 
   <section id="Hero">
     <div class="heroMainPage">
@@ -67,7 +64,7 @@
       </div>
 
       <div id="hero-main-image">
-        <img width="312" height="455" src="/public/images/HeroWomanIndex.png" alt="a person working on a ipad">
+        <img id="hero-image" src="/public/images/hero_woman_original.png" alt="a person working on a ipad">
       </div>
 
     </div>
@@ -89,7 +86,7 @@
 
         <section class="card" id="course1">
           <div class="course-card">
-            <img class="course-img" src="https://picsum.photos/400/200?random=1" alt="">
+            <img class="course-img" src="https://picsum.photos/320/200?random=1" alt="">
             <h5 class="card-desc">Sed ut perspiciatis unde omnis iste natus </h5>
             <p>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
             <p><b>14 00 NOK</b></p>
@@ -98,7 +95,7 @@
 
         <section class="card" id="course2">
           <div class="course-card">
-            <img class="course-img" src="https://picsum.photos/400/200?random=2" alt="">
+            <img class="course-img" src="https://picsum.photos/320/200?random=2" alt="">
             <h5 class="card-desc">Sed ut perspiciatis unde omnis iste natus </h5>
             <p>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
             <p><b>14 00 NOK</b></p>
@@ -107,7 +104,7 @@
 
         <section class="card" id="course3">
           <div class="course-card">
-            <img class="course-img" src="https://picsum.photos/400/200?random=3" alt="">
+            <img class="course-img" src="https://picsum.photos/320/200?random=3" alt="">
             <h5 class="card-desc">Sed ut perspiciatis unde omnis iste natus </h5>
             <p>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
             <p><b>14 00 NOK</b></p>
@@ -116,7 +113,7 @@
 
         <section class="card" id="course4">
           <div class="course-card">
-            <img class="course-img" src="https://picsum.photos/400/200?random=4" alt="">
+            <img class="course-img" src="https://picsum.photos/320/200?random=4" alt="">
             <h5 class="card-desc">Sed ut perspiciatis unde omnis iste natus </h5>
             <p>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
             <p><b>14 00 NOK</b></p>
@@ -125,7 +122,7 @@
 
         <section class="card" id="course5">
           <div class="course-card">
-            <img class="course-img" src="https://picsum.photos/400/200?random=5" alt="">
+            <img class="course-img" src="https://picsum.photos/320/200?random=5" alt="">
             <h5 class="card-desc">Sed ut perspiciatis unde omnis iste natus </h5>
             <p>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
             <p><b>14 00 NOK</b></p>
@@ -134,12 +131,23 @@
 
         <section class="card" id="course6">
           <div class="course-card">
-            <img class="course-img" src="https://picsum.photos/400/200?random=6" alt="">
+            <img class="course-img" src="https://picsum.photos/320/200?random=6" alt="">
             <h5 class="card-desc">Sed ut perspiciatis unde omnis iste natus </h5>
             <p>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
             <p><b>14 00 NOK</b></p>
           </div>
         </section>
+
+        <section class="card" id="course7">
+          <div class="course-card">
+            <img class="course-img" src="https://picsum.photos/320/200?random=7" alt="">
+            <h5 class="card-desc">Sed ut perspiciatis unde omnis iste natus </h5>
+            <p>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <p><b>14 00 NOK</b></p>
+          </div>
+        </section>
+
+
 
       </section>
 
