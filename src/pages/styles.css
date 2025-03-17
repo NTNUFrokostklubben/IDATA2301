@@ -16,6 +16,9 @@
     --background: #DAF0F4;
     --shadow: rgba(0,0,0,0.2);
 }
+image{
+    border-radius: 3px;
+}
 .tienne-regular {
     font-family: "Tienne", serif;
     font-weight: 400;
@@ -61,9 +64,14 @@ p {
     font-size: 1rem;
 }
 
-
 small {
     font-size: 0.833rem;
+}
+.filter-white{
+    filter: invert(98%) sepia(18%) saturate(5600%) hue-rotate(184deg) brightness(128%) contrast(87%);
+}
+.title-and-subtitle{
+    padding: 2rem;
 }
 /* Navbar */
 #menu-navbar {
