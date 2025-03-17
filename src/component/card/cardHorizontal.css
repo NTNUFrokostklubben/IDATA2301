@@ -2,14 +2,9 @@
 .cardAdmin {
     /*grid with 1st column only image, 2nd column title, description, keywords. 3rd column price, hours. 4th column credits, difficulty. */
     display: grid;
-    position: relative;
-    grid-template-columns: 300px 3fr 1fr 1fr 0.5fr; /* Image on the left, text on the right */
+    grid-template-columns: 300px 3fr 1fr 1fr; /* Image on the left, text on the right */
     grid-template-rows: 3rem 1fr;
-    /*gap: 1rem;*/
-    /*width: 100%; !* Full width for smaller screens *!*/
-    /*height: 10rem;*/
     margin: 1rem 2rem;
-    /*padding: 0rem 2rem;*/
     border: var(--textBlack) 1px solid;
     border-radius: 3px;
     overflow: hidden;
@@ -75,8 +70,6 @@
 
 .cardAdmin .button-group {
     display: flex;
-    grid-column-start: 5;
-    grid-column-end: 5;
     grid-row-start: 1;
     grid-row-end: 3;
     right: 10px;
