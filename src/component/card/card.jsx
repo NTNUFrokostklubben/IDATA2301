@@ -13,7 +13,7 @@ export default function Card(props) {
         props.path = "https://picsum.photos/300/200?random=2";
     }
 
-    const cardImg =  new image(props.name, props.path)
+    const cardImg = new image(props.name, props.path)
 
     return (
         <section className="card" id="course2">

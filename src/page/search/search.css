@@ -1,5 +1,4 @@
 
-
 .filters {
     display: flex;
     flex-flow: column;
@@ -46,7 +45,6 @@
     top: -2rem;
     left: 0rem;
 }
-
 
 
 section {

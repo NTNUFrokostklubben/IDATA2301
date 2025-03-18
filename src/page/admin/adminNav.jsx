@@ -2,7 +2,7 @@ import {Outlet} from "react-router-dom";
 import "./adminNav.css"
 
 export default function AdminNav() {
-    return(
+    return (
         <div className={"page"}>
             <div className="admin-sidebar">
                 {/*TODO: Refactor admin sidebar out into separate layout for admin pages*/}

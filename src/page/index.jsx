@@ -1,8 +1,6 @@
-
-
 export default function Index() {
     return (
-        <div >
+        <div>
             <section id={"hero"} className={"Hero"}>
                 <div>
                     <p>
@@ -14,7 +12,7 @@ export default function Index() {
                     </button>
                 </div>
             </section>
-            <section id={"courseinfo"} className={"CourseInfo"} >
+            <section id={"courseinfo"} className={"CourseInfo"}>
                 <h1>
                     Lorem ipsum dolor sit amet
                 </h1>

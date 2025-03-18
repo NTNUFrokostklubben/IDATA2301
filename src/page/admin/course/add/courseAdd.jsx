@@ -74,8 +74,7 @@ export default function CourseAdd() {
             // TODO: Change alert to something better. Check for success.
             handleFormSubmission(data).then(alert("Submitted Form"));
         });
-
-
+        console.log({value});
     }
 
     return (

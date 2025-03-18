@@ -10,10 +10,10 @@ export default function Search() {
 
         const value = Object.fromEntries(data.entries());
 
-        console.log({ value });
+        console.log({value});
     }
 
-    return(
+    return (
         <div className="page">
             <div className="filters">
                 <form onSubmit={handleSubmit} action="http://localhost:6655" method="POST">
@@ -51,7 +51,8 @@ export default function Search() {
                         </div>
                         <label><input className="" type="checkbox" name={"cat-it"}/> Information Technologies</label>
                         <label><input className="" type="checkbox" name={"cat-dm"}/> Digital Marketing</label>
-                        <label><input className="" type="checkbox" name={"cat-be"}/> Business and Entrepenaurship</label>
+                        <label><input className="" type="checkbox" name={"cat-be"}/> Business and
+                            Entrepenaurship</label>
                         <label><input className="" type="checkbox" name={"cat-dsa"}/> Data Science and Analytics</label>
                     </section>
                     <section id="ratings">
@@ -62,13 +63,15 @@ export default function Search() {
                         <div className="input-field-container">
                             <div className="input-wrapper">
                                 <label htmlFor="min-rating">Min rating</label>
-                                <input id="min-rating" className="" placeholder="Min" name={"min-rating"} type="number"/>
+                                <input id="min-rating" className="" placeholder="Min" name={"min-rating"}
+                                       type="number"/>
                             </div>
                             <span> - </span>
 
                             <div className="input-wrapper">
                                 <label htmlFor="max-rating">Max rating</label>
-                                <input id="max-rating" className="" placeholder="Max" name={"max-rating"} type="number"/>
+                                <input id="max-rating" className="" placeholder="Max" name={"max-rating"}
+                                       type="number"/>
                             </div>
                         </div>
                     </section>
@@ -85,7 +88,8 @@ export default function Search() {
                             <span> - </span>
                             <div className="input-wrapper">
                                 <label htmlFor="max-price">Max price</label>
-                                <input id="max-price" className="" placeholder="Max price" name={"max-price"} type="number"/>
+                                <input id="max-price" className="" placeholder="Max price" name={"max-price"}
+                                       type="number"/>
                             </div>
                         </div>
                     </section>
