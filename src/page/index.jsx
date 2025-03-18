@@ -1,9 +1,9 @@
-
+import "./Index.css";
 
 export default function Index() {
     return (
-        <div >
-            <section id={"hero"} className={"Hero"}>
+        <div id={"test"}>
+            <section id={"hero"} className={"hero"}>
                 <div>
                     <p>
                         Learniverse offers courses that give you the complete competence you need to succeed in the

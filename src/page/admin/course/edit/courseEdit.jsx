@@ -1,9 +1,9 @@
-import "./courseAdd.css";
+import "./courseEdit.css"
 import {Form} from "react-router-dom";
 
-export default function CourseAdd() {
+export default function CourseEdit() {
 
-
+    
 
     /**
      * Handle API call for uploading images.

@@ -1,6 +1,6 @@
 import "./cardHorizontal.css"
 import {useEffect, useState} from "react";
-import {redirect, useNavigate} from "react-router-dom";
+import {Link, redirect, useNavigate} from "react-router-dom";
 
 export default function CardHorizontal(course) {
 
@@ -23,10 +23,7 @@ export default function CardHorizontal(course) {
     }
 
 
-    function EditCourse() {
-        console.log("Edit course");
-        useNavigate("/course/edit/" + course.id);
-    }
+
 
 
     return (
@@ -40,8 +37,8 @@ export default function CardHorizontal(course) {
             <p className={"credits"}>{course.credits}ECTS credits</p>
             <p className="price">10000 NOK</p>
             <div className={"button-group"}>
-                <button className={"delete-button"} id={"delete" + course.id}>Delete</button>
-                <button onClick={EditCourse} className={"edit-button"} id={"edit" + course.id}>Edit</button>
+                <button className={"delete-button button"} id={"delete" + course.id}>Delete</button>
+                <Link to={"/admin/course/edit/" + course.id} className={"edit-button button"} id={"edit" + course.id}>Edit</Link>
             </div>
         </section>
     )

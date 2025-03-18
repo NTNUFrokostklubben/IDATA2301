@@ -83,13 +83,17 @@
 }
 
 /* Button styling */
-.cardAdmin button {
+.cardAdmin .button {
+    display: flex;
     width: 6rem;
     color: var(--textWhite);
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
     transition: transform 0.3s ease-in-out;
 }
 
-.cardAdmin:hover button {
+.cardAdmin:hover .button {
     opacity: 1; /* Fade in */
 }
 
