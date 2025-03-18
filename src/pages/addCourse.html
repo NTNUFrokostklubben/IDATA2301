@@ -11,16 +11,22 @@
 <body>
 <div class="page">
     <div class="filters">
-<!--        TODO: CHANGE TAG AND IMPLEMENT SIDEBAR FOR ADMINS-->
+        <!--        TODO: CHANGE TAG AND IMPLEMENT SIDEBAR FOR ADMINS-->
         <nav id="dashboard">
             <div class="filter-header">
                 <p>AdminDashboard</p>
                 <img width="12" src="../../public/icons/triangle-sharp.svg" alt="">
             </div>
             <ul>
-                <li><button>Overview</button></li>
-                <li><button>Courses</button></li>
-                <li><button>Analytics</button></li>
+                <li>
+                    <button>Overview</button>
+                </li>
+                <li>
+                    <button>Courses</button>
+                </li>
+                <li>
+                    <button>Analytics</button>
+                </li>
             </ul>
         </nav>
         <nav id="Management">
@@ -29,8 +35,12 @@
                 <img width="12" src="../../public/icons/triangle-sharp.svg" alt="">
             </div>
             <ul>
-                <li><button>Providers</button></li>
-                <li><button>Users</button></li>
+                <li>
+                    <button>Providers</button>
+                </li>
+                <li>
+                    <button>Users</button>
+                </li>
             </ul>
         </nav>
     </div>
@@ -85,14 +95,14 @@
                 </div>
 
                 <div class="group-2">
-<!--                    TODO: Replace with calendar modal later (javascript component)-->
+                    <!--                    TODO: Replace with calendar modal later (javascript component)-->
                     <div class="input-wrapper"><label for="course-date">Start Date</label>
                         <input type="date" id="course-date" name="course-date" required></div>
 
-<!--                    TODO: Add preview of uploaded image (javascript component)-->
+                    <!--                    TODO: Add preview of uploaded image (javascript component)-->
                     <div class="input-wrapper">
-                    <label for="course-image">Course Image</label>
-                    <input type="file" id="course-image" name="course-image" required>
+                        <label for="course-image">Course Image</label>
+                        <input type="file" id="course-image" name="course-image" required>
                     </div>
                 </div>
 
