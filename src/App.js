@@ -19,10 +19,10 @@ function App() {
                 </Route>
                 <Route path={"/admin"} element={<AdminNav/>}>
                     {/*<Route index element={<AdminDashboard/>}/>*/}
-                    <Route path={"/admin/course"} element={<CourseIndex/>}>
+                    <Route path={"/admin/course"} element={<Layout/>}>
                         <Route index element={<CourseIndex/>}/>
-                        <Route path={"course/add"} element={<CourseAdd/>}/>
-                        <Route path={"course/edit/:id"} element={<CourseEdit/>}/>
+                        <Route path={"add"} element={<CourseAdd/>}/>
+                        <Route path={"edit/:id"} element={<CourseEdit/>}/>
                     </Route>
                 </Route>
             </Routes>

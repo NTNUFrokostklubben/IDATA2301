@@ -38,7 +38,7 @@ export default function CardHorizontal(course) {
             <p className="price">10000 NOK</p>
             <div className={"button-group"}>
                 <button className={"delete-button button"} id={"delete" + course.id}>Delete</button>
-                <Link to={"/admin/course/edit/" + course.id} className={"edit-button button"} id={"edit" + course.id}>Edit</Link>
+                <Link to={`/admin/course/edit/${course.id}`} className={"edit-button button"} id={"edit" + course.id}>Edit</Link>
             </div>
         </section>
     )

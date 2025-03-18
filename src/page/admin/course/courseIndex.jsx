@@ -28,11 +28,9 @@ export default function CourseIndex() {
         fetch("http://localhost:8080/api/courses")
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
                 const courses = data.map((course) => new courseEntity(course.id, course.category, course.closestCourse, course.credits, course.description, course.diffLevel, course.hoursWeek, course.imgLink, course.relatedCert, course.title));
                 setCourses(courses);
                 setLoading(false)
-                console.log(courses)
             })
     }, []);
 
