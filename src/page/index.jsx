@@ -1,7 +1,10 @@
+
+import "./Index.css";
+
 export default function Index() {
     return (
-        <div>
-            <section id={"hero"} className={"Hero"}>
+        <div id={"test"}>
+            <section id={"hero"} className={"hero"}>
                 <div>
                     <p>
                         Learniverse offers courses that give you the complete competence you need to succeed in the
@@ -22,7 +25,7 @@ export default function Index() {
                 <h1>Temporary links to pages</h1>
                 <ul>
                     <li><a href={"/search"}>search/filters</a></li>
-                    <li><a href={"/admin/course/add"}>add course</a></li>
+                    <li><a href={"/admin"}>Admin</a></li>
                 </ul>
 
 

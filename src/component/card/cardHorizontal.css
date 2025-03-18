@@ -1,0 +1,139 @@
+
+.cardAdmin {
+    /*grid with 1st column only image, 2nd column title, description, keywords. 3rd column price, hours. 4th column credits, difficulty. */
+    display: grid;
+    grid-template-columns: 300px 3fr 1fr 1fr; /* Image on the left, text on the right */
+    grid-template-rows: 3rem 1fr;
+    margin: 1rem 2rem;
+    border: var(--textBlack) 1px solid;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.cardAdmin .card-title {
+    grid-column-start: 2;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 1;
+}
+
+
+.cardAdmin .course-img {
+    grid-column-start: 1;
+    grid-column-end: 1;
+    grid-row-start: 1;
+    grid-row-end: 3;
+    /*stretch image height*/
+    height: 100%;
+    object-fit: cover;
+}
+
+.cardAdmin .card-desc {
+    grid-column-start: 2;
+    grid-column-end: 2;
+}
+
+.cardAdmin .infotext {
+    grid-column-start: 3;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 2;
+}
+
+.cardAdmin .difficulty {
+    grid-column-start: 4;
+    grid-column-end: 4;
+    grid-row-start: 2;
+    grid-row-end: 2;
+}
+
+.cardAdmin .credits {
+    grid-column-start: 4;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 1;
+}
+
+.cardAdmin .price {
+    grid-column-start: 3;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 1;
+}
+
+.cardAdmin .rating {
+    grid-column-start: 2;
+    grid-column-end: 2;
+    grid-row-start: 3;
+    grid-row-end: 3;
+}
+
+.cardAdmin .button-group {
+    display: flex;
+    grid-row-start: 1;
+    grid-row-end: 3;
+    right: 10px;
+    transform: translateX(120%); /* Move out of view */
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Slide in when hovering */
+.cardAdmin:hover .button-group {
+    transform: translateX(0); /* Move into view */
+}
+
+/* Button styling */
+.cardAdmin .button {
+    display: flex;
+    width: 6rem;
+    color: var(--textWhite);
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    transition: transform 0.3s ease-in-out;
+}
+
+.cardAdmin:hover .button {
+    opacity: 1; /* Fade in */
+}
+
+.cardAdmin .edit-button {
+    background-color: var(--cta);
+    z-index: 1;
+}
+
+.cardAdmin .delete-button {
+    background-color: #BC2C2C;
+    /*position: relative;*/
+    /*left: 0.5rem;*/
+}
+
+
+
+@supports (-webkit-line-clamp: 8) {
+    .cardAdmin .card-desc {
+        display: -webkit-box; /* Required for line clamping */
+        -webkit-box-orient: vertical; /* Required for line clamping */
+        -webkit-line-clamp: 8; /* Limit to 3 lines */
+        overflow: hidden; /* Hide overflow */
+        text-overflow: ellipsis; /* Add ellipsis */
+    }
+}
+
+@supports not (-webkit-line-clamp: 8) {
+    .cardAdmin .card-desc {
+        position: relative;
+        max-height: 4.5em; /* Adjust based on line height and number of lines */
+        line-height: 1.5em; /* Adjust based on your design */
+        overflow: hidden;
+    }
+
+    .cardAdmin .card-desc::after {
+        content: '...';
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        background: white; /* Match the background color */
+        padding-left: 5px; /* Add some spacing */
+    }
+}
