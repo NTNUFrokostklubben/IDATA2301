@@ -1,10 +1,11 @@
 /* Default styling */
-* {
-    margin: 0;
+html {
+    margin: 0rem;
     font-size: 16px;
     color: var(--textBlack);
     border-radius: 3px;
     font-family: "Tienne", serif;
+    padding: 0;
 
     /* Colours used*/
     --textBlack: #242C2E;
@@ -15,6 +16,12 @@
     --cta: #455993;
     --background: #DAF0F4;
     --shadow: rgba(0,0,0,0.2);
+}
+body{
+    margin: 0;
+}
+footer{
+    font-size: 1rem;
 }
 image{
     border-radius: 3px;
@@ -239,6 +246,24 @@ nav li {
 #login-btn #signup-btn:hover{
     box-shadow: 0px 8px 16px 0px var(--shadow)
 }
+#footer-container{
+    background-color: var(--contrast);
+    font-size: 1rem;
+    height: auto;
+}
+#footer-textbox{
+    display: flex;
+}
+#footer-textbox #contact-us{
+    min-width: 40%;
+}
+.textFooter{
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+
 @media (min-width: 2800px) {
     #course6{
         display: none;
@@ -347,6 +372,12 @@ nav li {
     #login-btn, #signup-btn{
         width: 8rem;
     }
+    html{
+        font-size: 15px;
+    }
+    footer{
+        font-size: 0.925rem;
+    }
 }
 @media (max-width: 1024px) {
     .search-container #form_search {
@@ -368,28 +399,47 @@ nav li {
     .drop-btn {
         margin-right: 1.5rem;
     }
+    html{
+        font-size: 14px;
+    }
+    footer{
+        font-size: 0.875rem;
+    }
 }
 @media (max-width: 900px){
     #cart{
         display: none;
     }
+    html{
+        font-size: 12px;
+    }
+    footer{
+        font-size: 0.75rem;
+    }
+
 }
 
 /* Tablet - 475px width*/
 @media (max-width: 475px) {
+    html {
+        font-size: 10px; /* Adjust the base font size */
+    }
+    footer{
+        font-size: 0.625rem;
+    }
 }
-/* Mobile L - 475px width*/
+/* Mobile L - 475px width
 @media (max-width: 475px) {
 }
 
-/* Mobile M - 375px width*/
+Mobile M - 375px width
 @media (max-width: 375px) {
 }
 
-/* Mobile S - 320px width*/
+Mobile S - 320px width
 @media (max-width: 320px) {
 }
-
+*/
 
 
 

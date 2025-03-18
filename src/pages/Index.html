@@ -28,9 +28,7 @@
 <main>
     <nav id="menu-navbar">
         <li id="logo-image">
-          <a class="active" href="/src/pages/Index.html">
-            <img id="logo-icon" src="/public/logo.svg" alt="Learniverse Logo">
-          </a>
+          <img id="logo-icon" src="/public/logo.svg" alt="Learniverse Logo">
         </li>
         <li>
           <div class="dropdown">
@@ -197,7 +195,6 @@
     <div class="logo" id="logo10"> <img src="https://picsum.photos/75/75?random=10" alt="10"></div>
     <div class="logo" id="logo11"> <img src="https://picsum.photos/75/75?random=11" alt="11"></div>
     <div class="logo" id="logo12"> <img src="https://picsum.photos/75/75?random=12" alt="12"></div>
-    </div>
   </div>
 </section>
 
@@ -210,8 +207,8 @@
         aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
     </div>
   </div>
-
 </section>
+
 <section id="hero2">
   <div id="hero2-box">
     <!--The SVG Background and Pattern is by SVGBackgrounds.com
@@ -245,17 +242,30 @@
   </div>
 </section>
 
-<section id="footer">
+<section id="footer-container">
   <footer>
-    <img src="/public/icons/face" alt="">
-    <img src="https://picsum.photos/20/20" alt="">
-    <img src="https://picsum.photos/20/20" alt="">
-    <div class="textFooter">
-      <h5>Contact us:</h5>
-      <p>Address: 1234 Main Street, Lincoln, NE 685089</p>
-      <p>Phone number: +47 123 45 678</p>
-      <p>Email: learniverse@connect.com</p>
+    <img src="/public/logo.svg">
+
+    <div id="footer-textbox">
+
+      <div class="textFooter" id="contact-us">
+        <h5>Contact us:</h5>
+        <p>Address: 1234 Main Street, Lincoln, NE 685089</p>
+        <p>Phone number: +47 123 45 678</p>
+        <p>Email: learniverse@connect.com</p>
+      </div>
+
+      <div class="textFooter" id="legal">
+        <h5>Legal</h5>
+        <!--TODO add the link; https://www.ntnu.edu/studies/courses/IDATA2301#tab=omEmnet -->
+        <small>This website is a result of a university group project, performed in the course IDATA2301 Web
+          technologies, at NTNU.</small><br>
+        <small>All the information provided here is a result of imagination. </small><br>
+        <small> Any resemblance with real companies or products is a coincidence.</small><br>
+      </div>
+
     </div>
+
   </footer>
 </section>
 </body>
