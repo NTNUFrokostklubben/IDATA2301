@@ -1,4 +1,4 @@
-import {Outlet} from "react-router-dom";
+import {Link, Outlet} from "react-router-dom";
 import "./adminNav.css"
 
 export default function AdminNav() {
@@ -13,13 +13,13 @@ export default function AdminNav() {
                     </div>
                     <ul>
                         <li>
-                            <button>Overview</button>
+                            <Link>Overview</Link>
                         </li>
                         <li>
-                            <button>Courses</button>
+                            <Link to={"/admin/course"}>Courses</Link>
                         </li>
                         <li>
-                            <button>Analytics</button>
+                            <Link>Analytics</Link>
                         </li>
                     </ul>
                 </nav>

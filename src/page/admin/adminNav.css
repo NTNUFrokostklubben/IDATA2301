@@ -4,6 +4,8 @@
     flex-flow: column;
 }
 
+
+
 .admin-sidebar {
     display: flex;
     flex-flow: column;
@@ -31,12 +33,21 @@
 }
 
 .admin-sidebar li {
+
     background-color: #eaeaea;
-    padding: 0.5rem 1rem;
+    padding: 1rem 1rem;
 }
 
 .admin-sidebar li:hover {
     background-color: var(--highlight);
+}
+
+
+
+.admin-sidebar a {
+    display: block;
+    text-decoration: none;
+    color: var(--textBlack);
 }
 
 @media (max-width: 900px) {

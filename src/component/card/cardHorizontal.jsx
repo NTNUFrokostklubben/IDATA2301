@@ -26,19 +26,6 @@ export default function CardHorizontal(course) {
     }
 
 
-    function deleteCourse(id) {
-
-
-        // fetch("http://localhost:8080/api/course/" + id, {
-        //     method: "DELETE",
-        //     headers: {
-        //         "Content-Type": "application/json"
-        //     }
-        // }).then(() => {
-        //     console.log("Course deleted");
-        //     redirect("/admin/course");
-        // });
-    }
 
 
 
@@ -53,7 +40,7 @@ export default function CardHorizontal(course) {
             <p className={"credits"}>{course.credits}ECTS credits</p>
             <p className="price">10000 NOK</p>
             <div className={"button-group"}>
-                <button onClick={deleteCourse(course.id)} className={"delete-button button"} id={"delete" + course.id}>Delete</button>
+                <button className={"delete-button button"} id={"delete" + course.id}>Delete</button>
                 <Link to={`/admin/course/edit/${course.id}`} className={"edit-button button"} id={"edit" + course.id}>Edit</Link>
             </div>
         </section>
