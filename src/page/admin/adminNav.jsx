@@ -30,10 +30,10 @@ export default function AdminNav() {
                     </div>
                     <ul>
                         <li>
-                            <button>Providers</button>
+                            <Link>Providers</Link>
                         </li>
                         <li>
-                            <button>Users</button>
+                            <Link>Users</Link>
                         </li>
                     </ul>
                 </nav>

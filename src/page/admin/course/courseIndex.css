@@ -1,0 +1,13 @@
+
+#addCourse {
+    background-color: var(--cta);
+    margin: 0.5rem 2rem;
+}
+
+#addCourse a {
+    display: block;
+    text-decoration: none;
+    color: var(--textWhite);
+    padding: 1rem 1rem;
+}
+

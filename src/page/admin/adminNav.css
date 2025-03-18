@@ -35,7 +35,7 @@
 .admin-sidebar li {
 
     background-color: #eaeaea;
-    padding: 1rem 1rem;
+
 }
 
 .admin-sidebar li:hover {
@@ -48,6 +48,7 @@
     display: block;
     text-decoration: none;
     color: var(--textBlack);
+    padding: 1rem 1rem;
 }
 
 @media (max-width: 900px) {

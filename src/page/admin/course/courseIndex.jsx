@@ -1,6 +1,7 @@
 import "./courseIndex.css";
 import CardHorizontal from "../../../component/card/cardHorizontal";
 import {useEffect, useState} from "react";
+import {Link} from "react-router-dom";
 
 class courseEntity {
     constructor(id, category, closestCourse, credits, description, diffLevel, hoursWeek, imgLink, relatedCert, title) {
@@ -40,8 +41,9 @@ export default function CourseIndex() {
 
 
     return (
-        <div>
+        <div id={"courseIndex"}>
             <h1>Courses</h1>
+            <button id={"addCourse"}><Link to={"/admin/course/add"} className={"button"}>Add Course</Link></button>
             <div>
                 {courses.map((course) => <CardHorizontal key={course.id} {...course}/>)}
             </div>
