@@ -1,8 +1,11 @@
 import "./cardHorizontal.css"
 import {useEffect, useState} from "react";
 import {Link, redirect, useNavigate} from "react-router-dom";
+import DeleteModal from "../modals/deleteModal";
+import {createPortal} from "react-dom";
 
 export default function CardHorizontal(course) {
+
 
 
     if (!course) {
@@ -24,7 +27,7 @@ export default function CardHorizontal(course) {
 
 
     function deleteCourse(id) {
-        
+
 
         // fetch("http://localhost:8080/api/course/" + id, {
         //     method: "DELETE",
@@ -36,6 +39,7 @@ export default function CardHorizontal(course) {
         //     redirect("/admin/course");
         // });
     }
+
 
 
     return (
