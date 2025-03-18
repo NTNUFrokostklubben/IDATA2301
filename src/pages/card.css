@@ -1,5 +1,4 @@
 
-
 .card {
     display: flex;
     flex-flow: column;
@@ -31,8 +30,9 @@
     padding: 1rem;
 }
 
-.card h2 {
+.card b {
     margin: 1rem;
+    font-size: 1rem;
 }
 
 .rating {
@@ -69,5 +69,55 @@
         right: 0;
         background: white; /* Match the background color */
         padding-left: 5px; /* Add some spacing */
+    }
+}
+
+/* Responsive layout for smaller screens */
+@media (max-width: 768px) {
+    .card {
+        display: grid;
+        grid-template-columns: 100px 1fr 1fr; /* Image on the left, text on the right */
+        grid-template-rows: 100px 1fr 1fr;
+        gap: 1rem;
+        width: 100%; /* Full width for smaller screens */
+        /*padding: 1rem;*/
+    }
+
+    .card .course-img {
+        width: 100px; /* Smaller image */
+        height: 100px; /* Smaller image */
+        object-fit: cover;
+    }
+
+    .card b {
+        margin: 0;
+        font-size: 1rem;
+        justify-self: center;
+        grid-column-start: 2;
+        grid-column-end: -1;
+        grid-row: 1;
+    }
+
+    .card .card-desc {
+        -webkit-line-clamp: 4; /* Reduce to 2 lines for smaller screens */
+        max-height: 6em; /* Adjust height for smaller screens */
+        grid-column-start: 1;
+        grid-column-end: -1;
+        grid-row: 2;
+    }
+
+    .card .infotext {
+        grid-column-end: -1;
+        grid-column-start: 2;
+        grid-row: 1;
+        justify-self: center;
+        padding-top: 1rem;
+        text-align: left; /* Align text to the left */
+    }
+
+    .card .card-footer {
+        grid-column: 1 / -1; /* Span across both columns */
+        padding: 0;
+        /*margin-top: 0.5rem;*/
     }
 }
