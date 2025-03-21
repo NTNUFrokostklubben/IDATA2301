@@ -68,15 +68,58 @@
                     <input class="small-input-field" placeholder="First name" type="text" id="firstname" name="username">
                     <input class="small-input-field"  type="text" placeholder="Last name" id="lastname" name="lastname">
                 </div>
+                <input class="large-input-field" placeholder="Credit card number" type="number" name="Credit-card" id="credit-card">
+                <div class="small-input">
+                    <input class="small-input-field" placeholder="Expiration date mm/yy" type="text" name="expiration date" id="exp-date">
+                    <input class="small-input-field" placeholder="Security code" type="number" name="expiration date" id="sec-code">
+                </div>
                 <label for="lastname"></label>
                 <label for="firstname"></label>
             </form>
+            <div id="purchase">
+                <p>Total cost: </p>
+                <label class="valuta">14 000</label>
+                <p>,- nok</p>
+                <button id="purchase-button">Purchase</button>
+            </div>
 
         </section>
     </div>
     <div id="right-side">
         <section id="checkout">
+            <h1 class="header1">product</h1>
+            <div class="product">
+                <h2 class="header2">introduction to SQL essentials</h2>
+                <div class="picture-and-text">
+                <img width="200" height="50" src="https://picsum.photos/150/150" alt="product image">
+                <p class="product-desc">
+                    "Lorem ipsum dolor sit amet,
+                    consectetur adipiscing elit,
+                    sed do eiusmod tempor incididunt
+                    ut labore et dolore magna aliqua.
+                </p>
+            </div>
+                <div class="product-price">
 
+                    <div class="product-pricetag">
+                        <label>Price: </label>
+                        <label>15 000</label>
+                        <label class="valuta">,- nok</label>
+                    </div>
+
+                    <div class="purchase-discount">
+                        <label class="discount-tag">Discount: </label>
+                        <label>10%</label>
+                    </div>
+
+                    <div class="purchase-total-cost">
+                        <label>Total cost: </label>
+                        <label>14 000</label>
+                        <label class="valuta">,- nok</label>
+                    </div>
+
+                </div>
+            </div>
         </section>
     </div>
 </article>
