@@ -1,10 +1,11 @@
-
-* {
-    margin: 0;
+/* Default styling */
+html {
+    margin: 0rem;
     font-size: 16px;
     color: var(--textBlack);
     border-radius: 3px;
     font-family: "Tienne", serif;
+    padding: 0;
 
     /* Colours used*/
     --textBlack: #242C2E;
@@ -14,15 +15,22 @@
     --highlight: #D9E1F4;
     --cta: #455993;
     --background: #DAF0F4;
-    --shadow: rgba(0, 0, 0, 0.2);
+    --shadow: rgba(0,0,0,0.2);
 }
-
+body{
+    margin: 0;
+}
+footer{
+    font-size: 1rem;
+}
+image{
+    border-radius: 3px;
+}
 .tienne-regular {
     font-family: "Tienne", serif;
     font-weight: 400;
     font-style: normal;
 }
-
 .tienne-bold {
     font-family: "Tienne", serif;
     font-weight: 700;
@@ -63,27 +71,35 @@ p {
     font-size: 1rem;
 }
 
-
 small {
     font-size: 0.833rem;
 }
-
+.filter-white{
+    filter: invert(98%) sepia(18%) saturate(5600%) hue-rotate(184deg) brightness(128%) contrast(87%);
+}
+.title-and-subtitle{
+    padding: 2rem;
+}
+/* Navbar */
 #menu-navbar {
     background-color: var(--primary);
     display: flex;
-    justify-content: left;
+    flex-wrap: nowrap;
+    justify-content: center;
     align-items: center;
-    min-height: 4rem;
-    max-height: 5rem;
-    padding: 0.2rem;
+    height: 5rem;
+    width: 100%;
 }
-
 #logo-icon {
     height: 3rem;
-    width: 3rem;
+    width: 4rem;
+}
+#logo-image{
+    margin-right: 2rem ;
+    margin-left: 0;
 }
 
-#triangle-icon {
+#triangle-icon{
     rotate: 180deg;
 }
 
@@ -92,16 +108,11 @@ nav li {
     padding-inline-start: 0;
 }
 
-#menu-navbar > li {
-    margin: 2rem
-}
-
 
 .page {
     display: flex;
     flex-flow: row;
 }
-
 
 .cta-button {
     background-color: var(--cta);
@@ -117,6 +128,7 @@ nav li {
     font-size: large;
     border: none;
     background-color: var(--primary);
+    margin-right: 4rem;
 }
 
 .dropdown {
@@ -168,12 +180,13 @@ nav li {
 
 .search-container #form_search {
     background-color: var(--textWhite);
-    min-width: 35rem;
-    max-width: 55rem;
+    min-width: 65rem;
+    max-width: 75rem;
     max-height: 3rem;
     display: flex;
     flex-direction: row;
     align-items: center;
+    margin-right: 2.5rem;
 }
 
 ::placeholder {
@@ -193,37 +206,240 @@ nav li {
     align-items: center;
     padding: 0.5rem;
 }
+#cart_img {
+    width: 40px;
+    height: 40px;
+}
+#cart{
+    margin-right: 3.5rem;
+}
 
-#login-signup {
+#login-signup{
     display: flow;
     align-items: center;
     justify-content: center;
 }
 
-#login-btn {
+#login-btn{
     background-color: var(--textWhite);
     color: var(--textBlack);
+    margin-right: 1rem;
 }
 
-#signup-btn {
+#signup-btn{
     background-color: var(--cta);
     color: var(--textWhite);
 }
-
-#login-btn, #signup-btn {
+#login-signup-btn{
+    display: flex;
+    flex-wrap: nowrap;
+}
+#login-btn, #signup-btn{
     border: 1px solid var(--textBlack);
     cursor: pointer;
     font-size: large;
-    width: 8rem;
+    width: 10rem;
     height: 3rem;
     text-align: center;
     text-decoration: none;
 }
-
-#login-btn #signup-btn:hover {
+#login-btn #signup-btn:hover{
     box-shadow: 0px 8px 16px 0px var(--shadow)
 }
+#footer-container{
+    background-color: var(--contrast);
+    font-size: 1rem;
+    height: auto;
+}
+#footer-textbox{
+    display: flex;
+}
+#footer-textbox #contact-us{
+    min-width: 40%;
+}
+.textFooter{
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
 
+
+@media (min-width: 2800px) {
+    #course6{
+        display: none;
+    }
+    .search-container #form_search {
+        max-width: 85rem;
+        min-width: 75rem;
+    }
+    #login-btn, #signup-btn{
+        width: 14rem;
+    }
+    #login-btn{
+        margin-right: 1.5rem;
+    }
+    #logo-image{
+        margin-right: 8rem ;
+    }
+
+}
+@media (max-width: 2800px) {
+    #course6{
+        display: none;
+    }
+    .search-container #form_search {
+        max-width: 65rem;
+        min-width: 55rem;
+    }
+    #login-btn, #signup-btn{
+        width: 10rem;
+    }
+    #login-btn{
+        margin-right: 1rem;
+    }
+    #logo-image{
+        margin-right: 4rem ;
+    }
+}
+@media (max-width: 2350px) {
+    .search-container #form_search {
+        max-width: 55rem;
+        min-width: 45rem;
+    }
+    #login-btn, #signup-btn{
+        width: 10rem;
+    }
+    #login-btn{
+        margin-right: 0.7rem;
+    }
+    #logo-image{
+        margin-right: 7rem ;
+    }
+}
+@media (max-width: 1900px) {
+    .search-container #form_search {
+        max-width: 45rem;
+        min-width: 35rem;
+    }
+    #login-btn, #signup-btn{
+        width: 10rem;
+    }
+    #login-btn{
+        margin-right: 0.5rem;
+    }
+    #logo-image{
+        margin-right: 6rem ;
+    }
+}
+@media (max-width: 1500px) {
+    .search-container #form_search {
+        max-width: 35rem;
+        min-width: 25rem;
+        margin-right: 0.5rem;
+    }
+    #cart{
+        padding-left: 20px;
+    }
+    #login-btn, #signup-btn{
+        width: 8rem;
+    }
+    #login-btn{
+        margin-right: 0.3rem;
+    }
+    #logo-image{
+        margin-right: 5rem ;
+    }
+    .drop-btn {
+        margin-right: 3rem;
+    }
+
+}
+@media (max-width: 1250px) {
+    .search-container #form_search {
+        max-width: 25rem;
+        min-width: 15rem;
+        margin-right: 0.5rem;
+    }
+    #cart{
+        padding-left: 10px;
+    }
+    #logo-image{
+        margin-right: 4rem ;
+    }
+    .drop-btn {
+        margin-right: 2rem;
+    }
+    #login-btn, #signup-btn{
+        width: 8rem;
+    }
+    html{
+        font-size: 15px;
+    }
+    footer{
+        font-size: 0.925rem;
+    }
+}
+@media (max-width: 1024px) {
+    .search-container #form_search {
+        max-width: 15rem;
+        min-width: 10rem;
+    }
+    #login-btn, #signup-btn{
+        width: 7rem;
+    }
+    #login-btn{
+        margin-right: 0.1rem;
+    }
+    #cart{
+        padding-right: 0;
+    }
+    #logo-image{
+        margin-right: 3rem ;
+    }
+    .drop-btn {
+        margin-right: 1.5rem;
+    }
+    html{
+        font-size: 14px;
+    }
+    footer{
+        font-size: 0.875rem;
+    }
+}
+@media (max-width: 900px){
+    #cart{
+        display: none;
+    }
+    html{
+        font-size: 12px;
+    }
+    footer{
+        font-size: 0.75rem;
+    }
+
+}
+
+/* Tablet - 475px width*/
+@media (max-width: 475px) {
+    html {
+        font-size: 10px; /* Adjust the base font size */
+    }
+    footer{
+        font-size: 0.625rem;
+    }
+}
+/* Mobile L - 475px width
+@media (max-width: 475px) {
+}
+
+Mobile M - 375px width
+@media (max-width: 375px) {
+}
+
+Mobile S - 320px width
+@media (max-width: 320px) {
+}
+*/
 
 
 
