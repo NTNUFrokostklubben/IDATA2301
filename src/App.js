@@ -9,6 +9,7 @@ import CourseIndex from "./page/admin/course/courseIndex";
 import CourseEdit from "./page/admin/course/edit/courseEdit";
 import AdminDashboard from "./page/admin/adminDashboard";
 import About from "./page/about";
+import UserPage from "./page/userPage";
 
 function App() {
     return (
@@ -18,6 +19,7 @@ function App() {
                     <Route index element={<Index/>}/>
                     <Route path={"search"} element={<Search/>}/>
                     <Route path={"about"} element={<About/>}/>
+                    <Route path={"userPage"} element={<UserPage/>}/>
                 </Route>
                 <Route path={"/admin"} element={<AdminNav/>}>
                     {/*<Route index element={<AdminDashboard/>}/>*/}

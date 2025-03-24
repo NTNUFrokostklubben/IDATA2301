@@ -1,0 +1,139 @@
+
+.user-page{
+    background-color: var(--background);
+}
+
+#content{
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+#user-caret {
+    margin-left: 1rem;
+    margin-top: 1rem;
+    display: flex;
+    background-color: white;
+    width: 15rem;
+    height: 18rem;
+    justify-content: center;
+    max-width: 15rem;
+    flex-direction: column;
+
+}
+
+#caret {
+    display: flex;
+    flex-direction: column;
+
+    width: 15rem;
+    height: 18rem;
+    justify-content: center;
+    align-items: center;
+}
+
+#image {
+    border-radius: 50%;
+}
+
+
+#user_name {
+    font-size: 1.5rem;
+}
+
+#edit {
+    display: flex;
+    padding-top: 0.7rem;
+    padding-right: 0.7rem;
+    width: 1.5rem;
+    justify-self: flex-end;
+    align-self: flex-end;
+}
+#courses-heading{
+    font-size: 2rem;
+}
+
+#user_courses {
+    margin-top: 1.5rem;
+    margin-left: 1.5rem;
+    background-color: white;
+    justify-self: flex-start;
+    width: 45rem;
+    height: 18rem;
+}
+li{
+    padding-top: 0.7rem;
+}
+.star{
+    max-width: 1rem;
+    max-height: 1rem;
+}
+#users_reviews{
+    margin-top: 20px;
+    margin-left: 20px;
+    background-color: white;
+    width: 1000px;
+}
+.user-review-image{
+    border-radius: 50%;
+}
+.user-name-review{
+    justify-self: flex-start;
+}
+.user-review-section{
+    max-width: 200px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.review-date{
+    padding-bottom: 10px;
+    opacity: 40%;
+}
+.review-title{
+    padding-top: 20px;
+    padding-left: 10px;
+    font-size: 1rem;
+}
+.review-text{
+    padding-left: 10px;
+}
+#review-heading{
+    font-size: 2rem;
+}
+
+#users_favorites{
+    margin-bottom: 20px;
+}
+
+.one-favorite{
+    padding-bottom: 10px;
+}
+
+.favorite-course-title{
+    padding-left: 10px;
+}
+
+.favorite-image-and-text{
+    padding-left: 10px;
+    display: flex;
+}
+.favorite-course-text{
+    padding-left: 10px;
+}
+
+#users_favorites{
+    margin-top: 20px;
+    margin-left: 20px;
+    background-color: white;
+    width: 1000px;
+}
+#favorites-heading{
+    font-size: 2rem;
+}
+.favorite-course-title{
+    font-size: 1rem;
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
