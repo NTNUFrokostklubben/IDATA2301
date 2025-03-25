@@ -59,7 +59,7 @@ export default function UserPage (){
                     </ul>
                 </section>
 
-                <section id="users-reviews">
+                <section className="users-reviews">
                     <h5 id={"review-heading"} >Your reviews</h5>
 
                     {ratings.map(item => <Rating key={item.id} {...item}/>)}

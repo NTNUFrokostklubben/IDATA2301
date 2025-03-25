@@ -51,8 +51,9 @@
 }
 
 #user-courses {
-    margin-top: 1.5rem;
-    margin-left: 1.5rem;
+    margin-top: 1.3rem;
+    margin-left: 1.3rem;
+    margin-right: 1.3rem;
     background-color: white;
     justify-self: flex-start;
     width: 45rem;
@@ -68,16 +69,18 @@ li{
 #review-heading{
     padding: 1rem;
 }
-#users-reviews{
-    margin-top: 20px;
-    margin-left: 20px;
+.users-reviews{
+    margin-top: 1.3rem;
+    margin-left: 1.3rem;
+    margin-right: 1.3rem;
     background-color: white;
     width: 1000px;
 }
 #users-favorites{
-    margin-top: 20px;
-    margin-left: 20px;
-    margin-bottom: 20px;
+    margin-top: 1.3rem;
+    margin-left: 1.3rem;
+    margin-bottom: 1.3rem;
+    margin-right: 1.3rem;;
     background-color: white;
     width: 1000px;
 }
@@ -108,4 +111,13 @@ li{
     font-size: 1rem;
     padding-top: 20px;
     padding-bottom: 10px;
+}
+
+@media (max-width: 1290px){
+
+}
+@media (max-width: 1045px){
+    .users-reviews{
+
+    }
 }
