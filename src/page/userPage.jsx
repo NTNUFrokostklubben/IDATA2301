@@ -1,17 +1,45 @@
 import "./userPage.css"
+import { useEffect, useState } from 'react';
 export default function UserPage (){
+    const [data, setData] = useState([]);
+    const [user, setUser] = useState([]);
+    const [loading, setLoading] = useState([true]);
+    let [ratings, setRatings] = useState([]);
 
-    return(
-        <div>
-            <body class={"user-page"}>
-            
+    useEffect(() => {
+        fetch('http://localhost:8080/api/user-courses/1')
+            .then(response => response.json())
+            .then(data => {
+                setData(data)
+                setRatings(data.filter(item => item.rating > 0));
+                setLoading(false)
+            })
+            .catch(err => console.error('Error fetching data:', err));
+        }, []
+    );
+
+    useEffect(() => {
+        fetch('http://localhost:8080/api/user/1')
+            .then(response => response.json())
+            .then(user => {
+                setUser(user)
+        }).catch(err => console.error('Error fetching data:', err))
+        }, []
+    );
+    if (loading ){
+        return (<h1>loading</h1>)
+    }
+    console.log(ratings[1].rating)
+    return (
+        <div class={"user-page"}>
+            <h1>Testing: </h1>
             <section id="content">
                 <section id="user-caret">
                     <a href=""><img id="edit" src="/icons/pencil-sharp.svg" alt="edit button"/></a>
                     <div id="caret">
 
                         <picture id="user_image">
-                            <img id="image" src="https://picsum.photos/150/150" alt="user"/>
+                            <img id="image" src={user.profilePicture} alt="user"/>
                         </picture>
                         <p id="user_name">
                             User1
@@ -23,10 +51,9 @@ export default function UserPage (){
                 <section id="user_courses">
                     <h1 id="courses-heading">Previous courses</h1>
                     <ul>
-                        <li><a href="">Introduction to SQL Essentials</a></li>
-                        <li><a href="">Introduction to SQL Essentials</a></li>
-                        <li><a href="">Introduction to SQL Essentials</a></li>
-                        <li><a href="">Introduction to SQL Essentials</a></li>
+                        {data.map(item => (
+                            <li key={item.id}> <a href="">{item.course.title}</a></li>
+                            ))}
                     </ul>
                 </section>
 
@@ -37,14 +64,13 @@ export default function UserPage (){
                         <h2 className="review-title">Introduction to SQL Essentials</h2>
                         <div className="user-review-section">
                             <picture>
-                                <img className="user-review-image" src="https://picsum.photos/40/40" alt="user"/>
+                                <img className="user-review-image" src={user.profilePicture} alt="user"/>
                             </picture>
                             <p className="user-name-review">user1</p>
                             <div className="stars">
                                 <img className="star" src="/icons/star-sharp.svg" alt="review star"/>
                                 <img className="star" src="/icons/star-sharp.svg" alt="review star"/>
                                 <img className="star" src="/icons/star-sharp.svg" alt="review star"/>
-                                <img className="star" src="/icons/star-half-sharp.svg" alt="review star"/>
                             </div>
                             <p className="review-date">Reviewed on January 1, 2025 </p>
                         </div>
@@ -61,7 +87,7 @@ export default function UserPage (){
                         <h2 className="review-title">Introduction to SQL Essentials</h2>
                         <div className="user-review-section">
                             <picture>
-                                <img className="user-review-image" src="https://picsum.photos/40/40" alt="user"/>
+                                <img className="user-review-image" src={user.profilePicture} alt="user"/>
                             </picture>
                             <p className="user-name-review">user1</p>
 
@@ -125,7 +151,6 @@ export default function UserPage (){
 
                 </section>
             </section>
-            </body>
         </div>
 
     )

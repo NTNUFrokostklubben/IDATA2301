@@ -76,6 +76,8 @@ li{
 }
 .user-review-image{
     border-radius: 50%;
+    width: 40px;
+    height: 40px;
 }
 .user-name-review{
     justify-self: flex-start;
@@ -121,6 +123,10 @@ li{
 }
 .favorite-course-text{
     padding-left: 10px;
+}
+.favorite-course-image{
+    width: 10rem;
+    height: 4.7rem;
 }
 
 #users_favorites{
