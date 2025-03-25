@@ -79,7 +79,7 @@ export default function CourseAdd() {
     }
 
     return (
-        <div className="page">
+        <div className="courseInfo-page">
             <div>
                 <form onSubmit={handleSubmit} action="http://localhost:3000/course" method="POST">
                     <section id="course-info">
@@ -148,7 +148,7 @@ export default function CourseAdd() {
                             comma</label>
                             <input type="text" id="course-keywords" name="keywords" required/></div>
 
-                        <button className="cta-button" type="submit">Add Course</button>
+                        <button className="cta-button courseAdmin-button" type="submit">Add Course</button>
                     </section>
                 </form>
             </div>

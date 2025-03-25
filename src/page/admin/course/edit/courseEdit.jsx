@@ -1,4 +1,4 @@
-import "./courseEdit.css"
+
 import {Form, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 
@@ -117,7 +117,7 @@ export default function CourseEdit(courseId) {
     }
 
     return (
-        <div className="page">
+        <div className="courseInfo-page">
             <div>
                 <form onSubmit={handleSubmit} action={"http://localhost:3000/course/" + courseId} method="PUT">
                     <section id="course-info">

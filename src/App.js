@@ -18,15 +18,18 @@ function App() {
                     <Route index element={<Index/>}/>
                     <Route path={"search"} element={<Search/>}/>
                     <Route path={"userpage"} element={<UserPage/>}/>
-                </Route>
-                <Route path={"/admin"} element={<AdminNav/>}>
-                    {/*<Route index element={<AdminDashboard/>}/>*/}
-                    <Route path={"/admin/course"} element={<Layout/>}>
-                        <Route index element={<CourseIndex/>}/>
-                        <Route path={"add"} element={<CourseAdd/>}/>
-                        <Route path={"edit/:id"} element={<CourseEdit/>}/>
+                    <Route path={"login"} element={<Login/>}/>
+                    <Route path={"register"} element={<Register/>}/>
+                    <Route path={"/admin"} element={<AdminNav/>}>
+                        {/*<Route index element={<AdminDashboard/>}/>*/}
+                        <Route path={"/admin/course"}>
+                            <Route index element={<CourseIndex/>}/>
+                            <Route path={"add"} element={<CourseAdd/>}/>
+                            <Route path={"edit/:id"} element={<CourseEdit/>}/>
+                        </Route>
                     </Route>
                 </Route>
+
             </Routes>
         </BrowserRouter>
     )

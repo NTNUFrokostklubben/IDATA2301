@@ -65,7 +65,7 @@ section {
     flex-flow: column;
 }
 
-.input-field-container {
+.search-input-field-container {
     display: flex;
     flex-flow: row;
     margin: 2rem 0;
