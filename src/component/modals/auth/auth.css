@@ -1,7 +1,7 @@
-
+/*Ensure background expands over entire screen to indicate that user should address popup before anything else*/
 .auth-background {
     background-color: var(--textBlack);
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     position: fixed;
     display: flex;
     top: 0;
@@ -26,8 +26,15 @@
 }
 
 
+/*Make all of these only apply if under the authform*/
 
-input[type="text"], input[type="number"], input[type="password"], input[type="email"], select, textarea {
+
+.authform input[type="text"],
+.authform input[type="number"],
+.authform input[type="password"],
+.authform input[type="email"],
+.authform select,
+.authform textarea {
     width: 100%;
     height: 2.5rem;
     margin: 1rem 0;
@@ -38,12 +45,11 @@ input[type="text"], input[type="number"], input[type="password"], input[type="em
 }
 
 
-
-h1 {
+.auth-h1 {
     align-self: center;
 }
 
-#CTA {
+#auth-CTA {
     margin-top: 6rem;
 }
 
@@ -58,8 +64,8 @@ h1 {
     color: var(--textBlack);
 }
 
-#close-button {
-/*Ensure button is just a bit larger than image*/
+#auth-close-button {
+    /*Ensure button is just a bit larger than image*/
     width: 30px;
     height: 30px;
     background-color: var(--shadow);
@@ -74,16 +80,16 @@ h1 {
 
 }
 
-#close-button img {
+#auth-close-button > img {
     /*Center image in button*/
     margin: auto;
     width: 24px;
     height: 24px;
 }
 
-#close-button:hover {
-    cursor: pointer;
+#auth-close-button:hover {
     background-color: var(--highlight);
+    cursor: pointer;
 }
 
 @media (max-width: 600px) {

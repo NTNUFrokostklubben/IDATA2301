@@ -2,7 +2,7 @@ import "./auth.css"
 import {useEffect, useRef, useState} from "react";
 import { useFocusTrap } from "../../../utils/useFocusTrap";
 
-export default function Login({ onClose, ref }) {
+export default function Login({ onClose, changeMode }) {
 
     const modalRef = useRef(null)
     useFocusTrap(modalRef, true, onClose) // Passes true to isOpen due to this modal only being open when it is rendered
@@ -12,10 +12,10 @@ export default function Login({ onClose, ref }) {
         ref={modalRef}>
 
             <div className="authform">
-                <button id={"close-button"} onClick={onClose}>
+                <button id={"auth-close-button"} onClick={onClose}>
                     <img alt={"X"} src={"icons/close-sharp.svg"} />
                 </button>
-                <h1>
+                <h1 className={"auth-h1"}>
                     Log In
                 </h1>
                 <form action="http://localhost:8080/login" method="POST">
@@ -32,10 +32,10 @@ export default function Login({ onClose, ref }) {
 
 
                     </section>
-                    <section id="CTA">
+                    <section id="auth-CTA">
                         <button className="cta-button" type="submit">Log In</button>
                         {/*TODO: Implement redirect to Signup modal (probably just build component again in react)*/}
-                        <button className="cta-button secondary-button" type="submit">Sign up instead</button>
+                        <button onClick={changeMode} className="cta-button secondary-button" type="submit">Sign up instead</button>
                     </section>
                 </form>
             </div>
