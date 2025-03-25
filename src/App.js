@@ -1,4 +1,4 @@
-import  './App.css';
+import './App.css';
 import Index from "./page";
 import Search from "./page/search/search";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
@@ -8,8 +8,6 @@ import AdminNav from "./page/admin/adminNav";
 import CourseIndex from "./page/admin/course/courseIndex";
 import CourseEdit from "./page/admin/course/edit/courseEdit";
 import AdminDashboard from "./page/admin/adminDashboard";
-import About from "./page/about";
-import UserPage from "./page/userPage";
 
 function App() {
     return (
@@ -18,8 +16,6 @@ function App() {
                 <Route path={"/"} element={<Layout/>}>
                     <Route index element={<Index/>}/>
                     <Route path={"search"} element={<Search/>}/>
-                    <Route path={"about"} element={<About/>}/>
-                    <Route path={"userPage"} element={<UserPage/>}/>
                 </Route>
                 <Route path={"/admin"} element={<AdminNav/>}>
                     {/*<Route index element={<AdminDashboard/>}/>*/}
