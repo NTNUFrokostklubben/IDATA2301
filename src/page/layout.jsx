@@ -34,12 +34,6 @@ export default function Layout() {
                     </div>
                 </li>
                 <li>
-                    <div id="cart">
-                        <a href=""><img id="cart_img" src="/icons/cart-sharp.svg" alt="shopping cart"/></a>
-                    </div>
-
-                </li>
-                <li>
                     <div id="login-signup-btn">
                         <button id="login-btn" alt="Log in" href="#">Log in</button>
                         <button className="cta-button" id="signup-btn" alt="Sign up" href="#">Sign up</button>

@@ -97,7 +97,7 @@
     flex-flow: column;
 }
 
-p {
+.filters p {
     margin: 1rem 1rem;
 }
 
