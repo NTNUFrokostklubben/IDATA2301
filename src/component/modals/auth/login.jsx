@@ -9,7 +9,12 @@ export default function Login({ onClose, changeMode }) {
 
     return (
         <div className={"auth-background"}
-        ref={modalRef}>
+        ref={modalRef}
+        onClick={(c) => {
+            if (c.target === document.querySelector("#auth-modal > div")) {
+                onClose()
+            }
+        }}>
 
             <div className="authform">
                 <button id={"auth-close-button"} onClick={onClose}>

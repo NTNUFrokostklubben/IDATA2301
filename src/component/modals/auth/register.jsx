@@ -9,7 +9,12 @@ export default function Register({onClose, changeMode}) {
 
     return (
         <div className={"auth-background"}
-             ref={modalRef}>
+             ref={modalRef}
+             onClick={(c) => {
+                 if (c.target === document.querySelector("#auth-modal > div")) {
+                     onClose()
+                 }
+             }}>
             <div className="authform">
                 <button id={"auth-close-button"} onClick={onClose}>
                     <img alt={"X"} src={"icons/close-sharp.svg"}/>
