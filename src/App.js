@@ -18,8 +18,6 @@ function App() {
                     <Route index element={<Index/>}/>
                     <Route path={"search"} element={<Search/>}/>
                     <Route path={"userpage"} element={<UserPage/>}/>
-                    <Route path={"login"} element={<Login/>}/>
-                    <Route path={"register"} element={<Register/>}/>
                     <Route path={"/admin"} element={<AdminNav/>}>
                         {/*<Route index element={<AdminDashboard/>}/>*/}
                         <Route path={"/admin/course"}>
