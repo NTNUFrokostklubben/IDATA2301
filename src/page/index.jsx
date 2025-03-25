@@ -1,21 +1,24 @@
-
+import React, { useState, useEffect } from "react";
 import "./Index.css";
+import Search from "./search/search";
+import {Route} from "react-router-dom";
 
 export default function Index() {
-    let slideIndex = 0;
-    showSlides();
 
-    function showSlides() {
-        let i;
-        let slides = document.getElementsByClassName("mySlides");
-        for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
-        }
-        slideIndex++;
-        if (slideIndex > slides.length) {slideIndex = 1}
-        slides[slideIndex-1].style.display = "block";
-        setTimeout(showSlides, 6000); // Change image every 2 seconds
-    }
+    const [slideIndex, setSlideIndex] = useState(0);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setSlideIndex((prevIndex) => (prevIndex + 1) % slides.length);
+        }, 6000);
+        return () => clearInterval(interval);
+    }, []);
+
+    const slides = [
+        "https://picsum.photos/200/200?random=1",
+        "https://picsum.photos/200/200?random=2",
+        "https://picsum.photos/200/200?random=3"
+    ];
 
     return (
         <div id={"root"}>
@@ -180,19 +183,15 @@ export default function Index() {
 
                     {/*Slideshow container */}
                     <div className="slideshow-container">
-
-                        {/*Full-width images with number and caption text*/}
-                        <div className="mySlides fade">
-                            <img id="start" src="https://picsum.photos/200/200?random=1"/>
-                        </div>
-
-                        <div className="mySlides fade">
-                            <img src="https://picsum.photos/200/200?random=2"/>
-                        </div>
-
-                        <div className="mySlides fade">
-                            <img src="https://picsum.photos/200/200?random=3"/>
-                        </div>
+                        {slides.map((slide, index) => (
+                            <div
+                                key={index}
+                                className="mySlides fade"
+                                style={{ display: index === slideIndex ? "block" : "none" }}
+                            >
+                                <img src={slide} alt={`Slide ${index + 1}`} />
+                            </div>
+                        ))}
                     </div>
 
 
