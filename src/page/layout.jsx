@@ -1,7 +1,20 @@
 import {Outlet} from "react-router-dom";
 import "./layout.css"
+import {useState} from "react";
+import {createPortal} from "react-dom";
+import Login from "../component/modals/auth/login";
+// import {Modal} from "react-native";
 
 export default function Layout() {
+
+    const [showLoginModal,setShowLoginModal] = useState()
+
+    // const modal = () => {
+    //     <Modal>
+    //
+    //     </Modal>
+    // }
+
     return (
         <div>
             <nav id="menu-navbar">
@@ -39,13 +52,20 @@ export default function Layout() {
                     </div>
 
                 </li>
+
                 <li>
                     <div id="login-signup-btn">
-                        <button id="login-btn" alt="Log in" href="#">Log in</button>
+                        <button onClick={() => setShowLoginModal(true)} id="login-btn" alt="Log in" href="#">Log in</button>
                         <button className="cta-button" id="signup-btn" alt="Sign up" href="#">Sign up</button>
                     </div>
                 </li>
             </nav>
+            {
+                showLoginModal && createPortal(
+                    <Login onClose={() => setShowLoginModal(false)}/>,
+                    document.body
+                )
+            }
 
             <Outlet/>
 
