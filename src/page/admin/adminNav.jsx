@@ -3,7 +3,7 @@ import "./adminNav.css"
 
 export default function AdminNav() {
     return (
-        <div className={"page"}>
+        <div className={"admin-sidebar-container"}>
             <div className="admin-sidebar">
                 {/*TODO: Refactor admin sidebar out into separate layout for admin pages*/}
                 <nav id="dashboard">
