@@ -1,6 +1,6 @@
 import {Outlet} from "react-router-dom";
 import "./layout.css"
-import {useState} from "react";
+import {useRef, useState} from "react";
 import {createPortal} from "react-dom";
 import Login from "../component/modals/auth/login";
 // import {Modal} from "react-native";
@@ -8,6 +8,7 @@ import Login from "../component/modals/auth/login";
 export default function Layout() {
 
     const [showLoginModal,setShowLoginModal] = useState()
+    const ref = useRef();
 
     // const modal = () => {
     //     <Modal>
@@ -62,10 +63,11 @@ export default function Layout() {
             </nav>
             {
                 showLoginModal && createPortal(
-                    <Login onClose={() => setShowLoginModal(false)}/>,
-                    document.body
+                    <Login ref={ref} onClose={() => setShowLoginModal(false)}/>,
+                    document.getElementById("login-modal")
                 )
             }
+            <div id={"login-modal"}/>
 
             <Outlet/>
 
