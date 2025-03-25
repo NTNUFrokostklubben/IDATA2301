@@ -50,7 +50,7 @@
     align-self: flex-end;
 }
 
-#user_courses {
+#user-courses {
     margin-top: 1.5rem;
     margin-left: 1.5rem;
     background-color: white;
@@ -65,6 +65,9 @@ li{
     max-width: 1rem;
     max-height: 1rem;
 }
+#review-heading{
+    padding: 1rem;
+}
 #users-reviews{
     margin-top: 20px;
     margin-left: 20px;
@@ -77,6 +80,9 @@ li{
     margin-bottom: 20px;
     background-color: white;
     width: 1000px;
+}
+#favorites-heading{
+    padding: 1rem;
 }
 .one-favorite{
     padding-bottom: 10px;

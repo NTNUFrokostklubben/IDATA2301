@@ -60,14 +60,14 @@ export default function UserPage (){
                 </section>
 
                 <section id="users-reviews">
-                    <h5>Your reviews</h5>
+                    <h5 id={"review-heading"} >Your reviews</h5>
 
                     {ratings.map(item => <Rating key={item.id} {...item}/>)}
 
                 </section>
 
                 <section id="users-favorites">
-                    <h5>Favorites</h5>
+                    <h5 id={"favorites-heading"}>Favorites</h5>
 
                     <div className="one-favorite">
                         <h2 className="favorite-course-title">Introduction to SQL Essentials</h2>
