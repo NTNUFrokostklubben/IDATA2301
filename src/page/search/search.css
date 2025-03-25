@@ -101,7 +101,7 @@
     flex-flow: column;
 }
 
-p {
+.search-page p {
     margin: 1rem 1rem;
 }
 
