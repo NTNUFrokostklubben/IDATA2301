@@ -1,0 +1,31 @@
+
+.user-review-image{
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
+.user-name-review{
+    justify-self: flex-start;
+}
+.user-review-section{
+    max-width: 200px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.review-date{
+    padding-bottom: 10px;
+    opacity: 40%;
+}
+.review-title{
+    padding-top: 20px;
+    padding-left: 10px;
+    font-size: 1rem;
+}
+.review-text{
+    padding-left: 10px;
+}
+#review-heading{
+    font-size: 2rem;
+}

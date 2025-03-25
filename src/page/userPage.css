@@ -3,13 +3,13 @@
     background-color: var(--background);
 }
 
-#content{
+#user-page-content{
     display: flex;
     flex-wrap: wrap;
 
 }
 
-#user-caret {
+#user-page-caret {
     margin-left: 1rem;
     margin-top: 1rem;
     display: flex;
@@ -22,7 +22,7 @@
 
 }
 
-#caret {
+#user-caret {
     display: flex;
     flex-direction: column;
 
@@ -32,12 +32,12 @@
     align-items: center;
 }
 
-#image {
+#user-image {
     border-radius: 50%;
 }
 
 
-#user_name {
+#user-name {
     font-size: 1.5rem;
 }
 
@@ -48,9 +48,6 @@
     width: 1.5rem;
     justify-self: flex-end;
     align-self: flex-end;
-}
-#courses-heading{
-    font-size: 2rem;
 }
 
 #user_courses {
@@ -68,47 +65,19 @@ li{
     max-width: 1rem;
     max-height: 1rem;
 }
-#users_reviews{
+#users-reviews{
     margin-top: 20px;
     margin-left: 20px;
     background-color: white;
     width: 1000px;
 }
-.user-review-image{
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-}
-.user-name-review{
-    justify-self: flex-start;
-}
-.user-review-section{
-    max-width: 200px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
-}
-.review-date{
-    padding-bottom: 10px;
-    opacity: 40%;
-}
-.review-title{
-    padding-top: 20px;
-    padding-left: 10px;
-    font-size: 1rem;
-}
-.review-text{
-    padding-left: 10px;
-}
-#review-heading{
-    font-size: 2rem;
-}
-
-#users_favorites{
+#users-favorites{
+    margin-top: 20px;
+    margin-left: 20px;
     margin-bottom: 20px;
+    background-color: white;
+    width: 1000px;
 }
-
 .one-favorite{
     padding-bottom: 10px;
 }
@@ -129,15 +98,6 @@ li{
     height: 4.7rem;
 }
 
-#users_favorites{
-    margin-top: 20px;
-    margin-left: 20px;
-    background-color: white;
-    width: 1000px;
-}
-#favorites-heading{
-    font-size: 2rem;
-}
 .favorite-course-title{
     font-size: 1rem;
     padding-top: 20px;

@@ -86,32 +86,9 @@ li{
     background-color: white;
     width: 1000px;
 }
-.user-review-image{
-    border-radius: 50%;
-}
-.user-name-review{
-    justify-self: flex-start;
-}
-.user-review-section{
-    max-width: 200px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
-}
-.review-date{
-    padding-bottom: 10px;
-    opacity: 40%;
-}
-.review-title{
-    padding-top: 20px;
-    padding-left: 10px;
-    font-size: 1rem;
-}
-.review-text{
-    padding-left: 10px;
-    padding-bottom: 10px;
-}
+
+
+
 #review-heading{
     font-size: 2rem;
 }
@@ -122,10 +99,6 @@ li{
 
 .one-favorite{
     padding-bottom: 10px;
-}
-
-.favorite-course-title{
-    padding-left: 10px;
 }
 
 .favorite-image-and-text{

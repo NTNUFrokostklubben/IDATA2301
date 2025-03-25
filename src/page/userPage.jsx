@@ -1,5 +1,7 @@
 import "./userPage.css"
 import { useEffect, useState } from 'react';
+import CardHorizontal from "../component/card/cardHorizontal";
+import Rating from "../component/Rating/rating";
 export default function UserPage (){
     const [data, setData] = useState([]);
     const [user, setUser] = useState([]);
@@ -29,27 +31,27 @@ export default function UserPage (){
     if (loading ){
         return (<h1>loading</h1>)
     }
-    console.log(ratings[1].rating)
+    console.log(ratings)
     return (
         <div class={"user-page"}>
             <h1>Testing: </h1>
-            <section id="content">
-                <section id="user-caret">
+            <section id="user-page-content">
+                <section id="user-page-caret">
                     <a href=""><img id="edit" src="/icons/pencil-sharp.svg" alt="edit button"/></a>
-                    <div id="caret">
+                    <div id="user-caret">
 
-                        <picture id="user_image">
-                            <img id="image" src={user.profilePicture} alt="user"/>
+                        <picture>
+                            <img id="user-image" src={user.profilePicture} alt="user"/>
                         </picture>
-                        <p id="user_name">
+                        <p id="user-name">
                             User1
                         </p>
 
                     </div>
                 </section>
 
-                <section id="user_courses">
-                    <h1 id="courses-heading">Previous courses</h1>
+                <section id="user-courses">
+                    <h5>Previous courses</h5>
                     <ul>
                         {data.map(item => (
                             <li key={item.id}> <a href="">{item.course.title}</a></li>
@@ -57,61 +59,15 @@ export default function UserPage (){
                     </ul>
                 </section>
 
-                <section id="users_reviews">
-                    <h1 id="review-heading">Your reviews</h1>
+                <section id="users-reviews">
+                    <h5>Your reviews</h5>
 
-                    <div className="one-review">
-                        <h2 className="review-title">Introduction to SQL Essentials</h2>
-                        <div className="user-review-section">
-                            <picture>
-                                <img className="user-review-image" src={user.profilePicture} alt="user"/>
-                            </picture>
-                            <p className="user-name-review">user1</p>
-                            <div className="stars">
-                                <img className="star" src="/icons/star-sharp.svg" alt="review star"/>
-                                <img className="star" src="/icons/star-sharp.svg" alt="review star"/>
-                                <img className="star" src="/icons/star-sharp.svg" alt="review star"/>
-                            </div>
-                            <p className="review-date">Reviewed on January 1, 2025 </p>
-                        </div>
-                        <p className="review-text">"Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                            pariatur.
-                            Excepteur sint occaecat cupidatat non proident,
-                            sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    </div>
-
-                    <div className="one-review">
-                        <h2 className="review-title">Introduction to SQL Essentials</h2>
-                        <div className="user-review-section">
-                            <picture>
-                                <img className="user-review-image" src={user.profilePicture} alt="user"/>
-                            </picture>
-                            <p className="user-name-review">user1</p>
-
-                            <div className="stars">
-                                <img className="star" src="/icons/star-sharp.svg" alt="review star"/>
-                                <img className="star" src="/icons/star-sharp.svg" alt="review star"/>
-                                <img className="star" src="/icons/star-sharp.svg" alt="review star"/>
-                                <img className="star" src="/icons/star-half-sharp.svg" alt="review star"/>
-                            </div>
-                            <p className="review-date">Reviewed on January 1, 2025 </p>
-                        </div>
-                        <p className="review-text">"Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                            pariatur.
-                            Excepteur sint occaecat cupidatat non proident,
-                            sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    </div>
+                    {ratings.map(item => <Rating key={item.id} {...item}/>)}
 
                 </section>
 
-                <section id="users_favorites">
-                    <h1 id="favorites-heading">Favorites</h1>
+                <section id="users-favorites">
+                    <h5>Favorites</h5>
 
                     <div className="one-favorite">
                         <h2 className="favorite-course-title">Introduction to SQL Essentials</h2>
