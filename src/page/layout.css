@@ -95,8 +95,8 @@ nav li {
 
 .search-container #form_search {
     background-color: var(--textWhite);
-    max-width: 75rem;
-    max-height: 3rem;
+    width: 75rem;
+    height: 3rem;
     display: flex;
     flex-direction: row;
     align-items: center;

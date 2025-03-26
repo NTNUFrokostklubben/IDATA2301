@@ -165,7 +165,7 @@ index-card img {
 }
 
 .index-logo img {
-    max-width: 100%;
+    max-width: 15rem;
     height: auto;
 }
 .index-logo img:hover {
@@ -204,8 +204,8 @@ index-card img {
     font-weight: lighter;
 }
 #index-testimonial_photo {
-    width: 200px;
-    height: 200px;
+    width: 15rem;
+    height: 15rem;
     object-fit: cover;
     margin-right: 1.5rem;
 }

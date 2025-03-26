@@ -71,3 +71,39 @@ small {
 .filter-white{
     filter: invert(98%) sepia(18%) saturate(5600%) hue-rotate(184deg) brightness(128%) contrast(87%);
 }
+
+@media (max-width: 1250px) {
+    html{
+        font-size: 15px;
+    }
+    footer{
+        font-size: 0.925rem;
+    }
+}
+@media (max-width: 1024px) {
+    html{
+        font-size: 14px;
+    }
+    footer{
+        font-size: 0.875rem;
+    }
+}
+@media (max-width: 900px){
+    html{
+        font-size: 12px;
+    }
+    footer{
+        font-size: 0.75rem;
+    }
+
+}
+
+/* Tablet - 475px width*/
+@media (max-width: 475px) {
+    html {
+        font-size: 10px; /* Adjust the base font size */
+    }
+    footer{
+        font-size: 0.625rem;
+    }
+}
