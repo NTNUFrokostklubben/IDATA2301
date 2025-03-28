@@ -12,9 +12,11 @@
 .herotext {
     width: 20rem;
     align-self: center;
+    margin-right: 1rem;
+    padding-right: 1rem;
 }
 
-#hero2 {
+#worker-hero {
     display: flex;
     align-self: flex-start;
 
@@ -81,7 +83,7 @@
     padding-left: 1rem;
     padding-top: 1rem;
     background-color: var(--contrast);
-    box-shadow: #b4afbc 5px -5px 5px 0px;
+    box-shadow: #b4afbc 5px -5px 5px;
 }
 
 #contacts {
@@ -91,6 +93,11 @@
     flex-direction: column;
     padding-top: 3rem;
     background-color: var(--background);
+    padding-bottom: 1rem;
+}
+
+#gm-picture{
+
 }
 
 @media (max-width: 1285px) {
@@ -107,14 +114,11 @@
     }
 }
 
-@media (max-width: 450px) {
-    .review {
-        display: grid;
-        grid-template-columns: 11rem;
+@media (max-width: 320px){
+    #gm-picture {
+        width: 300px;
+        height: 300px;
     }
 }
 
 
-@media (max-width: 1270px) {
-
-}

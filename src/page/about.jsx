@@ -6,7 +6,7 @@ export default function About (){
             <body>
             <section id="heroWorker">
                 <div className="container">
-                    <picture className="img" id="hero2">
+                    <picture id="worker-hero">
                         <source srcSet="/images/businessWoman.png" type="image/png"/>
                         <img width="286" height="419" src="/images/businessWoman.png"
                              alt="a worker working on a computer"/>
@@ -88,10 +88,10 @@ export default function About (){
             <section id="contacts">
                 <h2 id="contactTitle"> Contact us</h2>
                 <picture>
-                    <img src="https://picsum.photos/400/400" alt="contact us"/>
-                    <h4>
+                    <img id="gm-picture" src="https://picsum.photos/400/400" alt="contact us"/>
+                    <h5>
                         General Manager
-                    </h4>
+                    </h5>
                     <p> Tore Toresen</p>
                     <p> tlf: 32312421</p>
                     <p> epost: Toret@learniverse.no</p>
