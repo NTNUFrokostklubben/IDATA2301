@@ -34,7 +34,6 @@ export default function UserPage (){
     console.log(ratings)
     return (
         <div class={"user-page"}>
-            <h1>Testing: </h1>
             <section id="user-page-content">
                 <section id="user-page-caret">
                     <a href=""><img id="edit" src="/icons/pencil-sharp.svg" alt="edit button"/></a>
@@ -51,10 +50,10 @@ export default function UserPage (){
                 </section>
 
                 <section id="user-courses">
-                    <h5>Previous courses</h5>
+                    <h5 id="previous-courses-heading">Previous courses</h5>
                     <ul>
                         {data.map(item => (
-                            <li key={item.id}> <a href="">{item.course.title}</a></li>
+                            <li className="user-course-item" key={item.id}> <a href="">{item.course.title}</a></li>
                             ))}
                     </ul>
                 </section>

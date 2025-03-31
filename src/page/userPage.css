@@ -6,6 +6,7 @@
 #user-page-content{
     display: flex;
     flex-wrap: wrap;
+    max-width: 1400px;
 
 }
 
@@ -34,6 +35,7 @@
 
 #user-image {
     border-radius: 50%;
+
 }
 
 
@@ -51,16 +53,19 @@
 }
 
 #user-courses {
-    margin-top: 1.3rem;
-    margin-left: 1.3rem;
-    margin-right: 1.3rem;
+    margin-top: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
     background-color: white;
     justify-self: flex-start;
-    width: 45rem;
+    width: 46.7rem;
     height: 18rem;
 }
-li{
+.user-course-item{
     padding-top: 0.7rem;
+}
+#previous-courses-heading{
+   margin: 1rem;
 }
 .star{
     max-width: 1rem;
@@ -70,17 +75,14 @@ li{
     padding: 1rem;
 }
 .users-reviews{
-    margin-top: 1.3rem;
-    margin-left: 1.3rem;
-    margin-right: 1.3rem;
+    margin-top: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
     background-color: white;
     width: 1000px;
 }
 #users-favorites{
-    margin-top: 1.3rem;
-    margin-left: 1.3rem;
-    margin-bottom: 1.3rem;
-    margin-right: 1.3rem;;
+  margin: 1.3rem;
     background-color: white;
     width: 1000px;
 }
@@ -88,11 +90,11 @@ li{
     padding: 1rem;
 }
 .one-favorite{
-    padding-bottom: 10px;
+    padding-bottom: 0.7rem;
 }
 
 .favorite-course-title{
-    padding-left: 10px;
+    padding-left: 0.7rem;
 }
 
 .favorite-image-and-text{
@@ -100,7 +102,7 @@ li{
     display: flex;
 }
 .favorite-course-text{
-    padding-left: 10px;
+    padding-left:0.7rem;
 }
 .favorite-course-image{
     width: 10rem;
@@ -109,8 +111,8 @@ li{
 
 .favorite-course-title{
     font-size: 1rem;
-    padding-top: 20px;
-    padding-bottom: 10px;
+    padding-top: 1.6rem;
+    padding-bottom: 0.7rem;
 }
 
 @media (max-width: 1290px){
@@ -118,6 +120,12 @@ li{
 }
 @media (max-width: 1045px){
     .users-reviews{
+
+    }
+}
+@media (max-width: 475px ){
+    #user-image {
+        width: 120px;
 
     }
 }
