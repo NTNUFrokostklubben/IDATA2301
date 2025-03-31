@@ -1,12 +1,28 @@
 import "./search.css"
 import Card from "../../component/card/card";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Collapsable from "../../component/Collapsable/collapsable";
+
+class courseEntity {
+    constructor(id, category, closestCourse, credits, description, diffLevel, hoursWeek, imgLink, relatedCert, title) {
+        this.id = id;
+        this.category = category;
+        this.closestCourse = closestCourse;
+        this.credits = credits;
+        this.description = description;
+        this.diffLevel = diffLevel;
+        this.hoursWeek = hoursWeek;
+        this.imgLink = imgLink;
+        this.relatedCert = relatedCert;
+        this.title = title;
+    }
+}
 
 export default function Search() {
 
+    const [courses, setCourses] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-    
     function handleSubmit(event) {
         event.preventDefault();
 
@@ -15,6 +31,21 @@ export default function Search() {
         const value = Object.fromEntries(data.entries());
 
         console.log({value});
+    }
+
+    useEffect(() => {
+        fetch("http://localhost:8080/api/courses")
+            .then((response) => response.json())
+            .then((data) => {
+                const courses = data.map((course) => new courseEntity(course.id, course.category, course.closestCourse, course.credits, course.description, course.diffLevel, course.hoursWeek, course.imgLink, course.relatedCert, course.title));
+                setCourses(courses);
+                setLoading(false)
+            })
+    }, []);
+
+
+    if (loading) {
+        return <div>Loading...</div>
     }
 
     return (
@@ -35,23 +66,27 @@ export default function Search() {
                             <div className="search-input-field-container">
                                 <div className="input-wrapper">
                                     <label htmlFor="min-size">Min</label>
-                                    <input className="" id="min-size" placeholder="Min" name={"min-credits"} type="number"/>
+                                    <input className="" id="min-size" placeholder="Min" name={"min-credits"}
+                                           type="number"/>
                                 </div>
                                 <span> - </span>
                                 <div className="input-wrapper">
                                     <label htmlFor="max-size">Max</label>
-                                    <input className="" id="max-size" placeholder="Max" name={"max-credits"} type="number"/>
+                                    <input className="" id="max-size" placeholder="Max" name={"max-credits"}
+                                           type="number"/>
                                 </div>
                             </div>
                         </section>
                     </Collapsable>
                     <Collapsable title={"Category"}>
                         <section id="category">
-                            <label><input className="" type="checkbox" name={"cat-it"}/> Information Technologies</label>
+                            <label><input className="" type="checkbox" name={"cat-it"}/> Information
+                                Technologies</label>
                             <label><input className="" type="checkbox" name={"cat-dm"}/> Digital Marketing</label>
                             <label><input className="" type="checkbox" name={"cat-be"}/> Business and
                                 Entrepenaurship</label>
-                            <label><input className="" type="checkbox" name={"cat-dsa"}/> Data Science and Analytics</label>
+                            <label><input className="" type="checkbox" name={"cat-dsa"}/> Data Science and
+                                Analytics</label>
 
                         </section>
                     </Collapsable>
@@ -80,7 +115,8 @@ export default function Search() {
                             <div className="search-input-field-container">
                                 <div className="input-wrapper">
                                     <label htmlFor="min-price">Min price</label>
-                                    <input id="min-price" className="" placeholder="Min" name={"min-price"} type="number"/>
+                                    <input id="min-price" className="" placeholder="Min" name={"min-price"}
+                                           type="number"/>
                                 </div>
                                 <span> - </span>
                                 <div className="input-wrapper">
@@ -122,9 +158,7 @@ export default function Search() {
                     </div>
                 </section>
                 <section id="results">
-                    <Card name={"Search Engine Optimization"} path={"https://picsum.photos/300/200?random=1"}/>
-                    <Card name={"Azure Cloud Fundamentals"} path={"https://picsum.photos/300/200?random=2"}/>
-                    <Card name={"Databricks Fundamentals"} path={"https://picsum.photos/300/200?random=3"}/>
+                    {courses.map((course) => <Card key={course.id} {...course}/>)}
                 </section>
             </div>
         </div>
