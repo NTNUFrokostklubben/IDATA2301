@@ -102,6 +102,10 @@ nav li {
     flex-flow: row;
 }
 
+button {
+    border: 1px solid var(--textBlack);
+    cursor: pointer;
+}
 
 .cta-button {
     background-color: var(--cta);

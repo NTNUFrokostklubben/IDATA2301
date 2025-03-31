@@ -26,7 +26,8 @@
 }
 
 
-/*Make all of these only apply if under the authform*/
+
+
 
 
 .authform input[type="text"],
@@ -58,6 +59,8 @@
     margin: 1rem 0;
 
 }
+
+
 
 .secondary-button {
     background-color: var(--shadow);
