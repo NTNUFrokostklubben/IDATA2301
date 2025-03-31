@@ -12,7 +12,7 @@ export default function Layout() {
                 <li>
                     <div className="dropdown">
                         <button className="drop-btn"> Courses
-                            <img id="triangle-icon" width="12" height="12" src="/icons/triangle-sharp.svg"/>
+                            <img id="triangle-icon" width="12" height="12" src="/icons/triangle-sharp.svg" alt={""}/>
                         </button>
                         <div className="dropdown-content">
                             <a href="#">Course 1</a>

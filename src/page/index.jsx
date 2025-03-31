@@ -69,8 +69,10 @@ export default function Index() {
 
                     <div className="index-hero-main-box">
                         <div className="index-hero-main-text">
-                            <h5>Learniverse offers courses that give you the competence you need to succeed in the workplace
-                                and beyond! </h5>
+                            <h5>
+                                Learniverse offers courses that give you the competence you need to succeed in the workplace
+                                and beyond!
+                            </h5>
                         </div>
                         <button className="cta-button" id="index-free-btn"><p>Try for free!</p></button>
                     </div>

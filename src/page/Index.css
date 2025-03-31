@@ -237,7 +237,7 @@ index-card img {
 .index-mySlides {
     display: none;
     padding-right: 2rem;
-    width: 20rem;
+    width: 30rem;
     height: 20rem;
 }
 
@@ -302,25 +302,30 @@ index-card img {
 
 }
 @media (max-width: 1250px) {
-
+    #index-hero-image{
+        padding: 2rem;
+        width: 18rem;
+    }
     .index-hero-main-box{
-        padding: 3rem;
         width: 20rem;
-        height: 14rem;
     }
 
 }
 @media (max-width: 600px) {
     #index-hero-image{
-
+        padding: 2rem;
+        width: 15rem;
+    }
+    .index-hero-main-box{
+        width: 15rem;
     }
     .index-card {
-        width: 15rem;
+        width: 12rem;
     }
 
     .index-course-img {
-        width: 15rem;
-        height: 10rem;
+        width: 12rem;
+        height: 8rem;
     }
 
     #index-hero2 {
