@@ -50,6 +50,7 @@ nav li {
 .dropdown {
     position: relative;
     display: inline-block;
+    width: 100%;
 }
 
 /* (Hidden by Default) */
@@ -128,13 +129,17 @@ nav li {
 
 #login-btn{
     background-color: var(--textWhite);
-    color: var(--textBlack);
     margin-right: 1rem;
 }
-
+#login-btn h5{
+    font-weight: normal;
+}
 #signup-btn{
     background-color: var(--cta);
+}
+#signup-btn h5{
     color: var(--textWhite);
+    font-weight: normal;
 }
 #login-signup-btn{
     flex-wrap: nowrap;

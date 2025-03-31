@@ -5,7 +5,35 @@ import {Route} from "react-router-dom";
 
 export default function Index() {
 
+    const [courseShown, setCourseShown] = useState(calcSceneStart());
     const [slideIndex, setSlideIndex] = useState(0);
+    const [courseIndex, setCourseIndex] = useState(0);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setCourseShown(calcSceneStart());
+        };
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
+
+    function calcSceneStart() {
+        if (window.matchMedia("(max-width: 480px)").matches) {
+            return 3;
+        } else if (window.matchMedia("(max-width: 1250px)").matches) {
+            return 3;
+        } else if (window.matchMedia("(max-width: 1600px)").matches) {
+            return 4;
+        } else if (window.matchMedia("(max-width: 1900px)").matches) {
+            return 5;
+        } else if (window.matchMedia("(max-width: 2350px)").matches) {
+            return 6;
+        } else {
+            return 7;
+        }
+    }
+
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -14,10 +42,24 @@ export default function Index() {
         return () => clearInterval(interval);
     }, []);
 
+    const courses = [
+        { id: "index-course1", img: "https://picsum.photos/200/200?random=1", desc: "Course 1", price: "1000 NOK" },
+        { id: "index-course2", img: "https://picsum.photos/200/200?random=2", desc: "Course 2", price: "2000 NOK" },
+        { id: "index-course3", img: "https://picsum.photos/200/200?random=3", desc: "Course 3", price: "3000 NOK" },
+        { id: "index-course4", img: "https://picsum.photos/200/200?random=4", desc: "Course 4", price: "4000 NOK" },
+        { id: "index-course5", img: "https://picsum.photos/200/200?random=5", desc: "Course 5", price: "5000 NOK" },
+        { id: "index-course6", img: "https://picsum.photos/200/200?random=6", desc: "Course 6", price: "6000 NOK" },
+        { id: "index-course7", img: "https://picsum.photos/200/200?random=7", desc: "Course 7", price: "7000 NOK" }
+    ];
+
     const slides = [
         "https://picsum.photos/200/200?random=1",
         "https://picsum.photos/200/200?random=2",
-        "https://picsum.photos/200/200?random=3"
+        "https://picsum.photos/200/200?random=3",
+        "https://picsum.photos/200/200?random=4",
+        "https://picsum.photos/200/200?random=5",
+        "https://picsum.photos/200/200?random=6",
+        "https://picsum.photos/200/200?random=7"
     ];
 
     return (
@@ -51,92 +93,45 @@ export default function Index() {
                 <section id="index-course-cards-section">
 
                     <section className="index-arrow">
-                        <button id="index-arrow-left-btn">
-                            <img id="index-arrow-left-icon" width="40" height="40"
-                                 src=" /icons/arrow-back-circle-sharp.svg" alt="Arrow Left"/>
+                        <button id="index-arrow-left-btn"
+                                onClick={() => setCourseIndex((prevIndex) => (prevIndex - 1 + courses.length) % courses.length)}>
+                            <img className={"index-arrow-icon"} src="/icons/arrow-back-circle-sharp.svg" alt="Arrow Left"/>
                         </button>
                     </section>
 
                     <section id="index-collection-cards">
-
-                        <section className="index-card" id="index-course1">
-                            <div className="index-course-card">
-                                <img className="index-course-img" src="https://picsum.photos/320/200?random=1" alt=""/>
-                                <h5 className="index-card-desc">Sed ut perspiciatis unde omnis iste natus </h5>
-                                <p>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                                    magna aliqua.</p>
-                                <p><b>14 00 NOK</b></p>
-                            </div>
-                        </section>
-
-                        <section className="index-card" id="index-course2">
-                            <div className="index-course-card">
-                                <img className="index-course-img" src="https://picsum.photos/320/200?random=2" alt=""/>
-                                <h5 className="index-card-desc">Sed ut perspiciatis unde omnis iste natus </h5>
-                                <p>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                                    magna aliqua.</p>
-                                <p><b>14 00 NOK</b></p>
-                            </div>
-                        </section>
-
-                        <section className="index-card" id="index-course3">
-                            <div className="index-course-card">
-                                <img className="index-course-img" src="https://picsum.photos/320/200?random=3" alt=""/>
-                                <h5 className="index-card-desc">Sed ut perspiciatis unde omnis iste natus </h5>
-                                <p>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                                    magna aliqua.</p>
-                                <p><b>14 00 NOK</b></p>
-                            </div>
-                        </section>
-
-                        <section className="index-card" id="index-course4">
-                            <div className="index-course-card">
-                                <img className="index-course-img" src="https://picsum.photos/320/200?random=4" alt=""/>
-                                <h5 className="index-card-desc">Sed ut perspiciatis unde omnis iste natus </h5>
-                                <p>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                                    magna aliqua.</p>
-                                <p><b>14 00 NOK</b></p>
-                            </div>
-                        </section>
-
-                        <section className="index-card" id="index-course5">
-                            <div className="index-course-card">
-                                <img className="index-course-img" src="https://picsum.photos/320/200?random=5" alt=""/>
-                                <h5 className="index-card-desc">Sed ut perspiciatis unde omnis iste natus </h5>
-                                <p>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                                    magna aliqua.</p>
-                                <p><b>14 00 NOK</b></p>
-                            </div>
-                        </section>
-
-                        <section className="index-card" id="index-course6">
-                            <div className="index-course-card">
-                                <img className="index-course-img" src="https://picsum.photos/320/200?random=6" alt=""/>
-                                <h5 className="index-card-desc">Sed ut perspiciatis unde omnis iste natus </h5>
-                                <p>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                                    magna aliqua.</p>
-                                <p><b>14 00 NOK</b></p>
-                            </div>
-                        </section>
-
-                        <section className="index-card" id="index-course7">
-                            <div className="index-course-card">
-                                <img className="index-course-img" src="https://picsum.photos/320/200?random=7" alt=""/>
-                                <h5 className="index-card-desc">Sed ut perspiciatis unde omnis iste natus </h5>
-                                <p>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                                    magna aliqua.</p>
-                                <p><b>14 00 NOK</b></p>
-                            </div>
-                        </section>
-
+                        {courses.slice(courseIndex, courseIndex + courseShown - 1).map((course, index) => (
+                            <section className="index-card" id={course.id} key={index}>
+                                <div className="index-course-card">
+                                    <img className="index-course-img" src={course.img} alt=""/>
+                                    <h5 className="index-card-desc">{course.desc}</h5>
+                                    <p>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                                        magna aliqua.</p>
+                                    <p>{course.price}</p>
+                                </div>
+                            </section>
+                        ))}
+                        {courseIndex + courseShown - 1 > courses.length && courses.slice(0, (courseIndex + courseShown - 1) % courses.length).map((course, index) => (
+                            <section className="index-card" id={course.id} key={index}>
+                                <div className="index-course-card">
+                                    <img className="index-course-img" src={course.img} alt=""/>
+                                    <h5 className="index-card-desc">{course.desc}</h5>
+                                    <p>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                    <p>{course.price}</p>
+                                </div>
+                            </section>
+                        ))}
                     </section>
 
                     <section className="index-arrow">
-                        <button id="index-arrow-right-btn">
-                            <img id="index-arrow-right-icon" width="40" height="40"
-                                 src="/icons/arrow-forward-circle-sharp.svg" alt="Arrow Right"/>
+                        <button id="index-arrow-right-btn"
+                                onClick={() => setCourseIndex((prevIndex) =>
+                                                    (prevIndex + 1 + courses.length) % courses.length)}>
+                            <img className={"index-arrow-icon"} src="/icons/arrow-forward-circle-sharp.svg"
+                                 alt="Arrow Right" style={{ width: "3rem", height: "3rem"}}/>
                         </button>
                     </section>
+
 
                 </section>
             </section>
@@ -148,7 +143,8 @@ export default function Index() {
                 </div>
                 <div id="index-collaborator-logos">
 
-                    <div className="index-logo" id="index-logo1"><img src="https://picsum.photos/250/75?random=1" alt="1"/></div>
+                    <div className="index-logo" id="index-logo1"><img src="https://picsum.photos/250/75?random=1"
+                                                                      alt="1"/></div>
                     <div className="index-logo" id="index-logo2"><img src="https://picsum.photos/250/75?random=2" alt="2"/></div>
                     <div className="index-logo" id="index-logo3"><img src="https://picsum.photos/250/75?random=3" alt="3"/></div>
                     <div className="index-logo" id="index-logo4"><img src="https://picsum.photos/250/75?random=4" alt="4"/></div>

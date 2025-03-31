@@ -53,6 +53,9 @@
     margin-top: 16px;
     padding: 5px;
 }
+#index-free-btn:hover{
+    box-shadow: var(--shadow);
+}
 #index-course-content{
     height: auto;
     padding-bottom: 2rem;
@@ -71,10 +74,14 @@
     align-content: center;
     border: none;
     cursor: pointer;
+
 }
-#index-course-cards-section #index-arrow-left-btn ,#index-arrow-right-btn{
+#index-course-cards-section .index-arrow-icon{
     border: none;
+    width: 3rem;
+    height: 3rem;
 }
+
 #index-collection-cards{
     display: flex;
     flex-wrap: nowrap;
@@ -87,7 +94,8 @@
     width: 20rem;
 }
 .index-course-img{
-    width:20rem;
+    width: 20rem;
+    height: 15rem;
 }
 
 .index-card:hover {
@@ -228,24 +236,11 @@ index-card img {
 
 .index-mySlides {
     display: none;
-    width: 300px;
     padding-right: 2rem;
+    width: 20rem;
+    height: 20rem;
 }
 
-/* The dots/bullets/indicators */
-.index-dot {
-    height: 15px;
-    width: 15px;
-    margin: 0 2px;
-    background-color: #bbb;
-    border-radius: 50%;
-    display: inline-block;
-    transition: background-color 0.6s ease;
-}
-
-.index-active {
-    background-color: #717171;
-}
 
 /* Fading animation */
 .index-fade {
@@ -290,9 +285,6 @@ index-card img {
     text-decoration: none;
 }
 
-/*
-TODO make this more smooth!!
- */
 @media (max-width: 3000px) {
 
 }
@@ -300,25 +292,16 @@ TODO make this more smooth!!
 
 }
 @media (max-width: 2350px) {
-    #index-course7{
-        display: none;
-    }
+
 }
 @media (max-width: 1900px) {
-    #index-course5, #index-course6, #index-course7{
-        display: none;
-    }
+
 }
 
 @media (max-width: 1600px) {
-    #index-course4, #index-course5, #index-course6, #index-course7 {
-        display: none;
-    }
+
 }
 @media (max-width: 1250px) {
-    #index-course3, #index-course4, #index-course5, #index-course6, #index-course7 {
-        display: none;
-    }
 
     .index-hero-main-box{
         padding: 3rem;
@@ -326,6 +309,39 @@ TODO make this more smooth!!
         height: 14rem;
     }
 
+}
+@media (max-width: 600px) {
+    #index-hero-image{
+
+    }
+    .index-card {
+        width: 15rem;
+    }
+
+    .index-course-img {
+        width: 15rem;
+        height: 10rem;
+    }
+
+    #index-hero2 {
+        padding: 2rem;
+    }
+
+    #index-hero2-box {
+        flex-direction: column;
+    }
+
+    #index-hero2_textbox {
+        padding: 1rem;
+    }
+
+    #index-hero2_textbox h3, #index-hero2_textbox p {
+        padding: 0.5rem;
+    }
+
+    #index-hero2_button {
+        margin-top: 1rem;
+    }
 }
 
 

@@ -1,5 +1,6 @@
 import {Outlet} from "react-router-dom";
 import "./layout.css"
+import React from "react";
 
 export default function Layout() {
     return (
@@ -10,8 +11,9 @@ export default function Layout() {
                 </li>
                 <li>
                     <div className="dropdown">
-                        <button className="drop-btn">Courses <img id="triangle-icon" width="12" height="12"
-                                                                  src="/icons/triangle-sharp.svg"/></button>
+                        <button className="drop-btn"> Courses
+                            <img id="triangle-icon" width="12" height="12" src="/icons/triangle-sharp.svg"/>
+                        </button>
                         <div className="dropdown-content">
                             <a href="#">Course 1</a>
                             <a href="#">Course 2</a>
@@ -35,8 +37,8 @@ export default function Layout() {
                 </li>
                 <li>
                     <div id="login-signup-btn">
-                        <button id="login-btn" alt="Log in" href="#">Log in</button>
-                        <button className="cta-button" id="signup-btn" alt="Sign up" href="#">Sign up</button>
+                        <button id="login-btn" alt="Log in" href="#"><h5>Log in</h5></button>
+                        <button className="cta-button" id="signup-btn" alt="Sign up" href="#"><h5>Sign up</h5></button>
                     </div>
                 </li>
             </nav>
