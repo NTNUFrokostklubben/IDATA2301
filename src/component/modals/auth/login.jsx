@@ -40,7 +40,7 @@ export default function Login({ onClose, changeMode }) {
                     <section id="auth-CTA">
                         <button className="cta-button" type="submit">Log In</button>
                         {/*TODO: Implement redirect to Signup modal (probably just build component again in react)*/}
-                        <button onClick={changeMode} className="cta-button secondary-button" type="submit">Sign up instead</button>
+                        <button onClick={changeMode} className="cta-button secondary-button" type="button">Sign up instead</button>
                     </section>
                 </form>
             </div>
