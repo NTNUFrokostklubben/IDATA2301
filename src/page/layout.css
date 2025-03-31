@@ -1,0 +1,321 @@
+/* Navbar */
+#menu-navbar {
+    background-color: var(--primary);
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    height: 5rem;
+    width: 100%;
+}
+#logo-icon {
+    height: 3rem;
+    width: 4rem;
+}
+#logo-image{
+    margin-right: 2rem ;
+    margin-left: 0;
+}
+
+#triangle-icon{
+    rotate: 180deg;
+}
+
+nav li {
+    list-style-type: none;
+    padding-inline-start: 0;
+}
+
+
+.page {
+    display: flex;
+    flex-flow: row;
+}
+
+.cta-button {
+    background-color: var(--cta);
+    color: var(--textWhite);
+    height: 3rem;
+    width: 7rem;
+}
+
+.drop-btn {
+    display: flow;
+    color: var(--textBlack);
+    padding: 1rem;
+    font-size: large;
+    border: none;
+    background-color: var(--primary);
+    margin-right: 4rem;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--primary);
+    min-width: 10rem;
+    box-shadow: 0px 8px 16px 0px var(--shadow);
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: var(--textBlack);
+    padding: 12px 1rem;
+    font-size: 1rem;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+    background-color: var(--background);
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .drop-btn {
+    background-color: var(--primary);
+}
+
+.search-container input[type=text] {
+    all: unset;
+    color: var(--textBlack);
+    height: 100%;
+    width: 100%;
+    padding: 0.5rem 0.8rem;
+}
+
+.search-container #form_search {
+    background-color: var(--textWhite);
+    min-width: 65rem;
+    max-width: 75rem;
+    max-height: 3rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: 2.5rem;
+}
+
+::placeholder {
+    color: var(--textBlack);
+    opacity: 0.7;
+}
+
+.search-container #search_btn {
+    all: unset;
+    cursor: pointer;
+    width: 2rem;
+    height: 4rem;
+}
+
+.search-container #search_btn #searchIcon {
+    display: flow;
+    align-items: center;
+    padding: 0.5rem;
+}
+#cart_img {
+    width: 40px;
+    height: 40px;
+}
+#cart{
+    margin-right: 3.5rem;
+}
+
+#login-signup{
+    display: flow;
+    align-items: center;
+    justify-content: center;
+}
+
+#login-btn{
+    background-color: var(--textWhite);
+    color: var(--textBlack);
+    margin-right: 1rem;
+}
+
+#signup-btn{
+    background-color: var(--cta);
+    color: var(--textWhite);
+}
+#login-signup-btn{
+    display: flex;
+    flex-wrap: nowrap;
+}
+#login-btn, #signup-btn{
+    border: 1px solid var(--textBlack);
+    cursor: pointer;
+    font-size: large;
+    width: 10rem;
+    height: 3rem;
+    text-align: center;
+    text-decoration: none;
+}
+#login-btn #signup-btn:hover{
+    box-shadow: 0px 8px 16px 0px var(--shadow)
+}
+
+
+
+@media (min-width: 2800px) {
+    #course6{
+        display: none;
+    }
+    .search-container #form_search {
+        max-width: 85rem;
+        min-width: 75rem;
+    }
+    #login-btn, #signup-btn{
+        width: 14rem;
+    }
+    #login-btn{
+        margin-right: 1.5rem;
+    }
+    #logo-image{
+        margin-right: 8rem ;
+    }
+
+}
+@media (max-width: 2800px) {
+    #course6{
+        display: none;
+    }
+    .search-container #form_search {
+        max-width: 65rem;
+        min-width: 55rem;
+    }
+    #login-btn, #signup-btn{
+        width: 10rem;
+    }
+    #login-btn{
+        margin-right: 1rem;
+    }
+    #logo-image{
+        margin-right: 4rem ;
+    }
+}
+@media (max-width: 2350px) {
+    .search-container #form_search {
+        max-width: 55rem;
+        min-width: 45rem;
+    }
+    #login-btn, #signup-btn{
+        width: 10rem;
+    }
+    #login-btn{
+        margin-right: 0.7rem;
+    }
+    #logo-image{
+        margin-right: 7rem ;
+    }
+}
+@media (max-width: 1900px) {
+    .search-container #form_search {
+        max-width: 45rem;
+        min-width: 35rem;
+    }
+    #login-btn, #signup-btn{
+        width: 10rem;
+    }
+    #login-btn{
+        margin-right: 0.5rem;
+    }
+    #logo-image{
+        margin-right: 6rem ;
+    }
+}
+@media (max-width: 1500px) {
+    .search-container #form_search {
+        max-width: 35rem;
+        min-width: 25rem;
+        margin-right: 0.5rem;
+    }
+    #cart{
+        padding-left: 20px;
+    }
+    #login-btn, #signup-btn{
+        width: 8rem;
+    }
+    #login-btn{
+        margin-right: 0.3rem;
+    }
+    #logo-image{
+        margin-right: 5rem ;
+    }
+    .drop-btn {
+        margin-right: 3rem;
+    }
+
+}
+@media (max-width: 1250px) {
+    .search-container #form_search {
+        max-width: 25rem;
+        min-width: 15rem;
+        margin-right: 0.5rem;
+    }
+    #cart{
+        padding-left: 10px;
+    }
+    #logo-image{
+        margin-right: 4rem ;
+    }
+    .drop-btn {
+        margin-right: 2rem;
+    }
+    #login-btn, #signup-btn{
+        width: 8rem;
+    }
+    html{
+        font-size: 15px;
+    }
+}
+@media (max-width: 1024px) {
+    .search-container #form_search {
+        max-width: 15rem;
+        min-width: 10rem;
+    }
+    #login-btn, #signup-btn{
+        width: 7rem;
+    }
+    #login-btn{
+        margin-right: 0.1rem;
+    }
+    #cart{
+        padding-right: 0;
+    }
+    #logo-image{
+        margin-right: 3rem ;
+    }
+    .drop-btn {
+        margin-right: 1.5rem;
+    }
+    html{
+        font-size: 14px;
+    }
+}
+@media (max-width: 900px){
+    #cart{
+        display: none;
+    }
+    html{
+        font-size: 12px;
+    }
+
+}
+
+/* Tablet - 475px width*/
+@media (max-width: 475px) {
+    html {
+        font-size: 10px; /* Adjust the base font size */
+    }
+}

@@ -1,10 +1,14 @@
 
-#dashboard {
+.admin-sidebar-container #dashboard {
     display: flex;
     flex-flow: column;
 }
 
-
+.admin-sidebar-container {
+    display: flex;
+    flex-flow: row;
+    margin: 0;
+}
 
 .admin-sidebar {
     display: flex;
@@ -15,7 +19,7 @@
     box-shadow: var(--shadow) 0 2rem 1rem;
 }
 
-.filter-header {
+.admin-sidebar-container .filter-header {
     display: flex;
     justify-content: space-between;
     padding-right: 1rem;

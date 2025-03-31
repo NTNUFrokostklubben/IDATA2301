@@ -8,6 +8,8 @@ import AdminNav from "./page/admin/adminNav";
 import CourseIndex from "./page/admin/course/courseIndex";
 import CourseEdit from "./page/admin/course/edit/courseEdit";
 import AdminDashboard from "./page/admin/adminDashboard";
+import Login from "./component/modals/auth/login";
+import Register from "./component/modals/auth/register";
 
 function App() {
     return (
@@ -16,15 +18,18 @@ function App() {
                 <Route path={"/"} element={<Layout/>}>
                     <Route index element={<Index/>}/>
                     <Route path={"search"} element={<Search/>}/>
-                </Route>
-                <Route path={"/admin"} element={<AdminNav/>}>
-                    {/*<Route index element={<AdminDashboard/>}/>*/}
-                    <Route path={"/admin/course"} element={<Layout/>}>
-                        <Route index element={<CourseIndex/>}/>
-                        <Route path={"add"} element={<CourseAdd/>}/>
-                        <Route path={"edit/:id"} element={<CourseEdit/>}/>
+                    <Route path={"login"} element={<Login/>}/>
+                    <Route path={"register"} element={<Register/>}/>
+                    <Route path={"/admin"} element={<AdminNav/>}>
+                        {/*<Route index element={<AdminDashboard/>}/>*/}
+                        <Route path={"/admin/course"}>
+                            <Route index element={<CourseIndex/>}/>
+                            <Route path={"add"} element={<CourseAdd/>}/>
+                            <Route path={"edit/:id"} element={<CourseEdit/>}/>
+                        </Route>
                     </Route>
                 </Route>
+
             </Routes>
         </BrowserRouter>
     )

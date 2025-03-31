@@ -14,7 +14,7 @@ export default function Search() {
     }
 
     return (
-        <div className="page">
+        <div className="search-page">
             <div className="filters">
                 <form onSubmit={handleSubmit} action="http://localhost:6655" method="POST">
                     <section id="difficulty">
@@ -32,7 +32,7 @@ export default function Search() {
                             <img width="12" src="/icons/triangle-sharp.svg" alt=""/>
                         </div>
                         <p>ECTS credits</p>
-                        <div className="input-field-container">
+                        <div className="search-input-field-container">
                             <div className="input-wrapper">
                                 <label htmlFor="min-size">Min</label>
                                 <input className="" id="min-size" placeholder="Min" name={"min-credits"} type="number"/>
@@ -60,7 +60,7 @@ export default function Search() {
                             <p>Ratings</p>
                             <img width="12" src="/icons/triangle-sharp.svg" alt=""/>
                         </div>
-                        <div className="input-field-container">
+                        <div className="search-input-field-container">
                             <div className="input-wrapper">
                                 <label htmlFor="min-rating">Min rating</label>
                                 <input id="min-rating" className="" placeholder="Min" name={"min-rating"}
@@ -80,7 +80,7 @@ export default function Search() {
                             <p>Price</p>
                             <img width="12" src="/icons/triangle-sharp.svg" alt=""/>
                         </div>
-                        <div className="input-field-container">
+                        <div className="search-input-field-container">
                             <div className="input-wrapper">
                                 <label htmlFor="min-price">Min price</label>
                                 <input id="min-price" className="" placeholder="Min" name={"min-price"} type="number"/>
@@ -98,7 +98,7 @@ export default function Search() {
                             <p>Course Start</p>
                             <img width="12" src="/icons/triangle-sharp.svg" alt=""/>
                         </div>
-                        <div className="input-field-container">
+                        <div className="search-input-field-container">
                             <div className="input-wrapper"><label htmlFor="from-date">From</label>
                                 <input id="from-date" name={"from-date"} type="date"/></div>
                             <span> - </span>
@@ -110,7 +110,7 @@ export default function Search() {
                 </form>
             </div>
 
-            <div className="results">
+            <div className="search-results">
                 <section id="resultsinfo">
                     <h2>3 results for "Lorem Ipsum"</h2>
                     <div className="input-wrapper">
