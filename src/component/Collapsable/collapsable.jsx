@@ -12,7 +12,7 @@ export default function Collapsable({title, children}) {
 
     return (
         <>
-            <button onClick={toggleOpen} className="filter-header">
+            <button onClick={toggleOpen} className="filter-header" type={"button"}>
                 <p>{title}</p>
                 <img style={{
                     transform: isOpen ? 'rotate(0deg)' : 'rotate(180deg)',
