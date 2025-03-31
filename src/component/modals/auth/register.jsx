@@ -11,7 +11,7 @@ export default function Register({onClose, changeMode}) {
         <div className={"auth-background"}
              ref={modalRef}
              onClick={(c) => {
-                 if (c.target === document.querySelector("#auth-modal > div")) {
+                 if (c.target === modalRef.current) {
                      onClose()
                  }
              }}>
