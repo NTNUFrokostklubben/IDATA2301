@@ -52,7 +52,7 @@
 }
 
 .search-page section {
-    margin: 2rem 0;
+    /*margin: 2rem 0;*/
 }
 
 .filter-header {
@@ -133,8 +133,10 @@
     font-size: 1rem;
 }
 
-.filter-header .collapsed {
-    display: none;
+
+.search-page .cta-button {
+    width: 100%;
+    margin: 1rem 0;
 }
 
 @media (max-width: 850px) {
