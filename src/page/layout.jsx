@@ -1,5 +1,6 @@
 import {Outlet} from "react-router-dom";
 import "./layout.css"
+import React from "react";
 import {useRef, useState} from "react";
 import {createPortal} from "react-dom";
 import Login from "../component/modals/auth/login";
@@ -26,8 +27,9 @@ export default function Layout() {
                 </li>
                 <li>
                     <div className="dropdown">
-                        <button className="drop-btn">Courses <img id="triangle-icon" width="12" height="12"
-                                                                  src="/icons/triangle-sharp.svg"/></button>
+                        <button className="drop-btn"> Courses
+                            <img id="triangle-icon" width="12" height="12" src="/icons/triangle-sharp.svg" alt={""}/>
+                        </button>
                         <div className="dropdown-content">
                             <a href="#">Course 1</a>
                             <a href="#">Course 2</a>
@@ -50,19 +52,15 @@ export default function Layout() {
                     </div>
                 </li>
                 <li>
-                    <div id="cart">
-                        <a href=""><img id="cart_img" src="/icons/cart-sharp.svg" alt="shopping cart"/></a>
-                    </div>
-
-                </li>
-
-                <li>
                     <div id="login-signup-btn">
-                        <button onClick={() => setShowLoginModal(true)} id="login-btn" alt="Log in" href="#">Log in
+                        <button onClick={() => setShowLoginModal(true)} id="login-btn" alt="Log in" href="#">
+                            <h5>Log in</h5>
                         </button>
                         <button onClick={() => setShowSignupModal(true)} className="cta-button" id="signup-btn"
-                                alt="Sign up" href="#">Sign up
-                        </button>
+                                alt="Sign up" href="#">
+                                <h5>Sign up</h5>
+                        </button>    
+                    </div>
                     </div>
                 </li>
             </nav>

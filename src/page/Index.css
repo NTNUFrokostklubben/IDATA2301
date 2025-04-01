@@ -1,8 +1,8 @@
-#Hero{
+#index-hero-section{
     background-color: var(--background);
     width: 100%;
 }
-.heroMainPage{
+.index-hero{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -11,100 +11,113 @@
     flex-wrap: wrap;
 }
 
-.hero-main-box{
+.index-hero-main-box{
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: var(--textWhite);
     box-shadow: 0 8 16 0 var(--shadow);
-    padding: 3rem;
+    padding: 2rem;
     width: 30rem;
-    height: 10rem;
+    height: auto;
 }
 
-.heroMainText{
-    font-size: x-large;
+.index-hero-main-text{
     text-align: center;
 }
+.index-hero-main-box h5{
+    font-weight: lighter;
+}
+.index-hero-main-box p{
+    color: var(--textWhite);
+}
 
-#hero-main-image{
+#index-hero-main-image{
     display: flex;
     align-self: flex-end;
     justify-content: flex-start;
 }
 
-#hero-image{
+#index-hero-image{
     transform: scaleX(-1);
-    width: 350px;
+    width: 20rem;
 }
 
-#free-btn{
+#index-free-btn{
     cursor: pointer;
     font-size: large;
-    width: 8rem;
-    height: 3rem;
     text-align: center;
     text-decoration: none;
-    margin-top: 1rem;
+    padding: 0.4rem;
+    max-width: 10rem;
 }
-#course-content{
-    min-height: 500px;
+#index-free-btn:hover{
+    box-shadow: var(--shadow);
+}
+#index-course-content{
+    height: auto;
+    padding-bottom: 2rem;
     background-color: var(--textWhite);
 }
-.section-subheading{
+.index-section-subheading{
     padding: 0.5rem;
     font-weight: normal;
 }
-#course-cards-section{
+#index-course-cards-section{
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-evenly;
 }
-#course-cards-section .arrow{
+#index-course-cards-section .index-arrow{
     align-content: center;
     border: none;
     cursor: pointer;
+
 }
-#course-cards-section #arrow-left-btn ,#arrow-right-btn{
+#index-course-cards-section .index-arrow-icon{
     border: none;
+    width: 3rem;
+    height: 3rem;
 }
-#collection-cards{
+
+#index-collection-cards{
     display: flex;
     flex-wrap: nowrap;
     grid-gap: 10px;
 }
-.card{
+.index-card{
     margin: 1rem;
     border: var(--textBlack) 1px solid;
     border-radius: 3px;
     width: 20rem;
 }
-.course-img{
-    width:20rem;
+.index-course-img{
+    width: 20rem;
+    height: 15rem;
 }
 
-.card:hover {
+.index-card:hover {
     box-shadow: 0px 8px 16px 0px var(--shadow);
 }
-.card .card-desc{
+.index-card .index-card-desc{
     text-align: left;
     padding: 0.5rem;
 }
-.card p {
+.index-card p {
     text-align: left;
-    padding: 1rem;
+    padding: 0.5rem;
 }
-card img {
+index-card img {
     justify-content: center;
     align-content: flex-start;
     padding: 0.5rem;
 }
 
-#course-content-heading{
+#index-course-content-heading{
     padding: 0.5rem;
 }
 @supports (-webkit-line-clamp: 3) {
-    .card .card-desc {
+    .index-card .index-card-desc {
         display: -webkit-box; /* Required for line clamping */
         -webkit-box-orient: vertical; /* Required for line clamping */
         -webkit-line-clamp: 3; /* Limit to 3 lines */
@@ -114,14 +127,14 @@ card img {
 }
 
 @supports not (-webkit-line-clamp: 3) {
-    .card .card-desc {
+    .index-card .index-card-desc{
         position: relative;
         max-height: 4.5em; /* Adjust based on line height and number of lines */
         line-height: 1.5em; /* Adjust based on your design */
         overflow: hidden;
     }
 
-    .card .card-desc::after {
+    .index-card .index-card-desc::after {
         content: '...';
         position: absolute;
         bottom: 0;
@@ -131,7 +144,7 @@ card img {
     }
 }
 /* Collabrotators */
-#collaborators-section{
+#index-collaborators-section{
 
     display: flex;
     flex-direction: column;
@@ -140,32 +153,40 @@ card img {
     height: auto;
     padding-bottom: 5rem;
 }
-#collaborator-logos {
+#index-collaborator-logos {
     padding-top: 1rem;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
     gap: 1rem;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
+    margin: 0 auto;
     width: 85%;
+    max-width: 80rem;
 }
 
-.logo {
+.index-logo {
     display: flex;
     justify-content: center;
     align-items: center;
-
+}
+.index-logo-two{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
 }
 
-.logo img {
-    max-width: 100%;
+.index-logo img {
+    max-width: 15rem;
     height: auto;
 }
-.logo img:hover {
+.index-logo-two-img img {
+    max-width: 7.5rem;
+    height: auto;
+}
+.index-logo img:hover {
     box-shadow: 0px 8px 16px 0px var(--shadow);
 }
-#testimonial{
+#index-testimonial{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -173,7 +194,7 @@ card img {
     padding-bottom: 4rem;
     padding-top: 2rem;
 }
-#testimonial_box{
+#index-testimonial_box{
     display: flex;
     align-items: center;
     width: 80%;
@@ -181,78 +202,67 @@ card img {
     background-color: #4D7E8A;
     padding: 2rem;
 }
-#testimonial_box:hover {
+#index-testimonial_box:hover {
     box-shadow: 0px 8px 16px 0px var(--shadow);
 }
-#testimonial_text{
+#index-testimonial_text{
     padding: 1rem;
     color: var(--textWhite);
     width: 60%;
 }
-#testimonial_text h3{
+#index-testimonial_text h3{
     color: var(--textWhite);
     font-weight: lighter;
 }
-#testimonial_text p{
+#index-testimonial_text p{
     color: var(--textWhite);
     font-weight: lighter;
 }
-#testimonial_photo {
-    width: 200px;
-    height: 200px;
+#index-testimonial_photo {
+    width: 15rem;
+    height: 15rem;
     object-fit: cover;
     margin-right: 1.5rem;
 }
 
-#hero2{
+#index-hero2{
     padding: 4rem;
     background-color: #DBF0F5;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='394' height='394' viewBox='0 0 800 800'%3E%3Cg fill='none' stroke='%23AFD7DF' stroke-width='5'%3E%3Cpath d='M769 229L1037 260.9M927 880L731 737 520 660 309 538 40 599 295 764 126.5 879.5 40 599-197 493 102 382-31 229 126.5 79.5-69-63'/%3E%3Cpath d='M-31 229L237 261 390 382 603 493 308.5 537.5 101.5 381.5M370 905L295 764'/%3E%3Cpath d='M520 660L578 842 731 737 840 599 603 493 520 660 295 764 309 538 390 382 539 269 769 229 577.5 41.5 370 105 295 -36 126.5 79.5 237 261 102 382 40 599 -69 737 127 880'/%3E%3Cpath d='M520-140L578.5 42.5 731-63M603 493L539 269 237 261 370 105M902 382L539 269M390 382L102 382'/%3E%3Cpath d='M-222 42L126.5 79.5 370 105 539 269 577.5 41.5 927 80 769 229 902 382 603 493 731 737M295-36L577.5 41.5M578 842L295 764M40-201L127 80M102 382L-261 269'/%3E%3C/g%3E%3Cg fill='%23437E8A'%3E%3Ccircle cx='769' cy='229' r='8'/%3E%3Ccircle cx='539' cy='269' r='8'/%3E%3Ccircle cx='603' cy='493' r='8'/%3E%3Ccircle cx='731' cy='737' r='8'/%3E%3Ccircle cx='520' cy='660' r='8'/%3E%3Ccircle cx='309' cy='538' r='8'/%3E%3Ccircle cx='295' cy='764' r='8'/%3E%3Ccircle cx='40' cy='599' r='8'/%3E%3Ccircle cx='102' cy='382' r='8'/%3E%3Ccircle cx='127' cy='80' r='8'/%3E%3Ccircle cx='370' cy='105' r='8'/%3E%3Ccircle cx='578' cy='42' r='8'/%3E%3Ccircle cx='237' cy='261' r='8'/%3E%3Ccircle cx='390' cy='382' r='8'/%3E%3C/g%3E%3C/svg%3E");
 }
-#hero2-box{
+#index-hero2-box{
     display: flex;
     justify-content: center;
     align-items: center;
+
 }
 /* Slideshow container */
-.slideshow-container {
-    width: auto;
+.index-slideshow-container {
+    justify-content: center;
     padding: 2rem;
 }
 
-.mySlides {
+.index-mySlides {
     display: none;
-    width: 300px;
-    padding-right: 2rem;
+}
+.index-slideshow-img{
+    width: 24rem;
+    heigth: 16rem;
 }
 
-/* The dots/bullets/indicators */
-.dot {
-    height: 15px;
-    width: 15px;
-    margin: 0 2px;
-    background-color: #bbb;
-    border-radius: 50%;
-    display: inline-block;
-    transition: background-color 0.6s ease;
-}
-
-.active {
-    background-color: #717171;
-}
 
 /* Fading animation */
-.fade {
+.index-fade {
     animation-name: fade;
     animation-duration: 1.5s;
 }
 
-@keyframes fade {
+@keyframes index-fade {
     from {opacity: .4}
     to {opacity: 1}
 }
 
-#hero2_textbox {
+#index-hero2_textbox {
     display: flex;
     flex-direction: column;
     padding: 2rem;
@@ -262,22 +272,19 @@ card img {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Soft shadow to blend edges */
     border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border for definition */
 }
-#hero2_textbox::after{
-
-}
-#hero2_textbox h3{
+#index-hero2_textbox h3{
     font-weight: normal;
     padding: 1rem;
 }
-#hero2_textbox p{
+#index-hero2_textbox p{
     font-weight: normal;
     padding: 1rem;
 }
-#hero2_button{
+#index-hero2_button{
     display: flex;
     justify-content: center;
 }
-#hero2_textbox button{
+#index-hero2_textbox button{
     border: 1px solid var(--textBlack);
     cursor: pointer;
     font-size: large;
@@ -287,9 +294,6 @@ card img {
     text-decoration: none;
 }
 
-/*
-TODO make this more smooth!!
- */
 @media (max-width: 3000px) {
 
 }
@@ -297,31 +301,69 @@ TODO make this more smooth!!
 
 }
 @media (max-width: 2350px) {
-    #course7{
-        display: none;
-    }
+
 }
 @media (max-width: 1900px) {
-    #course5, #course6, #course7{
-        display: none;
-    }
+
 }
 
 @media (max-width: 1600px) {
-    #course4, #course5, #course6, #course7 {
-        display: none;
-    }
+
 }
 @media (max-width: 1250px) {
-    #course3, #course4, #course5, #course6, #course7 {
-        display: none;
+    #index-hero-image{
+        width: 18rem;
+    }
+    .index-hero-main-box{
+        width: 20rem;
+    }
+}
+@media (max-width: 1024px){
+    .index-logo img {
+        max-width: 10rem;
+        height: auto;
+    }
+    .index-logo-two-img img {
+        max-width: 5rem;
+        height: auto;
+    }
+}
+@media (max-width: 600px) {
+    #index-hero-image{
+        width: 15rem;
+    }
+    .index-hero-main-box{
+        width: 15rem;
+    }
+    .index-card {
+        width: 12rem;
     }
 
-    .hero-main-box{
-        padding: 3rem;
-        width: 20rem;
-        height: 14rem;
+    .index-course-img {
+        width: 12rem;
+        height: 8rem;
     }
+
+    #index-hero2 {
+        padding: 2rem;
+    }
+
+    #index-hero2-box {
+        flex-direction: column;
+    }
+
+    #index-hero2_textbox {
+        padding: 1rem;
+    }
+
+    #index-hero2_textbox h3, #index-hero2_textbox p {
+        padding: 0.5rem;
+    }
+
+    #index-hero2_button {
+        margin-top: 1rem;
+    }
+
 }
 
 
