@@ -220,7 +220,7 @@ export default function Index() {
                         <div id="index-hero2_button">
                             <button className="cta-button">
                                 <img className="filter-white" width="15" height="15" src=" /icons/person-add-sharp.svg"/>
-                                <h6>Join for free!</h6>
+                                 Join for free!
                             </button>
                         </div>
                     </div>
