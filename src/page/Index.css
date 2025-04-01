@@ -294,20 +294,12 @@
         height: auto;
     }
 }
-@media (max-width: 600px) {
+@media (max-width: 550px) {
     #index-hero-image{
         width: 15rem;
     }
     .index-hero-main-box{
         width: 15rem;
-    }
-    .index-card {
-        width: 12rem;
-    }
-
-    .index-course-img {
-        width: 12rem;
-        height: 8rem;
     }
 
     #index-hero2 {
