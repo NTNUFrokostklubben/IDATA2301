@@ -1,0 +1,131 @@
+
+.user-page{
+    background-color: var(--background);
+}
+
+#user-page-content{
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1400px;
+
+}
+
+#user-page-caret {
+    margin-left: 1rem;
+    margin-top: 1rem;
+    display: flex;
+    background-color: white;
+    width: 15rem;
+    height: 18rem;
+    justify-content: center;
+    max-width: 15rem;
+    flex-direction: column;
+
+}
+
+#user-caret {
+    display: flex;
+    flex-direction: column;
+
+    width: 15rem;
+    height: 18rem;
+    justify-content: center;
+    align-items: center;
+}
+
+#user-image {
+    border-radius: 50%;
+
+}
+
+
+#user-name {
+    font-size: 1.5rem;
+}
+
+#edit {
+    display: flex;
+    padding-top: 0.7rem;
+    padding-right: 0.7rem;
+    width: 1.5rem;
+    justify-self: flex-end;
+    align-self: flex-end;
+}
+
+#user-courses {
+    margin-top: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    background-color: white;
+    justify-self: flex-start;
+    width: 46.7rem;
+    height: 18rem;
+}
+.user-course-item{
+    padding-top: 0.7rem;
+}
+#previous-courses-heading{
+   margin: 1rem;
+}
+.star{
+    max-width: 1rem;
+    max-height: 1rem;
+}
+#review-heading{
+    padding: 1rem;
+}
+.users-reviews{
+    margin-top: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    background-color: white;
+    width: 1000px;
+}
+#users-favorites{
+  margin: 1.3rem;
+    background-color: white;
+    width: 1000px;
+}
+#favorites-heading{
+    padding: 1rem;
+}
+.one-favorite{
+    padding-bottom: 0.7rem;
+}
+
+.favorite-course-title{
+    padding-left: 0.7rem;
+}
+
+.favorite-image-and-text{
+    padding-left: 10px;
+    display: flex;
+}
+.favorite-course-text{
+    padding-left:0.7rem;
+}
+.favorite-course-image{
+    width: 10rem;
+    height: 4.7rem;
+}
+
+.favorite-course-title{
+    font-size: 1rem;
+    padding-top: 1.6rem;
+    padding-bottom: 0.7rem;
+}
+
+@media (max-width: 1290px){
+
+}
+@media (max-width: 1045px){
+    .users-reviews{
+
+    }
+}
+@media (max-width: 475px ){
+    #user-image {
+        width: 120px;
+
+    }
+}
