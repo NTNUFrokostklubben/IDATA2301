@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Index.css";
 import Search from "./search/search";
-import {Route} from "react-router-dom";
+import {Link, Route} from "react-router-dom";
 
 export default function Index() {
 
@@ -19,6 +19,7 @@ export default function Index() {
         "https://picsum.photos/200/200?random=2",
         "https://picsum.photos/200/200?random=3"
     ];
+
 
     return (
         <div id={"root"}>
@@ -212,6 +213,7 @@ export default function Index() {
             <ul>
                 <li><a href={"/search"}>search/filters</a></li>
                 <li><a href={"/admin"}>Admin</a></li>
+                <li> <Link to={`/course/${1}`}> course</Link></li>
             </ul>
         </div>
     )

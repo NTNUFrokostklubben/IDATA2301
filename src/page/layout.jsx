@@ -1,9 +1,10 @@
-import {Outlet} from "react-router-dom";
+import {Link, Outlet} from "react-router-dom";
 import "./layout.css"
 import {useRef, useState} from "react";
 import {createPortal} from "react-dom";
 import Login from "../component/modals/auth/login";
 import Register from "../component/modals/auth/register";
+import Index from "./index";
 // import {Modal} from "react-native";
 
 export default function Layout() {
@@ -22,7 +23,7 @@ export default function Layout() {
         <div>
             <nav id="menu-navbar">
                 <li id="logo-image">
-                    <img id="logo-icon" src="logo.svg" alt="Learniverse Logo"/>
+                    <Link to={"/"}><img id="logo-icon" src="/logo.svg" alt="Learniverse Logo"/></Link>
                 </li>
                 <li>
                     <div className="dropdown">

@@ -1,0 +1,10 @@
+.provider-card{
+    margin-right: 2rem;
+    width: 14rem;
+    margin-bottom: 3rem;
+    height: 4rem;
+}
+.provider-name, .price{
+    font-size: 1.08rem;
+    color: var(--textWhite);
+}
