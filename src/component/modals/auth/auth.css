@@ -54,26 +54,14 @@
     margin: 1rem 0;
 }
 
-.authform .cta-button:hover {
-    background-color: var(--contrast);
-}
 
 
 
-.authform .secondary-button:hover {
-    background-color: var(--highlight);
-}
-
-.secondary-button {
-    background-color: var(--shadow);
-    color: var(--textBlack);
-}
 
 #auth-close-button {
     /*Ensure button is just a bit larger than image*/
     width: 30px;
     height: 30px;
-    background-color: var(--shadow);
     position: absolute;
     right: 0px;
     top: 0px;

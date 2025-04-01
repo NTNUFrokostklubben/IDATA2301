@@ -30,12 +30,6 @@ nav li {
     flex-flow: row;
 }
 
-.cta-button {
-    background-color: var(--cta);
-    color: var(--textWhite);
-    height: 3rem;
-    width: 7rem;
-}
 
 .drop-btn {
     display: flow;
@@ -127,35 +121,24 @@ nav li {
     justify-content: center;
 }
 
-#login-btn{
-    background-color: var(--textWhite);
-    margin-right: 1rem;
+#login-btn {
+    height: 3rem;
 }
+
 #login-btn h5{
     font-weight: normal;
 }
-#signup-btn{
-    background-color: var(--cta);
-}
+
 #signup-btn h5{
     color: var(--textWhite);
     font-weight: normal;
 }
+
 #login-signup-btn{
     flex-wrap: nowrap;
 }
-#login-btn, #signup-btn{
-    border: 1px solid var(--textBlack);
-    cursor: pointer;
-    font-size: large;
-    width: 10rem;
-    height: 3rem;
-    text-align: center;
-    text-decoration: none;
-}
-#login-btn #signup-btn:hover{
-    box-shadow: 0px 8px 16px 0px var(--shadow)
-}
+
+
 
 
 

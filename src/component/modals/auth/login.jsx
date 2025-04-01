@@ -17,7 +17,7 @@ export default function Login({ onClose, changeMode }) {
         }}>
 
             <div className="authform">
-                <button id={"auth-close-button"} onClick={onClose}>
+                <button id={"auth-close-button"} className={"secondary-button"} onClick={onClose}>
                     <img alt={"X"} src={"icons/close-sharp.svg"} />
                 </button>
                 <h1 className={"auth-h1"}>
