@@ -5,7 +5,7 @@ import Rating from "../component/Rating/rating";
 export default function UserPage (){
     const [data, setData] = useState([]);
     const [user, setUser] = useState([]);
-    const [loading, setLoading] = useState([true]);
+    const [loading, setLoading] = useState(true);
     let [ratings, setRatings] = useState([]);
 
     useEffect(() => {

@@ -8,7 +8,7 @@ export default function Checkout (){
         <article id="page-layout-checkout">
             <div id="left-side">
                 <section id="express-checkout">
-                    <h1 className="header1">Express checkout</h1>
+                    <h4 className="checkout-headers">Express checkout</h4>
                     <div id="payment-options">
                         <div id="paypal">
                             <a
@@ -36,11 +36,11 @@ export default function Checkout (){
 
                 <div className="separator">Continue below to pay with credit card</div>
                 <section id="billing">
-                    <h1 className="header1">Contact information</h1>
+                    <h5 className="checkout-headers">Contact information</h5>
 
                     <label htmlFor="email"></label><input className="large-input-field" type="text" id="email"
                                                           name="email input" placeholder="Email"/>
-                    <h1 className="header1"> Billing</h1>
+                    <h5 className="checkout-headers"> Billing</h5>
                     <form id="billing-input" action="https://web-tek.ninja/php_backend/dummy_login.php" method="post">
                         <input className="large-input-field" placeholder="country/region" type="text" id="country"
                                name="country-select"/>
@@ -72,9 +72,9 @@ export default function Checkout (){
             </div>
             <div id="right-side">
                 <section id="checkout">
-                    <h1 className="header1">product</h1>
+                    <h5 className="checkout-headers">product</h5>
                     <div className="product">
-                        <h2 className="header2">introduction to SQL essentials</h2>
+                        <h6 className="checkout-headers">introduction to SQL essentials</h6>
                         <div className="picture-and-text">
                             <img width="200" height="50" src="https://picsum.photos/150/150" alt="product image"/>
                             <p className="product-desc">
