@@ -1,0 +1,24 @@
+.collapsable {
+    overflow: hidden;
+    transition: max-height 0.2s ease-in-out, opacity 0.2s ease-in-out;
+    max-height: 0;
+    opacity: 0;
+}
+
+.collapsable.collapsed {
+
+    overflow: hidden;
+    transition: max-height 0.2s ease-in-out, opacity 0.2s ease-in-out;
+    max-height: 500px; /* Adjust this to a reasonable max height */
+    opacity: 1;
+}
+
+.collapsable section {
+    margin: 2rem 0rem;
+}
+
+.filter-header {
+    width: 100%;
+    border-color: var(--shadow);
+    align-items: center;
+}

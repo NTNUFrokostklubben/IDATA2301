@@ -1,28 +1,26 @@
 import "./card.css";
 
-export default function Card(props) {
+export default function Card(course) {
 
-    class image {
-        constructor(name, path) {
-            this.name = name;
-            this.path = path;
+    function getDifficulty (diff_level) {
+        switch (diff_level) {
+            case 0:
+                return "Beginner";
+            case 1:
+                return "Intermediate";
+            case 2:
+                return "Expert";
+            default:
+                return "Unknown";
         }
     }
 
-    if (props.path === undefined) {
-        props.path = "https://picsum.photos/300/200?random=2";
-    }
-
-    const cardImg = new image(props.name, props.path)
-
     return (
         <section className="card">
-            <img className="course-img" src={cardImg.path} alt=""/>
-            <b>{props.name}</b>
-            <p className="card-desc">Embark on your cloud computing journey with our beginner-level online course,
-                "Azure Fundamentals,"
-                meticulously crafted to prepare you for the AZ-900 exam</p>
-            <p className="infotext">10 hours per week • Beginner • 2 ECTS credits</p>
+            <img className="course-img" src={"https://picsum.photos/200/200?random=2"} alt=""/>
+            <b>{course.title}</b>
+            <p className="card-desc">{course.description}</p>
+            <p className="infotext">{course.hoursWeek} • {getDifficulty(course.diffLevel)} • {course.credits} ECTS credits</p>
             <div className="card-footer">
                 <div className="rating">
 

@@ -22,13 +22,8 @@
     max-width: 30rem;
     width: 30rem;
     background-color: var(--textWhite);
-    /*gap: 1rem;*/
+    gap: 1rem;
 }
-
-
-
-
-
 
 .authform input[type="text"],
 .authform input[type="number"],
@@ -54,13 +49,20 @@
     margin-top: 6rem;
 }
 
-.cta-button {
+.authform .cta-button {
     width: 100%;
     margin: 1rem 0;
+}
 
+.authform .cta-button:hover {
+    background-color: var(--contrast);
 }
 
 
+
+.authform .secondary-button:hover {
+    background-color: var(--highlight);
+}
 
 .secondary-button {
     background-color: var(--shadow);
@@ -96,9 +98,27 @@
 }
 
 @media (max-width: 600px) {
-    .authform {
-        width: 100%;
+
+    .auth-background {
+        /*Collapse so form takes up entire space, ignore background*/
     }
+
+    .authform {
+        /*max-height: 100%;*/
+        /*height: 100%;*/
+        position: absolute;
+        top: 0px;
+        width: 100%;
+        max-width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    .authform form {
+        padding: 0 2rem;
+    }
+
+
 
 
 }
