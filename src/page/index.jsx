@@ -53,13 +53,14 @@ export default function Index() {
     ];
 
     const slides = [
-        "https://picsum.photos/200/200?random=1",
-        "https://picsum.photos/200/200?random=2",
-        "https://picsum.photos/200/200?random=3",
-        "https://picsum.photos/200/200?random=4",
-        "https://picsum.photos/200/200?random=5",
-        "https://picsum.photos/200/200?random=6",
-        "https://picsum.photos/200/200?random=7"
+        "https://picsum.photos/480/320?random=1",
+        "https://picsum.photos/480/320?random=2",
+        "https://picsum.photos/480/320?random=3",
+        "https://picsum.photos/480/320?random=4",
+        "https://picsum.photos/480/320?random=5",
+        "https://picsum.photos/480/320?random=6",
+        "https://picsum.photos/480/320?random=7",
+        "https://picsum.photos/480/320?random=8",
     ];
 
     return (
@@ -147,17 +148,36 @@ export default function Index() {
 
                     <div className="index-logo" id="index-logo1"><img src="https://picsum.photos/250/75?random=1"
                                                                       alt="1"/></div>
-                    <div className="index-logo" id="index-logo2"><img src="https://picsum.photos/250/75?random=2" alt="2"/></div>
-                    <div className="index-logo" id="index-logo3"><img src="https://picsum.photos/250/75?random=3" alt="3"/></div>
-                    <div className="index-logo" id="index-logo4"><img src="https://picsum.photos/250/75?random=4" alt="4"/></div>
-                    <div className="index-logo" id="index-logo5"><img src="https://picsum.photos/250/75?random=5" alt="5"/></div>
-                    <div className="index-logo" id="index-logo6"><img src="https://picsum.photos/250/75?random=6" alt="6"/></div>
-                    <div className="index-logo" id="index-logo7"><img src="https://picsum.photos/250/75?random=7" alt="7"/></div>
-                    <div className="index-logo" id="index-logo8"><img src="https://picsum.photos/250/75?random=8" alt="8"/></div>
-                    <div className="index-logo" id="index-logo9"><img src="https://picsum.photos/75/75?random=9" alt="9"/></div>
-                    <div className="index-logo" id="index-logo10"><img src="https://picsum.photos/75/75?random=10" alt="10"/></div>
-                    <div className="index-logo" id="index-logo11"><img src="https://picsum.photos/75/75?random=11" alt="11"/></div>
-                    <div className="index-logo" id="index-logo12"><img src="https://picsum.photos/75/75?random=12" alt="12"/></div>
+                    <div className="index-logo" id="index-logo2"><img src="https://picsum.photos/250/75?random=2"
+                                                                      alt="2"/></div>
+                    <div className="index-logo" id="index-logo3"><img src="https://picsum.photos/250/75?random=3"
+                                                                      alt="3"/></div>
+                    <div className="index-logo" id="index-logo4"><img src="https://picsum.photos/250/75?random=4"
+                                                                      alt="4"/></div>
+                    <div className="index-logo" id="index-logo5"><img src="https://picsum.photos/250/75?random=5"
+                                                                      alt="5"/></div>
+                    <div className="index-logo" id="index-logo6"><img src="https://picsum.photos/250/75?random=6"
+                                                                      alt="6"/></div>
+                    <div className="index-logo" id="index-logo7"><img src="https://picsum.photos/250/75?random=7"
+                                                                      alt="7"/></div>
+                    <div className="index-logo" id="index-logo8"><img src="https://picsum.photos/250/75?random=8"
+                                                                      alt="8"/></div>
+                    <div className="index-logo-two" id="index-logo-9-10">
+                        <div className="index-logo-two-img" id="index-logo9">
+                            <img src="https://picsum.photos/75/75?random=9" alt="9"/>
+                        </div>
+                        <div className="index-logo-two-img" id="index-logo10">
+                            <img src="https://picsum.photos/75/75?random=10" alt="10"/>
+                        </div>
+                    </div>
+                    <div className="index-logo-two" id="index-logo-11-12">
+                        <div className="index-logo-two-img" id="index-logo11">
+                            <img src="https://picsum.photos/75/75?random=11" alt="11"/>
+                        </div>
+                        <div className="index-logo-two-img" id="index-logo12">
+                            <img src="https://picsum.photos/75/75?random=12" alt="12"/>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -188,7 +208,7 @@ export default function Index() {
                                 className="index-mySlides index-fade"
                                 style={{ display: index === slideIndex ? "block" : "none" }}
                             >
-                                <img src={slide} alt={`Slide ${index + 1}`} />
+                                <img className={"index-slideshow-img"} src={slide} alt={`Slide ${index + 1}`} />
                             </div>
                         ))}
                     </div>
@@ -198,9 +218,9 @@ export default function Index() {
                         <h3>Learn new skills with Learniverse</h3>
                         <p>xx% of learners learn something, which do this and this! Become one of the today</p>
                         <div id="index-hero2_button">
-                            <button className="cta-button"><img className="filter-white" width="15" height="15"
-                                                                src=" /icons/person-add-sharp.svg"/> Join for
-                                free!
+                            <button className="cta-button">
+                                <img className="filter-white" width="15" height="15" src=" /icons/person-add-sharp.svg"/>
+                                <h6>Join for free!</h6>
                             </button>
                         </div>
                     </div>

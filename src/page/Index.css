@@ -17,9 +17,9 @@
     align-items: center;
     background-color: var(--textWhite);
     box-shadow: 0 8 16 0 var(--shadow);
-    padding: 3rem;
+    padding: 2rem;
     width: 30rem;
-    height: 10rem;
+    height: auto;
 }
 
 .index-hero-main-text{
@@ -46,12 +46,10 @@
 #index-free-btn{
     cursor: pointer;
     font-size: large;
-    width: 120px;
-    height: 40px;
     text-align: center;
     text-decoration: none;
-    margin-top: 16px;
-    padding: 5px;
+    padding: 0.4rem;
+    max-width: 10rem;
 }
 #index-free-btn:hover{
     box-shadow: var(--shadow);
@@ -158,12 +156,11 @@ index-card img {
 #index-collaborator-logos {
     padding-top: 1rem;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
     gap: 1rem;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
+    margin: 0 auto;
     width: 85%;
+    max-width: 80rem;
 }
 
 .index-logo {
@@ -171,9 +168,19 @@ index-card img {
     justify-content: center;
     align-items: center;
 }
+.index-logo-two{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+}
 
 .index-logo img {
     max-width: 15rem;
+    height: auto;
+}
+.index-logo-two-img img {
+    max-width: 7.5rem;
     height: auto;
 }
 .index-logo img:hover {
@@ -227,18 +234,20 @@ index-card img {
     display: flex;
     justify-content: center;
     align-items: center;
+
 }
 /* Slideshow container */
 .index-slideshow-container {
-    width: auto;
+    justify-content: center;
     padding: 2rem;
 }
 
 .index-mySlides {
     display: none;
-    padding-right: 2rem;
-    width: 30rem;
-    height: 20rem;
+}
+.index-slideshow-img{
+    width: 24rem;
+    heigth: 16rem;
 }
 
 
@@ -303,17 +312,24 @@ index-card img {
 }
 @media (max-width: 1250px) {
     #index-hero-image{
-        padding: 2rem;
         width: 18rem;
     }
     .index-hero-main-box{
         width: 20rem;
     }
-
+}
+@media (max-width: 1024px){
+    .index-logo img {
+        max-width: 10rem;
+        height: auto;
+    }
+    .index-logo-two-img img {
+        max-width: 5rem;
+        height: auto;
+    }
 }
 @media (max-width: 600px) {
     #index-hero-image{
-        padding: 2rem;
         width: 15rem;
     }
     .index-hero-main-box{
@@ -347,6 +363,7 @@ index-card img {
     #index-hero2_button {
         margin-top: 1rem;
     }
+
 }
 
 
