@@ -29,14 +29,6 @@ nav li {
     display: flex;
     flex-flow: row;
 }
-
-.cta-button {
-    background-color: var(--cta);
-    color: var(--textWhite);
-    height: 3rem;
-    width: 7rem;
-}
-
 .drop-btn {
     display: flow;
     color: var(--textBlack);
@@ -156,9 +148,6 @@ nav li {
 #login-btn #signup-btn:hover{
     box-shadow: 0px 8px 16px 0px var(--shadow)
 }
-
-
-
 @media (min-width: 2800px) {
     #course6{
         display: none;

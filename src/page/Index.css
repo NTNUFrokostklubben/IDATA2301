@@ -72,7 +72,15 @@
     align-content: center;
     border: none;
     cursor: pointer;
-
+    background: none;
+}
+#index-arrow-left-btn, #index-arrow-right-btn{
+    border: none;
+    cursor: pointer;
+    background: none;
+}
+#index-arrow-left-btn, #index-arrow-right-btn:hover{
+    box-shadow: var(--shadow);
 }
 #index-course-cards-section .index-arrow-icon{
     border: none;
@@ -262,7 +270,7 @@ index-card img {
     to {opacity: 1}
 }
 
-#index-hero2_textbox {
+#index-hero2-textbox {
     display: flex;
     flex-direction: column;
     padding: 2rem;
@@ -271,28 +279,44 @@ index-card img {
     background: rgba(255, 255, 255, 0.15); /* Semi-transparent background */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Soft shadow to blend edges */
     border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border for definition */
+    height: auto;
 }
-#index-hero2_textbox h3{
+#index-hero2-textbox h3{
+    padding-bottom: 1.5rem;
+}
+#index-hero2-textbox h6{
     font-weight: normal;
+}
+#index-hero2-title-subtitle{
     padding: 1rem;
 }
-#index-hero2_textbox p{
+#index-hero2-button p{
     font-weight: normal;
-    padding: 1rem;
+    color: var(--textWhite);
 }
-#index-hero2_button{
+#index-hero2-button{
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    padding: 1rem;
 }
-#index-hero2_textbox button{
+#index-join-for-free{
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    align-items: center;
     border: 1px solid var(--textBlack);
     cursor: pointer;
-    font-size: large;
     width: 10rem;
     height: 3rem;
-    text-align: center;
     text-decoration: none;
 }
+#index-join{
+    width: 1rem;
+    height: 1rem;
+}
+
 
 @media (max-width: 3000px) {
 

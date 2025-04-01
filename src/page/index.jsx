@@ -196,8 +196,8 @@ export default function Index() {
 
             <section id="index-hero2">
                 <div id="index-hero2-box">
-                      {/* The SVG Background and Pattern is by SVGBackgrounds.com*/}
-                      {/* Url: "https://www.svgbackgrounds.com/set/free-svg-backgrounds-and-patterns/"*/}
+                    {/* The SVG Background and Pattern is by SVGBackgrounds.com*/}
+                    {/* Url: "https://www.svgbackgrounds.com/set/free-svg-backgrounds-and-patterns/"*/}
 
 
                     {/*Slideshow container */}
@@ -206,21 +206,23 @@ export default function Index() {
                             <div
                                 key={index}
                                 className="index-mySlides index-fade"
-                                style={{ display: index === slideIndex ? "block" : "none" }}
+                                style={{display: index === slideIndex ? "block" : "none"}}
                             >
-                                <img className={"index-slideshow-img"} src={slide} alt={`Slide ${index + 1}`} />
+                                <img className={"index-slideshow-img"} src={slide} alt={`Slide ${index + 1}`}/>
                             </div>
                         ))}
                     </div>
 
-
-                    <div id="index-hero2_textbox">
-                        <h3>Learn new skills with Learniverse</h3>
-                        <p>xx% of learners learn something, which do this and this! Become one of the today</p>
-                        <div id="index-hero2_button">
-                            <button className="cta-button">
-                                <img className="filter-white" width="15" height="15" src=" /icons/person-add-sharp.svg"/>
-                                <h6>Join for free!</h6>
+                    <div id="index-hero2-textbox">
+                        <div className={"index-hero2-title-subtitle"}>
+                            <h3>Learn new skills with Learniverse</h3>
+                            <h6> xx% of learners learn something, which do this and this! Become one of the today</h6>
+                        </div>
+                        <div id="index-hero2-button">
+                            <button className="cta-button" id="index-join-for-free">
+                                <img className="filter-white" id="index-join" src=" /icons/person-add-sharp.svg"
+                                     alt="Join"/> &nbsp;
+                                <p>Join for free!</p>
                             </button>
                         </div>
                     </div>

@@ -73,6 +73,30 @@ small {
 .filter-white{
     filter: invert(98%) sepia(18%) saturate(5600%) hue-rotate(184deg) brightness(128%) contrast(87%);
 }
+button {
+    border: 1px solid var(--textBlack);
+    cursor: pointer;
+}
+
+.cta-button {
+    background-color: var(--cta);
+    color: var(--textWhite);
+    height: 3rem;
+    width: 7rem;
+}
+
+.cta-button:hover {
+    background-color: var(--contrast);
+}
+
+.secondary-button {
+    background-color: var(--gray);
+    color: var(--textBlack);
+}
+
+.secondary-button:hover {
+    background-color: var(--highlight);
+}
 
 @media (max-width: 1250px) {
     html{

@@ -27,7 +27,7 @@ export default function Layout() {
                 </li>
                 <li>
                     <div className="dropdown">
-                        <button className="drop-btn"> Courses
+                        <button className="drop-btn"> Courses &nbsp;
                             <img id="triangle-icon" width="12" height="12" src="/icons/triangle-sharp.svg" alt={""}/>
                         </button>
                         <div className="dropdown-content">
@@ -60,7 +60,6 @@ export default function Layout() {
                                 alt="Sign up" href="#">
                                 <h5>Sign up</h5>
                         </button>    
-                    </div>
                     </div>
                 </li>
             </nav>
