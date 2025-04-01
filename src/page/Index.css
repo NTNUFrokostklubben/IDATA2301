@@ -68,6 +68,12 @@
     flex-wrap: nowrap;
     justify-content: space-evenly;
 }
+
+#index-course-cards-section button {
+    border: none;
+    background-color: transparent;
+}
+
 #index-course-cards-section .index-arrow{
     align-content: center;
     border: none;

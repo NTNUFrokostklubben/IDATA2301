@@ -126,13 +126,12 @@ nav li {
 #login-btn h5{
     font-weight: normal;
 }
-#signup-btn{
-    background-color: var(--cta);
-}
+
 #signup-btn h5{
     color: var(--textWhite);
     font-weight: normal;
 }
+
 #login-signup-btn{
     flex-wrap: nowrap;
 }

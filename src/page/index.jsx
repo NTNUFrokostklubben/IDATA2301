@@ -196,8 +196,8 @@ export default function Index() {
 
             <section id="index-hero2">
                 <div id="index-hero2-box">
-                    {/* The SVG Background and Pattern is by SVGBackgrounds.com*/}
-                    {/* Url: "https://www.svgbackgrounds.com/set/free-svg-backgrounds-and-patterns/"*/}
+                      {/* The SVG Background and Pattern is by SVGBackgrounds.com*/}
+                      {/* Url: "https://www.svgbackgrounds.com/set/free-svg-backgrounds-and-patterns/"*/}
 
 
                     {/*Slideshow container */}
@@ -206,9 +206,9 @@ export default function Index() {
                             <div
                                 key={index}
                                 className="index-mySlides index-fade"
-                                style={{display: index === slideIndex ? "block" : "none"}}
+                                style={{ display: index === slideIndex ? "block" : "none" }}
                             >
-                                <img className={"index-slideshow-img"} src={slide} alt={`Slide ${index + 1}`}/>
+                                <img className={"index-slideshow-img"} src={slide} alt={`Slide ${index + 1}`} />
                             </div>
                         ))}
                     </div>

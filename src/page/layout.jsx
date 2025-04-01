@@ -53,7 +53,7 @@ export default function Layout() {
                 </li>
                 <li>
                     <div id="login-signup-btn">
-                        <button onClick={() => setShowLoginModal(true)} id="login-btn" alt="Log in" href="#">
+                        <button onClick={() => setShowLoginModal(true)} id="login-btn" className={"secondary-button"} alt="Log in" href="#">
                             <h5>Log in</h5>
                         </button>
                         <button onClick={() => setShowSignupModal(true)} className="cta-button" id="signup-btn"
