@@ -1,6 +1,34 @@
 
+#courseIndex {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 600rem;
+}
+
+#courseIndex h2 {
+    margin: 0rem 1rem;
+}
+
+#courseIndex ul {
+    padding: 0 1rem;
+}
+
+#courseIndex li {
+    background-color: var(--gray);
+}
+
+#courseIndex .collapsable.collapsed {
+    background-color: var(--gray);
+    max-height: 500rem;
+
+}
+#courseIndex .filter-header {
+    height: 3rem;
+}
+
 #courseIndex #addCourse {
-    margin: 0.5rem 2rem;
+    margin: 1rem 1rem;
 }
 
 #courseIndex #addCourse a {
