@@ -1,8 +1,24 @@
 import {Outlet} from "react-router-dom";
 import "./layout.css"
 import React from "react";
+import {useRef, useState} from "react";
+import {createPortal} from "react-dom";
+import Login from "../component/modals/auth/login";
+import Register from "../component/modals/auth/register";
+// import {Modal} from "react-native";
 
 export default function Layout() {
+
+    const [showLoginModal, setShowLoginModal] = useState()
+    const [showSignupModal, setShowSignupModal] = useState()
+
+
+    // const modal = () => {
+    //     <Modal>
+    //
+    //     </Modal>
+    // }
+
     return (
         <div>
             <nav id="menu-navbar">
@@ -37,11 +53,36 @@ export default function Layout() {
                 </li>
                 <li>
                     <div id="login-signup-btn">
-                        <button id="login-btn" alt="Log in" href="#"><h5>Log in</h5></button>
-                        <button className="cta-button" id="signup-btn" alt="Sign up" href="#"><h5>Sign up</h5></button>
+                        <button onClick={() => setShowLoginModal(true)} id="login-btn" alt="Log in" href="#">
+                            <h5>Log in</h5>
+                        </button>
+                        <button onClick={() => setShowSignupModal(true)} className="cta-button" id="signup-btn"
+                                alt="Sign up" href="#">
+                                <h5>Sign up</h5>
+                        </button>    
+                    </div>
                     </div>
                 </li>
             </nav>
+            {
+                showLoginModal && createPortal(
+                    <Login changeMode={() => {
+                        setShowSignupModal(true)
+                        setShowLoginModal(false)
+                    }} onClose={() => setShowLoginModal(false)}/>,
+                    document.getElementById("auth-modal")
+                )
+            }
+            {
+                showSignupModal && createPortal(
+                    <Register changeMode={() => {
+                        setShowLoginModal(true)
+                        setShowSignupModal(false)
+                    }} onClose={() => setShowSignupModal(false)}/>,
+                    document.getElementById("auth-modal")
+                )
+            }
+            <div id={"auth-modal"}/>
 
             <Outlet/>
 

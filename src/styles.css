@@ -1,4 +1,3 @@
-
 * {
     margin: 0;
     font-size: 16px;
@@ -62,12 +61,15 @@ h6 {
 p {
     font-size: 1rem;
 }
+
 small {
     font-size: 0.833rem;
 }
+
 .title-and-subtitle{
     padding: 2rem;
 }
+
 .filter-white{
     filter: invert(98%) sepia(18%) saturate(5600%) hue-rotate(184deg) brightness(128%) contrast(87%);
 }
@@ -80,6 +82,7 @@ small {
         font-size: 0.925rem;
     }
 }
+
 @media (max-width: 1024px) {
     html{
         font-size: 14px;
@@ -88,6 +91,7 @@ small {
         font-size: 0.875rem;
     }
 }
+
 @media (max-width: 900px){
     html{
         font-size: 12px;
@@ -95,7 +99,6 @@ small {
     footer{
         font-size: 0.75rem;
     }
-
 }
 
 @media (max-width: 720px){

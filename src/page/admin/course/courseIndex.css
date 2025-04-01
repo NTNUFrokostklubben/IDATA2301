@@ -1,10 +1,10 @@
 
-#addCourse {
+#courseIndex #addCourse {
     background-color: var(--cta);
     margin: 0.5rem 2rem;
 }
 
-#addCourse a {
+#courseIndex #addCourse a {
     display: block;
     text-decoration: none;
     color: var(--textWhite);

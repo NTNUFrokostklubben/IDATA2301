@@ -1,0 +1,25 @@
+
+#navbar-logged-in{
+display: flex;
+    width: 1000px;
+    justify-content: space-around;
+}
+
+#search{
+    width: 500px;
+}
+
+#user-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+#user-items{
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+}
+
+#user-bell{
+    margin: 5px;
+}
