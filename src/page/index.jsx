@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "./Index.css";
+import CourseCard from "../component/card/CourseCard";
 import Search from "./search/search";
 import {Route} from "react-router-dom";
 
 export default function Index() {
-
     const [courseShown, setCourseShown] = useState(calcSceneStart());
-    const [slideIndex, setSlideIndex] = useState(0);
     const [courseIndex, setCourseIndex] = useState(0);
 
     useEffect(() => {
@@ -34,14 +33,6 @@ export default function Index() {
         }
     }
 
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setSlideIndex((prevIndex) => (prevIndex + 1) % slides.length);
-        }, 6000);
-        return () => clearInterval(interval);
-    }, []);
-
     const courses = [
         { id: "index-course1", img: "https://picsum.photos/200/200?random=1", desc: "Course 1", price: "1000 NOK" },
         { id: "index-course2", img: "https://picsum.photos/200/200?random=2", desc: "Course 2", price: "2000 NOK" },
@@ -51,6 +42,8 @@ export default function Index() {
         { id: "index-course6", img: "https://picsum.photos/200/200?random=6", desc: "Course 6", price: "6000 NOK" },
         { id: "index-course7", img: "https://picsum.photos/200/200?random=7", desc: "Course 7", price: "7000 NOK" }
     ];
+
+    const [slideIndex, setSlideIndex] = useState(0);
 
     const slides = [
         "https://picsum.photos/480/320?random=1",
@@ -62,6 +55,13 @@ export default function Index() {
         "https://picsum.photos/480/320?random=7",
         "https://picsum.photos/480/320?random=8",
     ];
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setSlideIndex((prevIndex) => (prevIndex + 1) % slides.length);
+        }, 6000);
+        return () => clearInterval(interval);
+    }, []);
 
     return (
         <div id={"root"}>
@@ -104,34 +104,21 @@ export default function Index() {
 
                     <section id="index-collection-cards">
                         {courses.slice(courseIndex, courseIndex + courseShown - 1).map((course, index) => (
-                            <section className="index-card" id={course.id} key={index}>
-                                <div className="index-course-card">
-                                    <img className="index-course-img" src={course.img} alt=""/>
-                                    <h5 className="index-card-desc">{course.desc}</h5>
-                                    <p>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                                        magna aliqua.</p>
-                                    <p>{course.price}</p>
-                                </div>
-                            </section>
+                            <CourseCard key={index} course={course} />
                         ))}
-                        {courseIndex + courseShown - 1 > courses.length && courses.slice(0, (courseIndex + courseShown - 1) % courses.length).map((course, index) => (
-                            <section className="index-card" id={course.id} key={index}>
-                                <div className="index-course-card">
-                                    <img className="index-course-img" src={course.img} alt=""/>
-                                    <h5 className="index-card-desc">{course.desc}</h5>
-                                    <p>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                    <p>{course.price}</p>
-                                </div>
-                            </section>
+                        {courseIndex + courseShown - 1 > courses.length
+                            && courses.slice(0, (courseIndex + courseShown - 1) % courses.length)
+                                .map((course, index) => (
+                            <CourseCard key={index} course={course}/>
                         ))}
                     </section>
 
                     <section className="index-arrow">
                         <button id="index-arrow-right-btn"
                                 onClick={() => setCourseIndex((prevIndex) =>
-                                                    (prevIndex + 1 + courses.length) % courses.length)}>
+                                    (prevIndex + 1 + courses.length) % courses.length)}>
                             <img className={"index-arrow-icon"} src="/icons/arrow-forward-circle-sharp.svg"
-                                 alt="Arrow Right" style={{ width: "3rem", height: "3rem"}}/>
+                                 alt="Arrow Right" style={{width: "3rem", height: "3rem"}}/>
                         </button>
                     </section>
 
