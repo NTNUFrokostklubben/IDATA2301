@@ -46,7 +46,7 @@ export default function AdminNav() {
                 </Collapsable>
             </div>
 
-            <Outlet/>
+            <div className={"testclass"}><Outlet/></div>
         </div>
     )
 }

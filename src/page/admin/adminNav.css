@@ -5,6 +5,8 @@
 }
 
 .admin-sidebar-container {
+
+    padding-top: 5rem;
     display: flex;
     flex-flow: row;
     margin: 0;
@@ -20,6 +22,7 @@
 }
 
 .admin-sidebar-container .filter-header {
+
     display: flex;
     justify-content: space-between;
     padding-right: 1rem;
@@ -49,8 +52,6 @@
 /* Toggle Button (Hidden on Desktop) */
 .sidebar-toggle {
     display: none;
-    background: none;
-    border: none;
     font-size: 1.5rem;
     cursor: pointer;
     padding: 1rem;
@@ -69,9 +70,7 @@
 @media (max-width: 900px) {
     .admin-sidebar {
         display: none;
-        position: relative;
-        top: 0;
-        left: 0;
+
         /*height: 100vh;*/
         z-index: 1;
         background: white;
@@ -80,10 +79,18 @@
 
     .sidebar-toggle {
         display: block;
+        position: fixed;
+        border-color: var(--shadow);
+        background: var(--textWhite);
+        z-index: 2;
     }
 
     .admin-sidebar.open {
         display: flex;
+        position: fixed;
+        top: 0;
+        left: 0;
+        padding-top: 9rem;
         min-height: 100%;
         min-width: 100%;
     }
@@ -92,6 +99,12 @@
     .admin-sidebar-container {
         display: flex;
         flex-flow: column;
+
+
+    }
+
+    .testclass {
+        padding-top: 5rem;
     }
 
 }
