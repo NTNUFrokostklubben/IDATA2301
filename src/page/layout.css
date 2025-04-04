@@ -30,15 +30,20 @@ nav li {
     flex-flow: row;
 }
 .drop-btn {
-    display: flow;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     color: var(--textBlack);
     padding: 1rem;
     font-size: large;
     border: none;
     background-color: var(--primary);
     margin-right: 4rem;
+    width: auto;
 }
-
+.drop-btn h5 {
+    font-weight: normal;
+}
 .dropdown {
     position: relative;
     display: inline-block;
@@ -99,6 +104,7 @@ nav li {
 ::placeholder {
     color: var(--textBlack);
     opacity: 0.7;
+    font-size: 1.44rem;
 }
 
 .search-container #search_btn {
@@ -112,11 +118,13 @@ nav li {
     display: flow;
     align-items: center;
     padding: 0.5rem;
+    width: 2rem;
 }
-#login-signup{
-    display: flow;
+#login-signup-btn{
+    display: flex;
     align-items: center;
     justify-content: center;
+    flex-wrap: nowrap;
 }
 
 #login-btn{

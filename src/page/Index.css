@@ -48,6 +48,7 @@
     font-size: large;
     text-align: center;
     text-decoration: none;
+    margin-top: 2rem;
     padding: 0.4rem;
     max-width: 10rem;
 }
@@ -246,7 +247,7 @@
 #index-join-for-free{
     display: flex;
     flex-direction: row;
-    justify-items: center;
+    justify-content: center;
     align-items: center;
     border: 1px solid var(--textBlack);
     cursor: pointer;
