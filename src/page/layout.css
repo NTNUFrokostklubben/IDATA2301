@@ -52,6 +52,7 @@ nav li {
 
 /* (Hidden by Default) */
 .dropdown-content {
+    width: 9rem;
     display: none;
     position: absolute;
     background-color: var(--primary);
@@ -120,8 +121,20 @@ nav li {
     padding: 0.5rem;
     width: 2rem;
 }
-#login-signup-btn{
+
+#login-signup-1 {
     display: flex;
+}
+
+#login-signup-2 {
+    display: none;
+}
+#menu-icon{
+    width: 2rem;
+    height: 2rem;
+}
+
+#login-signup-btn{
     align-items: center;
     justify-content: center;
     flex-wrap: nowrap;
@@ -140,9 +153,6 @@ nav li {
     font-weight: normal;
 }
 
-#login-signup-btn{
-    flex-wrap: nowrap;
-}
 #login-btn, #signup-btn{
     border: 1px solid var(--textBlack);
     cursor: pointer;
@@ -285,7 +295,7 @@ nav li {
     .search-container #form_search {
         max-width: 15rem;
     }
-    .dropdown {
+    #courses-dropdown {
         display: none;
     }
     html{
@@ -293,8 +303,17 @@ nav li {
     }
 }
 
-@media (max-width: 475px) {
+@media (max-width: 480px) {
     html {
         font-size: 8px; /* Adjust the base font size */
+    }
+    #login-signup-1 {
+         display: none;
+    }
+    #login-signup-2 {
+        display: flex;
+    }
+    .dropdown-content {
+        width: 6rem;
     }
 }

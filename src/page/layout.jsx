@@ -12,28 +12,6 @@ export default function Layout() {
     const [showLoginModal, setShowLoginModal] = useState()
     const [showSignupModal, setShowSignupModal] = useState()
 
-    useEffect(() => {
-        const handleResize = () => {
-            setCourseShown(calcSceneStart());
-        };
-        window.addEventListener("resize", handleResize);
-        return () => window.removeEventListener("resize", handleResize);
-    }, []);
-
-
-    function calcSceneStart() {
-        if (window.matchMedia("(max-width: 480px)").matches) {
-          
-        } else {
-            return 7;
-        }
-    }
-
-    function loginSignup(windowWidth){
-
-    }
-
-
     return (
         <div>
             <nav id="menu-navbar">
@@ -41,7 +19,7 @@ export default function Layout() {
                     <img id="logo-icon" src="logo.svg" alt="Learniverse Logo"/>
                 </li>
                 <li>
-                    <div className="dropdown">
+                    <div className="dropdown" id={"courses-dropdown"}>
                         <button className="drop-btn"> <h5>Courses</h5> &nbsp;
                             <img id="triangle-icon" width="12" height="12" src="/icons/triangle-sharp.svg" alt={""}/>
                         </button>
@@ -67,7 +45,7 @@ export default function Layout() {
                 </li>
                 <li>
                     <div id="login-signup-btn">
-                        <div id={"login-signup-1"}>
+                        <div id="login-signup-1">
                             <button onClick={() => setShowLoginModal(true)} id="login-btn"
                                     className={"secondary-button"} alt="Log in" href="#">
                                 <h5>Log in</h5>
@@ -77,10 +55,10 @@ export default function Layout() {
                                 <h5>Sign up</h5>
                             </button>
                         </div>
-                        <div id={"login-signup-2"}>
-                            <div className="dropdown">
+                        <div id="login-signup-2">
+                            <div className="dropdown" id="ls-dropdown">
                                 <button className="login-signup-drop-down">
-                                    <img id="searchIcon" height={32} width={32} src="/icons/menu-sharp.svg" alt="menu"/>
+                                    <img id="menu-icon" src="/icons/menu-sharp.svg" alt="menu"/>
                                 </button>
                                 <div className="dropdown-content">
                                 <a onClick={() => setShowLoginModal(true)}>Log in</a>
