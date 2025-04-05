@@ -1,19 +1,45 @@
 import React, { useState, useEffect } from "react";
 import "./Index.css";
 import CourseCard from "../component/card/CourseCard";
-import Search from "./search/search";
-import {Route} from "react-router-dom";
+
+class courseEntity {
+    constructor(id, category, closestCourse, credits, description, diffLevel, hoursWeek, imgLink, relatedCert, title) {
+        this.id = id;
+        this.category = category;
+        this.closestCourse = closestCourse;
+        this.credits = credits;
+        this.description = description;
+        this.diffLevel = diffLevel;
+        this.hoursWeek = hoursWeek;
+        this.imgLink = imgLink;
+        this.relatedCert = relatedCert;
+        this.title = title;
+    }
+}
 
 export default function Index() {
+
     const [courseShown, setCourseShown] = useState(calcSceneStart());
     const [courseIndex, setCourseIndex] = useState(0);
+    const [courses, setCourses] = useState([]);
 
+    // Use to resize the course shown based on window size
     useEffect(() => {
         const handleResize = () => {
             setCourseShown(calcSceneStart());
         };
         window.addEventListener("resize", handleResize);
         return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
+    // Fetch courses from the API
+    useEffect(() => {
+        fetch("http://localhost:8080/api/courses")
+            .then((response) => response.json())
+            .then((data) => {
+                const courses = data.map((course) => new courseEntity(course.id, course.category, course.closestCourse, course.credits, course.description, course.diffLevel, course.hoursWeek, course.imgLink, course.relatedCert, course.title));
+                setCourses(courses);
+            })
     }, []);
 
 
@@ -32,16 +58,6 @@ export default function Index() {
             return 7;
         }
     }
-
-    const courses = [
-        { id: "index-course1", img: "https://picsum.photos/200/200?random=1", desc: "Course 1", price: "1000 NOK" },
-        { id: "index-course2", img: "https://picsum.photos/200/200?random=2", desc: "Course 2", price: "2000 NOK" },
-        { id: "index-course3", img: "https://picsum.photos/200/200?random=3", desc: "Course 3", price: "3000 NOK" },
-        { id: "index-course4", img: "https://picsum.photos/200/200?random=4", desc: "Course 4", price: "4000 NOK" },
-        { id: "index-course5", img: "https://picsum.photos/200/200?random=5", desc: "Course 5", price: "5000 NOK" },
-        { id: "index-course6", img: "https://picsum.photos/200/200?random=6", desc: "Course 6", price: "6000 NOK" },
-        { id: "index-course7", img: "https://picsum.photos/200/200?random=7", desc: "Course 7", price: "7000 NOK" }
-    ];
 
     const [slideIndex, setSlideIndex] = useState(0);
 
@@ -103,14 +119,14 @@ export default function Index() {
                     </section>
 
                     <section id="index-collection-cards">
-                        {courses.slice(courseIndex, courseIndex + courseShown - 1).map((course, index) => (
-                            <CourseCard key={index} course={course} />
+                        {courses.slice(courseIndex, courseIndex + courseShown - 1).map((course) => (
+                            <CourseCard key={course.id} {...course} />
                         ))}
                         {courseIndex + courseShown - 1 > courses.length
                             && courses.slice(0, (courseIndex + courseShown - 1) % courses.length)
-                                .map((course, index) => (
-                            <CourseCard key={index} course={course}/>
-                        ))}
+                                .map((course) => (
+                                    <CourseCard key={course.id} {...course}/>
+                                ))}
                     </section>
 
                     <section className="index-arrow">
@@ -118,7 +134,7 @@ export default function Index() {
                                 onClick={() => setCourseIndex((prevIndex) =>
                                     (prevIndex + 1 + courses.length) % courses.length)}>
                             <img className={"index-arrow-icon"} src="/icons/arrow-forward-circle-sharp.svg"
-                                 alt="Arrow Right" style={{width: "3rem", height: "3rem"}}/>
+                                 alt="Arrow Right"/>
                         </button>
                     </section>
 

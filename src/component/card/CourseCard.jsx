@@ -1,14 +1,15 @@
 import "./courseCard.css"
 
-export default function CourseCard({index, course}) {
+export default function CourseCard(course) {
+    // TODO remove the temp value for the image link and price
+    var courceImg = "https://picsum.photos/200/200?random="+course.id;
     return (
         <section className="index-card" id={course.id} >
-            <div className="index-course-card" key={index}>
-                <img className="index-course-img" src={course.img} alt=""/>
-                <h5 className="index-card-desc">{course.desc}</h5>
-                <p>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                    magna aliqua.</p>
-                <p>{course.price}</p>
+            <div className="index-course-card">
+                <img className="index-course-img" src={courceImg} alt="Course Card"/>
+                <h5>{course.title}</h5>
+                <p className="index-card-desc"> {course.description}</p>
+                <p>100 NOK -temp</p>
             </div>
         </section>
 

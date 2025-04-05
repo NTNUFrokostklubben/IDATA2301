@@ -47,7 +47,7 @@ index-card img {
 @supports not (-webkit-line-clamp: 3) {
     .index-card .index-card-desc{
         position: relative;
-        max-height: 4.5em; /* Adjust based on line height and number of lines */
+        max-height: 2rem; /* Adjust based on line height and number of lines */
         line-height: 1.5em; /* Adjust based on your design */
         overflow: hidden;
     }
