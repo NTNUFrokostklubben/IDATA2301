@@ -14,13 +14,16 @@ export default function Layout() {
 
     return (
         <div>
+            {/*Navbar*/}
             <nav id="menu-navbar">
                 <li id="logo-image">
-                    <img id="logo-icon" src="logo.svg" alt="Learniverse Logo"/>
+                    <a href={"/about"}>
+                        <img id="logo-icon" src="logo.svg" alt="Learniverse Logo"/>
+                    </a>
                 </li>
                 <li>
                     <div className="dropdown" id={"courses-dropdown"}>
-                        <button className="drop-btn"> <h5>Courses</h5> &nbsp;
+                        <button className="drop-btn"><h5>Courses</h5> &nbsp;
                             <img id="triangle-icon" width="12" height="12" src="/icons/triangle-sharp.svg" alt={""}/>
                         </button>
                         <div className="dropdown-content">
@@ -61,7 +64,7 @@ export default function Layout() {
                                     <img id="menu-icon" src="/icons/menu-sharp.svg" alt="menu"/>
                                 </button>
                                 <div className="dropdown-content">
-                                <a onClick={() => setShowLoginModal(true)}>Log in</a>
+                                    <a onClick={() => setShowLoginModal(true)}>Log in</a>
                                     <a onClick={() => setShowSignupModal(true)}>Sign Up</a>
                                 </div>
                             </div>
@@ -70,6 +73,34 @@ export default function Layout() {
                     </div>
                 </li>
             </nav>
+
+            <Outlet/>
+
+            {/* Footer */}
+            <footer>
+                <img id="logo-icon" src="logo.svg" alt="Learniverse Logo"/>
+
+                <div id="footer-textbox">
+
+                <div className="textFooter" id="contact-us">
+                        <h5>Contact us:</h5>
+                        <p>Address: 1234 Main Street, Lincoln, NE 685089</p>
+                        <p>Phone number: +47 123 45 678</p>
+                        <p>Email: learniverse@connect.com</p>
+                    </div>
+
+                    <div className="textFooter" id="legal">
+                        <h5>Legal</h5>
+                        {/*TODO add the link; https://www.ntnu.edu/studies/courses/IDATA2301#tab=omEmnet */}
+                        <small>This website is a result of a university group project, performed in the course
+                            IDATA2301 Web
+                            technologies, at NTNU.</small><br/>
+                        <small>All the information provided here is a result of imagination. </small><br/>
+                        <small> Any resemblance with real companies or products is a coincidence.</small><br/>
+                    </div>
+
+                </div>
+            </footer>
             {
                 showLoginModal && createPortal(
                     <Login changeMode={() => {
@@ -89,8 +120,6 @@ export default function Layout() {
                 )
             }
             <div id={"auth-modal"}/>
-
-            <Outlet/>
 
         </div>
     )

@@ -9,7 +9,7 @@ export default function CourseCard(course) {
                 <img className="index-course-img" src={courseImg} alt="Course Card"/>
                 <h6>{course.title}</h6>
                 <p className="index-card-desc"> {course.description}</p>
-                <p>100 NOK -temp</p>
+                <p className="index-price">100 NOK -temp</p>
             </div>
         </section>
 

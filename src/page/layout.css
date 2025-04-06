@@ -165,10 +165,24 @@ nav li {
 #login-btn #signup-btn:hover{
     box-shadow: 0px 8px 16px 0px var(--shadow)
 }
+footer{
+    background-color: var(--contrast);
+    font-size: 1rem;
+    height: auto;
+    padding: 1.5rem;
+}
+#footer-textbox{
+    display: flex;
+}
+#footer-textbox #contact-us{
+    min-width: 40%;
+}
+.textFooter{
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
 @media (min-width: 2800px) {
-    #course6{
-        display: none;
-    }
     .search-container #form_search {
         max-width: 85rem;
     }
@@ -184,9 +198,6 @@ nav li {
 
 }
 @media (max-width: 2800px) {
-    #course6{
-        display: none;
-    }
     .search-container #form_search {
         max-width: 65rem;
     }
@@ -264,6 +275,9 @@ nav li {
     html{
         font-size: 15px;
     }
+    footer{
+        font-size: 0.925rem;
+    }
 }
 @media (max-width: 1024px) {
     .search-container #form_search {
@@ -284,10 +298,16 @@ nav li {
     html{
         font-size: 14px;
     }
+    footer{
+        font-size: 0.875rem;
+    }
 }
 @media (max-width: 900px){
     html{
         font-size: 12px;
+    }
+    footer{
+        font-size: 0.75rem;
     }
 }
 /* Tablet - 768px width*/
@@ -300,6 +320,9 @@ nav li {
     }
     html{
         font-size: 11px;
+    }
+    footer{
+        font-size: 0.625rem;
     }
 }
 

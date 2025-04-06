@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./Index.css";
 import CourseCard from "../component/card/CourseCard";
+import Register from "../component/modals/auth/register";
+import {createPortal} from "react-dom";
+import Login from "../component/modals/auth/login";
 
 class courseEntity {
     constructor(id, category, closestCourse, credits, description, diffLevel, hoursWeek, imgLink, relatedCert, title) {
@@ -18,6 +21,8 @@ class courseEntity {
 }
 
 export default function Index() {
+
+    const [showSignupModal, setShowSignupModal] = useState()
 
     const [courseShown, setCourseShown] = useState(calcSceneStart());
     const [courseIndex, setCourseIndex] = useState(0);
@@ -91,7 +96,9 @@ export default function Index() {
                                 and beyond!
                             </h5>
                         </div>
-                        <button className="cta-button" id="index-free-btn"><p>Try for free!</p></button>
+                        <button onClick={() => setShowSignupModal(true)} className="cta-button" id="index-free-btn">
+                            <p>Try for free!</p>
+                        </button>
                     </div>
 
                     <div id="index-hero-main-image">
@@ -222,7 +229,7 @@ export default function Index() {
                             <h6> xx% of learners learn something, which do this and this! Become one of the today</h6>
                         </div>
                         <div id="index-hero2-button">
-                            <button className="cta-button" id="index-join-for-free">
+                            <button onClick={() => setShowSignupModal(true)} className="cta-button" id="index-join-for-free">
                                 <img className="filter-white" id="index-join" src=" /icons/person-add-sharp.svg"
                                      alt="Join"/> &nbsp;
                                 <p>Join for free!</p>
@@ -236,7 +243,19 @@ export default function Index() {
             <ul>
                 <li><a href={"/search"}>search/filters</a></li>
                 <li><a href={"/admin"}>Admin</a></li>
+                <li><a href={"/about"}></a></li>
             </ul>
+            {
+                showSignupModal && createPortal(
+                    <Register changeMode={() => {
+                        setShowSignupModal(false)
+                    }} onClose={() => setShowSignupModal(false)}/>,
+                    document.getElementById("auth-modal")
+                )
+            }
+            <div id={"auth-modal"}/>
+
         </div>
+
     )
 } 

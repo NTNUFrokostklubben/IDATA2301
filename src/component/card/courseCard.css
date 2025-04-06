@@ -24,6 +24,9 @@
     margin-top: 1rem;
     text-align: left;
 }
+.index-card .index-price{
+    font-weight: bold;
+}
 index-card img {
     justify-content: center;
     align-content: flex-start;
