@@ -19,11 +19,10 @@
 }
 .index-card .index-card-desc{
     text-align: left;
-    padding: 0.5rem;
 }
 .index-card p {
+    margin-top: 1rem;
     text-align: left;
-    padding: 0.5rem;
 }
 index-card img {
     justify-content: center;
@@ -47,7 +46,7 @@ index-card img {
 @supports not (-webkit-line-clamp: 3) {
     .index-card .index-card-desc{
         position: relative;
-        max-height: 2rem; /* Adjust based on line height and number of lines */
+        max-height: 4.5rem; /* Adjust based on line height and number of lines */
         line-height: 1.5em; /* Adjust based on your design */
         overflow: hidden;
     }
@@ -70,7 +69,15 @@ index-card img {
     .index-course-img {
         width: 12rem;
         height: 8rem;
+        object-fit: cover
+    }
+
+    .index-card .index-card-desc {
+        -webkit-line-clamp: 4; /* Reduce to 2 lines for smaller screens */
+        max-height: 6em; /* Adjust height for smaller screens */
+        grid-column-start: 1;
+        grid-column-end: -1;
+        grid-row: 2;
     }
 
 }
-
