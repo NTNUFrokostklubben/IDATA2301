@@ -48,6 +48,7 @@
     font-size: large;
     text-align: center;
     text-decoration: none;
+    margin-top: 2rem;
     padding: 0.4rem;
     max-width: 10rem;
 }
@@ -78,76 +79,20 @@
     align-content: center;
     border: none;
     cursor: pointer;
-
+    background: none;
+}
+#index-arrow-left-btn, #index-arrow-right-btn{
+    border: none;
+    cursor: pointer;
+    background: none;
+}
+#index-arrow-left-btn, #index-arrow-right-btn:hover{
+    box-shadow: var(--shadow);
 }
 #index-course-cards-section .index-arrow-icon{
     border: none;
     width: 3rem;
     height: 3rem;
-}
-
-#index-collection-cards{
-    display: flex;
-    flex-wrap: nowrap;
-    grid-gap: 10px;
-}
-.index-card{
-    margin: 1rem;
-    border: var(--textBlack) 1px solid;
-    border-radius: 3px;
-    width: 20rem;
-}
-.index-course-img{
-    width: 20rem;
-    height: 15rem;
-}
-
-.index-card:hover {
-    box-shadow: 0px 8px 16px 0px var(--shadow);
-}
-.index-card .index-card-desc{
-    text-align: left;
-    padding: 0.5rem;
-}
-.index-card p {
-    text-align: left;
-    padding: 0.5rem;
-}
-index-card img {
-    justify-content: center;
-    align-content: flex-start;
-    padding: 0.5rem;
-}
-
-#index-course-content-heading{
-    padding: 0.5rem;
-}
-@supports (-webkit-line-clamp: 3) {
-    .index-card .index-card-desc {
-        display: -webkit-box; /* Required for line clamping */
-        -webkit-box-orient: vertical; /* Required for line clamping */
-        -webkit-line-clamp: 3; /* Limit to 3 lines */
-        overflow: hidden; /* Hide overflow */
-        text-overflow: ellipsis; /* Add ellipsis */
-    }
-}
-
-@supports not (-webkit-line-clamp: 3) {
-    .index-card .index-card-desc{
-        position: relative;
-        max-height: 4.5em; /* Adjust based on line height and number of lines */
-        line-height: 1.5em; /* Adjust based on your design */
-        overflow: hidden;
-    }
-
-    .index-card .index-card-desc::after {
-        content: '...';
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        background: white; /* Match the background color */
-        padding-left: 5px; /* Add some spacing */
-    }
 }
 /* Collabrotators */
 #index-collaborators-section{
@@ -268,7 +213,7 @@ index-card img {
     to {opacity: 1}
 }
 
-#index-hero2_textbox {
+#index-hero2-textbox {
     display: flex;
     flex-direction: column;
     padding: 2rem;
@@ -277,28 +222,44 @@ index-card img {
     background: rgba(255, 255, 255, 0.15); /* Semi-transparent background */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Soft shadow to blend edges */
     border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border for definition */
+    height: auto;
 }
-#index-hero2_textbox h3{
+#index-hero2-textbox h3{
+    padding-bottom: 1.5rem;
+}
+#index-hero2-textbox h6{
     font-weight: normal;
+}
+#index-hero2-title-subtitle{
     padding: 1rem;
 }
-#index-hero2_textbox p{
+#index-hero2-button p{
     font-weight: normal;
-    padding: 1rem;
+    color: var(--textWhite);
 }
-#index-hero2_button{
+#index-hero2-button{
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    padding: 1rem;
 }
-#index-hero2_textbox button{
+#index-join-for-free{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     border: 1px solid var(--textBlack);
     cursor: pointer;
-    font-size: large;
     width: 10rem;
     height: 3rem;
-    text-align: center;
     text-decoration: none;
 }
+#index-join{
+    width: 1rem;
+    height: 1rem;
+}
+
 
 @media (max-width: 3000px) {
 
@@ -334,20 +295,12 @@ index-card img {
         height: auto;
     }
 }
-@media (max-width: 600px) {
+@media (max-width: 550px) {
     #index-hero-image{
         width: 15rem;
     }
     .index-hero-main-box{
         width: 15rem;
-    }
-    .index-card {
-        width: 12rem;
-    }
-
-    .index-course-img {
-        width: 12rem;
-        height: 8rem;
     }
 
     #index-hero2 {
