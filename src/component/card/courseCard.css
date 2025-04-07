@@ -1,0 +1,86 @@
+#index-collection-cards{
+    display: flex;
+    flex-wrap: nowrap;
+    grid-gap: 10px;
+}
+.index-card{
+    margin: 1rem;
+    border: var(--textBlack) 1px solid;
+    border-radius: 3px;
+    width: 20rem;
+}
+.index-course-img{
+    width: 20rem;
+    height: 15rem;
+}
+
+.index-card:hover {
+    box-shadow: 0px 8px 16px 0px var(--shadow);
+}
+.index-card .index-card-desc{
+    text-align: left;
+}
+.index-card p {
+    margin-top: 1rem;
+    text-align: left;
+}
+.index-card .index-price{
+    font-weight: bold;
+}
+index-card img {
+    justify-content: center;
+    align-content: flex-start;
+    padding: 0.5rem;
+}
+
+#index-course-content-heading{
+    padding: 0.5rem;
+}
+@supports (-webkit-line-clamp: 3) {
+    .index-card .index-card-desc {
+        display: -webkit-box; /* Required for line clamping */
+        -webkit-box-orient: vertical; /* Required for line clamping */
+        -webkit-line-clamp: 3; /* Limit to 3 lines */
+        overflow: hidden; /* Hide overflow */
+        text-overflow: ellipsis; /* Add ellipsis */
+    }
+}
+
+@supports not (-webkit-line-clamp: 3) {
+    .index-card .index-card-desc{
+        position: relative;
+        max-height: 4.5rem; /* Adjust based on line height and number of lines */
+        line-height: 1.5em; /* Adjust based on your design */
+        overflow: hidden;
+    }
+
+    .index-card .index-card-desc::after {
+        content: '...';
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        background: white; /* Match the background color */
+        padding-left: 5px; /* Add some spacing */
+    }
+}
+
+@media (max-width: 700px) {
+    .index-card {
+        width: 12rem;
+    }
+
+    .index-course-img {
+        width: 12rem;
+        height: 8rem;
+        object-fit: cover
+    }
+
+    .index-card .index-card-desc {
+        -webkit-line-clamp: 4; /* Reduce to 2 lines for smaller screens */
+        max-height: 6em; /* Adjust height for smaller screens */
+        grid-column-start: 1;
+        grid-column-end: -1;
+        grid-row: 2;
+    }
+
+}

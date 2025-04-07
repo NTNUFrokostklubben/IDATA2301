@@ -34,18 +34,21 @@ nav li {
     display: flex;
     flex-flow: row;
 }
-
-
 .drop-btn {
-    display: flow;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     color: var(--textBlack);
     padding: 1rem;
     font-size: large;
     border: none;
     background-color: var(--primary);
     margin-right: 4rem;
+    width: auto;
 }
-
+.drop-btn h5 {
+    font-weight: normal;
+}
 .dropdown {
     position: relative;
     display: inline-block;
@@ -54,6 +57,7 @@ nav li {
 
 /* (Hidden by Default) */
 .dropdown-content {
+    width: 9rem;
     display: none;
     position: absolute;
     background-color: var(--primary);
@@ -106,6 +110,7 @@ nav li {
 ::placeholder {
     color: var(--textBlack);
     opacity: 0.7;
+    font-size: 1.44rem;
 }
 
 .search-container #search_btn {
@@ -119,17 +124,31 @@ nav li {
     display: flow;
     align-items: center;
     padding: 0.5rem;
+    width: 2rem;
 }
-#login-signup{
-    display: flow;
+
+#login-signup-1 {
+    display: flex;
+}
+
+#login-signup-2 {
+    display: none;
+}
+#menu-icon{
+    width: 2rem;
+    height: 2rem;
+}
+
+#login-signup-btn{
     align-items: center;
     justify-content: center;
+    flex-wrap: nowrap;
 }
 
-#login-btn {
-    height: 3rem;
+#login-btn{
+    background-color: var(--textWhite);
+    margin-right: 1rem;
 }
-
 #login-btn h5{
     font-weight: normal;
 }
@@ -139,18 +158,36 @@ nav li {
     font-weight: normal;
 }
 
-#login-signup-btn{
-    flex-wrap: nowrap;
+#login-btn, #signup-btn{
+    border: 1px solid var(--textBlack);
+    cursor: pointer;
+    font-size: large;
+    width: 10rem;
+    height: 3rem;
+    text-align: center;
+    text-decoration: none;
 }
-
-
-
-
-
+#login-btn #signup-btn:hover{
+    box-shadow: 0px 8px 16px 0px var(--shadow)
+}
+footer{
+    background-color: var(--contrast);
+    font-size: 1rem;
+    height: auto;
+    padding: 1.5rem;
+}
+#footer-textbox{
+    display: flex;
+}
+#footer-textbox #contact-us{
+    min-width: 40%;
+}
+.textFooter{
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
 @media (min-width: 2800px) {
-    #course6{
-        display: none;
-    }
     .search-container #form_search {
         max-width: 85rem;
     }
@@ -166,9 +203,6 @@ nav li {
 
 }
 @media (max-width: 2800px) {
-    #course6{
-        display: none;
-    }
     .search-container #form_search {
         max-width: 65rem;
     }
@@ -246,6 +280,9 @@ nav li {
     html{
         font-size: 15px;
     }
+    footer{
+        font-size: 0.925rem;
+    }
 }
 @media (max-width: 1024px) {
     .search-container #form_search {
@@ -266,10 +303,16 @@ nav li {
     html{
         font-size: 14px;
     }
+    footer{
+        font-size: 0.875rem;
+    }
 }
 @media (max-width: 900px){
     html{
         font-size: 12px;
+    }
+    footer{
+        font-size: 0.75rem;
     }
 }
 /* Tablet - 768px width*/
@@ -277,16 +320,28 @@ nav li {
     .search-container #form_search {
         max-width: 15rem;
     }
-    .dropdown {
+    #courses-dropdown {
         display: none;
     }
     html{
         font-size: 11px;
     }
+    footer{
+        font-size: 0.625rem;
+    }
 }
 
-@media (max-width: 475px) {
+@media (max-width: 480px) {
     html {
         font-size: 8px; /* Adjust the base font size */
+    }
+    #login-signup-1 {
+         display: none;
+    }
+    #login-signup-2 {
+        display: flex;
+    }
+    .dropdown-content {
+        width: 6rem;
     }
 }
