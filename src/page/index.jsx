@@ -243,7 +243,9 @@ export default function Index() {
             <ul>
                 <li><a href={"/search"}>search/filters</a></li>
                 <li><a href={"/admin"}>Admin</a></li>
-                <li><a href={"/about"}></a></li>
+                <li><a href={"/about"}>About us</a></li>
+                <li><a href={"/userpage"}>Userpage</a></li>
+                <li><a href={"/checkout"}>Checkout</a></li>
             </ul>
             {
                 showSignupModal && createPortal(

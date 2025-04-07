@@ -12,7 +12,7 @@ export default function AdminNav() {
                         <nav id="dashboard">
                         <ul>
                             <li>
-                                <Link>Overview</Link>
+                                <Link to={"/admin"}>Overview</Link>
                             </li>
                             <li>
                                 <Link to={"/admin/course"}>Courses</Link>

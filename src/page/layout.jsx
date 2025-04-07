@@ -1,4 +1,4 @@
-import {Outlet} from "react-router-dom";
+import {Link, Outlet} from "react-router-dom";
 import "./layout.css"
 import React, {useEffect} from "react";
 import {useRef, useState} from "react";
@@ -17,9 +17,9 @@ export default function Layout() {
             {/*Navbar*/}
             <nav id="menu-navbar">
                 <li id="logo-image">
-                    <a href={"/about"}>
+                    <Link to={"/about"}>
                         <img id="logo-icon" src="logo.svg" alt="Learniverse Logo"/>
-                    </a>
+                    </Link>
                 </li>
                 <li>
                     <div className="dropdown" id={"courses-dropdown"}>
