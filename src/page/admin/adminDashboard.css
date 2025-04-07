@@ -1,0 +1,65 @@
+.admin-dash{
+    padding: 1rem;
+}
+.admin-dash-content{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 4rem;
+}
+.admin-dash-revenue{
+    margin-top: 2rem;
+    padding: 1rem;
+    display: block;
+    background-color: var(--highlight);
+}
+.admin-dash-reviews{
+    margin-top: 2rem;
+    padding: 1rem;
+    display: block;
+    background-color: var(--highlight);
+}
+.admin-dash-reviews-list{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+.admin-dash-review{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--textWhite);
+    padding: 0.5rem;
+}
+.admin-dash-review-text{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.admin-dash-dot{
+    height: 25px;
+    width: 25px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+}
+.admin-dash-review-rating{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+}
+.admin-dash-users-result{
+    gap: 1rem;
+    margin-top: 1rem;
+}
+.admin-dash-users{
+    margin-top: 2rem;
+    padding: 1rem;
+    display: block;
+    background-color: var(--highlight);
+}
+.admin-dash-user-title{
+    font-weight: lighter;
+}
