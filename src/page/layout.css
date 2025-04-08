@@ -170,6 +170,10 @@ footer{
     font-size: 1rem;
     height: auto;
     padding: 1.5rem;
+    /*position:absolute;*/
+    /*left:0;*/
+    /*bottom:0;*/
+    /*right:0;*/
 }
 #footer-textbox{
     display: flex;

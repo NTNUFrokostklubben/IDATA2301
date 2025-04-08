@@ -3,7 +3,6 @@ import "./Index.css";
 import CourseCard from "../component/card/CourseCard";
 import Register from "../component/modals/auth/register";
 import {createPortal} from "react-dom";
-import Login from "../component/modals/auth/login";
 
 class courseEntity {
     constructor(id, category, closestCourse, credits, description, diffLevel, hoursWeek, imgLink, relatedCert, title) {
