@@ -12,7 +12,7 @@ class courseEntity {
         this.title = title;
         this.description = description;
         this.imgLink = imgLink;
-        this.price = 420;
+        this.price = null;
     }
     setPrice(price) {
         this.price = price;
@@ -73,8 +73,10 @@ useEffect(() => {
             return 5;
         } else if (window.matchMedia("(max-width: 2350px)").matches) {
             return 6;
-        } else {
+        } else if (window.matchMedia("(max-width: 3000px)").matches) {
             return 7;
+        } else {
+            return 8;
         }
     }
 
