@@ -2,21 +2,9 @@ import "./search.css"
 import Card from "../../component/card/card";
 import {useEffect, useState} from "react";
 import Collapsable from "../../component/Collapsable/collapsable";
+import {courseEntity} from "../../utils/Classes/commonClasses";
 
-class courseEntity {
-    constructor(id, category, closestCourse, credits, description, diffLevel, hoursWeek, imgLink, relatedCert, title) {
-        this.id = id;
-        this.category = category;
-        this.closestCourse = closestCourse;
-        this.credits = credits;
-        this.description = description;
-        this.diffLevel = diffLevel;
-        this.hoursWeek = hoursWeek;
-        this.imgLink = imgLink;
-        this.relatedCert = relatedCert;
-        this.title = title;
-    }
-}
+
 
 export default function Search() {
 
