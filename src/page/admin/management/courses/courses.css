@@ -1,0 +1,65 @@
+
+#courses-page {
+    margin: 1rem 2rem;
+}
+
+#courses-page .admin-table th:nth-child(1) {
+    width: 20%;
+}
+
+#courses-page .admin-table th:nth-child(2) {
+    width: 30%;
+}
+
+#courses-page .admin-table th:nth-child(3),
+#courses-page .admin-table th:nth-child(4),
+#courses-page .admin-table th:nth-child(5),
+#courses-page .admin-table th:nth-child(6)
+{
+    width: 6%;
+}
+
+#courses-page .admin-table th:nth-child(7) {
+    width: 26%;
+}
+
+
+#courses-page #addCourse {
+    color: var(--textWhite);
+    margin: 1rem 0;
+}
+
+#courses-page #addCourse a {
+    color: var(--textWhite);
+    text-decoration: none;
+}
+
+@supports (-webkit-line-clamp: 5) {
+    #courses-page .description {
+        display: -webkit-box; /* Required for line clamping */
+        -webkit-box-orient: vertical; /* Required for line clamping */
+        -webkit-line-clamp: 5; /* Limit to 3 lines */
+        line-height: 1rem;
+        max-height: 5rem; /* 5 lines of text */
+        overflow: hidden; /* Hide overflow */
+        text-overflow: ellipsis; /* Add ellipsis */
+    }
+}
+
+@supports not (-webkit-line-clamp: 5) {
+    #courses-page .description  {
+        position: relative;
+        max-height: 5rem; /* Adjust based on line height and number of lines */
+        line-height: 1em; /* Adjust based on your design */
+        overflow: hidden;
+    }
+
+    #courses-page .description::after {
+        content: '...';
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        background: white; /* Match the background color */
+        padding-left: 5px; /* Add some spacing */
+    }
+}

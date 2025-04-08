@@ -1,0 +1,19 @@
+#providers-page {
+    margin: 1rem 2rem;
+}
+
+#providers-page .provider {
+    width: 100%;
+}
+
+
+
+#providers-page #addProvider {
+    color: var(--textWhite);
+    margin: 1rem 0;
+}
+
+#providers-page #addProvider a {
+    color: var(--textWhite);
+    text-decoration: none;
+}
