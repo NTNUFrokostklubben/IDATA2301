@@ -25,41 +25,37 @@ nav li {
     list-style-type: none;
     padding-inline-start: 0;
 }
-
-
 .page {
     display: flex;
     flex-flow: row;
 }
-
-.cta-button {
-    background-color: var(--cta);
-    color: var(--textWhite);
-    height: 3rem;
-    width: 7rem;
-}
-
 .drop-btn {
-    display: flow;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     color: var(--textBlack);
     padding: 1rem;
     font-size: large;
     border: none;
     background-color: var(--primary);
     margin-right: 4rem;
+    width: auto;
 }
-
+.drop-btn h5 {
+    font-weight: normal;
+}
 .dropdown {
     position: relative;
     display: inline-block;
+    width: 100%;
 }
 
 /* (Hidden by Default) */
 .dropdown-content {
+    width: 9rem;
     display: none;
     position: absolute;
     background-color: var(--primary);
-    min-width: 10rem;
     box-shadow: 0px 8px 16px 0px var(--shadow);
     z-index: 1;
 }
@@ -98,9 +94,8 @@ nav li {
 
 .search-container #form_search {
     background-color: var(--textWhite);
-    min-width: 65rem;
-    max-width: 75rem;
-    max-height: 3rem;
+    width: 75rem;
+    height: 3rem;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -110,6 +105,7 @@ nav li {
 ::placeholder {
     color: var(--textBlack);
     opacity: 0.7;
+    font-size: 1.44rem;
 }
 
 .search-container #search_btn {
@@ -123,35 +119,40 @@ nav li {
     display: flow;
     align-items: center;
     padding: 0.5rem;
-}
-#cart_img {
-    width: 40px;
-    height: 40px;
-}
-#cart{
-    margin-right: 3.5rem;
+    width: 2rem;
 }
 
-#login-signup{
-    display: flow;
+#login-signup-1 {
+    display: flex;
+}
+
+#login-signup-2 {
+    display: none;
+}
+#menu-icon{
+    width: 2rem;
+    height: 2rem;
+}
+
+#login-signup-btn{
     align-items: center;
     justify-content: center;
+    flex-wrap: nowrap;
 }
 
 #login-btn{
     background-color: var(--textWhite);
-    color: var(--textBlack);
     margin-right: 1rem;
 }
+#login-btn h5{
+    font-weight: normal;
+}
 
-#signup-btn{
-    background-color: var(--cta);
+#signup-btn h5{
     color: var(--textWhite);
+    font-weight: normal;
 }
-#login-signup-btn{
-    display: flex;
-    flex-wrap: nowrap;
-}
+
 #login-btn, #signup-btn{
     border: 1px solid var(--textBlack);
     cursor: pointer;
@@ -164,16 +165,26 @@ nav li {
 #login-btn #signup-btn:hover{
     box-shadow: 0px 8px 16px 0px var(--shadow)
 }
-
-
-
+footer{
+    background-color: var(--contrast);
+    font-size: 1rem;
+    height: auto;
+    padding: 1.5rem;
+}
+#footer-textbox{
+    display: flex;
+}
+#footer-textbox #contact-us{
+    min-width: 40%;
+}
+.textFooter{
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
 @media (min-width: 2800px) {
-    #course6{
-        display: none;
-    }
     .search-container #form_search {
         max-width: 85rem;
-        min-width: 75rem;
     }
     #login-btn, #signup-btn{
         width: 14rem;
@@ -187,12 +198,8 @@ nav li {
 
 }
 @media (max-width: 2800px) {
-    #course6{
-        display: none;
-    }
     .search-container #form_search {
         max-width: 65rem;
-        min-width: 55rem;
     }
     #login-btn, #signup-btn{
         width: 10rem;
@@ -207,7 +214,6 @@ nav li {
 @media (max-width: 2350px) {
     .search-container #form_search {
         max-width: 55rem;
-        min-width: 45rem;
     }
     #login-btn, #signup-btn{
         width: 10rem;
@@ -222,7 +228,6 @@ nav li {
 @media (max-width: 1900px) {
     .search-container #form_search {
         max-width: 45rem;
-        min-width: 35rem;
     }
     #login-btn, #signup-btn{
         width: 10rem;
@@ -237,11 +242,7 @@ nav li {
 @media (max-width: 1500px) {
     .search-container #form_search {
         max-width: 35rem;
-        min-width: 25rem;
         margin-right: 0.5rem;
-    }
-    #cart{
-        padding-left: 20px;
     }
     #login-btn, #signup-btn{
         width: 8rem;
@@ -260,11 +261,7 @@ nav li {
 @media (max-width: 1250px) {
     .search-container #form_search {
         max-width: 25rem;
-        min-width: 15rem;
         margin-right: 0.5rem;
-    }
-    #cart{
-        padding-left: 10px;
     }
     #logo-image{
         margin-right: 4rem ;
@@ -278,20 +275,19 @@ nav li {
     html{
         font-size: 15px;
     }
+    footer{
+        font-size: 0.925rem;
+    }
 }
 @media (max-width: 1024px) {
     .search-container #form_search {
         max-width: 15rem;
-        min-width: 10rem;
     }
     #login-btn, #signup-btn{
         width: 7rem;
     }
     #login-btn{
         margin-right: 0.1rem;
-    }
-    #cart{
-        padding-right: 0;
     }
     #logo-image{
         margin-right: 3rem ;
@@ -302,20 +298,45 @@ nav li {
     html{
         font-size: 14px;
     }
+    footer{
+        font-size: 0.875rem;
+    }
 }
 @media (max-width: 900px){
-    #cart{
-        display: none;
-    }
     html{
         font-size: 12px;
     }
-
+    footer{
+        font-size: 0.75rem;
+    }
+}
+/* Tablet - 768px width*/
+@media (max-width: 768px) {
+    .search-container #form_search {
+        max-width: 15rem;
+    }
+    #courses-dropdown {
+        display: none;
+    }
+    html{
+        font-size: 11px;
+    }
+    footer{
+        font-size: 0.625rem;
+    }
 }
 
-/* Tablet - 475px width*/
-@media (max-width: 475px) {
+@media (max-width: 480px) {
     html {
-        font-size: 10px; /* Adjust the base font size */
+        font-size: 8px; /* Adjust the base font size */
+    }
+    #login-signup-1 {
+         display: none;
+    }
+    #login-signup-2 {
+        display: flex;
+    }
+    .dropdown-content {
+        width: 6rem;
     }
 }

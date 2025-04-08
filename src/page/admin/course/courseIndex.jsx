@@ -43,7 +43,7 @@ export default function CourseIndex() {
     return (
         <div id={"courseIndex"}>
             <h1>Courses</h1>
-            <button id={"addCourse"}><Link to={"/admin/course/add"} className={"button"}>Add Course</Link></button>
+            <button id={"addCourse"} className={"cta-button"}><Link to={"/admin/course/add"} className={""}>Add Course</Link></button>
             <div>
                 {courses.map((course) => <CardHorizontal key={course.id} {...course}/>)}
             </div>

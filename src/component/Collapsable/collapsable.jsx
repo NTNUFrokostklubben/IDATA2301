@@ -1,9 +1,9 @@
 import {useState} from "react";
 import "./collapsable.css"
 
-export default function Collapsable({title, children}) {
+export default function Collapsable({title, defaultOpen = false, children}) {
 
-    const [isOpen, setIsOpen] = useState(true)
+    const [isOpen, setIsOpen] = useState(defaultOpen)
 
 
     function toggleOpen() {
