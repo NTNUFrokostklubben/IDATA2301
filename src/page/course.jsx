@@ -18,7 +18,7 @@ export default function Course() {
                     setCourseData(data);
                     setLoading(false);
                     console.log(data)
-                    fetch(`http://localhost:8080/api/getAvg/${data.id}`)
+                    fetch(`http://localhost:8080/api/userCourses/averageRating/${data.id}`)
                         .then(response => response.json())
                         .then(data2 => {
                             setRatingData(data2);
