@@ -67,7 +67,7 @@
     padding: 1rem 1rem;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
     .admin-sidebar {
         display: none;
 

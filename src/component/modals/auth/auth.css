@@ -42,7 +42,7 @@
 }
 
 
-.auth-h1 {
+.auth-h2 {
     align-self: center;
 }
 
@@ -90,6 +90,7 @@
 
     .auth-background {
         /*Collapse so form takes up entire space, ignore background*/
+        z-index: 400000;
     }
 
     .authform {
@@ -99,8 +100,10 @@
         top: 0px;
         width: 100%;
         max-width: 100%;
+        top: 5rem;
         padding: 0;
         margin: 0;
+
     }
 
     .authform form {

@@ -28,7 +28,7 @@
 }
 
 #courseIndex #addCourse {
-    margin: 1rem 1rem;
+    margin: 1rem 0rem;
 }
 
 #courseIndex #addCourse a {
@@ -36,4 +36,81 @@
     text-decoration: none;
     color: var(--textWhite);
 }
+
+#courseIndex #table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0rem 2rem;
+}
+
+#courseIndex #table-header select {
+    height: 4rem;
+}
+
+#courseIndex #course-table {
+
+    table-layout: fixed;
+    margin: 0rem 2rem;
+}
+
+#courseIndex #course-table thead {
+    background-color: var(--highlight);
+}
+
+#courseIndex #course-table tbody {
+    background-color: var(--textWhite);
+    border: #242C2E solid 1px;
+}
+
+#courseIndex #course-table th {
+    padding: 1rem 2rem;
+    text-align: center;
+}
+
+
+#courseIndex #course-table th:nth-child(2) {
+    /*width: 20rem;*/
+}
+
+#courseIndex #course-table tr {
+    border-bottom: #242C2E solid 1px;
+    height: 4rem;
+
+}
+
+#courseIndex #course-table tr:hover {
+    background-color: var(--gray);
+}
+
+
+
+
+#courseIndex #course-table td {
+    vertical-align: center;
+    padding: 0rem 1rem;
+}
+
+#courseIndex .edit-button {
+    color: var(--textWhite);
+    text-decoration: none;
+}
+
+
+#courseIndex .delete-button {
+    background-color:var(--danger);
+    color: var(--textWhite);
+    height: 3rem;
+    width: 7rem;
+}
+
+#courseIndex .delete-button:hover {
+    background-color: #8f2323;
+    /*color: var(--textBlack);*/
+}
+
+
+
+
+
 
