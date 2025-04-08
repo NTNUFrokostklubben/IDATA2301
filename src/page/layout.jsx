@@ -77,7 +77,7 @@ export default function Layout() {
 
             {/* Footer */}
             <footer>
-                <img id="logo-icon" src="logo.svg" alt="Learniverse Logo"/>
+                <img id="logo-icon" src="/logo.svg" alt="Learniverse Logo"/>
 
                 <div id="footer-textbox">
 

@@ -1,7 +1,7 @@
-import react, { createContext } from "react";
+import { createContext } from "react";
 
-/**
- * Store the products in a globally available context
- * @type {React.Context<*[]>}
- */
-export const UserContext = createContext();
+
+export const UserContext = createContext({
+    user:{},
+    handleLogin: function (User){},
+});

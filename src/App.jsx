@@ -12,10 +12,19 @@ import UserPage from "./page/userPage";
 import About from "./page/about";
 import Checkout from "./page/checkout";
 import Course from "./page/course";
+import {UserContext} from "./userContext";
+import {useState} from "react";
 
 function App() {
+    const [User, setUser] = useState({});
+
+    function userLogin(User){
+        setUser(User)
+    }
     return (
+
         <BrowserRouter>
+            <UserContext.Provider value={{user: User, handleLogin: userLogin }}>
             <Routes>
                 <Route path={"/"} element={<Layout/>}>
                     <Route index element={<Index/>}/>
@@ -35,9 +44,10 @@ function App() {
                 </Route>
 
             </Routes>
+            </UserContext.Provider>
         </BrowserRouter>
-    )
-        ;
+
+            );
 }
 
 export default App;
