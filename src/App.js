@@ -11,6 +11,7 @@ import AdminDashboard from "./page/admin/adminDashboard";
 import UserPage from "./page/userPage";
 import About from "./page/about";
 import Checkout from "./page/checkout";
+import Course from "./page/course";
 
 function App() {
     return (
@@ -19,6 +20,7 @@ function App() {
                 <Route path={"/"} element={<Layout/>}>
                     <Route index element={<Index/>}/>
                     <Route path={"search"} element={<Search/>}/>
+                    <Route path={"course/:id"} element={<Course/>}/>
                     <Route path={"userpage"} element={<UserPage/>}/>
                     <Route path={"about"} element={<About/>}/>
                     <Route path={"checkout"} element={<Checkout/>}/>

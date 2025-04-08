@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Index.css";
+import Search from "./search/search";
+import {Link, Route} from "react-router-dom";
 import CourseCard from "../component/card/CourseCard";
 import Register from "../component/modals/auth/register";
 import {createPortal} from "react-dom";
@@ -242,9 +244,8 @@ export default function Index() {
             <ul>
                 <li><a href={"/search"}>search/filters</a></li>
                 <li><a href={"/admin"}>Admin</a></li>
-                <li><a href={"/about"}>About us</a></li>
-                <li><a href={"/userpage"}>Userpage</a></li>
-                <li><a href={"/checkout"}>Checkout</a></li>
+                <li> <Link to={`/course/${1}`}> course</Link></li>
+                <li><a href={"/about"}></a></li>
             </ul>
             {
                 showSignupModal && createPortal(
