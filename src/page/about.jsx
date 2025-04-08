@@ -3,7 +3,6 @@ export default function About (){
 
     return(
         <div>
-            <body>
             <section id="heroWorker">
                 <div className="container">
                     <picture id="worker-hero">
@@ -97,7 +96,6 @@ export default function About (){
                     <p> epost: Toret@learniverse.no</p>
                 </picture>
             </section>
-            </body>
         </div>
     )
 }

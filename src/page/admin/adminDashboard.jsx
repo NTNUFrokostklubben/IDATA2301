@@ -6,24 +6,26 @@ import "./adminDashboard.css";
 export default function AdminDashboard() {
 
     const data = [
-        {id: 0, value: 1000, label: 'Course 1', color: "#86b6c2"},
-        {id: 1, value: 1500, label: 'Course 2', color: "#4D7E8A"},
-        {id: 2, value: 2000, label: 'Course 3', color: "#DAF0F4"},
+        {id: 0, value: 1000, label: 'Provider 1', color: "#86b6c2"},
+        {id: 1, value: 1500, label: 'Provider 2', color: "#4D7E8A"},
+        {id: 2, value: 2000, label: 'Provider 3', color: "#DAF0F4"},
     ];
 
-    const [size, setSize] = useState(calcSceneStart());
+    const [size, setSize] = useState(screenSetSize());
+    const [hidden, setHidden] = useState(screenSetHidden());
 
     // Use to resize the course shown based on window size
     useEffect(() => {
         const handleResize=() => {
-            setSize(calcSceneStart());
+            setSize(screenSetSize());
+            setHidden(screenSetHidden());
         }
         window.addEventListener("resize", handleResize);
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
 
-    function calcSceneStart() {
+    function screenSetSize() {
         if (window.matchMedia("(max-width: 480px)").matches) {
             return {
                 width: 200,
@@ -48,6 +50,14 @@ export default function AdminDashboard() {
             };
         }
     }
+    function screenSetHidden() {
+        if (window.matchMedia("(max-width: 600px)").matches) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 
     return (
         <div className={"admin-dash"}>
@@ -64,12 +74,15 @@ export default function AdminDashboard() {
                         <PieChart
                             series={[
                                 {
-                                    startAngle: -90,
-                                    endAngle: 90,
-                                    data,
+                                    data: data,
+                                    highlightScope: { fade: 'global', highlight: 'item' },
+                                    faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' }
                                 },
                             ]}
                             {...size}
+                            slotProps={{
+                                legend: { hidden: hidden },
+                            }}
                         />
                     </div>
                     <h6> Total Revenue: 5500 NOK</h6>

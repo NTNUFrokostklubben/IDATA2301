@@ -19,9 +19,6 @@ export default function Layout() {
             <nav id="menu-navbar">
                 <li id="logo-image">
                     <Link to={"/"}><img id="logo-icon" src="/logo.svg" alt="Learniverse Logo"/></Link>
-                    <a href={"/about"}>
-                        <img id="logo-icon" src="logo.svg" alt="Learniverse Logo"/>
-                    </a>
                 </li>
                 <li>
                     <div className="dropdown" id={"courses-dropdown"}>
@@ -93,12 +90,10 @@ export default function Layout() {
 
                     <div className="textFooter" id="legal">
                         <h5>Legal</h5>
-                        {/*TODO add the link; https://www.ntnu.edu/studies/courses/IDATA2301#tab=omEmnet */}
                         <small>This website is a result of a university group project, performed in the course
-                            IDATA2301 Web
-                            technologies, at NTNU.</small><br/>
-                        <small>All the information provided here is a result of imagination. </small><br/>
-                        <small> Any resemblance with real companies or products is a coincidence.</small><br/>
+                            <a href={"https://www.ntnu.edu/studies/courses/IDATA2301#tab=omEmnet"}> IDATA2301</a>
+                            Web technologies, at NTNU. All the information provided here is a result of
+                            imagination. Any resemblance with real companies or products is a coincidence.</small>
                     </div>
 
                 </div>
