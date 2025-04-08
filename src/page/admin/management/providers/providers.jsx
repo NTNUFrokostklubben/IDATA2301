@@ -20,7 +20,7 @@ export default function Providers() {
                 console.error("Error fetching providers:", error);
                 setLoading(false);
             });
-    })
+    }, [])
 
     if (loading) {
         return <div>Loading...</div>;
