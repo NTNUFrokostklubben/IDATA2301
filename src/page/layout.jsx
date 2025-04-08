@@ -19,9 +19,6 @@ export default function Layout() {
             <nav id="menu-navbar">
                 <li id="logo-image">
                     <Link to={"/"}><img id="logo-icon" src="/logo.svg" alt="Learniverse Logo"/></Link>
-                    <a href={"/about"}>
-                        <img id="logo-icon" src="logo.svg" alt="Learniverse Logo"/>
-                    </a>
                 </li>
                 <li>
                     <div className="dropdown" id={"courses-dropdown"}>
