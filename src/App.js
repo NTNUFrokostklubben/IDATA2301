@@ -23,7 +23,7 @@ function App() {
                     <Route path={"course/:id"} element={<Course/>}/>
                     <Route path={"userpage"} element={<UserPage/>}/>
                     <Route path={"about"} element={<About/>}/>
-                    <Route path={"checkout"} element={<Checkout/>}/>
+                    <Route path={"checkout/:id"} element={<Checkout/>}/>
                     <Route path={"/admin"} element={<AdminNav/>}>
                         {/*<Route index element={<AdminDashboard/>}/>*/}
                         <Route path={"/admin/course"}>
