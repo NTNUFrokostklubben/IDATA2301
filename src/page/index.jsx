@@ -86,12 +86,6 @@ export default function Index() {
         return () => clearInterval(interval);
     }, []);
 
-    const slides = [
-        "https://picsum.photos/200/200?random=1",
-        "https://picsum.photos/200/200?random=2",
-        "https://picsum.photos/200/200?random=3"
-    ];
-
     return (
         <div id={"root"}>
             <section id="index-hero-section">
