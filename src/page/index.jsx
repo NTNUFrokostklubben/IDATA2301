@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Index.css";
+import Search from "./search/search";
+import {Link, Route} from "react-router-dom";
 import CourseCard from "../component/card/CourseCard";
 import Register from "../component/modals/auth/register";
 import {createPortal} from "react-dom";
@@ -83,6 +85,12 @@ export default function Index() {
         }, 6000);
         return () => clearInterval(interval);
     }, []);
+
+    const slides = [
+        "https://picsum.photos/200/200?random=1",
+        "https://picsum.photos/200/200?random=2",
+        "https://picsum.photos/200/200?random=3"
+    ];
 
     return (
         <div id={"root"}>
@@ -243,6 +251,7 @@ export default function Index() {
             <ul>
                 <li><a href={"/search"}>search/filters</a></li>
                 <li><a href={"/admin"}>Admin</a></li>
+                <li> <Link to={`/course/${1}`}> course</Link></li>
                 <li><a href={"/about"}></a></li>
             </ul>
             {

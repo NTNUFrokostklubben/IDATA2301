@@ -1,4 +1,5 @@
 import "./card.css";
+import {Link} from "react-router-dom";
 
 export default function Card(course) {
 
@@ -16,6 +17,7 @@ export default function Card(course) {
     }
 
     return (
+
         <section className="card">
             <img className="course-img" src={"https://picsum.photos/200/200?random=2"} alt=""/>
             <b>{course.title}</b>
@@ -32,5 +34,6 @@ export default function Card(course) {
                 <p id="price2">10 000 NOK</p>
             </div>
         </section>
+
     )
 }
