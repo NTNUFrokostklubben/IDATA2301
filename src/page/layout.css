@@ -7,6 +7,11 @@
     align-items: center;
     height: 5rem;
     width: 100%;
+    z-index: 10;
+    position: fixed;
+    top: 0;
+    left: 0;
+
 }
 #logo-icon {
     height: 3rem;

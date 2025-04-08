@@ -20,9 +20,9 @@ export default function Login({ onClose, changeMode }) {
                 <button id={"auth-close-button"} className={"secondary-button"} onClick={onClose}>
                     <img alt={"X"} src={"icons/close-sharp.svg"} />
                 </button>
-                <h1 className={"auth-h1"}>
+                <h2 className={"auth-h2"}>
                     Log In
-                </h1>
+                </h2>
                 <form action="http://localhost:8080/login" method="POST">
                     <section id="credentials">
 

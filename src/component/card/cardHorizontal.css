@@ -1,13 +1,17 @@
 
 .cardAdmin {
-    /*grid with 1st column only image, 2nd column title, description, keywords. 3rd column price, hours. 4th column credits, difficulty. */
+    margin: 0.5rem 1rem;
+    background-color: var(--textWhite);
+
     display: grid;
-    grid-template-columns: 300px 3fr 1fr 1fr; /* Image on the left, text on the right */
-    grid-template-rows: 3rem 1fr;
-    margin: 1rem 2rem;
+    grid-template-columns: 1fr 3fr 1fr 1fr; /* Image on the left, text on the right */
+    grid-template-rows: 1fr 4fr;
     border: var(--textBlack) 1px solid;
     border-radius: 3px;
     overflow: hidden;
+    max-height: 10rem;
+    height: 3fr;
+    gap: 1rem;
 }
 
 .cardAdmin .card-title {
@@ -23,7 +27,7 @@
     grid-column-end: 1;
     grid-row-start: 1;
     grid-row-end: 3;
-    /*stretch image height*/
+    max-width: 100%;
     height: 100%;
     object-fit: cover;
 }
@@ -31,14 +35,9 @@
 .cardAdmin .card-desc {
     grid-column-start: 2;
     grid-column-end: 2;
+
 }
 
-.cardAdmin .infotext {
-    grid-column-start: 3;
-    grid-column-end: 3;
-    grid-row-start: 2;
-    grid-row-end: 2;
-}
 
 .cardAdmin .difficulty {
     grid-column-start: 4;
@@ -61,15 +60,11 @@
     grid-row-end: 1;
 }
 
-.cardAdmin .rating {
-    grid-column-start: 2;
-    grid-column-end: 2;
-    grid-row-start: 3;
-    grid-row-end: 3;
-}
 
 .cardAdmin .button-group {
     display: flex;
+    grid-column-start: 4;
+    grid-column-end: 4;
     grid-row-start: 1;
     grid-row-end: 3;
     right: 10px;
@@ -111,21 +106,23 @@
 
 
 
-@supports (-webkit-line-clamp: 8) {
+@supports (-webkit-line-clamp: 5) {
     .cardAdmin .card-desc {
         display: -webkit-box; /* Required for line clamping */
         -webkit-box-orient: vertical; /* Required for line clamping */
-        -webkit-line-clamp: 8; /* Limit to 3 lines */
+        -webkit-line-clamp: 5; /* Limit to 3 lines */
+        line-height: 1rem;
+        max-height: 5rem; /* 5 lines of text */
         overflow: hidden; /* Hide overflow */
         text-overflow: ellipsis; /* Add ellipsis */
     }
 }
 
-@supports not (-webkit-line-clamp: 8) {
+@supports not (-webkit-line-clamp: 5) {
     .cardAdmin .card-desc {
         position: relative;
-        max-height: 4.5em; /* Adjust based on line height and number of lines */
-        line-height: 1.5em; /* Adjust based on your design */
+        max-height: 5rem; /* Adjust based on line height and number of lines */
+        line-height: 1em; /* Adjust based on your design */
         overflow: hidden;
     }
 
