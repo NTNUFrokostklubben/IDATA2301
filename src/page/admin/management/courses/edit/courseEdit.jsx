@@ -16,7 +16,6 @@ export default function CourseEdit(courseId) {
     const [course, setCourse] = useState([]);
 
     useEffect(() => {
-        console.log("fetching")
         fetch("http://localhost:8080/api/course/" + id)
             .then((r) => r.json())
             .then((c) => {

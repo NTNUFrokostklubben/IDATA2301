@@ -16,6 +16,7 @@ import Providers from "./page/admin/management/providers/providers";
 import Courses from "./page/admin/management/courses/courses";
 import ProviderAdd from "./page/admin/management/providers/add/providerAdd";
 import ProviderEdit from "./page/admin/management/providers/edit/providerEdit";
+import OfferableCourseAdd from "./page/admin/course/add/offerableCourseAdd";
 
 function App() {
     return (
@@ -32,7 +33,7 @@ function App() {
                         {/*<Route index element={<AdminDashboard/>}/>*/}
                         <Route path={"/admin/offerableCourses"}>
                             <Route index element={<OfferableCourses/>}/>
-                            <Route path={"add"} element={<CourseAdd/>}/>
+                            <Route path={"add"} element={<OfferableCourseAdd/>}/>
                             <Route path={"edit/:id"} element={<CourseEdit/>}/>
                         </Route>
                         <Route path={"/admin/management"}>

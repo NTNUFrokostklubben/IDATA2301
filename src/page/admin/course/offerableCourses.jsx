@@ -94,7 +94,7 @@ export default function OfferableCourses() {
         <div id={"courseIndex"}>
             <h2>Offerable courses</h2>
             <div id={"table-header"}>
-                <button id={"addCourse"} className={"cta-button"}><Link to={"/admin/course/add"} className={""}>Add
+                <button id={"addCourse"} className={"cta-button"}><Link to={"/admin/offerablecourses/add"} className={""}>Add
                     Course</Link></button>
                 <select id={"course"} onChange={changeProvider}>
                     <option value={""}>All</option>

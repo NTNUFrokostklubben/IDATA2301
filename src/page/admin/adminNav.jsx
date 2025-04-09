@@ -24,7 +24,7 @@ export default function AdminNav() {
                                 <Link>Overview</Link>
                             </li>
                             <li>
-                                <Link to={"/admin/offerablecourses"}>Courses</Link>
+                                <Link to={"/admin/offerablecourses"}>Offerable Courses</Link>
                             </li>
                             <li>
                                 <Link>Analytics</Link>
