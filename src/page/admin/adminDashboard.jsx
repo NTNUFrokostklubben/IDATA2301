@@ -5,7 +5,13 @@ import "./adminDashboard.css";
 
 export default function AdminDashboard() {
 
+    // Stats in overview
     const [revenueData, setRevenueData]=useState([]);
+    const [totalCourses, setTotalCourses]=useState([]);
+    const [totalUsers, setTotalUsers]=useState([]);
+    const [totalRevenue, setTotalRevenue]=useState([]);
+    const [avgRevenue, setAvgRevenue]=useState([]);
+
     const [size, setSize] = useState(screenSetSize());
     const [hidden, setHidden] = useState(screenSetHidden());
 
@@ -22,16 +28,39 @@ export default function AdminDashboard() {
     useEffect(() => {
         fetch("http://localhost:8080/api/transaction/providersStats")
             .then((response) => response.json())
-            .then((data) => {
-                const revenueData = data.map((providerStat) => ({
+            .then((data1) => {
+                const revenueData = data1.map((providerStat) => ({
                     id: providerStat.ID_PROVIDER,
                     value: providerStat.REVENUE,
                     label: providerStat.PROVIDER_NAME
                 }));
                 setRevenueData(revenueData);
             }).catch(err => console.error('Error fetching data:', err));
-        console.log(revenueData)
     }, []);
+
+    useEffect(() => {
+        fetch('http://localhost:8080/api/transaction/totalRevenue')
+            .then((response) => response.json())
+            .then((data2) => {
+                setTotalRevenue(data2);
+            }).catch(err => console.error('Error fetching data:', err));
+        fetch("http://localhost:8080/api/courses/total")
+            .then((response) => response.json())
+            .then((data3) => {
+                setTotalCourses(data3);
+            }).catch(err => console.error('Error fetching data:', err));
+        fetch("http://localhost:8080/api/users/total")
+            .then((response) => response.json())
+            .then((data4) => {
+                setTotalUsers(data4);
+            }).catch(err => console.error('Error fetching data:', err));
+        fetch("http://localhost:8080/api/transaction/averageRevenuePerCourse")
+            .then((response) => response.json())
+            .then((data4) => {
+                setAvgRevenue(data4);
+            }).catch(err => console.error('Error fetching data:', err));
+    }, []);
+
 
 
     function screenSetSize() {
@@ -60,12 +89,7 @@ export default function AdminDashboard() {
         }
     }
     function screenSetHidden() {
-        if (window.matchMedia("(max-width: 600px)").matches) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return !!(window.matchMedia("(max-width: 600px)").matches);
     }
 
     return (
@@ -94,7 +118,7 @@ export default function AdminDashboard() {
                             }}
                         />
                     </div>
-                    <h6> Total Revenue: 5500 NOK</h6>
+                    <h6> Total Revenue: {totalRevenue} NOK</h6>
                 </div>
 
                 <div className={"admin-dash-reviews"}>
@@ -167,10 +191,10 @@ export default function AdminDashboard() {
 
                 <div className={"admin-dash-result"}>
                 <h5 className={"admin-dash-title"}>Total registered users</h5>
-                        <h6 className={"admin-dash-total"}>605</h6>
+                        <h6 className={"admin-dash-total"}>{totalUsers}</h6>
                         &nbsp;
                         <h5 className={"admin-dash-title"}>New users last 30 days</h5>
-                        <h6 className={"admin-dash-total"}>25</h6>
+                        <h6 className={"admin-dash-total"}>Temp value</h6>
                     </div>
 
                 </div>
@@ -181,10 +205,10 @@ export default function AdminDashboard() {
 
                     <div className={"admin-dash-result"}>
                         <h5 className={"admin-dash-title"}>Total courses</h5>
-                        <h6 className={"admin-dash-total"}>3</h6>
+                        <h6 className={"admin-dash-total"}>{totalCourses}</h6>
                         &nbsp;
                         <h5 className={"admin-dash-title"}>Average revenue</h5>
-                        <h6 className={"admin-dash-total"}>1500 NOK</h6>
+                        <h6 className={"admin-dash-total"}> {avgRevenue} NOK</h6>
                     </div>
 
                 </div>
