@@ -40,6 +40,10 @@
     padding-bottom: 1rem;
     padding-top: 0.67rem;
 }
+#leave-empty-text{
+    opacity: 60%;
+    font-size: 80%;
+}
 
 #billing{
     display: flex;
@@ -69,7 +73,10 @@
     padding-left: 0.3rem;
     font-size: 0.875rem;
 }
-
+#country-select{
+    border: black;
+    padding-bottom: 2.3rem;
+}
 #purchase{
     display: flex;
     flex-direction: row;

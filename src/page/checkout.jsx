@@ -1,34 +1,57 @@
 import "./checkout.css"
 import {useParams} from "react-router-dom";
-import React, {useContext, useState} from "react";
+import React, {useContext, useMemo, useRef, useState} from "react";
 import {UserContext} from "../userContext";
 import {createPortal} from "react-dom";
 import Login from "../component/modals/auth/login";
 import Register from "../component/modals/auth/register";
 import {useSelector} from "react-redux";
+import Select from 'react-select'
+import countryList from "react-select-country-list";
+
 
 export default function Checkout() {
    // const [courseData, setCourseData] = useState([]);
-    const [loading, setLoading] = useState(true);
     const [showLoginModal, setShowLoginModal] = useState()
     const [showSignupModal, setShowSignupModal] = useState()
-    const {id} = useParams();
     const user = useContext(UserContext);
     const courseData = useSelector((state) => state.data.sharedObject)
+    const [countrySelect, setCountrySelect] = useState('')
+    const options = useMemo(() => countryList().getData(), [])
+    const [cardNumber, setCardNumber] = useState('');
 
     const handlePurchase =  ( ) => {
         fetch(`http://localhost:8080/api/transaction/offerId/${courseData.id}/userid/${1}`, {method:'POST'})
             .then(data => console.log(data))
             .catch(err => console.error('Error fetching data:', err));
     }
-   /* document.getElementById("exp-date").addEventListener("input", function (e) {
-        let value = e.target.value.replace(/\D/g, "");
-        if (value.length >= 2) {
-            value = value.slice(0, 2) + '/' + value.slice(2, 4);
-        }
-        e.target.value = value;
-    })
-*/
+        const inputRef = useRef(null);
+
+        const handleExpiration = (e) => {
+            let value = e.target.value.replace(/\D/g, ""); // Remove non-digits
+            if (value.length >= 2) {
+                value = value.slice(0, 2) + '/' + value.slice(2, 4);
+            }
+            e.target.value = value;
+        };
+
+    const handleCardNr = (e) => {
+        const input = e.target.value;
+
+        // 1. Remove all non-digit characters
+        const digitsOnly = input.replace(/\D/g, '');
+
+
+        // 3. Add space after every 4 digits
+        const formatted = digitsOnly.replace(/(\d{4})/g, '$1 ').replace(/(^\s+|\s+$)/,'')
+
+        setCardNumber(formatted);
+    }
+
+    const selectCountryHandler = value => {
+        setCountrySelect(value)
+    }
+
     function loggedIn(){
         if(user == null){
                 setShowLoginModal(true)
@@ -67,17 +90,22 @@ export default function Checkout() {
 
                 <div className="separator">Continue below to pay with credit card</div>
                 <section id="billing">
-                    <h5 className="checkout-headers">Contact information</h5>
+                    <h5 className="checkout-headers"> Additional Contact information</h5>
+                    <p id="leave-empty-text">Leave empty if no other recipients</p>
                     <label htmlFor="email"></label>
-                    <input className="large-input-field" type="text" id="email" name="email input" placeholder="Email"/>
+                    <input className="large-input-field"
+                           type="text"
+                           id="email"
+                           name="email input"
+                           pattern={"\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}\\b"}
+                           placeholder="Email"/>
                     <h5 className="checkout-headers"> Billing</h5>
                     <form id="billing-input" method="post">
-                        <input required={true}
-                               className="large-input-field"
-                               placeholder="country/region"
-                               type="text"
-                               id="country"
-                               name="country-select"/>
+                        <Select id={"country-select"} className={"large-input-field"}
+                                required={true}
+                                options={options}
+                                value={countrySelect}
+                                onChange={selectCountryHandler}/>
                         <div className="small-input">
                             <input required={true}
                                    className="small-input-field"
@@ -95,8 +123,12 @@ export default function Checkout() {
                         <input required={true}
                                className="large-input-field"
                                placeholder="Credit card number"
-                               type="number"
+                               type="text"
                                name="Credit-card"
+                               value={cardNumber}
+                               ref={inputRef}
+                               maxLength={19}
+                               onInput={handleCardNr}
                                id="credit-card"/>
                         <div className="small-input">
                             <input required={true}
@@ -105,6 +137,8 @@ export default function Checkout() {
                                    type="text"
                                    name="expiration date"
                                    maxLength={5}
+                                   ref={inputRef}
+                                   onInput={handleExpiration}
                                    id="exp-date"/>
                             <input required={true}
                                    className="small-input-field"
@@ -113,6 +147,7 @@ export default function Checkout() {
                                    name="expiration date"
                                    maxLength={3}
                                    id="sec-code"/>
+
                         </div>
                         <label htmlFor="lastname"></label>
                         <label htmlFor="firstname"></label>
@@ -180,4 +215,5 @@ export default function Checkout() {
             }
         </article>
     )
+
 }
