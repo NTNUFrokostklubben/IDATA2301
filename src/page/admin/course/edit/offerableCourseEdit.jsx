@@ -1,13 +1,10 @@
-import {use, useEffect, useState} from "react";
-import "./offerableCourseAdd.css"
 import DatePicker, {registerLocale} from "react-datepicker";
+import {useEffect, useState} from "react";
 import {nb} from "date-fns/locale/nb";
-import "react-datepicker/dist/react-datepicker.css";
-import {courseEntity, OfferableCourse, ProviderEntity} from "../../../../utils/Classes/commonClasses";
-import Course from "../../../course";
 import {AsyncApiRequest} from "../../../../utils/requests";
+import {courseEntity, OfferableCourse, ProviderEntity} from "../../../../utils/Classes/commonClasses";
 
-export default function OfferableCourseAdd() {
+export default function OfferableCourseEdit(courseId) {
 
     const [courses, setCourses] = useState([]);
     const [providers, setProviders] = useState([]);
@@ -62,10 +59,6 @@ export default function OfferableCourseAdd() {
         }
     }
 
-
-
-
-
     function handleFormSubmission(event) {
         event.preventDefault();
 
@@ -85,16 +78,7 @@ export default function OfferableCourseAdd() {
         }
     }
 
-
-    if (loading) {
-        return (
-            <div className="offerableCourse-page">
-                <h1>Loading...</h1>
-            </div>
-        )
-    }
-
-    return (
+    return(
         <div className="offerableCourse-page">
             <h1>Add offerable course</h1>
             <form onSubmit={handleFormSubmission}>
@@ -147,4 +131,5 @@ export default function OfferableCourseAdd() {
             </form>
         </div>
     )
+
 }
