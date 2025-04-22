@@ -1,4 +1,18 @@
 
+.offerableCourse-page .react-datepicker__input-container .react-datepicker__calendar-icon {
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    transform: translateY(-50%);
+}
+
+.offerableCourse-page .react-datepicker__view-calendar-icon input {
+    padding-left: 2rem; /* Adjust this value to create space for the icon */
+}
+
+.offerableCourse-page .react-datepicker-wrapper {
+    width: 100%;
+}
 
 
 .offerableCourse-page {
@@ -52,6 +66,13 @@
     box-sizing: border-box;
     border: 1px solid var(--shadow);
     font-size: 1rem;
+}
+
+#offerableCourse-info input[type=checkbox] {
+    margin: 1rem;
+    height: 2.5rem;
+    width: 2.5rem;
+    outline-color: olivedrab;
 }
 
 #offerableCourse-info input[type="file"] {
