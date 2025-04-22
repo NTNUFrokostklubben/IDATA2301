@@ -1,6 +1,6 @@
 import "./checkout.css"
 import {useParams} from "react-router-dom";
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext, useState} from "react";
 import {UserContext} from "../userContext";
 import {createPortal} from "react-dom";
 import Login from "../component/modals/auth/login";
@@ -15,8 +15,20 @@ export default function Checkout() {
     const {id} = useParams();
     const user = useContext(UserContext);
     const courseData = useSelector((state) => state.data.sharedObject)
-    console.log(courseData.price)
 
+    const handlePurchase =  ( ) => {
+        fetch(`http://localhost:8080/api/transaction/offerId/${courseData.id}/userid/${1}`, {method:'POST'})
+            .then(data => console.log(data))
+            .catch(err => console.error('Error fetching data:', err));
+    }
+   /* document.getElementById("exp-date").addEventListener("input", function (e) {
+        let value = e.target.value.replace(/\D/g, "");
+        if (value.length >= 2) {
+            value = value.slice(0, 2) + '/' + value.slice(2, 4);
+        }
+        e.target.value = value;
+    })
+*/
     function loggedIn(){
         if(user == null){
                 setShowLoginModal(true)
@@ -56,35 +68,63 @@ export default function Checkout() {
                 <div className="separator">Continue below to pay with credit card</div>
                 <section id="billing">
                     <h5 className="checkout-headers">Contact information</h5>
-                    <label htmlFor="email"></label><input className="large-input-field" type="text" id="email"
-                                                          name="email input" placeholder="Email"/>
+                    <label htmlFor="email"></label>
+                    <input className="large-input-field" type="text" id="email" name="email input" placeholder="Email"/>
                     <h5 className="checkout-headers"> Billing</h5>
-                    <form id="billing-input" action="https://web-tek.ninja/php_backend/dummy_login.php" method="post">
-                        <input className="large-input-field" placeholder="country/region" type="text" id="country"
+                    <form id="billing-input" method="post">
+                        <input required={true}
+                               className="large-input-field"
+                               placeholder="country/region"
+                               type="text"
+                               id="country"
                                name="country-select"/>
                         <div className="small-input">
-                            <input className="small-input-field" placeholder="First name" type="text" id="firstname"
+                            <input required={true}
+                                   className="small-input-field"
+                                   placeholder="First name"
+                                   type="text"
+                                   id="firstname"
                                    name="username"/>
-                            <input className="small-input-field" type="text" placeholder="Last name" id="lastname"
+                            <input required={true}
+                                   className="small-input-field"
+                                   type="text"
+                                   placeholder="Last name"
+                                   id="lastname"
                                    name="lastname"/>
                         </div>
-                        <input className="large-input-field" placeholder="Credit card number" type="number"
-                               name="Credit-card" id="credit-card"/>
+                        <input required={true}
+                               className="large-input-field"
+                               placeholder="Credit card number"
+                               type="number"
+                               name="Credit-card"
+                               id="credit-card"/>
                         <div className="small-input">
-                            <input className="small-input-field" placeholder="Expiration date mm/yy" type="number"
-                                   name="expiration date" id="exp-date"/>
-                            <input className="small-input-field" placeholder="Security code" type="number"
-                                   name="expiration date" id="sec-code"/>
+                            <input required={true}
+                                   className="small-input-field"
+                                   placeholder="Expiration date mm/yy"
+                                   type="text"
+                                   name="expiration date"
+                                   maxLength={5}
+                                   id="exp-date"/>
+                            <input required={true}
+                                   className="small-input-field"
+                                   placeholder="Security code"
+                                   type="number"
+                                   name="expiration date"
+                                   maxLength={3}
+                                   id="sec-code"/>
                         </div>
                         <label htmlFor="lastname"></label>
                         <label htmlFor="firstname"></label>
+                        <div id="purchase">
+                            <p>Total cost:</p> &nbsp;
+                            <label className="valuta">
+                                {(courseData.price * (1 - courseData.discount)).toFixed(2)}
+                            </label><p>,- nok</p>
+                            <button type="submit" id="purchase-button" onClick={handlePurchase}>Purchase</button>
+                        </div>
                     </form>
-                    <div id="purchase">
-                        <p>Total cost:</p> &nbsp;
-                        <label className="valuta"> {(courseData.price * (1 - courseData.discount)).toFixed(2)}</label>
-                        <p>,- nok</p>
-                        <button id="purchase-button">Purchase</button>
-                    </div>
+
 
                 </section>
             </div>
