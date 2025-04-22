@@ -20,7 +20,7 @@ export default function OfferableCourses() {
         fetch("http://localhost:8080/api/offerableCourses")
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
+                // console.log(data);
                 const courses = data.map((offerableCourse) => new OfferableCourse(
                     offerableCourse.id,
                     offerableCourse.date,
@@ -133,7 +133,7 @@ export default function OfferableCourses() {
                                 <p>{offerableCourse.course.title}</p>
                             </td>
                             <td><p>{offerableCourse.price},- NOK</p></td>
-                            <td><p>{offerableCourse.discount * 100} %</p></td>
+                            <td><p>{parseInt(offerableCourse.discount * 100)} %</p></td>
                             {/*convert unix date to norwegian date format*/}
                             <td><p>{new Date(offerableCourse.date).toLocaleDateString("no-NO", {
                                 year: "numeric",

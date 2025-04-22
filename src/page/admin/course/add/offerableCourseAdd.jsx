@@ -96,7 +96,7 @@ export default function OfferableCourseAdd() {
 
     return (
         <div className="offerableCourse-page">
-            <h1>Add offerable course</h1>
+            <h1>Add Offerable Course</h1>
             <form onSubmit={handleFormSubmission}>
                 <section id="offerableCourse-info">
                     <div className="group-2">
