@@ -5,37 +5,27 @@ import {UserContext} from "../userContext";
 import {createPortal} from "react-dom";
 import Login from "../component/modals/auth/login";
 import Register from "../component/modals/auth/register";
+import {useSelector} from "react-redux";
 
 export default function Checkout() {
-    const [courseData, setCourseData] = useState([]);
+   // const [courseData, setCourseData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [showLoginModal, setShowLoginModal] = useState()
     const [showSignupModal, setShowSignupModal] = useState()
     const {id} = useParams();
     const user = useContext(UserContext);
+    const courseData = useSelector((state) => state.data.sharedObject)
+    console.log(courseData.price)
 
-    useEffect(() => {
-            fetch(`http://localhost:8080/api/offerableCourses/${id}`)
-                .then(response => response.json())
-                .then(data => {
-                    setCourseData(data);
-                    setLoading(false);
-                }).catch(err => console.error('Error fetching data:', err));
-        }, []
-    );
     function loggedIn(){
         if(user == null){
                 setShowLoginModal(true)
         }
     }
-
-    if (loading) {
-        return (<h1>loading</h1>)
-    }
     return (
         <article id="page-layout-checkout" onLoad={loggedIn}>
 
-            <div id="left-side">
+            <div id="checkout-left-side">
                 <section id="express-checkout">
                     <h4 className="checkout-headers">Express checkout</h4>
                     <div id="payment-options">
@@ -91,14 +81,14 @@ export default function Checkout() {
                     </form>
                     <div id="purchase">
                         <p>Total cost:</p> &nbsp;
-                        <label className="valuta"> {courseData.price * (1 - courseData.discount)}</label>
+                        <label className="valuta"> {(courseData.price * (1 - courseData.discount)).toFixed(2)}</label>
                         <p>,- nok</p>
                         <button id="purchase-button">Purchase</button>
                     </div>
 
                 </section>
             </div>
-            <div id="right-side">
+            <div id="checkout-right-side">
                 <section id="checkout">
                     <h5 className="checkout-headers">product</h5>
                     <div className="product">
@@ -117,12 +107,12 @@ export default function Checkout() {
 
                             <div className="purchase-discount">
                                 <label className="discount-tag">Discount: </label>
-                                <label>{courseData.discount * 100}%</label>
+                                <span>{(courseData.discount * 100).toFixed(0)}%</span>
                             </div>
 
                             <div className="purchase-total-cost">
                                 <label>Total cost: </label>
-                                <label>{courseData.price * (1 - courseData.discount)}</label>
+                                <label>{(courseData.price * (1 - courseData.discount)).toFixed(2)}</label>
                                 <label className="valuta">,- nok</label>
                             </div>
 

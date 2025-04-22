@@ -2,8 +2,9 @@
     display: flex;
     padding-left: 1rem;
     margin-top: 5rem;
+
 }
-#left-side{
+#checkout-left-side{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -54,9 +55,7 @@
     height: 1.875rem; /* 30px / 16 */
 }
 .small-input-field::placeholder{
-    display: flex;
-    align-self: flex-start;
-    justify-self: flex-start;
+    padding-left: 0.3rem;
     font-size: 0.875rem; /* 14px / 16 */
 }
 
@@ -66,19 +65,24 @@
     margin-bottom: 0.625rem; /* 10px / 16 */
     margin-top: 0.625rem; /* 10px / 16 */
 }
+.large-input-field::placeholder{
+    padding-left: 0.3rem;
+    font-size: 0.875rem;
+}
 
 #purchase{
     display: flex;
     flex-direction: row;
     align-self: flex-end;
     margin-top: 0.625rem; /* 10px / 16 */
+    margin-bottom: 1rem;
 }
 
 #purchase-button{
     margin-left: 0.625rem; /* 10px / 16 */
 }
 
-#right-side{
+#checkout-right-side{
     padding-left: 1.25rem; /* 20px / 16 */
     width: 31.25rem; /* 500px / 16 */
 }

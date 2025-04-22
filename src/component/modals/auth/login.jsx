@@ -1,14 +1,12 @@
 import "./auth.css"
 import {useContext, useEffect, useRef, useState} from "react";
 import { useFocusTrap } from "../../../utils/useFocusTrap";
-import {UserContext} from "../../../userContext";
+
 
 export default function Login({ onClose, changeMode, closable=true }) {
 
     const modalRef = useRef(null)
     useFocusTrap(modalRef, true, onClose) // Passes true to isOpen due to this modal only being open when it is rendered
-    const user = useContext(UserContext);
-
     return (
         <div className={"auth-background"}
         ref={modalRef}
