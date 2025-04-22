@@ -4,8 +4,8 @@ import DatePicker, {registerLocale} from "react-datepicker";
 import {nb} from "date-fns/locale/nb";
 import "react-datepicker/dist/react-datepicker.css";
 import {courseEntity, OfferableCourse, ProviderEntity} from "../../../../utils/Classes/commonClasses";
-import Course from "../../../course";
 import {AsyncApiRequest} from "../../../../utils/requests";
+import {useNavigate} from "react-router-dom";
 
 export default function OfferableCourseAdd() {
 
@@ -15,6 +15,7 @@ export default function OfferableCourseAdd() {
     const [loading, setLoading] = useState(true);
 
     const [startDate, setStartDate] = useState(new Date());
+    const navigate = useNavigate();
 
     registerLocale("nb", nb)
 
@@ -32,7 +33,7 @@ export default function OfferableCourseAdd() {
             setLoading(false);
         }
 
-    }, );
+    },);
 
     /**
      * Fetches all courses from the API
@@ -41,7 +42,7 @@ export default function OfferableCourseAdd() {
      */
     async function fetchCourses() {
         try {
-            const p = await AsyncApiRequest("GET", "/courses",null);
+            const p = await AsyncApiRequest("GET", "/courses", null);
             setCourses(p)
         } catch (e) {
             console.error("Error fetching offerable courses:", e);
@@ -55,15 +56,12 @@ export default function OfferableCourseAdd() {
      */
     async function fetchProviders() {
         try {
-            const p = await AsyncApiRequest("GET", "/providers",null);
+            const p = await AsyncApiRequest("GET", "/providers", null);
             setProviders(p)
         } catch (e) {
             console.error("Error fetching offerable courses:", e);
         }
     }
-
-
-
 
 
     function handleFormSubmission(event) {
@@ -72,16 +70,18 @@ export default function OfferableCourseAdd() {
 
         const data = new FormData(event.target);
         const value = Object.fromEntries(data.entries());
-        const offerableCourse = new OfferableCourse(null, value.date, value.discount, value.price, value.visibility, new courseEntity(value.courseId), new ProviderEntity(value.providerId));
+        const offerableCourse = new OfferableCourse(null, new Date(startDate).getTime(), value.discount / 100, value.price, value.visibility, new courseEntity(value.courseId), new ProviderEntity(value.providerId));
 
         postOfferableCourse(offerableCourse)
+            .then(alert("Successfully added Offerable Course")).then(navigate("/admin/offerablecourses"))
     }
 
     async function postOfferableCourse(offerableCourse) {
+        // console.log(offerableCourse)
         try {
-            const p = await AsyncApiRequest("POST","/offerableCourse", offerableCourse);
+            const p = await AsyncApiRequest("POST", "/offerableCourse", offerableCourse);
         } catch (e) {
-            console.error("Error posting offerable course:", e);
+            throw e
         }
     }
 
@@ -119,7 +119,7 @@ export default function OfferableCourseAdd() {
                     <div className={"input-wrapper"}>
                         <label htmlFor={"date"}>Start date</label>
                         <DatePicker id={"date"} name={"date"} onChange={(date) => setStartDate(date)}
-                                    selected={startDate} dateFormat={"dd-MM-YYYY"} locale={"nb"}
+                                    selected={new Date(startDate)} dateFormat={"dd-MM-YYYY"} locale={"nb"}
                                     icon={<img src={"/icons/calendar-clear-sharp.svg"}/>} showIcon/>
                     </div>
 
@@ -136,7 +136,7 @@ export default function OfferableCourseAdd() {
 
                     <div className={"input-wrapper"}>
                         <label htmlFor={"visibility"}>Visibility</label>
-                        <input type="checkbox" id={"visibility"} name={"visibility"}/>
+                        <input type="checkbox" id={"visibility"} name={"visibility"} value={true}/>
                     </div>
 
                     <button type="submit" className={"button cta-button"}>Add Course</button>

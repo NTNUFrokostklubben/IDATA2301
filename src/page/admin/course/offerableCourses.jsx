@@ -20,12 +20,13 @@ export default function OfferableCourses() {
         fetch("http://localhost:8080/api/offerableCourses")
             .then((response) => response.json())
             .then((data) => {
+                console.log(data);
                 const courses = data.map((offerableCourse) => new OfferableCourse(
                     offerableCourse.id,
                     offerableCourse.date,
                     offerableCourse.discount,
                     offerableCourse.price,
-                    offerableCourse.visibility,
+                    offerableCourse.visible,
                     new courseEntity(
                         offerableCourse.course.id,
                         offerableCourse.course.category,
@@ -131,8 +132,8 @@ export default function OfferableCourses() {
                             <td>
                                 <p>{offerableCourse.course.title}</p>
                             </td>
-                            <td><p>{offerableCourse.price}</p></td>
-                            <td><p>{offerableCourse.discount}</p></td>
+                            <td><p>{offerableCourse.price},- NOK</p></td>
+                            <td><p>{offerableCourse.discount * 100} %</p></td>
                             {/*convert unix date to norwegian date format*/}
                             <td><p>{new Date(offerableCourse.date).toLocaleDateString("no-NO", {
                                 year: "numeric",
