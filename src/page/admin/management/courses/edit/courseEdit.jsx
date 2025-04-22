@@ -1,21 +1,8 @@
-
+import "../add/courseAdd.css"
 import {Form, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
+import {courseEntity} from "../../../../../utils/Classes/commonClasses";
 
-class courseEntity {
-    constructor(id, category, closestCourse, credits, description, diffLevel, hoursWeek, imgLink, relatedCert, title) {
-        this.id = id;
-        this.category = category;
-        this.closestCourse = closestCourse;
-        this.credits = credits;
-        this.description = description;
-        this.diffLevel = diffLevel;
-        this.hoursWeek = hoursWeek;
-        this.imgLink = imgLink;
-        this.relatedCert = relatedCert;
-        this.title = title;
-    }
-}
 
 export default function CourseEdit(courseId) {
 
@@ -29,7 +16,6 @@ export default function CourseEdit(courseId) {
     const [course, setCourse] = useState([]);
 
     useEffect(() => {
-        console.log("fetching")
         fetch("http://localhost:8080/api/course/" + id)
             .then((r) => r.json())
             .then((c) => {
@@ -160,28 +146,12 @@ export default function CourseEdit(courseId) {
                                 </select></div>
                         </div>
 
-                        <div className="group-2">
-                            <div className="input-wrapper"><label htmlFor="course-price">Price</label>
-                                <input type="number" id="course-price" name="price" defaultValue={course.price} required/></div>
 
-                            <div className="input-wrapper"><label htmlFor="price-currency">Currency</label>
-                                <select name="currency" id="price-currency" defaultValue={course.currency} required>
-                                    <option value="usd">USD</option>
-                                    <option value="eur">EUR</option>
-                                    <option value="nok">NOK</option>
-                                </select></div>
-                        </div>
 
-                        <div className="group-2">
-                            {/*TODO: Replace with calendar modal later (javascript component)*/}
-                            <div className="input-wrapper"><label htmlFor="course-date">Start Date</label>
-                                <input type="date" id="course-date" name="closestCourse" defaultValue={course.closestCourse} required/></div>
-
-                            {/*TODO: Add preview of uploaded image (javascript component)*/}
-                            <div className="input-wrapper">
-                                <label htmlFor="course-image">Course Image</label>
-                                <input type="file" id="course-image" name="imgLink" required/>
-                            </div>
+                        {/*TODO: Add preview of uploaded image (javascript component)*/}
+                        <div className="input-wrapper">
+                            <label htmlFor="course-image">Course Image</label>
+                            <input type="file" id="course-image" name="imgLink" required/>
                         </div>
 
                         <div className="input-wrapper"><label htmlFor="course-keywords">Keywords separated by

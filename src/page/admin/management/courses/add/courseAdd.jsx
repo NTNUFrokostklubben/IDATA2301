@@ -120,28 +120,12 @@ export default function CourseAdd() {
                                 </select></div>
                         </div>
 
-                        <div className="group-2">
-                            <div className="input-wrapper"><label htmlFor="course-price">Price</label>
-                                <input type="number" id="course-price" name="price" required/></div>
 
-                            <div className="input-wrapper"><label htmlFor="price-currency">Currency</label>
-                                <select name="currency" id="price-currency" required>
-                                    <option value="usd">USD</option>
-                                    <option value="eur">EUR</option>
-                                    <option value="nok">NOK</option>
-                                </select></div>
-                        </div>
 
-                        <div className="group-2">
-                            {/*TODO: Replace with calendar modal later (javascript component)*/}
-                            <div className="input-wrapper"><label htmlFor="course-date">Start Date</label>
-                                <input type="date" id="course-date" name="closestCourse" required/></div>
-
-                            {/*TODO: Add preview of uploaded image (javascript component)*/}
-                            <div className="input-wrapper">
-                                <label htmlFor="course-image">Course Image</label>
-                                <input type="file" id="course-image" name="imgLink" required/>
-                            </div>
+                        {/*TODO: Add preview of uploaded image (javascript component)*/}
+                        <div className="input-wrapper">
+                            <label htmlFor="course-image">Course Image</label>
+                            <input type="file" id="course-image" name="imgLink" required/>
                         </div>
 
                         <div className="input-wrapper"><label htmlFor="course-keywords">Keywords separated by
