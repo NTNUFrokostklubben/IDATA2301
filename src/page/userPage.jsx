@@ -9,7 +9,7 @@ export default function UserPage (){
     let [ratings, setRatings] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:8080/api/user-courses/1')
+        fetch('http://localhost:8080/api/userCourses/1')
             .then(response => response.json())
             .then(data => {
                 setData(data)
