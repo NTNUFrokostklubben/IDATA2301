@@ -3,16 +3,13 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin: 1rem 2rem;
     max-width: 600rem;
 }
 
-#courseIndex h2 {
-    margin: 0rem 1rem;
-}
 
-#courseIndex ul {
-    padding: 0 1rem;
-}
+
+
 
 #courseIndex li {
     background-color: var(--gray);
@@ -41,7 +38,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0rem 2rem;
+    /*margin: 0rem 2rem;*/
 }
 
 #courseIndex #table-header select {
@@ -51,7 +48,7 @@
 #courseIndex #course-table {
 
     table-layout: fixed;
-    margin: 0rem 2rem;
+    /*margin: 0rem 2rem;*/
 }
 
 #courseIndex #course-table thead {
@@ -91,23 +88,7 @@
     padding: 0rem 1rem;
 }
 
-#courseIndex .edit-button {
-    color: var(--textWhite);
-    text-decoration: none;
-}
 
-
-#courseIndex .delete-button {
-    background-color:var(--danger);
-    color: var(--textWhite);
-    height: 3rem;
-    width: 7rem;
-}
-
-#courseIndex .delete-button:hover {
-    background-color: #8f2323;
-    /*color: var(--textBlack);*/
-}
 
 
 

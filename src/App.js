@@ -12,6 +12,12 @@ import UserPage from "./page/userPage";
 import About from "./page/about";
 import Checkout from "./page/checkout";
 import Course from "./page/course";
+import Providers from "./page/admin/management/providers/providers";
+import Courses from "./page/admin/management/courses/courses";
+import ProviderAdd from "./page/admin/management/providers/add/providerAdd";
+import ProviderEdit from "./page/admin/management/providers/edit/providerEdit";
+import OfferableCourseAdd from "./page/admin/course/add/offerableCourseAdd";
+import OfferableCourseEdit from "./page/admin/course/edit/offerableCourseEdit";
 
 function App() {
     return (
@@ -25,11 +31,24 @@ function App() {
                     <Route path={"about"} element={<About/>}/>
                     <Route path={"checkout"} element={<Checkout/>}/>
                     <Route path={"/admin"} element={<AdminNav/>}>
-                        <Route index element={<AdminDashboard/>}/>
-                        <Route path={"/admin/course"}>
-                            <Route index element={<CourseIndex/>}/>
-                            <Route path={"add"} element={<CourseAdd/>}/>
-                            <Route path={"edit/:id"} element={<CourseEdit/>}/>
+                        {/*<Route index element={<AdminDashboard/>}/>*/}
+                        <Route path={"/admin/offerableCourses"}>
+                            <Route index element={<OfferableCourses/>}/>
+                            <Route path={"add"} element={<OfferableCourseAdd/>}/>
+                            <Route path={"edit/:id"} element={<OfferableCourseEdit/>}/>
+                        </Route>
+                        <Route path={"/admin/management"}>
+                            <Route path={"providers"}>
+                                <Route index element={<Providers/>}/>
+                                <Route path={"add"} element={<ProviderAdd /> }/>
+                                <Route path={"edit/:id"} element={<ProviderEdit/>}/>
+                            </Route>
+                            <Route path={"courses"}>
+                                <Route index element={<Courses/>}/>
+                                <Route path={"add"} element={<CourseAdd/> }/>
+                                <Route path={"edit/:id"} element={<CourseEdit/>}/>
+                            </Route>
+                            <Route path={"users"} element={<div>Users</div>}/>
                         </Route>
                     </Route>
                 </Route>

@@ -1,0 +1,88 @@
+
+.admin-table #table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0rem 2rem;
+}
+
+.admin-table #table-header select {
+    height: 4rem;
+}
+
+.admin-table  {
+    table-layout: fixed;
+    width: 100%;
+    /*margin: 0rem 2rem;*/
+}
+
+.admin-table img {
+    width: 3rem;
+    height: 3rem;
+    /*margin: 0rem 2rem;*/
+}
+
+/*Sets width of delete and edit button column*/
+.admin-table th:nth-last-child(1) {
+    width: 5rem;
+}
+
+.admin-table  thead {
+    background-color: var(--highlight);
+}
+
+.admin-table  tbody {
+    background-color: var(--textWhite);
+    border: #242C2E solid 1px;
+}
+
+.admin-table  th {
+    padding: 1rem 0.5rem;
+    text-align: center;
+}
+
+
+.admin-table  tr {
+    border-bottom: #242C2E solid 1px;
+    height: 4rem;
+}
+
+.admin-table  tr:hover {
+    background-color: var(--gray);
+}
+
+
+.admin-table  td {
+    vertical-align: center;
+    padding: 0rem 1rem;
+    margin: 1rem 0;
+}
+
+.admin-table .edit-button {
+    height: 2rem;
+    width: 4rem;
+
+}
+
+.admin-table .edit-button a {
+    color: var(--textWhite);
+    text-decoration: none;
+}
+
+
+.admin-table .delete-button {
+    background-color:var(--danger);
+    color: var(--textWhite);
+    height: 2rem;
+    width: 4rem;
+}
+
+.admin-table .delete-button a {
+    color: var(--textWhite);
+    text-decoration: none;
+}
+
+.admin-table .delete-button:hover {
+    background-color: #8f2323;
+    /*color: var(--textBlack);*/
+}

@@ -1,12 +1,12 @@
-import "./courseIndex.css";
+import "./offerableCourses.css";
+import "../management/aggregateTable.css"
 import CardHorizontal from "../../../component/card/cardHorizontal";
 import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import {courseEntity, OfferableCourse, ProviderEntity} from "../../../utils/Classes/commonClasses";
-import Collapsable from "../../../component/Collapsable/collapsable";
 
 
-export default function CourseIndex() {
+export default function OfferableCourses() {
 
 
     const [offerableCourses, setOfferableCourses] = useState([]);
@@ -20,12 +20,13 @@ export default function CourseIndex() {
         fetch("http://localhost:8080/api/offerableCourses")
             .then((response) => response.json())
             .then((data) => {
+                // console.log(data);
                 const courses = data.map((offerableCourse) => new OfferableCourse(
                     offerableCourse.id,
                     offerableCourse.date,
                     offerableCourse.discount,
                     offerableCourse.price,
-                    offerableCourse.visibility,
+                    offerableCourse.visible,
                     new courseEntity(
                         offerableCourse.course.id,
                         offerableCourse.course.category,
@@ -92,9 +93,9 @@ export default function CourseIndex() {
     // Important to ensure all courses from providers are displayed too as there are some missing courses atm.
     return (
         <div id={"courseIndex"}>
-            <h2>Courses</h2>
+            <h2>Offerable courses</h2>
             <div id={"table-header"}>
-                <button id={"addCourse"} className={"cta-button"}><Link to={"/admin/course/add"} className={""}>Add
+                <button id={"addCourse"} className={"cta-button"}><Link to={"/admin/offerablecourses/add"} className={""}>Add
                     Course</Link></button>
                 <select id={"course"} onChange={changeProvider}>
                     <option value={""}>All</option>
@@ -108,16 +109,16 @@ export default function CourseIndex() {
 
 
             <div>
-                <table id={"course-table"}>
+                <table className={"admin-table"} id={"course-table"}>
                     <thead>
                     <tr>
-                        <th>Provider</th>
-                        <th>Course</th>
-                        <th>Price</th>
-                        <th>Discount</th>
-                        <th>Start Date</th>
-                        <th>Visibility</th>
-                        <th>Actions</th>
+                        <th><p>Provider</p></th>
+                        <th><p>Course</p></th>
+                        <th><p>Price</p></th>
+                        <th><p>Discount</p></th>
+                        <th><p>Start Date</p></th>
+                        <th><p>Visibility</p></th>
+                        <th><p>Actions</p></th>
                     </tr>
                     </thead>
                     <tbody>{filteredCourses.map((offerableCourse) => (
@@ -126,27 +127,24 @@ export default function CourseIndex() {
                                 <img src={"https://picsum.photos/50?random=" + offerableCourse.id}
                                      alt={offerableCourse.provider.imgAltLink}
                                      width={50} height={50}/>
-                                {offerableCourse.provider.name}
+                                <p>{offerableCourse.provider.name}</p>
                             </td>
                             <td>
-                                <img src={"https://picsum.photos/50?random=" + offerableCourse.id}
-                                     alt={offerableCourse.course.title}
-                                     width={50} height={50}/>
-                                {offerableCourse.course.title}
+                                <p>{offerableCourse.course.title}</p>
                             </td>
-                            <td>{offerableCourse.price}</td>
-                            <td>{offerableCourse.discount}</td>
+                            <td><p>{offerableCourse.price},- NOK</p></td>
+                            <td><p>{parseInt(offerableCourse.discount * 100)} %</p></td>
                             {/*convert unix date to norwegian date format*/}
-                            <td>{new Date(offerableCourse.date).toLocaleDateString("no-NO", {
+                            <td><p>{new Date(offerableCourse.date).toLocaleDateString("no-NO", {
                                 year: "numeric",
                                 month: "2-digit",
                                 day: "2-digit"
-                            })}</td>
-                            <td>{offerableCourse.visibility ? "Visible" : "Hidden"}</td>
+                            })}</p></td>
+                            <td><p>{offerableCourse.visibility ? "Visible" : "Hidden"}</p></td>
                             <td>
-                                <button className={"cta-button"}><Link to={`/admin/course/edit/${offerableCourse.id}`}
+                                <button className={"cta-button edit-button"}><Link to={`/admin/offerablecourses/edit/${offerableCourse.id}`}
                                          id={"edit" + offerableCourse.id}
-                                         className={"edit-button"}>Edit</Link></button>
+                                         >Edit</Link></button>
                                 <button className={"delete-button"}>Delete</button>
                             </td>
                         </tr>
