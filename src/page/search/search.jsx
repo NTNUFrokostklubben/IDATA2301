@@ -2,11 +2,15 @@ import "./search.css"
 import Card from "../../component/card/card";
 import {useEffect, useState} from "react";
 import Collapsable from "../../component/Collapsable/collapsable";
-import {courseEntity} from "../../utils/Classes/commonClasses";
+import {courseEntity, FilterQuery} from "../../utils/Classes/commonClasses";
 import DatePicker from "react-datepicker";
+import {useParams, useSearchParams} from "react-router-dom";
 
 
 export default function Search() {
+
+    const [searchParams, setSearchParams] = useSearchParams();
+    const searchValue = searchParams.get("search");
 
     const [courses, setCourses] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -19,10 +23,51 @@ export default function Search() {
         event.preventDefault();
 
         const data = new FormData(event.target);
-
         const value = Object.fromEntries(data.entries());
 
-        console.log({value});
+        console.log(searchValue)
+
+        const filters = new FilterQuery({
+            ["startDate"]: startDate,
+            ["endDate"]: endDate
+        }, buildCategory(), buildDifficultyLevel(), {
+            ["min-credits"]: value["min-credits"],
+            ["max-credits"]: value["max-credits"]
+        }, {
+            ["min-rating"]: value["min-rating"],
+            ["max-rating"]: value["max-rating"]
+        }, {["min-price"]: value["min-price"], ["max-price"]: value["max-price"]}, searchValue);
+
+        console.log({filters});
+
+    }
+
+    /**
+     * Builds an array of all checked categories for filtering on the backend
+     *
+     * @returns {*[]} Array of checked categories
+     */
+    function buildCategory() {
+        const categories = [];
+        const checkboxes = document.querySelectorAll("input[type=checkbox]:checked.categoryCheckbox");
+        checkboxes.forEach((checkbox) => {
+            categories.push(checkbox.name);
+        });
+        return categories;
+    }
+
+    /**
+     * Builds an array of all checked difficulty levels for filtering on the backend
+     *
+     * @returns {*[]} Array of checked difficulty levelss
+     */
+    function buildDifficultyLevel() {
+        const levels = [];
+        const checkboxes = document.querySelectorAll("input[type=checkbox]:checked.difficultyCheckbox");
+        checkboxes.forEach((checkbox) => {
+            levels.push(checkbox.name);
+        });
+        return levels;
     }
 
     useEffect(() => {
@@ -35,6 +80,16 @@ export default function Search() {
             })
     }, []);
 
+    /**
+     * Handles date changes in the date range picker
+     *
+     * @param dates Array of dates
+     */
+    const dateChanged = (dates) => {
+        const [start, end] = dates;
+        setStartDate(start);
+        setEndDate(end);
+    };
 
     if (loading) {
         return <div>Loading...</div>
@@ -43,14 +98,16 @@ export default function Search() {
     return (
         <div className="search-page">
             <div className="filters">
-                <form onSubmit={handleSubmit} action="http://localhost:6655" method="POST">
+                <form onSubmit={handleSubmit} >
                     <Collapsable title={"Difficulty level"}>
                         <section id="difficulty">
 
-                            <label><input className="" type="checkbox" name={"diff-1"} value={true}/> Beginner</label>
-                            <label><input className="" type="checkbox" name={"diff-2"}
+                            <label><input className="difficultyCheckbox" type="checkbox" name={"1"}
+                                          value={true}/> Beginner</label>
+                            <label><input className="difficultyCheckbox" type="checkbox" name={"2"}
                                           value={true}/> Intermediate</label>
-                            <label><input className="" type="checkbox" name={"diff-3"} value={true}/> Expert</label>
+                            <label><input className="difficultyCheckbox" type="checkbox" name={"3"}
+                                          value={true}/> Expert</label>
                         </section>
                     </Collapsable>
                     <Collapsable title={"Course size"}>
@@ -60,25 +117,29 @@ export default function Search() {
                                 <div className="input-wrapper">
                                     <label htmlFor="min-size">Min</label>
                                     <input className="" id="min-size" placeholder="min" name={"min-credits"}
-                                           type="number"/>
+                                           type="number" min={0}/>
                                 </div>
                                 <p> - </p>
                                 <div className="input-wrapper">
                                     <label htmlFor="max-size">Max</label>
                                     <input className="" id="max-size" placeholder="max" name={"max-credits"}
-                                           type="number"/>
+                                           type="number" min={0}/>
                                 </div>
                             </div>
                         </section>
                     </Collapsable>
                     <Collapsable title={"Category"}>
                         <section id="category">
-                            <label><input className="" type="checkbox" name={"cat-it"}/> Information
+                            <label><input className="categoryCheckbox" type="checkbox" name={"it"}
+                                          value={true}/> Information
                                 Technologies</label>
-                            <label><input className="" type="checkbox" name={"cat-dm"}/> Digital Marketing</label>
-                            <label><input className="" type="checkbox" name={"cat-be"}/> Business and
+                            <label><input className="categoryCheckbox" type="checkbox" name={"dm"}
+                                          value={true}/> Digital Marketing</label>
+                            <label><input className="categoryCheckbox" type="checkbox" name={"be"}
+                                          value={true}/> Business and
                                 Entrepenaurship</label>
-                            <label><input className="" type="checkbox" name={"cat-dsa"}/> Data Science and
+                            <label><input className="categoryCheckbox" type="checkbox" name={"dsa"} value={true}/> Data
+                                Science and
                                 Analytics</label>
 
                         </section>
@@ -91,14 +152,14 @@ export default function Search() {
                                 <div className="input-wrapper">
                                     <label htmlFor="min-rating">Min rating</label>
                                     <input id="min-rating" className="" placeholder="min" name={"min-rating"}
-                                           type="number"/>
+                                           type="number" min={0} max={5}/>
                                 </div>
                                 <p> - </p>
 
                                 <div className="input-wrapper">
                                     <label htmlFor="max-rating">Max rating</label>
                                     <input id="max-rating" className="" placeholder="max" name={"max-rating"}
-                                           type="number"/>
+                                           type="number" min={0} max={5}/>
                                 </div>
                             </div>
                         </section>
@@ -109,13 +170,13 @@ export default function Search() {
                                 <div className="input-wrapper">
                                     <label htmlFor="min-price">Min price</label>
                                     <input id="min-price" className="" placeholder="min" name={"min-price"}
-                                           type="number"/>
+                                           type="number" min={0}/>
                                 </div>
                                 <p> - </p>
                                 <div className="input-wrapper">
                                     <label htmlFor="max-price">Max price</label>
                                     <input id="max-price" className="" placeholder="max" name={"max-price"}
-                                           type="number"/>
+                                           type="number" min={0}/>
                                 </div>
                             </div>
                         </section>
@@ -123,20 +184,12 @@ export default function Search() {
 
                     <Collapsable title={"Course Start"}>
                         <section id={"dates"}>
-                            <div className="search-input-field-container">
-                                <div className="input-wrapper"><label htmlFor="from-date">From</label>
-                                    <DatePicker id={"from-date"} name={"from-date"} selected={startDate}
-                                                onChange={(date) => setStartDate(date)}
-                                                selectsStart={true} startDate={startDate} endDate={endDate}
-                                                icon={<img src={"/icons/calendar-clear-sharp.svg"}/>} showIcon/></div>
+                            <p>Date Range</p>
 
-                                <p> - </p>
-                                <div className="input-wrapper"><label htmlFor="to-date">To</label>
-                                    <DatePicker id="to-date" name={"to-date"} selected={endDate}
-                                                onChange={(date) => setEndDate(date)} selectsEnd={true}
-                                                startDate={startDate} endDate={endDate} minDate={startDate}
-                                                icon={<img src={"/icons/calendar-clear-sharp.svg"}/>} showIcon/></div>
-                            </div>
+                            <DatePicker selected={startDate} onChange={dateChanged} startDate={startDate}
+                                        endDate={endDate} selectsRange={true}
+                                        icon={<img src={"/icons/calendar-clear-sharp.svg"}/>} showIcon/>
+
                         </section>
                     </Collapsable>
                     <button className="cta-button" type="submit">Filter</button>
@@ -146,7 +199,7 @@ export default function Search() {
 
             <div className="search-results">
                 <section id="resultsinfo">
-                    <h2>3 results for "Lorem Ipsum"</h2>
+                    <h2>3 results for "{searchValue}"</h2>
                     <div className="input-wrapper">
                         <select className="filter-dropdown" id="filter-ropdown" type="dropdown">
                             <option>Most Relevant</option>

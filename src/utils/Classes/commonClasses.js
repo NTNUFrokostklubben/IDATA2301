@@ -38,3 +38,15 @@ export class OfferableCourse {
         this.provider = provider;
     }
 }
+
+export class FilterQuery {
+    constructor(dateRange, categories, diffLevels, courseSizeRange, ratingRange, priceRange, searchValue) {
+        this.dateRange = dateRange;
+        this.categories = categories;
+        this.diffLevels = diffLevels;
+        this.courseSizeRange = courseSizeRange;
+        this.ratingRange = ratingRange;
+        this.priceRange = priceRange;
+        this.searchValue = searchValue;
+    }
+}

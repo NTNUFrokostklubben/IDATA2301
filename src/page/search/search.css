@@ -8,7 +8,7 @@
 
 .filters .react-datepicker__view-calendar-icon input[type="text"] {
     padding-left: 2rem; /* Adjust this value to create space for the icon */
-    width: 8rem;
+    /*width: 8rem;*/
 }
 
 
@@ -84,7 +84,7 @@
 }
 
 .filters #dates {
-    padding-bottom: 60rem;
+    /*padding-bottom: 60rem;*/
 }
 
 .search-input-field-container {
