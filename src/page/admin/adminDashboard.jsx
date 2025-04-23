@@ -1,7 +1,19 @@
 import * as React from 'react';
 import {useEffect, useState} from 'react';
 import {PieChart} from '@mui/x-charts/PieChart';
+import AdminReview from "../../component/Rating/adminReview";
 import "./adminDashboard.css";
+
+class reviewEntity {
+      constructor(id, rating, comment, courseTitle, userName, profilePicture){
+        this.id = id;
+        this.rating = rating;
+        this.comment = comment;
+        this.title = courseTitle;
+        this.user = userName;
+        this.profilePicture = profilePicture;
+    }
+}
 
 export default function AdminDashboard() {
 
@@ -11,6 +23,7 @@ export default function AdminDashboard() {
     const [totalUsers, setTotalUsers]=useState([]);
     const [totalRevenue, setTotalRevenue]=useState([]);
     const [avgRevenue, setAvgRevenue]=useState([]);
+    const [reviews, setReviews]=useState([]);
 
     const [size, setSize] = useState(screenSetSize());
     const [hidden, setHidden] = useState(screenSetHidden());
@@ -28,39 +41,48 @@ export default function AdminDashboard() {
     useEffect(() => {
         fetch("http://localhost:8080/api/transaction/providersStats")
             .then((response) => response.json())
-            .then((data1) => {
-                const revenueData = data1.map((providerStat) => ({
+            .then((data) => {
+                const revenue = data.map((providerStat) => ({
                     id: providerStat.ID_PROVIDER,
                     value: providerStat.REVENUE,
                     label: providerStat.PROVIDER_NAME
                 }));
-                setRevenueData(revenueData);
+                setRevenueData(revenue);
+            }).catch(err => console.error('Error fetching data:', err));
+    }, []);
+
+    useEffect(() => {
+        fetch("http://localhost:8080/api/userCourses/lastReviews")
+            .then((response) => response.json())
+            .then((data) => {
+                const reviews = data.map((review) => new reviewEntity(review.id, review.rating,
+                    review.comment, review.course.title, review.user.name, review.user.profilePicture));
+                setReviews(reviews);
             }).catch(err => console.error('Error fetching data:', err));
     }, []);
 
     useEffect(() => {
         fetch('http://localhost:8080/api/transaction/totalRevenue')
             .then((response) => response.json())
-            .then((data2) => {
-                setTotalRevenue(data2);
+            .then((data) => {
+                setTotalRevenue(data);
             }).catch(err => console.error('Error fetching data:', err));
         fetch("http://localhost:8080/api/courses/total")
             .then((response) => response.json())
-            .then((data3) => {
-                setTotalCourses(data3);
+            .then((data) => {
+                setTotalCourses(data);
             }).catch(err => console.error('Error fetching data:', err));
         fetch("http://localhost:8080/api/users/total")
             .then((response) => response.json())
-            .then((data4) => {
-                setTotalUsers(data4);
+            .then((data) => {
+                setTotalUsers(data);
             }).catch(err => console.error('Error fetching data:', err));
         fetch("http://localhost:8080/api/transaction/averageRevenuePerCourse")
             .then((response) => response.json())
-            .then((data4) => {
-                setAvgRevenue(data4);
+            .then((data) => {
+                setAvgRevenue(data);
             }).catch(err => console.error('Error fetching data:', err));
     }, []);
-
 
 
     function screenSetSize() {
@@ -124,65 +146,9 @@ export default function AdminDashboard() {
                 <div className={"admin-dash-reviews"}>
                     <h3>Recent Reviews</h3>
                     <hr className={"solid"}/>
-
-                    <div className={"admin-dash-reviews-list"}>
-
-                        {/*TODO: separate the reviews into a component*/}
-                        <div className={"admin-dash-review"}>
-                            <div className={"admin-dash-review-text"}>
-                                <span className={"admin-dash-dot"}></span> &nbsp;
-                                <p>Course 1 - &nbsp; </p>
-                                <p>Great course, learned a lot!</p>
-                            </div>
-                            &nbsp;
-                            <div className={"admin-dash-review-rating"}>
-                                <img width="24" src="/icons/star-sharp.svg" alt=""/>
-                                &nbsp;
-                                <p>5</p>
-                            </div>
-                        </div>
-
-                        <div className={"admin-dash-review"}>
-                            <div className={"admin-dash-review-text"}>
-                                <span className={"admin-dash-dot"}></span> &nbsp;
-                                <p>Course 2 - &nbsp; </p>
-                                <p>Great course!</p>
-                            </div>
-                            &nbsp;
-                            <div className={"admin-dash-review-rating"}>
-                                <img width="24" src="/icons/star-sharp.svg" alt=""/>
-                                &nbsp;
-                                <p>4</p>
-                            </div>
-                        </div>
-
-                        <div className={"admin-dash-review"}>
-                            <div className={"admin-dash-review-text"}>
-                                <span className={"admin-dash-dot"}></span> &nbsp;
-                                <p>Course 3 - &nbsp; </p>
-                                <p>Could be better tbh...</p>
-                            </div>
-                            &nbsp;
-                            <div className={"admin-dash-review-rating"}>
-                                <img width="24" src="/icons/star-sharp.svg" alt=""/>
-                                &nbsp;
-                                <p>3</p>
-                            </div>
-                        </div>
-
-                    </div>
-                    <br />
-                    <hr className={"solid"}/>
-                    <div className={"admin-dash-reviews-avg"}>
-
-                        <h6> Average rating: </h6>
-                        <div className={"admin-dash-review-rating"}>
-                            <img width="24" src="/icons/star-sharp.svg" alt=""/>
-                            &nbsp;
-                            <p>4</p>
-                        </div>
-                    </div>
-
+                    {reviews.map((review) => (
+                        <AdminReview key={review.id} {...review}/>
+                    ))}
                 </div>
 
                 <div className={"admin-dash-users"}>

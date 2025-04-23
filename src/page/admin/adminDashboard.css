@@ -32,46 +32,6 @@
     flex-direction: column;
     background-color: var(--highlight);
 }
-.admin-dash-reviews-list{
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin-top: 1rem;
-}
-.admin-dash-review{
-    display: flex;
-    min-width: 30rem;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    background-color: var(--textWhite);
-    padding: 0.5rem;
-}
-.admin-dash-review-text{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-.admin-dash-dot{
-    height: 1.5rem;
-    width: 1.5rem;
-    background-color: #bbb;
-    border-radius: 50%;
-    display: inline-block;
-}
-.admin-dash-review-rating{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-end;
-}
-.admin-dash-reviews-avg{
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-    justify-content: space-between;
-    padding-top: 2rem;
-}
 .admin-dash-users{
     min-width: 25rem;
     margin-top: 2rem;
@@ -93,4 +53,10 @@
 }
 .admin-dash-title{
     font-weight: lighter;
+}
+.admin-dash-review-user-image{
+    height: 2rem;
+    width: 2rem;
+    border-radius: 50%;
+    margin-right: 0.5rem;
 }
