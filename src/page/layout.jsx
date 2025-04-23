@@ -15,6 +15,10 @@ export default function Layout() {
 
     return (
         <div>
+            <link rel="preconnect" href="https://fonts.googleapis.com"/>
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin/>
+            <link href="https://fonts.googleapis.com/css2?family=Tienne:wght@400;700;900&display=swap"
+                  rel="stylesheet"/>
             {/*Navbar*/}
             <nav id="menu-navbar">
                 <li id="logo-image">
@@ -81,7 +85,7 @@ export default function Layout() {
 
                 <div id="footer-textbox">
 
-                <div className="textFooter" id="contact-us">
+                    <div className="textFooter" id="contact-us">
                         <h5>Contact us:</h5>
                         <p>Address: 1234 Main Street, Lincoln, NE 685089</p>
                         <p>Phone number: +47 123 45 678</p>
