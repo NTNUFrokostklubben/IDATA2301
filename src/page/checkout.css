@@ -1,5 +1,6 @@
 #page-layout-checkout{
     display: flex;
+    justify-content: center;
     padding-left: 1rem;
     margin-top: 5rem;
 

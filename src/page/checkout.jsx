@@ -11,7 +11,8 @@ import countryList from "react-select-country-list";
 
 
 export default function Checkout() {
-   // const [courseData, setCourseData] = useState([]);
+
+    const [loading, setLoading] = useState(false);
     const [showLoginModal, setShowLoginModal] = useState()
     const [showSignupModal, setShowSignupModal] = useState()
     const user = useContext(UserContext);
@@ -19,13 +20,16 @@ export default function Checkout() {
     const [countrySelect, setCountrySelect] = useState('')
     const options = useMemo(() => countryList().getData(), [])
     const [cardNumber, setCardNumber] = useState('');
+    const inputRef = useRef(null);
 
     const handlePurchase =  ( ) => {
-        fetch(`http://localhost:8080/api/transaction/offerId/${courseData.id}/userid/${1}`, {method:'POST'})
-            .then(data => console.log(data))
+
+         fetch(`http://localhost:8080/api/transaction/offerId/${courseData.id}/userid/${1}`, {method:'POST'})
+            .then((response) => {console.log(response.status)})
             .catch(err => console.error('Error fetching data:', err));
+
     }
-        const inputRef = useRef(null);
+
 
         const handleExpiration = (e) => {
             let value = e.target.value.replace(/\D/g, ""); // Remove non-digits
@@ -34,6 +38,20 @@ export default function Checkout() {
             }
             e.target.value = value;
         };
+
+    const handlePurchas = async () => {
+        setLoading(true);
+
+        try {
+            // Simulate API call
+            await new Promise((resolve) => setTimeout(resolve, 2000));
+            alert('Purchase complete!');
+        } catch (err) {
+            console.error(err);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     const handleCardNr = (e) => {
         const input = e.target.value;
@@ -83,7 +101,7 @@ export default function Checkout() {
                                 <img id="klarna-image" src="/images/klarnaXL.webp" alt="klarna"/></a>
                         </div>
                         <div id="other">
-                            <button onClick="">other</button>
+                            <button onClick="">Other</button>
                         </div>
                     </div>
                 </section>
@@ -100,27 +118,27 @@ export default function Checkout() {
                            pattern={"\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}\\b"}
                            placeholder="Email"/>
                     <h5 className="checkout-headers"> Billing</h5>
-                    <form id="billing-input" method="post">
+                    <form id="billing-input" onSubmit={e => e.preventDefault() }>
                         <Select id={"country-select"} className={"large-input-field"}
-                                required={true}
+                                required={false}
                                 options={options}
                                 value={countrySelect}
                                 onChange={selectCountryHandler}/>
                         <div className="small-input">
-                            <input required={true}
+                            <input required={false}
                                    className="small-input-field"
                                    placeholder="First name"
                                    type="text"
                                    id="firstname"
                                    name="username"/>
-                            <input required={true}
+                            <input required={false}
                                    className="small-input-field"
                                    type="text"
                                    placeholder="Last name"
                                    id="lastname"
                                    name="lastname"/>
                         </div>
-                        <input required={true}
+                        <input required={false}
                                className="large-input-field"
                                placeholder="Credit card number"
                                type="text"
@@ -131,7 +149,7 @@ export default function Checkout() {
                                onInput={handleCardNr}
                                id="credit-card"/>
                         <div className="small-input">
-                            <input required={true}
+                            <input required={false}
                                    className="small-input-field"
                                    placeholder="Expiration date mm/yy"
                                    type="text"
@@ -140,7 +158,7 @@ export default function Checkout() {
                                    ref={inputRef}
                                    onInput={handleExpiration}
                                    id="exp-date"/>
-                            <input required={true}
+                            <input required={false}
                                    className="small-input-field"
                                    placeholder="Security code"
                                    type="number"
@@ -165,7 +183,7 @@ export default function Checkout() {
             </div>
             <div id="checkout-right-side">
                 <section id="checkout">
-                    <h5 className="checkout-headers">product</h5>
+                    <h5 className="checkout-headers">Product</h5>
                     <div className="product">
                         <h6 className="checkout-headers">{courseData.course.title}</h6>
                         <div className="picture-and-text">

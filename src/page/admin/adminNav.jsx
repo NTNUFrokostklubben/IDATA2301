@@ -24,7 +24,7 @@ export default function AdminNav() {
                                 <Link>Overview</Link>
                             </li>
                             <li>
-                                <Link to={"/admin/course"}>Courses</Link>
+                                <Link to={"/admin/offerablecourses"}>Offerable Courses</Link>
                             </li>
                             <li>
                                 <Link>Analytics</Link>
@@ -36,11 +36,15 @@ export default function AdminNav() {
                     <nav id="Management">
                         <ul>
                             <li>
-                                <Link>Providers</Link>
+                                <Link to={"/admin/management/providers"}>Providers</Link>
+                            </li>
+                            <li>
+                                <Link to={"/admin/management/courses"}>Courses</Link>
                             </li>
                             <li>
                                 <Link>Users</Link>
                             </li>
+
                         </ul>
                     </nav>
                 </Collapsable>
