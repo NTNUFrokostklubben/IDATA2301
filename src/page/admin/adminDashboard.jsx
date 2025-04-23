@@ -25,6 +25,8 @@ export default function AdminDashboard() {
     const [totalRevenue, setTotalRevenue]=useState([]);
     const [avgRevenue, setAvgRevenue]=useState([]);
     const [reviews, setReviews]=useState([]);
+    const [revenueLast30Days, setRevenueLast30Days] = useState([])
+    const [newUsers, setNewUsers] = useState([])
 
     const [size, setSize] = useState(screenSetSize());
     const [hidden, setHidden] = useState(screenSetHidden());
@@ -84,6 +86,18 @@ export default function AdminDashboard() {
             .then((data) => {
                 setAvgRevenue(data);
             }).catch(err => console.error('Error fetching data:', err));
+        fetch("http://localhost:8080/api/transaction/revenueLast30Days")
+            .then((response) => response.json())
+            .then((data) => {
+                setRevenueLast30Days(data);
+            }).catch(err => console.error('Error fetching data:', err));
+        fetch("http://localhost:8080/api/users/newUsers")
+            .then((response) => response.json())
+            .then((data) => {
+                setNewUsers(data);
+            }).catch(err => console.error('Error fetching data:', err));
+
+
     }, []);
 
 
@@ -149,7 +163,7 @@ export default function AdminDashboard() {
                         <h6 className={"admin-dash-total"}>{totalRevenue} NOK</h6>
                         &nbsp;
                         <h5 className={"admin-dash-title"}>Total revenue last 30 days</h5>
-                        <h6 className={"admin-dash-total"}>TEMP NOK</h6>
+                        <h6 className={"admin-dash-total"}>{revenueLast30Days} NOK</h6>
                     </div>
                 </div>
 
@@ -173,7 +187,7 @@ export default function AdminDashboard() {
                             <h6 className={"admin-dash-total"}>{totalUsers}</h6>
                             &nbsp;
                             <h5 className={"admin-dash-title"}>New users last 30 days</h5>
-                            <h6 className={"admin-dash-total"}>Temp value</h6>
+                            <h6 className={"admin-dash-total"}> {newUsers} </h6>
                         </div>
                     </div>
                     <div className={"admin-dash-courses"}>
