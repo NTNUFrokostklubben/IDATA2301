@@ -11,6 +11,7 @@ export default function Course() {
     const [loading, setLoading] = useState(true);
     const [keywords, setKeywords] = useState([])
     const {id} = useParams();
+
     useEffect(() => {
             fetch(`http://localhost:8080/api/course/${id}`)
                 .then(response => response.json())

@@ -5,7 +5,6 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Layout from "./page/layout";
 import CourseAdd from "./page/admin/management/courses/add/courseAdd";
 import AdminNav from "./page/admin/adminNav";
-import OfferableCourses from "./page/admin/course/offerableCourses";
 import CourseEdit from "./page/admin/management/courses/edit/courseEdit";
 import AdminDashboard from "./page/admin/adminDashboard";
 import UserPage from "./page/userPage";
@@ -16,6 +15,7 @@ import Providers from "./page/admin/management/providers/providers";
 import Courses from "./page/admin/management/courses/courses";
 import ProviderAdd from "./page/admin/management/providers/add/providerAdd";
 import ProviderEdit from "./page/admin/management/providers/edit/providerEdit";
+import OfferableCourses from "./page/admin/course/offerableCourses";
 import OfferableCourseAdd from "./page/admin/course/add/offerableCourseAdd";
 import OfferableCourseEdit from "./page/admin/course/edit/offerableCourseEdit";
 
@@ -31,7 +31,7 @@ function App() {
                     <Route path={"about"} element={<About/>}/>
                     <Route path={"checkout"} element={<Checkout/>}/>
                     <Route path={"/admin"} element={<AdminNav/>}>
-                        {/*<Route index element={<AdminDashboard/>}/>*/}
+                        <Route index element={<AdminDashboard/>}/>
                         <Route path={"/admin/offerableCourses"}>
                             <Route index element={<OfferableCourses/>}/>
                             <Route path={"add"} element={<OfferableCourseAdd/>}/>
