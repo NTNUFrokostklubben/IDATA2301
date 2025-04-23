@@ -1,5 +1,5 @@
 import "./checkout.css"
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import React, {useContext, useMemo, useRef, useState} from "react";
 import {UserContext} from "../userContext";
 import {createPortal} from "react-dom";
@@ -13,21 +13,32 @@ import countryList from "react-select-country-list";
 export default function Checkout() {
 
     const [loading, setLoading] = useState(false);
-    const [showLoginModal, setShowLoginModal] = useState()
-    const [showSignupModal, setShowSignupModal] = useState()
+    const [status, setStatus] = useState(Number);
+    const [showLoginModal, setShowLoginModal] = useState(Boolean)
+    const [showSignupModal, setShowSignupModal] = useState(Boolean)
     const user = useContext(UserContext);
     const courseData = useSelector((state) => state.data.sharedObject)
     const [countrySelect, setCountrySelect] = useState('')
     const options = useMemo(() => countryList().getData(), [])
     const [cardNumber, setCardNumber] = useState('');
     const inputRef = useRef(null);
+    const navigate = useNavigate();
 
-    const handlePurchase =  ( ) => {
-
+    const handlePurchase =  async () => {
+        setLoading(true);
          fetch(`http://localhost:8080/api/transaction/offerId/${courseData.id}/userid/${1}`, {method:'POST'})
-            .then((response) => {console.log(response.status)})
+            .then((response) => {setStatus(response.status)})
             .catch(err => console.error('Error fetching data:', err));
+        try {
+            // Simulate API call
+            await new Promise((resolve) => setTimeout(resolve, 2000));
 
+        } catch (err) {
+            console.error(err);
+        } finally {
+            setLoading(false);
+            navigate('/order-complete');
+        }
     }
 
 
@@ -38,20 +49,6 @@ export default function Checkout() {
             }
             e.target.value = value;
         };
-
-    const handlePurchas = async () => {
-        setLoading(true);
-
-        try {
-            // Simulate API call
-            await new Promise((resolve) => setTimeout(resolve, 2000));
-            alert('Purchase complete!');
-        } catch (err) {
-            console.error(err);
-        } finally {
-            setLoading(false);
-        }
-    };
 
     const handleCardNr = (e) => {
         const input = e.target.value;
@@ -69,6 +66,25 @@ export default function Checkout() {
     const selectCountryHandler = value => {
         setCountrySelect(value)
     }
+
+    const customSelectStyles = {
+        control: (base) => ({
+            ...base,
+            height: '20px',         // match your other inputs
+            minHeight: '25px',
+            fontSize: '1rem',
+            borderRadius: '4px',
+            borderColor: '#ccc',    // override the default blue border
+        }),
+        valueContainer: (base) => ({
+            ...base,
+            padding: '0 8px',
+        }),
+        indicatorsContainer: (base) => ({
+            ...base,
+            height: '20px',
+        }),
+    };
 
     function loggedIn(){
         if(user == null){
@@ -108,11 +124,12 @@ export default function Checkout() {
 
                 <div className="separator">Continue below to pay with credit card</div>
                 <section id="billing">
-                    <h5 className="checkout-headers"> Additional Contact information</h5>
+                    <h5 className="checkout-headers"> Additional Contact Information</h5>
                     <p id="leave-empty-text">Leave empty if no other recipients</p>
                     <label htmlFor="email"></label>
                     <input className="large-input-field"
                            type="text"
+
                            id="email"
                            name="email input"
                            pattern={"\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}\\b"}
@@ -121,6 +138,7 @@ export default function Checkout() {
                     <form id="billing-input" onSubmit={e => e.preventDefault() }>
                         <Select id={"country-select"} className={"large-input-field"}
                                 required={false}
+                                styles={customSelectStyles}
                                 options={options}
                                 value={countrySelect}
                                 onChange={selectCountryHandler}/>
@@ -174,7 +192,9 @@ export default function Checkout() {
                             <label className="valuta">
                                 {(courseData.price * (1 - courseData.discount)).toFixed(2)}
                             </label><p>,- nok</p>
-                            <button type="submit" id="purchase-button" onClick={handlePurchase}>Purchase</button>
+                            <button type="submit" id="purchase-button" onClick={handlePurchase} disabled={loading}>
+                                {loading ? 'Processing' : 'purchase'}
+                            </button>
                         </div>
                     </form>
 

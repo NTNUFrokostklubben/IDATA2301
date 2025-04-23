@@ -21,6 +21,7 @@ import ProviderAdd from "./page/admin/management/providers/add/providerAdd";
 import ProviderEdit from "./page/admin/management/providers/edit/providerEdit";
 import OfferableCourseAdd from "./page/admin/course/add/offerableCourseAdd";
 import OfferableCourseEdit from "./page/admin/course/edit/offerableCourseEdit";
+import OrderComplete from "./page/orderComplete";
 
 function App() {
     const [User, setUser] = useState({});
@@ -38,6 +39,7 @@ function App() {
                     <Route path={"search"} element={<Search/>}/>
                     <Route path={"course/:id"} element={<Course/>}/>
                     <Route path={"userpage"} element={<UserPage/>}/>
+                    <Route path={"order-complete"} element={<OrderComplete/>}/>
                     <Route path={"about"} element={<About/>}/>
                     <Route path={"checkout/:id"} element={<Checkout/>}/>
                     <Route path={"/admin"} element={<AdminNav/>}>

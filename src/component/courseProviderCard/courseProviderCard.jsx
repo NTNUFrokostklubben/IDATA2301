@@ -18,6 +18,7 @@ export default function CourseProviderCard (offerableCourse ){
             {// <img className="provider-logo-small" src={offerableCourse.provider.logoLink}/>
             }
             <img className="provider-logo-placeholder" src="/icons/mail-sharp.svg"/>
+
         </Link>
     )
 }

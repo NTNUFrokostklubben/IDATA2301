@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: row;
     width: 13rem;
-    height: 4rem;
+    height: 7rem;
 }
 .provider-name, .provider-card-price{
     padding-bottom: 0.6rem;
@@ -11,16 +11,28 @@
 }
 
 .provider-card-text{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 6rem;
     padding-left: 0.4rem;
     padding-top: 0.4rem;
 }
+
+.provider-card-price{
+    justify-self: flex-end;
+}
 .provider-logo-placeholder{
-    padding-left: 1.5rem;
+    padding-left: 0.5rem;
+    height: 6rem;
+    width: 6rem;
 }
 
 @media (max-width: 380px) {
 
     .provider-logo-placeholder{
     }
+
+
 
 }
