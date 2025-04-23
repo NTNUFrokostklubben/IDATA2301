@@ -5,13 +5,14 @@ import AdminReview from "../../component/Rating/adminReview";
 import "./adminDashboard.css";
 
 class reviewEntity {
-      constructor(id, rating, comment, courseTitle, userName, profilePicture){
+      constructor(id, rating, comment, courseTitle, userName, profilePicture, courseID){
         this.id = id;
         this.rating = rating;
         this.comment = comment;
         this.title = courseTitle;
         this.user = userName;
         this.profilePicture = profilePicture;
+        this.courseId = courseID;
     }
 }
 
@@ -56,7 +57,8 @@ export default function AdminDashboard() {
             .then((response) => response.json())
             .then((data) => {
                 const reviews = data.map((review) => new reviewEntity(review.id, review.rating,
-                    review.comment, review.course.title, review.user.name, review.user.profilePicture));
+                    review.comment, review.course.title, review.user.name, review.user.profilePicture,
+                    review.course.id));
                 setReviews(reviews);
             }).catch(err => console.error('Error fetching data:', err));
     }, []);
@@ -86,32 +88,31 @@ export default function AdminDashboard() {
 
 
     function screenSetSize() {
-        if (window.matchMedia("(max-width: 480px)").matches) {
+        let innerWidth = window.innerWidth;
+        if (window.matchMedia("(max-width: 1024px)").matches) {
             return {
-                width: 200,
-                height: 100,
-            };
-        } else if(window.matchMedia("(max-width: 1024px)").matches) {
-            return {
-                width: 300,
+                width: innerWidth* 0.8,
                 height: 200,
             };
-        }
-        else if(window.matchMedia("(max-width: 1900px)").matches) {
+        }  else if (window.matchMedia("(max-width: 1600px)").matches) {
             return {
-                width: 400,
+                width: innerWidth * 0.55,
+                height: 200,
+            };
+        }  else if (window.matchMedia("(max-width: 2000px)").matches) {
+            return {
+                width: innerWidth * 0.6,
                 height: 250,
             };
-        }
-        else {
+        } else {
             return {
-                width: 600,
-                height: 400,
-            };
+                width: 1200,
+                height: 300,
+            }
         }
     }
     function screenSetHidden() {
-        return !!(window.matchMedia("(max-width: 600px)").matches);
+         return !!(window.matchMedia("(max-width: 700px)").matches);
     }
 
     return (
@@ -130,58 +131,66 @@ export default function AdminDashboard() {
                             series={[
                                 {
                                     data: revenueData,
-                                    highlightScope: { fade: 'global', highlight: 'item' },
-                                    faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' }
+                                    highlightScope: {fade: 'global', highlight: 'item'},
+                                    faded: {innerRadius: 30, additionalRadius: -30, color: 'gray'}
                                 },
                             ]}
                             {...size}
                             slotProps={{
-                                legend: { hidden: hidden },
+                                legend: {hidden: hidden},
                             }}
                         />
                     </div>
-                    <h6> Total Revenue: {totalRevenue} NOK</h6>
+                    &nbsp; &nbsp;
+                    <hr className={"solid"}/>
+
+                    <div className={"admin-dash-result"}>
+                        <h5 className={"admin-dash-title"}>Total Revenue</h5>
+                        <h6 className={"admin-dash-total"}>{totalRevenue} NOK</h6>
+                        &nbsp;
+                        <h5 className={"admin-dash-title"}>Total revenue last 30 days</h5>
+                        <h6 className={"admin-dash-total"}>TEMP NOK</h6>
+                    </div>
                 </div>
+
 
                 <div className={"admin-dash-reviews"}>
                     <h3>Recent Reviews</h3>
                     <hr className={"solid"}/>
-                    {reviews.map((review) => (
-                        <AdminReview key={review.id} {...review}/>
-                    ))}
-                </div>
-
-                <div className={"admin-dash-users"}>
-                <h3>Users</h3>
-                <hr className={"solid"}/>
-
-                <div className={"admin-dash-result"}>
-                <h5 className={"admin-dash-title"}>Total registered users</h5>
-                        <h6 className={"admin-dash-total"}>{totalUsers}</h6>
-                        &nbsp;
-                        <h5 className={"admin-dash-title"}>New users last 30 days</h5>
-                        <h6 className={"admin-dash-total"}>Temp value</h6>
+                    <div className={"admin-dash-reviews-list"}>
+                        {reviews.map((review) => (
+                            <AdminReview key={review.id} {...review}/>
+                        ))}
                     </div>
-
                 </div>
 
-                <div className={"admin-dash-courses"}>
-                    <h3>Courses</h3>
-                    <hr className={"solid"}/>
-
-                    <div className={"admin-dash-result"}>
-                        <h5 className={"admin-dash-title"}>Total courses</h5>
-                        <h6 className={"admin-dash-total"}>{totalCourses}</h6>
-                        &nbsp;
-                        <h5 className={"admin-dash-title"}>Average revenue</h5>
-                        <h6 className={"admin-dash-total"}> {avgRevenue} NOK</h6>
+                <div className={"admin-dash-overview"}>
+                    <div className={"admin-dash-users"}>
+                        <h3>Users</h3>
+                        <hr className={"solid"}/>
+                        <div className={"admin-dash-result"}>
+                            <h5 className={"admin-dash-title"}>Total registered users</h5>
+                            <h6 className={"admin-dash-total"}>{totalUsers}</h6>
+                            &nbsp;
+                            <h5 className={"admin-dash-title"}>New users last 30 days</h5>
+                            <h6 className={"admin-dash-total"}>Temp value</h6>
+                        </div>
                     </div>
+                    <div className={"admin-dash-courses"}>
+                        <h3>Courses</h3>
+                        <hr className={"solid"}/>
 
-                </div>
-
-            </div>
+                        <div className={"admin-dash-result"}>
+                            <h5 className={"admin-dash-title"}>Total courses</h5>
+                            <h6 className={"admin-dash-total"}>{totalCourses}</h6>
+                            &nbsp;
+                            <h5 className={"admin-dash-title"}>Average revenue</h5>
+                            <h6 className={"admin-dash-total"}> {avgRevenue} NOK</h6>
+                        </div>
+                    </div>
+                 </div>
+             </div>
         </div>
-
     )
 }
 
