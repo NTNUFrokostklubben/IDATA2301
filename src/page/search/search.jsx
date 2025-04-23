@@ -28,8 +28,8 @@ export default function Search() {
         console.log(searchValue)
 
         const filters = new FilterQuery({
-            ["startDate"]: startDate,
-            ["endDate"]: endDate
+            ["startDate"]: startDate.getTime(),
+            ["endDate"]: endDate.getTime()
         }, buildCategory(), buildDifficultyLevel(), {
             ["min-credits"]: value["min-credits"],
             ["max-credits"]: value["max-credits"]
