@@ -174,26 +174,6 @@ export default function AdminDashboard() {
         }
     }
 
-
-    useEffect(() => {
-        fetch("http://localhost:8080/api/transaction/averageRevenuePerCourse")
-            .then((response) => response.json())
-            .then((data) => {
-                setAvgRevenue(data);
-            }).catch(err => console.error('Error fetching data:', err));
-        fetch("http://localhost:8080/api/transaction/revenueLast30Days")
-            .then((response) => response.json())
-            .then((data) => {
-                setRevenueLast30Days(data);
-            }).catch(err => console.error('Error fetching data:', err));
-        fetch("http://localhost:8080/api/users/newUsers")
-            .then((response) => response.json())
-            .then((data) => {
-                setNewUsers(data);
-            }).catch(err => console.error('Error fetching data:', err));
-    }, []);
-
-
     function screenSetSize() {
         let innerWidth = window.innerWidth;
         if (window.matchMedia("(max-width: 1024px)").matches) {

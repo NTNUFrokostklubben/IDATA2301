@@ -5,6 +5,7 @@ import {Link, Route} from "react-router-dom";
 import CourseCard from "../component/card/CourseCard";
 import Register from "../component/modals/auth/register";
 import {createPortal} from "react-dom";
+import {AsyncApiRequest} from "../utils/requests";
 
 class courseEntity {
     constructor(id, title, description, imgLink) {
@@ -35,31 +36,34 @@ export default function Index() {
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
-// Fetch courses from the API
-useEffect(() => {
-    fetch("http://localhost:8080/api/courses")
-        .then((response) => response.json())
-        .then((data) => {
-            const courses = data.map((course) => new courseEntity(course.id, course.title, course.description, course.imgLink));
+    useEffect(() => {
+        if (courses.length === 0) {
+            fetchCourses();
+        }
+    }, []);
 
-            // Fetch prices for each course
-            const priceFetches = courses.map((course) => {
-                const fetchApiCall = `http://localhost:8080/api/offerableCourses/coursePrice/${course.id}`;
-                return fetch(fetchApiCall)
-                    .then((response) => response.json())
-                    .then((price) => {
-                        course.setPrice(price);
-                    });
+    /**
+     * Fetches all courses from the API
+     */
+    async function fetchCourses() {
+        try {
+            const data = await AsyncApiRequest("GET", "/courses", null);
+            const courses = data.map((course) => new courseEntity(course.id, course.title, course.description, course.imgLink));
+            setCourses(courses);
+
+            const priceFetches = courses.map(async (course) => {
+                const fetchApiCall = `/offerableCourses/coursePrice/${course.id}`;
+                const price = await AsyncApiRequest("GET", fetchApiCall, null);
+                course.setPrice(price);
             });
 
             // Wait for all price fetches to complete
-            Promise.all(priceFetches).then(() => {
-                setCourses(courses);
-            });
-        })
-        .catch(err => console.error('Error fetching data:', err));
-}, []);
-
+            await Promise.all(priceFetches);
+            setCourses([...courses]); // Ensure state is updated with new course prices
+        } catch (err) {
+            console.error("Error fetching courses: ", err);
+        }
+    }
 
 
     function calcSceneStart() {
