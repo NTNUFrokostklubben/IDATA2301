@@ -1,5 +1,5 @@
 import "../add/courseAdd.css"
-import {Form, useParams} from "react-router-dom";
+import {Form, useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {courseEntity} from "../../../../../utils/Classes/commonClasses";
 
@@ -9,6 +9,8 @@ export default function CourseEdit(courseId) {
     // TODO: Once backend returns larger object with provider, price, currency etc. Update this to reflect that.
 
     const { id } = useParams();
+
+    const navigate = useNavigate();
 
     console.log(id)
 
@@ -94,7 +96,7 @@ export default function CourseEdit(courseId) {
         handleImageUpload(image).then(r => {
             data.set("imgLink", r);
             // TODO: Change alert to something better. Check for success.
-            handleFormSubmission(data).then(alert("Submitted Form"));
+            handleFormSubmission(data).then(alert("Submitted Form")).then(navigate(-1));
         });
     }
 

@@ -1,12 +1,17 @@
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import "./courses.css";
 import "../aggregateTable.css";
+import {createPortal} from "react-dom";
+import DeleteModal from "../../../../component/modals/deleteModal";
 
 export default function Courses() {
 
     const [courses, setCourses] = useState([]);
     const [loading, setLoading] = useState(true);
+
+    const [showDeleteModal, setShowDeleteModal] = useState();
+    const [focusedId, setFocusedId] = useState()
 
     useEffect(() => {
         fetch("http://localhost:8080/api/courses")
@@ -61,17 +66,25 @@ export default function Courses() {
                                         Edit
                                     </Link>
                                 </button>
-                                <button className={"delete-button"}>
-                                    <Link to={`/admin/management/courses/delete/${course.id}`}>
-                                        Delete
-                                    </Link>
-                                </button>
+                                <button id={"delete" + course.id} className={"delete-button"} onClick={() => {
+                                    setFocusedId(course.id)
+                                    setShowDeleteModal(true);
+                                }}>Delete</button>
                             </td>
                         </tr>
                     ))}
                     </tbody>
                 </table>
             </div>
+
+            {
+                showDeleteModal && createPortal(
+                    <DeleteModal onClose={() => setShowDeleteModal(false)} deleteId={focusedId} apiEndpoint={"/course/"}/>,
+                    document.getElementById("delete-modal")
+                )
+            }
+
+            <div id={"delete-modal"}/>
         </div>
     )
 }

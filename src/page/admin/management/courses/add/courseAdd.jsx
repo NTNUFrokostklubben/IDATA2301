@@ -1,9 +1,10 @@
 import "./courseAdd.css";
-import {Form} from "react-router-dom";
+import {Form, useNavigate} from "react-router-dom";
 
 export default function CourseAdd() {
 
 
+    const navigate = useNavigate();
 
     /**
      * Handle API call for uploading images.
@@ -74,7 +75,7 @@ export default function CourseAdd() {
         handleImageUpload(image).then(r => {
             data.set("imgLink", r);
             // TODO: Change alert to something better. Check for success.
-            handleFormSubmission(data).then(alert("Submitted Form"));
+            handleFormSubmission(data).then(alert("Submitted Form")).then(navigate(-1));
         });
     }
 
