@@ -98,16 +98,16 @@ export default function Search() {
     return (
         <div className="search-page">
             <div className="filters">
-                <form onSubmit={handleSubmit} >
+                <form onSubmit={handleSubmit}>
                     <Collapsable title={"Difficulty level"}>
                         <section id="difficulty">
 
+                            <label><input className="difficultyCheckbox" type="checkbox" name={"0"}
+                                          value={true} defaultChecked={true}/> Beginner</label>
                             <label><input className="difficultyCheckbox" type="checkbox" name={"1"}
-                                          value={true}/> Beginner</label>
+                                          value={true} defaultChecked={true}/> Intermediate</label>
                             <label><input className="difficultyCheckbox" type="checkbox" name={"2"}
-                                          value={true}/> Intermediate</label>
-                            <label><input className="difficultyCheckbox" type="checkbox" name={"3"}
-                                          value={true}/> Expert</label>
+                                          value={true} defaultChecked={true}/> Expert</label>
                         </section>
                     </Collapsable>
                     <Collapsable title={"Course size"}>
@@ -131,14 +131,15 @@ export default function Search() {
                     <Collapsable title={"Category"}>
                         <section id="category">
                             <label><input className="categoryCheckbox" type="checkbox" name={"it"}
-                                          value={true}/> Information
+                                          value={true} defaultChecked={true}/> Information
                                 Technologies</label>
                             <label><input className="categoryCheckbox" type="checkbox" name={"dm"}
-                                          value={true}/> Digital Marketing</label>
+                                          value={true} defaultChecked={true}/> Digital Marketing</label>
                             <label><input className="categoryCheckbox" type="checkbox" name={"be"}
-                                          value={true}/> Business and
+                                          value={true} defaultChecked={true}/> Business and
                                 Entrepenaurship</label>
-                            <label><input className="categoryCheckbox" type="checkbox" name={"dsa"} value={true}/> Data
+                            <label><input className="categoryCheckbox" type="checkbox" name={"dsa"} value={true}
+                                          defaultChecked={true}/> Data
                                 Science and
                                 Analytics</label>
 
@@ -188,6 +189,7 @@ export default function Search() {
 
                             <DatePicker selected={startDate} onChange={dateChanged} startDate={startDate}
                                         endDate={endDate} selectsRange={true}
+                                        dateFormat={"dd/MM/YYYY"}
                                         icon={<img src={"/icons/calendar-clear-sharp.svg"}/>} showIcon/>
 
                         </section>
