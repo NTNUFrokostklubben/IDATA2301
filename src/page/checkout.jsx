@@ -27,11 +27,14 @@ export default function Checkout() {
 
     const handlePurchase =  async () => {
         setLoading(true);
-        AsyncApiRequest("POST", "/transaction/offerId/${courseData.id}/userid/${1}")
-
+        setStatus( AsyncApiRequest("POST", `/transaction/offerId/${courseData.id}/userid/${1}`, null).status
+        )
+        /*
          fetch(`http://localhost:8080/api/transaction/offerId/${courseData.id}/userid/${1}`, {method:'POST'})
             .then((response) => {setStatus(response.status)})
             .catch(err => console.error('Error fetching data:', err));
+
+         */
         try {
             // Simulate API call
             await new Promise((resolve) => setTimeout(resolve, 2000));
