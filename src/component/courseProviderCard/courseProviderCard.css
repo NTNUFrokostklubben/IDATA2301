@@ -1,6 +1,7 @@
 .provider-card{
     display: flex;
     flex-direction: row;
+    justify-content: center;
     width: 13rem;
     height: 7rem;
 }
@@ -24,6 +25,8 @@
 }
 .provider-logo-placeholder{
     padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 0.5rem;
     height: 6rem;
     width: 6rem;
 }
@@ -31,6 +34,13 @@
 @media (max-width: 380px) {
 
     .provider-logo-placeholder{
+        height: 5rem;
+        width: 5rem;
+    }
+    .provider-card{
+        width: 12rem;
+        height: 6rem;
+
     }
 
 

@@ -16,8 +16,9 @@ export default function CourseProviderCard (offerableCourse ){
                 <p className="provider-card-price">{offerableCourse.price},- nok</p>
             </div>
             {// <img className="provider-logo-small" src={offerableCourse.provider.logoLink}/>
+                // <img className="provider-logo-placeholder" src="https://picsum.photos/300/300"/>
             }
-            <img className="provider-logo-placeholder" src="/icons/mail-sharp.svg"/>
+
 
         </Link>
     )

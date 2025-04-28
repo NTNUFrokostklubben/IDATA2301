@@ -111,9 +111,11 @@
 }
 @media (max-width: 374px) {
     .course-page-content{
-        width: 41rem;
+        width: 40rem;
     }
-    #course-offerables{
+    #course-offerables > *{
+        margin-right: 1rem;
     }
+
 
 }
