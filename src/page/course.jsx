@@ -39,7 +39,7 @@ export default function Course() {
         }
        fetchData()
 
-    });
+    }, []);
 
     /**
      * Fetches all course data from the API

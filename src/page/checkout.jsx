@@ -9,6 +9,7 @@ import {useSelector} from "react-redux";
 import Select from 'react-select'
 import countryList from "react-select-country-list";
 import {AsyncApiRequest} from "../utils/requests";
+import SpinnerLoader from "../component/modals/Spinner/spinnerLoader";
 
 
 export default function Checkout() {
@@ -33,7 +34,6 @@ export default function Checkout() {
          fetch(`http://localhost:8080/api/transaction/offerId/${courseData.id}/userid/${1}`, {method:'POST'})
             .then((response) => {setStatus(response.status)})
             .catch(err => console.error('Error fetching data:', err));
-
          */
         try {
             // Simulate API call
@@ -69,30 +69,7 @@ export default function Checkout() {
         setCardNumber(formatted);
     }
 
-    const selectCountryHandler = value => {
-        setCountrySelect(value)
-    }
-/*
-    const customSelectStyles = {
-        control: (base) => ({
-            ...base,
-            height: '20px',         // match your other inputs
-            minHeight: '25px',
-            fontSize: '1rem',
-            borderRadius: '4px',
-            borderColor: '#ccc',    // override the default blue border
-        }),
-        valueContainer: (base) => ({
-            ...base,
-            padding: '0 8px',
-        }),
-        indicatorsContainer: (base) => ({
-            ...base,
-            height: '20px',
-        }),
-    };
 
- */
 
     function loggedIn(){
         if(user == null){
@@ -101,7 +78,7 @@ export default function Checkout() {
     }
     return (
         <article id="page-layout-checkout" onLoad={loggedIn}>
-
+            {loading && <SpinnerLoader/>}
             <div id="checkout-left-side">
                 <section id="express-checkout">
                     <h4 className="checkout-headers">Express checkout</h4>
@@ -151,8 +128,7 @@ export default function Checkout() {
                                 options={options}
                                 value={countrySelect}
                                 unstyled={true}
-                                classNamePrefix={"country-select"}
-                                onChange={selectCountryHandler}/>
+                                classNamePrefix={"country-select"}/>
                         <div className="small-input">
                             <input required={false}
                                    className="small-input-field"
