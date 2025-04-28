@@ -1,9 +1,12 @@
 import "./offerableCourses.css";
 import "../management/aggregateTable.css"
 import CardHorizontal from "../../../component/card/cardHorizontal";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import {courseEntity, OfferableCourse, ProviderEntity} from "../../../utils/Classes/commonClasses";
+import {createPortal} from "react-dom";
+import Login from "../../../component/modals/auth/login";
+import DeleteModal from "../../../component/modals/deleteModal";
 
 
 export default function OfferableCourses() {
@@ -13,6 +16,8 @@ export default function OfferableCourses() {
     const [uniqueCourses, setUniqueCourses] = useState([]);
     const [filteredCourses, setFilteredCourses] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [showDeleteModal, setShowDeleteModal] = useState();
+    const [focusedId, setFocusedId] = useState()
     const [error, setError] = useState(null);
 
 
@@ -145,13 +150,24 @@ export default function OfferableCourses() {
                                 <button className={"cta-button edit-button"}><Link to={`/admin/offerablecourses/edit/${offerableCourse.id}`}
                                          id={"edit" + offerableCourse.id}
                                          >Edit</Link></button>
-                                <button className={"delete-button"}>Delete</button>
+                                <button id={"delete" + offerableCourse.id} className={"delete-button"} onClick={() => {
+                                    setFocusedId(offerableCourse.id)
+                                    setShowDeleteModal(true);
+                                }}>Delete</button>
                             </td>
                         </tr>
                     ))}</tbody>
                 </table>
             </div>
 
+            {
+                showDeleteModal && createPortal(
+                    <DeleteModal onClose={() => setShowDeleteModal(false)} deleteId={focusedId} apiEndpoint={"/offerableCourses/"}/>,
+                    document.getElementById("delete-modal")
+                )
+            }
+
+            <div id={"delete-modal"}/>
 
         </div>
     )

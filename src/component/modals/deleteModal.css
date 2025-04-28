@@ -1,0 +1,64 @@
+
+.delete-modal {
+    display: flex;
+    position: absolute;
+    flex-flow: column;
+    margin: 2rem 0rem;
+    padding: 2rem;
+    max-width: 30rem;
+    width: 30rem;
+    background-color: var(--textWhite);
+    gap: 1rem;
+}
+
+#delete-close-button > img {
+    /*Center image in button*/
+    margin: auto;
+    width: 24px;
+    height: 24px;
+}
+
+.delete-modal h3 {
+    align-self: center;
+    margin-top: 3rem;
+    font-size: 2rem;
+}
+
+.delete-modal p {
+    align-self: center;
+    margin-top: 1rem;
+    /*font-size: 1.5rem;*/
+}
+
+#delete-close-button {
+    /*Ensure button is just a bit larger than image*/
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    margin: 1rem;
+    display: flex;
+    justify-content: center;
+    align-self: flex-end;
+    /*align-items: flex-end;*/
+
+}
+
+#delete-CTA {
+    margin-top: 2rem;
+    display: flex;
+    /*justify-content: space-between;*/
+    align-items: center;
+    justify-content: center;
+}
+
+.delete-modal .delete-button {
+    margin: 1rem 1rem;
+    background-color: var(--danger);
+}
+
+.delete-modal .delete-button:hover {
+    margin: 1rem 1rem;
+    background-color: #8f2323;
+}

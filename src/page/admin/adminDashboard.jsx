@@ -3,6 +3,7 @@ import {useEffect, useState} from 'react';
 import {PieChart} from '@mui/x-charts/PieChart';
 import AdminReview from "../../component/Rating/adminReview";
 import "./adminDashboard.css";
+import {AsyncApiRequest} from "../../utils/requests";
 
 class reviewEntity {
       constructor(id, rating, comment, courseTitle, userName, profilePicture, courseID){
@@ -41,65 +42,137 @@ export default function AdminDashboard() {
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
+    // Fetches all stats from the API
     useEffect(() => {
-        fetch("http://localhost:8080/api/transaction/providersStats")
-            .then((response) => response.json())
-            .then((data) => {
-                const revenue = data.map((providerStat) => ({
-                    id: providerStat.ID_PROVIDER,
-                    value: providerStat.REVENUE,
-                    label: providerStat.PROVIDER_NAME
-                }));
-                setRevenueData(revenue);
-            }).catch(err => console.error('Error fetching data:', err));
-    }, []);
+        if (revenueData.length === 0) {
+            fetchRevenueData();
+        }
+        if (reviews.length === 0){
+            fetchReviews();
+        }
+        if (totalRevenue<=0){
+            fetchTotalRevenue();
+        }
+        if (totalCourses<=0){
+            fetchTotalCourses();
+        }
+        if (totalUsers<=0){
+            fetchTotalUsers();
+        }
+        if (avgRevenue<=0){
+            fetchAvgRevenue();
+        }
+        if (revenueLast30Days<=0){
+            fetchRevenueLast30Days();
+        }
+        if (newUsers<=0){
+            fetchNewUsers();
+        }
+    },);
 
-    useEffect(() => {
-        fetch("http://localhost:8080/api/userCourses/lastReviews")
-            .then((response) => response.json())
-            .then((data) => {
-                const reviews = data.map((review) => new reviewEntity(review.id, review.rating,
-                    review.comment, review.course.title, review.user.name, review.user.profilePicture,
-                    review.course.id));
-                setReviews(reviews);
-            }).catch(err => console.error('Error fetching data:', err));
-    }, []);
+    /**
+     * Fetches all revenue data from the API
+     */
+    async function fetchRevenueData() {
+        try{
+            const data = await AsyncApiRequest("GET","/transaction/providersStats", null);
+            const revenue = data.map((providerStat) => ({
+                id: providerStat.ID_PROVIDER,
+                value: providerStat.REVENUE,
+                label: providerStat.PROVIDER_NAME
+            }));
+            setRevenueData(revenue);
+        } catch (err){
+            console.error("Error fetching provider stats : ", err);
+        }
+    }
 
-    useEffect(() => {
-        fetch('http://localhost:8080/api/transaction/totalRevenue')
-            .then((response) => response.json())
-            .then((data) => {
-                setTotalRevenue(data);
-            }).catch(err => console.error('Error fetching data:', err));
-        fetch("http://localhost:8080/api/courses/total")
-            .then((response) => response.json())
-            .then((data) => {
-                setTotalCourses(data);
-            }).catch(err => console.error('Error fetching data:', err));
-        fetch("http://localhost:8080/api/users/total")
-            .then((response) => response.json())
-            .then((data) => {
-                setTotalUsers(data);
-            }).catch(err => console.error('Error fetching data:', err));
-        fetch("http://localhost:8080/api/transaction/averageRevenuePerCourse")
-            .then((response) => response.json())
-            .then((data) => {
-                setAvgRevenue(data);
-            }).catch(err => console.error('Error fetching data:', err));
-        fetch("http://localhost:8080/api/transaction/revenueLast30Days")
-            .then((response) => response.json())
-            .then((data) => {
-                setRevenueLast30Days(data);
-            }).catch(err => console.error('Error fetching data:', err));
-        fetch("http://localhost:8080/api/users/newUsers")
-            .then((response) => response.json())
-            .then((data) => {
-                setNewUsers(data);
-            }).catch(err => console.error('Error fetching data:', err));
+    /**
+     * Fetches the recent reviews from the API
+     */
+    async function fetchReviews(){
+        try{
+            const data = await AsyncApiRequest("GET", "/userCourses/lastReviews", null);
+            const reviews = data.map((review) => new reviewEntity(review.id, review.rating,
+                review.comment, review.course.title, review.user.name, review.user.profilePicture,
+                review.course.id));
+            setReviews(reviews);
+        } catch (err){
+            console.log("Error fetching reviews: ", err)
+        }
+    }
 
+    /**
+     * Fetches the total revenue from the API
+     */
+    async function fetchTotalRevenue(){
+        try{
+            const data = await AsyncApiRequest("GET", "/transaction/totalRevenue", null);
+            setTotalRevenue(data);
+        } catch (err){
+            console.log("Error fetching total revenue: ", err);
+        }
+    }
 
-    }, []);
+    /**
+     * Fetches the total courses from the API
+     */
+    async function fetchTotalCourses(){
+        try{
+            const data = await AsyncApiRequest("GET", "/courses/total", null);
+            setTotalCourses(data);
+        } catch (err){
+            console.log("Error fetching total courses: ", err);
+        }
+    }
 
+    /**
+     * Fetches the total users from the API
+     */
+    async function fetchTotalUsers(){
+        try{
+            const data = await AsyncApiRequest("GET", "/users/total", null);
+            setTotalUsers(data);
+        } catch (err){
+            console.log("Error fetching total revenue: ", err);
+        }
+    }
+
+    /**
+     * Fetches the average revenue from the API
+     */
+    async function fetchAvgRevenue(){
+        try{
+            const data = await AsyncApiRequest("GET", "/transaction/averageRevenuePerCourse", null);
+            setAvgRevenue(data);
+        } catch (err){
+            console.log("Error fetching total revenue: ", err);
+        }
+    }
+
+    /**
+     * Fetches the total courses from the API
+     */
+    async function fetchRevenueLast30Days(){
+        try{
+            const data = await AsyncApiRequest("GET", "/transaction/revenueLast30Days", null);
+            setRevenueLast30Days(data);
+        } catch (err){
+            console.log("Error fetching total courses: ", err);
+        }
+    }
+
+    /**
+     * Fetches the total users from the API
+     */
+    async function fetchNewUsers(){
+        try{
+            const data = await AsyncApiRequest("GET", "/users/newUsers", null);
+            setNewUsers(data);
+        } catch (err){
+            console.log("Error fetching total revenue: ", err);
+        }
+    }
 
     function screenSetSize() {
         let innerWidth = window.innerWidth;
