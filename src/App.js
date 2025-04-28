@@ -27,7 +27,7 @@ function App() {
                     <Route index element={<Index/>}/>
                     <Route path={"search"} element={<Search/>}/>
                     <Route path={"course/:id"} element={<Course/>}/>
-                    <Route path={"userpage"} element={<UserPage/>}/>
+                    <Route path={"userpage/:id"} element={<UserPage/>}/>
                     <Route path={"about"} element={<About/>}/>
                     <Route path={"checkout"} element={<Checkout/>}/>
                     <Route path={"/admin"} element={<AdminNav/>}>

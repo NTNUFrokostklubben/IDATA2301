@@ -1,6 +1,7 @@
 
 .user-page{
     background-color: var(--background);
+    margin-top: 5rem;
 }
 
 #user-page-content{

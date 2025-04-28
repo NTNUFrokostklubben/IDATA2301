@@ -35,7 +35,8 @@ export default function Course() {
     async function fetchCourseData() {
         try {
             const fetchApiCall = `/course/${id}`;
-            const data = await AsyncApiRequest("GET", fetchApiCall, null);
+            const data = await AsyncApiRequest("GET", fetchApiCall, null)
+                .then(response => response.json());
             setCourseData(data);
             setLoading(false);
         } catch (error) {
@@ -49,7 +50,8 @@ export default function Course() {
     async function fetchOfferableCourses() {
         try {
             const fetchApiCall = `/offerableCourses/course/${id}`;
-            const data = await AsyncApiRequest("GET", fetchApiCall, null);
+            const data = await AsyncApiRequest("GET", fetchApiCall, null)
+                .then(response => response.json());
             setofferableCourseData(data);
         } catch (error) {
             console.error("Error fetching offerable course data:", error);
@@ -62,7 +64,8 @@ export default function Course() {
     async function fetchRatingData() {
         try {
              const fetchApiCall = `/userCourses/averageRating/${id}`;
-            const data = await AsyncApiRequest("GET", fetchApiCall, null);
+            const data = await AsyncApiRequest("GET", fetchApiCall, null)
+                .then(response => response.json());
             setRatingData(data);
         } catch (error) {
             console.error("Error fetching rating value:", error);
@@ -75,7 +78,8 @@ export default function Course() {
     async function fetchKeywords() {
         try {
             const fetchApiCall = `/keyword/${id}`;
-            const data = await AsyncApiRequest("GET", fetchApiCall, null);
+            const data = await AsyncApiRequest("GET", fetchApiCall, null)
+                .then(response => response.json());
             setKeywords(data);
         } catch (error) {
             console.error("Error fetching keywords:", error);

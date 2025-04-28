@@ -2,38 +2,48 @@ import "./userPage.css"
 import { useEffect, useState } from 'react';
 import CardHorizontal from "../component/card/cardHorizontal";
 import Rating from "../component/Rating/rating";
+import {AsyncApiRequest} from "../utils/requests";
+import {Link, useParams} from "react-router-dom";
+
 export default function UserPage (){
     const [data, setData] = useState([]);
     const [user, setUser] = useState([]);
     const [loading, setLoading] = useState(true);
-    let [ratings, setRatings] = useState([]);
+    const [ratings, setRatings] = useState([]);
+    const {id} = useParams();
 
-    useEffect(() => {
-        fetch('http://localhost:8080/api/userCourses/1')
-            .then(response => response.json())
-            .then(data => {
-                setData(data)
-                setRatings(data.filter(item => item.rating > 0));
-                setLoading(false)
-            })
-            .catch(err => console.error('Error fetching data:', err));
-        }, []
+    useEffect( () => {
+        const fetchData = async () =>{
+            try {
+                await Promise.any([handlePageLoad()])
+            }catch (e){console.log(e)}
+        }
+        fetchData()
+        } , []
     );
 
-    useEffect(() => {
-        fetch('http://localhost:8080/api/user/1')
-            .then(response => response.json())
-            .then(user => {
-                setUser(user)
-        }).catch(err => console.error('Error fetching data:', err))
-        }, []
-    );
-    if (loading ){
-        return (<h1>loading</h1>)
+
+    async function handlePageLoad(){
+        try{
+            const userData = await AsyncApiRequest("GET", `/user/${id}`, null)
+                .then(response => response.json())
+            setUser(userData)
+            console.log(userData)
+            const ratingData = await AsyncApiRequest("GET", `/userCourses/${id}`, null)
+                .then(response => response.json())
+            setData(ratingData)
+            setRatings(ratingData.filter(item => item.rating > 0));
+            setLoading(false)
+        }catch (e){console.error(e)}
     }
-    console.log(ratings)
+
+
+    if (loading ){
+        return (<h5>loading...</h5>)
+    }
+
     return (
-        <div class={"user-page"}>
+        <div className="user-page">
             <section id="user-page-content">
                 <section id="user-page-caret">
                     <a href=""><img id="edit" src="/icons/pencil-sharp.svg" alt="edit button"/></a>
@@ -53,7 +63,7 @@ export default function UserPage (){
                     <h5 id="previous-courses-heading">Previous courses</h5>
                     <ul>
                         {data.map(item => (
-                            <li className="user-course-item" key={item.id}> <a href="">{item.course.title}</a></li>
+                            <li className="user-course-item" key={item.id}> <Link to={`/course/${item.course.id}`}>{item.course.title}</Link></li>
                             ))}
                     </ul>
                 </section>
