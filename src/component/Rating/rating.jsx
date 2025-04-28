@@ -1,6 +1,13 @@
 import "./rating.css"
 export default function Rating (rating){
 
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+
+        const options = { month: 'long', day: 'numeric', year: 'numeric' };
+        return date.toLocaleDateString('en-US', options).replace(' ', ' ');
+    }
+
     if (!rating) {
         return <div>data is missing.</div>;
     };
@@ -22,7 +29,7 @@ export default function Rating (rating){
                         )
                     }
                 </div>
-                <p className="review-date">Reviewed on January 1, 2025 </p>
+                <p className="review-date">Reviewed on {formatDate(rating.date)} </p>
             </div>
             <p className="review-text">{rating.comment}</p>
         </div>
