@@ -27,10 +27,7 @@ export function AsyncApiRequest(method, url, requestBody) {
         headers: headers,
         body: body,
     })
-        .then(response => response.json())
-        .then(data => {
-            return data;
-        })
+        .then(response => {return response})
         .catch(error => {
             console.error('Error:', error);
             throw error;
