@@ -33,7 +33,7 @@
     padding-bottom: 1rem;
 }
 #paypal-image{
-    width: 6.5rem;
+    width: 7rem;
     height: 2.3rem;
     padding-bottom: 1rem;
 }
@@ -75,9 +75,16 @@
     font-size: 0.875rem;
 }
 #country-select{
-    border: black;
-    height: 1rem;
-    padding-bottom: 3rem;
+    border: 2px black;
+}
+.country-select__control{
+    border: 2px solid black;
+    height: 2rem;
+    min-height: 1rem;
+    margin-bottom: 1rem;
+}
+.country-select__menu{
+    background-color: var(--highlight);
 }
 #purchase{
     display: flex;

@@ -72,7 +72,7 @@ export default function Checkout() {
     const selectCountryHandler = value => {
         setCountrySelect(value)
     }
-
+/*
     const customSelectStyles = {
         control: (base) => ({
             ...base,
@@ -91,6 +91,8 @@ export default function Checkout() {
             height: '20px',
         }),
     };
+
+ */
 
     function loggedIn(){
         if(user == null){
@@ -142,11 +144,14 @@ export default function Checkout() {
                            placeholder="Email"/>
                     <h5 className="checkout-headers"> Billing</h5>
                     <form id="billing-input" onSubmit={e => e.preventDefault() }>
-                        <Select id={"country-select"} className={"large-input-field"}
+                        <Select id={"country-select"}
+
                                 required={false}
-                                styles={customSelectStyles}
+                               // styles={customSelectStyles}
                                 options={options}
                                 value={countrySelect}
+                                unstyled={true}
+                                classNamePrefix={"country-select"}
                                 onChange={selectCountryHandler}/>
                         <div className="small-input">
                             <input required={false}

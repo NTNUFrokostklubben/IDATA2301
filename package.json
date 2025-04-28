@@ -3,14 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-<<<<<<< HEAD
     "@reduxjs/toolkit": "^2.7.0",
-=======
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@mui/material": "^7.0.1",
     "@mui/x-charts": "^7.28.0",
->>>>>>> 3abe47c138876c55842030f66f2bbff15a9d013b
     "cra-template": "1.2.0",
     "react": "^19.0.0",
     "react-datepicker": "^8.3.0",
