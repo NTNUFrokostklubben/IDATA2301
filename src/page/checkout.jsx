@@ -8,6 +8,7 @@ import Register from "../component/modals/auth/register";
 import {useSelector} from "react-redux";
 import Select from 'react-select'
 import countryList from "react-select-country-list";
+import {AsyncApiRequest} from "../utils/requests";
 
 
 export default function Checkout() {
@@ -26,6 +27,8 @@ export default function Checkout() {
 
     const handlePurchase =  async () => {
         setLoading(true);
+        AsyncApiRequest("POST", "/transaction/offerId/${courseData.id}/userid/${1}")
+
          fetch(`http://localhost:8080/api/transaction/offerId/${courseData.id}/userid/${1}`, {method:'POST'})
             .then((response) => {setStatus(response.status)})
             .catch(err => console.error('Error fetching data:', err));
