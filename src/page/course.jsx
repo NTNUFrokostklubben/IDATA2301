@@ -4,35 +4,24 @@ import Rating from "../component/Rating/rating";
 import CourseProviderCard from "../component/courseProviderCard/courseProviderCard";
 import {useParams} from "react-router-dom";
 import {AsyncApiRequest} from "../utils/requests";
+import AddFavorite from "../component/favorite/addFavorite";
 
 export default function Course() {
     const [courseData, setCourseData] = useState([]);
     const [ratingData, setRatingData] = useState();
     const [offerableCourseData, setofferableCourseData] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [isFavorite, setFavorite] = useState(false);
     const [keywords, setKeywords] = useState([])
+
     const {id} = useParams();
 
+    useEffect(() => {
 
-    useEffect(() =>{
-        /*
-        if (courseData.length === 0){
-            fetchCourseData();
-        }
-        if (offerableCourseData.length === 0){
-            fetchOfferableCourses();
-        }
-        if (!ratingData) {
-            fetchRatingData();
-        }
-        if (keywords.length === 0){
-            fetchKeywords();
-        }
-
-         */
         const fetchData = async () =>{
             try {
-                await Promise.all([fetchCourseData(),fetchOfferableCourses(), fetchKeywords(), fetchRatingData()])
+                await Promise.all([fetchCourseData(),fetchOfferableCourses(), fetchKeywords(), fetchRatingData(),
+                    checkFavorite()])
             }catch (e){
                 console.error(e)
             }
@@ -99,6 +88,17 @@ export default function Course() {
             console.error("Error fetching keywords:", error);
         }
     }
+    async function checkFavorite() {
+        try {
+            const favoriteState = await AsyncApiRequest("GET", `/isFavorited/${1}/${id}`, false)
+                .then(response => response.json())
+            console.log(favoriteState)
+            setFavorite(favoriteState)
+
+        }catch (error) {
+            console.error("Error fetching keywords:", error);
+        }
+    }
 
     function diffConvert(diff) {
         let value;
@@ -125,8 +125,8 @@ export default function Course() {
             <section id="course-splash">
 
                 <div id="course-splash-right-side">
-
-                    <h4 id="course-splash-title">{courseData.title}</h4>
+                    <div id="course-page-add-favorite"> <AddFavorite uid={1} cid={1} isFav={isFavorite}/> </div>
+                    <h4 id="course-splash-title">{courseData.title} </h4>
 
                     <div id="course-splash-details">
 
