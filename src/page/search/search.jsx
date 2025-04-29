@@ -5,6 +5,7 @@ import Collapsable from "../../component/Collapsable/collapsable";
 import {courseEntity, FilterQuery} from "../../utils/Classes/commonClasses";
 import DatePicker from "react-datepicker";
 import {useParams, useSearchParams} from "react-router-dom";
+import {AsyncApiRequest} from "../../utils/requests";
 
 
 export default function Search() {
@@ -79,6 +80,15 @@ export default function Search() {
                 setLoading(false)
             })
     }, []);
+
+    async function fetchFilteredCourses() {
+        try {
+            const p = await AsyncApiRequest("GET", "/offerableCourses/" + id, null);
+            setOfferableCourse(p);
+        } catch (e) {
+            console.error("Error fetching offerable courses:", e);
+        }
+    }
 
     /**
      * Handles date changes in the date range picker
