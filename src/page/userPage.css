@@ -1,12 +1,16 @@
 
 .user-page{
     background-color: var(--background);
+    display: flex;
+    justify-content: center;
+    padding-top: 5rem;
 }
 
 #user-page-content{
     display: flex;
     flex-wrap: wrap;
     max-width: 1400px;
+    justify-content: center;
 
 }
 

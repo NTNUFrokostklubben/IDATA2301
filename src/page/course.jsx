@@ -6,10 +6,56 @@ import {useParams} from "react-router-dom";
 import {AsyncApiRequest} from "../utils/requests";
 import AddFavorite from "../component/favorite/addFavorite";
 
+export function ReviewComponent({cid, ratingData}){
+    const [averageRating, setAverageRating] = useState(null);
+    const [halfStar, setHalfStar] = useState(false)
+    const [loading, setLoading] = useState(true);
+    const [stars, setStars] = useState([]);
+
+    useEffect(() => {
+        setLoading(true);
+        const fetchData =  () => {
+
+            if(ratingData){
+                console.log(Math.floor(ratingData))
+                setStars(Array(Math.floor(ratingData)).fill(0))
+                setHalfStar(true)
+            }
+
+            /*
+
+            const result = await AsyncApiRequest("GET", `/userCourses/averageRating/${cid}`, null )
+                .then(response => response.json())
+            setAverageRating(result);
+              */
+
+
+
+            setLoading(false);
+        };
+        fetchData();
+    }, []);
+
+    if (loading) {
+        return (<h5>loading...</h5>)
+    }
+    return(
+        <div className={"course-page-review-component"}>
+            <div className={"review-component-aggregate-stars"}>
+            {
+                stars.map(() =>
+                    <img className="review-component-star" src="/icons/star-sharp.svg" alt="review star"/>
+                )
+            }
+            </div>
+        </div>
+    )
+}
+
 export default function Course() {
     const [courseData, setCourseData] = useState([]);
     const [ratingData, setRatingData] = useState();
-    const [offerableCourseData, setofferableCourseData] = useState([]);
+    const [offerableCourseData, setOfferableCourseData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [isFavorite, setFavorite] = useState(false);
     const [keywords, setKeywords] = useState([])
@@ -18,15 +64,15 @@ export default function Course() {
 
     useEffect(() => {
 
-        const fetchData = async () =>{
+        const fetchData = async () => {
             try {
-                await Promise.all([fetchCourseData(),fetchOfferableCourses(), fetchKeywords(), fetchRatingData(),
+                await Promise.all([fetchCourseData(), fetchOfferableCourses(), fetchKeywords(), fetchRatingData(),
                     checkFavorite()])
-            }catch (e){
+            } catch (e) {
                 console.error(e)
             }
         }
-       fetchData()
+        fetchData()
 
     }, []);
 
@@ -38,7 +84,7 @@ export default function Course() {
             const fetchApiCall = `/course/${id}`;
             const data = await AsyncApiRequest("GET", fetchApiCall, null)
                 .then(response => response.json())
-                setCourseData(data)
+            setCourseData(data)
             setLoading(false);
         } catch (error) {
             console.error("Error fetching course data:", error);
@@ -53,7 +99,7 @@ export default function Course() {
             const fetchApiCall = `/offerableCourses/course/${id}`;
             const data = await AsyncApiRequest("GET", fetchApiCall, null)
                 .then(response => response.json())
-            setofferableCourseData(data)
+            setOfferableCourseData(data)
 
         } catch (error) {
             console.error("Error fetching offerable course data:", error);
@@ -65,10 +111,10 @@ export default function Course() {
      */
     async function fetchRatingData() {
         try {
-             const fetchApiCall = `/userCourses/averageRating/${id}`;
+            const fetchApiCall = `/userCourses/averageRating/${id}`;
             const data = await AsyncApiRequest("GET", fetchApiCall, null)
                 .then(response => response.json())
-             setRatingData(data)
+            setRatingData(data)
 
         } catch (error) {
             console.error("Error fetching rating value:", error);
@@ -83,19 +129,19 @@ export default function Course() {
             const fetchApiCall = `/keyword/${id}`;
             const data = await AsyncApiRequest("GET", fetchApiCall, null)
                 .then(response => response.json())
-                setKeywords(data)
+            setKeywords(data)
         } catch (error) {
             console.error("Error fetching keywords:", error);
         }
     }
+
     async function checkFavorite() {
         try {
             const favoriteState = await AsyncApiRequest("GET", `/isFavorited/${1}/${id}`, false)
                 .then(response => response.json())
-            console.log(favoriteState)
             setFavorite(favoriteState)
 
-        }catch (error) {
+        } catch (error) {
             console.error("Error fetching keywords:", error);
         }
     }
@@ -121,59 +167,69 @@ export default function Course() {
     }
     return (
         <div className="course-page">
-            <div className="course-page-content" >
-            <section id="course-splash">
+            <div className="course-page-content">
+                <section id="course-splash">
 
-                <div id="course-splash-right-side">
-                    <div id="course-page-add-favorite"> <AddFavorite uid={1} cid={1} isFav={isFavorite}/> </div>
-                    <h4 id="course-splash-title">{courseData.title} </h4>
+                    <div id="course-splash-right-side">
+                        <div id="course-page-add-favorite"><AddFavorite uid={1} cid={1} isFav={isFavorite}/></div>
+                        <h4 id="course-splash-title">{courseData.title} </h4>
 
-                    <div id="course-splash-details">
+                        <div id="course-splash-details">
 
-                        <p id="course-splash-hrw">{courseData.hoursWeek} hours per week</p>
-                        <img className="course-splash-details-spacing"
-                             src="/icons/ellipsis-horizontal-circle-sharp.svg"/>
+                            <p id="course-splash-hrw">{courseData.hoursWeek} hours per week</p>
+                            <img className="course-splash-details-spacing"
+                                 src="/icons/ellipsis-horizontal-circle-sharp.svg"/>
 
-                        <p id="course-splash-diff">{diffConvert(courseData.diffLevel)}</p>
-                        <img className="course-splash-details-spacing"
-                             src="/icons/ellipsis-horizontal-circle-sharp.svg"/>
+                            <p id="course-splash-diff">{diffConvert(courseData.diffLevel)}</p>
+                            <img className="course-splash-details-spacing"
+                                 src="/icons/ellipsis-horizontal-circle-sharp.svg"/>
 
-                        <p id="course-splash-credits">credits: {courseData.credits}</p>
-                    </div>
+                            <p id="course-splash-credits">credits: {courseData.credits}</p>
+                        </div>
 
-                    <div id="course-splash-offerability">
-                        <p id="course-splash-closest">Closest course session: {new Date(courseData.closestCourse).toLocaleDateString()}</p>
-                        <p id="course-splash-relatedcert">Related certificate: {courseData.relatedCert}</p>
-                    </div>
+                        <div id="course-splash-offerability">
+                            <p id="course-splash-closest">Closest course
+                                session: {new Date(courseData.closestCourse).toLocaleDateString()}</p>
+                            <p id="course-splash-relatedcert">Related certificate: {courseData.relatedCert}</p>
+                        </div>
 
-                    <div id="course-splash-avgstars">
-                        <img id="course-splash-star" src="/icons/star-sharp.svg" alt={"rating star"}/>
-                        <p id="course-splash-rating">{ratingData}</p>
-                    </div>
+                        <div id="course-splash-avgstars">
+                            <img id="course-splash-star" src="/icons/star-sharp.svg" alt={"rating star"}/>
+                            <p id="course-splash-rating">{ratingData}</p>
+                        </div>
 
-                    <div id="course-splash-keywords">
-                        {keywords.map( item => (
-                            <p className="course-splash-keyword">{item.keyword}</p>
+                        <div id="course-splash-keywords">
+                            {keywords.map(item => (
+                                <p className="course-splash-keyword">{item.keyword}</p>
 
                             ))}
+                        </div>
+
                     </div>
 
-                </div>
+                    <picture>
+                        <img id="course-splash-image" src={courseData.imgLink} alt={"course image"}/>
+                    </picture>
 
-                <picture>
-                    <img id="course-splash-image" src={courseData.imgLink} alt={"course image"}/>
-                </picture>
+                </section>
 
-            </section>
+                <section id="course-description">
+                    <h4 id="course-description-heading"> Description</h4>
+                    <p id="course-description-text">{courseData.description}</p>
+                </section>
 
-            <section id="course-description">
-                <h4 id="course-description-heading"> Description</h4>
-                <p id="course-description-text">{courseData.description}</p>
-            </section>
+                <section id="course-offerables">
+                    {offerableCourseData.map(item => <CourseProviderCard key={item.id} {...item}/>)}
+                </section>
+                <section className={"course-page-reviews"}>
+                    <div className={"course-page-review-aggregate"}>
+                        <h5> Customer reviews</h5>
+                        <ReviewComponent cid={id} ratingData={ratingData}/>
+                    </div>
+                    <div className={"course-page-user-reviews"}>
+                    </div>
 
-            <section id="course-offerables">
-                {offerableCourseData.map(item => <CourseProviderCard key={item.id} {...item}/>)}
-            </section>
+                </section>
             </div>
         </div>
     )
