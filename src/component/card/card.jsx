@@ -1,9 +1,11 @@
 import "./card.css";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
-export default function Card(course) {
+export default function Card(offerableCourse) {
 
-    function getDifficulty (diff_level) {
+    const navigate = useNavigate();
+
+    function getDifficulty(diff_level) {
         switch (diff_level) {
             case 0:
                 return "Beginner";
@@ -18,20 +20,21 @@ export default function Card(course) {
 
     return (
 
-        <section className="card">
-            <img className="course-img" src={"https://picsum.photos/200/200?random=2"} alt=""/>
-            <b>{course.title}</b>
-            <p className="card-desc">{course.description}</p>
-            <p className="infotext">{course.hoursWeek} • {getDifficulty(course.diffLevel)} • {course.credits} ECTS credits</p>
+        <section  className="card">
+            <Link to={"/course/" + offerableCourse.course.id}><img className="course-img" src={"https://picsum.photos/200/200?random=2"} alt=""/></Link>
+            <h5>{offerableCourse.course.title}</h5>
+            <p className="card-desc">{offerableCourse.course.description}</p>
+            <p className="infotext">{offerableCourse.course.hoursWeek} • {getDifficulty(offerableCourse.course.diffLevel)} • {offerableCourse.course.credits} ECTS
+                credits</p>
             <div className="card-footer">
                 <div className="rating">
 
                     <img width="24" src="/icons/star-sharp.svg" alt=""/>
-                    <b>3.4</b>
-                    (152)
+                    <b>{offerableCourse.rating}</b>
+                    ({offerableCourse.numberOfRatings})
 
                 </div>
-                <p id="price2">10 000 NOK</p>
+                <p id="price2">{offerableCourse.minDiscountedPrice} NOK</p>
             </div>
         </section>
 
