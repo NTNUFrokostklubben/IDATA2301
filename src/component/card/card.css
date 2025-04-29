@@ -27,7 +27,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem;
+    padding: 0rem 1rem;
     margin-top: auto;
 
 }
@@ -38,7 +38,7 @@
 
 }
 
-.card h5 {
+.card h6 {
     margin: 0.5rem 1rem;
 }
 
@@ -102,7 +102,7 @@
         object-fit: cover;
     }
 
-    .card h5 {
+    .card h6 {
         margin: 0;
         /*font-size: 1.2rem; !* Adjust font size for smaller screens *!*/
         justify-self: center;

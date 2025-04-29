@@ -27,7 +27,7 @@ export default function Search() {
      * @param event Form submit event
      * @returns {Promise<void>}
      */
-    async function handleSubmit(event) {
+    function handleSubmit(event) {
         event.preventDefault();
 
         const data = new FormData(event.target);
@@ -56,7 +56,7 @@ export default function Search() {
     function buildDefaultFilter() {
         const builtFilters = new FilterQuery({
             ["startDate"]: startDate.getTime(),
-            ["endDate"]: endDate.getTime()
+            ["endDate"]: new Date(new Date().getFullYear(), 11, 31)
         }, buildCategory(), buildDifficultyLevel(), {
             ["min-credits"]: null,
             ["max-credits"]: null
@@ -101,6 +101,7 @@ export default function Search() {
      * Called whenever filter object is changed
      */
     useEffect(() => {
+
         const fetchData = async () => {
             try {
                 await fetchFilteredCourses();
@@ -111,6 +112,7 @@ export default function Search() {
         }
 
         fetchData();
+        console.log(filters)
     }, [filters]);
 
 
@@ -120,7 +122,7 @@ export default function Search() {
      */
     async function fetchFilteredCourses() {
         try {
-            const p = await AsyncApiRequest("POST", "/search", filters);
+            const p = await AsyncApiRequest("POST", "/search", filters).then((p) => p.json());
             setOfferableCourses(p);
         } catch (e) {
             console.error("Error fetching offerable courses:", e);
@@ -134,6 +136,7 @@ export default function Search() {
      */
     const dateChanged = (dates) => {
         const [start, end] = dates;
+        console.log("New dates:", start, end); // Debug
         setStartDate(start);
         setEndDate(end);
 
