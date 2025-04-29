@@ -39,6 +39,16 @@ export class OfferableCourse {
     }
 }
 
+export class CourseWithPrice {
+    constructor(Course, minDiscountedPrice, closestDate, rating, numberOfRatings) {
+        this.Course = Course;
+        this.minDiscountedPrice = minDiscountedPrice;
+        this.closestDate = closestDate;
+        this.rating = rating;
+        this.numberOfRatings = numberOfRatings;
+    }
+}
+
 export class FilterQuery {
     constructor(dateRange, categories, diffLevels, courseSizeRange, ratingRange, priceRange, searchValue) {
         this.dateRange = dateRange;

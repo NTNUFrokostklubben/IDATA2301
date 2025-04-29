@@ -14,7 +14,7 @@
 
 .card .infotext {
     color: rgba(0, 0, 0, 0.5);
-    font-size: 0.7rem;
+    font-size: 1rem;
 }
 
 .card .course-img {
@@ -26,16 +26,30 @@
 .card .card-footer {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 1rem;
+    margin-top: auto;
+
 }
 
 .card b {
-    margin: 1rem;
+    /*margin: 1rem;*/
     font-size: 1rem;
+
+}
+
+.card h5 {
+    margin: 0.5rem 1rem;
 }
 
 .rating {
-    margin: 1rem 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+
+    gap: 0.5rem; /* Add spacing between star and text */
+    margin: 0rem 1rem; /* Remove default margin */
 
 }
 
@@ -88,14 +102,16 @@
         object-fit: cover;
     }
 
-    .card b {
+    .card h5 {
         margin: 0;
-        font-size: 1rem;
+        /*font-size: 1.2rem; !* Adjust font size for smaller screens *!*/
         justify-self: center;
+        padding: 1rem 0rem;
         grid-column-start: 2;
         grid-column-end: -1;
         grid-row: 1;
     }
+
 
     .card .card-desc {
         -webkit-line-clamp: 4; /* Reduce to 2 lines for smaller screens */
@@ -110,7 +126,7 @@
         grid-column-start: 2;
         grid-row: 1;
         justify-self: center;
-        padding-top: 1rem;
+        padding-top: 2rem;
         text-align: left; /* Align text to the left */
     }
 

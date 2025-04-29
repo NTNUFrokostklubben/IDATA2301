@@ -13,22 +13,27 @@ export default function Search() {
     const [searchParams, setSearchParams] = useSearchParams();
     const searchValue = searchParams.get("search");
 
-    const [courses, setCourses] = useState([]);
+    const [offerableCourses, setOfferableCourses] = useState([]);
     const [loading, setLoading] = useState(true);
 
     const [startDate, setStartDate] = useState(new Date())
-    const [endDate, setEndDate] = useState(new Date())
+    // Sets the default date to the end of the year
+    const [endDate, setEndDate] = useState(new Date(new Date().getFullYear(), 11, 31));
 
+    const [filters, setFilters] = useState(buildDefaultFilter())
 
-    function handleSubmit(event) {
+    /**
+     * Triggered once form is submitted, only changes Filter object, useEffect is called when filter object is changed
+     * @param event Form submit event
+     * @returns {Promise<void>}
+     */
+    async function handleSubmit(event) {
         event.preventDefault();
 
         const data = new FormData(event.target);
         const value = Object.fromEntries(data.entries());
 
-        console.log(searchValue)
-
-        const filters = new FilterQuery({
+        const builtFilters = new FilterQuery({
             ["startDate"]: startDate.getTime(),
             ["endDate"]: endDate.getTime()
         }, buildCategory(), buildDifficultyLevel(), {
@@ -39,8 +44,28 @@ export default function Search() {
             ["max-rating"]: value["max-rating"]
         }, {["min-price"]: value["min-price"], ["max-price"]: value["max-price"]}, searchValue);
 
-        console.log({filters});
+        setFilters(builtFilters)
 
+    }
+
+    /**
+     * Builds a default filter that gets all courses for this year when page is loaded
+     *
+     * @returns {FilterQuery}
+     */
+    function buildDefaultFilter() {
+        const builtFilters = new FilterQuery({
+            ["startDate"]: startDate.getTime(),
+            ["endDate"]: endDate.getTime()
+        }, buildCategory(), buildDifficultyLevel(), {
+            ["min-credits"]: null,
+            ["max-credits"]: null
+        }, {
+            ["min-rating"]: null,
+            ["max-rating"]: null
+        }, {["min-price"]: null, ["max-price"]: null}, searchValue);
+
+        return builtFilters;
     }
 
     /**
@@ -71,20 +96,32 @@ export default function Search() {
         return levels;
     }
 
+    /**
+     * Fetches all courses from the API.
+     * Called whenever filter object is changed
+     */
     useEffect(() => {
-        fetch("http://localhost:8080/api/courses")
-            .then((response) => response.json())
-            .then((data) => {
-                const courses = data.map((course) => new courseEntity(course.id, course.category, course.closestCourse, course.credits, course.description, course.diffLevel, course.hoursWeek, course.imgLink, course.relatedCert, course.title));
-                setCourses(courses);
-                setLoading(false)
-            })
-    }, []);
+        const fetchData = async () => {
+            try {
+                await fetchFilteredCourses();
+                setLoading(false);
+            } catch (e) {
+                console.error(e)
+            }
+        }
 
+        fetchData();
+    }, [filters]);
+
+
+    /**
+     * Fetches filtered courses from the API
+     * @returns {Promise<void>}
+     */
     async function fetchFilteredCourses() {
         try {
-            const p = await AsyncApiRequest("GET", "/offerableCourses/" + id, null);
-            setOfferableCourse(p);
+            const p = await AsyncApiRequest("POST", "/search", filters);
+            setOfferableCourses(p);
         } catch (e) {
             console.error("Error fetching offerable courses:", e);
         }
@@ -99,6 +136,7 @@ export default function Search() {
         const [start, end] = dates;
         setStartDate(start);
         setEndDate(end);
+
     };
 
     if (loading) {
@@ -199,7 +237,7 @@ export default function Search() {
 
                             <DatePicker selected={startDate} onChange={dateChanged} startDate={startDate}
                                         endDate={endDate} selectsRange={true}
-                                        dateFormat={"dd/MM/YYYY"}
+                                        dateFormat={"dd/MM/yyyy"}
                                         icon={<img src={"/icons/calendar-clear-sharp.svg"}/>} showIcon/>
 
                         </section>
@@ -211,7 +249,7 @@ export default function Search() {
 
             <div className="search-results">
                 <section id="resultsinfo">
-                    <h2>3 results for "{searchValue}"</h2>
+                    <h2>{offerableCourses.length} results for "{searchValue}"</h2>
                     <div className="input-wrapper">
                         <select className="filter-dropdown" id="filter-ropdown" type="dropdown">
                             <option>Most Relevant</option>
@@ -223,7 +261,7 @@ export default function Search() {
                     </div>
                 </section>
                 <section id="results">
-                    {courses.map((course) => <Card key={course.id} {...course}/>)}
+                    {offerableCourses.map((course) => <Card key={course.course.id} {...course}/>)}
                 </section>
             </div>
         </div>
