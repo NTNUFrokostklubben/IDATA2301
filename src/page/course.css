@@ -1,9 +1,13 @@
 .course-page {
+    width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items:center;
     background-color: var(--background);
+    padding-top: 4rem;
+}
+.course-page-content{
+    width: 60rem;
 }
 #course-splash{
     margin: 1.5rem;
@@ -14,7 +18,7 @@
     display: flex;
     flex-direction: column;
 
-    margin-top: 3rem;
+
     margin-right: 3rem;
 
 }
@@ -28,6 +32,7 @@
 }
 
 #course-splash-image{
+
     height: 17rem;
     width: 25rem;
 }
@@ -54,8 +59,8 @@
     padding-left: 0.4rem;
 }
 #course-description{
-    width: 60rem;
     padding-left: 1rem;
+    padding-right: 1rem;
 }
 #course-description-heading{
     padding: 0.5rem;
@@ -65,10 +70,17 @@
 }
 #course-offerables{
     margin-top: 2rem;
-    width: 60rem;
+
     display: flex;
     flex-direction: row;
+    justify-content: flex-start;
+    padding-bottom: 2rem;
+    padding-left: 1rem;
 }
+#course-offerables > *{
+    margin-right: 2rem;
+}
+
 #course-splash-keywords{
     display: flex;
     padding-top: 1rem;
@@ -83,15 +95,27 @@
 
 @media (max-width: 950px) {
     #course-description{
-        width: 37rem;
     }
 
 }
-@media (max-width: 600px) {
+@media (max-width: 680px) {
     #course-splash{
         flex-direction: column;
+    }
+    .course-page-content{
+        width: 42rem;
     }
     .course-page{
         align-items: flex-start;
     }
+}
+@media (max-width: 374px) {
+    .course-page-content{
+        width: 40rem;
+    }
+    #course-offerables > *{
+        margin-right: 1rem;
+    }
+
+
 }

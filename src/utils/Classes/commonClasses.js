@@ -38,3 +38,10 @@ export class OfferableCourse {
         this.provider = provider;
     }
 }
+
+export class User{
+    constructor( email, passwordHash) {
+        this.email = email;
+        this.passwordHash = passwordHash;
+    }
+}
