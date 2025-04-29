@@ -26,6 +26,10 @@ export default function Layout() {
 
     return (
         <div>
+            <link rel="preconnect" href="https://fonts.googleapis.com"/>
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin/>
+            <link href="https://fonts.googleapis.com/css2?family=Tienne:wght@400;700;900&display=swap"
+                  rel="stylesheet"/>
             {/*Navbar*/}
             <nav id="menu-navbar">
                 <li id="logo-image">
@@ -88,11 +92,11 @@ export default function Layout() {
 
             {/* Footer */}
             <footer>
-                <img id="logo-icon" src="logo.svg" alt="Learniverse Logo"/>
+                <img id="logo-icon" src="/logo.svg" alt="Learniverse Logo"/>
 
                 <div id="footer-textbox">
 
-                <div className="textFooter" id="contact-us">
+                    <div className="textFooter" id="contact-us">
                         <h5>Contact us:</h5>
                         <p>Address: 1234 Main Street, Lincoln, NE 685089</p>
                         <p>Phone number: +47 123 45 678</p>
@@ -101,12 +105,10 @@ export default function Layout() {
 
                     <div className="textFooter" id="legal">
                         <h5>Legal</h5>
-                        {/*TODO add the link; https://www.ntnu.edu/studies/courses/IDATA2301#tab=omEmnet */}
                         <small>This website is a result of a university group project, performed in the course
-                            IDATA2301 Web
-                            technologies, at NTNU.</small><br/>
-                        <small>All the information provided here is a result of imagination. </small><br/>
-                        <small> Any resemblance with real companies or products is a coincidence.</small><br/>
+                            <a href={"https://www.ntnu.edu/studies/courses/IDATA2301#tab=omEmnet"}> IDATA2301</a>
+                            Web technologies, at NTNU. All the information provided here is a result of
+                            imagination. Any resemblance with real companies or products is a coincidence.</small>
                     </div>
 
                 </div>

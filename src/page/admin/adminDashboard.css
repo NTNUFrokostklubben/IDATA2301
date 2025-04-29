@@ -1,0 +1,75 @@
+.admin-dash{
+    padding: 1rem;
+}
+.admin-dash-content{
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 4rem;
+    padding-bottom: 4rem;
+}
+.admin-dash-revenue{
+    margin-top: 2rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--highlight);
+}
+.admin-dash-revenue h6{
+    margin-top: 2rem;
+}
+.admin-dash-revenue-graph{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.admin-dash-reviews{
+    margin-top: 2rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--highlight);
+}
+.admin-dash-overview{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-top: 2rem;
+}
+.admin-dash-users{
+    padding: 1rem;
+    display: block;
+    background-color: var(--highlight);
+    margin-right: 4rem;
+    width: 100%;
+}
+.admin-dash-courses{
+    padding: 1rem;
+    display: block;
+    background-color: var(--highlight);
+    width: 100%;
+}
+.admin-dash-result{
+    gap: 1rem;
+    margin-top: 1rem;
+}
+.admin-dash-title{
+    font-weight: lighter;
+}
+
+@media (max-width: 1024px) {
+    .admin-dash-content{
+        flex-direction: column;
+        grid-template-columns: 1fr;
+        grid-gap: 0rem;
+    }
+    .admin-dash-overview{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+    .admin-dash-users{
+        margin-right: 0rem;
+        margin-bottom: 2rem;
+    }
+
+}

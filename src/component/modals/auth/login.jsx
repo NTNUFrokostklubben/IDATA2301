@@ -1,25 +1,28 @@
 import "./auth.css"
-import {useEffect, useRef, useState} from "react";
+import {useContext, useEffect, useRef, useState} from "react";
 import { useFocusTrap } from "../../../utils/useFocusTrap";
 
-export default function Login({ onClose, changeMode }) {
+
+export default function Login({ onClose, changeMode, closable=true }) {
 
     const modalRef = useRef(null)
     useFocusTrap(modalRef, true, onClose) // Passes true to isOpen due to this modal only being open when it is rendered
-
     return (
         <div className={"auth-background"}
         ref={modalRef}
-        onClick={(c) => {
-            if (c.target === modalRef.current) {
+        onClick={((c) => {
+            if ( closable &&  c.target === modalRef.current) {
                 onClose()
             }
-        }}>
+
+        })}>
 
             <div className="authform">
+                { closable &&
                 <button id={"auth-close-button"} className={"secondary-button"} onClick={onClose}>
-                    <img alt={"X"} src={"icons/close-sharp.svg"} />
+                    <img alt={"X"} src={"/icons/close-sharp.svg"} />
                 </button>
+                }
                 <h2 className={"auth-h2"}>
                     Log In
                 </h2>

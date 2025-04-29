@@ -13,7 +13,6 @@ const API_BASE_URL = "http://localhost:8080/api";
  */
 export function AsyncApiRequest(method, url, requestBody) {
     const fullUrl = API_BASE_URL + url;
-    console.log(fullUrl)
     let body = null;
     let headers = {};
     if (requestBody) {
@@ -28,10 +27,7 @@ export function AsyncApiRequest(method, url, requestBody) {
         headers: headers,
         body: body,
     })
-        .then(response => response.json())
-        .then(data => {
-            return data;
-        })
+        .then(response => {return response})
         .catch(error => {
             console.error('Error:', error);
             throw error;

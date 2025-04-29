@@ -5,27 +5,24 @@ import {Link, Route} from "react-router-dom";
 import CourseCard from "../component/card/CourseCard";
 import Register from "../component/modals/auth/register";
 import {createPortal} from "react-dom";
-import Login from "../component/modals/auth/login";
+import {AsyncApiRequest} from "../utils/requests";
 
 class courseEntity {
-    constructor(id, category, closestCourse, credits, description, diffLevel, hoursWeek, imgLink, relatedCert, title) {
+    constructor(id, title, description, imgLink) {
         this.id = id;
-        this.category = category;
-        this.closestCourse = closestCourse;
-        this.credits = credits;
-        this.description = description;
-        this.diffLevel = diffLevel;
-        this.hoursWeek = hoursWeek;
-        this.imgLink = imgLink;
-        this.relatedCert = relatedCert;
         this.title = title;
+        this.description = description;
+        this.imgLink = imgLink;
+        this.price = null;
+    }
+    setPrice(price) {
+        this.price = price;
     }
 }
 
 export default function Index() {
 
     const [showSignupModal, setShowSignupModal] = useState()
-
     const [courseShown, setCourseShown] = useState(calcSceneStart());
     const [courseIndex, setCourseIndex] = useState(0);
     const [courses, setCourses] = useState([]);
@@ -39,15 +36,36 @@ export default function Index() {
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
-    // Fetch courses from the API
     useEffect(() => {
-        fetch("http://localhost:8080/api/courses")
-            .then((response) => response.json())
-            .then((data) => {
-                const courses = data.map((course) => new courseEntity(course.id, course.category, course.closestCourse, course.credits, course.description, course.diffLevel, course.hoursWeek, course.imgLink, course.relatedCert, course.title));
-                setCourses(courses);
-            })
+        if (courses.length === 0) {
+            fetchCourses();
+        }
     }, []);
+
+    /**
+     * Fetches all courses from the API
+     */
+    async function fetchCourses() {
+        try {
+            const data = await AsyncApiRequest("GET", "/courses", null)
+        .then(response => response.json());
+            const courses = data.map((course) => new courseEntity(course.id, course.title, course.description, course.imgLink));
+            setCourses(courses);
+
+            const priceFetches = courses.map(async (course) => {
+                const fetchApiCall = `/offerableCourses/coursePrice/${course.id}`;
+                const price = await AsyncApiRequest("GET", fetchApiCall, null)
+                    .then(response => response.json());
+                course.setPrice(price);
+            });
+
+            // Wait for all price fetches to complete
+            await Promise.all(priceFetches);
+            setCourses([...courses]); // Ensure state is updated with new course prices
+        } catch (err) {
+            console.error("Error fetching courses: ", err);
+        }
+    }
 
 
     function calcSceneStart() {
@@ -61,8 +79,10 @@ export default function Index() {
             return 5;
         } else if (window.matchMedia("(max-width: 2350px)").matches) {
             return 6;
-        } else {
+        } else if (window.matchMedia("(max-width: 3000px)").matches) {
             return 7;
+        } else {
+            return 8;
         }
     }
 
@@ -246,7 +266,9 @@ export default function Index() {
                 <li><a href={"/search"}>search/filters</a></li>
                 <li><a href={"/admin"}>Admin</a></li>
                 <li> <Link to={`/course/${1}`}> course</Link></li>
-                <li><a href={"/about"}></a></li>
+                <li> <Link to={`/userpage/${1}`}> user page</Link></li>
+                <li><a href={"/about"}>about</a></li>
+                <li><a href={"/checkout"}>checkout</a></li>
             </ul>
             {
                 showSignupModal && createPortal(

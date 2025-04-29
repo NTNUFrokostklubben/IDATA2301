@@ -39,6 +39,7 @@ export class OfferableCourse {
     }
 }
 
+
 export class CourseWithPrice {
     constructor(Course, minDiscountedPrice, closestDate, rating, numberOfRatings) {
         this.Course = Course;
@@ -58,5 +59,11 @@ export class FilterQuery {
         this.ratingRange = ratingRange;
         this.priceRange = priceRange;
         this.searchValue = searchValue;
+
+export class User{
+    constructor( email, passwordHash) {
+        this.email = email;
+        this.passwordHash = passwordHash;
+
     }
 }
