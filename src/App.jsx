@@ -11,6 +11,9 @@ import UserPage from "./page/userPage";
 import About from "./page/about";
 import Checkout from "./page/checkout";
 import Course from "./page/course";
+
+import {UserContext} from "./userContext";
+import {useState} from "react";
 import Providers from "./page/admin/management/providers/providers";
 import Courses from "./page/admin/management/courses/courses";
 import ProviderAdd from "./page/admin/management/providers/add/providerAdd";
@@ -18,18 +21,27 @@ import ProviderEdit from "./page/admin/management/providers/edit/providerEdit";
 import OfferableCourses from "./page/admin/course/offerableCourses";
 import OfferableCourseAdd from "./page/admin/course/add/offerableCourseAdd";
 import OfferableCourseEdit from "./page/admin/course/edit/offerableCourseEdit";
+import OrderComplete from "./page/orderComplete";
 
 function App() {
+    const [User, setUser] = useState({});
+
+    function userLogin(User){
+        setUser(User)
+    }
     return (
+
         <BrowserRouter>
+            <UserContext.Provider value={{user: User, handleLogin: userLogin }}>
             <Routes>
                 <Route path={"/"} element={<Layout/>}>
                     <Route index element={<Index/>}/>
                     <Route path={"search"} element={<Search/>}/>
                     <Route path={"course/:id"} element={<Course/>}/>
                     <Route path={"userpage/:id"} element={<UserPage/>}/>
+                    <Route path={"order-complete"} element={<OrderComplete/>}/>
                     <Route path={"about"} element={<About/>}/>
-                    <Route path={"checkout"} element={<Checkout/>}/>
+                    <Route path={"checkout/:id"} element={<Checkout/>}/>
                     <Route path={"/admin"} element={<AdminNav/>}>
                         <Route index element={<AdminDashboard/>}/>
                         <Route path={"/admin/offerableCourses"}>
@@ -54,9 +66,10 @@ function App() {
                 </Route>
 
             </Routes>
+            </UserContext.Provider>
         </BrowserRouter>
-    )
-        ;
+
+            );
 }
 
 export default App;
