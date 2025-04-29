@@ -60,7 +60,8 @@ export class FilterQuery {
         this.priceRange = priceRange;
         this.searchValue = searchValue;
     }
-    
+}
+
 export class User{
     constructor( email, passwordHash) {
         this.email = email;
