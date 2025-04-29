@@ -31,6 +31,7 @@
     width: 6rem;
 }
 
+
 @media (max-width: 380px) {
 
     .provider-logo-placeholder{
@@ -42,7 +43,4 @@
         height: 6rem;
 
     }
-
-
-
 }
