@@ -1,4 +1,5 @@
 import "./rating.css"
+import {Link} from "react-router-dom";
 export default function Rating (rating){
 
     function formatDate(dateString) {
@@ -16,7 +17,9 @@ export default function Rating (rating){
 
     return (
         <div className="one-review">
+            <Link to={ `/course/${rating.id}` /* should link to user review */}>
         <h5 className="review-title">{rating.course.title}</h5>
+            </Link>
             <div className="user-review-section">
                 <picture>
                     <img className="user-review-image" src={rating.user.profilePicture} alt="user"/>
