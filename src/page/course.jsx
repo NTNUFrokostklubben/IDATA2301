@@ -6,47 +6,119 @@ import {useParams} from "react-router-dom";
 import {AsyncApiRequest} from "../utils/requests";
 import AddFavorite from "../component/favorite/addFavorite";
 
-export function ReviewComponent({cid, ratingData}){
-    const [averageRating, setAverageRating] = useState(null);
+export function ReviewComponent({cid, averageRating}) {
+    const [ratingData, setRatingData] = useState(null);
     const [halfStar, setHalfStar] = useState(false)
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [stars, setStars] = useState([]);
+    const [oneStarBar, setOneStarBar] = useState(0);
+    const [twoStarBar, setTwoStarBar] = useState(0);
+    const [threeStarBar, setThreeStarBar] = useState(0);
+    const [fourStarBar, setFourStarBar] = useState(0);
+    const [fiveStarBar, setFiveStarBar] = useState(0);
 
     useEffect(() => {
         setLoading(true);
-        const fetchData =  () => {
 
-            if(ratingData){
-                console.log(Math.floor(ratingData))
-                setStars(Array(Math.floor(ratingData)).fill(0))
-                setHalfStar(true)
+        const fetchData = () => {
+            if (averageRating !== undefined) {
+
+                console.log(averageRating)
+                if (!Number.isInteger(averageRating)) {
+                    setHalfStar(true)
+                }
+                setStars(Array(Math.floor(averageRating)).fill(0))
             }
 
-            /*
+        }
 
-            const result = await AsyncApiRequest("GET", `/userCourses/averageRating/${cid}`, null )
-                .then(response => response.json())
-            setAverageRating(result);
-              */
+        const fetchRatingArray = async () => {
+            const data = await AsyncApiRequest("GET", `/userCourses/course/${cid}`, null)
+                .then(response => response.json());
+            setRatingData(data)
+            console.log(data)
+            calculateStarDistribution(data.map(item => item.rating));
 
 
-
-            setLoading(false);
-        };
+        }
         fetchData();
-    }, []);
+        fetchRatingArray();
+        setLoading(false);
+    }, [averageRating]);
+
+
+    const calculateStarDistribution = (ratings) => {
+        const starCounts = [0, 0, 0, 0, 0]; // For 1-5 stars
+
+        ratings.forEach(rating => {
+            const starIndex = Math.floor(rating) - 1;
+            if (starIndex >= 0 && starIndex < 5) {
+                starCounts[starIndex]++;
+            }
+        });
+        setOneStarBar((starCounts[0] / 5) * 100);
+        setTwoStarBar((starCounts[1] / 5) * 100);
+        setThreeStarBar((starCounts[2] / 5) * 100);
+        setFourStarBar((starCounts[3] / 5) * 100);
+        setFiveStarBar((starCounts[4] / 5) * 100);
+        console.log("star bar"+  fiveStarBar)
+    }
 
     if (loading) {
         return (<h5>loading...</h5>)
     }
-    return(
+
+    return (
         <div className={"course-page-review-component"}>
-            <div className={"review-component-aggregate-stars"}>
-            {
-                stars.map(() =>
-                    <img className="review-component-star" src="/icons/star-sharp.svg" alt="review star"/>
-                )
-            }
+            <div className={"course-page-review-component-left"}>
+                <div className={"review-component-aggregate-stars"}>
+                    {
+                        stars.map(() =>
+                            <img className="review-component-star" src="/icons/star-sharp.svg" alt="review star"/>
+                        )
+                    } {halfStar && (
+                    <img
+                        className="review-component-star"
+                        src="/icons/star-half-sharp.svg"
+                        alt="half star"
+                    />
+                )}
+                    <p className={"review-component-average-rating"}>
+                        {averageRating} out of 5
+                    </p>
+                </div>
+                <div className={"course-page-reviews-rating-bars"}>
+                    <div className={"course-page-review-component-text-and-bar"}>
+                        <p className={"course-page-review-component-bar-text"}>5 star</p>
+                    <div className={"course-page-reviews-rating-bar-unit"}>
+                        <div className={"reviews-rating-bar-star"} style={{width: `${fiveStarBar}%`}}></div>
+                    </div>
+                    </div>
+
+                    <div className={"course-page-review-component-text-and-bar"}>
+                        <p className={"course-page-review-component-bar-text"}>4 star</p>
+                        <div className={"course-page-reviews-rating-bar-unit"}>
+                            <div className={"reviews-rating-bar-star"} style={{width: `${fourStarBar}%`}}></div>
+                        </div>
+                    </div>
+                    <div className={"course-page-review-component-text-and-bar"}>
+                        <p className={"course-page-review-component-bar-text"}>3 star</p>
+                        <div className={"course-page-reviews-rating-bar-unit"}>
+                            <div className={"reviews-rating-bar-star"} style={{width: `${threeStarBar}%`}}></div>
+                        </div>
+                    </div>
+                    <div className={"course-page-review-component-text-and-bar"}>
+                        <p className={"course-page-review-component-bar-text"}>2 star</p>
+                        <div className={"course-page-reviews-rating-bar-unit"}>
+                            <div className={"reviews-rating-bar-star"} style={{width: `${twoStarBar}%`}}></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div className={"course-page-review-component-right"}>
+
             </div>
         </div>
     )
@@ -63,6 +135,7 @@ export default function Course() {
     const {id} = useParams();
 
     useEffect(() => {
+        setLoading(true)
 
         const fetchData = async () => {
             try {
@@ -73,7 +146,7 @@ export default function Course() {
             }
         }
         fetchData()
-
+        setLoading(false)
     }, []);
 
     /**
@@ -115,6 +188,7 @@ export default function Course() {
             const data = await AsyncApiRequest("GET", fetchApiCall, null)
                 .then(response => response.json())
             setRatingData(data)
+            console.log(ratingData)
 
         } catch (error) {
             console.error("Error fetching rating value:", error);
@@ -224,7 +298,7 @@ export default function Course() {
                 <section className={"course-page-reviews"}>
                     <div className={"course-page-review-aggregate"}>
                         <h5> Customer reviews</h5>
-                        <ReviewComponent cid={id} ratingData={ratingData}/>
+                        <ReviewComponent cid={id} averageRating={ratingData}/>
                     </div>
                     <div className={"course-page-user-reviews"}>
                     </div>
