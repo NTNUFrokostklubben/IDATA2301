@@ -104,6 +104,14 @@
 
 .course-page-review-component{
     width: 60rem;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: row;
+}
+.course-page-review-component-left * {
+}
+.course-page-reviews-rating-bars{
+
 }
 
 .review-component-aggregate-stars{
@@ -117,7 +125,7 @@
     flex-direction: row;
 }
 .course-page-reviews-rating-bar-unit{
-    width: 16rem;
+    width: 12rem;
     height: 20px;
     margin-top: 1rem;
     background-color: #e0e0e0;
