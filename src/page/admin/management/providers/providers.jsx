@@ -98,7 +98,6 @@ export default function Providers() {
      */
     async function fetchProviders() {
         const p = await getProviders();
-        console.log(p)
         setProviders(p)
     }
 

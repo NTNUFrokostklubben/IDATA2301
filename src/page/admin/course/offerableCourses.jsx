@@ -7,6 +7,15 @@ import {courseEntity, OfferableCourse, ProviderEntity} from "../../../utils/Clas
 import {createPortal} from "react-dom";
 import Login from "../../../component/modals/auth/login";
 import DeleteModal from "../../../component/modals/deleteModal";
+import {getOfferableCourses} from "../../../utils/commonRequests";
+
+export function OfferableCoursesTableContent() {
+
+    return (
+        <>
+        </>
+    )
+}
 
 
 export default function OfferableCourses() {
@@ -22,54 +31,37 @@ export default function OfferableCourses() {
 
 
     useEffect(() => {
-        fetch("http://localhost:8080/api/offerableCourses")
-            .then((response) => response.json())
-            .then((data) => {
-                // console.log(data);
-                const courses = data.map((offerableCourse) => new OfferableCourse(
-                    offerableCourse.id,
-                    offerableCourse.date,
-                    offerableCourse.discount,
-                    offerableCourse.price,
-                    offerableCourse.visible,
-                    new courseEntity(
-                        offerableCourse.course.id,
-                        offerableCourse.course.category,
-                        offerableCourse.course.closestCourse,
-                        offerableCourse.course.credits,
-                        offerableCourse.course.description,
-                        offerableCourse.course.diffLevel,
-                        offerableCourse.course.hoursWeek,
-                        offerableCourse.course.imgLink,
-                        offerableCourse.course.relatedCert,
-                        offerableCourse.course.title
-                    ),
-                    new ProviderEntity(
-                        offerableCourse.provider.id,
-                        offerableCourse.provider.name,
-                        offerableCourse.provider.imgLink,
-                        offerableCourse.provider.imgAltLink
-                    )
-                ));
-                // Sort by provider name
-                const sorted = courses.sort((a, b) => {
-                    if (a.provider.name < b.provider.name) {
-                        return -1;
-                    }
-                    if (a.provider.name > b.provider.name) {
-                        return 1;
-                    }
-                    return 0;
-                })
-                setOfferableCourses(sorted);
-                setFilteredCourses(sorted);
-                // Unique list of provicers from offerableCourses
-                setUniqueCourses(sorted.map((offerableCourse) => offerableCourse.course).filter((course, index, self) => {
-                    return index === self.findIndex((c) => c.id === course.id);
-                }));
+        const fetchData = async () => {
+            try {
+                await fetchOfferableCourses();
                 setLoading(false);
-            })
+            } catch (e) {
+                console.error(e)
+                setError(e)
+            }
+        }
+
+        fetchData()
     }, []);
+
+    async function fetchOfferableCourses() {
+        const p = await getOfferableCourses();
+
+        const sorted = p.sort((a, b) => {
+            if (a.provider.name < b.provider.name) {
+                return -1;
+            }
+            if (a.provider.name > b.provider.name) {
+                return 1;
+            }
+            return 0;
+        })
+        setOfferableCourses(sorted);
+        setFilteredCourses(sorted);
+        setUniqueCourses(sorted.map((offerableCourse) => offerableCourse.course).filter((course, index, self) => {
+            return index === self.findIndex((c) => c.id === course.id);
+        }));
+    }
 
 
     function changeProvider(e) {
@@ -90,11 +82,9 @@ export default function OfferableCourses() {
     }
 
 
-    if (loading) {
-        return <div>Loading...</div>
-    }
 
-    // TODO: Refactor so providers without courses are not displayed as well as courses without providers
+
+
     // Important to ensure all courses from providers are displayed too as there are some missing courses atm.
     return (
         <div id={"courseIndex"}>
@@ -102,7 +92,7 @@ export default function OfferableCourses() {
             <div id={"table-header"}>
                 <button id={"addCourse"} className={"cta-button"}><Link to={"/admin/offerablecourses/add"} className={""}>Add
                     Course</Link></button>
-                <select id={"course"} onChange={changeProvider}>
+                <select disabled={loading} id={"course"} onChange={changeProvider}>
                     <option value={""}>All</option>
                     {uniqueCourses.map((course) => (
                         <option key={course.id} value={course.id}>
@@ -126,7 +116,8 @@ export default function OfferableCourses() {
                         <th><p>Actions</p></th>
                     </tr>
                     </thead>
-                    <tbody>{filteredCourses.map((offerableCourse) => (
+                    <tbody>
+                    {filteredCourses.map((offerableCourse) => (
                         <tr key={offerableCourse.id}>
                             <td>
                                 <img src={"https://picsum.photos/50?random=" + offerableCourse.id}
@@ -156,7 +147,8 @@ export default function OfferableCourses() {
                                 }}>Delete</button>
                             </td>
                         </tr>
-                    ))}</tbody>
+                    ))}
+                    </tbody>
                 </table>
             </div>
 
