@@ -8,25 +8,111 @@ import {createPortal} from "react-dom";
 import Login from "../../../component/modals/auth/login";
 import DeleteModal from "../../../component/modals/deleteModal";
 import {getOfferableCourses} from "../../../utils/commonRequests";
+import {Skeleton} from "@mui/material";
 
-export function OfferableCoursesTableContent() {
+/**
+ * Builds table with offerable courses
+ *
+ * @param filteredCourses
+ * @returns {Element}
+ * @constructor
+ */
+function OfferableCoursesTableContent({filteredCourses}) {
+
+    const [showDeleteModal, setShowDeleteModal] = useState();
+    const [focusedId, setFocusedId] = useState()
 
     return (
         <>
+            {filteredCourses.map((offerableCourse) => (
+                <tr key={offerableCourse.id}>
+                    <td>
+                        <img src={"https://picsum.photos/50?random=" + offerableCourse.id}
+                             alt={offerableCourse.provider.imgAltLink}
+                             width={50} height={50}/>
+                        <p>{offerableCourse.provider.name}</p>
+                    </td>
+                    <td>
+                        <p>{offerableCourse.course.title}</p>
+                    </td>
+                    <td><p>{offerableCourse.price},- NOK</p></td>
+                    <td><p>{parseInt(offerableCourse.discount * 100)} %</p></td>
+                    {/*convert unix date to norwegian date format*/}
+                    <td><p>{new Date(offerableCourse.date).toLocaleDateString("no-NO", {
+                        year: "numeric",
+                        month: "2-digit",
+                        day: "2-digit"
+                    })}</p></td>
+                    <td><p>{offerableCourse.visibility ? "Visible" : "Hidden"}</p></td>
+                    <td>
+                        <button className={"cta-button edit-button"}><Link
+                            to={`/admin/offerablecourses/edit/${offerableCourse.id}`}
+                            id={"edit" + offerableCourse.id}
+                        >Edit</Link></button>
+                        <button id={"delete" + offerableCourse.id} className={"delete-button"} onClick={() => {
+                            setFocusedId(offerableCourse.id)
+                            setShowDeleteModal(true);
+                        }}>Delete
+                        </button>
+                    </td>
+                </tr>
+            ))}
+            {
+                showDeleteModal && createPortal(
+                    <DeleteModal onClose={() => setShowDeleteModal(false)} deleteId={focusedId}
+                                 apiEndpoint={"/offerableCourses/"}/>,
+                    document.getElementById("delete-modal")
+                )
+            }
         </>
     )
 }
 
+/**
+ * Renders skeletons for the offerable courses table
+ *
+ * @returns {Element}
+ * @constructor
+ */
+function OfferableCoursesTableSkeleton() {
+
+    return (
+        <>
+            {Array.from({length: 10}).map((_, index) => (
+                <tr key={`skeleton-${index}`}>
+                    <td>
+                        <Skeleton variant="text"/>
+                    </td>
+                    <td>
+                        <Skeleton variant="text"/>
+                    </td>
+                    <td>
+                        <Skeleton variant="text"/>
+                    </td>
+                    <td>
+                        <Skeleton variant="text"/>
+                    </td>
+                    <td>
+                        <Skeleton variant="text"/>
+                    </td>
+                    <td>
+                        <Skeleton variant="text"/>
+                    </td>
+                    <td>
+                        <Skeleton variant="text"/>
+                    </td>
+                </tr>
+            ))}
+        </>
+    )
+}
 
 export default function OfferableCourses() {
-
-
     const [offerableCourses, setOfferableCourses] = useState([]);
     const [uniqueCourses, setUniqueCourses] = useState([]);
     const [filteredCourses, setFilteredCourses] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [showDeleteModal, setShowDeleteModal] = useState();
-    const [focusedId, setFocusedId] = useState()
+
     const [error, setError] = useState(null);
 
 
@@ -82,19 +168,17 @@ export default function OfferableCourses() {
     }
 
 
-
-
-
     // Important to ensure all courses from providers are displayed too as there are some missing courses atm.
     return (
         <div id={"courseIndex"}>
             <h2>Offerable courses</h2>
             <div id={"table-header"}>
-                <button id={"addCourse"} className={"cta-button"}><Link to={"/admin/offerablecourses/add"} className={""}>Add
+                <button id={"addCourse"} className={"cta-button"}><Link to={"/admin/offerablecourses/add"}
+                                                                        className={""}>Add
                     Course</Link></button>
                 <select disabled={loading} id={"course"} onChange={changeProvider}>
-                    <option value={""}>All</option>
-                    {uniqueCourses.map((course) => (
+                    <option value={""}>{loading ? "Loading" : "All"}</option>
+                    {!loading && uniqueCourses.map((course) => (
                         <option key={course.id} value={course.id}>
                             {course.title}
                         </option>
@@ -117,47 +201,12 @@ export default function OfferableCourses() {
                     </tr>
                     </thead>
                     <tbody>
-                    {filteredCourses.map((offerableCourse) => (
-                        <tr key={offerableCourse.id}>
-                            <td>
-                                <img src={"https://picsum.photos/50?random=" + offerableCourse.id}
-                                     alt={offerableCourse.provider.imgAltLink}
-                                     width={50} height={50}/>
-                                <p>{offerableCourse.provider.name}</p>
-                            </td>
-                            <td>
-                                <p>{offerableCourse.course.title}</p>
-                            </td>
-                            <td><p>{offerableCourse.price},- NOK</p></td>
-                            <td><p>{parseInt(offerableCourse.discount * 100)} %</p></td>
-                            {/*convert unix date to norwegian date format*/}
-                            <td><p>{new Date(offerableCourse.date).toLocaleDateString("no-NO", {
-                                year: "numeric",
-                                month: "2-digit",
-                                day: "2-digit"
-                            })}</p></td>
-                            <td><p>{offerableCourse.visibility ? "Visible" : "Hidden"}</p></td>
-                            <td>
-                                <button className={"cta-button edit-button"}><Link to={`/admin/offerablecourses/edit/${offerableCourse.id}`}
-                                         id={"edit" + offerableCourse.id}
-                                         >Edit</Link></button>
-                                <button id={"delete" + offerableCourse.id} className={"delete-button"} onClick={() => {
-                                    setFocusedId(offerableCourse.id)
-                                    setShowDeleteModal(true);
-                                }}>Delete</button>
-                            </td>
-                        </tr>
-                    ))}
+                    {loading ? <OfferableCoursesTableSkeleton/> :
+                        <OfferableCoursesTableContent filteredCourses={filteredCourses}/>}
                     </tbody>
                 </table>
             </div>
 
-            {
-                showDeleteModal && createPortal(
-                    <DeleteModal onClose={() => setShowDeleteModal(false)} deleteId={focusedId} apiEndpoint={"/offerableCourses/"}/>,
-                    document.getElementById("delete-modal")
-                )
-            }
 
             <div id={"delete-modal"}/>
 

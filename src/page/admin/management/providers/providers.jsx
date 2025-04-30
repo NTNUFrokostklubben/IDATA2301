@@ -7,7 +7,7 @@ import DeleteModal from "../../../../component/modals/deleteModal";
 import {Skeleton} from "@mui/material";
 import {getProviders} from "../../../../utils/commonRequests";
 
-export function ProviderTableContent({providers}) {
+function ProviderTableContent({providers}) {
 
     const [showDeleteModal, setShowDeleteModal] = useState();
     const [focusedId, setFocusedId] = useState()
@@ -50,7 +50,7 @@ export function ProviderTableContent({providers}) {
  * @returns {Element}
  * @constructor
  */
-export function ProviderTableSkeleton() {
+function ProviderTableSkeleton() {
     return (
 
         <>

@@ -14,7 +14,7 @@ import {Skeleton} from "@mui/material";
  * @returns {Element}
  * @constructor
  */
-export function CourseTableContent({courses}) {
+function CourseTableContent({courses}) {
 
     const [showDeleteModal, setShowDeleteModal] = useState();
     const [focusedId, setFocusedId] = useState()
@@ -64,7 +64,7 @@ export function CourseTableContent({courses}) {
  * @returns {Element}
  * @constructor
  */
-export function CoursesTableSkeleton() {
+function CoursesTableSkeleton() {
 
     return (
         <>
