@@ -18,8 +18,12 @@ import ProviderEdit from "./page/admin/management/providers/edit/providerEdit";
 import OfferableCourses from "./page/admin/course/offerableCourses";
 import OfferableCourseAdd from "./page/admin/course/add/offerableCourseAdd";
 import OfferableCourseEdit from "./page/admin/course/edit/offerableCourseEdit";
+import {useState} from "react";
+import {deleteAuthorizationCookies, getAuthenticatedUser} from "./utils/authentication/authentication";
 
 function App() {
+    const [user, setUser] = useState(null);
+
     return (
         <BrowserRouter>
             <Routes>
@@ -55,8 +59,30 @@ function App() {
 
             </Routes>
         </BrowserRouter>
-    )
-        ;
+    );
+
+    /**
+     * Logs the user out
+     */
+    function logoutUser(){
+        console.log("Logout User");
+        deleteAuthorizationCookies();
+        setUser(null);
+    }
+
+    /**
+     * Check cookies if is user logged in
+     */
+    function tryRestoreUserSession() {
+        if (!user) {
+            const loggedInUser = getAuthenticatedUser();
+            if (loggedInUser) {
+                console.log("User session found in cookies, restoring");
+                setUser(loggedInUser);
+            }
+        }
+    }
+
 }
 
 export default App;

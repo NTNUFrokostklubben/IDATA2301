@@ -1,3 +1,5 @@
+import {getCookie} from "./authentication/cookies";
+import {HttpResponseError} from "./authentication/HttpResponseError";
 
 
 const API_BASE_URL = "http://localhost:8080/api";
@@ -22,13 +24,17 @@ export function AsyncApiRequest(method, url, requestBody) {
             'Content-Type': 'application/json',
         };
     }
+    const jwtToken = getCookie("jwt");
+    if (jwtToken) {
+        headers["Authorization"] = "Bearer " + jwtToken;
+    }
     return fetch(fullUrl, {
         method: method,
         mode: "cors",
         headers: headers,
         body: body,
     })
-        .then(response => response.json())
+        .then(handleErrors)
         .then(data => {
             return data;
         })
@@ -36,4 +42,20 @@ export function AsyncApiRequest(method, url, requestBody) {
             console.error('Error:', error);
             throw error;
         });
+}
+
+/**
+ * Check whether the HTTP response has a 200 OK status. If it does, return the
+ * response. If it does not, throw an Error
+ *
+ * @param response
+ * @return {response} The response (if all was OK)
+ * @throws Error containing the response code and text from the response body
+ */
+async function handleErrors(response) {
+    if (!response.ok) {
+        const responseText = await response.text();
+        throw new HttpResponseError(response.status, responseText);
+    }
+    return response;
 }

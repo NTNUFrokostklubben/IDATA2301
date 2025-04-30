@@ -75,7 +75,8 @@ export default function AdminDashboard() {
      */
     async function fetchRevenueData() {
         try{
-            const data = await AsyncApiRequest("GET","/transaction/providersStats", null);
+            const data = await AsyncApiRequest("GET","/transaction/providersStats", null)
+                .then(response => response.json());
             const revenue = data.map((providerStat) => ({
                 id: providerStat.ID_PROVIDER,
                 value: providerStat.REVENUE,
@@ -92,7 +93,8 @@ export default function AdminDashboard() {
      */
     async function fetchReviews(){
         try{
-            const data = await AsyncApiRequest("GET", "/userCourses/lastReviews", null);
+            const data = await AsyncApiRequest("GET", "/userCourses/lastReviews", null)
+                .then(response => response.json());
             const reviews = data.map((review) => new reviewEntity(review.id, review.rating,
                 review.comment, review.course.title, review.user.name, review.user.profilePicture,
                 review.course.id));
@@ -107,7 +109,8 @@ export default function AdminDashboard() {
      */
     async function fetchTotalRevenue(){
         try{
-            const data = await AsyncApiRequest("GET", "/transaction/totalRevenue", null);
+            const data = await AsyncApiRequest("GET", "/transaction/totalRevenue", null)
+                .then(response => response.json());
             setTotalRevenue(data);
         } catch (err){
             console.log("Error fetching total revenue: ", err);
@@ -119,7 +122,8 @@ export default function AdminDashboard() {
      */
     async function fetchTotalCourses(){
         try{
-            const data = await AsyncApiRequest("GET", "/courses/total", null);
+            const data = await AsyncApiRequest("GET", "/courses/total", null)
+                .then(response => response.json());
             setTotalCourses(data);
         } catch (err){
             console.log("Error fetching total courses: ", err);
@@ -131,7 +135,8 @@ export default function AdminDashboard() {
      */
     async function fetchTotalUsers(){
         try{
-            const data = await AsyncApiRequest("GET", "/users/total", null);
+            const data = await AsyncApiRequest("GET", "/users/total", null)
+                .then(response => response.json());
             setTotalUsers(data);
         } catch (err){
             console.log("Error fetching total revenue: ", err);
@@ -143,7 +148,8 @@ export default function AdminDashboard() {
      */
     async function fetchAvgRevenue(){
         try{
-            const data = await AsyncApiRequest("GET", "/transaction/averageRevenuePerCourse", null);
+            const data = await AsyncApiRequest("GET", "/transaction/averageRevenuePerCourse", null)
+                .then(response => response.json());
             setAvgRevenue(data);
         } catch (err){
             console.log("Error fetching total revenue: ", err);
@@ -155,7 +161,8 @@ export default function AdminDashboard() {
      */
     async function fetchRevenueLast30Days(){
         try{
-            const data = await AsyncApiRequest("GET", "/transaction/revenueLast30Days", null);
+            const data = await AsyncApiRequest("GET", "/transaction/revenueLast30Days", null)
+                .then(response => response.json());
             setRevenueLast30Days(data);
         } catch (err){
             console.log("Error fetching total courses: ", err);
@@ -167,7 +174,8 @@ export default function AdminDashboard() {
      */
     async function fetchNewUsers(){
         try{
-            const data = await AsyncApiRequest("GET", "/users/newUsers", null);
+            const data = await AsyncApiRequest("GET", "/users/newUsers", null)
+                .then(response => response.json());
             setNewUsers(data);
         } catch (err){
             console.log("Error fetching total revenue: ", err);

@@ -2,6 +2,7 @@ import "./userPage.css"
 import { useEffect, useState } from 'react';
 import CardHorizontal from "../component/card/cardHorizontal";
 import Rating from "../component/Rating/rating";
+
 export default function UserPage (){
     const [data, setData] = useState([]);
     const [user, setUser] = useState([]);

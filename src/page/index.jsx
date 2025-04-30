@@ -47,13 +47,15 @@ export default function Index() {
      */
     async function fetchCourses() {
         try {
-            const data = await AsyncApiRequest("GET", "/courses", null);
+            const data = await AsyncApiRequest("GET", "/courses", null)
+                .then(response => response.json());
             const courses = data.map((course) => new courseEntity(course.id, course.title, course.description, course.imgLink));
             setCourses(courses);
 
             const priceFetches = courses.map(async (course) => {
                 const fetchApiCall = `/offerableCourses/coursePrice/${course.id}`;
-                const price = await AsyncApiRequest("GET", fetchApiCall, null);
+                const price = await AsyncApiRequest("GET", fetchApiCall, null)
+                    .then(response => response.json());
                 course.setPrice(price);
             });
 
@@ -266,6 +268,7 @@ export default function Index() {
                 <li> <Link to={`/course/${1}`}> course</Link></li>
                 <li><a href={"/about"}>about</a></li>
                 <li><a href={"/checkout"}>checkout</a></li>
+                <li><a href={"/userpage"}>Userpage</a></li>
             </ul>
             {
                 showSignupModal && createPortal(
