@@ -16,8 +16,6 @@ export class courseEntity {
     }
 }
 
-
-
 export class ProviderEntity {
     constructor(id, name, imgLink, imgAltLink) {
         this.id = id;
@@ -36,5 +34,14 @@ export class OfferableCourse {
         this.visibility = visibility;
         this.course = course;
         this.provider = provider;
+    }
+}
+
+export class SignupEntity{
+    constructor(name, passwordHash, email) {
+        this.name = name;
+        this.passwordHash = passwordHash;
+        this.email = email;
+
     }
 }

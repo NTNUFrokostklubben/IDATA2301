@@ -1,11 +1,32 @@
 import "./auth.css"
 import {useRef} from "react";
 import {useFocusTrap} from "../../../utils/useFocusTrap";
+import {sendAuthenticationRequest} from "../../../utils/authentication/authentication";
+import {AsyncApiRequest} from "../../../utils/requests";
+import {SignupEntity} from "../../../utils/Classes/commonClasses";
 
 export default function Register({onClose, changeMode}) {
 
     const modalRef = useRef(null)
     useFocusTrap(modalRef, true, onClose) // Passes true to isOpen due to this modal only being open when it is rendered
+
+    function submitForm(event){
+        event.preventDefault();
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+        const signup = new SignupEntity(name, password, email);
+        postSignup(signup).then(alert("Successfully signed up new user"));
+        console.log("Submitting form");
+    }
+
+    async function postSignup(signup) {
+        try {
+            const p = await AsyncApiRequest("POST", "/signup", signup);
+        } catch (e) {
+            throw e
+        }
+    }
 
     return (
         <div className={"auth-background"}
@@ -42,7 +63,7 @@ export default function Register({onClose, changeMode}) {
 
                     </section>
                     <section id="auth-CTA">
-                        <button className="cta-button" type="submit">Sign up</button>
+                        <button className="cta-button" type="submit" onClick={submitForm}>Sign up</button>
                         {/*TODO: Implement redirect to Signup modal (probably just build component again in react)*/}
                         <button onClick={changeMode} className="cta-button secondary-button" type="button">Log In instead</button>
                     </section>
