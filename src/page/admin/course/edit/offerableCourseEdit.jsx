@@ -47,7 +47,7 @@ export default function OfferableCourseEdit(offerableCourseId) {
      */
     async function fetchOfferableCourse() {
         try {
-            const p = await AsyncApiRequest("GET", "/offerableCourses/" + id, null);
+            const p = await AsyncApiRequest("GET", "/offerableCourses/" + id, null).then((p)=>p.json());
             setOfferableCourse(p);
         } catch (e) {
             console.error("Error fetching offerable courses:", e);
@@ -61,7 +61,7 @@ export default function OfferableCourseEdit(offerableCourseId) {
      */
     async function fetchCourses() {
         try {
-            const p = await AsyncApiRequest("GET", "/courses", null);
+            const p = await AsyncApiRequest("GET", "/courses", null).then((p)=>p.json());
             setCourses(p)
         } catch (e) {
             console.error("Error fetching offerable courses:", e);
@@ -75,7 +75,7 @@ export default function OfferableCourseEdit(offerableCourseId) {
      */
     async function fetchProviders() {
         try {
-            const p = await AsyncApiRequest("GET", "/providers", null);
+            const p = await AsyncApiRequest("GET", "/providers", null).then((p)=>p.json());
             setProviders(p)
         } catch (e) {
             console.error("Error fetching offerable courses:", e);
