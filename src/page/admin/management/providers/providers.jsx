@@ -27,6 +27,7 @@ export default function Providers() {
             });
     }, [])
 
+    // TODO: Replace with Skeleton
     if (loading) {
         return <div>Loading...</div>;
     }
