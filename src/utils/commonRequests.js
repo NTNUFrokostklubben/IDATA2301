@@ -59,3 +59,24 @@ export function getOfferableCourses() {
             throw error;
         });
 }
+
+/**
+ * Gets a specific offerable course from Server
+ *
+ * @param id
+ * @returns {Promise<*>}
+ */
+export function getOfferableCourse(id) {
+    return AsyncApiRequest("GET", "/offerableCourses/" + id, null)
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error("Error fetching offerable course");
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            throw error;
+        });
+}

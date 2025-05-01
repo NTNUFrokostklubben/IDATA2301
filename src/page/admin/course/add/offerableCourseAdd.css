@@ -113,6 +113,10 @@
     gap: 0.5rem;
 }
 
+.offerable-course-edit-skeleton .loader {
+    margin: 1rem;
+}
+
 @media (max-width: 900px) {
     .group-2 .input-wrapper,
     .group-3 .input-wrapper {

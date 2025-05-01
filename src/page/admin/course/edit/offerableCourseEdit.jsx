@@ -5,6 +5,7 @@ import {AsyncApiRequest} from "../../../../utils/requests";
 import {courseEntity, OfferableCourse, ProviderEntity} from "../../../../utils/Classes/commonClasses";
 import {useNavigate, useParams} from "react-router-dom";
 import {Skeleton} from "@mui/material";
+import {getCourses, getOfferableCourse, getProviders} from "../../../../utils/commonRequests";
 
 /**
  * Builds the form for editing an offerable course
@@ -17,7 +18,7 @@ import {Skeleton} from "@mui/material";
  */
 function OfferableCourseEditForm({offerableCourse, providers, courses}) {
 
-    const [startDate, setStartDate] = useState(new Date());
+    const [startDate, setStartDate] = useState(offerableCourse.date);
     const navigate = useNavigate();
 
     async function postOfferableCourse(offerableCourse) {
@@ -43,7 +44,7 @@ function OfferableCourseEditForm({offerableCourse, providers, courses}) {
     return (
         <form onSubmit={handleFormSubmission}>
             <section id="offerableCourse-info">
-                <input id={"id"} name={"id"} type={"number"} hidden={true} value={offerableCourse.id}/>
+                <input disabled={true} id={"id"} name={"id"} type={"number"} hidden={true} value={offerableCourse.id}/>
                 <div className="group-2">
                     <div className="input-wrapper"><label htmlFor="provider-name">Provider Name</label>
                         <select id={"provider-name"} name={"providerId"} defaultValue={offerableCourse.provider.id}
@@ -65,7 +66,7 @@ function OfferableCourseEditForm({offerableCourse, providers, courses}) {
                 <div className={"input-wrapper"}>
                     <label htmlFor={"date"}>Start date</label>
                     <DatePicker id={"date"} name={"date"} onChange={(date) => setStartDate(date)}
-                                selected={new Date(offerableCourse.date)} dateFormat={"dd-MM-YYYY"} locale={"nb"}
+                                selected={startDate} dateFormat={"dd-MM-yyyy"} locale={"nb"}
                                 icon={<img src={"/icons/calendar-clear-sharp.svg"}/>} showIcon/>
                 </div>
 
@@ -97,10 +98,45 @@ function OfferableCourseEditForm({offerableCourse, providers, courses}) {
     )
 }
 
-function OfferableCourseEditSkeleton() {
+export function OfferableCourseFormSkeleton() {
     return (
+        // Uses same ID as loaded form for styling purposes. Only 1 can be loaded at a time so this should be fine
+        <div className={"offerable-course-edit-skeleton"} id="offerableCourse-info">
+            <div className="group-2">
+                <div className="input-wrapper"><label htmlFor="provider-name">Provider Name</label>
+                    <Skeleton className={"loader"} variant={"rectangular"} height={"2.5rem"} width={"100%"} />
+                </div>
+                <div className="input-wrapper"><label htmlFor="course-name">Course Name</label>
+                    <Skeleton className={"loader"} variant={"rectangular"} height={"2.5rem"} width={"100%"} />
+                </div>
+            </div>
 
-        <h1>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</h1>
+            <div className={"input-wrapper"}>
+                <label htmlFor={"date"}>Start date</label>
+                <Skeleton className={"loader"} variant={"rectangular"} height={"2.5rem"} width={"100%"} />
+
+            </div>
+
+            <div className={"group-2"}>
+                <div className={"input-wrapper"}>
+                    <label htmlFor={"price"}>Price of course</label>
+                    <Skeleton className={"loader"} variant={"rectangular"} height={"2.5rem"} width={"100%"} />
+                </div>
+                <div className={"input-wrapper"}>
+                    <label htmlFor={"discount"}>Discount in percent</label>
+                    <Skeleton className={"loader"} variant={"rectangular"} height={"2.5rem"} width={"100%"} />
+                </div>
+            </div>
+
+            <div className={"input-wrapper"}>
+                <label htmlFor={"visibility"}>Visibility</label>
+                <Skeleton className={"loader"} variant={"rectangular"} width={"2.5rem"} height={"2.5rem"} />
+            </div>
+
+
+            <Skeleton variant={"rectangular"} className={"cta-button"} height={"2.5rem"} sx={"background-color: var(--cta)"} />
+
+        </div>
 
 
     )
@@ -146,7 +182,7 @@ export default function OfferableCourseEdit(offerableCourseId) {
      */
     async function fetchOfferableCourse() {
         try {
-            const p = await AsyncApiRequest("GET", "/offerableCourses/" + id, null).then((p) => p.json());
+            const p = await getOfferableCourse(id)
             setOfferableCourse(p);
             return p;
         } catch (e) {
@@ -161,7 +197,7 @@ export default function OfferableCourseEdit(offerableCourseId) {
      */
     async function fetchCourses() {
         try {
-            const p = await AsyncApiRequest("GET", "/courses", null).then((p) => p.json());
+            const p = await getCourses();
             setCourses(p);
         } catch (e) {
             throw new Error(e);
@@ -175,7 +211,7 @@ export default function OfferableCourseEdit(offerableCourseId) {
      */
     async function fetchProviders() {
         try {
-            const p = await AsyncApiRequest("GET", "/providers", null).then((p) => p.json());
+            const p = await getProviders();
             setProviders(p);
         } catch (e) {
             throw new Error(e);
@@ -186,7 +222,7 @@ export default function OfferableCourseEdit(offerableCourseId) {
     return (
         <div className="offerableCourse-page">
             <h1>Update Offerable Course</h1>
-            {loading ? <OfferableCourseEditSkeleton/>:
+            {loading ? <OfferableCourseFormSkeleton/>:
                 <OfferableCourseEditForm offerableCourse={offerableCourse} providers={providers} courses={courses}/>}
         </div>
     )
