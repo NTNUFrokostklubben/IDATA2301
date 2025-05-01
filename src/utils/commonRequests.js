@@ -41,6 +41,27 @@ export function getCourses() {
 }
 
 /**
+ * Gets a specific course from Server
+ *
+ * @param cid Course ID
+ * @returns {Promise<*>}
+ */
+export function getCourse(cid) {
+    return AsyncApiRequest("GET", "/course/" + cid, null)
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error("Error fetching course");
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            throw error;
+        });
+}
+
+/**
  * Gets all offerable courses from Server
  *
  * @returns {Promise<*>}
@@ -63,7 +84,7 @@ export function getOfferableCourses() {
 /**
  * Gets a specific offerable course from Server
  *
- * @param id
+ * @param id OfferableCourse ID
  * @returns {Promise<*>}
  */
 export function getOfferableCourse(id) {
