@@ -23,14 +23,19 @@ import OfferableCourseEdit from "./page/admin/course/edit/offerableCourseEdit";
 import {useState} from "react";
 import {deleteAuthorizationCookies, getAuthenticatedUser} from "./utils/authentication/authentication";
 import OrderComplete from "./page/orderComplete";
+import NoAccess from "./page/NoAccess";
+import ProtectedRoute from "./page/ProtectedRoute";
 
 function App() {
 
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState({});
+
+    // function userLogin(user){
+    //     setUser(user)
+    // }
 
     return (
     <BrowserRouter>
-        {/*<UserContext.Provider value={{user: User, handleLogin: userLogin }}>*/}
         <Routes>
             <Route path={"/"} element={<Layout/>}>
                 <Route index element={<Index/>}/>
@@ -40,7 +45,8 @@ function App() {
                 <Route path={"order-complete"} element={<OrderComplete/>}/>
                 <Route path={"about"} element={<About/>}/>
                 <Route path={"checkout/:id"} element={<Checkout/>}/>
-                <Route path={"/admin"} element={<AdminNav/>}>
+                <Route path={"noAccess"} element={<NoAccess/>}/>
+                <Route path={"/admin"} element={<ProtectedRoute/>}>
                     <Route index element={<AdminDashboard/>}/>
                     <Route path={"/admin/offerableCourses"}>
                         <Route index element={<OfferableCourses/>}/>
@@ -64,7 +70,6 @@ function App() {
             </Route>
 
         </Routes>
-        {/*</UserContext.Provider>*/}
     </BrowserRouter>
 
     );

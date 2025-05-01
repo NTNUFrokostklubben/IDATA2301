@@ -6,8 +6,7 @@ import {sendAuthenticationRequest} from "../../../utils/authentication/authentic
 import {showFormError} from "../../../utils/tools"
 
 
-export default function Login({ onClose, changeMode, props }) {
-    const [error, setError] =useState("");
+export default function Login({ onClose, changeMode, props, closable=true }) {
     const navigate = useNavigate();
 
     function submitForm(event){
@@ -39,7 +38,6 @@ export default function Login({ onClose, changeMode, props }) {
             }
 
         })}>
-
             <div className="authform">
                 { closable &&
                 <button id={"auth-close-button"} className={"secondary-button"} onClick={onClose}>

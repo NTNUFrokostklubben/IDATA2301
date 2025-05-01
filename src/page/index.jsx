@@ -269,6 +269,7 @@ export default function Index() {
                 <li> <Link to={`/userpage/${1}`}> user page</Link></li>
                 <li><a href={"/about"}>about</a></li>
                 <li><a href={"/checkout"}>checkout</a></li>
+                <li><a href={"/noAccess"}>403 no access</a></li>
             </ul>
             {
                 showSignupModal && createPortal(
