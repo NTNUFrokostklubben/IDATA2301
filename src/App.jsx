@@ -13,7 +13,6 @@ import Checkout from "./page/checkout";
 import Course from "./page/course";
 
 import {UserContext} from "./userContext";
-import {useState} from "react";
 import Providers from "./page/admin/management/providers/providers";
 import Courses from "./page/admin/management/courses/courses";
 import ProviderAdd from "./page/admin/management/providers/add/providerAdd";
@@ -26,50 +25,48 @@ import {deleteAuthorizationCookies, getAuthenticatedUser} from "./utils/authenti
 import OrderComplete from "./page/orderComplete";
 
 function App() {
-    const [User, setUser] = useState({});
 
-    function userLogin(User){
-        setUser(User)
-    }
+    const [user, setUser] = useState(null);
+
     return (
-
-        <BrowserRouter>
-            <UserContext.Provider value={{user: User, handleLogin: userLogin }}>
-            <Routes>
-                <Route path={"/"} element={<Layout/>}>
-                    <Route index element={<Index/>}/>
-                    <Route path={"search"} element={<Search/>}/>
-                    <Route path={"course/:id"} element={<Course/>}/>
-                    <Route path={"userpage/:id"} element={<UserPage/>}/>
-                    <Route path={"order-complete"} element={<OrderComplete/>}/>
-                    <Route path={"about"} element={<About/>}/>
-                    <Route path={"checkout/:id"} element={<Checkout/>}/>
-                    <Route path={"/admin"} element={<AdminNav/>}>
-                        <Route index element={<AdminDashboard/>}/>
-                        <Route path={"/admin/offerableCourses"}>
-                            <Route index element={<OfferableCourses/>}/>
-                            <Route path={"add"} element={<OfferableCourseAdd/>}/>
-                            <Route path={"edit/:id"} element={<OfferableCourseEdit/>}/>
+    <BrowserRouter>
+        {/*<UserContext.Provider value={{user: User, handleLogin: userLogin }}>*/}
+        <Routes>
+            <Route path={"/"} element={<Layout/>}>
+                <Route index element={<Index/>}/>
+                <Route path={"search"} element={<Search/>}/>
+                <Route path={"course/:id"} element={<Course/>}/>
+                <Route path={"userpage/:id"} element={<UserPage/>}/>
+                <Route path={"order-complete"} element={<OrderComplete/>}/>
+                <Route path={"about"} element={<About/>}/>
+                <Route path={"checkout/:id"} element={<Checkout/>}/>
+                <Route path={"/admin"} element={<AdminNav/>}>
+                    <Route index element={<AdminDashboard/>}/>
+                    <Route path={"/admin/offerableCourses"}>
+                        <Route index element={<OfferableCourses/>}/>
+                        <Route path={"add"} element={<OfferableCourseAdd/>}/>
+                        <Route path={"edit/:id"} element={<OfferableCourseEdit/>}/>
+                    </Route>
+                    <Route path={"/admin/management"}>
+                        <Route path={"providers"}>
+                            <Route index element={<Providers/>}/>
+                            <Route path={"add"} element={<ProviderAdd /> }/>
+                            <Route path={"edit/:id"} element={<ProviderEdit/>}/>
                         </Route>
-                        <Route path={"/admin/management"}>
-                            <Route path={"providers"}>
-                                <Route index element={<Providers/>}/>
-                                <Route path={"add"} element={<ProviderAdd /> }/>
-                                <Route path={"edit/:id"} element={<ProviderEdit/>}/>
-                            </Route>
-                            <Route path={"courses"}>
-                                <Route index element={<Courses/>}/>
-                                <Route path={"add"} element={<CourseAdd/> }/>
-                                <Route path={"edit/:id"} element={<CourseEdit/>}/>
-                            </Route>
-                            <Route path={"users"} element={<div>Users</div>}/>
+                        <Route path={"courses"}>
+                            <Route index element={<Courses/>}/>
+                            <Route path={"add"} element={<CourseAdd/> }/>
+                            <Route path={"edit/:id"} element={<CourseEdit/>}/>
                         </Route>
+                        <Route path={"users"} element={<div>Users</div>}/>
                     </Route>
                 </Route>
+            </Route>
 
-            </Routes>
-            </UserContext.Provider>
-        </BrowserRouter>
+        </Routes>
+        {/*</UserContext.Provider>*/}
+    </BrowserRouter>
+
     );
 
     /**
