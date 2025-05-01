@@ -10,6 +10,7 @@ export function ReviewComponent({cid, averageRating}) {
     const [ratingData, setRatingData] = useState(null);
     const [halfStar, setHalfStar] = useState(false)
     const [loading, setLoading] = useState(true);
+    const [offerableCourseData, setOfferableCourseData] = useState(true);
     const [stars, setStars] = useState([]);
     const [oneStarBar, setOneStarBar] = useState(0);
     const [twoStarBar, setTwoStarBar] = useState(0);
@@ -171,8 +172,8 @@ export default function Course() {
         try {
             const fetchApiCall = `/course/${id}`;
             const data = await AsyncApiRequest("GET", fetchApiCall, null)
-                .then(response => response.json())
-            setCourseData(data)
+                .then(response => response.json());
+            setCourseData(data);
             setLoading(false);
         } catch (error) {
             console.error("Error fetching course data:", error);
@@ -186,9 +187,8 @@ export default function Course() {
         try {
             const fetchApiCall = `/offerableCourses/course/${id}`;
             const data = await AsyncApiRequest("GET", fetchApiCall, null)
-                .then(response => response.json())
-            setOfferableCourseData(data)
-
+                .then(response => response.json());
+            setOfferableCourseData(data);
         } catch (error) {
             console.error("Error fetching offerable course data:", error);
         }
@@ -201,8 +201,8 @@ export default function Course() {
         try {
             const fetchApiCall = `/userCourses/averageRating/${id}`;
             const data = await AsyncApiRequest("GET", fetchApiCall, null)
-                .then(response => response.json())
-            setRatingData(data)
+                .then(response => response.json());
+            setRatingData(data);
             console.log(ratingData)
 
         } catch (error) {
@@ -217,8 +217,9 @@ export default function Course() {
         try {
             const fetchApiCall = `/keyword/${id}`;
             const data = await AsyncApiRequest("GET", fetchApiCall, null)
-                .then(response => response.json())
-            setKeywords(data)
+                .then(response => response.json());
+            setKeywords(data);
+
         } catch (error) {
             console.error("Error fetching keywords:", error);
         }

@@ -38,7 +38,7 @@ function App() {
                     <Route index element={<Index/>}/>
                     <Route path={"search"} element={<Search/>}/>
                     <Route path={"course/:id"} element={<Course/>}/>
-                    <Route path={"userpage"} element={<UserPage/>}/>
+                    <Route path={"userpage/:id"} element={<UserPage/>}/>
                     <Route path={"order-complete"} element={<OrderComplete/>}/>
                     <Route path={"about"} element={<About/>}/>
                     <Route path={"checkout/:id"} element={<Checkout/>}/>

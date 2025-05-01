@@ -18,10 +18,8 @@
     position: relative;
     display: flex;
     flex-direction: column;
-
-
-    margin-right: 3rem;
-
+    margin-right: 0rem;
+    padding-right: 3rem;
 }
 
 #course-splash-right-side > * {
@@ -31,7 +29,7 @@
 #course-page-add-favorite{
     position: absolute;
     display: inline-block;
-    right: 0px;
+    right: 0.5rem;
     top: 0px;
 }
 #course-splash-star{

@@ -68,8 +68,20 @@ export default function Checkout() {
 
         setCardNumber(formatted);
     }
+    const openPopup = (url) => {
+        const width = 700;
+        const height = 500;
+        const left = (window.innerWidth - width) / 2;
+        const top = (window.innerHeight - height) / 2;
 
-
+        window.open(
+            url, // URL
+            "_blank", // Target
+            `width=${width},height=${height},left=${left},top=${top},resizable=yes,scrollbars=yes`
+        );
+    };
+    const openPaypal = () => openPopup("https://www.paypal.com/no/webapps/mpp/paypal-popup")
+    const openKlarna = () => openPopup("https://docs.klarna.com/")
 
     function loggedIn(){
         if(user == null){
@@ -84,11 +96,9 @@ export default function Checkout() {
                     <h4 className="checkout-headers">Express checkout</h4>
                     <div id="payment-options">
                         <div id="paypal">
-                            <a
-                                href="https://www.paypal.com/no/webapps/mpp/paypal-popup" title="Slik fungerer PayPal"
-                                onClick="javascript:window.open('https://www.paypal.com/no/webapps/mpp/paypal-popup','WIPaypal',
-                'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes,' +
-                 ' width=1060, height=700'); return false;">
+                            <a onClick={openPaypal}
+                                title="Slik fungerer PayPal"
+                                rel="noopener noreferrer">
                                 <img id="paypal-image"
                                      src="https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-100px.png"
                                      border="0"
@@ -96,9 +106,7 @@ export default function Checkout() {
                                 /></a>
                         </div>
                         <div id="klarna">
-                            <a href="https://docs.klarna.com/" onClick="javascript:window.open('https://docs.klarna.com/' ,'WIPaypal',
-                'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes,' +
-                 ' width=1060, height=700'); return false;">
+                            <a onClick={openKlarna}  rel="noopener noreferrer" >
                                 <img id="klarna-image" src="/images/klarnaXL.webp" alt="klarna"/></a>
                         </div>
                         <div id="other">

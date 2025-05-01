@@ -1,4 +1,18 @@
 
+.filters .react-datepicker__input-container .react-datepicker__calendar-icon {
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    transform: translateY(-50%);
+}
+
+.filters .react-datepicker__view-calendar-icon input[type="text"] {
+    padding-left: 2rem; /* Adjust this value to create space for the icon */
+    /*width: 8rem;*/
+}
+
+
+
 .filters {
     display: flex;
     flex-flow: column;
@@ -13,6 +27,7 @@
     display: flex;
     flex-flow: column;
     margin: 0 3rem;
+
 }
 
 #results {
@@ -49,6 +64,7 @@
 .search-page {
     display: flex;
     flex-flow: row;
+    padding-top: 5rem;
 }
 
 .search-page section {
@@ -65,6 +81,11 @@
 .filters #difficulty {
     display: flex;
     flex-flow: column;
+    padding: 1rem 0;
+}
+
+.filters #dates {
+    /*padding-bottom: 60rem;*/
 }
 
 .search-input-field-container {
@@ -99,6 +120,7 @@
 .filters #category {
     display: flex;
     flex-flow: column;
+    padding: 1rem 0;
 }
 
 .search-page p {
