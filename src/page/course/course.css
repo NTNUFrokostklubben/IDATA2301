@@ -100,53 +100,6 @@
     padding-right: 1rem;
 }
 
-.course-page-review-component{
-    width: 60rem;
-    margin-bottom: 1rem;
-    display: flex;
-    flex-direction: row;
-}
-.course-page-review-component-left * {
-}
-.course-page-reviews-rating-bars{
-
-}
-
-.review-component-aggregate-stars{
-    display: flex;
-    flex-direction: row;
-    width: 20rem;
-    height: 2rem;
-}
-.course-page-review-component-text-and-bar{
-    display: flex;
-    flex-direction: row;
-}
-.course-page-reviews-rating-bar-unit{
-    width: 12rem;
-    height: 20px;
-    margin-top: 1rem;
-    background-color: #e0e0e0;
-    border-radius: 3px;
-    overflow: hidden;
-}
-.course-page-review-component-bar-text{
-    align-self: flex-end;
-    padding-right: 0.5rem;
-}
-.reviews-rating-bar-star{
-    height: 100%;
-    background-color: #5da164   ; /* Green color */
-    border-radius: 3px;
-    transition: width 0.3s ease;
-}
-
-.review-component-average-rating{
-    align-self: center;
-    padding-left: 1.3rem;
-    font-size: 1.2rem;
-    font-weight: bold;
-}
 @media (max-width: 950px) {
     #course-description{
     }
