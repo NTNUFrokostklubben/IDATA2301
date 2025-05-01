@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import {AsyncApiRequest} from "../../utils/requests";
 import Rating from "../../component/Rating/rating";
 import "./reviewSection.css"
+import ReviewWriter from "../../component/Rating/reviewWriter";
 
 
 export function ReviewComponent({cid, averageRating}) {
@@ -9,11 +10,19 @@ export function ReviewComponent({cid, averageRating}) {
     const [halfStar, setHalfStar] = useState(false)
     const [loading, setLoading] = useState(true);
     const [stars, setStars] = useState([]);
+    const[starBars, setStarBars] = useState([])
     const [oneStarBar, setOneStarBar] = useState(0);
     const [twoStarBar, setTwoStarBar] = useState(0);
     const [threeStarBar, setThreeStarBar] = useState(0);
     const [fourStarBar, setFourStarBar] = useState(0);
     const [fiveStarBar, setFiveStarBar] = useState(0);
+    // Add state for visible items count
+    const [visibleReviews, setVisibleReviews] = useState(3); // Start with 3 reviews
+
+    // Function to load more reviews
+    const loadMoreReviews = () => {
+        setVisibleReviews(prev => prev + 3); // Increase by 3 each click
+    };
 
     const fetchData = async () => {
         if(averageRating !== undefined) {
@@ -61,11 +70,20 @@ export function ReviewComponent({cid, averageRating}) {
                 starCounts[starIndex]++;
             }
         });
+
+        let starPercent =[];
+        starCounts.forEach((number, index) => {
+            starPercent[index]= number/5*100;
+        })
+        console.log(starPercent)
+        setStarBars(starPercent.reverse());
+
         setOneStarBar((starCounts[0] / 5) * 100);
         setTwoStarBar((starCounts[1] / 5) * 100);
         setThreeStarBar((starCounts[2] / 5) * 100);
         setFourStarBar((starCounts[3] / 5) * 100);
         setFiveStarBar((starCounts[4] / 5) * 100);
+
     }
 
     if (loading) {
@@ -92,38 +110,18 @@ export function ReviewComponent({cid, averageRating}) {
                             {averageRating} out of 5
                         </p>
                     </div>)}
-                <div className={"course-page-reviews-rating-bars"}>
-                    <div className={"course-page-review-component-text-and-bar"}>
-                        <p className={"course-page-review-component-bar-text"}>5 star</p>
-                        <div className={"course-page-reviews-rating-bar-unit"}>
-                            <div className={"reviews-rating-bar-star"} style={{width: `${fiveStarBar}%`}}></div>
-                        </div>
-                    </div>
 
-                    <div className={"course-page-review-component-text-and-bar"}>
-                        <p className={"course-page-review-component-bar-text"}>4 star</p>
-                        <div className={"course-page-reviews-rating-bar-unit"}>
-                            <div className={"reviews-rating-bar-star"} style={{width: `${fourStarBar}%`}}></div>
-                        </div>
-                    </div>
-                    <div className={"course-page-review-component-text-and-bar"}>
-                        <p className={"course-page-review-component-bar-text"}>3 star</p>
-                        <div className={"course-page-reviews-rating-bar-unit"}>
-                            <div className={"reviews-rating-bar-star"} style={{width: `${threeStarBar}%`}}></div>
-                        </div>
-                    </div>
-                    <div className={"course-page-review-component-text-and-bar"}>
-                        <p className={"course-page-review-component-bar-text"}>2 star</p>
-                        <div className={"course-page-reviews-rating-bar-unit"}>
-                            <div className={"reviews-rating-bar-star"} style={{width: `${twoStarBar}%`}}></div>
-                        </div>
-                    </div>
-                    <div className={"course-page-review-component-text-and-bar"}>
-                        <p className={"course-page-review-component-bar-text"}>1 star</p>
-                        <div className={"course-page-reviews-rating-bar-unit"}>
-                            <div className={"reviews-rating-bar-star"} style={{width: `${oneStarBar}%`}}></div>
-                        </div>
-                    </div>
+                <div className={"course-page-reviews-rating-bars"}>
+                    {
+                        starBars.map((item, index) =>
+                            <div className={"course-page-review-component-text-and-bar"}>
+                                <p className={"course-page-review-component-bar-text"}>{5-index} star</p>
+                                <div className={"course-page-reviews-rating-bar-unit"}>
+                                    <div className={"reviews-rating-bar-star"} style={{width:`${item}%`}}></div>
+                                </div>
+                            </div>
+                        )
+                    }
 
                 </div>
             </div>
@@ -131,10 +129,20 @@ export function ReviewComponent({cid, averageRating}) {
 
             {ratingData !== null && ( <div className={"course-page-review-component-right"}>
                 {
-                    ratingData.map(item => <Rating key={item.id} rating={item} title={false}/>)
+                    ratingData.slice(0, visibleReviews)
+                        .map(item => <Rating key={item.id} rating={item} title={false}/>)
 
                 }
+                {visibleReviews < ratingData.length && (
+                    <button
+                        onClick={loadMoreReviews}
+                        className="show-more-button"
+                    >
+                        Show More Reviews
+                    </button>
+                )}
             </div>)}
+
         </div>
     )
 }
