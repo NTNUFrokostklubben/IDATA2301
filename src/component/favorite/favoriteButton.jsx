@@ -1,9 +1,9 @@
 import {useState} from "react";
 import {AsyncApiRequest} from "../../utils/requests";
-import "./addFavorite.css"
+import "./favoriteButton.css"
 
 //TODO Refactor to use context for user ID
-export default function AddFavorite ({uid, cid, isFav}){
+export default function FavoriteButton ({uid, cid, isFav}){
     const [isFilled, setIsFilled] = useState(isFav);
     const [isDisabled, setIsDisabled] = useState(false);
 

@@ -4,13 +4,12 @@ import Rating from "../component/Rating/rating";
 import CourseProviderCard from "../component/courseProviderCard/courseProviderCard";
 import {useParams} from "react-router-dom";
 import {AsyncApiRequest} from "../utils/requests";
-import AddFavorite from "../component/favorite/addFavorite";
+import FavoriteButton from "../component/favorite/favoriteButton";
 
 export function ReviewComponent({cid, averageRating}) {
     const [ratingData, setRatingData] = useState(null);
     const [halfStar, setHalfStar] = useState(false)
     const [loading, setLoading] = useState(true);
-    const [offerableCourseData, setOfferableCourseData] = useState(true);
     const [stars, setStars] = useState([]);
     const [oneStarBar, setOneStarBar] = useState(0);
     const [twoStarBar, setTwoStarBar] = useState(0);
@@ -18,29 +17,29 @@ export function ReviewComponent({cid, averageRating}) {
     const [fourStarBar, setFourStarBar] = useState(0);
     const [fiveStarBar, setFiveStarBar] = useState(0);
 
-    const fetchData = () => {
-        if (averageRating !== undefined) {
-
+    const fetchData = async () => {
+        if(averageRating !== undefined) {
             console.log(averageRating)
             if (!Number.isInteger(averageRating)) {
                 setHalfStar(true)
             }
             setStars(Array(Math.floor(averageRating)).fill(0))
         }
-
     }
     const fetchRatingArray = async () => {
         const data = await AsyncApiRequest("GET", `/userCourses/course/${cid}`, null)
             .then( response  => response.json());
+        const filteredAndSorted = data
+            .filter(item => item.review?.rating > 0)
+            .sort((a, b) => b.review.rating - a.review.rating);
 
-        setRatingData(data.filter(item => item.rating > 0))
-        calculateStarDistribution(data.map(item => item.rating));
-
+        setRatingData(filteredAndSorted)
+        calculateStarDistribution(data.map(item => item.review.rating));
 
     }
     const fetching = async () => {
         try {
-            await Promise.all([fetchData, fetchRatingArray()])
+            await Promise.all([fetchData(), fetchRatingArray()])
         } catch (e) {
             console.error(e)
         }
@@ -49,6 +48,7 @@ export function ReviewComponent({cid, averageRating}) {
     useEffect(() => {
         setLoading(true);
         fetching()
+
         console.log("finished loading")
         setLoading(false);
     }, [averageRating]);
@@ -77,8 +77,9 @@ export function ReviewComponent({cid, averageRating}) {
     return (
         <div className={"course-page-review-component"}>
             <div className={"course-page-review-component-left"}>
+                {stars !== [] && (
                 <div className={"review-component-aggregate-stars"}>
-                    {
+                     {
                         stars.map(() =>
                             <img className="review-component-star" src="/icons/star-sharp.svg" alt="review star"/>
                         )
@@ -92,7 +93,7 @@ export function ReviewComponent({cid, averageRating}) {
                     <p className={"review-component-average-rating"}>
                         {averageRating} out of 5
                     </p>
-                </div>
+                </div>)}
                 <div className={"course-page-reviews-rating-bars"}>
                     <div className={"course-page-review-component-text-and-bar"}>
                         <p className={"course-page-review-component-bar-text"}>5 star</p>
@@ -132,7 +133,7 @@ export function ReviewComponent({cid, averageRating}) {
 
             {ratingData !== null && ( <div className={"course-page-review-component-right"}>
                 {
-                    ratingData.map(item => <Rating key={item.id} {...item}/>)
+                    ratingData.map(item => <Rating key={item.id} rating={item} title={false}/>)
 
                 }
             </div>)}
@@ -147,7 +148,6 @@ export default function Course() {
     const [loading, setLoading] = useState(true);
     const [isFavorite, setFavorite] = useState(false);
     const [keywords, setKeywords] = useState([])
-
     const {id} = useParams();
 
     useEffect(() => {
@@ -202,8 +202,7 @@ export default function Course() {
             const fetchApiCall = `/userCourses/averageRating/${id}`;
             const data = await AsyncApiRequest("GET", fetchApiCall, null)
                 .then(response => response.json());
-            setRatingData(data);
-            console.log(ratingData)
+            setRatingData(Math.round(data * 10) / 10);
 
         } catch (error) {
             console.error("Error fetching rating value:", error);
@@ -261,7 +260,7 @@ export default function Course() {
                 <section id="course-splash">
 
                     <div id="course-splash-right-side">
-                        <div id="course-page-add-favorite"><AddFavorite uid={1} cid={1} isFav={isFavorite}/></div>
+                        <div id="course-page-add-favorite"><FavoriteButton uid={1} cid={id} isFav={isFavorite}/></div>
                         <h4 id="course-splash-title">{courseData.title} </h4>
 
                         <div id="course-splash-details">
