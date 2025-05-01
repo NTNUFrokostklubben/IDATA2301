@@ -148,7 +148,7 @@ export default function OfferableCourseAdd() {
 
     return (
         <div className="offerableCourse-page">
-            <h1>Add Offerable Course</h1>
+            <h2>Add Offerable Course</h2>
             {loading ? <OfferableCourseFormSkeleton/> : <OfferableCourseAddForm providers={providers} courses={courses}/>}
         </div>
     )

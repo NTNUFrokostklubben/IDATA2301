@@ -144,7 +144,7 @@ export default function CourseAdd() {
 
     return (
         <div className="courseInfo-page">
-            <h1>Add Course</h1>
+            <h2>Add Course</h2>
             {loading ? <CourseFormSkeleton/> : <CourseAddForm/>}
         </div>
     )

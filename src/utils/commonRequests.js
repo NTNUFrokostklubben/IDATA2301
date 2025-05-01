@@ -21,6 +21,27 @@ export function getProviders() {
 }
 
 /**
+ * Gets a specific provider from Server
+ *
+ * @param pid Provider ID
+ * @returns {Promise<*>}
+ */
+export function getProvider(pid) {
+    return AsyncApiRequest("GET", "/provider/" + pid, null)
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error("Error fetching provider");
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            throw error;
+        });
+}
+
+/**
  * Gets all courses from Server
  *
  * @returns {Promise<*>}

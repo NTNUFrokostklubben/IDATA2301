@@ -240,7 +240,7 @@ export default function CourseEdit() {
 
     return (
         <div className="courseInfo-page">
-            <h1>Update Course</h1>
+            <h2>Update Course</h2>
             {loading ? <CourseFormSkeleton/> : <CourseEditForm course={course}/>}
         </div>
     )

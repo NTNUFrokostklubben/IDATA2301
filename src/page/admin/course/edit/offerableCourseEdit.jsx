@@ -221,7 +221,7 @@ export default function OfferableCourseEdit(offerableCourseId) {
 
     return (
         <div className="offerableCourse-page">
-            <h1>Update Offerable Course</h1>
+            <h2>Update Offerable Course</h2>
             {loading ? <OfferableCourseFormSkeleton/>:
                 <OfferableCourseEditForm offerableCourse={offerableCourse} providers={providers} courses={courses}/>}
         </div>
