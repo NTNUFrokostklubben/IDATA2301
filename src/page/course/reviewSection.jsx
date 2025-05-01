@@ -115,7 +115,7 @@ export function ReviewComponent({cid, averageRating}) {
                     {
                         starBars.map((item, index) =>
                             <div className={"course-page-review-component-text-and-bar"}>
-                                <p className={"course-page-review-component-bar-text"}>{5-index} star</p>
+                                <a><p className={"course-page-review-component-bar-text"}>{5-index} star</p></a>
                                 <div className={"course-page-reviews-rating-bar-unit"}>
                                     <div className={"reviews-rating-bar-star"} style={{width:`${item}%`}}></div>
                                 </div>
