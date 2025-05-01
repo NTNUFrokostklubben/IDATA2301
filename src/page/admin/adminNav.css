@@ -78,7 +78,7 @@
     }
 
     .sidebar-toggle {
-        display: block;
+        display: flex;
         position: fixed;
         border-color: var(--shadow);
         background: var(--textWhite);
@@ -103,7 +103,7 @@
 
     }
 
-    .testclass {
+    .admin-page-content {
         padding-top: 5rem;
     }
 

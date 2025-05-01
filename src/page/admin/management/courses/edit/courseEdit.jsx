@@ -2,30 +2,12 @@ import "../add/courseAdd.css"
 import {Form, useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {courseEntity} from "../../../../../utils/Classes/commonClasses";
+import {Skeleton} from "@mui/material";
+import {getCourse, getCourses} from "../../../../../utils/commonRequests";
 
-
-export default function CourseEdit(courseId) {
-
-    // TODO: Once backend returns larger object with provider, price, currency etc. Update this to reflect that.
-
-    const { id } = useParams();
+function CourseEditForm({course}) {
 
     const navigate = useNavigate();
-
-    console.log(id)
-
-    const [loading, setLoading] = useState(true);
-    const [course, setCourse] = useState([]);
-
-    useEffect(() => {
-        fetch("http://localhost:8080/api/course/" + id)
-            .then((r) => r.json())
-            .then((c) => {
-                console.log(c)
-                setCourse(new courseEntity(c.id, c.category, c.closestCourse, c.credits, c.description, c.diffLevel, c.hoursWeek, c.imgLink, c.relatedCert, c.title));
-                setLoading(false);
-            })
-    }, []);
 
     /**
      * Handle API call for uploading images.
@@ -50,7 +32,6 @@ export default function CourseEdit(courseId) {
         }
 
         const imageUrl = await response.text();
-        console.log(imageUrl)
         return imageUrl;
     }
 
@@ -63,7 +44,6 @@ export default function CourseEdit(courseId) {
      */
     async function handleFormSubmission(data) {
         const value = Object.fromEntries(data.entries());
-        console.log(value);
 
         const requestOptions = {
             method: 'PUT',
@@ -100,70 +80,168 @@ export default function CourseEdit(courseId) {
         });
     }
 
-    if (loading) {
-        return <div>Loading...</div>
+    return (
+        <form onSubmit={handleSubmit} action={"http://localhost:3000/course/" + course.id} method="PUT">
+            <section id="course-info">
+                <input disabled={true} id={"id"} name={"id"} type={"number"} hidden={true} value={course.id}/>
+
+                <div className="input-wrapper"><label htmlFor="course-name">Course Name</label>
+                    <input type="text" id="course-name" name="title" defaultValue={course.title} required/>
+                </div>
+
+                <div className="input-wrapper"><label htmlFor="course-description">Course Description</label>
+                    <textarea id="course-description" name="description" defaultValue={course.description}
+                              required></textarea></div>
+
+                <div className="group-3">
+                    <div className="input-wrapper">
+                        <label htmlFor="difficulty-level">Difficulty Level</label>
+                        <select name="diffLevel" id="difficulty-level" defaultValue={course.diffLevel} required>
+                            <option value="0">Beginner</option>
+                            <option value="1">Intermediate</option>
+                            <option value="2">Expert</option>
+                        </select></div>
+
+                    <div className="input-wrapper"><label htmlFor="course-credits">ECTS Credits</label>
+                        <input type="number" step={".5"} id="course-credits" name="credits"
+                               defaultValue={course.credits} required/></div>
+
+                    <div className="input-wrapper"><label htmlFor="course-duration">Duration</label>
+                        <input type="number" id="course-duration" name="hoursWeek"
+                               defaultValue={course.hoursWeek} required/></div>
+                </div>
+
+                <div className="group-2">
+                    <div className="input-wrapper"><label htmlFor="related-certification">Related
+                        Certification</label>
+                        <input type="text" id="related-certification" name="relatedCert"
+                               defaultValue={course.relatedCert} required/>
+                    </div>
+
+                    <div className="input-wrapper"><label htmlFor="course-category">Category</label>
+                        <select name="catergory" id="course-category" defaultValue={course.category} required>
+                            <option value="it">Information Technologies</option>
+                            <option value="dm">Digital Marketing</option>
+                            <option value="be">Business and Entrepreneurship</option>
+                            <option value="dsa">Data Science and Analytics</option>
+                        </select></div>
+                </div>
+
+
+                {/*TODO: Add preview of uploaded image (javascript component)*/}
+                <div className="input-wrapper">
+                    <label htmlFor="course-image">Course Image</label>
+                    <input type="file" id="course-image" name="imgLink" required/>
+                </div>
+
+                <div className="input-wrapper"><label htmlFor="course-keywords">Keywords separated by
+                    comma</label>
+                    <input type="text" id="course-keywords" name="keywords" required/></div>
+
+                <button className="cta-button" type="submit">Update Course</button>
+            </section>
+        </form>
+    )
+}
+
+/**
+ * Renders a skeleton for the Course form
+ *
+ * @returns {JSX.Element}
+ * @constructor
+ */
+export function CourseFormSkeleton() {
+    return (
+        // Same ID for styling purposes, only 1 id is rendered at a time so this should be fine.
+        <div className={"course-edit-skeleton"} id="course-info">
+            <div className="input-wrapper"><label htmlFor="course-name">Course Name</label>
+                <Skeleton className={"loader"} variant={"rectangular"} height={"2.5rem"} width={"100%"}/></div>
+
+            <div className="input-wrapper"><label htmlFor="course-description">Course Description</label>
+                <Skeleton className={"loader"} variant={"rectangular"} height={"16rem"} width={"100%"}/></div>
+
+            <div className="group-3">
+                <div className="input-wrapper">
+                    <label htmlFor="difficulty-level">Difficulty Level</label>
+                    <Skeleton className={"loader"} variant={"rectangular"} height={"2.5rem"} width={"100%"}/></div>
+
+                <div className="input-wrapper"><label htmlFor="course-credits">ECTS Credits</label>
+                    <Skeleton className={"loader"} variant={"rectangular"} height={"2.5rem"} width={"100%"}/></div>
+
+                <div className="input-wrapper"><label htmlFor="course-duration">Duration</label>
+                    <Skeleton className={"loader"} variant={"rectangular"} height={"2.5rem"} width={"100%"}/></div>
+            </div>
+
+            <div className="group-2">
+                <div className="input-wrapper"><label htmlFor="related-certification">Related
+                    Certification</label>
+                    <Skeleton className={"loader"} variant={"rectangular"} height={"2.5rem"} width={"100%"}/>
+                </div>
+
+                <div className="input-wrapper"><label htmlFor="course-category">Category</label>
+                    <Skeleton className={"loader"} variant={"rectangular"} height={"2.5rem"} width={"100%"}/></div>
+            </div>
+
+
+            {/*TODO: Add preview of uploaded image (javascript component)*/}
+            <div className="input-wrapper">
+                <label htmlFor="course-image">Course Image</label>
+                <Skeleton className={"loader"} variant={"rectangular"} height={"2.5rem"} width={"100%"}/>
+            </div>
+
+            <div className="input-wrapper"><label htmlFor="course-keywords">Keywords separated by
+                comma</label>
+                <Skeleton className={"loader"} variant={"rectangular"} height={"2.5rem"} width={"100%"}/></div>
+
+            <Skeleton variant={"rectangular"} className={"cta-button"} height={"2.5rem"}
+                      sx={"background-color: var(--cta)"}/>
+        </div>
+    )
+}
+
+export default function CourseEdit() {
+
+    const [loading, setLoading] = useState(true);
+    const [course, setCourse] = useState([]);
+
+    const {id} = useParams();
+
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                await fetchCourses();
+                setLoading(false);
+            } catch (e) {
+                console.error(e)
+            }
+        }
+
+        fetchData()
+    }, []);
+
+    /**
+     * Fetches course
+     *
+     * @returns {Promise<void>}
+     */
+    async function fetchCourses() {
+        try {
+            const p = await getCourse(id);
+            setCourse(p);
+        } catch (e) {
+            throw new Error(e);
+        }
     }
+
+
+
+
 
     return (
         <div className="courseInfo-page">
-            <div>
-                <form onSubmit={handleSubmit} action={"http://localhost:3000/course/" + courseId} method="PUT">
-                    <section id="course-info">
-                        <input id={"id"} name={"id"} type={"number"} hidden={true} value={course.id}/>
-
-                        <div className="input-wrapper"><label htmlFor="course-name">Course Name</label>
-                            <input type="text" id="course-name" name="title" defaultValue={course.title} required/></div>
-
-                        <div className="input-wrapper"><label htmlFor="course-description">Course Description</label>
-                            <textarea id="course-description" name="description" defaultValue={course.description} required></textarea></div>
-
-                        <div className="group-3">
-                            <div className="input-wrapper">
-                                <label htmlFor="difficulty-level">Difficulty Level</label>
-                                <select name="diffLevel" id="difficulty-level" defaultValue={course.diffLevel} required>
-                                    <option value="0">Beginner</option>
-                                    <option value="1">Intermediate</option>
-                                    <option value="2">Expert</option>
-                                </select></div>
-
-                            <div className="input-wrapper"><label htmlFor="course-credits">ECTS Credits</label>
-                                <input type="number" step={".5"} id="course-credits" name="credits" defaultValue={course.credits} required/></div>
-
-                            <div className="input-wrapper"><label htmlFor="course-duration">Duration</label>
-                                <input type="number" id="course-duration" name="hoursWeek" defaultValue={course.hoursWeek} required/></div>
-                        </div>
-
-                        <div className="group-2">
-                            <div className="input-wrapper"><label htmlFor="related-certification">Related
-                                Certification</label>
-                                <input type="text" id="related-certification" name="relatedCert" defaultValue={course.relatedCert} required/>
-                            </div>
-
-                            <div className="input-wrapper"><label htmlFor="course-category">Category</label>
-                                <select name="catergory" id="course-category" defaultValue={course.category} required>
-                                    <option value="it">Information Technologies</option>
-                                    <option value="dm">Digital Marketing</option>
-                                    <option value="be">Business and Entrepreneurship</option>
-                                    <option value="dsa">Data Science and Analytics</option>
-                                </select></div>
-                        </div>
-
-
-
-                        {/*TODO: Add preview of uploaded image (javascript component)*/}
-                        <div className="input-wrapper">
-                            <label htmlFor="course-image">Course Image</label>
-                            <input type="file" id="course-image" name="imgLink" required/>
-                        </div>
-
-                        <div className="input-wrapper"><label htmlFor="course-keywords">Keywords separated by
-                            comma</label>
-                            <input type="text" id="course-keywords" name="keywords" required/></div>
-
-                        <button className="cta-button" type="submit">Update Course</button>
-                    </section>
-                </form>
-            </div>
+            <h2>Update Course</h2>
+            {loading ? <CourseFormSkeleton/> : <CourseEditForm course={course}/>}
         </div>
     )
 }

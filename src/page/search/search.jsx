@@ -6,6 +6,7 @@ import {courseEntity, FilterQuery} from "../../utils/Classes/commonClasses";
 import DatePicker from "react-datepicker";
 import {useParams, useSearchParams} from "react-router-dom";
 import {AsyncApiRequest} from "../../utils/requests";
+import SpinnerLoader from "../../component/modals/Spinner/spinnerLoader";
 
 
 export default function Search() {
@@ -15,6 +16,7 @@ export default function Search() {
 
     const [offerableCourses, setOfferableCourses] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false)
 
     const [startDate, setStartDate] = useState(new Date())
     // Sets the default date to the end of the year
@@ -112,7 +114,6 @@ export default function Search() {
         }
 
         fetchData();
-        console.log(filters)
     }, [filters]);
 
 
@@ -125,6 +126,7 @@ export default function Search() {
             const p = await AsyncApiRequest("POST", "/search", filters).then((p) => p.json());
             setOfferableCourses(p);
         } catch (e) {
+            setError(true);
             console.error("Error fetching offerable courses:", e);
         }
     }
@@ -142,9 +144,7 @@ export default function Search() {
 
     };
 
-    if (loading) {
-        return <div>Loading...</div>
-    }
+
 
     return (
         <div className="search-page">
@@ -264,7 +264,9 @@ export default function Search() {
                     </div>
                 </section>
                 <section id="results">
-                    {offerableCourses.map((course) => <Card key={course.course.id} {...course}/>)}
+                    {loading ? <SpinnerLoader show={true}/> : null}
+                    {error ? <p className="error-message">Error fetching courses. Please try again later.</p> : null}
+                    {!error && offerableCourses.map((course) => <Card key={course.course.id} {...course}/>)}
                 </section>
             </div>
         </div>
