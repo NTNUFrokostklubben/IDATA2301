@@ -45,3 +45,33 @@ export class SignupEntity{
 
     }
 }
+
+export class CourseWithPrice {
+    constructor(Course, minDiscountedPrice, closestDate, rating, numberOfRatings) {
+        this.Course = Course;
+        this.minDiscountedPrice = minDiscountedPrice;
+        this.closestDate = closestDate;
+        this.rating = rating;
+        this.numberOfRatings = numberOfRatings;
+    }
+}
+
+export class FilterQuery {
+    constructor(dateRange, categories, diffLevels, courseSizeRange, ratingRange, priceRange, searchValue) {
+        this.dateRange = dateRange;
+        this.categories = categories;
+        this.diffLevels = diffLevels;
+        this.courseSizeRange = courseSizeRange;
+        this.ratingRange = ratingRange;
+        this.priceRange = priceRange;
+        this.searchValue = searchValue;
+    }
+}
+
+export class User{
+    constructor( email, passwordHash) {
+        this.email = email;
+        this.passwordHash = passwordHash;
+
+    }
+}

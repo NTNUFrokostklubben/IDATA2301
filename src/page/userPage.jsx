@@ -2,39 +2,61 @@ import "./userPage.css"
 import { useEffect, useState } from 'react';
 import CardHorizontal from "../component/card/cardHorizontal";
 import Rating from "../component/Rating/rating";
+import {AsyncApiRequest} from "../utils/requests";
+import {Link, useParams} from "react-router-dom";
+import FavoriteCard from "../component/favoriteCard/favoriteCard";
 
 export default function UserPage (){
-    const [data, setData] = useState([]);
+    const [courses, setCourses] = useState([]);
     const [user, setUser] = useState([]);
     const [loading, setLoading] = useState(true);
-    let [ratings, setRatings] = useState([]);
+    const [ratings, setRatings] = useState([]);
+    const [favorites, setFavorites] = useState([]);
+    const {id} = useParams();
 
-    useEffect(() => {
-        fetch('http://localhost:8080/api/userCourses/1')
-            .then(response => response.json())
-            .then(data => {
-                setData(data)
-                setRatings(data.filter(item => item.rating > 0));
+    useEffect( () => {
+        const fetchData = async () =>{
+            try {
+                await Promise.all([handleUserData(), handleCourseData(), handleFavoritesData()])
                 setLoading(false)
-            })
-            .catch(err => console.error('Error fetching data:', err));
-        }, []
+            }catch (e){console.log(e)}
+        }
+        fetchData()
+        } , []
     );
 
-    useEffect(() => {
-        fetch('http://localhost:8080/api/user/1')
-            .then(response => response.json())
-            .then(user => {
-                setUser(user)
-        }).catch(err => console.error('Error fetching data:', err))
-        }, []
-    );
-    if (loading ){
-        return (<h1>loading</h1>)
+
+    async function handleUserData() {
+        try {
+            const userData = await AsyncApiRequest("GET", `/user/${id}`, null)
+                .then(response => response.json())
+            setUser(userData)
+        }catch (e){console.error(e)}
     }
-    console.log(ratings)
+    async function handleCourseData() {
+        try {
+            const courseData = await AsyncApiRequest("GET", `/userCourses/${id}`, null)
+                .then(response => response.json())
+            setCourses(courseData)
+            setRatings(courseData.filter(item => item.rating > 0));
+
+        }catch (e){console.error(e)}
+    }
+    async function handleFavoritesData() {
+        try {
+            const favoritesData = await AsyncApiRequest("GET", `/userFavorites/${id}`, null)
+                .then(response => response.json())
+            setFavorites(favoritesData)
+            console.log(favoritesData)
+        }catch (e){console.error(e)}
+    }
+
+    if (loading ){
+        return (<h5>loading...</h5>)
+    }
+
     return (
-        <div class={"user-page"}>
+        <div className="user-page">
             <section id="user-page-content">
                 <section id="user-page-caret">
                     <a href=""><img id="edit" src="/icons/pencil-sharp.svg" alt="edit button"/></a>
@@ -53,8 +75,8 @@ export default function UserPage (){
                 <section id="user-courses">
                     <h5 id="previous-courses-heading">Previous courses</h5>
                     <ul>
-                        {data.map(item => (
-                            <li className="user-course-item" key={item.id}> <a href="">{item.course.title}</a></li>
+                        {courses.map(item => (
+                            <li className="user-course-item" key={item.id}> <Link to={`/course/${item.course.id}`}>{item.course.title}</Link></li>
                             ))}
                     </ul>
                 </section>
@@ -69,41 +91,7 @@ export default function UserPage (){
                 <section id="users-favorites">
                     <h5 id={"favorites-heading"}>Favorites</h5>
 
-                    <div className="one-favorite">
-                        <h2 className="favorite-course-title">Introduction to SQL Essentials</h2>
-                        <div className="favorite-image-and-text">
-                            <img className="favorite-course-image" src="https://picsum.photos/150/75" alt="user"/>
-                            <p className="favorite-course-text">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt ut labore
-                                et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                                laboris nisi
-                                ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                                velit esse
-                                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                                sunt in culpa
-                                qui officia deserunt mollit anim id est laborum.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div className="one-favorite">
-                        <h2 className="favorite-course-title">Introduction to SQL Essentials</h2>
-                        <div className="favorite-image-and-text">
-                            <img className="favorite-course-image" src="https://picsum.photos/150/75" alt="user"/>
-                            <p className="favorite-course-text">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt ut labore
-                                et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                                laboris nisi
-                                ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                                velit esse
-                                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                                sunt in culpa
-                                qui officia deserunt mollit anim id est laborum.
-                            </p>
-                        </div>
-                    </div>
+                    {favorites.map(item => <FavoriteCard key={item.id} {...item.course}/>)}
 
                 </section>
             </section>

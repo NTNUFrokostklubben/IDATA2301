@@ -1,5 +1,5 @@
 import "./auth.css"
-import {useEffect, useRef, useState} from "react";
+import {useContext, useEffect, useRef, useState} from "react";
 import { useFocusTrap } from "../../../utils/useFocusTrap";
 import {redirect, useNavigate} from "react-router-dom";
 import {sendAuthenticationRequest} from "../../../utils/authentication/authentication";
@@ -33,16 +33,19 @@ export default function Login({ onClose, changeMode, props }) {
     return (
         <div className={"auth-background"}
         ref={modalRef}
-        onClick={(c) => {
-            if (c.target === modalRef.current) {
+        onClick={((c) => {
+            if ( closable &&  c.target === modalRef.current) {
                 onClose()
             }
-        }}>
+
+        })}>
 
             <div className="authform">
+                { closable &&
                 <button id={"auth-close-button"} className={"secondary-button"} onClick={onClose}>
-                    <img alt={"X"} src={"icons/close-sharp.svg"} />
+                    <img alt={"X"} src={"/icons/close-sharp.svg"} />
                 </button>
+                }
                 <h2 className={"auth-h2"}>
                     Log In
                 </h2>
@@ -72,7 +75,6 @@ export default function Login({ onClose, changeMode, props }) {
                         {/*TODO: Implement redirect to Signup modal (probably just build component again in react)*/}
                         <button onClick={changeMode} className="cta-button secondary-button" type="button">Sign up instead</button>
                     </section>
-
                 </form>
             </div>
         </div>

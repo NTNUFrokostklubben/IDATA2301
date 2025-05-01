@@ -1,6 +1,7 @@
 
 .user-page{
     background-color: var(--background);
+    margin-top: 5rem;
 }
 
 #user-page-content{
@@ -81,39 +82,7 @@
     background-color: white;
     width: 1000px;
 }
-#users-favorites{
-  margin: 1.3rem;
-    background-color: white;
-    width: 1000px;
-}
-#favorites-heading{
-    padding: 1rem;
-}
-.one-favorite{
-    padding-bottom: 0.7rem;
-}
 
-.favorite-course-title{
-    padding-left: 0.7rem;
-}
-
-.favorite-image-and-text{
-    padding-left: 10px;
-    display: flex;
-}
-.favorite-course-text{
-    padding-left:0.7rem;
-}
-.favorite-course-image{
-    width: 10rem;
-    height: 4.7rem;
-}
-
-.favorite-course-title{
-    font-size: 1rem;
-    padding-top: 1.6rem;
-    padding-bottom: 0.7rem;
-}
 
 @media (max-width: 1290px){
 

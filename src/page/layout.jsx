@@ -1,4 +1,4 @@
-import {Link, Outlet} from "react-router-dom";
+import {Link, Outlet, useNavigate, useSearchParams} from "react-router-dom";
 import "./layout.css"
 import React, {useEffect} from "react";
 import {useRef, useState} from "react";
@@ -10,8 +10,19 @@ import Index from "./index";
 
 export default function Layout() {
 
-    const [showLoginModal, setShowLoginModal] = useState()
-    const [showSignupModal, setShowSignupModal] = useState()
+    const [showLoginModal, setShowLoginModal] = useState();
+    const [showSignupModal, setShowSignupModal] = useState();
+
+    const [searchParams, setSearchParams] = useSearchParams();
+    const searchValue = searchParams.get("search");
+
+    const navigate = useNavigate();
+
+
+
+    function goToSearchPage() {
+        navigate("/search")
+    }
 
     return (
         <div>
@@ -41,11 +52,11 @@ export default function Layout() {
                 </li>
                 <li>
                     <div className="search-container">
-                        <form id="form_search" role="search">
+                        <form onSubmit={goToSearchPage} id="form_search" role="search">
                             <button type="submit" id="search_btn">
                                 <img id="searchIcon" src="/icons/search-sharp.svg" alt="search icon"/>
                             </button>
-                            <input type="text" placeholder="Search.." name="search"/>
+                            <input type="text" placeholder="search..." defaultValue={searchValue}  name="search"/>
                         </form>
                     </div>
                 </li>
@@ -81,7 +92,7 @@ export default function Layout() {
 
             {/* Footer */}
             <footer>
-                <img id="logo-icon" src="logo.svg" alt="Learniverse Logo"/>
+                <img id="logo-icon" src="/logo.svg" alt="Learniverse Logo"/>
 
                 <div id="footer-textbox">
 

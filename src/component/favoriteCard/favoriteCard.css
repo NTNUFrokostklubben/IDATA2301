@@ -1,0 +1,61 @@
+#users-favorites{
+    margin: 1.3rem;
+    background-color: white;
+    width: 1000px;
+}
+#favorites-heading{
+    padding: 1rem;
+}
+.one-favorite{
+    padding-bottom: 0.7rem;
+}
+
+.favorite-course-title{
+    padding-left: 0.7rem;
+}
+
+.favorite-image-and-text{
+    padding-left: 10px;
+    display: flex;
+}
+.favorite-course-text{
+    padding-left:0.7rem;
+}
+.favorite-course-image{
+    width: 10rem;
+    height: 4.7rem;
+}
+
+.favorite-course-title{
+    font-size: 1rem;
+    padding-top: 1.6rem;
+    padding-bottom: 0.7rem;
+}
+
+@supports (-webkit-line-clamp: 3) {
+    .favorite-image-and-text .favorite-course-text {
+        display: -webkit-box; /* Required for line clamping */
+        -webkit-box-orient: vertical; /* Required for line clamping */
+        -webkit-line-clamp: 4; /* Limit to 3 lines */
+        overflow: hidden; /* Hide overflow */
+        text-overflow: ellipsis; /* Add ellipsis */
+    }
+}
+
+@supports not (-webkit-line-clamp: 3) {
+    .favorite-image-and-text .favorite-course-text{
+        position: relative;
+        max-height: 4.5rem; /* Adjust based on line height and number of lines */
+        line-height: 1.5em; /* Adjust based on your design */
+        overflow: hidden;
+    }
+
+    .favorite-image-and-text .favorite-course-text::after {
+        content: '...';
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        background: white; /* Match the background color */
+        padding-left: 5px; /* Add some spacing */
+    }
+}

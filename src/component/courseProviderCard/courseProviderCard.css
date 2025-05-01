@@ -1,10 +1,46 @@
 .provider-card{
-    margin-right: 2rem;
-    width: 14rem;
-    margin-bottom: 3rem;
-    height: 4rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 13rem;
+    height: 7rem;
 }
-.provider-name, .price{
+.provider-name, .provider-card-price{
+    padding-bottom: 0.6rem;
     font-size: 1.08rem;
     color: var(--textWhite);
+}
+
+.provider-card-text{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 6rem;
+    padding-left: 0.4rem;
+    padding-top: 0.4rem;
+}
+
+.provider-card-price{
+    justify-self: flex-end;
+}
+.provider-logo-placeholder{
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 0.5rem;
+    height: 6rem;
+    width: 6rem;
+}
+
+
+@media (max-width: 380px) {
+
+    .provider-logo-placeholder{
+        height: 5rem;
+        width: 5rem;
+    }
+    .provider-card{
+        width: 12rem;
+        height: 6rem;
+
+    }
 }
