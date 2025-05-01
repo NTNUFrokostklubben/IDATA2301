@@ -3,6 +3,8 @@ import {useEffect, useRef, useState} from "react";
 import { useFocusTrap } from "../../../utils/useFocusTrap";
 import {redirect, useNavigate} from "react-router-dom";
 import {sendAuthenticationRequest} from "../../../utils/authentication/authentication";
+import {showFormError} from "../../../utils/tools"
+
 
 export default function Login({ onClose, changeMode, props }) {
     const [error, setError] =useState("");
@@ -13,31 +15,20 @@ export default function Login({ onClose, changeMode, props }) {
         const username = document.getElementById("username").value;
         const password = document.getElementById("password").value;
         console.log("Submitting form");
-        sendAuthenticationRequest(
-            username, password, onLoginSuccess, (errorMessage) => setError(errorMessage)
-        );
+        sendAuthenticationRequest(username, password, onLoginSuccess, showFormError);
     }
     /**
      * This function is called when login is successful
      */
     function onLoginSuccess(userData) {
+        alert("Successfully logged in for user")
         props.setUser(userData);
         navigate("/");
     }
-
-    function onLoginSubmit(userData){
-        props.setUser(userData);
-        navigate("/");
-    }
-
-    let errorMessage = null;
-    if (error){
-        errorMessage = <p className={"error"}></p>
-    }
-
 
     const modalRef = useRef(null)
     useFocusTrap(modalRef, true, onClose) // Passes true to isOpen due to this modal only being open when it is rendered
+
 
     return (
         <div className={"auth-background"}
@@ -73,6 +64,7 @@ export default function Login({ onClose, changeMode, props }) {
                                    required/>
                         </label>
 
+                    <p id="result-message" className="hidden"></p>
 
                     </section>
                     <section id="auth-CTA">
@@ -80,6 +72,7 @@ export default function Login({ onClose, changeMode, props }) {
                         {/*TODO: Implement redirect to Signup modal (probably just build component again in react)*/}
                         <button onClick={changeMode} className="cta-button secondary-button" type="button">Sign up instead</button>
                     </section>
+
                 </form>
             </div>
         </div>

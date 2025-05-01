@@ -4,6 +4,9 @@ import {PieChart} from '@mui/x-charts/PieChart';
 import AdminReview from "../../component/Rating/adminReview";
 import "./adminDashboard.css";
 import {AsyncApiRequest} from "../../utils/requests";
+import {useNavigate} from "react-router-dom";
+import {getAuthenticatedUser, isAdmin} from "../../utils/authentication/authentication";
+// import {runOnLoad} from "../../utils/tools";
 
 class reviewEntity {
       constructor(id, rating, comment, courseTitle, userName, profilePicture, courseID){
@@ -18,6 +21,18 @@ class reviewEntity {
 }
 
 export default function AdminDashboard() {
+    const navigate = useNavigate();
+
+    // runOnLoad(protectAdminArea);
+
+    /**
+     * Redirect the user away from this page when admin permissions not present
+     */
+    function protectAdminArea() {
+        if (!isAdmin(getAuthenticatedUser())) {
+            navigate("/");
+        }
+    }
 
     // Stats in overview
     const [revenueData, setRevenueData]=useState([]);

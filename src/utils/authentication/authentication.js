@@ -27,7 +27,7 @@ export function getAuthenticatedUser(){
  * @returns {boolean}
  */
 export function isAdmin(user){
-    return user && user.roles && user.oles.includes("ROLE_ADMIN");
+    return user && user.roles && user.roles.includes("ROLE_ADMIN");
 }
 
 /**
@@ -62,6 +62,8 @@ export async function sendAuthenticationRequest(
         errorCallback(httpError.message);
     }
 }
+
+
 
 /**
  * Parse JWT string, extract information from it

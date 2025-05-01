@@ -50,11 +50,9 @@ export default function Register({onClose, changeMode}) {
                             <input type="text" id="name" name="name" required/>
                         </label>
 
-
                         <label htmlFor="email">Email:
                             <input type="text" id="email" name="email" required/>
                         </label>
-
 
                         <label htmlFor="password">Password:
                             <input type="password" id="password" name="password" required/>
