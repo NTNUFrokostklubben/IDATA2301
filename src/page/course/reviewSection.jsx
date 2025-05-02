@@ -3,19 +3,18 @@ import {AsyncApiRequest} from "../../utils/requests";
 import Review from "../../component/Rating/review";
 import "./reviewSection.css"
 import ReviewWriter from "../../component/Rating/reviewWriter";
+import {UserCourse} from "../../utils/Classes/commonClasses";
 
 
 export function ReviewComponent({cid, averageRating}) {
-    const [ratingData, setRatingData] = useState(null);
+    const [courseData, setCourseData] = useState([]);
     const [halfStar, setHalfStar] = useState(false)
     const [loading, setLoading] = useState(true);
     const [stars, setStars] = useState([]);
     const[starBars, setStarBars] = useState([])
-    const [oneStarBar, setOneStarBar] = useState(0);
-    const [twoStarBar, setTwoStarBar] = useState(0);
-    const [threeStarBar, setThreeStarBar] = useState(0);
-    const [fourStarBar, setFourStarBar] = useState(0);
-    const [fiveStarBar, setFiveStarBar] = useState(0);
+    const[currentStar, setCurrentStar] = useState(5)
+    const [filteredReviews, setFilteredReviews] = useState([]);
+
     // Add state for visible items count
     const [visibleReviews, setVisibleReviews] = useState(3); // Start with 3 reviews
 
@@ -40,7 +39,8 @@ export function ReviewComponent({cid, averageRating}) {
             .filter(item => item.review?.rating > 0)
             .sort((a, b) => b.review.rating - a.review.rating);
 
-        setRatingData(filteredAndSorted)
+        setCourseData(data)
+        setFilteredReviews(filteredAndSorted)
         calculateStarDistribution(data.map(item => item.review.rating));
 
     }
@@ -51,6 +51,7 @@ export function ReviewComponent({cid, averageRating}) {
             console.error(e)
         }
     }
+
 
     useEffect(() => {
         setLoading(true);
@@ -78,13 +79,24 @@ export function ReviewComponent({cid, averageRating}) {
         console.log(starPercent)
         setStarBars(starPercent.reverse());
 
-        setOneStarBar((starCounts[0] / 5) * 100);
-        setTwoStarBar((starCounts[1] / 5) * 100);
-        setThreeStarBar((starCounts[2] / 5) * 100);
-        setFourStarBar((starCounts[3] / 5) * 100);
-        setFiveStarBar((starCounts[4] / 5) * 100);
-
     }
+
+    // Filter reviews when current changes
+    useEffect(() => {
+        if (courseData !== null) {
+        const filtered =[...courseData].sort((a, b)=>
+            (a.review.rating % currentStar) - (b.review.rating % currentStar)
+        );
+        setFilteredReviews(filtered);
+        console.log(filtered)
+    }
+    }, [currentStar]);
+
+    const handleStarClick = (e) =>{
+        setCurrentStar(e.target.value)
+        console.log(e.target.value)
+    }
+
 
     if (loading) {
         return (<h5>loading...</h5>)
@@ -115,7 +127,12 @@ export function ReviewComponent({cid, averageRating}) {
                     {
                         starBars.map((item, index) =>
                             <div className={"course-page-review-component-text-and-bar"}>
-                                <a href={""}><p className={"course-page-review-component-bar-text"}>{5-index} star</p></a>
+                                <button className={"course-page-review-star-bar-clickable"}
+                                onClick={handleStarClick}
+                                value={5-index}
+                                >
+                                    {5-index} star
+                                </button>
                                 <div className={"course-page-reviews-rating-bar-unit"}>
                                     <div className={"reviews-rating-bar-star"} style={{width:`${item}%`}}></div>
                                 </div>
@@ -127,14 +144,14 @@ export function ReviewComponent({cid, averageRating}) {
             </div>
 
 
-            {ratingData !== null && (
+            {filteredReviews !== null && (
                 <div className={"course-page-review-component-right"}>
                 {
-                    ratingData.slice(0, visibleReviews)
+                    filteredReviews.slice(0, visibleReviews)
                         .map(item => <Review key={item.id} rating={item} title={false}/>)
 
                 }
-                {visibleReviews < ratingData.length && (
+                {visibleReviews < filteredReviews.length && (
                     <button
                         onClick={loadMoreReviews}
                         className="show-more-reviews-button"

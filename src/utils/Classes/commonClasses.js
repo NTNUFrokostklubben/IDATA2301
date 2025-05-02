@@ -27,6 +27,24 @@ export class ProviderEntity {
     }
 }
 
+export class UserCourse{
+    constructor(id, review, date, course,user) {
+        this.id = id;
+        this.review = review;
+        this.date = date;
+        this.course = course;
+        this.user = user;
+    }
+}
+export class Review{
+    constructor(id, rating, reviewDate, comment, title) {
+        this.id = id;
+        this.reviewDate = reviewDate;
+        this.comment = comment;
+        this.title = title;
+    }
+}
+
 export class OfferableCourse {
     constructor(id, date, discount, price, visibility, course, provider) {
         this.id = id;
