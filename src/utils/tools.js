@@ -12,10 +12,18 @@ function runOnLoad(func) {
  * Show an error message for a form
  * @param errorMessage The error message to show
  */
-export function showFormError(errorMessage) {
+export function showFormErrorLogin(errorMessage) {
     if(errorMessage === "Invalid username or password"){
         showFormResult(errorMessage, "error");
     }
+}
+
+/**
+ * Show an error message for a form
+ * @param errorMessage The error message to show
+ */
+export function showFormErrorSignup(errorMessage) {
+    showFormResult(errorMessage, "error");
 }
 
 /**

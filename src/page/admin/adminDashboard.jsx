@@ -5,24 +5,10 @@ import AdminReview from "../../component/Rating/adminReview";
 import "./adminDashboard.css";
 import {AsyncApiRequest} from "../../utils/requests";
 import {useNavigate} from "react-router-dom";
-import {getAuthenticatedUser, isAdmin} from "../../utils/authentication/authentication";
-// import {runOnLoad} from "../../utils/tools";
-
-class reviewEntity {
-      constructor(id, rating, comment, courseTitle, userName, profilePicture, courseID){
-        this.id = id;
-        this.rating = rating;
-        this.comment = comment;
-        this.title = courseTitle;
-        this.user = userName;
-        this.profilePicture = profilePicture;
-        this.courseId = courseID;
-    }
-}
+import {reviewEntity} from "../../utils/Classes/commonClasses";
 
 export default function AdminDashboard() {
     const navigate = useNavigate();
-
 
     // Stats in overview
     const [revenueData, setRevenueData]=useState([]);
@@ -50,7 +36,7 @@ export default function AdminDashboard() {
     // Fetches all stats from the API
     useEffect(() => {
         if (revenueData.length === 0) {
-            fetchRevenueData();
+            fetchRevenueData()
         }
         if (reviews.length === 0){
             fetchReviews();

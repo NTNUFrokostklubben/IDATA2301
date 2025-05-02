@@ -63,6 +63,35 @@ export async function sendAuthenticationRequest(
     }
 }
 
+export async function sendSignupRequest(
+    name,
+    email,
+    passwordHash,
+    successCallback,
+    errorCallback
+) {
+    const postData = {
+        name: name,
+        passwordHash: passwordHash,
+        email: email,
+    };
+    try {
+        const jwtResponse = await AsyncApiRequest("POST", "/signup", postData).then(response => response.json());
+        console.log("JWT response: ", jwtResponse);
+        if (jwtResponse && jwtResponse.jwt) {
+            setCookie("jwt", jwtResponse.jwt);
+            const userData = parseJwtUser(jwtResponse.jwt);
+            if (userData) {
+                setCookie("current_username", userData.name);
+                setCookie("current_user_roles", userData.roles.join(","));
+                successCallback(userData);
+            }
+        }
+    } catch (httpError) {
+        errorCallback(httpError.message);
+    }
+}
+
 
 
 /**

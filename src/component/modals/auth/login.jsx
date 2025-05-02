@@ -3,10 +3,10 @@ import {useContext, useEffect, useRef, useState} from "react";
 import { useFocusTrap } from "../../../utils/useFocusTrap";
 import {redirect, useNavigate} from "react-router-dom";
 import {sendAuthenticationRequest} from "../../../utils/authentication/authentication";
-import {showFormError} from "../../../utils/tools"
+import {showFormErrorLogin} from "../../../utils/tools"
 
 
-export default function Login({ onClose, changeMode, props, closable=true }) {
+export default function Login({ onClose, changeMode, closable=true }) {
     const navigate = useNavigate();
 
     function submitForm(event){
@@ -14,15 +14,15 @@ export default function Login({ onClose, changeMode, props, closable=true }) {
         const username = document.getElementById("username").value;
         const password = document.getElementById("password").value;
         console.log("Submitting form");
-        sendAuthenticationRequest(username, password, onLoginSuccess, showFormError);
+        sendAuthenticationRequest(username, password, onLoginSuccess, showFormErrorLogin);
     }
     /**
      * This function is called when login is successful
      */
     function onLoginSuccess(userData) {
-        alert("Successfully logged in for user")
-        props.setUser(userData);
-        navigate("/");
+        console.log("Successfully logged in for user: ", userData.username);
+        window.location.reload(); // TODO - maybe find an other way to do this
+        onClose();
     }
 
     const modalRef = useRef(null)

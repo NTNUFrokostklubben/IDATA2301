@@ -1,9 +1,8 @@
 import "./auth.css"
 import {useRef} from "react";
 import {useFocusTrap} from "../../../utils/useFocusTrap";
-import {sendAuthenticationRequest} from "../../../utils/authentication/authentication";
-import {AsyncApiRequest} from "../../../utils/requests";
-import {SignupEntity} from "../../../utils/Classes/commonClasses";
+import {sendAuthenticationRequest, sendSignupRequest} from "../../../utils/authentication/authentication";
+import {showFormErrorSignup} from "../../../utils/tools";
 
 export default function Register({onClose, changeMode, closable=true }) {
 
@@ -15,17 +14,26 @@ export default function Register({onClose, changeMode, closable=true }) {
         const name = document.getElementById("name").value;
         const email = document.getElementById("email").value;
         const password = document.getElementById("password").value;
-        const signup = new SignupEntity(name, password, email);
-        postSignup(signup).then(alert("Successfully signed up new user"));
+        sendSignupRequest(name, email, password,
+            (userData) => onSignupSuccess(userData, password), // pass password
+            showFormErrorSignup
+        );
         console.log("Submitting form");
     }
 
-    async function postSignup(signup) {
-        try {
-            const p = await AsyncApiRequest("POST", "/signup", signup);
-        } catch (e) {
-            throw e
-        }
+    function onSignupSuccess(userData, password) {
+        console.log("Successfully signed up for user: ", userData.username);
+        sendAuthenticationRequest(userData.username, password, onSigninSuccess, showFormErrorSignup);
+        window.location.reload();
+        onClose();
+    }
+
+    /**
+     * This function is called when login is successful
+     */
+    function onSigninSuccess(userData) {
+        console.log("Successfully logged in for user: ", userData.username);
+        onClose();
     }
 
     return (
@@ -60,12 +68,12 @@ export default function Register({onClose, changeMode, closable=true }) {
                             <input type="password" id="password" name="password" required/>
                         </label>
 
-
+                        <p id="result-message" className="hidden"></p>
                     </section>
                     <section id="auth-CTA">
-                        <button className="cta-button" type="submit" onClick={submitForm}>Sign up</button>
+                    <button className="cta-button" type="submit" onClick={submitForm}>Sign up</button>
                         {/*TODO: Implement redirect to Signup modal (probably just build component again in react)*/}
-                        <button onClick={changeMode} className="cta-button secondary-button" type="button">Log In instead</button>
+                        <button onClick={changeMode} className="cta-button secondary-button" type="button">Log in instead</button>
                     </section>
                 </form>
             </div>

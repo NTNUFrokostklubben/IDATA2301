@@ -30,10 +30,6 @@ function App() {
 
     const [user, setUser] = useState({});
 
-    // function userLogin(user){
-    //     setUser(user)
-    // }
-
     return (
     <BrowserRouter>
         <Routes>
@@ -68,7 +64,6 @@ function App() {
                     </Route>
                 </Route>
             </Route>
-
         </Routes>
     </BrowserRouter>
 
