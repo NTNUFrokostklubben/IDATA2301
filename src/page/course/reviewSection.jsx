@@ -7,13 +7,16 @@ import {UserCourse} from "../../utils/Classes/commonClasses";
 
 
 export function ReviewComponent({cid, averageRating}) {
-    const [courseData, setCourseData] = useState([]);
+    const [userCourseData, setUserCourseData] = useState([]);
     const [halfStar, setHalfStar] = useState(false)
     const [loading, setLoading] = useState(true);
     const [stars, setStars] = useState([]);
     const[starBars, setStarBars] = useState([])
     const[currentStar, setCurrentStar] = useState(5)
     const [filteredReviews, setFilteredReviews] = useState([]);
+    const [allowedToReview, setAllowedToReview] = useState(true);
+    const [allowEditReview, setAllowEditReview] = useState(false);
+    const [isDisabled, setIsDisabled] = useState(true);
 
     // Add state for visible items count
     const [visibleReviews, setVisibleReviews] = useState(3); // Start with 3 reviews
@@ -22,6 +25,7 @@ export function ReviewComponent({cid, averageRating}) {
     const loadMoreReviews = () => {
         setVisibleReviews(prev => prev + 3); // Increase by 3 each click
     };
+
 
     const fetchData = async () => {
         if(averageRating !== undefined) {
@@ -39,17 +43,23 @@ export function ReviewComponent({cid, averageRating}) {
             .filter(item => item.review?.rating > 0)
             .sort((a, b) => b.review.rating - a.review.rating);
 
-        setCourseData(data)
+        setUserCourseData(data)
         setFilteredReviews(filteredAndSorted)
         calculateStarDistribution(data.map(item => item.review.rating));
+        setAllowedToReview(!filteredAndSorted.some(obj => obj.user?.id === 1))
 
     }
     const fetching = async () => {
         try {
             await Promise.all([fetchData(), fetchRatingArray()])
+            console.log(allowedToReview)
         } catch (e) {
             console.error(e)
         }
+    }
+
+    const getUserReview =(uid) =>{
+        return filteredReviews.find(review => review.user?.id === uid )
     }
 
 
@@ -76,15 +86,14 @@ export function ReviewComponent({cid, averageRating}) {
         starCounts.forEach((number, index) => {
             starPercent[index]= number/5*100;
         })
-        console.log(starPercent)
         setStarBars(starPercent.reverse());
 
     }
 
     // Filter reviews when current changes
     useEffect(() => {
-        if (courseData !== null) {
-        const filtered =[...courseData].sort((a, b)=>
+        if (userCourseData !== null) {
+        const filtered =[...userCourseData].sort((a, b)=>
             (a.review.rating % currentStar) - (b.review.rating % currentStar)
         );
         setFilteredReviews(filtered);
@@ -94,7 +103,6 @@ export function ReviewComponent({cid, averageRating}) {
 
     const handleStarClick = (e) =>{
         setCurrentStar(e.target.value)
-        console.log(e.target.value)
     }
 
 
@@ -144,7 +152,7 @@ export function ReviewComponent({cid, averageRating}) {
             </div>
 
 
-            {filteredReviews !== null && (
+            { filteredReviews !== null && (
                 <div className={"course-page-review-component-right"}>
                 {
                     filteredReviews.slice(0, visibleReviews)
@@ -159,7 +167,9 @@ export function ReviewComponent({cid, averageRating}) {
                         Show More Reviews
                     </button>
                 )}
-                    <ReviewWriter cid={1} uid={1} />
+                    {allowedToReview && ( <ReviewWriter cid={1} uid={1} />)}
+                    {isDisabled && !allowedToReview && (<button onClick={()=> {setAllowEditReview(true); setIsDisabled(false)}} >Edit your review?</button>)}
+                    {allowEditReview && (( <ReviewWriter cid={1} uid={1} existingReview={getUserReview(1)} />))}
             </div>)}
 
 

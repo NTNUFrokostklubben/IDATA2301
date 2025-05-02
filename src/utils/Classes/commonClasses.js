@@ -81,9 +81,11 @@ export class FilterQuery {
 }
 
 export class User{
-    constructor( email, passwordHash) {
+    constructor(id, name, email, role, profilePicture ) {
+        this.id = id;
         this.email = email;
-        this.passwordHash = passwordHash;
-
+        this.name = name;
+        this.role = role;
+        this.profilePicture = profilePicture;
     }
 }

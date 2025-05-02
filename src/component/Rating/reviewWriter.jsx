@@ -4,7 +4,7 @@ import {AsyncApiRequest} from "../../utils/requests";
 import {Rating} from "@mui/material";
 
 
-export default function ReviewWriter({uid, cid}){
+export default function ReviewWriter({uid, cid, existingReview = null}){
     const [reviewText, setReviewText] = useState('');
     const [reviewTitle, setReviewTitle] = useState('');
     const [reviewStars, setReviewStars] = useState((1));
@@ -17,6 +17,13 @@ export default function ReviewWriter({uid, cid}){
             title: reviewTitle
         }
     }
+
+    useEffect( () => {
+        if(existingReview !== null){
+            setReviewTitle(existingReview.review?.title)
+            setReviewText(existingReview.review?.comment)
+        }
+    }, [])
     const sendReview = async () =>{
         let payload = reviewToJson();
 
