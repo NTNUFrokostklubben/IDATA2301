@@ -3,7 +3,8 @@ import {useEffect, useState} from "react";
 import {AsyncApiRequest} from "../../utils/requests";
 import {Rating} from "@mui/material";
 
-
+//TODO make title and text go away on publish
+//TODO refresh review component on publish
 export default function ReviewWriter({uid, cid, existingReview = null}){
     const [reviewText, setReviewText] = useState('');
     const [reviewTitle, setReviewTitle] = useState('');
