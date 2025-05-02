@@ -1,6 +1,6 @@
-import "./rating.css"
+import "./review.css"
 import {Link} from "react-router-dom";
-export default function Rating ({rating, title= false}){
+export default function Review ({rating, title= false}){
     function formatDate(dateString) {
         const date = new Date(dateString);
         const options = { month: 'long', day: 'numeric', year: 'numeric' };

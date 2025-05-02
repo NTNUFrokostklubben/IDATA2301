@@ -1,0 +1,84 @@
+
+.review-writer-section{
+    padding-top: 3rem;
+}
+
+.review-writer-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.review-writer-container-stars{
+    height: 2rem;
+    width: 2rem;
+    scale: 160%;
+    justify-self: center;
+    align-self: flex-start;
+    padding-top: 0.5rem;
+    margin-left: 1.4rem;
+}
+
+
+.review-writer-container-input::placeholder{
+    font-size: 1rem;
+}
+.review-writer-container-input{
+    resize: none;
+}
+.review-writer-stars-and-publish{
+     display: flex;
+     flex-direction: row;
+    font-size: 1rem;
+
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+ }
+.review-writer-container-publish{
+
+    width: 6rem;
+    margin-left: 2rem;
+}
+
+
+.review-writer-container-title{
+    width: 32rem;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.review-writer-container-title::placeholder{
+    font-size: 1rem;
+}
+
+
+@media (max-width: 800px) {
+    .review-writer-container-input{
+        width: 32rem;
+    }
+    .review-writer-container-publish{
+        font-size: 95%;
+
+    }
+
+}
+@media (max-width: 600px) {
+    .review-writer-container,  .review-writer-container-input, .review-writer-container-title{
+        width: 28rem;
+    }
+    .review-writer-container-publish{
+        font-size: 90%;
+        width: 5rem;
+    }
+
+}
+
+@media (max-width: 545px) {
+    .review-writer-container-publish{
+        width: 9rem;
+        height: 2.3rem;
+    }
+    .review-writer-container-stars{
+        margin-left: 3rem;
+    }
+}

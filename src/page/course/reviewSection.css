@@ -11,6 +11,10 @@
 
 }
 
+.show-more-reviews-button{
+    font-size: 1rem;
+}
+
 .review-component-aggregate-stars{
     display: flex;
     flex-direction: row;
@@ -20,11 +24,14 @@
 .course-page-review-component-text-and-bar{
     display: flex;
     flex-direction: row;
+    align-items: center;
+    padding-top: 0.5rem;
+
 }
 .course-page-reviews-rating-bar-unit{
     width: 12rem;
     height: 20px;
-    margin-top: 1rem;
+    margin-top: 0rem;
     background-color: #e0e0e0;
     border-radius: 3px;
     overflow: hidden;
@@ -45,4 +52,30 @@
     padding-left: 1.3rem;
     font-size: 1.2rem;
     font-weight: bold;
+}
+
+@media (max-width: 800px) {
+    .show-more-reviews-button{
+        font-size: 90%;
+    }
+}
+
+@media (max-width: 666px) {
+    .course-page-review-component{
+        width: 40rem;
+    }
+    .show-more-reviews-button{
+        font-size: 80%;
+    }
+}
+@media (max-width: 545px) {
+
+    .course-page-review-component{
+       flex-direction: column;
+        padding-left: 1rem;
+    }
+    .show-more-reviews-button{
+        font-size: 60%;
+    }
+
 }

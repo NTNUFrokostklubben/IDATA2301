@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {AsyncApiRequest} from "../../utils/requests";
-import Rating from "../../component/Rating/rating";
+import Review from "../../component/Rating/review";
 import "./reviewSection.css"
 import ReviewWriter from "../../component/Rating/reviewWriter";
 
@@ -115,7 +115,7 @@ export function ReviewComponent({cid, averageRating}) {
                     {
                         starBars.map((item, index) =>
                             <div className={"course-page-review-component-text-and-bar"}>
-                                <a><p className={"course-page-review-component-bar-text"}>{5-index} star</p></a>
+                                <a href={""}><p className={"course-page-review-component-bar-text"}>{5-index} star</p></a>
                                 <div className={"course-page-reviews-rating-bar-unit"}>
                                     <div className={"reviews-rating-bar-star"} style={{width:`${item}%`}}></div>
                                 </div>
@@ -127,22 +127,26 @@ export function ReviewComponent({cid, averageRating}) {
             </div>
 
 
-            {ratingData !== null && ( <div className={"course-page-review-component-right"}>
+            {ratingData !== null && (
+                <div className={"course-page-review-component-right"}>
                 {
                     ratingData.slice(0, visibleReviews)
-                        .map(item => <Rating key={item.id} rating={item} title={false}/>)
+                        .map(item => <Review key={item.id} rating={item} title={false}/>)
 
                 }
                 {visibleReviews < ratingData.length && (
                     <button
                         onClick={loadMoreReviews}
-                        className="show-more-button"
+                        className="show-more-reviews-button"
                     >
                         Show More Reviews
                     </button>
                 )}
+                    <ReviewWriter cid={1} uid={1} />
             </div>)}
 
+
         </div>
+
     )
 }
