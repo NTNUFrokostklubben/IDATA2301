@@ -46,7 +46,7 @@ function App() {
                 <Route path={"about"} element={<About/>}/>
                 <Route path={"checkout/:id"} element={<Checkout/>}/>
                 <Route path={"noAccess"} element={<NoAccess/>}/>
-                <Route path={"/admin"} element={<ProtectedRoute/>}>
+                <Route path={"/admin"} element={<AdminNav/>}>
                     <Route index element={<AdminDashboard/>}/>
                     <Route path={"/admin/offerableCourses"}>
                         <Route index element={<OfferableCourses/>}/>

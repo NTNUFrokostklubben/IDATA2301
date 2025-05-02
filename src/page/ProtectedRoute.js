@@ -1,5 +1,4 @@
 import { Navigate, Outlet } from "react-router-dom";
-import Cookies from "js-cookie";
 import {jwtDecode} from "jwt-decode";
 import {getCookie} from "../utils/authentication/cookies";
 import {getAuthenticatedUser, isAdmin} from "../utils/authentication/authentication";

@@ -23,16 +23,6 @@ class reviewEntity {
 export default function AdminDashboard() {
     const navigate = useNavigate();
 
-    // runOnLoad(protectAdminArea);
-
-    /**
-     * Redirect the user away from this page when admin permissions not present
-     */
-    function protectAdminArea() {
-        if (!isAdmin(getAuthenticatedUser())) {
-            navigate("/");
-        }
-    }
 
     // Stats in overview
     const [revenueData, setRevenueData]=useState([]);

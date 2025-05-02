@@ -2,6 +2,7 @@ import {Link, Outlet} from "react-router-dom";
 import "./adminNav.css"
 import Collapsable from "../../component/Collapsable/collapsable";
 import {useState} from "react";
+import ProtectedRoute from "../ProtectedRoute";
 
 export default function AdminNav() {
 
@@ -47,7 +48,7 @@ export default function AdminNav() {
                 </Collapsable>
             </div>
 
-            <div className={"testclass"}><Outlet/></div>
+            <ProtectedRoute className={"testclass"}><Outlet/></ProtectedRoute>
         </div>
     )
 }
