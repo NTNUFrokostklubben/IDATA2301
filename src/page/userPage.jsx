@@ -37,9 +37,13 @@ export default function UserPage (){
         try {
             const courseData = await AsyncApiRequest("GET", `/userCourses/${id}`, null)
                 .then(response => response.json())
-            setCourses(courseData)
-            setRatings(courseData.filter(item => item.rating > 0));
 
+            const filteredAndSorted = courseData
+                .filter(item => item.review?.rating > 0)
+                .sort((a, b) => b.review.rating - a.review.rating);
+
+            setCourses(courseData)
+            setRatings(filteredAndSorted)
         }catch (e){console.error(e)}
     }
     async function handleFavoritesData() {
@@ -47,7 +51,6 @@ export default function UserPage (){
             const favoritesData = await AsyncApiRequest("GET", `/userFavorites/${id}`, null)
                 .then(response => response.json())
             setFavorites(favoritesData)
-            console.log(favoritesData)
         }catch (e){console.error(e)}
     }
 
@@ -84,7 +87,7 @@ export default function UserPage (){
                 <section className="users-reviews">
                     <h5 id={"review-heading"} >Your reviews</h5>
 
-                    {ratings.map(item => <Rating key={item.id} {...item}/>)}
+                    {ratings.map(item => <Rating key={item.id}  rating={item} title={true}/>)}
 
                 </section>
 

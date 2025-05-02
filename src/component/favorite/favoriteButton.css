@@ -1,0 +1,13 @@
+.favorite-component{
+    display: flex;
+    height: 2rem;
+    width: 2rem;
+    padding: 0;
+    border-width: 0px;
+    background-color: transparent;
+}
+
+.favorite-component svg{
+    height: 100%;
+    width: 100%;
+}

@@ -10,7 +10,7 @@ import AdminDashboard from "./page/admin/adminDashboard";
 import UserPage from "./page/userPage";
 import About from "./page/about";
 import Checkout from "./page/checkout";
-import Course from "./page/course";
+import Course from "./page/course/course";
 
 import {UserContext} from "./userContext";
 import Providers from "./page/admin/management/providers/providers";

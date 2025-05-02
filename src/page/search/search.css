@@ -26,6 +26,7 @@
 .search-results {
     display: flex;
     flex-flow: column;
+    min-height: 50rem;
     margin: 0 3rem;
 
 }

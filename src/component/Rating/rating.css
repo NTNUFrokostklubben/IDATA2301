@@ -1,4 +1,8 @@
 
+.one-review{
+    padding-bottom: 1rem;
+}
+
 .user-review-image{
     border-radius: 50%;
     width: 40px;
@@ -8,12 +12,17 @@
     justify-self: flex-start;
 }
 .user-review-section{
-    max-width: 210px;
+    max-width: 20rem;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 1rem;
+    padding-bottom: 0.3rem;
+    gap: 0.5rem;
 }
+
 .review-date{
     padding-bottom: 0.7px;
     padding-left: 1rem;
