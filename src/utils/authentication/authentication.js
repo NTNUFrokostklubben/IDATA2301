@@ -8,12 +8,12 @@ import {AsyncApiRequest} from "../requests";
 */
 export function getAuthenticatedUser(){
    let user = null;
-   const username = getCookie("current_username");
+   const email = getCookie("current_email");
    const rolesComma = getCookie("current_user_roles");
-   if(username && rolesComma){
+   if(email && rolesComma){
        const roles = rolesComma.split(",");
        user = {
-           username: username,
+           email: email,
            roles: roles,
        };
    }
@@ -23,8 +23,8 @@ export function getAuthenticatedUser(){
 /**
  * Check if the given user has admin rights
  *
- * @param user
- * @returns {boolean}
+ * @param user User object
+ * @returns {boolean} True if the user has admin rights, false otherwise
  */
 export function isAdmin(user){
     return user && user.roles && user.roles.includes("ROLE_ADMIN");
@@ -32,19 +32,19 @@ export function isAdmin(user){
 
 /**
  * Send authentication request to the API
- * @param username Username
+ * @param email
  * @param password Password, plain text
  * @param successCallback Function to call on success
  * @param errorCallback Function to call on error, with response text as the parameter
  */
 export async function sendAuthenticationRequest(
-    username,
+    email,
     password,
     successCallback,
     errorCallback
 ) {
     const postData = {
-        username: username,
+        email: email,
         password: password,
     };
     try {
@@ -53,7 +53,7 @@ export async function sendAuthenticationRequest(
             setCookie("jwt", jwtResponse.jwt);
             const userData = parseJwtUser(jwtResponse.jwt);
             if (userData) {
-                setCookie("current_username", userData.username);
+                setCookie("current_email", userData.email);
                 setCookie("current_user_roles", userData.roles.join(","));
                 successCallback(userData);
             }
@@ -82,7 +82,7 @@ export async function sendSignupRequest(
             setCookie("jwt", jwtResponse.jwt);
             const userData = parseJwtUser(jwtResponse.jwt);
             if (userData) {
-                setCookie("current_username", userData.name);
+                setCookie("current_email", userData.email);
                 setCookie("current_user_roles", userData.roles.join(","));
                 successCallback(userData);
             }
@@ -125,7 +125,7 @@ function parseJwtUser(jwtString) {
     const jwtObject = parseJwt(jwtString);
     if (jwtObject) {
         user = {
-            username: jwtObject.sub,
+            email: jwtObject.sub,
             roles: jwtObject.roles.map((r) => r.authority),
         };
     }
@@ -137,6 +137,6 @@ function parseJwtUser(jwtString) {
  */
 export function deleteAuthorizationCookies() {
     deleteCookie("jwt");
-    deleteCookie("current_username");
+    deleteCookie("current_email");
     deleteCookie("current_user_roles");
 }

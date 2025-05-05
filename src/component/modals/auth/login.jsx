@@ -11,16 +11,16 @@ export default function Login({ onClose, changeMode, closable=true }) {
 
     function submitForm(event){
         event.preventDefault();
-        const username = document.getElementById("username").value;
+        const email = document.getElementById("email").value;
         const password = document.getElementById("password").value;
         console.log("Submitting form");
-        sendAuthenticationRequest(username, password, onLoginSuccess, showFormErrorLogin);
+        sendAuthenticationRequest(email, password, onLoginSuccess, showFormErrorLogin);
     }
     /**
      * This function is called when login is successful
      */
     function onLoginSuccess(userData) {
-        console.log("Successfully logged in for user: ", userData.username);
+        console.log("Successfully logged in for user: ", userData.email);
         window.location.reload(); // TODO - maybe find an other way to do this
         onClose();
     }
@@ -50,10 +50,10 @@ export default function Login({ onClose, changeMode, closable=true }) {
                 <form>
                     <section id="credentials">
 
-                        <label htmlFor="username">Email:
+                        <label htmlFor="email">Email:
                             <input type="text"
-                                   id="username"
-                                   name="username"
+                                   id="email"
+                                   name="email"
                                    required/>
                         </label>
 

@@ -36,15 +36,6 @@ export class OfferableCourse {
         this.provider = provider;
     }
 }
-// todo delete this?
-export class SignupEntity{
-    constructor(name, passwordHash, email) {
-        this.name = name;
-        this.passwordHash = passwordHash;
-        this.email = email;
-
-    }
-}
 
 export class CourseWithPrice {
     constructor(Course, minDiscountedPrice, closestDate, rating, numberOfRatings) {
