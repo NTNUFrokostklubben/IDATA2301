@@ -9,7 +9,7 @@
 #user-page-content{
     display: flex;
     flex-wrap: wrap;
-    max-width: 1400px;
+    max-width: 87.5rem;
     justify-content: center;
 
 }
@@ -39,7 +39,8 @@
 
 #user-image {
     border-radius: 50%;
-
+    width: 12rem;
+    height: 12rem;
 }
 
 
@@ -56,7 +57,7 @@
     align-self: flex-end;
 }
 
-#user-courses {
+#user-page-user-courses {
     margin-top: 1rem;
     margin-left: 1rem;
     margin-right: 1rem;
@@ -83,12 +84,12 @@
     margin-left: 1rem;
     margin-right: 1rem;
     background-color: white;
-    width: 1000px;
+    width: 62.5rem;
 }
 #users-favorites{
   margin: 1.3rem;
     background-color: white;
-    width: 1000px;
+    width: 62.5rem;
 }
 #favorites-heading{
     padding: 1rem;
@@ -102,7 +103,7 @@
 }
 
 .favorite-image-and-text{
-    padding-left: 10px;
+    padding-left: 0.7rem;
     display: flex;
 }
 .favorite-course-text{
@@ -122,14 +123,22 @@
 @media (max-width: 1290px){
 
 }
-@media (max-width: 1045px){
+@media (max-width: 700px){
     .users-reviews{
 
+        width: 46.7rem;
+    }
+    #users-favorites{
+
+        width: 46.7rem;
     }
 }
-@media (max-width: 475px ){
-    #user-image {
-        width: 120px;
+@media (max-width: 555px ){
 
+    #user-page-content{
+        width: 38rem;
+    }
+    .user-page-course-hotlink{
+        font-size: 80%;
     }
 }

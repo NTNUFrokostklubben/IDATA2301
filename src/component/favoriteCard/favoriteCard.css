@@ -1,7 +1,7 @@
 #users-favorites{
     margin: 1.3rem;
     background-color: white;
-    width: 1000px;
+    width: 62.5rem;
 }
 #favorites-heading{
     padding: 1rem;
@@ -57,5 +57,12 @@
         right: 0;
         background: white; /* Match the background color */
         padding-left: 5px; /* Add some spacing */
+    }
+}
+
+@media (max-width: 700px){
+    #users-favorites{
+
+        width: 46.7rem;
     }
 }
