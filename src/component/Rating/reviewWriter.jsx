@@ -5,7 +5,7 @@ import {Rating} from "@mui/material";
 
 //TODO make title and text go away on publish
 //TODO refresh review component on publish
-export default function ReviewWriter({uid, cid, existingReview = null}){
+export default function ReviewWriter({uid, cid, existingReview = null, callback}){
     const [reviewText, setReviewText] = useState('');
     const [reviewTitle, setReviewTitle] = useState('');
     const [reviewStars, setReviewStars] = useState((1));
@@ -24,12 +24,15 @@ export default function ReviewWriter({uid, cid, existingReview = null}){
             setReviewTitle(existingReview.review?.title)
             setReviewText(existingReview.review?.comment)
         }
-    }, [])
+    }, [existingReview])
+
+
     const sendReview = async () =>{
         let payload = reviewToJson();
 
         const request = await AsyncApiRequest("PUT", `/userCourses/addRating/${uid}/${cid}`, payload);
         console.log(request.status)
+        callback();
     }
 
     useEffect(() => {

@@ -71,6 +71,11 @@ export function ReviewComponent({cid, averageRating}) {
         setLoading(false);
     }, [averageRating]);
 
+    const finishedEdits = () =>{
+        setAllowEditReview(false);
+        setIsDisabled(true);
+        refresh();
+    }
 
     const calculateStarDistribution = (ratings) => {
         const starCounts = [0, 0, 0, 0, 0]; // For 1-5 stars
@@ -103,6 +108,10 @@ export function ReviewComponent({cid, averageRating}) {
 
     const handleStarClick = (e) =>{
         setCurrentStar(e.target.value)
+    }
+
+    const refresh = () =>{
+        setFilteredReviews(filteredReviews);
     }
 
 
@@ -169,7 +178,7 @@ export function ReviewComponent({cid, averageRating}) {
                 )}
                     {allowedToReview && ( <ReviewWriter cid={1} uid={1} />)}
                     {isDisabled && !allowedToReview && (<button onClick={()=> {setAllowEditReview(true); setIsDisabled(false)}} >Edit your review?</button>)}
-                    {allowEditReview && (( <ReviewWriter cid={1} uid={1} existingReview={getUserReview(1)} />))}
+                    {allowEditReview && (( <ReviewWriter cid={1} uid={1} existingReview={getUserReview(1)} callback={finishedEdits} />))}
             </div>)}
 
 

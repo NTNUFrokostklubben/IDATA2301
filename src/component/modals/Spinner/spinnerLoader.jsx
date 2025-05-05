@@ -1,7 +1,7 @@
 import {useState} from "react";
 import "./spinnerLoader.css"
 export default function SpinnerLoader(show= true){
-    const [showSpinner, setShowSpinner] = useState (true);
+    const [showSpinner, setShowSpinner] = useState (show);
     return(
         <div className="spinner-loader-background">
             {
