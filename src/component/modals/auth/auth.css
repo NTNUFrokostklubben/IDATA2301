@@ -86,6 +86,12 @@
     cursor: pointer;
 }
 
+#result-message{
+    color: #BC2C2C;
+    display: flex;
+    align-self: flex-end;
+}
+
 @media (max-width: 600px) {
 
     .auth-background {

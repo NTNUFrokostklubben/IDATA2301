@@ -4,28 +4,132 @@ import "./courses.css";
 import "../aggregateTable.css";
 import {createPortal} from "react-dom";
 import DeleteModal from "../../../../component/modals/deleteModal";
+import {getCourses} from "../../../../utils/commonRequests";
+import {Skeleton} from "@mui/material";
+
+/**
+ * Builds table with courses
+ *
+ * @param courses courses to be displayed
+ * @returns {Element}
+ * @constructor
+ */
+function CourseTableContent({courses}) {
+
+    const [showDeleteModal, setShowDeleteModal] = useState();
+    const [focusedId, setFocusedId] = useState()
+
+    return (
+        <>
+            {courses.map((course) => (
+                <tr key={course.id}>
+                    <td>
+                        <img src={"https://picsum.photos/50?random=" + course.id} width={50} height={50}/>
+                        <p>{course.title}</p>
+                    </td>
+                    <td className={"description"}><p>{course.description}</p></td>
+                    <td><p>{course.category}</p></td>
+                    <td><p>{course.diffLevel}</p></td>
+                    <td><p>{course.credits}</p></td>
+                    <td><p>{course.hoursWeek}</p></td>
+                    <td><p>{course.relatedCert}</p></td>
+                    <td>
+                        <button className={"cta-button edit-button"}>
+                            <Link to={`/admin/management/courses/edit/${course.id}`}>
+                                Edit
+                            </Link>
+                        </button>
+                        <button id={"delete" + course.id} className={"delete-button"} onClick={() => {
+                            setFocusedId(course.id)
+                            setShowDeleteModal(true);
+                        }}>Delete
+                        </button>
+                    </td>
+                </tr>
+            ))}
+            {
+                showDeleteModal && createPortal(
+                    <DeleteModal onClose={() => setShowDeleteModal(false)} deleteId={focusedId} apiEndpoint={"/course/"}/>,
+                    document.getElementById("delete-modal")
+                )
+            }
+        </>
+    )
+}
+
+
+/**
+ * Renders skeletons for the course table whilst waiting for API data
+ *
+ * @returns {Element}
+ * @constructor
+ */
+function CoursesTableSkeleton() {
+
+    return (
+        <>
+            {Array.from({length: 10}).map((_, index) => (
+                <tr key={`skeleton-${index}`}>
+                    <td>
+                        <Skeleton variant="rectangular"/>
+                    </td>
+                    <td className={"description"}>
+                        <Skeleton variant="text"/>
+                    </td>
+                    <td>
+                        <Skeleton variant="text"/>
+                    </td>
+                    <td>
+                        <Skeleton variant="text"/>
+                    </td>
+                    <td>
+                        <Skeleton variant="text"/>
+                    </td>
+                    <td>
+                        <Skeleton variant="text"/>
+                    </td>
+                    <td>
+                        <Skeleton variant="text"/>
+                    </td>
+                    <td>
+                        <Skeleton variant="text"/>
+                    </td>
+                </tr>
+                ))}
+        </>
+    )
+}
 
 export default function Courses() {
 
     const [courses, setCourses] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    const [showDeleteModal, setShowDeleteModal] = useState();
-    const [focusedId, setFocusedId] = useState()
+
 
     useEffect(() => {
-        fetch("http://localhost:8080/api/courses")
-            .then((response) => response.json())
-            .then((data) => {
-                setCourses(data);
+
+        const fetchData = async () => {
+            try {
+                await fetchCourses();
                 setLoading(false);
-            })
-            .catch((error) => {
-                console.error("Error fetching courses:", error);
-                setLoading(false);
-            });
+            } catch (e) {
+                console.error(e)
+            }
+        }
+
+        fetchData()
 
     }, []);
+
+    async function fetchCourses() {
+        try {
+            const p = await getCourses();
+            setCourses(p);
+        } catch (e) {
+            throw new Error(e);
+        }
+    }
 
     return (
         <div id={"courses-page"}>
@@ -48,41 +152,12 @@ export default function Courses() {
                     </tr>
                     </thead>
                     <tbody>
-                    {courses.map((course) => (
-                        <tr key={course.id}>
-                            <td>
-                                <img src={"https://picsum.photos/50?random=" + course.id} width={50} height={50} />
-                                <p>{course.title}</p>
-                            </td>
-                            <td className={"description"}><p>{course.description}</p></td>
-                            <td><p>{course.category}</p></td>
-                            <td><p>{course.diffLevel}</p></td>
-                            <td><p>{course.credits}</p></td>
-                            <td><p>{course.hoursWeek}</p></td>
-                            <td><p>{course.relatedCert}</p></td>
-                            <td>
-                                <button className={"cta-button edit-button"}>
-                                    <Link to={`/admin/management/courses/edit/${course.id}`}>
-                                        Edit
-                                    </Link>
-                                </button>
-                                <button id={"delete" + course.id} className={"delete-button"} onClick={() => {
-                                    setFocusedId(course.id)
-                                    setShowDeleteModal(true);
-                                }}>Delete</button>
-                            </td>
-                        </tr>
-                    ))}
+                    {loading ?<CoursesTableSkeleton/>:<CourseTableContent courses={courses}/>}
                     </tbody>
                 </table>
             </div>
 
-            {
-                showDeleteModal && createPortal(
-                    <DeleteModal onClose={() => setShowDeleteModal(false)} deleteId={focusedId} apiEndpoint={"/course/"}/>,
-                    document.getElementById("delete-modal")
-                )
-            }
+
 
             <div id={"delete-modal"}/>
         </div>

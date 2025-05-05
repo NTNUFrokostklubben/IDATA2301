@@ -128,12 +128,13 @@ nav li {
 }
 
 #login-signup-1 {
-    display: flex;
+   display: flex;
 }
 
 #login-signup-2 {
     display: none;
 }
+
 #menu-icon{
     width: 2rem;
     height: 2rem;
@@ -170,15 +171,29 @@ nav li {
 #login-btn #signup-btn:hover{
     box-shadow: 0px 8px 16px 0px var(--shadow)
 }
+.nav-user{
+    display: flex;
+    height: 3rem;
+    width: 3rem;
+    background-color: var(--textWhite);
+}
+.nav-user-image{
+    justify-content: center;
+    align-items: center;
+    filter: invert(32%) sepia(9%) saturate(3293%) hue-rotate(187deg) brightness(95%) contrast(81%);
+}
+.signed-in{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
 footer{
     background-color: var(--contrast);
     font-size: 1rem;
     height: auto;
     padding: 1.5rem;
-    /*position:absolute;*/
-    /*left:0;*/
-    /*bottom:0;*/
-    /*right:0;*/
 }
 #footer-textbox{
     display: flex;

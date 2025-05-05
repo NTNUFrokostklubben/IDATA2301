@@ -2,8 +2,10 @@ import "./providerAdd.css"
 import {courseEntity, OfferableCourse, ProviderEntity} from "../../../../../utils/Classes/commonClasses";
 import {AsyncApiRequest} from "../../../../../utils/requests";
 import {useNavigate} from "react-router-dom";
+import {useState} from "react";
+import {ProviderFormSkeleton} from "../edit/providerEdit";
 
-export default function ProviderAdd() {
+function ProviderFormAdd() {
 
     const navigate = useNavigate();
 
@@ -28,34 +30,44 @@ export default function ProviderAdd() {
         }
     }
 
-    return(
-        <div className="providerInfo-page">
-            <h1>Add Provider</h1>
-            <form className="providerInfo-form" onSubmit={handleFormSubmission}>
-                <section id="provider-info">
-                    <div className="input-wrapper"><label htmlFor="provider-name">Provider Name</label>
-                        <input type="text" id="provider-name" name="name" required/></div>
+    return (
+        <form className="providerInfo-form" onSubmit={handleFormSubmission}>
+            <section id="provider-info">
+                <div className="input-wrapper"><label htmlFor="provider-name">Provider Name</label>
+                    <input type="text" id="provider-name" name="name" required/></div>
 
 
-                    <div className="group-2">
-                        {/*TODO: Add preview of uploaded image (javascript component)*/}
-                        <div className="input-wrapper">
-                            <label htmlFor="provider-image">Provider Image</label>
-                            <input type="file" id="provider-image" name="imgLink" required/>
-                        </div>
-
-                        {/*TODO: Add preview of uploaded image (javascript component)*/}
-                        <div className="input-wrapper">
-                            <label htmlFor="provider-alt-image">Alternative Provider Image</label>
-                            <input type="file" id="provider-alt-image" name="imgLinkAlt" required/>
-                        </div>
+                <div className="group-2">
+                    {/*TODO: Add preview of uploaded image (javascript component)*/}
+                    <div className="input-wrapper">
+                        <label htmlFor="provider-image">Provider Image</label>
+                        <input type="file" id="provider-image" name="imgLink" required/>
                     </div>
 
+                    {/*TODO: Add preview of uploaded image (javascript component)*/}
+                    <div className="input-wrapper">
+                        <label htmlFor="provider-alt-image">Alternative Provider Image</label>
+                        <input type="file" id="provider-alt-image" name="imgLinkAlt" required/>
+                    </div>
+                </div>
 
-                    <button type="submit" className={"button cta-button"}>Add Provider</button>
-                </section>
 
-            </form>
+                <button type="submit" className={"button cta-button"}>Add Provider</button>
+            </section>
+
+        </form>
+    )
+}
+
+export default function ProviderAdd() {
+
+    // TODO: Add a check to set this true if there is no connection to the server
+    const [loading, setLoading] = useState(false)
+
+    return(
+        <div className="providerInfo-page">
+            <h2>Add Provider</h2>
+            {loading ? <ProviderFormSkeleton/> : <ProviderFormAdd/>}
         </div>
     )
 }

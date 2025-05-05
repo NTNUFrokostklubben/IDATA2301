@@ -4,31 +4,101 @@ import "../aggregateTable.css";
 import "./providers.css"
 import {createPortal} from "react-dom";
 import DeleteModal from "../../../../component/modals/deleteModal";
+import {Skeleton} from "@mui/material";
+import {getProviders} from "../../../../utils/commonRequests";
 
-export default function Providers() {
-
-    const [providers, setProviders] = useState([]);
-
-    const [loading, setLoading] = useState(true);
+function ProviderTableContent({providers}) {
 
     const [showDeleteModal, setShowDeleteModal] = useState();
     const [focusedId, setFocusedId] = useState()
 
+    return (
+        <>
+            {providers.map((provider) => (
+                <tr key={provider.id}>
+                    <td>
+                        <img src={"https://picsum.photos/50?random=" + provider.id}
+                             alt={provider.imgAltLink}
+                             width={50} height={50}/>
+                        <p>{provider.name}</p>
+                    </td>
+                    <td>
+                        <button className={"cta-button edit-button"}><Link
+                            to={`/admin/management/providers/edit/${provider.id}`}>Edit</Link></button>
+                        <button id={"delete" + provider.id} className={"delete-button"} onClick={() => {
+                            setFocusedId(provider.id)
+                            setShowDeleteModal(true);
+                        }}>Delete
+                        </button>
+                    </td>
+                </tr>
+            ))}
+            {
+                showDeleteModal && createPortal(
+                    <DeleteModal onClose={() => setShowDeleteModal(false)} deleteId={focusedId}
+                                 apiEndpoint={"/provider/"}/>,
+                    document.getElementById("delete-modal")
+                )
+            }
+        </>
+    )
+}
+
+/**
+ * Renders skeletons for the provider table
+ *
+ * @returns {Element}
+ * @constructor
+ */
+function ProviderTableSkeleton() {
+    return (
+
+        <>
+            {Array.from({length: 10}).map((_, index) => (
+                <tr key={`skeleton-${index}`}>
+                    <td>
+                        <Skeleton variant="text"/>
+                    </td>
+                    <td>
+                        <Skeleton variant="text"/>
+                    </td>
+                </tr>
+            ))}
+        </>
+
+    )
+}
+
+export default function Providers() {
+
+    const [providers, setProviders] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+
     useEffect(() => {
-        fetch("http://localhost:8080/api/providers")
-            .then((response) => response.json())
-            .then((data) => {
-                setProviders(data);
+        const fetchData = async () => {
+            try {
+                await Promise.all([
+                    fetchProviders()
+                ]);
                 setLoading(false);
-            })
-            .catch((error) => {
-                console.error("Error fetching providers:", error);
-                setLoading(false);
-            });
+            } catch (e) {
+                console.error(e)
+            }
+        }
+
+        fetchData()
+
     }, [])
 
-    if (loading) {
-        return <div>Loading...</div>;
+    /**
+     * Fetches all providers from the API
+     *
+     * @returns {Promise<void>}
+     */
+    async function fetchProviders() {
+        const p = await getProviders();
+        setProviders(p)
     }
 
     return (
@@ -45,33 +115,11 @@ export default function Providers() {
                     </tr>
                     </thead>
                     <tbody>
-                    {providers.map((provider) => (
-                        <tr key={provider.id}>
-                            <td>
-                                <img src={"https://picsum.photos/50?random=" + provider.id}
-                                     alt={provider.imgAltLink}
-                                     width={50} height={50}/>
-                                <p>{provider.name}</p>
-                            </td>
-                            <td >
-                                <button className={"cta-button edit-button"}><Link
-                                    to={`/admin/management/providers/edit/${provider.id}`}>Edit</Link></button>
-                                <button id={"delete" + provider.id} className={"delete-button"} onClick={() => {
-                                    setFocusedId(provider.id)
-                                    setShowDeleteModal(true);
-                                }}>Delete</button>
-                            </td>
-                        </tr>
-                    ))}
+                        {loading ? <ProviderTableSkeleton/> : <ProviderTableContent providers={providers}/>}
                     </tbody>
                 </table>
             </div>
-            {
-                showDeleteModal && createPortal(
-                    <DeleteModal onClose={() => setShowDeleteModal(false)} deleteId={focusedId} apiEndpoint={"/provider/"}/>,
-                    document.getElementById("delete-modal")
-                )
-            }
+
 
             <div id={"delete-modal"}/>
         </div>
