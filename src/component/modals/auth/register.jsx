@@ -22,8 +22,8 @@ export default function Register({onClose, changeMode, closable=true }) {
     }
 
     function onSignupSuccess(userData, password) {
-        console.log("Successfully signed up for user: ", userData.username);
-        sendAuthenticationRequest(userData.username, password, onSigninSuccess, showFormErrorSignup);
+        console.log("Successfully signed up for user: ", userData.email);
+        sendAuthenticationRequest(userData.email, password, onSigninSuccess, showFormErrorSignup);
         window.location.reload();
         onClose();
     }
@@ -32,7 +32,7 @@ export default function Register({onClose, changeMode, closable=true }) {
      * This function is called when login is successful
      */
     function onSigninSuccess(userData) {
-        console.log("Successfully logged in for user: ", userData.username);
+        console.log("Successfully logged in for user: ", userData.email);
         onClose();
     }
 
