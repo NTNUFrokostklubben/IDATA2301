@@ -5,19 +5,20 @@ import Review from "../component/Rating/review";
 import {AsyncApiRequest} from "../utils/requests";
 import {Link, useParams} from "react-router-dom";
 import FavoriteCard from "../component/favoriteCard/favoriteCard";
+import {getAuthenticatedUser} from "../utils/authentication/authentication";
 
 export default function UserPage (){
     const [courses, setCourses] = useState([]);
-    const [user, setUser] = useState([]);
+    const [user, setUser] = useState(null );
     const [loading, setLoading] = useState(true);
     const [ratings, setRatings] = useState([]);
     const [favorites, setFavorites] = useState([]);
-    const {id} = useParams();
 
     useEffect( () => {
+
         const fetchData = async () =>{
             try {
-                await Promise.all([handleUserData(), handleCourseData(), handleFavoritesData()])
+                await Promise.all([handleUserData()])
                 setLoading(false)
             }catch (e){console.log(e)}
         }
@@ -25,41 +26,56 @@ export default function UserPage (){
         } , []
     );
 
+    useEffect(() => {
+        if (!user) return;  // ✅ Don't fetch unless user is set
+
+        async function handleCourseData() {
+            try {
+                const courseData = await AsyncApiRequest("GET", `/userCourses/${user.id}`, null)
+                    .then(response => response.json())
+
+                const filteredAndSorted = courseData
+                    .filter(item => item.review?.rating > 0)
+                    .sort((a, b) => b.review.rating - a.review.rating);
+
+                setCourses(courseData)
+                setRatings(filteredAndSorted)
+            }catch (e){console.error(e)}
+        }
+
+        async function handleFavoritesData() {
+            try {
+                const favoritesData = await AsyncApiRequest("GET", `/userFavorites/${user.id}`, null)
+                    .then(response => response.json())
+                setFavorites(favoritesData)
+            }catch (e){console.error(e)}
+        }
+
+        if (loading ){
+            return (<h5>loading...</h5>)
+        }
+
+
+        handleCourseData();
+    }, [user]);
+
 
     async function handleUserData() {
         try {
-            const userData = await AsyncApiRequest("GET", `/user/${id}`, null)
+           let tempUser = getAuthenticatedUser()
+
+            const tempApiCall = `/UserByEmail/${tempUser.email}`;
+            const userData = await AsyncApiRequest("GET", tempApiCall, null)
                 .then(response => response.json())
             setUser(userData)
+            console.log(userData)
         }catch (e){console.error(e)}
     }
-    async function handleCourseData() {
-        try {
-            const courseData = await AsyncApiRequest("GET", `/userCourses/${id}`, null)
-                .then(response => response.json())
-
-            const filteredAndSorted = courseData
-                .filter(item => item.review?.rating > 0)
-                .sort((a, b) => b.review.rating - a.review.rating);
-
-            setCourses(courseData)
-            setRatings(filteredAndSorted)
-        }catch (e){console.error(e)}
-    }
-    async function handleFavoritesData() {
-        try {
-            const favoritesData = await AsyncApiRequest("GET", `/userFavorites/${id}`, null)
-                .then(response => response.json())
-            setFavorites(favoritesData)
-        }catch (e){console.error(e)}
-    }
-
-    if (loading ){
-        return (<h5>loading...</h5>)
-    }
-
     return (
+
+
         <div className="user-page">
+            {user && (
             <section id="user-page-content">
                 <section id="user-page-caret">
                     <a href=""><img id="edit" src="/icons/pencil-sharp.svg" alt="edit button"/></a>
@@ -75,11 +91,11 @@ export default function UserPage (){
                     </div>
                 </section>
 
-                <section id="user-courses">
+                <section id="user-page-user-courses">
                     <h5 id="previous-courses-heading">Previous courses</h5>
                     <ul>
                         {courses.map(item => (
-                            <li className="user-course-item" key={item.id}> <Link to={`/course/${item.course.id}`}>{item.course.title}</Link></li>
+                            <li className="user-course-item" key={item.id}> <Link className={"user-page-course-hotlink"} to={`/course/${item.course.id}`}>{item.course.title}</Link></li>
                             ))}
                     </ul>
                 </section>
@@ -97,7 +113,7 @@ export default function UserPage (){
                     {favorites.map(item => <FavoriteCard key={item.id} {...item.course}/>)}
 
                 </section>
-            </section>
+            </section>)}
         </div>
 
     )

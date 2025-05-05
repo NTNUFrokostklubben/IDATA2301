@@ -16,6 +16,7 @@ export class courseEntity {
     }
 }
 
+
 export class ProviderEntity {
     constructor(id, name, imgLink, imgAltLink) {
         this.id = id;
@@ -25,8 +26,8 @@ export class ProviderEntity {
     }
 }
 
-export class UserCourse{
-    constructor(id, review, date, course,user) {
+export class UserCourse {
+    constructor(id, review, date, course, user) {
         this.id = id;
         this.review = review;
         this.date = date;
@@ -34,7 +35,8 @@ export class UserCourse{
         this.user = user;
     }
 }
-export class Review{
+
+export class Review {
     constructor(id, rating, reviewDate, comment, title) {
         this.id = id;
         this.reviewDate = reviewDate;
@@ -52,15 +54,6 @@ export class OfferableCourse {
         this.visibility = visibility;
         this.course = course;
         this.provider = provider;
-    }
-}
-// todo delete this?
-export class SignupEntity{
-    constructor(name, passwordHash, email) {
-        this.name = name;
-        this.passwordHash = passwordHash;
-        this.email = email;
-
     }
 }
 
@@ -86,8 +79,8 @@ export class FilterQuery {
     }
 }
 
-export class User{
-    constructor(id, name, email, role, profilePicture ) {
+export class User {
+    constructor(id, name, email, role, profilePicture) {
         this.id = id;
         this.email = email;
         this.name = name;
@@ -97,7 +90,7 @@ export class User{
 }
 
 export class reviewEntity {
-    constructor(id, rating, comment, courseTitle, userName, profilePicture, courseID){
+    constructor(id, rating, comment, courseTitle, userName, profilePicture, courseID) {
         this.id = id;
         this.rating = rating;
         this.comment = comment;
@@ -107,4 +100,3 @@ export class reviewEntity {
         this.courseId = courseID;
     }
 }
-
