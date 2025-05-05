@@ -59,7 +59,7 @@ export default function AdminDashboard() {
         if (newUsers<=0){
             fetchNewUsers();
         }
-    },);
+    },[]);
 
     /**
      * Fetches all revenue data from the API

@@ -26,6 +26,7 @@ export class ProviderEntity {
     }
 }
 
+
 export class UserCourse {
     constructor(id, review, date, course, user) {
         this.id = id;
@@ -35,6 +36,7 @@ export class UserCourse {
         this.user = user;
     }
 }
+
 
 export class Review {
     constructor(id, rating, reviewDate, comment, title) {
@@ -79,8 +81,10 @@ export class FilterQuery {
     }
 }
 
+
 export class User {
     constructor(id, name, email, role, profilePicture) {
+
         this.id = id;
         this.email = email;
         this.name = name;
