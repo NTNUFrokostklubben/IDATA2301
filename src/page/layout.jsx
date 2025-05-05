@@ -33,17 +33,17 @@ useEffect(() => {
         // If logged in, show the logout button and user icon
         signedOutElements.forEach(element => element.style.display = "none");
         signedInElements.forEach(element => element.style.display = "flex");
-        const username = user.username;
-        fetchUserProfilePic(username);
+        const email = user.email;
+        fetchUserProfilePic(email);
     }
 }, []);
 
     /**
      * Fetches the total revenue from the API
      */
-    async function fetchUserProfilePic(username) {
+    async function fetchUserProfilePic(email) {
         try{
-            const fetchApiCall = `/userProfilePicture/${username}`;
+            const fetchApiCall = `/userProfilePicture/${email}`;
             const data = await AsyncApiRequest("GET", {fetchApiCall}, null)
                 .then(response => response.json());
             setUserPicture(data);
