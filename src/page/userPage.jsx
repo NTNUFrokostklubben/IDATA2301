@@ -1,7 +1,7 @@
 import "./userPage.css"
 import { useEffect, useState } from 'react';
 import CardHorizontal from "../component/card/cardHorizontal";
-import Rating from "../component/Rating/rating";
+import Review from "../component/Rating/review";
 import {AsyncApiRequest} from "../utils/requests";
 import {Link, useParams} from "react-router-dom";
 import FavoriteCard from "../component/favoriteCard/favoriteCard";
@@ -87,7 +87,7 @@ export default function UserPage (){
                 <section className="users-reviews">
                     <h5 id={"review-heading"} >Your reviews</h5>
 
-                    {ratings.map(item => <Rating key={item.id}  rating={item} title={true}/>)}
+                    {ratings.map(item => <Review key={item.id} rating={item} title={true}/>)}
 
                 </section>
 

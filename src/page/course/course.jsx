@@ -9,7 +9,7 @@ import FavoriteButton from "../../component/favorite/favoriteButton";
 
 export default function Course() {
     const [courseData, setCourseData] = useState([]);
-    const [ratingData, setRatingData] = useState();
+    const [ratingData, setRatingData] = useState(0);
     const [offerableCourseData, setOfferableCourseData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [isFavorite, setFavorite] = useState(false);
