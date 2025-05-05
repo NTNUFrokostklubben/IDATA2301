@@ -6,6 +6,7 @@ import {courseEntity, FilterQuery} from "../../utils/Classes/commonClasses";
 import DatePicker from "react-datepicker";
 import {useParams, useSearchParams} from "react-router-dom";
 import {AsyncApiRequest} from "../../utils/requests";
+import SpinnerLoader from "../../component/modals/Spinner/spinnerLoader";
 
 
 export default function Search() {
@@ -15,12 +16,12 @@ export default function Search() {
 
     const [offerableCourses, setOfferableCourses] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false)
 
     const [startDate, setStartDate] = useState(new Date())
     // Sets the default date to the end of the year
     const [endDate, setEndDate] = useState(new Date(new Date().getFullYear(), 11, 31));
 
-    const [filters, setFilters] = useState(buildDefaultFilter())
 
     /**
      * Triggered once form is submitted, only changes Filter object, useEffect is called when filter object is changed
@@ -29,44 +30,38 @@ export default function Search() {
      */
     function handleSubmit(event) {
         event.preventDefault();
-
         const data = new FormData(event.target);
         const value = Object.fromEntries(data.entries());
 
-        const builtFilters = new FilterQuery({
-            ["startDate"]: startDate.getTime(),
-            ["endDate"]: endDate.getTime()
-        }, buildCategory(), buildDifficultyLevel(), {
-            ["min-credits"]: value["min-credits"],
-            ["max-credits"]: value["max-credits"]
-        }, {
-            ["min-rating"]: value["min-rating"],
-            ["max-rating"]: value["max-rating"]
-        }, {["min-price"]: value["min-price"], ["max-price"]: value["max-price"]}, searchValue);
+        // Flatten the filter object into URL params
+        const params = new URLSearchParams();
+        params.set("search", searchValue || "");
 
-        setFilters(builtFilters)
+        // Date range
+        params.set("startDate", startDate.getTime());
+        params.set("endDate", endDate.getTime());
+
+        // Difficulty levels (array)
+        const levels = buildDifficultyLevel();
+        levels.forEach(level => params.append("diffLevels", level));
+
+        // Categories (array)
+        const categories = buildCategory();
+        categories.forEach(cat => params.append("categories", cat));
+
+        // Other ranges (flattened)
+        if (value["min-credits"]) params.set("min-credits", value["min-credits"]);
+        if (value["max-credits"]) params.set("max-credits", value["max-credits"]);
+        if (value["min-rating"]) params.set("min-rating", value["min-rating"]);
+        if (value["max-rating"]) params.set("max-rating", value["max-rating"]);
+        if (value["min-price"]) params.set("min-price", value["min-price"]);
+        if (value["max-price"]) params.set("max-price", value["max-price"]);
+
+        setSearchParams(params);
 
     }
 
-    /**
-     * Builds a default filter that gets all courses for this year when page is loaded
-     *
-     * @returns {FilterQuery}
-     */
-    function buildDefaultFilter() {
-        const builtFilters = new FilterQuery({
-            ["startDate"]: startDate.getTime(),
-            ["endDate"]: new Date(new Date().getFullYear(), 11, 31)
-        }, buildCategory(), buildDifficultyLevel(), {
-            ["min-credits"]: null,
-            ["max-credits"]: null
-        }, {
-            ["min-rating"]: null,
-            ["max-rating"]: null
-        }, {["min-price"]: null, ["max-price"]: null}, searchValue);
 
-        return builtFilters;
-    }
 
     /**
      * Builds an array of all checked categories for filtering on the backend
@@ -101,20 +96,41 @@ export default function Search() {
      * Called whenever filter object is changed
      */
     useEffect(() => {
-
         const fetchData = async () => {
             try {
+                const filters = reconstructFilterFromParams(searchParams);
                 await fetchFilteredCourses();
                 setLoading(false);
             } catch (e) {
-                console.error(e)
+                console.error(e);
             }
-        }
-
+        };
         fetchData();
-        console.log(filters)
-    }, [filters]);
+    }, [searchParams]);
 
+    function reconstructFilterFromParams(params) {
+        return new FilterQuery(
+            {
+                startDate: params.get("startDate") ? new Date(parseInt(params.get("startDate"))) : null,
+                endDate: params.get("endDate") ? new Date(parseInt(params.get("endDate"))) : null,
+            },
+            params.getAll("categories") || [],
+            params.getAll("diffLevels") || [],
+            {
+                "min-credits": params.get("min-credits"),
+                "max-credits": params.get("max-credits"),
+            },
+            {
+                "min-rating": params.get("min-rating"),
+                "max-rating": params.get("max-rating"),
+            },
+            {
+                "min-price": params.get("min-price"),
+                "max-price": params.get("max-price"),
+            },
+            params.get("search") || ""
+        );
+    }
 
     /**
      * Fetches filtered courses from the API
@@ -122,12 +138,15 @@ export default function Search() {
      */
     async function fetchFilteredCourses() {
         try {
-            const p = await AsyncApiRequest("POST", "/search", filters).then((p) => p.json());
+            const p = await AsyncApiRequest("GET", "/search?" + searchParams,null ).then((p) => p.json());
             setOfferableCourses(p);
         } catch (e) {
+            setError(true);
             console.error("Error fetching offerable courses:", e);
         }
     }
+
+
 
     /**
      * Handles date changes in the date range picker
@@ -142,9 +161,7 @@ export default function Search() {
 
     };
 
-    if (loading) {
-        return <div>Loading...</div>
-    }
+
 
     return (
         <div className="search-page">
@@ -264,7 +281,9 @@ export default function Search() {
                     </div>
                 </section>
                 <section id="results">
-                    {offerableCourses.map((course) => <Card key={course.course.id} {...course}/>)}
+                    {loading ? <SpinnerLoader show={true}/> : null}
+                    {error ? <p className="error-message">Error fetching courses. Please try again later.</p> : null}
+                    {!error && offerableCourses.map((course) => <Card key={course.course.id} {...course}/>)}
                 </section>
             </div>
         </div>

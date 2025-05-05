@@ -1,0 +1,13 @@
+.no-access{
+    padding-top: 8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 70%;
+    padding-bottom: 4rem;
+}
+.access-denied{
+    height: 15%;
+    width: 15%;
+}

@@ -48,7 +48,7 @@ export default function Index() {
     async function fetchCourses() {
         try {
             const data = await AsyncApiRequest("GET", "/courses", null)
-        .then(response => response.json());
+                .then(response => response.json());
             const courses = data.map((course) => new courseEntity(course.id, course.title, course.description, course.imgLink));
             setCourses(courses);
 
@@ -269,6 +269,7 @@ export default function Index() {
                 <li> <Link to={`/userpage/${1}`}> user page</Link></li>
                 <li><a href={"/about"}>about</a></li>
                 <li><a href={"/checkout"}>checkout</a></li>
+                <li><a href={"/noAccess"}>403 no access</a></li>
             </ul>
             {
                 showSignupModal && createPortal(
