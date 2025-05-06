@@ -3,37 +3,11 @@ import {Form, useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {courseEntity} from "../../../../../utils/Classes/commonClasses";
 import {Skeleton} from "@mui/material";
-import {getCourse, getCourses} from "../../../../../utils/commonRequests";
+import {getCourse, getCourses, postCourse, uploadImage} from "../../../../../utils/commonRequests";
 
 function CourseEditForm({course}) {
 
     const navigate = useNavigate();
-
-    /**
-     * Handle API call for uploading images.
-     *
-     * @param image image to upload
-     * @returns {Promise<string|null>} Image URL if upload success or Null
-     */
-    async function handleImageUpload(image) {
-        // TODO: Refactor this into a "common utils" type file so users can upload images using same method
-        const formData = new FormData();
-        formData.append('file', image);
-
-        const imageOptions = {
-            method: "POST",
-            body: formData
-        }
-        const response = await fetch("http://localhost:8080/api/images/upload", imageOptions);
-
-        if (!response.ok) {
-            console.log("Error uploading image");
-            return null;
-        }
-
-        const imageUrl = await response.text();
-        return imageUrl;
-    }
 
 
     /**
@@ -45,21 +19,8 @@ function CourseEditForm({course}) {
     async function handleFormSubmission(data) {
         const value = Object.fromEntries(data.entries());
 
-        const requestOptions = {
-            method: 'PUT',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(value)
-        };
-
-        const response = await fetch("http://localhost:8080/api/course", requestOptions)
-
-        if (!response.ok) {
-            console.log("Error submitting form");
-            return null;
-        }
-
-        const responseBody = response.body;
-        return responseBody;
+        const response = await postCourse(value)
+        return response;
     }
 
     /**
@@ -73,7 +34,7 @@ function CourseEditForm({course}) {
         const data = new FormData(event.target);
         const image = data.get("imgLink")
 
-        handleImageUpload(image).then(r => {
+        uploadImage(image).then(r => {
             data.set("imgLink", r);
             // TODO: Change alert to something better. Check for success.
             handleFormSubmission(data).then(alert("Submitted Form")).then(navigate(-1));
@@ -83,7 +44,7 @@ function CourseEditForm({course}) {
     return (
         <form onSubmit={handleSubmit} action={"http://localhost:3000/course/" + course.id} method="PUT">
             <section id="course-info">
-                <input disabled={true} id={"id"} name={"id"} type={"number"} hidden={true} value={course.id}/>
+                <input disabled={false} id={"id"} name={"id"} type={"number"} hidden={true} value={course.id}/>
 
                 <div className="input-wrapper"><label htmlFor="course-name">Course Name</label>
                     <input type="text" id="course-name" name="title" defaultValue={course.title} required/>

@@ -21,7 +21,7 @@ export default function Card(offerableCourse) {
     return (
 
         <section  className="card">
-            <Link to={"/course/" + offerableCourse.course.id}><img className="course-img" src={"https://picsum.photos/200/200?random=2"} alt=""/></Link>
+            <Link to={"/course/" + offerableCourse.course.id}><img className="course-img" src={offerableCourse.course.imgLink} alt=""/></Link>
             <h6>{offerableCourse.course.title}</h6>
             <p className="card-desc">{offerableCourse.course.description}</p>
             <p className="infotext">{offerableCourse.course.hoursWeek} hr/w • {getDifficulty(offerableCourse.course.diffLevel)} • {offerableCourse.course.credits} ECTS

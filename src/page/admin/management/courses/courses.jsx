@@ -24,7 +24,7 @@ function CourseTableContent({courses}) {
             {courses.map((course) => (
                 <tr key={course.id}>
                     <td>
-                        <img src={"https://picsum.photos/50?random=" + course.id} width={50} height={50}/>
+                        <img src={course.imgLink} width={50} height={50}/>
                         <p>{course.title}</p>
                     </td>
                     <td className={"description"}><p>{course.description}</p></td>
