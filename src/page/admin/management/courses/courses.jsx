@@ -47,18 +47,19 @@ function CourseTableContent({courses}) {
                     <td><p>{course.credits}</p></td>
                     <td><p>{course.hoursWeek}</p></td>
                     <td><p>{course.relatedCert}</p></td>
-                    <td className={"button-group"}>
-                        <Link to={`/admin/management/courses/edit/${course.id}`}>
-                            <button className={"cta-button edit-button"}>
-                                Edit
+                    <td >
+                        <div className={"button-group"}><Link to={`/admin/management/courses/edit/${course.id}`}>
+                            <button>
+                                <img src={"/icons/pencil-sharp.svg"}/>
                             </button>
                         </Link>
 
-                        <button id={"delete" + course.id} className={"delete-button"} onClick={() => {
-                            setFocusedId(course.id)
-                            setShowDeleteModal(true);
-                        }}>Delete
-                        </button>
+                            <button id={"delete" + course.id} onClick={() => {
+                                setFocusedId(course.id)
+                                setShowDeleteModal(true);
+                            }}><img src={"/icons/trash-sharp.svg"}/>
+                            </button>
+                        </div>
                     </td>
                 </tr>
             ))}

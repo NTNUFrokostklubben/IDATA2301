@@ -47,17 +47,20 @@ function OfferableCoursesTableContent({filteredCourses}) {
                         day: "2-digit"
                     })}</p></td>
                     <td><p>{offerableCourse.visible ? "Visible" : "Hidden"}</p></td>
-                    <td className={"button-group"}>
-                        <Link
+                    <td>
+                        <div className={"button-group"}><Link
                             to={`/admin/offerablecourses/edit/${offerableCourse.id}`}
                             id={"edit" + offerableCourse.id}
-                        ><button className={"cta-button edit-button"}>Edit</button></Link>
+                        >
+                            <button><img src={"/icons/pencil-sharp.svg"}/></button>
+                        </Link>
 
-                        <button id={"delete" + offerableCourse.id} className={"delete-button"} onClick={() => {
-                            setFocusedId(offerableCourse.id)
-                            setShowDeleteModal(true);
-                        }}>Delete
-                        </button>
+                            <button id={"delete" + offerableCourse.id} onClick={() => {
+                                setFocusedId(offerableCourse.id)
+                                setShowDeleteModal(true);
+                            }}><img src={"/icons/trash-sharp.svg"}/>
+                            </button>
+                        </div>
                     </td>
                 </tr>
             ))}

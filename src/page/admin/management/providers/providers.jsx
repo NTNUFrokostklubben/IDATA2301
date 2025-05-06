@@ -21,17 +21,20 @@ function ProviderTableContent({providers}) {
                              alt={""}/>
                         <p>{provider.name}</p>
                     </td>
-                    <td className={"button-group"}>
-                        <Link
+                    <td >
+                        <div className={"button-group"}><Link
                             to={`/admin/management/providers/edit/${provider.id}`}>
-                            <button className={"cta-button edit-button"}>Edit</button>
+
+                            <button><img src={"/icons/pencil-sharp.svg"}/></button>
                         </Link>
 
-                        <button id={"delete" + provider.id} className={"delete-button"} onClick={() => {
-                            setFocusedId(provider.id)
-                            setShowDeleteModal(true);
-                        }}>Delete
-                        </button>
+
+                            <button id={"delete" + provider.id} onClick={() => {
+                                setFocusedId(provider.id)
+                                setShowDeleteModal(true);
+                            }}><img src={"/icons/trash-sharp.svg"}/>
+                            </button>
+                        </div>
                     </td>
                 </tr>
             ))}
