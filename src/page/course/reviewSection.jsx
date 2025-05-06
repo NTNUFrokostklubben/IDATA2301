@@ -6,7 +6,7 @@ import ReviewWriter from "../../component/Rating/reviewWriter";
 import {UserCourse} from "../../utils/Classes/commonClasses";
 
 
-export function ReviewComponent({cid, averageRating}) {
+export function ReviewComponent({cid, uid, averageRating}) {
     const [userCourseData, setUserCourseData] = useState([]);
     const [halfStar, setHalfStar] = useState(false)
     const [loading, setLoading] = useState(true);
@@ -40,9 +40,8 @@ export function ReviewComponent({cid, averageRating}) {
         const data = await AsyncApiRequest("GET", `/userCourses/course/${cid}`, null)
             .then( response  => response.json());
         const filteredAndSorted = data
-            .filter(item => item.review?.rating > 0)
+            .filter(item => item.review != null)
             .sort((a, b) => b.review.rating - a.review.rating);
-
         setUserCourseData(data)
         setFilteredReviews(filteredAndSorted)
         calculateStarDistribution(data.map(item => item.review.rating));
@@ -52,7 +51,6 @@ export function ReviewComponent({cid, averageRating}) {
     const fetching = async () => {
         try {
             await Promise.all([fetchData(), fetchRatingArray()])
-            console.log(allowedToReview)
         } catch (e) {
             console.error(e)
         }
@@ -102,7 +100,6 @@ export function ReviewComponent({cid, averageRating}) {
             (a.review.rating % currentStar) - (b.review.rating % currentStar)
         );
         setFilteredReviews(filtered);
-        console.log(filtered)
     }
     }, [currentStar]);
 
@@ -176,9 +173,12 @@ export function ReviewComponent({cid, averageRating}) {
                         Show More Reviews
                     </button>
                 )}
-                    {allowedToReview && ( <ReviewWriter cid={1} uid={1} />)}
+                    {uid && cid && (
+                    <div className={"review-writer-section-writer"}>
+                    {allowedToReview && ( <ReviewWriter cid={cid} uid={uid} />)}
                     {isDisabled && !allowedToReview && (<button onClick={()=> {setAllowEditReview(true); setIsDisabled(false)}} >Edit your review?</button>)}
-                    {allowEditReview && (( <ReviewWriter cid={1} uid={1} existingReview={getUserReview(1)} callback={finishedEdits} />))}
+                    {allowEditReview && (( <ReviewWriter cid={cid} uid={uid} existingReview={getUserReview(uid)} callback={finishedEdits} />))}
+                    </div>)}
             </div>)}
 
 

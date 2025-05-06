@@ -5,11 +5,13 @@ import {AsyncApiRequest} from "../../utils/requests";
 import CourseProviderCard from "../../component/courseProviderCard/courseProviderCard";
 import {ReviewComponent} from "./reviewSection";
 import FavoriteButton from "../../component/favorite/favoriteButton";
+import {getAuthenticatedUser} from "../../utils/authentication/authentication";
 
 
 export default function Course() {
     const [courseData, setCourseData] = useState([]);
     const [ratingData, setRatingData] = useState(0);
+    const [user, setUser] = useState(null);
     const [offerableCourseData, setOfferableCourseData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [isFavorite, setFavorite] = useState(false);
@@ -21,8 +23,13 @@ export default function Course() {
 
         const fetchData = async () => {
             try {
-                await Promise.all([fetchCourseData(), fetchOfferableCourses(), fetchKeywords(), fetchRatingData(),
-                    checkFavorite()])
+                await Promise.all([handleUserData(), fetchCourseData()]).then(async () => {
+                    try {
+                        await Promise.all([ fetchOfferableCourses(), fetchKeywords(), fetchRatingData()])
+                    }catch (e) {
+                        console.error(e)
+                    }
+                })
             } catch (e) {
                 console.error(e)
             }
@@ -31,6 +38,21 @@ export default function Course() {
         setLoading(false)
     }, []);
 
+
+    useEffect(() => {
+        if (user === null) return;
+        checkFavorite()
+    }, [user]);
+    async function handleUserData() {
+        try {
+            let tempUser = getAuthenticatedUser()
+
+            const tempApiCall = `/UserByEmail/${tempUser.email}`;
+            const userData = await AsyncApiRequest("GET", tempApiCall, null)
+                .then(response => response.json())
+            setUser(userData)
+        }catch (e){console.error(e)}
+    }
     /**
      * Fetches all course data from the API
      */
@@ -92,7 +114,7 @@ export default function Course() {
 
     async function checkFavorite() {
         try {
-            const favoriteState = await AsyncApiRequest("GET", `/isFavorited/${1}/${id}`, false)
+            const favoriteState = await AsyncApiRequest("GET", `/isFavorited/${user.id}/${id}`, false)
                 .then(response => response.json())
             setFavorite(favoriteState)
 
@@ -126,7 +148,8 @@ export default function Course() {
                 <section id="course-splash">
 
                     <div id="course-splash-right-side">
-                        <div id="course-page-add-favorite"><FavoriteButton uid={1} cid={id} isFav={isFavorite}/></div>
+                        {user && (
+                        <div id="course-page-add-favorite"><FavoriteButton uid={user.id} cid={id} isFav={isFavorite}/></div>)}
                         <h4 id="course-splash-title">{courseData.title} </h4>
 
                         <div id="course-splash-details">
@@ -176,15 +199,16 @@ export default function Course() {
                 <section id="course-offerables">
                     {offerableCourseData.map(item => <CourseProviderCard key={item.id} {...item}/>)}
                 </section>
+                {user && (
                 <section className={"course-page-reviews"}>
                     <div className={"course-page-review-aggregate"}>
                         <h5> Customer reviews</h5>
-                        <ReviewComponent cid={id} averageRating={ratingData}/>
+                        <ReviewComponent cid={id} averageRating={ratingData} uid={user.id}/>
                     </div>
                     <div className={"course-page-user-reviews"}>
                     </div>
 
-                </section>
+                </section>)}
             </div>
         </div>
     )
