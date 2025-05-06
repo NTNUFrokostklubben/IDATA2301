@@ -20,34 +20,34 @@ export default function Layout() {
     const navigate = useNavigate();
 
 
-useEffect(() => {
-    // Check if the user is logged in
-    const user = getAuthenticatedUser();
-    const signedOutElements = document.querySelectorAll(".signed-out");
-    const signedInElements = document.querySelectorAll(".signed-in");
-    if (!user) {
-        // Show login and signup buttons
-        signedOutElements.forEach(element => element.style.display = "flex");
-        signedInElements.forEach(element => element.style.display = "none");
-    } else {
-        // If logged in, show the logout button and user icon
-        signedOutElements.forEach(element => element.style.display = "none");
-        signedInElements.forEach(element => element.style.display = "flex");
-        const email = user.email;
-        fetchUserProfilePic(email);
-    }
-}, []);
+    useEffect(() => {
+        // Check if the user is logged in
+        const user = getAuthenticatedUser();
+        const signedOutElements = document.querySelectorAll(".signed-out");
+        const signedInElements = document.querySelectorAll(".signed-in");
+        if (!user) {
+            // Show login and signup buttons
+            signedOutElements.forEach(element => element.style.display = "flex");
+            signedInElements.forEach(element => element.style.display = "none");
+        } else {
+            // If logged in, show the logout button and user icon
+            signedOutElements.forEach(element => element.style.display = "none");
+            signedInElements.forEach(element => element.style.display = "flex");
+            const email = user.email;
+            fetchUserProfilePic(email);
+        }
+    }, []);
 
     /**
      * Fetches the total revenue from the API
      */
     async function fetchUserProfilePic(email) {
-        try{
+        try {
             const fetchApiCall = `/userProfilePicture/${email}`;
             const data = await AsyncApiRequest("GET", {fetchApiCall}, null)
                 .then(response => response.json());
             setUserPicture(data);
-        } catch (err){
+        } catch (err) {
             setUserPicture("/icons/person-sharp.svg");
             console.log("Error fetching total revenue: ", err);
         }
@@ -58,7 +58,7 @@ useEffect(() => {
         navigate("/search");
     }
 
-    function goToUserPage(){
+    function goToUserPage() {
         navigate(`/userpage/${1}`);
     }
 
@@ -104,7 +104,7 @@ useEffect(() => {
                             <button type="submit" id="search_btn">
                                 <img id="searchIcon" src="/icons/search-sharp.svg" alt="search icon"/>
                             </button>
-                            <input type="text" placeholder="search..." defaultValue={searchValue}  name="search"/>
+                            <input type="text" placeholder="search..." defaultValue={searchValue} name="search"/>
                         </form>
                     </div>
                 </li>
@@ -114,7 +114,7 @@ useEffect(() => {
                             <div className={"signed-in"}>
                                 <div className={"nav-user"}>
                                     <img className={"nav-user-image"} src={userPicture} alt={"User profile"}
-                                         onClick={() => goToUserPage()} />
+                                         onClick={() => goToUserPage()}/>
                                 </div>
                                 <button onClick={() => logout()} className="cta-button" id="logut-btn"
                                         alt="Log out" href="#">
@@ -162,7 +162,9 @@ useEffect(() => {
                 </li>
             </nav>
 
-            <Outlet/>
+            <div className={"page-content"}>
+                <Outlet/>
+            </div>
 
             {/* Footer */}
             <footer>
@@ -191,8 +193,9 @@ useEffect(() => {
                 showLoginModal && createPortal(
                     <Login
                         changeMode={() => {
-                        setShowSignupModal(true)
-                        setShowLoginModal(false)}}
+                            setShowSignupModal(true)
+                            setShowLoginModal(false)
+                        }}
                         onClose={() => setShowLoginModal(false)}
                     />,
                     document.getElementById("auth-modal")

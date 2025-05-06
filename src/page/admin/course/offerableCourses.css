@@ -2,7 +2,7 @@
 #courseIndex {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    /*justify-content: center;*/
     margin: 1rem 2rem;
     max-width: 600rem;
 }

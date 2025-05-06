@@ -2,20 +2,21 @@
 .admin-sidebar-container #dashboard {
     display: flex;
     flex-flow: column;
+
 }
 
 .admin-sidebar-container {
-
-    padding-top: 5rem;
     display: flex;
     flex-flow: row;
     margin: 0;
+    height: 150vh;
 }
 
 .admin-sidebar {
     display: flex;
     flex-flow: column;
     min-width: 24rem;
+
     width: 24rem;
     max-width: 24rem;
     box-shadow: var(--shadow) 0 2rem 1rem;
@@ -104,7 +105,6 @@
     }
 
     .admin-page-content {
-        padding-top: 5rem;
     }
 
 }
