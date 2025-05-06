@@ -67,7 +67,7 @@
 
 
 #courseIndex #course-table th:nth-child(2) {
-    /*width: 20rem;*/
+    width: 20rem;
 }
 
 #courseIndex #course-table tr {
@@ -83,7 +83,7 @@
 
 #courseIndex #course-table td {
     vertical-align: center;
-    padding: 0rem 1rem;
+    padding: 1rem 1rem;
 }
 
 #courseIndex img {

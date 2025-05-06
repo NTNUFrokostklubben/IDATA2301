@@ -21,9 +21,12 @@ function ProviderTableContent({providers}) {
                              alt={""}/>
                         <p>{provider.name}</p>
                     </td>
-                    <td>
-                        <button className={"cta-button edit-button"}><Link
-                            to={`/admin/management/providers/edit/${provider.id}`}>Edit</Link></button>
+                    <td className={"button-group"}>
+                        <Link
+                            to={`/admin/management/providers/edit/${provider.id}`}>
+                            <button className={"cta-button edit-button"}>Edit</button>
+                        </Link>
+
                         <button id={"delete" + provider.id} className={"delete-button"} onClick={() => {
                             setFocusedId(provider.id)
                             setShowDeleteModal(true);
@@ -104,8 +107,10 @@ export default function Providers() {
         <div id={"providers-page"}>
             <h2>Course Providers</h2>
             <div id={"table-header"}>
-                <button id={"addProvider"} className={"cta-button"}><Link to={"/admin/management/providers/add"}>Add
-                    Provider</Link></button>
+                <Link to={"/admin/management/providers/add"}>
+                    <button id={"addProvider"} className={"cta-button"}>Add Provider</button>
+                </Link>
+
                 <table className={"admin-table"}>
                     <thead>
                     <tr>
@@ -114,7 +119,7 @@ export default function Providers() {
                     </tr>
                     </thead>
                     <tbody>
-                        {loading ? <ProviderTableSkeleton/> : <ProviderTableContent providers={providers}/>}
+                    {loading ? <ProviderTableSkeleton/> : <ProviderTableContent providers={providers}/>}
                     </tbody>
                 </table>
             </div>

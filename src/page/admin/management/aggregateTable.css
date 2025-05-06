@@ -24,7 +24,7 @@
 
 /*Sets width of delete and edit button column*/
 .admin-table th:nth-last-child(1) {
-    width: 5rem;
+    width: 8rem;
 }
 
 .admin-table  thead {
@@ -54,17 +54,17 @@
 
 .admin-table  td {
     vertical-align: center;
-    padding: 0rem 1rem;
+    padding: 1rem 1rem;
     margin: 1rem 0;
 }
 
 .admin-table .edit-button {
     height: 2rem;
-    width: 4rem;
+    width: 6rem;
 
 }
 
-.admin-table .edit-button a {
+.admin-table a {
     color: var(--textWhite);
     text-decoration: none;
 }
@@ -74,7 +74,7 @@
     background-color:var(--danger);
     color: var(--textWhite);
     height: 2rem;
-    width: 4rem;
+    width: 6rem;
 }
 
 .admin-table .delete-button a {
@@ -85,4 +85,13 @@
 .admin-table .delete-button:hover {
     background-color: #8f2323;
     /*color: var(--textBlack);*/
+}
+
+.admin-table .button-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+
 }
