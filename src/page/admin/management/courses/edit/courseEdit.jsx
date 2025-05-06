@@ -32,6 +32,7 @@ function CourseEditForm({course}) {
     async function handleFormSubmission(data) {
         const value = Object.fromEntries(data.entries());
 
+
         const response = await postCourse(value)
         return response;
     }
@@ -49,12 +50,14 @@ function CourseEditForm({course}) {
 
         // Uploads image if it was changed
         if (imageChanged) {
+
             uploadImage(image).then(r => {
                 data.set("imgLink", r);
                 // TODO: Change alert to something better. Check for success.
                 handleFormSubmission(data).then(alert("Submitted Form")).then(navigate(-1));
             });
         } else {
+
             data.set("imgLink", course.imgLink);
             handleFormSubmission(data).then(alert("Submitted Form")).then(navigate(-1));
         }
@@ -117,7 +120,7 @@ function CourseEditForm({course}) {
                     </div>
 
                     <div className="input-wrapper"><label htmlFor="course-category">Category</label>
-                        <select name="catergory" id="course-category" defaultValue={course.category} required>
+                        <select name="category" id="course-category" defaultValue={course.category} required>
                             <option value="it">Information Technologies</option>
                             <option value="dm">Digital Marketing</option>
                             <option value="be">Business and Entrepreneurship</option>
