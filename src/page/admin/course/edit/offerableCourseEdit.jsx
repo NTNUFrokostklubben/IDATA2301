@@ -44,7 +44,7 @@ function OfferableCourseEditForm({offerableCourse, providers, courses}) {
     return (
         <form onSubmit={handleFormSubmission}>
             <section id="offerableCourse-info">
-                <input disabled={true} id={"id"} name={"id"} type={"number"} hidden={true} value={offerableCourse.id}/>
+                <input disabled={false} id={"id"} name={"id"} type={"number"} hidden={true} value={offerableCourse.id}/>
                 <div className="group-2">
                     <div className="input-wrapper"><label htmlFor="provider-name">Provider Name</label>
                         <select id={"provider-name"} name={"providerId"} defaultValue={offerableCourse.provider.id}

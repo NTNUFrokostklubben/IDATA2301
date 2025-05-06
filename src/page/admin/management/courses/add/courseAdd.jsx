@@ -33,7 +33,6 @@ function CourseAddForm() {
         }
 
         const imageUrl = await response.text();
-        console.log(imageUrl)
         return imageUrl;
     }
 

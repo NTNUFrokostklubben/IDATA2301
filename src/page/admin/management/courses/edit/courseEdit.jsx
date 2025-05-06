@@ -45,8 +45,7 @@ function CourseEditForm({course}) {
         event.preventDefault();
 
         const data = new FormData(event.target);
-        const image = data.get("imgLink")
-        console.log(image)
+        const image = data.get("imgLink");
 
         // Uploads image if it was changed
         if (imageChanged) {
