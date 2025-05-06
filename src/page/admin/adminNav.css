@@ -9,7 +9,7 @@
     display: flex;
     flex-flow: row;
     margin: 0;
-    height: 150vh;
+    min-height: 100rem;
 }
 
 .admin-sidebar {
