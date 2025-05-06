@@ -68,7 +68,7 @@ export default function Layout() {
      * Navigates to the user page.
      */
     function goToUserPage(){
-        navigate(`/userpage/${1}`);
+        navigate(`/userpage`);
     }
 
     /**

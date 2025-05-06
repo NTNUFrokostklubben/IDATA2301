@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./Index.css";
 import Search from "./search/search";
 import {Link, Route} from "react-router-dom";
-import CourseCard from "../component/card/CourseCard";
+import CourseCard from "../component/card/courseCard";
+import Card from "../component/card/card";
 import Register from "../component/modals/auth/register";
 import {createPortal} from "react-dom";
 import {AsyncApiRequest} from "../utils/requests";
@@ -14,6 +15,7 @@ export default function Index() {
     const [courseShown, setCourseShown] = useState(calcSceneStart());
     const [courseIndex, setCourseIndex] = useState(0);
     const [courseCards, setCourseCards] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     // Use to resize the course shown based on window size
     useEffect(() => {
@@ -24,16 +26,19 @@ export default function Index() {
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
+
     useEffect(() => {
-        if (courseCards.length === 0) {
-            fetchCourses();
+        const fetchData = async () => {
+            try{
+                await fetchCourses();
+                setLoading(false);
+            } catch (err){
+                console.error("Error fetching data: ", err);
+            }
         }
+        fetchData();
     }, []);
 
-
-    // TODO change to dto and use the courseEntity class
-    // TODO fetch only the courseCards that are offerable
-    // TODO fetch only a sertan amount of courseCards
     /**
      * Fetches all courseCards from the API
      */
@@ -44,10 +49,9 @@ export default function Index() {
             const courseCards = data.map((courseCard) => new CourseWithPrice(courseCard.course,
                 courseCard.minDiscountedPrice, courseCard.closestDate, courseCard.rating, courseCard.numberOfRatings));
             setCourseCards(courseCards);
-            console.log("CourseCards has been fetched: ", courseCards);
-
+            console.log(courseCards);
         } catch (err) {
-            console.error("Error fetching courseCards: ", err);
+            throw new Error("Error fetching course cards: ", err);
         }
     }
 
@@ -122,37 +126,37 @@ export default function Index() {
                         labore et dolore magna aliqua.</h5>
                 </div>
 
-                <section id="index-course-cards-section">
+                { loading ? <h1>Uff da</h1> :
+                    <section id="index-course-cards-section">
 
-                    <section className="index-arrow">
-                        <button id="index-arrow-left-btn"
-                                onClick={() => setCourseIndex((prevIndex) => (prevIndex - 1 + courseCards.length) % courseCards.length)}>
-                            <img className={"index-arrow-icon"} src="/icons/arrow-back-circle-sharp.svg" alt="Arrow Left"/>
-                        </button>
+                        <section className="index-arrow">
+                            <button id="index-arrow-left-btn"
+                                    onClick={() => setCourseIndex((prevIndex) => (prevIndex - 1 + courseCards.length) % courseCards.length)}>
+                                <img className={"index-arrow-icon"} src="/icons/arrow-back-circle-sharp.svg" alt="Arrow Left"/>
+                            </button>
+                        </section>
+
+                        <section id="index-collection-cards">
+                            {courseCards.slice(courseIndex, courseIndex + courseShown - 1).map((courseCard) => (
+                                <CourseCard key={courseCard.id} {...courseCard} />
+                            ))}
+                            {courseIndex + courseShown - 1 > courseCards.length
+                                && courseCards.slice(0, (courseIndex + courseShown - 1) % courseCards.length)
+                                    .map((courseCard) => (
+                                        <CourseCard key={courseCard.id} {...courseCard}/>
+                                    ))}
+                        </section>
+
+                        <section className="index-arrow">
+                            <button id="index-arrow-right-btn"
+                                    onClick={() => setCourseIndex((prevIndex) =>
+                                        (prevIndex + 1 + courseCards.length) % courseCards.length)}>
+                                <img className={"index-arrow-icon"} src="/icons/arrow-forward-circle-sharp.svg"
+                                     alt="Arrow Right"/>
+                            </button>
+                        </section>
                     </section>
-
-                    <section id="index-collection-cards">
-                        {courseCards.slice(courseIndex, courseIndex + courseShown - 1).map((courseCard) => (
-                            <CourseCard key={courseCard.id} {...courseCard} />
-                        ))}
-                        {courseIndex + courseShown - 1 > courseCards.length
-                            && courseCards.slice(0, (courseIndex + courseShown - 1) % courseCards.length)
-                                .map((courseCard) => (
-                                    <CourseCard key={courseCard.id} {...courseCard}/>
-                                ))}
-                    </section>
-
-                    <section className="index-arrow">
-                        <button id="index-arrow-right-btn"
-                                onClick={() => setCourseIndex((prevIndex) =>
-                                    (prevIndex + 1 + courseCards.length) % courseCards.length)}>
-                            <img className={"index-arrow-icon"} src="/icons/arrow-forward-circle-sharp.svg"
-                                 alt="Arrow Right"/>
-                        </button>
-                    </section>
-
-
-                </section>
+                }
             </section>
             <section id="index-collaborators-section">
                 <div className="title-and-subtitle">

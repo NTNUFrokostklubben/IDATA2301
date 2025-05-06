@@ -61,7 +61,7 @@ export class OfferableCourse {
 
 export class CourseWithPrice {
     constructor(Course, minDiscountedPrice, closestDate, rating, numberOfRatings) {
-        this.Course = Course;
+        this.course = Course;
         this.minDiscountedPrice = minDiscountedPrice;
         this.closestDate = closestDate;
         this.rating = rating;
