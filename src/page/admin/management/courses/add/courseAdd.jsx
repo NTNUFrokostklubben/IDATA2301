@@ -33,7 +33,6 @@ function CourseAddForm() {
         }
 
         const imageUrl = await response.text();
-        console.log(imageUrl)
         return imageUrl;
     }
 
@@ -116,7 +115,7 @@ function CourseAddForm() {
                     </div>
 
                     <div className="input-wrapper"><label htmlFor="course-category">Category</label>
-                        <select name="catergory" id="course-category" required>
+                        <select name="category" id="course-category" required>
                             <option value="it">Information Technologies</option>
                             <option value="dm">Digital Marketing</option>
                             <option value="be">Business and Entrepreneurship</option>

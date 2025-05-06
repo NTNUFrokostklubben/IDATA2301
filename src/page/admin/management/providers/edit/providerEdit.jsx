@@ -69,23 +69,19 @@ function ProviderEditForm({provider}) {
         const altImg = data.get("imgLinkAlt")
         const builtProvider = new ProviderEntity(value.id, value.name, value.imgLink, value.imgLinkAlt);
 
-        console.log(provider)
 
         if (imageChanged && altImgChanged) {
-            console.log("BOTH CHANGED")
             uploadImage(image).then((r) => {
                 builtProvider.logoLink = r;
             }).then(() => {
                 uploadImage(altImg).then((r) => {
                     builtProvider.altLogoLink = r;
                 }).then(() => {
-                    console.log(builtProvider)
                     postProvider(builtProvider).then(alert("Successfully added Provider")).then(navigate(-1))
                 })
             })
 
         } else if (imageChanged) {
-            console.log("MAIN CHANGED")
             uploadImage(image).then((r) => {
                 builtProvider.logoLink = r;
             }).then(() => {

@@ -22,17 +22,20 @@ function OfferableCoursesTableContent({filteredCourses}) {
     const [showDeleteModal, setShowDeleteModal] = useState();
     const [focusedId, setFocusedId] = useState()
 
+    console.log(filteredCourses)
+
     return (
         <>
             {filteredCourses.map((offerableCourse) => (
                 <tr key={offerableCourse.id}>
                     <td>
                         <img src={offerableCourse.provider.altLogoLink}
-                             alt={""}
-                             width={50} height={50}/>
+                             alt={""}/>
                         <p>{offerableCourse.provider.name}</p>
                     </td>
                     <td>
+                        <img src={offerableCourse.course.imgLink}
+                             alt={""}/>
                         <p>{offerableCourse.course.title}</p>
                     </td>
                     <td><p>{offerableCourse.price},- NOK</p></td>
@@ -43,17 +46,21 @@ function OfferableCoursesTableContent({filteredCourses}) {
                         month: "2-digit",
                         day: "2-digit"
                     })}</p></td>
-                    <td><p>{offerableCourse.visibility ? "Visible" : "Hidden"}</p></td>
+                    <td><p>{offerableCourse.visible ? "Visible" : "Hidden"}</p></td>
                     <td>
-                        <button className={"cta-button edit-button"}><Link
+                        <div className={"button-group"}><Link
                             to={`/admin/offerablecourses/edit/${offerableCourse.id}`}
                             id={"edit" + offerableCourse.id}
-                        >Edit</Link></button>
-                        <button id={"delete" + offerableCourse.id} className={"delete-button"} onClick={() => {
-                            setFocusedId(offerableCourse.id)
-                            setShowDeleteModal(true);
-                        }}>Delete
-                        </button>
+                        >
+                            <button><img src={"/icons/pencil-sharp.svg"}/></button>
+                        </Link>
+
+                            <button id={"delete" + offerableCourse.id} onClick={() => {
+                                setFocusedId(offerableCourse.id)
+                                setShowDeleteModal(true);
+                            }}><img src={"/icons/trash-sharp.svg"}/>
+                            </button>
+                        </div>
                     </td>
                 </tr>
             ))}
@@ -173,9 +180,9 @@ export default function OfferableCourses() {
         <div id={"courseIndex"}>
             <h2>Offerable courses</h2>
             <div id={"table-header"}>
-                <button id={"addCourse"} className={"cta-button"}><Link to={"/admin/offerablecourses/add"}
-                                                                        className={""}>Add
-                    Course</Link></button>
+                <Link to={"/admin/offerablecourses/add"}
+                      className={""}><button id={"addCourse"} className={"cta-button"}>Add Course</button></Link>
+
                 <select disabled={loading} id={"course"} onChange={changeProvider}>
                     <option value={""}>{loading ? "Loading" : "All"}</option>
                     {!loading && uniqueCourses.map((course) => (

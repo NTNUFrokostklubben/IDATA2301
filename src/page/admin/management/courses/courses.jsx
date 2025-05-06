@@ -19,31 +19,47 @@ function CourseTableContent({courses}) {
     const [showDeleteModal, setShowDeleteModal] = useState();
     const [focusedId, setFocusedId] = useState()
 
+
+    function getDifficultyLevel(level) {
+        switch (level) {
+            case 0:
+                return "Beg.";
+            case 1:
+                return "Int.";
+            case 2:
+                return "Exp.";
+            default:
+                return "Unknown";
+        }
+    }
+
     return (
         <>
             {courses.map((course) => (
                 <tr key={course.id}>
                     <td>
-                        <img src={course.imgLink} width={50} height={50}/>
+                        <img src={course.imgLink}/>
                         <p>{course.title}</p>
                     </td>
                     <td className={"description"}><p>{course.description}</p></td>
                     <td><p>{course.category}</p></td>
-                    <td><p>{course.diffLevel}</p></td>
+                    <td><p>{getDifficultyLevel(course.diffLevel)}</p></td>
                     <td><p>{course.credits}</p></td>
                     <td><p>{course.hoursWeek}</p></td>
                     <td><p>{course.relatedCert}</p></td>
-                    <td>
-                        <button className={"cta-button edit-button"}>
-                            <Link to={`/admin/management/courses/edit/${course.id}`}>
-                                Edit
-                            </Link>
-                        </button>
-                        <button id={"delete" + course.id} className={"delete-button"} onClick={() => {
-                            setFocusedId(course.id)
-                            setShowDeleteModal(true);
-                        }}>Delete
-                        </button>
+                    <td >
+                        <div className={"button-group"}><Link to={`/admin/management/courses/edit/${course.id}`}>
+                            <button>
+                                <img src={"/icons/pencil-sharp.svg"}/>
+                            </button>
+                        </Link>
+
+                            <button id={"delete" + course.id} onClick={() => {
+                                setFocusedId(course.id)
+                                setShowDeleteModal(true);
+                            }}><img src={"/icons/trash-sharp.svg"}/>
+                            </button>
+                        </div>
                     </td>
                 </tr>
             ))}
@@ -95,7 +111,7 @@ function CoursesTableSkeleton() {
                         <Skeleton variant="text"/>
                     </td>
                 </tr>
-                ))}
+            ))}
         </>
     )
 }
@@ -104,7 +120,6 @@ export default function Courses() {
 
     const [courses, setCourses] = useState([]);
     const [loading, setLoading] = useState(true);
-
 
 
     useEffect(() => {
@@ -135,9 +150,13 @@ export default function Courses() {
         <div id={"courses-page"}>
             <h2>Courses</h2>
             <div id={"table-header"}>
-                <button id={"addCourse"} className={"cta-button"}>
-                    <Link to={"/admin/management/courses/add"}>Add Course</Link>
-                </button>
+                <Link to={"/admin/management/courses/add"}>
+                    <button id={"addCourse"} className={"cta-button"}>
+                        Add
+                        Course
+                    </button>
+                </Link>
+
                 <table className={"admin-table"}>
                     <thead>
                     <tr>
@@ -152,11 +171,10 @@ export default function Courses() {
                     </tr>
                     </thead>
                     <tbody>
-                    {loading ?<CoursesTableSkeleton/>:<CourseTableContent courses={courses}/>}
+                    {loading ? <CoursesTableSkeleton/> : <CourseTableContent courses={courses}/>}
                     </tbody>
                 </table>
             </div>
-
 
 
             <div id={"delete-modal"}/>
