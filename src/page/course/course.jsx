@@ -16,6 +16,7 @@ export default function Course() {
     const [loading, setLoading] = useState(true);
     const [isFavorite, setFavorite] = useState(false);
     const [keywords, setKeywords] = useState([])
+    const [isUserEnrolled, setIsUserEnrolled] = useState(false);
     const {id} = useParams();
 
     useEffect(() => {
@@ -38,11 +39,19 @@ export default function Course() {
         setLoading(false)
     }, []);
 
+    const checkUserCourse = async () =>{
+
+        const enrolled = AsyncApiRequest("GET", `/userCourses/user/${user.id}/course/${id}`, null)
+            .then(response => response.json())
+        setIsUserEnrolled(enrolled);
+    }
 
     useEffect(() => {
         if (user === null) return;
         checkFavorite()
     }, [user]);
+
+
     async function handleUserData() {
         try {
             let tempUser = getAuthenticatedUser()
