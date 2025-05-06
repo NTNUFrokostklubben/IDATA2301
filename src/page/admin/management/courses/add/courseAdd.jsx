@@ -8,6 +8,8 @@ function CourseAddForm() {
 
     const navigate = useNavigate();
 
+    const [courseImage, setCourseImage] = useState([])
+
     /**
      * Handle API call for uploading images.
      *
@@ -66,6 +68,23 @@ function CourseAddForm() {
         });
     }
 
+    /**
+     * Handles image change event.
+     * Used to indicate that a new image needs to be uploaded to server.
+     *
+     * @param image
+     * @returns {Promise<void>}
+     */
+    async function handleChangeImage(image) {
+        // TODO: Ensure image locally is updated once new image is uploaded on file, doesnt send to beckend before submit
+
+        const img = new Image();
+        img.src = URL.createObjectURL(image[0]);
+
+        setCourseImage(img);
+
+    }
+
     return (
         <form onSubmit={handleSubmit} action="http://localhost:3000/course" method="POST">
             <section id="course-info">
@@ -107,16 +126,19 @@ function CourseAddForm() {
                 </div>
 
 
-
-                {/*TODO: Add preview of uploaded image (javascript component)*/}
-                <div className="input-wrapper">
-                    <label htmlFor="course-image">Course Image</label>
-                    <input type="file" id="course-image" name="imgLink" required/>
+                <div className={"imageUpload-wrapper"}>
+                    <div className="input-wrapper">
+                        <label htmlFor="course-image">Course Image</label>
+                        <input type="file" id="course-image" name="imgLink"
+                               onChange={(e) => handleChangeImage(e.target.files)} required/>
+                    </div>
+                    <img className={"img-preview"} src={courseImage.src} alt={""}/>
                 </div>
 
                 <div className="input-wrapper"><label htmlFor="course-keywords">Keywords separated by
                     comma</label>
-                    <input type="text" id="course-keywords" name="keywords" required/></div>
+                    <input type="text" id="course-keywords" name="keywords"
+                           required/></div>
 
                 <button className="cta-button courseAdmin-button" type="submit">Add Course</button>
             </section>

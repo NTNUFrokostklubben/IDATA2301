@@ -20,6 +20,20 @@
     margin: 1rem 0;
 }
 
+
+
+.imageUpload-wrapper {
+    display: flex;
+    flex-direction: column;
+    max-height: 20rem;
+
+}
+.imageUpload-wrapper .img-preview {
+    padding: 0rem 1rem;
+
+    max-width: 200px;
+}
+
 .group-2 {
     display: flex;
     flex-wrap: wrap;
