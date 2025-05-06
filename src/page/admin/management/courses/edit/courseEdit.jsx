@@ -9,6 +9,19 @@ function CourseEditForm({course}) {
 
     const navigate = useNavigate();
 
+    const [courseImage, setCourseImage] = useState([])
+    const [imageChanged, setImageChanged] = useState(false);
+
+    /**
+     * Loads the current image from the server
+     */
+    useEffect(() => {
+            const img = new Image();
+            img.src = course.imgLink;
+
+            setCourseImage(img);
+        }
+        , [course.imgLink]);
 
     /**
      * Handles form submission after successful Image Upload for Course
@@ -33,12 +46,37 @@ function CourseEditForm({course}) {
 
         const data = new FormData(event.target);
         const image = data.get("imgLink")
+        console.log(image)
 
-        uploadImage(image).then(r => {
-            data.set("imgLink", r);
-            // TODO: Change alert to something better. Check for success.
+        // Uploads image if it was changed
+        if (imageChanged) {
+            uploadImage(image).then(r => {
+                data.set("imgLink", r);
+                // TODO: Change alert to something better. Check for success.
+                handleFormSubmission(data).then(alert("Submitted Form")).then(navigate(-1));
+            });
+        } else {
+            data.set("imgLink", course.imgLink);
             handleFormSubmission(data).then(alert("Submitted Form")).then(navigate(-1));
-        });
+        }
+    }
+
+    /**
+     * Handles image change event.
+     * Used to indicate that a new image needs to be uploaded to server.
+     *
+     * @param image
+     * @returns {Promise<void>}
+     */
+    async function handleChangeImage(image) {
+        // TODO: Ensure image locally is updated once new image is uploaded on file, doesnt send to beckend before submit
+
+        const img = new Image();
+        img.src = URL.createObjectURL(image[0]);
+
+        setCourseImage(img);
+        setImageChanged(true);
+
     }
 
     return (
@@ -89,11 +127,15 @@ function CourseEditForm({course}) {
                 </div>
 
 
-                {/*TODO: Add preview of uploaded image (javascript component)*/}
-                <div className="input-wrapper">
-                    <label htmlFor="course-image">Course Image</label>
-                    <input type="file" id="course-image" name="imgLink" required/>
+                <div className={"imageUpload-wrapper"}>
+                    <div className="input-wrapper">
+                        <label htmlFor="course-image">Course Image</label>
+                        <input type="file" id="course-image" name="imgLink"
+                               onChange={(e) => handleChangeImage(e.target.files)} required={imageChanged}/>
+                    </div>
+                    <img className={"img-preview"} src={courseImage.src} alt={""}/>
                 </div>
+
 
                 <div className="input-wrapper"><label htmlFor="course-keywords">Keywords separated by
                     comma</label>
@@ -194,9 +236,6 @@ export default function CourseEdit() {
             throw new Error(e);
         }
     }
-
-
-
 
 
     return (
