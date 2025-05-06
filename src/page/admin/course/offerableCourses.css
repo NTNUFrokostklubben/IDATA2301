@@ -81,13 +81,16 @@
 }
 
 
-
-
 #courseIndex #course-table td {
     vertical-align: center;
     padding: 0rem 1rem;
 }
 
+#courseIndex img {
+    height: 100%;
+    max-width: 6rem;
+    max-height: 6rem;
+}
 
 
 

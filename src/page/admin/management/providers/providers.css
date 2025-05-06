@@ -17,3 +17,9 @@
     color: var(--textWhite);
     text-decoration: none;
 }
+
+#providers-page img {
+    height: 100%;
+    max-width: 6rem;
+    max-height: 6rem;
+}

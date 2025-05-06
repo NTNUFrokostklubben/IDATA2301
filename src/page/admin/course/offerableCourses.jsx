@@ -27,8 +27,8 @@ function OfferableCoursesTableContent({filteredCourses}) {
             {filteredCourses.map((offerableCourse) => (
                 <tr key={offerableCourse.id}>
                     <td>
-                        <img src={"https://picsum.photos/50?random=" + offerableCourse.id}
-                             alt={offerableCourse.provider.imgAltLink}
+                        <img src={offerableCourse.provider.altLogoLink}
+                             alt={""}
                              width={50} height={50}/>
                         <p>{offerableCourse.provider.name}</p>
                     </td>

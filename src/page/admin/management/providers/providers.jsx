@@ -17,9 +17,8 @@ function ProviderTableContent({providers}) {
             {providers.map((provider) => (
                 <tr key={provider.id}>
                     <td>
-                        <img src={"https://picsum.photos/50?random=" + provider.id}
-                             alt={provider.imgAltLink}
-                             width={50} height={50}/>
+                        <img src={provider.altLogoLink}
+                             alt={""}/>
                         <p>{provider.name}</p>
                     </td>
                     <td>
