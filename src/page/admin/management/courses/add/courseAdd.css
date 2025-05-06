@@ -24,14 +24,14 @@
 
 .imageUpload-wrapper {
     display: flex;
-    flex-direction: column;
     max-height: 20rem;
-
+    justify-content: space-between;
+    align-items: center;
 }
-.imageUpload-wrapper .img-preview {
-    padding: 0rem 1rem;
+.img-preview {
 
-    max-width: 200px;
+    justify-self: center;
+    max-height: 4rem;
 }
 
 .group-2 {

@@ -41,6 +41,8 @@ export function ProviderFormSkeleton() {
 
 function ProviderEditForm({provider}) {
     const navigate = useNavigate();
+    const [providerImage, setProviderImage] = useState([])
+    const [providerImageAlt, setProviderImageAlt] = useState([])
 
     function handleFormSubmission(event) {
         event.preventDefault();
@@ -62,6 +64,25 @@ function ProviderEditForm({provider}) {
         }
     }
 
+    /**
+     * Handles image change event.
+     * Used to indicate that a new image needs to be uploaded to server.
+     *
+     * @param image
+     * @returns {Promise<void>}
+     */
+    async function handleChangeImage(image, alt) {
+
+        const img = new Image();
+        img.src = URL.createObjectURL(image[0]);
+
+        if (alt) {
+            setProviderImageAlt(img)
+        } else {
+            setProviderImage(img);
+        }
+    }
+
     return (
         <form className="providerInfo-form" onSubmit={handleFormSubmission}>
 
@@ -71,20 +92,22 @@ function ProviderEditForm({provider}) {
                     <input type="text" id="provider-name" name="name" defaultValue={provider.name} required/></div>
 
 
-                <div className="group-2">
-                    {/*TODO: Add preview of uploaded image (javascript component)*/}
+                <div className={"imageUpload-wrapper"}>
                     <div className="input-wrapper">
                         <label htmlFor="provider-image">Provider Image</label>
-                        <input type="file" id="provider-image" name="imgLink" defaultValue={provider.imgLink}
-                               required/>
+                        <input type="file" id="provider-image" name="imgLink"
+                               onChange={(e) => handleChangeImage(e.target.files, false)} required/>
                     </div>
+                    <img className={"img-preview"} src={providerImage.src}/>
+                </div>
 
-                    {/*TODO: Add preview of uploaded image (javascript component)*/}
+                <div className={"imageUpload-wrapper"}>
                     <div className="input-wrapper">
                         <label htmlFor="provider-alt-image">Alternative Provider Image</label>
                         <input type="file" id="provider-alt-image" name="imgLinkAlt"
-                               defaultValue={provider.imgAltLink} required/>
+                               onChange={(e) => handleChangeImage(e.target.files, true)} required/>
                     </div>
+                    <img className={"img-preview"} src={providerImageAlt.src}/>
                 </div>
 
 

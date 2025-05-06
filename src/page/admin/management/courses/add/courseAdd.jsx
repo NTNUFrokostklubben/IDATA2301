@@ -76,7 +76,6 @@ function CourseAddForm() {
      * @returns {Promise<void>}
      */
     async function handleChangeImage(image) {
-        // TODO: Ensure image locally is updated once new image is uploaded on file, doesnt send to beckend before submit
 
         const img = new Image();
         img.src = URL.createObjectURL(image[0]);

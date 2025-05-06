@@ -18,11 +18,11 @@ export class courseEntity {
 
 
 export class ProviderEntity {
-    constructor(id, name, imgLink, imgAltLink) {
+    constructor(id, name, logoLink, altLogoLink) {
         this.id = id;
         this.name = name;
-        this.imgLink = imgLink;
-        this.imgAltLink = imgAltLink;
+        this.logoLink = logoLink;
+        this.altLogoLink = altLogoLink;
     }
 }
 
