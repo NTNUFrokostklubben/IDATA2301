@@ -6,26 +6,14 @@ import CourseCard from "../component/card/CourseCard";
 import Register from "../component/modals/auth/register";
 import {createPortal} from "react-dom";
 import {AsyncApiRequest} from "../utils/requests";
-
-class courseEntity {
-    constructor(id, title, description, imgLink) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.imgLink = imgLink;
-        this.price = null;
-    }
-    setPrice(price) {
-        this.price = price;
-    }
-}
+import {CourseWithPrice} from "../utils/Classes/commonClasses";
 
 export default function Index() {
 
     const [showSignupModal, setShowSignupModal] = useState()
     const [courseShown, setCourseShown] = useState(calcSceneStart());
     const [courseIndex, setCourseIndex] = useState(0);
-    const [courses, setCourses] = useState([]);
+    const [courseCards, setCourseCards] = useState([]);
 
     // Use to resize the course shown based on window size
     useEffect(() => {
@@ -37,33 +25,29 @@ export default function Index() {
     }, []);
 
     useEffect(() => {
-        if (courses.length === 0) {
+        if (courseCards.length === 0) {
             fetchCourses();
         }
     }, []);
 
+
+    // TODO change to dto and use the courseEntity class
+    // TODO fetch only the courseCards that are offerable
+    // TODO fetch only a sertan amount of courseCards
     /**
-     * Fetches all courses from the API
+     * Fetches all courseCards from the API
      */
     async function fetchCourses() {
         try {
-            const data = await AsyncApiRequest("GET", "/courses", null)
+            const data = await AsyncApiRequest("GET", "/courses/courseCard", null)
                 .then(response => response.json());
-            const courses = data.map((course) => new courseEntity(course.id, course.title, course.description, course.imgLink));
-            setCourses(courses);
+            const courseCards = data.map((courseCard) => new CourseWithPrice(courseCard.course,
+                courseCard.minDiscountedPrice, courseCard.closestDate, courseCard.rating, courseCard.numberOfRatings));
+            setCourseCards(courseCards);
+            console.log("CourseCards has been fetched: ", courseCards);
 
-            const priceFetches = courses.map(async (course) => {
-                const fetchApiCall = `/offerableCourses/coursePrice/${course.id}`;
-                const price = await AsyncApiRequest("GET", fetchApiCall, null)
-                    .then(response => response.json());
-                course.setPrice(price);
-            });
-
-            // Wait for all price fetches to complete
-            await Promise.all(priceFetches);
-            setCourses([...courses]); // Ensure state is updated with new course prices
         } catch (err) {
-            console.error("Error fetching courses: ", err);
+            console.error("Error fetching courseCards: ", err);
         }
     }
 
@@ -142,26 +126,26 @@ export default function Index() {
 
                     <section className="index-arrow">
                         <button id="index-arrow-left-btn"
-                                onClick={() => setCourseIndex((prevIndex) => (prevIndex - 1 + courses.length) % courses.length)}>
+                                onClick={() => setCourseIndex((prevIndex) => (prevIndex - 1 + courseCards.length) % courseCards.length)}>
                             <img className={"index-arrow-icon"} src="/icons/arrow-back-circle-sharp.svg" alt="Arrow Left"/>
                         </button>
                     </section>
 
                     <section id="index-collection-cards">
-                        {courses.slice(courseIndex, courseIndex + courseShown - 1).map((course) => (
-                            <CourseCard key={course.id} {...course} />
+                        {courseCards.slice(courseIndex, courseIndex + courseShown - 1).map((courseCard) => (
+                            <CourseCard key={courseCard.id} {...courseCard} />
                         ))}
-                        {courseIndex + courseShown - 1 > courses.length
-                            && courses.slice(0, (courseIndex + courseShown - 1) % courses.length)
-                                .map((course) => (
-                                    <CourseCard key={course.id} {...course}/>
+                        {courseIndex + courseShown - 1 > courseCards.length
+                            && courseCards.slice(0, (courseIndex + courseShown - 1) % courseCards.length)
+                                .map((courseCard) => (
+                                    <CourseCard key={courseCard.id} {...courseCard}/>
                                 ))}
                     </section>
 
                     <section className="index-arrow">
                         <button id="index-arrow-right-btn"
                                 onClick={() => setCourseIndex((prevIndex) =>
-                                    (prevIndex + 1 + courses.length) % courses.length)}>
+                                    (prevIndex + 1 + courseCards.length) % courseCards.length)}>
                             <img className={"index-arrow-icon"} src="/icons/arrow-forward-circle-sharp.svg"
                                  alt="Arrow Right"/>
                         </button>
@@ -260,17 +244,6 @@ export default function Index() {
                     </div>
                 </div>
             </section>
-
-            <h1>Temporary links to pages</h1>
-            <ul>
-                <li><a href={"/search"}>search/filters</a></li>
-                <li><a href={"/admin"}>Admin</a></li>
-                <li> <Link to={`/course/${1}`}> course</Link></li>
-                <li> <Link to={`/userpage/${1}`}> user page</Link></li>
-                <li><a href={"/about"}>about</a></li>
-                <li><a href={"/checkout"}>checkout</a></li>
-                <li><a href={"/noAccess"}>403 no access</a></li>
-            </ul>
             {
                 showSignupModal && createPortal(
                     <Register changeMode={() => {

@@ -20,7 +20,11 @@ export default function Layout() {
     const navigate = useNavigate();
 
 
-useEffect(() => {
+    /**
+     * This function is called when the component mounts.
+     * It checks if the user is logged in and updates the UI accordingly.
+     */
+    useEffect(() => {
     // Check if the user is logged in
     const user = getAuthenticatedUser();
     const signedOutElements = document.querySelectorAll(".signed-out");
@@ -53,16 +57,23 @@ useEffect(() => {
         }
     }
 
-
+    /**
+     * Navigates to the search page.
+     */
     function goToSearchPage() {
         navigate("/search");
     }
 
+    /**
+     * Navigates to the user page.
+     */
     function goToUserPage(){
         navigate(`/userpage/${1}`);
     }
 
-    // TODO : refactor
+    /**
+     * Logs out the user by deleting the authentication cookies and redirecting to the index page.
+     */
     function logout() {
         // Clear the authentication cookies
         deleteAuthorizationCookies();
@@ -89,12 +100,13 @@ useEffect(() => {
                             <img id="triangle-icon" width="12" height="12" src="/icons/triangle-sharp.svg" alt={""}/>
                         </button>
                         <div className="dropdown-content">
-                            <a href="#">Course 1</a>
-                            <a href="#">Course 2</a>
-                            <a href="#">Course 3</a>
-                            <a href="#">Course 4</a>
-                            <a href="#">Course 5</a>
-                            <a href="#">Course 6</a>
+                            <a href={"/search"}>Search/filters</a>
+                            <a href={"/admin"}>Admin</a>
+                            <a href={"/about"}>About</a>
+                            <a href={"/checkout"}>Checkout</a>
+                            <a href={"/noAccess"}>403 no access</a>
+                            <Link to={`/course/${1}`}> course</Link>
+                            <Link to={`/userpage/${1}`}> user page</Link>
                         </div>
                     </div>
                 </li>
@@ -104,7 +116,7 @@ useEffect(() => {
                             <button type="submit" id="search_btn">
                                 <img id="searchIcon" src="/icons/search-sharp.svg" alt="search icon"/>
                             </button>
-                            <input type="text" placeholder="search..." defaultValue={searchValue}  name="search"/>
+                            <input type="text" placeholder="Search..." defaultValue={searchValue}  name="search"/>
                         </form>
                     </div>
                 </li>
@@ -116,7 +128,7 @@ useEffect(() => {
                                     <img className={"nav-user-image"} src={userPicture} alt={"User profile"}
                                          onClick={() => goToUserPage()} />
                                 </div>
-                                <button onClick={() => logout()} className="cta-button" id="logut-btn"
+                                <button onClick={() => logout()} className="cta-button" id="logout-btn"
                                         alt="Log out" href="#">
                                     <h5>Log out</h5>
                                 </button>
