@@ -2,6 +2,7 @@ import "./courseAdd.css";
 import {Form, useNavigate} from "react-router-dom";
 import {useState} from "react";
 import {CourseFormSkeleton} from "../edit/courseEdit";
+import {postCourse, uploadImage} from "../../../../../utils/commonRequests";
 
 function CourseAddForm() {
 
@@ -42,23 +43,9 @@ function CourseAddForm() {
      */
     async function handleFormSubmission(data) {
         const value = Object.fromEntries(data.entries());
-        console.log(value);
 
-        const requestOptions = {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(value)
-        };
-
-        const response = await fetch("http://localhost:8080/api/course", requestOptions)
-
-        if (!response.ok) {
-            console.log("Error submitting form");
-            return null;
-        }
-
-        const responseBody = response.body;
-        return responseBody;
+        const response = await postCourse(value)
+        return response;
     }
 
     /**
@@ -72,7 +59,7 @@ function CourseAddForm() {
         const data = new FormData(event.target);
         const image = data.get("imgLink")
 
-        handleImageUpload(image).then(r => {
+        uploadImage(image).then(r => {
             data.set("imgLink", r);
             // TODO: Change alert to something better. Check for success.
             handleFormSubmission(data).then(alert("Submitted Form")).then(navigate(-1));
