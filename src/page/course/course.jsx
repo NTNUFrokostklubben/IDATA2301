@@ -26,7 +26,8 @@ export default function Course() {
             try {
                 await Promise.all([handleUserData(), fetchCourseData()]).then(async () => {
                     try {
-                        await Promise.all([ fetchOfferableCourses(), fetchKeywords(), fetchRatingData()])
+                        await Promise.all([ fetchOfferableCourses(), fetchKeywords(), fetchRatingData()]);
+                        setLoading(false);
                     }catch (e) {
                         console.error(e)
                     }
@@ -36,7 +37,7 @@ export default function Course() {
             }
         }
         fetchData()
-        setLoading(false)
+
     }, []);
 
     const checkUserCourse = async () =>{
