@@ -19,7 +19,7 @@
     min-width: 24rem;
     width: 24rem;
     max-width: 24rem;
-    height: 150vh;
+    min-height: 100rem;
     box-shadow: var(--shadow) 0 2rem 1rem;
 }
 
