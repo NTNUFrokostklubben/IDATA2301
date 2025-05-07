@@ -59,7 +59,7 @@ useEffect(() => {
     }
 
     function goToUserPage(){
-        navigate(`/userpage/${1}`);
+        navigate(`/userpage/`);
     }
 
     // TODO : refactor

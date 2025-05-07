@@ -1,15 +1,16 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {AsyncApiRequest} from "../../utils/requests";
 import "./favoriteButton.css"
 
-//TODO Refactor to use context for user ID
 export default function FavoriteButton ({uid, cid, isFav}){
     const [isFilled, setIsFilled] = useState(isFav);
     const [isDisabled, setIsDisabled] = useState(false);
+    const [showFav, setShowFav] = useState(false);
 
     const handleFavorite = async () => {
         setIsFilled(!isFilled)
         setIsDisabled(true)
+
 
         try{
        if (isFilled){
@@ -43,7 +44,9 @@ export default function FavoriteButton ({uid, cid, isFav}){
     };
 
     return (
+        <div className={"favorites-button-container"}>
             <button onClick={handleFavorite} disabled={isDisabled} className="favorite-component"><FavoriteHeart/></button>
+        </div>
     )
 
 }

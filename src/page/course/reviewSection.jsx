@@ -42,11 +42,11 @@ export function ReviewComponent({cid, uid, averageRating}) {
             .then( response  => response.json());
         const filteredAndSorted = data
             .filter(item => item.review != null)
-            .sort((a, b) => b.review.rating - a.review.rating);
+            .sort((a, b) => b.review?.rating - a.review?.rating);
         setUserCourseData(data)
         setIsUserEnrolled(data.some(course =>  course.user?.id === uid))
         setFilteredReviews(filteredAndSorted)
-        calculateStarDistribution(data.map(item => item.review.rating));
+        calculateStarDistribution(data.map(item => item.review?.rating));
         setAllowEditReview(filteredAndSorted.some(obj => obj.user?.id === uid ))
 
     }
@@ -105,7 +105,7 @@ export function ReviewComponent({cid, uid, averageRating}) {
     useEffect(() => {
         if (userCourseData !== null) {
         const filtered =[...userCourseData].sort((a, b)=>
-            (a.review.rating % currentStar) - (b.review.rating % currentStar)
+            (a.review?.rating % currentStar) - (b.review?.rating % currentStar)
         );
         setFilteredReviews(filtered);
     }
