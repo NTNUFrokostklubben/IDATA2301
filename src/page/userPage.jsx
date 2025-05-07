@@ -47,16 +47,6 @@ export default function UserPage (){
     }, [user]);
 
 
-    async function handleUserData() {
-        try {
-           let tempUser = getAuthenticatedUser()
-
-            const tempApiCall = `/UserByEmail/${tempUser.email}`;
-            const userData = await AsyncApiRequest("GET", tempApiCall, null)
-                .then(response => response.json())
-            //setUser(userData)
-        }catch (e){console.error(e)}
-    }
     return (
 
 

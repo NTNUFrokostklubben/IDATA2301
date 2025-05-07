@@ -31,11 +31,6 @@ export default function Checkout() {
         setLoading(true)
         const status = await AsyncApiRequest("POST", `/transaction/offerId/${courseData.id}/userid/${userData.id}`, null);
         try {
-            if (status.status === 201){
-                const addUserCourse =
-                    AsyncApiRequest("POST" ,`/userCourses/add/${userData.id}/${courseData.course.id}`, null)
-                    .then( response  => response.json());
-            }
 
             await new Promise((resolve) => setTimeout(resolve, 2000));
 
