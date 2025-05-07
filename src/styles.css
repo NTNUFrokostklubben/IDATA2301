@@ -125,6 +125,15 @@ button {
     background-color: var(--highlight);
 }
 
+.page-content {
+    padding-top: 5rem;
+    min-height: 100rem;
+}
+
+footer {
+    position: relative;
+}
+
 @media (max-width: 1250px) {
     html{
         font-size: 15px;

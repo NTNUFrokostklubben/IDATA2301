@@ -24,7 +24,7 @@ import {useState} from "react";
 import {deleteAuthorizationCookies, getAuthenticatedUser} from "./utils/authentication/authentication";
 import OrderComplete from "./page/orderComplete";
 import NoAccess from "./page/NoAccess";
-import ProtectedRoute from "./page/ProtectedRoute";
+import ProtectedRoute from "./component/routing/ProtectedRoute";
 
 function App() {
 

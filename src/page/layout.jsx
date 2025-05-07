@@ -8,6 +8,7 @@ import Register from "../component/modals/auth/register";
 import Index from "./index";
 import {deleteAuthorizationCookies, getAuthenticatedUser} from "../utils/authentication/authentication";
 import {AsyncApiRequest} from "../utils/requests";
+import ScrollRoute from "../component/routing/scrollRoute";
 // import {Modal} from "react-native";
 
 export default function Layout() {
@@ -20,49 +21,63 @@ export default function Layout() {
     const navigate = useNavigate();
 
 
-useEffect(() => {
-    // Check if the user is logged in
-    const user = getAuthenticatedUser();
-    const signedOutElements = document.querySelectorAll(".signed-out");
-    const signedInElements = document.querySelectorAll(".signed-in");
-    if (!user) {
-        // Show login and signup buttons
-        signedOutElements.forEach(element => element.style.display = "flex");
-        signedInElements.forEach(element => element.style.display = "none");
-    } else {
-        // If logged in, show the logout button and user icon
-        signedOutElements.forEach(element => element.style.display = "none");
-        signedInElements.forEach(element => element.style.display = "flex");
-        const email = user.email;
-        fetchUserProfilePic(email);
-    }
-}, []);
+
+    /**
+     * This function is called when the component mounts.
+     * It checks if the user is logged in and updates the UI accordingly.
+     */
+    useEffect(() => {
+      // Check if the user is logged in
+      const user = getAuthenticatedUser();
+      const signedOutElements = document.querySelectorAll(".signed-out");
+      const signedInElements = document.querySelectorAll(".signed-in");
+      if (!user) {
+          // Show login and signup buttons
+          signedOutElements.forEach(element => element.style.display = "flex");
+          signedInElements.forEach(element => element.style.display = "none");
+      } else {
+          // If logged in, show the logout button and user icon
+          signedOutElements.forEach(element => element.style.display = "none");
+          signedInElements.forEach(element => element.style.display = "flex");
+          const email = user.email;
+          fetchUserProfilePic(email);
+      }
+    }, []);
+
 
     /**
      * Fetches the total revenue from the API
      */
     async function fetchUserProfilePic(email) {
-        try{
+        try {
             const fetchApiCall = `/userProfilePicture/${email}`;
             const data = await AsyncApiRequest("GET", {fetchApiCall}, null)
                 .then(response => response.json());
             setUserPicture(data);
-        } catch (err){
+        } catch (err) {
             setUserPicture("/icons/person-sharp.svg");
             console.log("Error fetching total revenue: ", err);
         }
     }
 
-
+    /**
+     * Navigates to the search page.
+     */
     function goToSearchPage() {
         navigate("/search");
     }
 
+
+    /**
+     * Navigates to the user page.
+     */
     function goToUserPage(){
-        navigate(`/userpage/`);
+        navigate(`/userpage`);
     }
 
-    // TODO : refactor
+    /**
+     * Logs out the user by deleting the authentication cookies and redirecting to the index page.
+     */
     function logout() {
         // Clear the authentication cookies
         deleteAuthorizationCookies();
@@ -89,12 +104,13 @@ useEffect(() => {
                             <img id="triangle-icon" width="12" height="12" src="/icons/triangle-sharp.svg" alt={""}/>
                         </button>
                         <div className="dropdown-content">
-                            <a href="#">Course 1</a>
-                            <a href="#">Course 2</a>
-                            <a href="#">Course 3</a>
-                            <a href="#">Course 4</a>
-                            <a href="#">Course 5</a>
-                            <a href="#">Course 6</a>
+                            <a href={"/search"}>Search/filters</a>
+                            <a href={"/admin"}>Admin</a>
+                            <a href={"/about"}>About</a>
+                            <a href={"/checkout"}>Checkout</a>
+                            <a href={"/noAccess"}>403 no access</a>
+                            <Link to={`/course/${1}`}> course</Link>
+                            <Link to={`/userpage/${1}`}> user page</Link>
                         </div>
                     </div>
                 </li>
@@ -104,7 +120,8 @@ useEffect(() => {
                             <button type="submit" id="search_btn">
                                 <img id="searchIcon" src="/icons/search-sharp.svg" alt="search icon"/>
                             </button>
-                            <input type="text" placeholder="search..." defaultValue={searchValue}  name="search"/>
+                            <input type="text" placeholder="Search..." defaultValue={searchValue}  name="search"/>
+
                         </form>
                     </div>
                 </li>
@@ -114,19 +131,25 @@ useEffect(() => {
                             <div className={"signed-in"}>
                                 <div className={"nav-user"}>
                                     <img className={"nav-user-image"} src={userPicture} alt={"User profile"}
-                                         onClick={() => goToUserPage()} />
+                                         onClick={() => goToUserPage()}/>
                                 </div>
-                                <button onClick={() => logout()} className="cta-button" id="logut-btn"
+                                <button onClick={() => logout()} className="cta-button" id="logout-btn"
                                         alt="Log out" href="#">
                                     <h5>Log out</h5>
                                 </button>
                             </div>
                             <div className={"signed-out"}>
-                                <button onClick={() => setShowLoginModal(true)} id="login-btn"
+                                <button  onClick={() => {
+                                    setShowLoginModal(true)
+                                    setShowSignupModal(false)
+                                }} id="login-btn"
                                         className={"secondary-button"} alt="Log in" href="#">
                                     <h5>Log in</h5>
                                 </button>
-                                <button onClick={() => setShowSignupModal(true)} className="cta-button" id="signup-btn"
+                                <button onClick={() => {
+                                    setShowSignupModal(true)
+                                    setShowLoginModal(false)
+                                }} className="cta-button" id="signup-btn"
                                         alt="Sign up" href="#">
                                     <h5>Sign up</h5>
                                 </button>
@@ -162,7 +185,9 @@ useEffect(() => {
                 </li>
             </nav>
 
-            <Outlet/>
+            <div className={"page-content"}>
+                <ScrollRoute><Outlet/></ScrollRoute>
+            </div>
 
             {/* Footer */}
             <footer>
@@ -191,8 +216,9 @@ useEffect(() => {
                 showLoginModal && createPortal(
                     <Login
                         changeMode={() => {
-                        setShowSignupModal(true)
-                        setShowLoginModal(false)}}
+                            setShowSignupModal(true)
+                            setShowLoginModal(false)
+                        }}
                         onClose={() => setShowLoginModal(false)}
                     />,
                     document.getElementById("auth-modal")

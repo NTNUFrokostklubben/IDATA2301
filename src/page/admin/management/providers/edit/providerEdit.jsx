@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import {AsyncApiRequest} from "../../../../../utils/requests";
 import {courseEntity, OfferableCourse, ProviderEntity} from "../../../../../utils/Classes/commonClasses";
 import {Skeleton} from "@mui/material";
-import {getProvider} from "../../../../../utils/commonRequests";
+import {getProvider, uploadImage} from "../../../../../utils/commonRequests";
 
 /**
  * Skeleton component for the ProviderForm
@@ -14,33 +14,50 @@ import {getProvider} from "../../../../../utils/commonRequests";
 export function ProviderFormSkeleton() {
     return (
         // Uses same ID as loaded form for styling purposes. Only 1 can be loaded at a time so this should be fine
-            <div className={"provider-skeleton"} id="provider-info">
-                <div className="input-wrapper"><label htmlFor="provider-name">Provider Name</label>
-                    <Skeleton className={"loader"} variant={"rectangular"} height={"2.5rem"} width={"100%"} /></div>
+        <div className={"provider-skeleton"} id="provider-info">
+            <div className="input-wrapper"><label htmlFor="provider-name">Provider Name</label>
+                <Skeleton className={"loader"} variant={"rectangular"} height={"2.5rem"} width={"100%"}/></div>
 
 
-                <div className="group-2">
-                    {/*TODO: Add preview of uploaded image (javascript component)*/}
-                    <div className="input-wrapper">
-                        <label htmlFor="provider-image">Provider Image</label>
-                        <Skeleton className={"loader"} variant={"rectangular"} height={"2.5rem"} width={"100%"} />
-                    </div>
-
-                    {/*TODO: Add preview of uploaded image (javascript component)*/}
-                    <div className="input-wrapper">
-                        <label htmlFor="provider-alt-image">Alternative Provider Image</label>
-                        <Skeleton className={"loader"} variant={"rectangular"} height={"2.5rem"} width={"100%"} />
-                    </div>
+            <div className="group-2">
+                {/*TODO: Add preview of uploaded image (javascript component)*/}
+                <div className="input-wrapper">
+                    <label htmlFor="provider-image">Provider Image</label>
+                    <Skeleton className={"loader"} variant={"rectangular"} height={"2.5rem"} width={"100%"}/>
                 </div>
 
-
-                <Skeleton variant={"rectangular"} className={"cta-button"} height={"2.5rem"} sx={"background-color: var(--cta)"} />
+                {/*TODO: Add preview of uploaded image (javascript component)*/}
+                <div className="input-wrapper">
+                    <label htmlFor="provider-alt-image">Alternative Provider Image</label>
+                    <Skeleton className={"loader"} variant={"rectangular"} height={"2.5rem"} width={"100%"}/>
+                </div>
             </div>
+
+
+            <Skeleton variant={"rectangular"} className={"cta-button"} height={"2.5rem"}
+                      sx={"background-color: var(--cta)"}/>
+        </div>
     )
 }
 
 function ProviderEditForm({provider}) {
     const navigate = useNavigate();
+    const [providerImage, setProviderImage] = useState([])
+    const [providerImageAlt, setProviderImageAlt] = useState([])
+
+    const [imageChanged, setImageChanged] = useState(false)
+    const [altImgChanged, setAltImgChanged] = useState(false)
+
+    useEffect(() => {
+        const img = new Image();
+        img.src = provider.logoLink;
+        setProviderImage(img);
+
+        const imgAlt = new Image();
+        imgAlt.src = provider.altLogoLink;
+        setProviderImageAlt(imgAlt);
+
+    }, [provider.logoLink, provider.altLogoLink]);
 
     function handleFormSubmission(event) {
         event.preventDefault();
@@ -48,17 +65,77 @@ function ProviderEditForm({provider}) {
 
         const data = new FormData(event.target);
         const value = Object.fromEntries(data.entries());
-        const provider = new ProviderEntity(value.id, value.name, value.imgLink, value.imgLinkAlt);
+        const image = data.get("imgLink")
+        const altImg = data.get("imgLinkAlt")
+        const builtProvider = new ProviderEntity(value.id, value.name, value.imgLink, value.imgLinkAlt);
 
-        postProvider(provider)
-            .then(alert("Successfully added Offerable Course")).then(navigate(-1))
+
+        if (imageChanged && altImgChanged) {
+            uploadImage(image).then((r) => {
+                builtProvider.logoLink = r;
+            }).then(() => {
+                uploadImage(altImg).then((r) => {
+                    builtProvider.altLogoLink = r;
+                }).then(() => {
+                    postProvider(builtProvider).then(alert("Successfully added Provider")).then(navigate(-1))
+                })
+            })
+
+        } else if (imageChanged) {
+            uploadImage(image).then((r) => {
+                builtProvider.logoLink = r;
+            }).then(() => {
+                builtProvider.altLogoLink = provider.altLogoLink;
+                postProvider(builtProvider).then(alert("Successfully added Provider")).then(navigate(-1))
+            })
+        } else if (altImgChanged) {
+            uploadImage(altImg).then((r) => {
+                builtProvider.altLogoLink = r;
+            }).then(() => {
+                builtProvider.logoLink = provider.logoLink;
+                postProvider(builtProvider).then(alert("Successfully added Provider")).then(navigate(-1))
+            })
+        } else {
+            builtProvider.logoLink = provider.logoLink;
+            builtProvider.altLogoLink = provider.altLogoLink;
+            postProvider(builtProvider).then(alert("Successfully added Provider")).then(navigate(-1))
+        }
+
+
     }
 
+    /**
+     * Handles form submission after successful Image Upload for Course
+     *
+     * @param provider
+     * @returns {Promise<void>}
+     */
     async function postProvider(provider) {
         try {
             await AsyncApiRequest("POST", "/provider", provider);
         } catch (e) {
-            throw e
+            throw new Error("Error posting provider: " + e);
+        }
+    }
+
+    /**
+     * Handles image change event.
+     * Used to indicate that a new image needs to be uploaded to server.
+     *
+     * @param image
+     * @returns {Promise<void>}
+     */
+    async function handleChangeImage(image, alt) {
+
+        const img = new Image();
+        img.src = URL.createObjectURL(image[0]);
+
+        if (alt) {
+            setProviderImageAlt(img)
+            setAltImgChanged(true);
+        } else {
+            setProviderImage(img);
+            setImageChanged(true);
         }
     }
 
@@ -71,20 +148,22 @@ function ProviderEditForm({provider}) {
                     <input type="text" id="provider-name" name="name" defaultValue={provider.name} required/></div>
 
 
-                <div className="group-2">
-                    {/*TODO: Add preview of uploaded image (javascript component)*/}
+                <div className={"imageUpload-wrapper"}>
                     <div className="input-wrapper">
                         <label htmlFor="provider-image">Provider Image</label>
-                        <input type="file" id="provider-image" name="imgLink" defaultValue={provider.imgLink}
-                               required/>
+                        <input type="file" id="provider-image" name="imgLink"
+                               onChange={(e) => handleChangeImage(e.target.files, false)} required={imageChanged}/>
                     </div>
+                    <img className={"img-preview"} src={providerImage.src}/>
+                </div>
 
-                    {/*TODO: Add preview of uploaded image (javascript component)*/}
+                <div className={"imageUpload-wrapper"}>
                     <div className="input-wrapper">
                         <label htmlFor="provider-alt-image">Alternative Provider Image</label>
                         <input type="file" id="provider-alt-image" name="imgLinkAlt"
-                               defaultValue={provider.imgAltLink} required/>
+                               onChange={(e) => handleChangeImage(e.target.files, true)} required={altImgChanged}/>
                     </div>
+                    <img className={"img-preview"} src={providerImageAlt.src}/>
                 </div>
 
 
@@ -101,7 +180,6 @@ export default function ProviderEdit(courseId) {
 
     const [provider, setProvider] = useState([]);
     const [loading, setLoading] = useState(true);
-
 
 
     useEffect(() => {

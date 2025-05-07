@@ -18,11 +18,11 @@ export class courseEntity {
 
 
 export class ProviderEntity {
-    constructor(id, name, imgLink, imgAltLink) {
+    constructor(id, name, logoLink, altLogoLink) {
         this.id = id;
         this.name = name;
-        this.imgLink = imgLink;
-        this.imgAltLink = imgAltLink;
+        this.logoLink = logoLink;
+        this.altLogoLink = altLogoLink;
     }
 }
 
@@ -61,7 +61,7 @@ export class OfferableCourse {
 
 export class CourseWithPrice {
     constructor(Course, minDiscountedPrice, closestDate, rating, numberOfRatings) {
-        this.Course = Course;
+        this.course = Course;
         this.minDiscountedPrice = minDiscountedPrice;
         this.closestDate = closestDate;
         this.rating = rating;

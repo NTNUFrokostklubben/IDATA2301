@@ -18,7 +18,9 @@ export function AsyncApiRequest(method, url, requestBody) {
     console.log(fullUrl)
     let body = null;
     let headers = {};
-    if (requestBody) {
+    if (requestBody instanceof FormData) {
+        body = requestBody;
+    } else if (requestBody) {
         body = JSON.stringify(requestBody);
         headers = {
             'Content-Type': 'application/json',
