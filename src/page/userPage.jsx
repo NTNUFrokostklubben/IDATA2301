@@ -27,7 +27,7 @@ export default function UserPage (){
     );
 
     useEffect(() => {
-        if (!user) return;  // ✅ Don't fetch unless user is set
+        if (!user) return;  // Don't fetch unless user is set
 
         async function handleCourseData() {
             try {
@@ -55,7 +55,7 @@ export default function UserPage (){
             return (<h5>loading...</h5>)
         }
 
-
+        handleFavoritesData();
         handleCourseData();
     }, [user]);
 
@@ -68,7 +68,6 @@ export default function UserPage (){
             const userData = await AsyncApiRequest("GET", tempApiCall, null)
                 .then(response => response.json())
             setUser(userData)
-            console.log(userData)
         }catch (e){console.error(e)}
     }
     return (

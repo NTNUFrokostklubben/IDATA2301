@@ -6,7 +6,7 @@ import ReviewWriter from "../../component/Rating/reviewWriter";
 import {UserCourse} from "../../utils/Classes/commonClasses";
 
 
-export function ReviewComponent({cid, averageRating}) {
+export function ReviewComponent({cid, uid, averageRating}) {
     const [userCourseData, setUserCourseData] = useState([]);
     const [halfStar, setHalfStar] = useState(false)
     const [loading, setLoading] = useState(true);
@@ -14,9 +14,11 @@ export function ReviewComponent({cid, averageRating}) {
     const[starBars, setStarBars] = useState([])
     const[currentStar, setCurrentStar] = useState(5)
     const [filteredReviews, setFilteredReviews] = useState([]);
-    const [allowedToReview, setAllowedToReview] = useState(true);
+    const [editReview, setEditReview] = useState(false);
     const [allowEditReview, setAllowEditReview] = useState(false);
     const [isDisabled, setIsDisabled] = useState(true);
+    const [isUserEnrolled, setIsUserEnrolled] = useState(false);
+
 
     // Add state for visible items count
     const [visibleReviews, setVisibleReviews] = useState(3); // Start with 3 reviews
@@ -25,7 +27,6 @@ export function ReviewComponent({cid, averageRating}) {
     const loadMoreReviews = () => {
         setVisibleReviews(prev => prev + 3); // Increase by 3 each click
     };
-
 
     const fetchData = async () => {
         if(averageRating !== undefined) {
@@ -40,19 +41,24 @@ export function ReviewComponent({cid, averageRating}) {
         const data = await AsyncApiRequest("GET", `/userCourses/course/${cid}`, null)
             .then( response  => response.json());
         const filteredAndSorted = data
-            .filter(item => item.review?.rating > 0)
+            .filter(item => item.review != null)
             .sort((a, b) => b.review.rating - a.review.rating);
-
         setUserCourseData(data)
+        setIsUserEnrolled(data.some(course =>  course.user?.id === uid))
         setFilteredReviews(filteredAndSorted)
         calculateStarDistribution(data.map(item => item.review.rating));
-        setAllowedToReview(!filteredAndSorted.some(obj => obj.user?.id === 1))
+        setAllowEditReview(filteredAndSorted.some(obj => obj.user?.id === uid ))
 
     }
+
+    useEffect(() => {
+
+    }, [isUserEnrolled]);
+
+
     const fetching = async () => {
         try {
             await Promise.all([fetchData(), fetchRatingArray()])
-            console.log(allowedToReview)
         } catch (e) {
             console.error(e)
         }
@@ -72,8 +78,8 @@ export function ReviewComponent({cid, averageRating}) {
     }, [averageRating]);
 
     const finishedEdits = () =>{
-        setAllowEditReview(false);
-        setIsDisabled(true);
+        setAllowEditReview(true);
+        setEditReview(false)
         refresh();
     }
 
@@ -102,7 +108,6 @@ export function ReviewComponent({cid, averageRating}) {
             (a.review.rating % currentStar) - (b.review.rating % currentStar)
         );
         setFilteredReviews(filtered);
-        console.log(filtered)
     }
     }, [currentStar]);
 
@@ -176,9 +181,12 @@ export function ReviewComponent({cid, averageRating}) {
                         Show More Reviews
                     </button>
                 )}
-                    {allowedToReview && ( <ReviewWriter cid={1} uid={1} />)}
-                    {isDisabled && !allowedToReview && (<button onClick={()=> {setAllowEditReview(true); setIsDisabled(false)}} >Edit your review?</button>)}
-                    {allowEditReview && (( <ReviewWriter cid={1} uid={1} existingReview={getUserReview(1)} callback={finishedEdits} />))}
+                    {uid && cid && (
+                    <div className={"review-writer-section-writer"}>
+                    {isUserEnrolled && !allowEditReview && ( <ReviewWriter cid={cid} uid={uid} />)}
+                    {isUserEnrolled && !editReview && allowEditReview && (<button onClick={()=> {setEditReview(true)}} >Edit your review?</button>)}
+                    {editReview && (( <ReviewWriter cid={cid} uid={uid} existingReview={getUserReview(uid)} callback={finishedEdits} />))}
+                    </div>)}
             </div>)}
 
 

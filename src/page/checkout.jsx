@@ -1,6 +1,6 @@
 import "./checkout.css"
 import {useNavigate, useParams} from "react-router-dom";
-import React, {useContext, useMemo, useRef, useState} from "react";
+import React, {useContext, useEffect, useMemo, useRef, useState} from "react";
 import {UserContext} from "../userContext";
 import {createPortal} from "react-dom";
 import Login from "../component/modals/auth/login";
@@ -10,15 +10,15 @@ import Select from 'react-select'
 import countryList from "react-select-country-list";
 import {AsyncApiRequest} from "../utils/requests";
 import SpinnerLoader from "../component/modals/Spinner/spinnerLoader";
+import {getAuthenticatedUser} from "../utils/authentication/authentication";
 
 
 export default function Checkout() {
 
     const [loading, setLoading] = useState(false);
-    const [status, setStatus] = useState(Number);
+    const [user, setUser] = useState(null);
     const [showLoginModal, setShowLoginModal] = useState(Boolean)
     const [showSignupModal, setShowSignupModal] = useState(Boolean)
-    const user = useContext(UserContext);
     const courseData = useSelector((state) => state.data.sharedObject)
     const [countrySelect, setCountrySelect] = useState('')
     const options = useMemo(() => countryList().getData(), [])
@@ -26,17 +26,16 @@ export default function Checkout() {
     const inputRef = useRef(null);
     const navigate = useNavigate();
 
-    const handlePurchase =  async () => {
-        setLoading(true);
-        setStatus( AsyncApiRequest("POST", `/transaction/offerId/${courseData.id}/userid/${1}`, null).status
-        )
-        /*
-         fetch(`http://localhost:8080/api/transaction/offerId/${courseData.id}/userid/${1}`, {method:'POST'})
-            .then((response) => {setStatus(response.status)})
-            .catch(err => console.error('Error fetching data:', err));
-         */
+    const sendUserData = async () =>{
+
+        const status = AsyncApiRequest("POST", `/transaction/offerId/${courseData.id}/userid/${user.id}`, null);
+
         try {
-            // Simulate API call
+            if (status.status === 201){
+                const addUserCourse = AsyncApiRequest("POST" ,`/userCourses/add/${user.id}/${courseData.id}`, null)
+                    .then( response  => response.json());
+            }
+
             await new Promise((resolve) => setTimeout(resolve, 2000));
 
         } catch (err) {
@@ -46,6 +45,21 @@ export default function Checkout() {
             navigate('/order-complete');
         }
     }
+
+    const handlePurchase =  async () => {
+        let user = getAuthenticatedUser();
+        setLoading(true);
+        const uid = AsyncApiRequest("GET",`/UserByEmail/${user.email}`, null )
+            .then( response  => response.json());
+        setUser(uid)
+
+    }
+
+    useEffect(() => {
+        if (user === null) return;
+        console.log(user)
+        sendUserData()
+    }, [user]);
 
 
         const handleExpiration = (e) => {
@@ -84,6 +98,7 @@ export default function Checkout() {
     const openKlarna = () => openPopup("https://docs.klarna.com/")
 
     function loggedIn(){
+        let user = getAuthenticatedUser();
         if(user == null){
                 setShowLoginModal(true)
         }
@@ -119,11 +134,11 @@ export default function Checkout() {
                 <section id="billing">
                     <h5 className="checkout-headers"> Additional Contact Information</h5>
                     <p id="leave-empty-text">Leave empty if no other recipients</p>
-                    <label htmlFor="email"></label>
+                    <label htmlFor="checkout-email"></label>
                     <input className="large-input-field"
                            type="text"
 
-                           id="email"
+                           id="checkout-email"
                            name="email input"
                            pattern={"\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}\\b"}
                            placeholder="Email"/>

@@ -8,6 +8,7 @@ import Register from "../component/modals/auth/register";
 import Index from "./index";
 import {deleteAuthorizationCookies, getAuthenticatedUser} from "../utils/authentication/authentication";
 import {AsyncApiRequest} from "../utils/requests";
+import ScrollRoute from "../component/routing/scrollRoute";
 // import {Modal} from "react-native";
 
 export default function Layout() {
@@ -20,38 +21,40 @@ export default function Layout() {
     const navigate = useNavigate();
 
 
+
     /**
      * This function is called when the component mounts.
      * It checks if the user is logged in and updates the UI accordingly.
      */
     useEffect(() => {
-    // Check if the user is logged in
-    const user = getAuthenticatedUser();
-    const signedOutElements = document.querySelectorAll(".signed-out");
-    const signedInElements = document.querySelectorAll(".signed-in");
-    if (!user) {
-        // Show login and signup buttons
-        signedOutElements.forEach(element => element.style.display = "flex");
-        signedInElements.forEach(element => element.style.display = "none");
-    } else {
-        // If logged in, show the logout button and user icon
-        signedOutElements.forEach(element => element.style.display = "none");
-        signedInElements.forEach(element => element.style.display = "flex");
-        const email = user.email;
-        fetchUserProfilePic(email);
-    }
-}, []);
+      // Check if the user is logged in
+      const user = getAuthenticatedUser();
+      const signedOutElements = document.querySelectorAll(".signed-out");
+      const signedInElements = document.querySelectorAll(".signed-in");
+      if (!user) {
+          // Show login and signup buttons
+          signedOutElements.forEach(element => element.style.display = "flex");
+          signedInElements.forEach(element => element.style.display = "none");
+      } else {
+          // If logged in, show the logout button and user icon
+          signedOutElements.forEach(element => element.style.display = "none");
+          signedInElements.forEach(element => element.style.display = "flex");
+          const email = user.email;
+          fetchUserProfilePic(email);
+      }
+    }, []);
+
 
     /**
      * Fetches the total revenue from the API
      */
     async function fetchUserProfilePic(email) {
-        try{
+        try {
             const fetchApiCall = `/userProfilePicture/${email}`;
             const data = await AsyncApiRequest("GET", {fetchApiCall}, null)
                 .then(response => response.json());
             setUserPicture(data);
-        } catch (err){
+        } catch (err) {
             setUserPicture("/icons/person-sharp.svg");
             console.log("Error fetching total revenue: ", err);
         }
@@ -63,6 +66,7 @@ export default function Layout() {
     function goToSearchPage() {
         navigate("/search");
     }
+
 
     /**
      * Navigates to the user page.
@@ -117,6 +121,7 @@ export default function Layout() {
                                 <img id="searchIcon" src="/icons/search-sharp.svg" alt="search icon"/>
                             </button>
                             <input type="text" placeholder="Search..." defaultValue={searchValue}  name="search"/>
+
                         </form>
                     </div>
                 </li>
@@ -126,7 +131,7 @@ export default function Layout() {
                             <div className={"signed-in"}>
                                 <div className={"nav-user"}>
                                     <img className={"nav-user-image"} src={userPicture} alt={"User profile"}
-                                         onClick={() => goToUserPage()} />
+                                         onClick={() => goToUserPage()}/>
                                 </div>
                                 <button onClick={() => logout()} className="cta-button" id="logout-btn"
                                         alt="Log out" href="#">
@@ -134,11 +139,17 @@ export default function Layout() {
                                 </button>
                             </div>
                             <div className={"signed-out"}>
-                                <button onClick={() => setShowLoginModal(true)} id="login-btn"
+                                <button  onClick={() => {
+                                    setShowLoginModal(true)
+                                    setShowSignupModal(false)
+                                }} id="login-btn"
                                         className={"secondary-button"} alt="Log in" href="#">
                                     <h5>Log in</h5>
                                 </button>
-                                <button onClick={() => setShowSignupModal(true)} className="cta-button" id="signup-btn"
+                                <button onClick={() => {
+                                    setShowSignupModal(true)
+                                    setShowLoginModal(false)
+                                }} className="cta-button" id="signup-btn"
                                         alt="Sign up" href="#">
                                     <h5>Sign up</h5>
                                 </button>
@@ -174,7 +185,9 @@ export default function Layout() {
                 </li>
             </nav>
 
-            <Outlet/>
+            <div className={"page-content"}>
+                <ScrollRoute><Outlet/></ScrollRoute>
+            </div>
 
             {/* Footer */}
             <footer>
@@ -203,8 +216,9 @@ export default function Layout() {
                 showLoginModal && createPortal(
                     <Login
                         changeMode={() => {
-                        setShowSignupModal(true)
-                        setShowLoginModal(false)}}
+                            setShowSignupModal(true)
+                            setShowLoginModal(false)
+                        }}
                         onClose={() => setShowLoginModal(false)}
                     />,
                     document.getElementById("auth-modal")
