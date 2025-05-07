@@ -1,10 +1,10 @@
 import {useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {ProviderFormSkeleton} from "../../providers/edit/providerEdit";
-import {getUser, putUser, uploadImage} from "../../../../../utils/commonRequests";
+import {getRoles, getUser, putUser, uploadImage} from "../../../../../utils/commonRequests";
 import "./editUser.css"
 
-function UserEditForm({user}) {
+function UserEditForm({user, roles}) {
 
     const navigate = useNavigate();
     const [userImage, setUserImage] = useState([])
@@ -16,17 +16,15 @@ function UserEditForm({user}) {
         setUserImage(img);
     }, [user.profilePicture]);
 
+
     function handleSubmit(event) {
         event.preventDefault();
 
         const data = new FormData(event.target);
         const image = data.get("profilePicture")
-        const active = data.get("active")
-        console.log(active)
-
+        data.set("role", buildRoleObject());
 
         if (imageChanged) {
-            console.log(image)
             uploadImage(image).then(r => {
                 data.set("profilePicture", r);
 
@@ -46,15 +44,23 @@ function UserEditForm({user}) {
     }
 
 
-
-
     function handleChangeImage(image) {
-        console.log(image)
         const img = new Image();
         img.src = URL.createObjectURL(image[0]);
 
         setUserImage(img);
         setImageChanged(true);
+    }
+
+    function buildRoleObject() {
+
+        // TODO: Change this to nest correctly. Need to change how it adds to formdata as well
+        const role = [];
+        const checkboxes = document.querySelectorAll("input[name='role']:checked");
+        checkboxes.forEach((checkbox) => {
+            role.push(roles.find(r => r.name === checkbox.value));
+        })
+        return role;
     }
 
     return (
@@ -82,6 +88,21 @@ function UserEditForm({user}) {
                     <img className={"img-preview"} src={userImage.src}/>
                 </div>
 
+                <div id={"user-roles"} name={"role"}>
+                    <label htmlFor="user-roles">User Roles</label>
+                    {/*    Multiple checkboxes, 1 for each role. Should pre-check the roles that the user already has. roles property has same structure as the role parameter on user*/}
+
+                    {roles.map((role) =>
+                        (
+                            <div key={role.id}>
+                                <label htmlFor={role.name}>{role.name}</label>
+                                <input type="checkbox" id={role.name} name={"role"} value={role.name}
+                                       defaultChecked={user.role.some(r => JSON.stringify(r) === JSON.stringify(role))}/>
+                            </div>
+                        )
+                    )}
+                </div >
+
                 <div className={"input-wrapper"}>
                     <label htmlFor={"active"}>Active</label>
                     <input type="checkbox" id={"active"} name={"active"}
@@ -108,12 +129,16 @@ export default function UserEdit(userId) {
     const {id} = useParams();
 
     const [user, setUser] = useState([]);
+    const [roles, setRoles] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                await fetchUser();
+                await Promise.all([
+                    fetchUser(),
+                    fetchRoles()
+                ])
                 setLoading(false);
             } catch (e) {
                 console.error(e)
@@ -126,8 +151,16 @@ export default function UserEdit(userId) {
     async function fetchUser() {
         try {
             const u = await getUser(id);
-            console.log(u);
             setUser(u);
+        } catch (e) {
+            throw new Error(e);
+        }
+    }
+
+    async function fetchRoles() {
+        try {
+            const r = await getRoles();
+            setRoles(r)
         } catch (e) {
             throw new Error(e);
         }
@@ -136,7 +169,7 @@ export default function UserEdit(userId) {
     return (
         <div className="userInfo-page">
             <h2>Edit Provider</h2>
-            {loading ? <UserFormSkeleton/> : <UserEditForm user={user}/>}
+            {loading ? <UserFormSkeleton/> : <UserEditForm user={user} roles={roles}/>}
         </div>
     )
 }

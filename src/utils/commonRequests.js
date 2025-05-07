@@ -204,6 +204,13 @@ export function getUser(uid) {
         });
 }
 
+/**
+ * Updates a user to Server with the given uid. Limited parameters
+ *
+ * @param uid User ID
+ * @param user User object (profile picture, roles, active)
+ * @returns {Promise<*>}
+ */
 export function putUser(uid, user) {
     return AsyncApiRequest("PUT", "/user/" + uid, user)
         .then(response => {
@@ -211,6 +218,26 @@ export function putUser(uid, user) {
                 return response.json();
             } else {
                 throw new Error("Error posting user");
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            throw error;
+        });
+}
+
+/**
+ * Gets all roles from Server
+ *
+ * @returns {Promise<*>}
+ */
+export function getRoles() {
+    return AsyncApiRequest("GET", "/roles", null)
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error("Error fetching roles");
             }
         })
         .catch(error => {
