@@ -38,17 +38,19 @@ export default function AdminDashboard() {
     useEffect(() => {
         const fetchdata = async() => {
             try{
-                await fetchRevenueData();
-                await fetchReviews();
-                await fetchTotalRevenue();
-                await fetchTotalCourses();
-                await fetchTotalUsers();
-                await fetchAvgRevenue();
-                await fetchRevenueLast30Days();
-                await fetchNewUsers();
+                await Promise.all([
+                    fetchRevenueData(),
+                    fetchReviews(),
+                    fetchTotalRevenue(),
+                    fetchTotalCourses(),
+                    fetchTotalUsers(),
+                    fetchAvgRevenue(),
+                    fetchRevenueLast30Days(),
+                    fetchNewUsers()
+                ]);
                 setLoading(false);
             } catch (err){
-                console.error("Error fetching data: ", err);
+                console.error("Error fetching admin dashboard data: ", err);
             }
         }
         fetchdata();
@@ -68,7 +70,7 @@ export default function AdminDashboard() {
             }));
             setRevenueData(revenue);
         } catch (err){
-            console.error("Error fetching provider stats : ", err);
+            throw new Error("Error fetching revenue data: ", err);
         }
     }
 
@@ -84,7 +86,7 @@ export default function AdminDashboard() {
                 userCourse.course.id));
             setReviews(reviews);
         } catch (err){
-            console.log("Error fetching reviews: ", err)
+            throw new Error("Error fetching reviews: ", err);
         }
     }
 
@@ -97,7 +99,7 @@ export default function AdminDashboard() {
                 .then(response => response.json());
             setTotalRevenue(data);
         } catch (err){
-            console.log("Error fetching total revenue: ", err);
+            throw new Error("Error fetching total revenue: ", err);
         }
     }
 
@@ -110,7 +112,7 @@ export default function AdminDashboard() {
                 .then(response => response.json());
             setTotalCourses(data);
         } catch (err){
-            console.log("Error fetching total courses: ", err);
+            throw new Error("Error fetching total courses: ", err);
         }
     }
 
@@ -123,7 +125,7 @@ export default function AdminDashboard() {
                 .then(response => response.json());
             setTotalUsers(data);
         } catch (err){
-            console.log("Error fetching total revenue: ", err);
+            throw new Error("Error fetching total users: ", err);
         }
     }
 
@@ -136,7 +138,7 @@ export default function AdminDashboard() {
                 .then(response => response.json());
             setAvgRevenue(data);
         } catch (err){
-            console.log("Error fetching total revenue: ", err);
+            throw new Error("Error fetching total revenue: ", err);
         }
     }
 
@@ -149,7 +151,7 @@ export default function AdminDashboard() {
                 .then(response => response.json());
             setRevenueLast30Days(data);
         } catch (err){
-            console.log("Error fetching total courses: ", err);
+            throw new Error("Error fetching total revenue last 30 days: ", err);
         }
     }
 
@@ -162,7 +164,7 @@ export default function AdminDashboard() {
                 .then(response => response.json());
             setNewUsers(data);
         } catch (err){
-            console.log("Error fetching total revenue: ", err);
+            throw new Error("Error fetching new users: ", err);
         }
     }
 

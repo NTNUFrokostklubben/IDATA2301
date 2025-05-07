@@ -33,7 +33,7 @@ export default function Index() {
                 await fetchCourses();
                 setLoading(false);
             } catch (err){
-                console.error("Error fetching data: ", err);
+                throw new Error("Error fetching course cards: ", err);
             }
         }
         fetchData();
