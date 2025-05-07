@@ -84,11 +84,11 @@ export default function AdminDashboard() {
      */
     async function fetchReviews(){
         try{
-            const data = await AsyncApiRequest("GET", "/userCourses/lastReviews", null)
+            const data = await AsyncApiRequest("GET", "/userCourses/lastUserCourses", null)
                 .then(response => response.json());
-            const reviews = data.map((review) => new reviewEntity(review.id, review.rating,
-                review.comment, review.course.title, review.user.name, review.user.profilePicture,
-                review.course.id));
+            const reviews = data.map((userCourse) => new reviewEntity(userCourse.id, userCourse.review.rating,
+                userCourse.review.comment, userCourse.course.title, userCourse.user.name, userCourse.user.profilePicture,
+                userCourse.course.id));
             setReviews(reviews);
         } catch (err){
             console.log("Error fetching reviews: ", err)

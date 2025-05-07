@@ -9,7 +9,7 @@ export default function Review ({rating, title= false}){
 
     if (!rating) {
         return <div>data is missing.</div>;
-    };
+    }
     let array =  Array(rating.review.rating).fill(0);
 
 
