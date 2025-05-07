@@ -25,6 +25,7 @@ import {deleteAuthorizationCookies, getAuthenticatedUser} from "./utils/authenti
 import OrderComplete from "./page/orderComplete";
 import NoAccess from "./page/NoAccess";
 import ProtectedRoute from "./component/routing/ProtectedRoute";
+import NotFound from "./page/notFound";
 
 function App() {
 
@@ -42,6 +43,7 @@ function App() {
                 <Route path={"about"} element={<About/>}/>
                 <Route path={"checkout/:id"} element={<Checkout/>}/>
                 <Route path={"noAccess"} element={<NoAccess/>}/>
+                <Route path={"notFound"} element={<NotFound/>}/>
                 <Route path={"/admin"} element={<AdminNav/>}>
                     <Route index element={<AdminDashboard/>}/>
                     <Route path={"/admin/offerableCourses"}>

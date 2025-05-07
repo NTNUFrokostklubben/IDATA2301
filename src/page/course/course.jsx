@@ -1,12 +1,13 @@
 import {use, useEffect, useState} from "react";
 import "./course.css"
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {AsyncApiRequest} from "../../utils/requests";
 import CourseProviderCard from "../../component/courseProviderCard/courseProviderCard";
 import {ReviewComponent} from "./reviewSection";
 import FavoriteButton from "../../component/favorite/favoriteButton";
 import {getAuthenticatedUser} from "../../utils/authentication/authentication";
 import {useSelector} from "react-redux";
+
 
 
 export default function Course() {
@@ -21,6 +22,8 @@ export default function Course() {
     const [isUserEnrolled, setIsUserEnrolled] = useState(false);
     const {id} = useParams();
     const userData = useSelector((state) => state.data.user)
+    const navigate = useNavigate();
+
     useEffect(() => {
         setLoading(true)
 
@@ -74,6 +77,7 @@ export default function Course() {
             setLoading(false);
         } catch (error) {
             console.error("Error fetching course data:", error);
+            navigate("/notFound")
         }
     }
 

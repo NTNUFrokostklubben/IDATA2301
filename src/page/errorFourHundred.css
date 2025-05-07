@@ -1,4 +1,4 @@
-.no-access{
+.error-four-hundred{
     padding-top: 8rem;
     display: flex;
     justify-content: center;
@@ -7,7 +7,7 @@
     height: 70%;
     padding-bottom: 4rem;
 }
-.access-denied{
+.error-four-image{
     height: 15%;
     width: 15%;
 }
