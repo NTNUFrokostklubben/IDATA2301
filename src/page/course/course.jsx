@@ -15,7 +15,8 @@ export default function Course() {
     const [user, setUser] = useState(null);
     const [offerableCourseData, setOfferableCourseData] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [isFavorite, setFavorite] = useState(false);
+    const [isFavorite, setFavorite] = useState(null);
+    const [isFavoriteLoaded, setIsFavoriteLoaded] = useState(false);
     const [keywords, setKeywords] = useState([])
     const [isUserEnrolled, setIsUserEnrolled] = useState(false);
     const {id} = useParams();
@@ -53,6 +54,11 @@ export default function Course() {
         checkFavorite()
     }, [user]);
 
+    useEffect(() => {
+        if (isFavorite === null) return;
+
+        setIsFavoriteLoaded(true)
+    }, [isFavorite]);
     function handleUserData() {
        setUser(userData)
     }
@@ -151,7 +157,7 @@ export default function Course() {
                 <section id="course-splash">
 
                     <div id="course-splash-right-side">
-                        {user && (
+                        {user && isFavoriteLoaded &&  (
                         <div id="course-page-add-favorite"><FavoriteButton uid={user.id} cid={id} isFav={isFavorite}/></div>)}
                         <h4 id="course-splash-title">{courseData.title} </h4>
 

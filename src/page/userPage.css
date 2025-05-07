@@ -19,7 +19,7 @@
     display: flex;
     background-color: white;
     width: 15rem;
-    height: 18rem;
+    height: 20rem;
     justify-content: center;
     max-width: 15rem;
     flex-direction: column;
@@ -63,7 +63,8 @@
     background-color: white;
     justify-self: flex-start;
     width: 46.7rem;
-    height: 18rem;
+    min-height: 18rem;
+    padding-bottom: 1rem;
 }
 .user-course-item{
     padding-top: 0.7rem;

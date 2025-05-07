@@ -10,7 +10,7 @@ export default function Review ({rating: userCourse, title= false}){
     if (!userCourse) {
         return <div>data is missing.</div>;
     };
-    let array =  Array(userCourse.review.rating).fill(0);
+    let array =  Array(userCourse.review?.rating).fill(0);
 
 
     return (
@@ -19,7 +19,7 @@ export default function Review ({rating: userCourse, title= false}){
                 <h5 className="review-title">{userCourse.course.title}</h5>
             </Link>)
             }
-            <h6 className="review-title">{userCourse.review.title}</h6>
+            <h6 className="review-title">{userCourse.review?.title}</h6>
             <div className="user-review-section">
                 <picture>
                     <img className="user-review-image" src={userCourse.user.profilePicture} alt="user"/>
@@ -32,9 +32,9 @@ export default function Review ({rating: userCourse, title= false}){
                         )
                     }
                 </div>
-                <p className="review-date">Reviewed on {formatDate(userCourse.review.date)} </p>
+                <p className="review-date">Reviewed on {formatDate(userCourse.review?.date)} </p>
             </div>
-            <p className="review-text">{userCourse.review.comment}</p>
+            <p className="review-text">{userCourse.review?.comment}</p>
         </div>
     )
 
