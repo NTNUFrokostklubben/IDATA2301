@@ -2,13 +2,33 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
+    text-decoration: none;
     width: 13rem;
     height: 7rem;
 }
 .provider-name, .provider-card-price{
     padding-bottom: 0.6rem;
     font-size: 1.08rem;
+    text-decoration: none;
     color: var(--textWhite);
+}
+
+.original-price {
+    font-size: 1rem;
+    text-decoration: line-through;
+    color: gray;
+    margin-right: 8px;
+}
+
+.discounted-price {
+    font-size: 1rem;
+    padding-top: 0.4rem;
+    color: var(--textWhite);
+}
+
+.provider-card-price-and-discount{
+    display: flex;
+    flex-direction: column;
 }
 
 .provider-card-text{
