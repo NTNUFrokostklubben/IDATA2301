@@ -2,30 +2,20 @@ import React, { useState, useEffect } from "react";
 import "./Index.css";
 import Search from "./search/search";
 import {Link, Route} from "react-router-dom";
-import CourseCard from "../component/card/CourseCard";
+import CourseCard from "../component/card/courseCard";
+import Card from "../component/card/card";
 import Register from "../component/modals/auth/register";
 import {createPortal} from "react-dom";
 import {AsyncApiRequest} from "../utils/requests";
-
-class courseEntity {
-    constructor(id, title, description, imgLink) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.imgLink = imgLink;
-        this.price = null;
-    }
-    setPrice(price) {
-        this.price = price;
-    }
-}
+import {CourseWithPrice} from "../utils/Classes/commonClasses";
 
 export default function Index() {
 
     const [showSignupModal, setShowSignupModal] = useState()
     const [courseShown, setCourseShown] = useState(calcSceneStart());
     const [courseIndex, setCourseIndex] = useState(0);
-    const [courses, setCourses] = useState([]);
+    const [courseCards, setCourseCards] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     // Use to resize the course shown based on window size
     useEffect(() => {
@@ -36,34 +26,32 @@ export default function Index() {
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
+
     useEffect(() => {
-        if (courses.length === 0) {
-            fetchCourses();
+        const fetchData = async () => {
+            try{
+                await fetchCourses();
+                setLoading(false);
+            } catch (err){
+                throw new Error("Error fetching course cards: ", err);
+            }
         }
+        fetchData();
     }, []);
 
     /**
-     * Fetches all courses from the API
+     * Fetches all courseCards from the API
      */
     async function fetchCourses() {
         try {
-            const data = await AsyncApiRequest("GET", "/courses", null)
+            const data = await AsyncApiRequest("GET", "/courses/courseCard", null)
                 .then(response => response.json());
-            const courses = data.map((course) => new courseEntity(course.id, course.title, course.description, course.imgLink));
-            setCourses(courses);
-
-            const priceFetches = courses.map(async (course) => {
-                const fetchApiCall = `/offerableCourses/coursePrice/${course.id}`;
-                const price = await AsyncApiRequest("GET", fetchApiCall, null)
-                    .then(response => response.json());
-                course.setPrice(price);
-            });
-
-            // Wait for all price fetches to complete
-            await Promise.all(priceFetches);
-            setCourses([...courses]); // Ensure state is updated with new course prices
+            const courseCards = data.map((courseCard) => new CourseWithPrice(courseCard.course,
+                courseCard.minDiscountedPrice, courseCard.closestDate, courseCard.rating, courseCard.numberOfRatings));
+            setCourseCards(courseCards);
+            console.log(courseCards);
         } catch (err) {
-            console.error("Error fetching courses: ", err);
+            throw new Error("Error fetching course cards: ", err);
         }
     }
 
@@ -138,37 +126,37 @@ export default function Index() {
                         labore et dolore magna aliqua.</h5>
                 </div>
 
-                <section id="index-course-cards-section">
+                { loading ? <h1>Uff da</h1> :
+                    <section id="index-course-cards-section">
 
-                    <section className="index-arrow">
-                        <button id="index-arrow-left-btn"
-                                onClick={() => setCourseIndex((prevIndex) => (prevIndex - 1 + courses.length) % courses.length)}>
-                            <img className={"index-arrow-icon"} src="/icons/arrow-back-circle-sharp.svg" alt="Arrow Left"/>
-                        </button>
+                        <section className="index-arrow">
+                            <button id="index-arrow-left-btn"
+                                    onClick={() => setCourseIndex((prevIndex) => (prevIndex - 1 + courseCards.length) % courseCards.length)}>
+                                <img className={"index-arrow-icon"} src="/icons/arrow-back-circle-sharp.svg" alt="Arrow Left"/>
+                            </button>
+                        </section>
+
+                        <section id="index-collection-cards">
+                            {courseCards.slice(courseIndex, courseIndex + courseShown - 1).map((courseCard) => (
+                                <CourseCard key={courseCard.id} {...courseCard} />
+                            ))}
+                            {courseIndex + courseShown - 1 > courseCards.length
+                                && courseCards.slice(0, (courseIndex + courseShown - 1) % courseCards.length)
+                                    .map((courseCard) => (
+                                        <CourseCard key={courseCard.id} {...courseCard}/>
+                                    ))}
+                        </section>
+
+                        <section className="index-arrow">
+                            <button id="index-arrow-right-btn"
+                                    onClick={() => setCourseIndex((prevIndex) =>
+                                        (prevIndex + 1 + courseCards.length) % courseCards.length)}>
+                                <img className={"index-arrow-icon"} src="/icons/arrow-forward-circle-sharp.svg"
+                                     alt="Arrow Right"/>
+                            </button>
+                        </section>
                     </section>
-
-                    <section id="index-collection-cards">
-                        {courses.slice(courseIndex, courseIndex + courseShown - 1).map((course) => (
-                            <CourseCard key={course.id} {...course} />
-                        ))}
-                        {courseIndex + courseShown - 1 > courses.length
-                            && courses.slice(0, (courseIndex + courseShown - 1) % courses.length)
-                                .map((course) => (
-                                    <CourseCard key={course.id} {...course}/>
-                                ))}
-                    </section>
-
-                    <section className="index-arrow">
-                        <button id="index-arrow-right-btn"
-                                onClick={() => setCourseIndex((prevIndex) =>
-                                    (prevIndex + 1 + courses.length) % courses.length)}>
-                            <img className={"index-arrow-icon"} src="/icons/arrow-forward-circle-sharp.svg"
-                                 alt="Arrow Right"/>
-                        </button>
-                    </section>
-
-
-                </section>
+                }
             </section>
             <section id="index-collaborators-section">
                 <div className="title-and-subtitle">
@@ -260,17 +248,6 @@ export default function Index() {
                     </div>
                 </div>
             </section>
-
-            <h1>Temporary links to pages</h1>
-            <ul>
-                <li><a href={"/search"}>search/filters</a></li>
-                <li><a href={"/admin"}>Admin</a></li>
-                <li> <Link to={`/course/${1}`}> course</Link></li>
-                <li> <Link to={`/userpage/${1}`}> user page</Link></li>
-                <li><a href={"/about"}>about</a></li>
-                <li><a href={"/checkout"}>checkout</a></li>
-                <li><a href={"/noAccess"}>403 no access</a></li>
-            </ul>
             {
                 showSignupModal && createPortal(
                     <Register changeMode={() => {

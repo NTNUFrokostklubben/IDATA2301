@@ -1,13 +1,22 @@
 #index-collection-cards{
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     flex-wrap: nowrap;
     grid-gap: 10px;
 }
 .index-card{
-    margin: 1rem;
+    display: flex;
+    flex-direction: column;
     border: var(--textBlack) 1px solid;
     border-radius: 3px;
     width: 20rem;
+    height: 100%;
+}
+.index-course-card{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 }
 .index-course-img{
     width: 20rem;
@@ -21,20 +30,28 @@
     text-align: left;
 }
 .index-card p {
-    margin-top: 1rem;
+    padding: 1rem 0rem;
     text-align: left;
 }
 .index-card .index-price{
     font-weight: bold;
 }
-index-card img {
+.index-card img {
     justify-content: center;
     align-content: flex-start;
-    padding: 0.5rem;
 }
 
-#index-course-content-heading{
-    padding: 0.5rem;
+.index-card .index-card-footer{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-self: flex-end;
+    padding: 0rem 1rem;
+    margin-top: auto;
+}
+
+.index-course-content-heading{
+    padding: 0rem 1rem;
 }
 @supports (-webkit-line-clamp: 3) {
     .index-card .index-card-desc {

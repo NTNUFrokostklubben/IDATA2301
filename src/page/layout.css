@@ -154,12 +154,12 @@ nav li {
     font-weight: normal;
 }
 
-#signup-btn h5{
+#signup-btn, #logout-btn h5{
     color: var(--textWhite);
     font-weight: normal;
 }
 
-#login-btn, #signup-btn{
+#login-btn, #signup-btn, #logout-btn{
     border: 1px solid var(--textBlack);
     cursor: pointer;
     font-size: large;
@@ -168,7 +168,7 @@ nav li {
     text-align: center;
     text-decoration: none;
 }
-#login-btn #signup-btn:hover{
+#login-btn #signup-btn #logout-btn:hover{
     box-shadow: 0px 8px 16px 0px var(--shadow)
 }
 .nav-user{
