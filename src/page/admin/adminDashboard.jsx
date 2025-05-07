@@ -17,8 +17,9 @@ export default function AdminDashboard() {
     const [totalRevenue, setTotalRevenue]=useState([]);
     const [avgRevenue, setAvgRevenue]=useState([]);
     const [reviews, setReviews]=useState([]);
-    const [revenueLast30Days, setRevenueLast30Days] = useState([])
-    const [newUsers, setNewUsers] = useState([])
+    const [revenueLast30Days, setRevenueLast30Days] = useState([]);
+    const [newUsers, setNewUsers] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     const [size, setSize] = useState(screenSetSize());
     const [hidden, setHidden] = useState(screenSetHidden());
@@ -35,30 +36,22 @@ export default function AdminDashboard() {
 
     // Fetches all stats from the API
     useEffect(() => {
-        if (revenueData.length === 0) {
-            fetchRevenueData()
+        const fetchdata = async() => {
+            try{
+                await fetchRevenueData();
+                await fetchReviews();
+                await fetchTotalRevenue();
+                await fetchTotalCourses();
+                await fetchTotalUsers();
+                await fetchAvgRevenue();
+                await fetchRevenueLast30Days();
+                await fetchNewUsers();
+                setLoading(false);
+            } catch (err){
+                console.error("Error fetching data: ", err);
+            }
         }
-        if (reviews.length === 0){
-            fetchReviews();
-        }
-        if (totalRevenue<=0){
-            fetchTotalRevenue();
-        }
-        if (totalCourses<=0){
-            fetchTotalCourses();
-        }
-        if (totalUsers<=0){
-            fetchTotalUsers();
-        }
-        if (avgRevenue<=0){
-            fetchAvgRevenue();
-        }
-        if (revenueLast30Days<=0){
-            fetchRevenueLast30Days();
-        }
-        if (newUsers<=0){
-            fetchNewUsers();
-        }
+        fetchdata();
     },[]);
 
     /**
@@ -207,75 +200,78 @@ export default function AdminDashboard() {
             <h2>Dashboard</h2>
             <p> On this page you will find the overview over your courses</p>
 
-            <div className={"admin-dash-content"}>
+            {loading ? null :
+                <div className={"admin-dash-content"}>
 
-                <div className={"admin-dash-revenue"}>
-                    <h3>Revenue</h3>
-                    <p>Revenue overview</p>
-                    <div className={"admin-dash-revenue-graph"}>
-                        <PieChart
-                            series={[
-                                {
-                                    data: revenueData,
-                                    highlightScope: {fade: 'global', highlight: 'item'},
-                                    faded: {innerRadius: 30, additionalRadius: -30, color: 'gray'}
-                                },
-                            ]}
-                            {...size}
-                            slotProps={{
-                                legend: {hidden: hidden},
-                            }}
-                        />
-                    </div>
-                    &nbsp; &nbsp;
-                    <hr className={"solid"}/>
-
-                    <div className={"admin-dash-result"}>
-                        <h5 className={"admin-dash-title"}>Total Revenue</h5>
-                        <h6 className={"admin-dash-total"}>{totalRevenue} NOK</h6>
-                        &nbsp;
-                        <h5 className={"admin-dash-title"}>Total revenue last 30 days</h5>
-                        <h6 className={"admin-dash-total"}>{revenueLast30Days} NOK</h6>
-                    </div>
-                </div>
-
-
-                <div className={"admin-dash-reviews"}>
-                    <h3>Recent Reviews</h3>
-                    <hr className={"solid"}/>
-                    <div className={"admin-dash-reviews-list"}>
-                        {reviews.map((review) => (
-                            <AdminReview key={review.id} {...review}/>
-                        ))}
-                    </div>
-                </div>
-
-                <div className={"admin-dash-overview"}>
-                    <div className={"admin-dash-users"}>
-                        <h3>Users</h3>
-                        <hr className={"solid"}/>
-                        <div className={"admin-dash-result"}>
-                            <h5 className={"admin-dash-title"}>Total registered users</h5>
-                            <h6 className={"admin-dash-total"}>{totalUsers}</h6>
-                            &nbsp;
-                            <h5 className={"admin-dash-title"}>New users last 30 days</h5>
-                            <h6 className={"admin-dash-total"}> {newUsers} </h6>
+                    <div className={"admin-dash-revenue"}>
+                        <h3>Revenue</h3>
+                        <p>Revenue overview</p>
+                        <div className={"admin-dash-revenue-graph"}>
+                            <PieChart
+                                series={[
+                                    {
+                                        data: revenueData,
+                                        highlightScope: {fade: 'global', highlight: 'item'},
+                                        faded: {innerRadius: 30, additionalRadius: -30, color: 'gray'}
+                                    },
+                                ]}
+                                {...size}
+                                slotProps={{
+                                    legend: {hidden: hidden},
+                                }}
+                            />
                         </div>
-                    </div>
-                    <div className={"admin-dash-courses"}>
-                        <h3>Courses</h3>
+                        &nbsp; &nbsp;
                         <hr className={"solid"}/>
 
                         <div className={"admin-dash-result"}>
-                            <h5 className={"admin-dash-title"}>Total courses</h5>
-                            <h6 className={"admin-dash-total"}>{totalCourses}</h6>
+                            <h5 className={"admin-dash-title"}>Total Revenue</h5>
+                            <h6 className={"admin-dash-total"}>{totalRevenue} NOK</h6>
                             &nbsp;
-                            <h5 className={"admin-dash-title"}>Average revenue</h5>
-                            <h6 className={"admin-dash-total"}> {avgRevenue} NOK</h6>
+                            <h5 className={"admin-dash-title"}>Total revenue last 30 days</h5>
+                            <h6 className={"admin-dash-total"}>{revenueLast30Days} NOK</h6>
                         </div>
                     </div>
-                 </div>
-             </div>
+
+
+                    <div className={"admin-dash-reviews"}>
+                        <h3>Recent Reviews</h3>
+                        <hr className={"solid"}/>
+                        <div className={"admin-dash-reviews-list"}>
+                            {reviews.map((review) => (
+                                <AdminReview key={review.id} {...review}/>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className={"admin-dash-overview"}>
+                        <div className={"admin-dash-users"}>
+                            <h3>Users</h3>
+                            <hr className={"solid"}/>
+                            <div className={"admin-dash-result"}>
+                                <h5 className={"admin-dash-title"}>Total registered users</h5>
+                                <h6 className={"admin-dash-total"}>{totalUsers}</h6>
+                                &nbsp;
+                                <h5 className={"admin-dash-title"}>New users last 30 days</h5>
+                                <h6 className={"admin-dash-total"}> {newUsers} </h6>
+                            </div>
+                        </div>
+                        <div className={"admin-dash-courses"}>
+                            <h3>Courses</h3>
+                            <hr className={"solid"}/>
+
+                            <div className={"admin-dash-result"}>
+                                <h5 className={"admin-dash-title"}>Total courses</h5>
+                                <h6 className={"admin-dash-total"}>{totalCourses}</h6>
+                                &nbsp;
+                                <h5 className={"admin-dash-title"}>Average revenue</h5>
+                                <h6 className={"admin-dash-total"}> {avgRevenue} NOK</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
         </div>
     )
 }
