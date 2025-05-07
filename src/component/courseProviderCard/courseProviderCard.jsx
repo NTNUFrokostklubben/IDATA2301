@@ -1,12 +1,12 @@
 import "./courseProviderCard.css"
 import {Link} from "react-router-dom";
-import {setSharedObject} from "../../dataSlice";
+import {setCourseObject} from "../../dataSlice";
 import { useDispatch } from 'react-redux';
 export default function CourseProviderCard (offerableCourse ){
     const dispatch = useDispatch();
 
     const handleClick = () =>{
-        dispatch(setSharedObject(offerableCourse))
+        dispatch(setCourseObject(offerableCourse))
     }
     return(
 

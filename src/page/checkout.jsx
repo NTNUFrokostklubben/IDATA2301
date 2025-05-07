@@ -16,23 +16,24 @@ import {getAuthenticatedUser} from "../utils/authentication/authentication";
 export default function Checkout() {
 
     const [loading, setLoading] = useState(false);
-    const [user, setUser] = useState(null);
     const [showLoginModal, setShowLoginModal] = useState(Boolean)
     const [showSignupModal, setShowSignupModal] = useState(Boolean)
     const courseData = useSelector((state) => state.data.sharedObject)
+    const userData = useSelector((state) => state.data.user)
     const [countrySelect, setCountrySelect] = useState('')
     const options = useMemo(() => countryList().getData(), [])
     const [cardNumber, setCardNumber] = useState('');
     const inputRef = useRef(null);
     const navigate = useNavigate();
 
-    const sendUserData = async () =>{
-
-        const status = AsyncApiRequest("POST", `/transaction/offerId/${courseData.id}/userid/${user.id}`, null);
-
+    const handlePurchase = async () =>{
+        console.log(courseData)
+        setLoading(true)
+        const status = await AsyncApiRequest("POST", `/transaction/offerId/${courseData.id}/userid/${userData.id}`, null);
         try {
             if (status.status === 201){
-                const addUserCourse = AsyncApiRequest("POST" ,`/userCourses/add/${user.id}/${courseData.id}`, null)
+                const addUserCourse =
+                    AsyncApiRequest("POST" ,`/userCourses/add/${userData.id}/${courseData.course.id}`, null)
                     .then( response  => response.json());
             }
 
@@ -46,20 +47,6 @@ export default function Checkout() {
         }
     }
 
-    const handlePurchase =  async () => {
-        let user = getAuthenticatedUser();
-        setLoading(true);
-        const uid = AsyncApiRequest("GET",`/UserByEmail/${user.email}`, null )
-            .then( response  => response.json());
-        setUser(uid)
-
-    }
-
-    useEffect(() => {
-        if (user === null) return;
-        console.log(user)
-        sendUserData()
-    }, [user]);
 
 
         const handleExpiration = (e) => {
