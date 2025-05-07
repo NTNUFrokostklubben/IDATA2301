@@ -6,6 +6,7 @@ import CourseProviderCard from "../../component/courseProviderCard/courseProvide
 import {ReviewComponent} from "./reviewSection";
 import FavoriteButton from "../../component/favorite/favoriteButton";
 import {getAuthenticatedUser} from "../../utils/authentication/authentication";
+import {useSelector} from "react-redux";
 
 
 export default function Course() {
@@ -18,7 +19,7 @@ export default function Course() {
     const [keywords, setKeywords] = useState([])
     const [isUserEnrolled, setIsUserEnrolled] = useState(false);
     const {id} = useParams();
-
+    const userData = useSelector((state) => state.data.user)
     useEffect(() => {
         setLoading(true)
 
@@ -52,16 +53,8 @@ export default function Course() {
         checkFavorite()
     }, [user]);
 
-
-    async function handleUserData() {
-        try {
-            let tempUser = getAuthenticatedUser()
-
-            const tempApiCall = `/UserByEmail/${tempUser.email}`;
-            const userData = await AsyncApiRequest("GET", tempApiCall, null)
-                .then(response => response.json())
-            setUser(userData)
-        }catch (e){console.error(e)}
+    function handleUserData() {
+       setUser(userData)
     }
     /**
      * Fetches all course data from the API

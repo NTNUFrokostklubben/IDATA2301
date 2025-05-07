@@ -4,10 +4,22 @@ import { useFocusTrap } from "../../../utils/useFocusTrap";
 import {redirect, useNavigate} from "react-router-dom";
 import {sendAuthenticationRequest} from "../../../utils/authentication/authentication";
 import {showFormErrorLogin} from "../../../utils/tools"
+import {useDispatch} from "react-redux";
+import {clearCourseObject, setUserObject} from "../../../dataSlice";
+import {AsyncApiRequest} from "../../../utils/requests";
 
 
 export default function Login({ onClose, changeMode, closable=true }) {
     const navigate = useNavigate();
+    const dispatch = useDispatch()
+
+    async function addUserToRedux(email){
+
+        const userDto = await AsyncApiRequest("GET", `/userDto/${email}`, null)
+            .then(response => response.json())
+
+        dispatch(setUserObject(userDto));
+    }
 
     function submitForm(event){
         event.preventDefault();
@@ -21,6 +33,7 @@ export default function Login({ onClose, changeMode, closable=true }) {
      */
     function onLoginSuccess(userData) {
         console.log("Successfully logged in for user: ", userData.email);
+        addUserToRedux(userData.email)
         window.location.reload(); // TODO - maybe find an other way to do this
         onClose();
     }
