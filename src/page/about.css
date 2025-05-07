@@ -56,7 +56,7 @@
 .about-us-and-our-products-grid{
     margin-top: 2rem;
     display: grid;
-    grid-template-columns:  2fr 1fr;
+    grid-template-columns:  1fr  1fr;
     grid-template-areas:
             "text1 text1 img1"
             "img2 text2 text2"
@@ -172,10 +172,6 @@
 @media (max-width: 1024px) {
     .about-us-and-our-products-grid {
         grid-template-columns: 1fr 1fr;
-    }
-
-    .about-section-img {
-        width: 80%;
     }
 }
 
