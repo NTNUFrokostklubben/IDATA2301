@@ -1,50 +1,112 @@
-
-.container {
+.about-hero-container {
     display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 2rem;
     background-image: url("/public/aboutHeroBG.png");
     background-repeat: no-repeat;
     background-size: cover;
-    justify-content: center;
-
-
+    min-height: 30rem;
 }
 
-.herotext {
-    width: 20rem;
-    align-self: center;
-    margin-right: 1rem;
-    padding-right: 1rem;
-}
-
-#worker-hero {
+#about-hero-img-box {
     display: flex;
-    align-self: flex-start;
-
+    align-self: flex-end;
+    padding-right: 2rem;
+}
+#about-hero-img{
+    width: 20rem;
+    height: auto;
 }
 
-#blurb {
-
+.about-hero-text-box{
     display: flex;
     flex-direction: column;
-    padding: 4rem;
     justify-content: center;
     align-items: center;
-    align-content: center;
-    background-color: var(--highlight);
+    padding: 2rem;
+    border-radius: 5px; /* Increased for softer edges */
+    backdrop-filter: blur(10px); /* Stronger blur for better effect */
+    background: rgba(255, 255, 255, 0.15); /* Semi-transparent background */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Soft shadow to blend edges */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border for definition */
+    height: 50%;
+    width: 30%;
 }
 
-.blurbTitle {
-    align-self: center;
+.about-hero-text {
+    align-self: flex-start;
+    font-weight: normal;
+}
+.about-us-and-our-products {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: var(--textWhite);
+    padding: 2rem;
+}
+.about-us-and-our-products-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+.about-us-and-our-products-grid{
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns:  2fr 1fr;
+    grid-template-areas:
+            "text1 text1 img1"
+            "img2 text2 text2"
+            "text3 text3 img3"
+            "img4 text4 text4";
+    gap: 4rem;
+    max-width: 100rem;
+}
+.about-section-text-box{
+    background-color: var(--contrast);
+    padding: 2rem;
+    border-radius: 5px;
+    max-width: 50rem;
+}
+.about-section-text-box:hover {
+    box-shadow: 0px 8px 16px 0px var(--shadow);
+}
+#about-section-text-box-1 { grid-area: text1; }
+#about-section-img-1     { grid-area: img1; }
+
+#about-section-img-2     { grid-area: img2; }
+#about-section-text-box-2{ grid-area: text2; }
+
+#about-section-text-box-3{ grid-area: text3; }
+#about-section-img-3     { grid-area: img3; }
+
+#about-section-img-4     { grid-area: img4; }
+#about-section-text-box-4{ grid-area: text4; }
+
+.about-section-text-box .about-section-text{
+    font-weight: normal;
+    color: var(--textWhite);
 }
 
-.blurbText {
-
+.about-section-img-box{
     display: flex;
     justify-content: center;
-
-    max-width: 60rem;
+    align-items: center;
+    padding: 2rem;
 }
 
+.about-section-img{
+    width: 25rem;
+    max-width: 30rem;
+    height: auto;
+}
+.about-section-img:hover {
+    transform: scale(1.10);
+    transition: transform 0.1s ease;
+}
 
 #reviewTitle {
     display: flex;
@@ -65,8 +127,6 @@
     display: grid;
     grid-template-columns: 11rem 11rem 11rem 11rem 11rem 11rem;
     gap: 3rem;
-
-
 }
 
 .text, .name {
@@ -95,15 +155,27 @@
     background-color: var(--background);
     padding-bottom: 1rem;
 }
-
 #gm-picture{
-
+    width: 80%;
 }
 
 @media (max-width: 1285px) {
     .review {
         display: grid;
         grid-template-columns: 11rem 11rem 11rem
+    }
+    #about-hero-img{
+        width: 18rem;
+    }
+}
+
+@media (max-width: 1024px) {
+    .about-us-and-our-products-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .about-section-img {
+        width: 80%;
     }
 }
 
@@ -112,12 +184,35 @@
         display: grid;
         grid-template-columns: 11rem 11rem;
     }
+    #about-hero-img{
+        width: 15rem;
+    }
+    #about-hero-text-box{
+        width: 50%;
+    }
 }
 
-@media (max-width: 320px){
-    #gm-picture {
-        width: 300px;
-        height: 300px;
+@media (max-width: 600px) {
+    .about-us-and-our-products-grid {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "text1"
+            "img1"
+            "text2"
+            "img2"
+            "text3"
+            "img3"
+            "text4"
+            "img4";
+    }
+
+    .about-section-img {
+        width: 50%;
+    }
+}
+@media (max-width: 450px) {
+    #about-hero-text{
+        font-size: 0.8rem;
     }
 }
 

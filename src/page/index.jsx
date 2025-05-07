@@ -234,7 +234,7 @@ export default function Index() {
                     </div>
 
                     <div id="index-hero2-textbox">
-                        <div className={"index-hero2-title-subtitle"}>
+                        <div className="index-hero2-title-subtitle">
                             <h3>Learn new skills with Learniverse</h3>
                             <h6> xx% of learners learn something, which do this and this! Become one of the today</h6>
                         </div>
