@@ -1,5 +1,24 @@
 import {AsyncApiRequest} from "./requests";
 
+export function uploadImage(file) {
+    const formData = new FormData();
+    formData.append("file", file);
+
+    return AsyncApiRequest("POST", "/images/upload", formData)
+        .then(response => {
+            if (response.ok) {
+                return response.text();
+            } else {
+                throw new Error("Error uploading image");
+            }
+        })
+       .catch(error => {
+            console.error('Error:', error);
+            throw error;
+       });
+}
+
+
 /**
  * Gets all providers from Server
  *
@@ -74,6 +93,21 @@ export function getCourse(cid) {
                 return response.json();
             } else {
                 throw new Error("Error fetching course");
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            throw error;
+        });
+}
+
+export function postCourse(course) {
+    return AsyncApiRequest("POST", "/course", course)
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error("Error posting course");
             }
         })
         .catch(error => {

@@ -2,7 +2,7 @@
 #courseIndex {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    /*justify-content: center;*/
     margin: 1rem 2rem;
     max-width: 600rem;
 }
@@ -67,7 +67,7 @@
 
 
 #courseIndex #course-table th:nth-child(2) {
-    /*width: 20rem;*/
+    width: 20rem;
 }
 
 #courseIndex #course-table tr {
@@ -81,13 +81,16 @@
 }
 
 
-
-
 #courseIndex #course-table td {
     vertical-align: center;
-    padding: 0rem 1rem;
+    padding: 1rem 1rem;
 }
 
+#courseIndex img {
+    height: 100%;
+    max-width: 6rem;
+    max-height: 6rem;
+}
 
 
 

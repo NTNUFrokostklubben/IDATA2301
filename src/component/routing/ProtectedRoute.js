@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom";
 import {jwtDecode} from "jwt-decode";
-import {getCookie} from "../utils/authentication/cookies";
-import {getAuthenticatedUser, isAdmin} from "../utils/authentication/authentication";
+import {getCookie} from "../../utils/authentication/cookies";
+import {getAuthenticatedUser, isAdmin} from "../../utils/authentication/authentication";
 
 const ProtectedRoute = () => {
     const token = getCookie("jwt");

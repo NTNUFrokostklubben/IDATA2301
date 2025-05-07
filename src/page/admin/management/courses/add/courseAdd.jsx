@@ -2,10 +2,13 @@ import "./courseAdd.css";
 import {Form, useNavigate} from "react-router-dom";
 import {useState} from "react";
 import {CourseFormSkeleton} from "../edit/courseEdit";
+import {postCourse, uploadImage} from "../../../../../utils/commonRequests";
 
 function CourseAddForm() {
 
     const navigate = useNavigate();
+
+    const [courseImage, setCourseImage] = useState([])
 
     /**
      * Handle API call for uploading images.
@@ -30,7 +33,6 @@ function CourseAddForm() {
         }
 
         const imageUrl = await response.text();
-        console.log(imageUrl)
         return imageUrl;
     }
 
@@ -42,23 +44,9 @@ function CourseAddForm() {
      */
     async function handleFormSubmission(data) {
         const value = Object.fromEntries(data.entries());
-        console.log(value);
 
-        const requestOptions = {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(value)
-        };
-
-        const response = await fetch("http://localhost:8080/api/course", requestOptions)
-
-        if (!response.ok) {
-            console.log("Error submitting form");
-            return null;
-        }
-
-        const responseBody = response.body;
-        return responseBody;
+        const response = await postCourse(value)
+        return response;
     }
 
     /**
@@ -72,11 +60,27 @@ function CourseAddForm() {
         const data = new FormData(event.target);
         const image = data.get("imgLink")
 
-        handleImageUpload(image).then(r => {
+        uploadImage(image).then(r => {
             data.set("imgLink", r);
             // TODO: Change alert to something better. Check for success.
             handleFormSubmission(data).then(alert("Submitted Form")).then(navigate(-1));
         });
+    }
+
+    /**
+     * Handles image change event.
+     * Used to indicate that a new image needs to be uploaded to server.
+     *
+     * @param image
+     * @returns {Promise<void>}
+     */
+    async function handleChangeImage(image) {
+
+        const img = new Image();
+        img.src = URL.createObjectURL(image[0]);
+
+        setCourseImage(img);
+
     }
 
     return (
@@ -111,7 +115,7 @@ function CourseAddForm() {
                     </div>
 
                     <div className="input-wrapper"><label htmlFor="course-category">Category</label>
-                        <select name="catergory" id="course-category" required>
+                        <select name="category" id="course-category" required>
                             <option value="it">Information Technologies</option>
                             <option value="dm">Digital Marketing</option>
                             <option value="be">Business and Entrepreneurship</option>
@@ -120,16 +124,19 @@ function CourseAddForm() {
                 </div>
 
 
-
-                {/*TODO: Add preview of uploaded image (javascript component)*/}
-                <div className="input-wrapper">
-                    <label htmlFor="course-image">Course Image</label>
-                    <input type="file" id="course-image" name="imgLink" required/>
+                <div className={"imageUpload-wrapper"}>
+                    <div className="input-wrapper">
+                        <label htmlFor="course-image">Course Image</label>
+                        <input type="file" id="course-image" name="imgLink"
+                               onChange={(e) => handleChangeImage(e.target.files)} required/>
+                    </div>
+                    <img className={"img-preview"} src={courseImage.src} alt={""}/>
                 </div>
 
                 <div className="input-wrapper"><label htmlFor="course-keywords">Keywords separated by
                     comma</label>
-                    <input type="text" id="course-keywords" name="keywords" required/></div>
+                    <input type="text" id="course-keywords" name="keywords"
+                           required/></div>
 
                 <button className="cta-button courseAdmin-button" type="submit">Add Course</button>
             </section>

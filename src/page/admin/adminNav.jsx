@@ -2,7 +2,7 @@ import {Link, Outlet} from "react-router-dom";
 import "./adminNav.css"
 import Collapsable from "../../component/Collapsable/collapsable";
 import {useState} from "react";
-import ProtectedRoute from "../ProtectedRoute";
+import ProtectedRoute from "../../component/routing/ProtectedRoute";
 
 export default function AdminNav() {
 

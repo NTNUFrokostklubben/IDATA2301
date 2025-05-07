@@ -3,38 +3,25 @@ import {Form, useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {courseEntity} from "../../../../../utils/Classes/commonClasses";
 import {Skeleton} from "@mui/material";
-import {getCourse, getCourses} from "../../../../../utils/commonRequests";
+import {getCourse, getCourses, postCourse, uploadImage} from "../../../../../utils/commonRequests";
 
 function CourseEditForm({course}) {
 
     const navigate = useNavigate();
 
+    const [courseImage, setCourseImage] = useState([])
+    const [imageChanged, setImageChanged] = useState(false);
+
     /**
-     * Handle API call for uploading images.
-     *
-     * @param image image to upload
-     * @returns {Promise<string|null>} Image URL if upload success or Null
+     * Loads the current image from the server
      */
-    async function handleImageUpload(image) {
-        // TODO: Refactor this into a "common utils" type file so users can upload images using same method
-        const formData = new FormData();
-        formData.append('file', image);
+    useEffect(() => {
+            const img = new Image();
+            img.src = course.imgLink;
 
-        const imageOptions = {
-            method: "POST",
-            body: formData
+            setCourseImage(img);
         }
-        const response = await fetch("http://localhost:8080/api/images/upload", imageOptions);
-
-        if (!response.ok) {
-            console.log("Error uploading image");
-            return null;
-        }
-
-        const imageUrl = await response.text();
-        return imageUrl;
-    }
-
+        , [course.imgLink]);
 
     /**
      * Handles form submission after successful Image Upload for Course
@@ -45,21 +32,9 @@ function CourseEditForm({course}) {
     async function handleFormSubmission(data) {
         const value = Object.fromEntries(data.entries());
 
-        const requestOptions = {
-            method: 'PUT',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(value)
-        };
 
-        const response = await fetch("http://localhost:8080/api/course", requestOptions)
-
-        if (!response.ok) {
-            console.log("Error submitting form");
-            return null;
-        }
-
-        const responseBody = response.body;
-        return responseBody;
+        const response = await postCourse(value)
+        return response;
     }
 
     /**
@@ -71,19 +46,45 @@ function CourseEditForm({course}) {
         event.preventDefault();
 
         const data = new FormData(event.target);
-        const image = data.get("imgLink")
+        const image = data.get("imgLink");
 
-        handleImageUpload(image).then(r => {
-            data.set("imgLink", r);
-            // TODO: Change alert to something better. Check for success.
+        // Uploads image if it was changed
+        if (imageChanged) {
+
+            uploadImage(image).then(r => {
+                data.set("imgLink", r);
+                // TODO: Change alert to something better. Check for success.
+                handleFormSubmission(data).then(alert("Submitted Form")).then(navigate(-1));
+            });
+        } else {
+
+            data.set("imgLink", course.imgLink);
             handleFormSubmission(data).then(alert("Submitted Form")).then(navigate(-1));
-        });
+        }
+    }
+
+    /**
+     * Handles image change event.
+     * Used to indicate that a new image needs to be uploaded to server.
+     *
+     * @param image
+     * @returns {Promise<void>}
+     */
+    async function handleChangeImage(image) {
+        // TODO: Ensure image locally is updated once new image is uploaded on file, doesnt send to beckend before submit
+
+        const img = new Image();
+        img.src = URL.createObjectURL(image[0]);
+
+        setCourseImage(img);
+        setImageChanged(true);
+
     }
 
     return (
         <form onSubmit={handleSubmit} action={"http://localhost:3000/course/" + course.id} method="PUT">
             <section id="course-info">
-                <input disabled={true} id={"id"} name={"id"} type={"number"} hidden={true} value={course.id}/>
+                <input disabled={false} id={"id"} name={"id"} type={"number"} hidden={true} value={course.id}/>
 
                 <div className="input-wrapper"><label htmlFor="course-name">Course Name</label>
                     <input type="text" id="course-name" name="title" defaultValue={course.title} required/>
@@ -119,7 +120,7 @@ function CourseEditForm({course}) {
                     </div>
 
                     <div className="input-wrapper"><label htmlFor="course-category">Category</label>
-                        <select name="catergory" id="course-category" defaultValue={course.category} required>
+                        <select name="category" id="course-category" defaultValue={course.category} required>
                             <option value="it">Information Technologies</option>
                             <option value="dm">Digital Marketing</option>
                             <option value="be">Business and Entrepreneurship</option>
@@ -128,11 +129,15 @@ function CourseEditForm({course}) {
                 </div>
 
 
-                {/*TODO: Add preview of uploaded image (javascript component)*/}
-                <div className="input-wrapper">
-                    <label htmlFor="course-image">Course Image</label>
-                    <input type="file" id="course-image" name="imgLink" required/>
+                <div className={"imageUpload-wrapper"}>
+                    <div className="input-wrapper">
+                        <label htmlFor="course-image">Course Image</label>
+                        <input type="file" id="course-image" name="imgLink"
+                               onChange={(e) => handleChangeImage(e.target.files)} required={imageChanged}/>
+                    </div>
+                    <img className={"img-preview"} src={courseImage.src} alt={""}/>
                 </div>
+
 
                 <div className="input-wrapper"><label htmlFor="course-keywords">Keywords separated by
                     comma</label>
@@ -233,9 +238,6 @@ export default function CourseEdit() {
             throw new Error(e);
         }
     }
-
-
-
 
 
     return (
