@@ -12,6 +12,7 @@ import {useSelector} from "react-redux";
 
 export default function Course() {
     const [courseData, setCourseData] = useState([]);
+    const [uniqueCourses, setUniqueCourses] = useState([]);
     const [ratingData, setRatingData] = useState(0);
     const [user, setUser] = useState(null);
     const [offerableCourseData, setOfferableCourseData] = useState([]);
@@ -62,6 +63,29 @@ export default function Course() {
 
         setIsFavoriteLoaded(true)
     }, [isFavorite]);
+
+    useEffect(() => {
+        if (offerableCourseData === []) return;
+        const courseMap = new Map();
+        offerableCourseData.forEach(item => {
+            const existing = courseMap.get(item.provider.id); // or another field if courseId isn't there
+            const currentItemDate = new Date(item.date);
+
+            if (!existing) {
+                courseMap.set(item.provider.id, item);
+            } else {
+                const existingDate = new Date(existing.date);
+                if (currentItemDate < existingDate) {
+                    courseMap.set(item.provider.id, item);
+                }
+            }
+        });
+        setUniqueCourses( Array.from(courseMap.values()));
+        console.log(uniqueCourses)
+    }, [offerableCourseData]);
+
+
+
     function handleUserData() {
        setUser(userData)
     }
@@ -208,10 +232,10 @@ export default function Course() {
                     <h4 id="course-description-heading"> Description</h4>
                     <p id="course-description-text">{courseData.description}</p>
                 </section>
-
+                {uniqueCourses?.length >0 && (
                 <section id="course-offerables">
-                    {offerableCourseData.map(item => <CourseProviderCard key={item.id} {...item}/>)}
-                </section>
+                    {uniqueCourses.map(item => <CourseProviderCard key={item.id} {...item}/>)}
+                </section>)}
                 {user && (
                 <section className={"course-page-reviews"}>
                     <div className={"course-page-review-aggregate"}>

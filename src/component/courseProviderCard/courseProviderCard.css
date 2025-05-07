@@ -7,8 +7,9 @@
     width: 13rem;
     height: 7rem;
 }
-.provider-card-name, .provider-card-price{
-    padding-bottom: 0.6rem;
+.provider-card-name, .provider-card-price,
+.provider-card-date{
+    padding-bottom: 0.3rem;
     font-size: 1.08rem;
     text-decoration: none;
     color: var(--textWhite);
@@ -25,7 +26,6 @@
 
 .discounted-price {
     font-size: 1rem;
-    padding-top: 0.4rem;
     color: var(--textWhite);
 }
 
