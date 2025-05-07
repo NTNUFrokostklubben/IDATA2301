@@ -101,6 +101,12 @@ export function getCourse(cid) {
         });
 }
 
+/**
+ * Posts a new course to Server
+ *
+ * @param course
+ * @returns {Promise<*>}
+ */
 export function postCourse(course) {
     return AsyncApiRequest("POST", "/course", course)
         .then(response => {
@@ -149,6 +155,62 @@ export function getOfferableCourse(id) {
                 return response.json();
             } else {
                 throw new Error("Error fetching offerable course");
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            throw error;
+        });
+}
+
+/**
+ * Gets all users from Server
+ *
+ * @returns {Promise<*>}
+ */
+export function getUsers() {
+    return AsyncApiRequest("GET", "/users", null)
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error("Error fetching users");
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            throw error;
+        });
+}
+
+/**
+ * Gets a specific user from Server
+ *
+ * @param uid
+ * @returns {Promise<*>}
+ */
+export function getUser(uid) {
+    return AsyncApiRequest("GET", "/user/" + uid, null)
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error("Error fetching user");
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            throw error;
+        });
+}
+
+export function putUser(uid, user) {
+    return AsyncApiRequest("PUT", "/user/" + uid, user)
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error("Error posting user");
             }
         })
         .catch(error => {
