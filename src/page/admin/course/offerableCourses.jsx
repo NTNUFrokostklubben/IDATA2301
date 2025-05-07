@@ -181,7 +181,9 @@ export default function OfferableCourses() {
             <h2>Offerable courses</h2>
             <div id={"table-header"}>
                 <Link to={"/admin/offerablecourses/add"}
-                      className={""}><button id={"addCourse"} className={"cta-button"}>Add Course</button></Link>
+                      className={""}>
+                    <button id={"addCourse"} className={"cta-button"}>Add Course</button>
+                </Link>
 
                 <select disabled={loading} id={"course"} onChange={changeProvider}>
                     <option value={""}>{loading ? "Loading" : "All"}</option>
