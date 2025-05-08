@@ -12,10 +12,10 @@ export default function About (){
                              alt="a worker working on a computer" id="about-hero-img"/>
                     </picture>
                     <div className={"about-hero-text-box"}>
-                        <h6 className="about-hero-text">
+                        <p className="about-hero-text">
                             Welcome to Learniverse Connect, your premier destination for unlocking a world of knowledge
                             and skills through our dynamic online course marketplace!
-                        </h6>
+                        </p>
                     </div>
 
                 </div>
@@ -170,6 +170,75 @@ export default function About (){
 
             </section>
             <section className="meet-our-team">
+
+                <div className="meet-our-team-content">
+
+                    <h2 className="about-title">Meet our team</h2>
+
+                    <div className="meet-our-team-grid">
+
+                        <div className="meet-our-team-person">
+                            <img className="meet-our-team-person-img" src="/images/employees/anna.jpg"
+                                 alt="a businesswoman"/>
+                            <h6 className="meet-our-team-person-name">Anna</h6>
+                            <p className="meet-our-team-person-job">Title</p>
+                            <p className="meet-our-team-contact">
+                                <a href="mailto::anna@learnivese.com">Contact Anna</a>
+                            </p>
+                        </div>
+
+                        <div className="meet-our-team-person">
+                            <img className="meet-our-team-person-img" src="/images/employees/daniel.jpg"
+                                 alt="a businesswoman"/>
+                            <h6 className="meet-our-team-person-name">Daniel</h6>
+                            <p className="meet-our-team-person-job">Title</p>
+                            <p className="meet-our-team-contact">
+                                <a href="mailto::daniel@learnivese.com">Contact Daniel</a>
+                            </p>
+                        </div>
+
+                        <div className="meet-our-team-person">
+                            <img className="meet-our-team-person-img" src="/images/employees/elizabeth.jpg"
+                                 alt="a businesswoman"/>
+                            <h6 className="meet-our-team-person-name">Elizabeth</h6>
+                            <p className="meet-our-team-person-job">Title</p>
+                            <p className="meet-our-team-contact">
+                                <a href="mailto::elizabeth@learnivese.com">Contact Elizabeth</a>
+                            </p>
+                        </div>
+
+                        <div className="meet-our-team-person">
+                            <img className="meet-our-team-person-img" src="/images/employees/markus.jpg"
+                                 alt="a businesswoman"/>
+                            <h6 className="meet-our-team-person-name">Markus</h6>
+                            <p className="meet-our-team-person-job">Title</p>
+                            <p className="meet-our-team-contact">
+                                <a href="mailto::markus@learnivese.com">Contact Markus</a>
+                            </p>
+                        </div>
+
+                        <div className="meet-our-team-person">
+                            <img className="meet-our-team-person-img" src="/images/employees/samuel.jpg"
+                                 alt="a businesswoman"/>
+                            <h6 className="meet-our-team-person-name">Samuel</h6>
+                            <p className="meet-our-team-person-job">Title</p>
+                            <p className="meet-our-team-contact">
+                                <a href="mailto::samuel@learnivese.com">Contact Samuel</a>
+                            </p>
+                        </div>
+
+                        <div className="meet-our-team-person">
+                            <img className="meet-our-team-person-img" src="/images/employees/sarah.jpg"
+                                 alt="a businesswoman"/>
+                            <h6 className="meet-our-team-person-name">Sarah</h6>
+                            <p className="meet-our-team-person-job">Title</p>
+                            <p className="meet-our-team-contact">
+                                <a href="mailto::sarah@learnivese.com">Contact Sarah</a>
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
 
 
             </section>
