@@ -3,7 +3,8 @@ export default function About (){
 
     return(
         <div className="about">
-            <section id="about-hero-worker">
+
+            <section className="about-hero-worker">
                 <div className="about-hero-container">
                     <picture id="about-hero-img-box">
                         <source srcSet="/images/businessWoman.png" type="image/png"/>
@@ -22,10 +23,10 @@ export default function About (){
 
 
             <section className="about-us-and-our-products">
-                <h2 className="blurbTitle">About us and our products</h2>
 
                 <div className="about-us-and-our-products-container">
 
+                    <h2 className="about-title">About us and our products</h2>
                     <div className="about-us-and-our-products-grid">
 
                         <div className="about-section-text-box" id="about-section-text-box-1">
@@ -108,60 +109,65 @@ export default function About (){
             </section>
 
             <section id="about-feedback-section">
-                <h2 id="about-feedback-title">What our students say</h2>
 
-                <div className="about-feedback-main-box">
+                <div className="about-feedback-section-content">
+                    <h2 className="about-title">What our students say</h2>
 
-                    <div className="about-feedback">
-                        <p className="about-feedback-quote">“Learniverse Connect completely transformed my career
-                            path! I took a digital marketing course and not only earned my certification, but also
-                            landed a new job within a month. The instructor was incredibly supportive, and
-                            the workshop sessions really helped me apply what I learned. Highly recommend!”
-                        </p>
-                        <div className="about-feedback-footer">
-                            <p className="about-name">Melissa T.</p>
-                            <p className="about-job-desc"> Marketing Specialist</p>
-                        </div>
-                    </div>
+                    <div className="about-feedback-main-box">
 
-                    <div className="about-feedback">
-                        <p className="about-feedback-quote"> “The creative writing course I took on Learniverse
-                            Connect was a game-changer. It wasn’t just about theory—the live workshops and
-                            feedback from the instructor made it feel like a real classroom experience.
-                            Now I’m working on my first novel!”
-                        </p>
-                        <div className="about-feedback-footer">
-                            <p className="about-name"> Aisha B.</p>
-                            <p className="about-job-desc"> Aspiring Author</p>
-                        </div>
-                    </div>
-
-                    <div className="about-feedback">
-                        <p className="about-feedback-quote">"As someone transitioning into tech from a totally
-                            different field, I was nervous. But Learniverse Connect made it easy.
-                            The platform’s hands-on workshops and clear certification path helped me build
-                            confidence—and real skills. The money-back guarantee gave me peace of mind,
-                            though I didn’t need it!"
-                        </p>
-                        <div className="about-feedback-footer">
-                            <p className="about-name"> Jorge R. </p>
-                            <p className="about-job-desc"> Junior Web Developer</p>
-                        </div>
-                    </div>
-
-                    <div className="about-feedback">
-                        <p className="about-feedback-quote"> “Learniverse Connect stands out because it
-                            actually feels like a community. I’ve taken courses on other platforms,
-                            but this one offered real interaction with instructors and peers.
-                            I’ve now earned two certifications and plan to take more courses this year!”
-                        </p>
-                        <div className="about-feedback-footer">
-                            <p className="about-name"> Priya M. </p>
-                            <p className="about-job-desc"> Freelance Data Analyst </p>
+                        <div className="about-feedback">
+                            <p className="about-feedback-quote">“Learniverse Connect completely transformed my career
+                                path! I took a digital marketing course and not only earned my certification, but also
+                                landed a new job within a month. The instructor was incredibly supportive, and
+                                the workshop sessions really helped me apply what I learned. Highly recommend!”
+                            </p>
+                            <div className="about-feedback-footer">
+                                <p className="about-name">Melissa T.</p>
+                                <p className="about-job-desc"> Marketing Specialist</p>
+                            </div>
                         </div>
 
+                        <div className="about-feedback">
+                            <p className="about-feedback-quote"> “The creative writing course I took on Learniverse
+                                Connect was a game-changer. It wasn’t just about theory—the live workshops and
+                                feedback from the instructor made it feel like a real classroom experience.
+                                Now I’m working on my first novel!”
+                            </p>
+                            <div className="about-feedback-footer">
+                                <p className="about-name"> Aisha B.</p>
+                                <p className="about-job-desc"> Aspiring Author</p>
+                            </div>
+                        </div>
+
+                        <div className="about-feedback">
+                            <p className="about-feedback-quote">"As someone transitioning into tech from a totally
+                                different field, I was nervous. But Learniverse Connect made it easy.
+                                The platform’s hands-on workshops and clear certification path helped me build
+                                confidence—and real skills. The money-back guarantee gave me peace of mind,
+                                though I didn’t need it!"
+                            </p>
+                            <div className="about-feedback-footer">
+                                <p className="about-name"> Jorge R. </p>
+                                <p className="about-job-desc"> Junior Web Developer</p>
+                            </div>
+                        </div>
+
+                        <div className="about-feedback">
+                            <p className="about-feedback-quote"> “Learniverse Connect stands out because it
+                                actually feels like a community. I’ve taken courses on other platforms,
+                                but this one offered real interaction with instructors and peers.
+                                I’ve now earned two certifications and plan to take more courses this year!”
+                            </p>
+                            <div className="about-feedback-footer">
+                                <p className="about-name"> Priya M. </p>
+                                <p className="about-job-desc"> Freelance Data Analyst </p>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
+
+
             </section>
             <section className="meet-our-team">
 

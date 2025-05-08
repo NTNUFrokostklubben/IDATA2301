@@ -1,3 +1,16 @@
+.about{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    overflow-x: hidden;
+    background-color: var(--background);
+}
+.about-hero-worker{
+    background-color: #d2f1f4;
+    width: 100%;
+}
 .about-hero-container {
     display: flex;
     flex-direction: row;
@@ -8,6 +21,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     min-height: 30rem;
+    max-width: 150rem;
 }
 
 #about-hero-img-box {
@@ -46,7 +60,8 @@
     justify-content: center;
     align-items: center;
     background-color: var(--textWhite);
-    padding: 2rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
     width: 100%;
 }
 .about-us-and-our-products-container{
@@ -55,6 +70,11 @@
     justify-content: center;
     padding: 2rem;
     max-width: 150rem;
+}
+.about-title{
+    display: flex;
+    justify-content: flex-start;
+    padding-bottom: 2rem;
 }
 .about-us-and-our-products-grid{
     margin-top: 2rem;
@@ -97,11 +117,13 @@
 }
 
 .about-our-mission{
-    padding: 2rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
     background-color: var(--highlight);
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
 }
 
 .about-our-mission-content{
@@ -123,14 +145,20 @@
 .about-our-mission-img{
     width: 20rem;
 }
+#about-feedback-section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--textWhite);
+    width: 100%;
 
-#about-feedback-section {
+}
+.about-feedback-section-content {
     display: flex;
     padding: 4rem;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    min-height: 100%;
 }
 
 #about-feedback-title {
@@ -155,6 +183,7 @@
     background-color: var(--contrast);
     box-shadow: #b4afbc 5px -5px 5px;
     max-width: 30rem;
+    height: 80%;
 }
 
 .about-feedback-quote, .about-name, .about-job-desc {
