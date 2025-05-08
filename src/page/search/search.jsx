@@ -139,6 +139,7 @@ export default function Search() {
     async function fetchFilteredCourses() {
         try {
             const p = await AsyncApiRequest("GET", "/search?" + searchParams,null ).then((p) => p.json());
+
             setOfferableCourses(p);
         } catch (e) {
             setError(true);
@@ -161,6 +162,29 @@ export default function Search() {
 
     };
 
+    function sortCourses(event) {
+        const value = event.target.value;
+        let sortedCourses = [...offerableCourses];
+
+        switch (value) {
+            case "Highest Reviewed":
+                sortedCourses.sort((a, b) => b.rating - a.rating);
+                break;
+            case "Price Ascending":
+                sortedCourses.sort((a, b) => a.minDiscountedPrice - b.minDiscountedPrice);
+                break;
+            case "Price Descending":
+                sortedCourses.sort((a, b) => b.minDiscountedPrice - a.minDiscountedPrice);
+                break;
+            case "Closest start date":
+                sortedCourses.sort((a, b) => new Date(a.closestDate) - new Date(b.closestDate));
+                break;
+            default:
+                break;
+        }
+
+        setOfferableCourses(sortedCourses);
+    }
 
 
     return (
@@ -271,12 +295,11 @@ export default function Search() {
                 <section id="resultsinfo">
                     <h2>{offerableCourses.length} results for "{searchValue}"</h2>
                     <div className="input-wrapper">
-                        <select className="filter-dropdown" id="filter-ropdown" type="dropdown">
-                            <option>Most Relevant</option>
+                        <select onChange={sortCourses} className="filter-dropdown" id="filter-ropdown" type="dropdown">
+                            <option>Highest Reviewed</option>
                             <option>Price Ascending</option>
                             <option>Price Descending</option>
-                            <option>Highest Reviewed</option>
-                            <option>Newest</option>
+                            <option>Closest start date</option>
                         </select>
                     </div>
                 </section>
