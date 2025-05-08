@@ -100,29 +100,8 @@ button {
     background-color: var(--highlight);
 }
 
-button {
-    border: 1px solid var(--textBlack);
-    cursor: pointer;
-}
-
-.cta-button {
-    background-color: var(--cta);
-    color: var(--textWhite);
-    height: 3rem;
-    width: 7rem;
-}
-
-.cta-button:hover {
-    background-color: var(--contrast);
-}
-
-.secondary-button {
-    background-color: var(--gray);
-    color: var(--textBlack);
-}
-
-.secondary-button:hover {
-    background-color: var(--highlight);
+input:disabled {
+    cursor: not-allowed;
 }
 
 .page-content {

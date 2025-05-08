@@ -18,7 +18,6 @@ export default function DeleteModal({onClose, deleteId, apiEndpoint}) {
 
     async function deleteObject() {
         try {
-            console.log(apiEndpoint + deleteId)
             await AsyncApiRequest("DELETE", apiEndpoint + deleteId, null);
         } catch (e) {
             console.error("Error fetching offerable courses:", e);
