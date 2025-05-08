@@ -38,20 +38,23 @@
 .about-hero-text {
     align-self: flex-start;
     font-weight: normal;
+
 }
 .about-us-and-our-products {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     background-color: var(--textWhite);
     padding: 2rem;
+    width: 100%;
 }
 .about-us-and-our-products-container{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
     padding: 2rem;
+    max-width: 150rem;
 }
 .about-us-and-our-products-grid{
     margin-top: 2rem;
@@ -94,45 +97,55 @@
 }
 
 .about-our-mission{
+    padding: 2rem;
+    background-color: var(--highlight);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.about-our-mission-content{
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    padding: 2rem;
-    background-color: var(--highlight);
+    align-items: center;
+    max-width: 150rem;
+
 }
 .about-our-mission-text-box{
     width: 50%;
-    max-width: 60rem;
+    max-width: 100rem;
 }
 .about-our-mission-img-box{
     display: flex;
     justify-content: center;
 }
 .about-our-mission-img{
-    width: 15rem;
-    max-width: 30rem;
-    height: auto;
+    width: 20rem;
 }
 
 #about-feedback-section {
     display: flex;
     padding: 4rem;
     flex-direction: column;
-    justify-content: flex-start;
-    align-content: center;
+    justify-content: center;
+    align-items: center;
     min-height: 100%;
 }
 
 #about-feedback-title {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     padding-bottom: 4rem;
 }
 
 .about-feedback-main-box {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 3rem;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 4rem;
 }
 
 .about-feedback {
@@ -219,18 +232,29 @@
         gap: 3rem;
     }
 }
-@media (max-width: 450px) {
-    #about-hero-text{
-        font-size: 0.8rem;
-    }
+@media (max-width: 650px) {
     .about-hero-text{
         font-size: 1.2rem;
+    }
+    .about-our-mission-img{
+        width: 10rem;
+    }
+}
+@media (max-width: 450px) {
+    .about-hero-text{
+        font-size: 1rem;
     }
     .about-section-text-box .about-section-text{
         font-size: 0.9rem;
     }
     .about-our-mission-text-box .about-our-mission-text{
         font-size: 0.9rem;
+    }
+    .about-feedback-main-box {
+        display: grid;
+        grid-template-columns: 70%;
+        grid-template-rows: 1fr 1fr 1fr 1fr;
+        gap: 2rem;
     }
 }
 
