@@ -3,6 +3,8 @@ import {Link} from "react-router-dom";
 import {getProviders, getUsers} from "../../../../utils/commonRequests";
 import "./users.css"
 import {Skeleton} from "@mui/material";
+import {createPortal} from "react-dom";
+import DeleteModal from "../../../../component/modals/deleteModal";
 
 function UserTableSkeleton() {
 
@@ -67,6 +69,13 @@ function UserTableContent({users}) {
                     </td>
                 </tr>
             ))}
+            {
+                showDeleteModal && createPortal(
+                    <DeleteModal onClose={() => setShowDeleteModal(false)} deleteId={focusedId}
+                                 apiEndpoint={"/user/"}/>,
+                    document.getElementById("delete-modal")
+                )
+            }
         </>
     )
 
