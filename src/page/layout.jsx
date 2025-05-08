@@ -27,21 +27,21 @@ export default function Layout() {
      * It checks if the user is logged in and updates the UI accordingly.
      */
     useEffect(() => {
-      // Check if the user is logged in
-      const user = getAuthenticatedUser();
-      const signedOutElements = document.querySelectorAll(".signed-out");
-      const signedInElements = document.querySelectorAll(".signed-in");
-      if (!user) {
-          // Show login and signup buttons
-          signedOutElements.forEach(element => element.style.display = "flex");
-          signedInElements.forEach(element => element.style.display = "none");
-      } else {
-          // If logged in, show the logout button and user icon
-          signedOutElements.forEach(element => element.style.display = "none");
-          signedInElements.forEach(element => element.style.display = "flex");
-          const email = user.email;
-          fetchUserProfilePic(email);
-      }
+        // Check if the user is logged in
+        const user = getAuthenticatedUser();
+        const signedOutElements = document.querySelectorAll(".signed-out");
+        const signedInElements = document.querySelectorAll(".signed-in");
+        if (!user) {
+            // Show login and signup buttons
+            signedOutElements.forEach(element => element.style.display = "flex");
+            signedInElements.forEach(element => element.style.display = "none");
+        } else {
+            // If logged in, show the logout button and user icon
+            signedOutElements.forEach(element => element.style.display = "none");
+            signedInElements.forEach(element => element.style.display = "flex");
+            const email = user.email;
+            fetchUserProfilePic(email);
+        }
     }, []);
 
 
@@ -50,13 +50,13 @@ export default function Layout() {
      */
     async function fetchUserProfilePic(email) {
         try {
-            const fetchApiCall = `/userProfilePicture/${email}`;
-            const data = await AsyncApiRequest("GET", {fetchApiCall}, null)
-                .then(response => response.json());
+            console.log("FETHICN FMAGE")
+            const data = await AsyncApiRequest("GET", /userProfilePicture/ + email, null)
+                .then(response => response.text());
             setUserPicture(data);
         } catch (err) {
             setUserPicture("/icons/person-sharp.svg");
-            console.log("Error fetching total revenue: ", err);
+            console.log("Error fetching profile picture: ", err);
         }
     }
 

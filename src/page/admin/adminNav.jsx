@@ -40,7 +40,7 @@ export default function AdminNav() {
                                 <Link to={"/admin/management/courses"}>Courses</Link>
                             </li>
                             <li>
-                                <Link>Users</Link>
+                                <Link to={"/admin/management/users"}>Users</Link>
                             </li>
 
                         </ul>

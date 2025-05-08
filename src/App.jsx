@@ -25,6 +25,8 @@ import {deleteAuthorizationCookies, getAuthenticatedUser} from "./utils/authenti
 import OrderComplete from "./page/orderComplete";
 import NoAccess from "./page/NoAccess";
 import ProtectedRoute from "./component/routing/ProtectedRoute";
+import Users from "./page/admin/management/users/users";
+import UserEdit from "./page/admin/management/users/edit/editUser";
 import NotFound from "./page/notFound";
 
 function App() {
@@ -62,7 +64,11 @@ function App() {
                             <Route path={"add"} element={<CourseAdd/> }/>
                             <Route path={"edit/:id"} element={<CourseEdit/>}/>
                         </Route>
-                        <Route path={"users"} element={<div>Users</div>}/>
+                        <Route path={"users"}>
+                            <Route index element={<Users/>}/>
+                            <Route path={"edit/:id"} element={<UserEdit/>}/>
+                        </Route>
+
                     </Route>
                 </Route>
             </Route>
