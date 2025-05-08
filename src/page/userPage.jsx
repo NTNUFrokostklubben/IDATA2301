@@ -1,21 +1,89 @@
 import "./userPage.css"
-import { useEffect, useState } from 'react';
-import CardHorizontal from "../component/card/cardHorizontal";
+import React, {useEffect, useRef, useState} from 'react';
 import Review from "../component/Rating/review";
 import {AsyncApiRequest} from "../utils/requests";
 import {Link, useParams} from "react-router-dom";
 import FavoriteCard from "../component/favoriteCard/favoriteCard";
-import {getAuthenticatedUser} from "../utils/authentication/authentication";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {createPortal} from "react-dom";
+import {uploadImage} from "../utils/commonRequests";
+import {setCourseObject, setUserImage, setUserObject} from "../dataSlice";
 
-export default function UserPage (){
+export function UserImageModal ({ close , uid}){
+    const dispatch = useDispatch();
+    function deletePfp(){
+
+    }
+    function changePfp(link){
+        const finLink = {
+            profilePicture: link.toString()
+        };
+        const userDto =  AsyncApiRequest("PUT" ,`/user/image/${uid}`, finLink )
+            .then(response => response.json())
+
+        close();
+    }
+
+
+    const handleFileChange = async (event)  => {
+        const file = event.target.files[0];
+        const imgLink = await uploadImage(file).then(r =>{ changePfp(r); dispatch(setUserImage(r))} )
+
+    };
+
+    function removeStyles(){
+        return{
+            background: "none",
+            border: "none",
+            padding: 0,
+            margin: 0,
+            font: "inherit",
+            color: "inherit",
+            cursor: "pointer",
+            outline: "none",
+            appearance: "none",
+        }
+    }
+
+    return(
+        <div className={"user-page-modal-background"}>
+            <div className={"user-page-modal"}>
+
+                <label className="file-upload-button">
+                    Change profile picture
+                    <input type="file" style={{display: "none"}} onChange={handleFileChange}/>
+                </label>
+
+                <button style={removeStyles()} onClick={deletePfp()}>
+                    <p className={"user-page-modal-delete-pfp"}>
+                        delete profile picture
+                    </p>
+                </button>
+                <button style={removeStyles()} onClick={close}>
+                    <p className={"user-page-modal-cancel"}>
+                        Cancel
+                    </p>
+                </button>
+
+            </div>
+
+        </div>
+    )
+}
+
+export default function UserPage() {
     const [courses, setCourses] = useState([]);
+    const [showUserModal, setShowUserModal] = useState(false)
     const user = useSelector((state) => state.data.user)
     const [loading, setLoading] = useState(true);
     const [ratings, setRatings] = useState([]);
     const [favorites, setFavorites] = useState([]);
+    const sacrificialDivRef = useRef(null);
+    const [mounted, setMounted] = useState(false);
 
-
+    useEffect(() => {
+        setMounted(true); // after the DOM is ready
+    }, []);
 
     useEffect(() => {
         if (!user) return;  // Don't fetch unless user is set
@@ -34,6 +102,7 @@ export default function UserPage (){
             }catch (e){console.error(e)}
         }
 
+
         async function handleFavoritesData() {
             try {
                 const favoritesData = await AsyncApiRequest("GET", `/userFavorites/${user.id}`, null)
@@ -47,17 +116,23 @@ export default function UserPage (){
     }, [user]);
 
 
+    function profileImageClickHandler() {
+        setShowUserModal(true)
+    }
+
     return (
 
 
+
         <div className="user-page">
+            {console.log(user)}
             {user && (
             <section id="user-page-content">
                 <section id="user-page-caret">
 
                     <div id="user-caret">
 
-                        <picture>
+                        <picture onClick={profileImageClickHandler}>
                             <img className={"user-page-user-image"} src={user.profilePicture} alt="user"/>
                         </picture>
                         <p id="user-name">
@@ -78,7 +153,7 @@ export default function UserPage (){
                             ))}
                     </ul>
                 </section>
-
+                <div id={"sacrificial-div-for-modal"} ref={sacrificialDivRef}></div>
                 <section className="users-reviews">
                     <h5 id={"review-heading"} >Your reviews</h5>
 
@@ -93,6 +168,12 @@ export default function UserPage (){
 
                 </section>
             </section>)}
+            {
+                mounted && sacrificialDivRef.current && showUserModal && createPortal(
+                    <UserImageModal uid={user.id} close={() => setShowUserModal(false)}/>,
+                    document.getElementById("sacrificial-div-for-modal")
+                )
+            }
         </div>
 
     )

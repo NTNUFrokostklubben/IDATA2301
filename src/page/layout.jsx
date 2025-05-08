@@ -9,7 +9,7 @@ import Index from "./index";
 import {deleteAuthorizationCookies, getAuthenticatedUser} from "../utils/authentication/authentication";
 import {AsyncApiRequest} from "../utils/requests";
 import ScrollRoute from "../component/routing/scrollRoute";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {clearCourseObject, clearUserObject} from "../dataSlice";
 // import {Modal} from "react-native";
 
@@ -18,6 +18,7 @@ export default function Layout() {
     const [showLoginModal, setShowLoginModal] = useState();
     const [showSignupModal, setShowSignupModal] = useState();
     const [searchParams, setSearchParams] = useSearchParams();
+    const user = useSelector((state) => state.data.user)
     const searchValue = searchParams.get("search");
     const [userPicture, setUserPicture] = useState([]);
     const navigate = useNavigate();
@@ -42,7 +43,7 @@ export default function Layout() {
             signedOutElements.forEach(element => element.style.display = "none");
             signedInElements.forEach(element => element.style.display = "flex");
             const email = user.email;
-            fetchUserProfilePic(email);
+            fetchUserProfilePic();
         }
     }, []);
 
@@ -50,17 +51,25 @@ export default function Layout() {
     /**
      * Fetches the total revenue from the API
      */
-    async function fetchUserProfilePic(email) {
-        try {
-            console.log("FETHICN FMAGE")
-            const data = await AsyncApiRequest("GET", /userProfilePicture/ + email, null)
-                .then(response => response.text());
-            setUserPicture(data);
-        } catch (err) {
+    async function fetchUserProfilePic() {
+        if (user){
+            setUserPicture(user.profilePicture)
+
+        } else {
             setUserPicture("/icons/person-sharp.svg");
-            console.log("Error fetching profile picture: ", err);
+            console.log("Error fetching profile picture");
         }
     }
+
+    useEffect(() => {
+        if (user){
+            setUserPicture(user.profilePicture)
+
+        } else {
+            setUserPicture("/icons/person-sharp.svg");
+            console.log("Error fetching profile picture");
+        }
+    }, [user]);
 
     /**
      * Navigates to the search page.
