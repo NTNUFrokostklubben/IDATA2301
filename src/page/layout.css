@@ -180,8 +180,9 @@ nav li {
 .nav-user-image{
     justify-content: center;
     align-items: center;
-    filter: invert(32%) sepia(9%) saturate(3293%) hue-rotate(187deg) brightness(95%) contrast(81%);
+    /*filter: invert(32%) sepia(9%) saturate(3293%) hue-rotate(187deg) brightness(95%) contrast(81%);*/
 }
+
 .signed-in{
     display: flex;
     flex-direction: row;

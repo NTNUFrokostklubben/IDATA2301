@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import {ProviderFormSkeleton} from "../../providers/edit/providerEdit";
 import {getRoles, getUser, putUser, uploadImage} from "../../../../../utils/commonRequests";
 import "./editUser.css"
+import {Role} from "../../../../../utils/Classes/commonClasses";
 
 function UserEditForm({user, roles}) {
 
@@ -22,7 +23,6 @@ function UserEditForm({user, roles}) {
 
         const data = new FormData(event.target);
         const image = data.get("profilePicture")
-        data.set("role", buildRoleObject());
 
         if (imageChanged) {
             uploadImage(image).then(r => {
@@ -38,6 +38,7 @@ function UserEditForm({user, roles}) {
 
     async function handleFormSubmission(data) {
         const value = Object.fromEntries(data.entries());
+        value.role = buildRoleObject();
         console.log(value)
         const response = await putUser(user.id, value);
         return response
@@ -58,8 +59,9 @@ function UserEditForm({user, roles}) {
         const role = [];
         const checkboxes = document.querySelectorAll("input[name='role']:checked");
         checkboxes.forEach((checkbox) => {
-            role.push(roles.find(r => r.name === checkbox.value));
+            role.push(new Role(checkbox.id, checkbox.value));
         })
+        console.log(role)
         return role;
     }
 
@@ -73,7 +75,7 @@ function UserEditForm({user, roles}) {
                            required/>
                 </div>
 
-                <div className="input-wrapper"><label htmlFor="user-name">Email</label>
+                <div className="input-wrapper"><label htmlFor="user-name">Full Name</label>
                     <input disabled={true} type="text" id="user-name" name="name" defaultValue={user.name}
                            required/>
                 </div>
@@ -94,10 +96,10 @@ function UserEditForm({user, roles}) {
 
                     {roles.map((role) =>
                         (
-                            <div key={role.id}>
-                                <label htmlFor={role.name}>{role.name}</label>
-                                <input type="checkbox" id={role.name} name={"role"} value={role.name}
+                            <div className={"role-checkbox"} key={role.id}>
+                                <input type="checkbox" id={role.id} name={"role"} value={role.name}
                                        defaultChecked={user.role.some(r => JSON.stringify(r) === JSON.stringify(role))}/>
+                                <label htmlFor={role}>{role.name}</label>
                             </div>
                         )
                     )}

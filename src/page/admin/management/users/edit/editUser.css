@@ -67,6 +67,7 @@
     height: 2.5rem;
     margin: 1rem 1rem;
     box-sizing: border-box;
+    border-radius: 0px;
     font-size: 1rem;
 
 }
@@ -74,6 +75,30 @@
 #user-info .cta-button {
     margin: 1rem 1rem;
 }
+
+#user-info #user-roles input[type="checkbox"] {
+    width: 2rem;
+    height: 2rem;
+}
+
+#user-info #user-roles .role-checkbox {
+    display: flex;
+
+    flex-direction: row;
+    align-items: center;
+}
+
+#user-info #user-roles {
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    padding: 1rem;
+    margin: 1rem;
+    background-color: var(--textWhite);
+    border: var(--textBlack) inset 2px;
+}
+
+
 
 .input-wrapper {
     position: relative;
@@ -85,6 +110,8 @@
 .user-skeleton .loader {
     margin: 1rem;
 }
+
+
 
 @media (max-width: 900px) {
     .group-2 .input-wrapper,

@@ -36,6 +36,7 @@ export default function Layout() {
             signedOutElements.forEach(element => element.style.display = "none");
             signedInElements.forEach(element => element.style.display = "flex");
             const email = user.email;
+            console.log("EMAIL:" + email)
             fetchUserProfilePic(email);
         }
     }, []);
@@ -45,13 +46,13 @@ export default function Layout() {
      */
     async function fetchUserProfilePic(email) {
         try {
-            const fetchApiCall = `/userProfilePicture/${email}`;
-            const data = await AsyncApiRequest("GET", {fetchApiCall}, null)
-                .then(response => response.json());
+            console.log("FETHICN FMAGE")
+            const data = await AsyncApiRequest("GET", /userProfilePicture/ + email, null)
+                .then(response => response.text());
             setUserPicture(data);
         } catch (err) {
             setUserPicture("/icons/person-sharp.svg");
-            console.log("Error fetching total revenue: ", err);
+            console.log("Error fetching profile picture: ", err);
         }
     }
 
