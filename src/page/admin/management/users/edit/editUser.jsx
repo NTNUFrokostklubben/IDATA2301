@@ -4,6 +4,7 @@ import {ProviderFormSkeleton} from "../../providers/edit/providerEdit";
 import {getRoles, getUser, putUser, uploadImage} from "../../../../../utils/commonRequests";
 import "./editUser.css"
 import {Role} from "../../../../../utils/Classes/commonClasses";
+import {Skeleton} from "@mui/material";
 
 function UserEditForm({user, roles}) {
 
@@ -103,7 +104,7 @@ function UserEditForm({user, roles}) {
                             </div>
                         )
                     )}
-                </div >
+                </div>
 
                 <div className={"input-wrapper"}>
                     <label htmlFor={"active"}>Active</label>
@@ -121,9 +122,38 @@ function UserEditForm({user, roles}) {
 
 function UserFormSkeleton() {
     return (
-        <>
-            <h1>XD</h1>
-        </>
+        <div className={"user-edit-skeleton"} id="user-info">
+
+            <div className="input-wrapper"><label htmlFor="user-email">Email</label>
+                <Skeleton className={"loader"} variant={"rectangular"} height={"2.5rem"} width={"100%"}/>
+            </div>
+            <div className="input-wrapper"><label htmlFor="user-name">Full Name</label>
+                <Skeleton className={"loader"} variant={"rectangular"} height={"2.5rem"} width={"100%"}/>
+            </div>
+
+            <div className="input-wrapper">
+                <label htmlFor="course-image">Course Image</label>
+                <Skeleton className={"loader"} variant={"rectangular"} height={"2.5rem"} width={"100%"}/>
+            </div>
+
+
+            <div className={"input-wrapper"} name={"role"}>
+                <label htmlFor="user-roles">User Roles</label>
+                <Skeleton className={"loader"} variant={"rectangular"} height={"20rem"} width={"100%"}/>
+            </div>
+
+
+
+            <div className={"input-wrapper"}>
+                <label htmlFor={"visibility"}>Visibility</label>
+                <Skeleton className={"loader"} variant={"rectangular"} width={"2.5rem"} height={"2.5rem"}/>
+            </div>
+
+
+            <Skeleton variant={"rectangular"} className={"cta-button"} height={"2.5rem"}
+                      sx={"background-color: var(--cta)"}/>
+
+        </div>
     )
 }
 
@@ -170,7 +200,7 @@ export default function UserEdit(userId) {
 
     return (
         <div className="userInfo-page">
-            <h2>Edit Provider</h2>
+            <h2>Edit User</h2>
             {loading ? <UserFormSkeleton/> : <UserEditForm user={user} roles={roles}/>}
         </div>
     )

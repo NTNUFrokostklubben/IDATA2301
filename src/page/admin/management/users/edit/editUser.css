@@ -98,7 +98,9 @@
     border: var(--textBlack) inset 2px;
 }
 
-
+.user-edit-skeleton .loader {
+    margin: 1rem;
+}
 
 .input-wrapper {
     position: relative;
