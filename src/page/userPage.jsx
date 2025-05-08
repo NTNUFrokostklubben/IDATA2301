@@ -54,11 +54,11 @@ export default function UserPage (){
             {user && (
             <section id="user-page-content">
                 <section id="user-page-caret">
-                    <a href=""><img id="edit" src="/icons/pencil-sharp.svg" alt="edit button"/></a>
+
                     <div id="user-caret">
 
                         <picture>
-                            <img id="user-image" src={user.profilePicture} alt="user"/>
+                            <img className={"user-page-user-image"} src={user.profilePicture} alt="user"/>
                         </picture>
                         <p id="user-name">
                             User1

@@ -17,7 +17,6 @@ export default function Login({ onClose, changeMode, closable=true }) {
 
         const userDto = await AsyncApiRequest("GET", `/userDto/${email}`, null)
             .then(response => response.json())
-
         dispatch(setUserObject(userDto));
     }
 

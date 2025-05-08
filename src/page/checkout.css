@@ -2,13 +2,16 @@
     display: flex;
     justify-content: center;
     padding-left: 1rem;
-    margin-top: 5rem;
 
 }
 #checkout-left-side{
     display: flex;
+    padding-right: 1rem;
     flex-direction: column;
     align-items: center;
+}
+.checkout-header{
+    padding-top: 1.7rem;
 }
 #express-checkout{
     margin-top: 1rem;
@@ -36,6 +39,12 @@
     width: 7rem;
     height: 2.3rem;
     padding-bottom: 1rem;
+}
+.express-checkout-other{
+    padding-bottom: 0.5rem;
+}
+.express-checkout-other-button{
+    font-size: 1rem;
 }
 .checkout-headers{
     padding-bottom: 1rem;
@@ -74,12 +83,15 @@
     padding-left: 0.3rem;
     font-size: 0.875rem;
 }
-#country-select{
+.country-select{
     border: 2px black;
+
+}
+.country-select * {
+    font-size: 1rem;
 }
 .country-select__control{
     border: 2px solid black;
-    height: 2rem;
     min-height: 1rem;
     margin-bottom: 1rem;
 }
@@ -96,10 +108,10 @@
 
 #purchase-button{
     margin-left: 0.625rem; /* 10px / 16 */
+    font-size: 1rem;
 }
 
 #checkout-right-side{
-    padding-left: 1.25rem; /* 20px / 16 */
     width: 31.25rem; /* 500px / 16 */
 }
 #checkout{
@@ -107,7 +119,6 @@
     width: 31.25rem; /* 500px / 16 */
 }
 .product{
-    margin-top: 1rem;
     display:  flex;
     flex-direction: column;
     border: 1px solid rgba(0, 0, 0, .5);
@@ -155,13 +166,23 @@
     flex-direction: column;
 }
 .product-checkout-image{
+    width: 16rem;
+    height: 10rem;
     float: left; /* Float image to the left */
     margin-right: 1.25rem; /* 20px / 16 */
     margin-bottom: 0.625rem; /* 10px / 16 */
 }
-.product-pricetag .purchase-discount .purchase-total-cost{
+.product-pricetag, .purchase-discount, .purchase-total-cost{
     display: flex;
     flex-direction: row;
+}
+
+.product-pricetag  *, .purchase-discount  *, .purchase-total-cost *{
+    font-size: 1rem;
+}
+
+.checkout-final-price{
+    font-size: 1rem ;
 }
 
 .picture-and-text{
@@ -244,6 +265,10 @@
    }
     .product{
         width: 38rem;
+    }
+    .product-checkout-image{
+        width: 8rem;
+        height: 5rem;
     }
 
    #express-checkout{

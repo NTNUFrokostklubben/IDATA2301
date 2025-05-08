@@ -8,6 +8,7 @@ const dataSlice = createSlice({
         user: {
             id: 0,
             name: "",
+            profilePicture: "",
         }
     },
     reducers: {
