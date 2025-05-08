@@ -23,8 +23,8 @@ export default function Card(offerableCourse) {
         <section className="card">
             <div className={"card-top"}><Link to={"/course/" + offerableCourse.course.id}><img className="course-img"
                                                                                                src={offerableCourse.course.imgLink}
-                                                                                               alt=""/></Link>
-                <h6>{offerableCourse.course.title}</h6></div>
+                                                                                               alt={"image: " + offerableCourse.course.title}/></Link>
+                <h2>{offerableCourse.course.title}</h2></div>
             <p className="card-desc">{offerableCourse.course.description}</p>
             <p className="infotext">{offerableCourse.course.hoursWeek} hr/w
                 • {getDifficulty(offerableCourse.course.diffLevel)} • {offerableCourse.course.credits} ECTS
