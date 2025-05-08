@@ -11,6 +11,7 @@ import {AsyncApiRequest} from "../utils/requests";
 import ScrollRoute from "../component/routing/scrollRoute";
 import {useDispatch} from "react-redux";
 import {clearCourseObject, clearUserObject} from "../dataSlice";
+import LearniverseLogo from "../component/icons/learniverseLogo";
 // import {Modal} from "react-native";
 
 export default function Layout() {
@@ -103,7 +104,7 @@ export default function Layout() {
                 </li>
                 <li>
                     <div className="dropdown" id={"courses-dropdown"}>
-                        <button className="drop-btn"><h5>Courses</h5> &nbsp;
+                        <button className="drop-btn"><b>Courses</b> &nbsp;
                             <img id="triangle-icon" width="12" height="12" src="/icons/triangle-sharp.svg" alt={""}/>
                         </button>
                         <div className="dropdown-content">
@@ -138,7 +139,7 @@ export default function Layout() {
                                 </div>
                                 <button onClick={() => logout()} className="cta-button" id="logout-btn"
                                         alt="Log out" href="#">
-                                    <h5>Log out</h5>
+                                    <b>Log out</b>
                                 </button>
                             </div>
                             <div className={"signed-out"}>
@@ -147,14 +148,14 @@ export default function Layout() {
                                     setShowSignupModal(false)
                                 }} id="login-btn"
                                         className={"secondary-button"} alt="Log in" href="#">
-                                    <h5>Log in</h5>
+                                    <b>Log in</b>
                                 </button>
                                 <button onClick={() => {
                                     setShowSignupModal(true)
                                     setShowLoginModal(false)
                                 }} className="cta-button" id="signup-btn"
                                         alt="Sign up" href="#">
-                                    <h5>Sign up</h5>
+                                    <b>Sign up</b>
                                 </button>
                             </div>
                         </div>
@@ -194,23 +195,23 @@ export default function Layout() {
 
             {/* Footer */}
             <footer>
-                <img id="logo-icon" src="/logo.svg" alt="Learniverse Logo"/>
+                <LearniverseLogo fill={"#FFFFFF"}/>
 
                 <div id="footer-textbox">
 
                     <div className="textFooter" id="contact-us">
-                        <h5>Contact us:</h5>
+                        <h3>Contact us:</h3>
                         <p>Address: 1234 Main Street, Lincoln, NE 685089</p>
                         <p>Phone number: +47 123 45 678</p>
                         <p>Email: learniverse@connect.com</p>
                     </div>
 
                     <div className="textFooter" id="legal">
-                        <h5>Legal</h5>
-                        <small>This website is a result of a university group project, performed in the course
-                            <a href={"https://www.ntnu.edu/studies/courses/IDATA2301#tab=omEmnet"}> IDATA2301</a>
-                            Web technologies, at NTNU. All the information provided here is a result of
-                            imagination. Any resemblance with real companies or products is a coincidence.</small>
+                        <h3>Legal</h3>
+                        <p>This website is a result of a university group project, performed in the course
+                             <a href={"https://www.ntnu.edu/studies/courses/IDATA2301#tab=omEmnet"}>IDATA2301</a>
+                             Web technologies, at NTNU. All the information provided here is a result of
+                            imagination. Any resemblance with real companies or products is a coincidence.</p>
                     </div>
 
                 </div>

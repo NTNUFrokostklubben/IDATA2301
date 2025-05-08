@@ -115,10 +115,10 @@ export default function Index() {
 
                     <div className="index-hero-main-box">
                         <div className="index-hero-main-text">
-                            <h5>
+                            <p>
                                 Learniverse offers courses that give you the competence you need to succeed in the workplace
                                 and beyond!
-                            </h5>
+                            </p>
                         </div>
                         <button onClick={() => setShowSignupModal(true)} className="cta-button" id="index-free-btn">
                             <p>Try for free!</p>
@@ -137,9 +137,9 @@ export default function Index() {
                 <section id="index-course-content">
                     <div className="title-and-subtitle">
                         <h2 className="section-heading">Lorem ipsum dolor sit amet</h2>
-                        <h5 className="section-subheading">Consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                        <h3 className="section-subheading">Consectetur adipiscing elit, sed do eiusmod tempor incididunt
                             ut
-                            labore et dolore magna aliqua.</h5>
+                            labore et dolore magna aliqua.</h3>
                     </div>
 
                     {loading ? <p>Loading</p> :
@@ -180,8 +180,8 @@ export default function Index() {
                 <section id="index-collaborators-section">
                     <div className="title-and-subtitle">
                         <h2 className="section-heading">Collaborators</h2>
-                        <h5 className="section-subheading">Proud collaborator with over 200+ companies and
-                            organizations</h5>
+                        <h3 className="section-subheading">Proud collaborator with over 200+ companies and
+                            organizations</h3>
                     </div>
                     {loading ? <p>Loading</p> :
                         <div id="index-collaborator-logos">

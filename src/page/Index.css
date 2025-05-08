@@ -36,10 +36,14 @@
 .index-hero-main-text{
     text-align: center;
 }
-.index-hero-main-box h5{
-    font-weight: lighter;
+
+.index-hero-main-box p {
+    font-size: 1.5rem;
+    color: var(--textBlack);
 }
-.index-hero-main-box p{
+
+.index-hero-main-box button p {
+    font-size: 1rem;
     color: var(--textWhite);
 }
 
@@ -197,7 +201,7 @@
     align-items: center;
     width: 80%;
     max-width: 1000px;
-    background-color: #4D7E8A;
+    background-color: var(--contrast);
     padding: 2rem;
 }
 #index-testimonial_box:hover {
