@@ -14,7 +14,7 @@
 }
 
 .card .infotext {
-    color: rgba(0, 0, 0, 0.5);
+    color: rgba(0, 0, 0, 0.6);
     font-size: 1rem;
 }
 
@@ -48,8 +48,9 @@
 
 }
 
-.card h6 {
+.card h2 {
     margin: 0.5rem 1rem;
+    font-size: 1.2rem;
 }
 
 .rating {
@@ -90,8 +91,8 @@
         position: absolute;
         bottom: 0;
         right: 0;
-        background: white; /* Match the background color */
-        padding-left: 5px; /* Add some spacing */
+        background: white;
+        padding-left: 5px;
     }
 }
 
@@ -128,7 +129,7 @@
         padding: 0rem 0rem;
     }
 
-    .card h6 {
+    .card h2 {
         justify-content: left;
         padding-right: 1rem;
     }
@@ -156,8 +157,8 @@
             position: absolute;
             bottom: 0;
             right: 0;
-            background: white; /* Match the background color */
-            padding-left: 5px; /* Add some spacing */
+            background: white;
+            padding-left: 5px;
         }
     }
 
