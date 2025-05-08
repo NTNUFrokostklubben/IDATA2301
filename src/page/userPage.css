@@ -37,8 +37,8 @@
     align-items: center;
 }
 
-#user-image {
-    border-radius: 50%;
+.user-page-user-image {
+    border-radius: 2px;
     width: 12rem;
     height: 12rem;
 }

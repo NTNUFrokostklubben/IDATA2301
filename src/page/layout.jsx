@@ -9,6 +9,8 @@ import Index from "./index";
 import {deleteAuthorizationCookies, getAuthenticatedUser} from "../utils/authentication/authentication";
 import {AsyncApiRequest} from "../utils/requests";
 import ScrollRoute from "../component/routing/scrollRoute";
+import {useDispatch} from "react-redux";
+import {clearCourseObject, clearUserObject} from "../dataSlice";
 // import {Modal} from "react-native";
 
 export default function Layout() {
@@ -19,7 +21,7 @@ export default function Layout() {
     const searchValue = searchParams.get("search");
     const [userPicture, setUserPicture] = useState([]);
     const navigate = useNavigate();
-
+    const dispatch = useDispatch();
 
 
     /**
@@ -81,6 +83,7 @@ export default function Layout() {
     function logout() {
         // Clear the authentication cookies
         deleteAuthorizationCookies();
+        dispatch(clearUserObject)
         // Redirect to the login page
         navigate("/");
         // Reload the page to update the UI
