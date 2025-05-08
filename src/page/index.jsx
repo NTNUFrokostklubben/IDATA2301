@@ -8,6 +8,7 @@ import Register from "../component/modals/auth/register";
 import {createPortal} from "react-dom";
 import {AsyncApiRequest} from "../utils/requests";
 import {CourseWithPrice} from "../utils/Classes/commonClasses";
+import {getCourses, getProviders} from "../utils/commonRequests";
 
 export default function Index() {
 
@@ -16,6 +17,7 @@ export default function Index() {
     const [courseIndex, setCourseIndex] = useState(0);
     const [courseCards, setCourseCards] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [providers, setProviders] = useState([])
 
     // Use to resize the course shown based on window size
     useEffect(() => {
@@ -30,7 +32,10 @@ export default function Index() {
     useEffect(() => {
         const fetchData = async () => {
             try{
-                await fetchCourses();
+                await Promise.all([
+                    fetchProviders(),
+                    fetchCourses()
+                ])
                 setLoading(false);
             } catch (err){
                 throw new Error("Error fetching course cards: ", err);
@@ -38,6 +43,15 @@ export default function Index() {
         }
         fetchData();
     }, []);
+
+    async function fetchProviders() {
+        try {
+            const data = await getProviders();
+            setProviders(data);
+        } catch (err) {
+            throw new Error("Error fetching providers: ", err);
+        }
+    }
 
     /**
      * Fetches all courseCards from the API
@@ -95,7 +109,7 @@ export default function Index() {
     }, []);
 
     return (
-        <div id={"root"}>
+        <div id={"index"}>
             <section id="index-hero-section">
                 <div className="index-hero">
 
@@ -119,87 +133,71 @@ export default function Index() {
                 </div>
             </section>
 
-            <section id="index-course-content">
-                <div className="title-and-subtitle">
-                    <h2 className="section-heading">Lorem ipsum dolor sit amet</h2>
-                    <h5 className="section-subheading">Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua.</h5>
-                </div>
+            <div id={"index-course-background"}>
+                <section id="index-course-content">
+                    <div className="title-and-subtitle">
+                        <h2 className="section-heading">Lorem ipsum dolor sit amet</h2>
+                        <h5 className="section-subheading">Consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                            ut
+                            labore et dolore magna aliqua.</h5>
+                    </div>
 
-                { loading ? <h1>Uff da</h1> :
-                    <section id="index-course-cards-section">
+                    {loading ? <p>Loading</p> :
+                        <section id="index-course-cards-section">
 
-                        <section className="index-arrow">
-                            <button id="index-arrow-left-btn"
-                                    onClick={() => setCourseIndex((prevIndex) => (prevIndex - 1 + courseCards.length) % courseCards.length)}>
-                                <img className={"index-arrow-icon"} src="/icons/arrow-back-circle-sharp.svg" alt="Arrow Left"/>
-                            </button>
+                            <section className="index-arrow">
+                                <button id="index-arrow-left-btn"
+                                        onClick={() => setCourseIndex((prevIndex) => (prevIndex - 1 + courseCards.length) % courseCards.length)}>
+                                    <img className={"index-arrow-icon"} src="/icons/arrow-back-circle-sharp.svg"
+                                         alt="Arrow Left"/>
+                                </button>
+                            </section>
+
+                            <section id="index-collection-cards">
+                                {courseCards.slice(courseIndex, courseIndex + courseShown - 1).map((courseCard) => (
+                                    <CourseCard key={courseCard.id} {...courseCard} />
+                                ))}
+                                {courseIndex + courseShown - 1 > courseCards.length
+                                    && courseCards.slice(0, (courseIndex + courseShown - 1) % courseCards.length)
+                                        .map((courseCard) => (
+                                            <CourseCard key={courseCard.id} {...courseCard}/>
+                                        ))}
+                            </section>
+
+                            <section className="index-arrow">
+                                <button id="index-arrow-right-btn"
+                                        onClick={() => setCourseIndex((prevIndex) =>
+                                            (prevIndex + 1 + courseCards.length) % courseCards.length)}>
+                                    <img className={"index-arrow-icon"} src="/icons/arrow-forward-circle-sharp.svg"
+                                         alt="Arrow Right"/>
+                                </button>
+                            </section>
                         </section>
+                    }
+                </section>
+            </div>
+            <div id={"index-collaborators-background"}>
+                <section id="index-collaborators-section">
+                    <div className="title-and-subtitle">
+                        <h2 className="section-heading">Collaborators</h2>
+                        <h5 className="section-subheading">Proud collaborator with over 200+ companies and
+                            organizations</h5>
+                    </div>
+                    {loading ? <p>Loading</p> :
+                        <div id="index-collaborator-logos">
 
-                        <section id="index-collection-cards">
-                            {courseCards.slice(courseIndex, courseIndex + courseShown - 1).map((courseCard) => (
-                                <CourseCard key={courseCard.id} {...courseCard} />
+                            {providers.map((provider) => (
+                                <div className={"index-logo"} id={"index-logo" + provider.id} key={provider.id}>
+                                    <img src={provider.logoLink} alt={provider.name}/>
+                                </div>
                             ))}
-                            {courseIndex + courseShown - 1 > courseCards.length
-                                && courseCards.slice(0, (courseIndex + courseShown - 1) % courseCards.length)
-                                    .map((courseCard) => (
-                                        <CourseCard key={courseCard.id} {...courseCard}/>
-                                    ))}
-                        </section>
 
-                        <section className="index-arrow">
-                            <button id="index-arrow-right-btn"
-                                    onClick={() => setCourseIndex((prevIndex) =>
-                                        (prevIndex + 1 + courseCards.length) % courseCards.length)}>
-                                <img className={"index-arrow-icon"} src="/icons/arrow-forward-circle-sharp.svg"
-                                     alt="Arrow Right"/>
-                            </button>
-                        </section>
-                    </section>
-                }
-            </section>
-            <section id="index-collaborators-section">
-                <div className="title-and-subtitle">
-                    <h2 className="section-heading">Collaborators</h2>
-                    <h5 className="section-subheading">Proud collaborator with over 200+ companies and
-                        organizations</h5>
-                </div>
-                <div id="index-collaborator-logos">
 
-                    <div className="index-logo" id="index-logo1"><img src="https://picsum.photos/250/75?random=1"
-                                                                      alt="1"/></div>
-                    <div className="index-logo" id="index-logo2"><img src="https://picsum.photos/250/75?random=2"
-                                                                      alt="2"/></div>
-                    <div className="index-logo" id="index-logo3"><img src="https://picsum.photos/250/75?random=3"
-                                                                      alt="3"/></div>
-                    <div className="index-logo" id="index-logo4"><img src="https://picsum.photos/250/75?random=4"
-                                                                      alt="4"/></div>
-                    <div className="index-logo" id="index-logo5"><img src="https://picsum.photos/250/75?random=5"
-                                                                      alt="5"/></div>
-                    <div className="index-logo" id="index-logo6"><img src="https://picsum.photos/250/75?random=6"
-                                                                      alt="6"/></div>
-                    <div className="index-logo" id="index-logo7"><img src="https://picsum.photos/250/75?random=7"
-                                                                      alt="7"/></div>
-                    <div className="index-logo" id="index-logo8"><img src="https://picsum.photos/250/75?random=8"
-                                                                      alt="8"/></div>
-                    <div className="index-logo-two" id="index-logo-9-10">
-                        <div className="index-logo-two-img" id="index-logo9">
-                            <img src="https://picsum.photos/75/75?random=9" alt="9"/>
                         </div>
-                        <div className="index-logo-two-img" id="index-logo10">
-                            <img src="https://picsum.photos/75/75?random=10" alt="10"/>
-                        </div>
-                    </div>
-                    <div className="index-logo-two" id="index-logo-11-12">
-                        <div className="index-logo-two-img" id="index-logo11">
-                            <img src="https://picsum.photos/75/75?random=11" alt="11"/>
-                        </div>
-                        <div className="index-logo-two-img" id="index-logo12">
-                            <img src="https://picsum.photos/75/75?random=12" alt="12"/>
-                        </div>
-                    </div>
-                </div>
-            </section>
+                    }
+                </section>
+            </div>
+
 
             <section id="index-testimonial">
                 <div id="index-testimonial_box">
