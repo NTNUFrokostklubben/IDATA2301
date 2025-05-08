@@ -23,12 +23,13 @@
     flex-direction: column;
     justify-items: center;
     align-items: center;
+    height: 12rem;
 }
 
 .card .course-img {
     display: flex;
     max-width: 100%;
-    max-height: 12rem;
+    max-height: 100%;
     /*object-fit: cover;*/
 }
 
