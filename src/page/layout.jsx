@@ -207,11 +207,12 @@ export default function Layout() {
                     </div>
 
                     <div className="textFooter" id="legal">
+
                         <h3>Legal</h3>
-                        <p>This website is a result of a university group project, performed in the course
-                             <a href={"https://www.ntnu.edu/studies/courses/IDATA2301#tab=omEmnet"}>IDATA2301</a>
-                             Web technologies, at NTNU. All the information provided here is a result of
-                            imagination. Any resemblance with real companies or products is a coincidence.</p>
+                        <small>This website is a result of a university group project, performed in the course
+                            <a href={"https://www.ntnu.edu/studies/courses/IDATA2301#tab=omEmnet"}> IDATA2301</a>&nbsp;
+                            Web technologies, at <a href={"https://www.ntnu.no/"}>NTNU</a>. All the information provided here is a result of
+                            imagination. Any resemblance with real companies or products is a coincidence.</small>
                     </div>
 
                 </div>
