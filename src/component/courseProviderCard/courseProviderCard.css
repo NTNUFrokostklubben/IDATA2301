@@ -2,21 +2,31 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-content: center;
     text-decoration: none;
     width: 13rem;
-    height: 7rem;
+    height: 9rem;
 }
 .provider-card-name, .provider-card-price,
 .provider-card-date{
-    padding-bottom: 0.3rem;
-    font-size: 1.08rem;
-    text-decoration: none;
+    text-align: center;
     color: var(--textWhite);
 }
 
-.provider-card-price-section{
+.provider-card .provider-card-price-section{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
 }
+
+.provider-card-price-and-discount {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0rem 1rem;
+    margin-top: auto;
+}
+
 .original-price {
     font-size: 1rem;
     text-decoration: line-through;
@@ -29,7 +39,7 @@
     color: var(--textWhite);
 }
 
-.provider-card-price-and-discount{
+.provider-card-price-and-discount {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -38,15 +48,13 @@
     justify-items: center;
 }
 
-.provider-card-text{
+.provider-card-text {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-content: center;
     align-items: center;
-    height: 6rem;
-    padding-left: 0.4rem;
-    padding-top: 0.4rem;
+    padding: 0.5rem 0;
 }
 
 .provider-card-price{
@@ -67,9 +75,5 @@
         height: 5rem;
         width: 5rem;
     }
-    .provider-card{
-        width: 12rem;
-        height: 6rem;
-
-    }
+    
 }
