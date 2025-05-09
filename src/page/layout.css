@@ -138,7 +138,7 @@ menu li {
     display: none;
 }
 
-#menu-icon{
+.menu-icon{
     width: 2rem;
     height: 2rem;
 }
@@ -191,6 +191,8 @@ menu li {
     background-color: var(--textWhite);
 }
 .nav-user-image{
+    height: 3rem;
+    width: 3rem;
     justify-content: center;
     align-items: center;
     /*filter: invert(32%) sepia(9%) saturate(3293%) hue-rotate(187deg) brightness(95%) contrast(81%);*/

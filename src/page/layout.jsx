@@ -169,7 +169,7 @@ export default function Layout() {
                             <div className={"signed-in"}>
                                 <div className="dropdown" id="ls-dropdown">
                                     <button className="login-signup-drop-down">
-                                        <img id="menu-icon" src="/icons/menu-sharp.svg" alt="menu"/>
+                                        <img className="menu-icon" src="/icons/menu-sharp.svg" alt="menu"/>
                                     </button>
                                     <div className="dropdown-content">
                                         <a onClick={() => goToUserPage()}>Userpage</a>
@@ -180,7 +180,7 @@ export default function Layout() {
                             <div className={"signed-out"}>
                                 <div className="dropdown" id="ls-dropdown">
                                     <button className="login-signup-drop-down">
-                                        <img id="menu-icon" src="/icons/menu-sharp.svg" alt="menu"/>
+                                        <img className="menu-icon" src="/icons/menu-sharp.svg" alt="menu"/>
                                     </button>
                                     <div className="dropdown-content">
                                         <a onClick={() => setShowLoginModal(true)}>Log in</a>

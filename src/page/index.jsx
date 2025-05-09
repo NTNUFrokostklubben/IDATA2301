@@ -3,7 +3,6 @@ import "./Index.css";
 import Search from "./search/search";
 import {Link, Route} from "react-router-dom";
 import {CourseCard, CourseCardSkeleton} from "../component/card/courseCard";
-import Card from "../component/card/card";
 import Register from "../component/modals/auth/register";
 import {createPortal} from "react-dom";
 import {AsyncApiRequest} from "../utils/requests";
@@ -18,7 +17,7 @@ export default function Index() {
     const [courseCards, setCourseCards] = useState([]);
     const [loading, setLoading] = useState(true);
     const [providers, setProviders] = useState([]);
-    const [overflow, setOverflow] = useState(true);
+    const [overflow, setOverflow] = useState(false);
 
     // Use to resize the course shown based on window size
     useEffect(() => {
@@ -104,16 +103,12 @@ export default function Index() {
 
     function calcCardsShown(){
         const sceneStart = calcSceneStart();
-
-        // Ensure we don’t set courseShown higher than what's available
         const adjustedShown = Math.min(sceneStart, courseCards.length || sceneStart);
-
         setCourseShown(adjustedShown);
         setOverflow(courseCards.length >= adjustedShown);
 
-        // Clamp index if it's out of bounds after resize
         if (courseIndex > courseCards.length - adjustedShown) {
-            setCourseIndex(0); // or courseCards.length - adjustedShown
+            setCourseIndex(0);
         }
     }
 
@@ -273,15 +268,11 @@ export default function Index() {
                     {/* The SVG Background and Pattern is by SVGBackgrounds.com*/}
                     {/* Url: "https://www.svgbackgrounds.com/set/free-svg-backgrounds-and-patterns/"*/}
 
-
-                    {/*Slideshow container */}
                     <div className="index-slideshow-container">
                         {slides.map((slide, index) => (
-                            <div
-                                key={index}
-                                className="index-mySlides index-fade"
-                                style={{display: index === slideIndex ? "block" : "none"}}
-                            >
+                            <div key={index} className="index-mySlides index-fade"
+                                style={{display: index === slideIndex ? "block" : "none"}}>
+
                                 <img className={"index-slideshow-img"} src={slide} alt={`Slide ${index + 1}`}/>
                             </div>
                         ))}
