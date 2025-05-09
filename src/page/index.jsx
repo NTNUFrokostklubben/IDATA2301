@@ -64,7 +64,7 @@ export default function Index() {
             const courseCards = data.map((courseCard) => new CourseWithPrice(courseCard.course,
                 courseCard.minDiscountedPrice, courseCard.closestDate, courseCard.rating, courseCard.numberOfRatings));
             setCourseCards(courseCards);
-            console.log(courseCards);
+
         } catch (err) {
             throw new Error("Error fetching course cards: ", err);
         }

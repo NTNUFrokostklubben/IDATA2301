@@ -81,7 +81,7 @@ export default function Course() {
             }
         });
         setUniqueCourses( Array.from(courseMap.values()));
-        console.log(uniqueCourses)
+
     }, [offerableCourseData]);
 
 

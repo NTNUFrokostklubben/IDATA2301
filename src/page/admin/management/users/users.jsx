@@ -44,7 +44,7 @@ function UserTableContent({users}) {
             {users.map((user) => (
                 <tr key={user.id}>
                     <td>
-                        <img src={user.profilePicture}/>
+                        <img src={user.profilePicture} alt={"image " + user.name}/>
                         <p>{user.email}</p>
                     </td>
                     <td ><p>{user.name}</p></td>
@@ -56,14 +56,14 @@ function UserTableContent({users}) {
                         <div className={"button-group"}>
                             <Link to={`/admin/management/users/edit/${user.id}`}>
                                 <button>
-                                    <img src={"/icons/pencil-sharp.svg"}/>
+                                    <img src={"/icons/pencil-sharp.svg"} alt={"edit"}/>
                                 </button>
                             </Link>
 
                             <button id={"delete" + user.id} onClick={() => {
                                 setFocusedId(user.id)
                                 setShowDeleteModal(true);
-                            }}><img src={"/icons/trash-sharp.svg"}/>
+                            }}><img src={"/icons/trash-sharp.svg"} id={"delete"}/>
                             </button>
                         </div>
                     </td>
@@ -111,7 +111,7 @@ export default function Users() {
      */
     async function fetchUsers() {
         const p = await getUsers();
-        console.log(p)
+
         setUsers(p)
     }
 

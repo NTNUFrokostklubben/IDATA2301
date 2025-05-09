@@ -53,13 +53,13 @@ export default function Layout() {
      */
     async function fetchUserProfilePic(email) {
         try {
-            console.log("FETHICN FMAGE")
+
             const data = await AsyncApiRequest("GET", /userProfilePicture/ + email, null)
                 .then(response => response.text());
             setUserPicture(data);
         } catch (err) {
             setUserPicture("/icons/person-sharp.svg");
-            console.log("Error fetching profile picture: ", err);
+            throw new Error("Error fetching user profile picture: " + err);
         }
     }
 

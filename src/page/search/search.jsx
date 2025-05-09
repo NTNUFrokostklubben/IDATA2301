@@ -162,7 +162,7 @@ export default function Search() {
      */
     const dateChanged = (dates) => {
         const [start, end] = dates;
-        console.log("New dates:", start, end); // Debug
+
         setStartDate(start);
         setEndDate(end);
 
