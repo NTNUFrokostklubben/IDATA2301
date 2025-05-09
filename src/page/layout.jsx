@@ -20,7 +20,7 @@ export default function Layout() {
     const [searchParams, setSearchParams] = useSearchParams();
     const user = useSelector((state) => state.data.user)
     const searchValue = searchParams.get("search");
-    const [userPicture, setUserPicture] = useState([]);
+    const [userPicture, setUserPicture] = useState(String);
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -49,26 +49,15 @@ export default function Layout() {
 
 
     /**
-     * Fetches the total revenue from the API
+     * Fetches the user profile picture link
      */
     async function fetchUserProfilePic() {
-        if (user){
-            setUserPicture(user.profilePicture)
-
-        } else {
-            setUserPicture("/icons/person-sharp.svg");
-            console.log("Error fetching profile picture");
-        }
+        if (user) setUserPicture(user.profilePicture)
     }
 
     useEffect(() => {
-        if (user){
-            setUserPicture(user.profilePicture)
+        if (user) setUserPicture(user.profilePicture)
 
-        } else {
-            setUserPicture("/icons/person-sharp.svg");
-            console.log("Error fetching profile picture");
-        }
     }, [user]);
 
     /**
@@ -86,17 +75,23 @@ export default function Layout() {
         navigate(`/userpage`);
     }
 
+    async function deleteUserRedux(){
+        dispatch(clearUserObject())
+    }
     /**
      * Logs out the user by deleting the authentication cookies and redirecting to the index page.
      */
     function logout() {
         // Clear the authentication cookies
         deleteAuthorizationCookies();
-        dispatch(clearUserObject)
+        deleteUserRedux().then(() =>{
+            console.log(user);
+            window.location.reload();
+        })
         // Redirect to the login page
         navigate("/");
         // Reload the page to update the UI
-        window.location.reload();
+
     }
 
     return (

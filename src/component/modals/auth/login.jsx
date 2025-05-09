@@ -17,6 +17,7 @@ export default function Login({ onClose, changeMode, closable=true }) {
 
         const userDto = await AsyncApiRequest("GET", `/userDto/${email}`, null)
             .then(response => response.json())
+        console.log(userDto)
         dispatch(setUserObject(userDto));
     }
 
@@ -32,8 +33,11 @@ export default function Login({ onClose, changeMode, closable=true }) {
      */
     function onLoginSuccess(userData) {
         console.log("Successfully logged in for user: ", userData.email);
-        addUserToRedux(userData.email)
-        window.location.reload(); // TODO - maybe find an other way to do this
+        addUserToRedux(userData.email).then(() => {
+            window.location.reload()
+        }
+        )
+       // TODO - maybe find an other way to do this
         onClose();
     }
 

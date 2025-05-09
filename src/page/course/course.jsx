@@ -20,7 +20,7 @@ export default function Course() {
     const [isFavorite, setFavorite] = useState(null);
     const [isFavoriteLoaded, setIsFavoriteLoaded] = useState(false);
     const [keywords, setKeywords] = useState([])
-    const [isUserEnrolled, setIsUserEnrolled] = useState(false);
+    //const [isUserEnrolled, setIsUserEnrolled] = useState(false);
     const {id} = useParams();
     const userData = useSelector((state) => state.data.user)
     const navigate = useNavigate();
@@ -46,13 +46,14 @@ export default function Course() {
 
     }, []);
 
+    /*
     const checkUserCourse = async () =>{
 
         const enrolled = AsyncApiRequest("GET", `/userCourses/user/${user.id}/course/${id}`, null)
             .then(response => response.json())
         setIsUserEnrolled(enrolled);
     }
-
+     */
     useEffect(() => {
         if (user === null) return;
         checkFavorite()
@@ -81,13 +82,13 @@ export default function Course() {
             }
         });
         setUniqueCourses( Array.from(courseMap.values()));
-        console.log(uniqueCourses)
     }, [offerableCourseData]);
 
 
 
     function handleUserData() {
        setUser(userData)
+        console.log(userData)
     }
     /**
      * Fetches all course data from the API

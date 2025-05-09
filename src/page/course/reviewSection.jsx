@@ -30,7 +30,6 @@ export function ReviewComponent({cid, uid, averageRating}) {
 
     const fetchData = async () => {
         if(averageRating !== undefined) {
-            console.log(averageRating)
             if (!Number.isInteger(averageRating)) {
                 setHalfStar(true)
             }

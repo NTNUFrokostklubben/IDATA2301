@@ -11,10 +11,25 @@ import {setCourseObject, setUserImage, setUserObject} from "../dataSlice";
 
 export function UserImageModal ({ close , uid}){
     const dispatch = useDispatch();
-    function deletePfp(){
+    const [isChangeClicked, setIsChangeClicked] = useState(false);
+    const [isDeleteClicked, setIsDeleteClicked] = useState(false);
 
+
+    const handleClick =  async (setter) => {
+        setter(true);
+
+        setTimeout(() => {
+            setter(false);
+        }, 150); // change back after 150ms (you can adjust this)
+    };
+
+    function deletePfp(){
+        console.log("beep boop deleting fpf ")
+        handleClick(setIsDeleteClicked)
     }
+
     function changePfp(link){
+        handleClick(setIsChangeClicked)
         const finLink = {
             profilePicture: link.toString()
         };
@@ -49,22 +64,28 @@ export function UserImageModal ({ close , uid}){
         <div className={"user-page-modal-background"}>
             <div className={"user-page-modal"}>
 
-                <label className="file-upload-button">
-                    Change profile picture
-                    <input type="file" style={{display: "none"}} onChange={handleFileChange}/>
-                </label>
-
-                <button style={removeStyles()} onClick={deletePfp()}>
-                    <p className={"user-page-modal-delete-pfp"}>
-                        delete profile picture
-                    </p>
-                </button>
-                <button style={removeStyles()} onClick={close}>
-                    <p className={"user-page-modal-cancel"}>
-                        Cancel
-                    </p>
-                </button>
-
+                <div className={"user-page-modal-option-container"}
+                     style={{backgroundColor: isChangeClicked ? 'white' : 'var(--background)'}}>
+                    <label className="file-upload-button">
+                        Change profile picture
+                        <input className={"user-page-picture-picker"} type="file" style={{display: "none"}} onChange={handleFileChange}/>
+                    </label>
+                </div>
+                <div className={"user-page-modal-option-container"}  onClick={deletePfp}
+                     style={{backgroundColor: isDeleteClicked ? 'white' : 'var(--background)'}} >
+                    <button style={removeStyles()}>
+                        <p className={"user-page-modal-delete-pfp"}>
+                            delete profile picture
+                        </p>
+                    </button>
+                </div>
+                <div className={"user-page-modal-option-container"} onClick={close}>
+                    <button style={removeStyles()} >
+                        <p className={"user-page-modal-cancel"}>
+                            Cancel
+                        </p>
+                    </button>
+                </div>
             </div>
 
         </div>
