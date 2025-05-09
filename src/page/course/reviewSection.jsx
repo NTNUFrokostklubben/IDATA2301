@@ -29,6 +29,7 @@ export function ReviewComponent({cid, uid, averageRating}) {
     };
 
     const fetchData = async () => {
+
         if (averageRating !== undefined) {
 
             if (!Number.isInteger(averageRating)) {

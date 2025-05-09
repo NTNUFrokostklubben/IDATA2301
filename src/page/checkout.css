@@ -44,7 +44,8 @@
     padding-bottom: 0.5rem;
 }
 .express-checkout-other-button{
-    font-size: 1rem;
+    font-size: inherit;
+    height: 3rem;
 }
 .checkout-headers{
     padding-bottom: 1rem;
@@ -106,8 +107,10 @@
     margin-bottom: 1rem;
 }
 
-#purchase-button{
+.checkout-purchase-button{
+    height: 3rem;
     margin-left: 0.625rem; /* 10px / 16 */
+
     font-size: 1rem;
 }
 
