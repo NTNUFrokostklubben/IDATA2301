@@ -13,12 +13,12 @@ import {getCourses, getProviders} from "../utils/commonRequests";
 export default function Index() {
 
     const [showSignupModal, setShowSignupModal] = useState()
-    const [courseShown, setCourseShown] = useState(calcSceneStart());
+    const [courseShown, setCourseShown] = useState(calcSceneStart(0));
     const [courseIndex, setCourseIndex] = useState(0);
     const [courseCards, setCourseCards] = useState([]);
     const [loading, setLoading] = useState(true);
     const [providers, setProviders] = useState([]);
-    const [overflow, setOverflow] = useState(false);
+    const [overflow, setOverflow] = useState(true);
 
     // Use to resize the course shown based on window size
     useEffect(() => {
@@ -37,7 +37,7 @@ export default function Index() {
         if (!loading){
             calcCardsShown();
         }
-    },[courseCards]);
+    },[courseCards, loading]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -83,33 +83,37 @@ export default function Index() {
         }
     }
 
-
     function calcSceneStart() {
         let courseCardsShown;
 
         if (window.matchMedia("(max-width: 1250px)").matches) {
-            courseCardsShown = 3;
+            courseCardsShown = 2;
         } else if (window.matchMedia("(max-width: 1600px)").matches) {
-            courseCardsShown = 4;
+            courseCardsShown = 3;
         } else if (window.matchMedia("(max-width: 1900px)").matches) {
-            courseCardsShown = 5;
+            courseCardsShown = 4;
         } else if (window.matchMedia("(max-width: 2350px)").matches) {
-            courseCardsShown = 6;
+            courseCardsShown = 5;
         } else if (window.matchMedia("(max-width: 3000px)").matches) {
-            courseCardsShown = 6;
+            courseCardsShown = 5;
         } else {
-            courseCardsShown = 8;
+            courseCardsShown = 6;
         }
         return courseCardsShown;
     }
 
     function calcCardsShown(){
-        setCourseShown(calcSceneStart());
-        if (courseCards.length < courseShown - 1) {
-            setCourseShown(courseCards.length + 1);
-            setOverflow(false);
-        } else {
-            setOverflow(true);
+        const sceneStart = calcSceneStart();
+
+        // Ensure we don’t set courseShown higher than what's available
+        const adjustedShown = Math.min(sceneStart, courseCards.length || sceneStart);
+
+        setCourseShown(adjustedShown);
+        setOverflow(courseCards.length >= adjustedShown);
+
+        // Clamp index if it's out of bounds after resize
+        if (courseIndex > courseCards.length - adjustedShown) {
+            setCourseIndex(0); // or courseCards.length - adjustedShown
         }
     }
 
@@ -186,20 +190,29 @@ export default function Index() {
 
                     {loading ?
                         <section id={"index-collection-cards"}>
-                            {Array.from({length: courseShown - 1}).map((_, index) => (
+                            {Array.from({length: courseShown}).map((_, index) => (
                                 <CourseCardSkeleton key={index}/>
                             ))}
                         </section>
                         :
                         <section id="index-collection-cards">
-                            {courseCards.slice(courseIndex, courseIndex + courseShown - 1).map((courseCard) => (
-                                <CourseCard key={courseCard.id} {...courseCard} />
-                            ))}
-                            {courseIndex + courseShown > courseCards.length - 1
-                                && courseCards.slice(0, (courseIndex + courseShown - 1) % courseCards.length)
-                                    .map((courseCard) => (
-                                        <CourseCard key={courseCard.id} {...courseCard}/>
-                                    ))}
+                            {(() => {
+                                const visibleCards = [];
+                                const endIndex = courseIndex + courseShown;
+
+                                if (endIndex <= courseCards.length) {
+                                    visibleCards.push(...courseCards.slice(courseIndex, endIndex));
+                                } else {
+                                    visibleCards.push(...courseCards.slice(courseIndex));
+                                    if (overflow) {
+                                        visibleCards.push(...courseCards.slice(0, endIndex % courseCards.length));
+                                    }
+                                }
+
+                                return visibleCards.map((courseCard) => (
+                                    <CourseCard key={courseCard.id} {...courseCard} />
+                                ));
+                            })()}
                         </section>
                     }
 
