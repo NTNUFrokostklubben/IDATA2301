@@ -8,7 +8,7 @@ export default function CourseProviderCard (offerableCourse ){
     const handleClick = () =>{
         dispatch(setCourseObject(offerableCourse))
     }
-    const formattedDate = new Date(offerableCourse.date).toLocaleDateString('en-GB', {
+    const formattedDate = new Date(offerableCourse.date).toLocaleDateString('de-DE', {
         day: '2-digit',
         month: '2-digit',
         year: '2-digit',
@@ -19,17 +19,17 @@ export default function CourseProviderCard (offerableCourse ){
 
         <Link to={`/checkout/${offerableCourse.id}`} onClick={handleClick} className="provider-card cta-button">
             <div className="provider-card-text">
-                <p className="provider-card-name">{offerableCourse.provider.name}</p>
+                <b className="provider-card-name">{offerableCourse.provider.name}</b>
                 <p className={"provider-card-date"} >start date: {formattedDate}</p>
                 <div className="provider-card-price-section">
                     {hasDiscount ? (
                         <div className={"provider-card-price-and-discount"}>
 
-                            <span className="original-price">{offerableCourse.price},- NOK</span>
-                            <span className="discounted-price">{discountedPrice},- NOK</span>
+                            <p className="original-price">{offerableCourse.price},- NOK</p>
+                            <p className="discounted-price">{discountedPrice},- NOK</p>
                         </div>
                     ) : (
-                        <span className="provider-card-price">{offerableCourse.price},- NOK</span>
+                        <p className="provider-card-price">{offerableCourse.price},- NOK</p>
                     )}
                 </div>
             </div>

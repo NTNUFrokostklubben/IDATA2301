@@ -4,7 +4,7 @@
     flex-direction: column;
     align-items:center;
     background-color: var(--background);
-    padding-top: 4rem;
+    /*padding-top: 4rem;*/
     min-height: 100rem;
 }
 .course-page-content{
@@ -119,8 +119,9 @@
     padding: 2rem;
 }
 
-@media (max-width: 950px) {
-    #course-description{
+@media (max-width: 1440px) {
+    .course-page-content {
+        width: 100%;
     }
 
 }
@@ -129,7 +130,7 @@
         flex-direction: column;
     }
     .course-page-content{
-        width: 42rem;
+        width: 100%;
     }
     .course-page{
         align-items: flex-start;
@@ -137,7 +138,7 @@
 }
 @media (max-width: 374px) {
     .course-page-content{
-        width: 40rem;
+        /*width: 40rem;*/
     }
     #course-offerables > *{
         margin-right: 1rem;

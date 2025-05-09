@@ -22,7 +22,7 @@
 }
 
 .review-writer-section-writer button {
-
+    font-size: 1rem;
 }
 
 .course-page-reviews-rating-bars button {
@@ -116,12 +116,18 @@
     .show-more-reviews-button{
         font-size: 80%;
     }
+    .course-page-reviews-rating-bars button {
+        height: 3rem;
+        border: transparent 1px solid;
+        transition: border 0.1s ease;
+        background-color: transparent;
+    }
 }
 @media (max-width: 545px) {
 
     .course-page-review-component{
        flex-direction: column;
-        padding-left: 1rem;
+        /*padding-left: 1rem;*/
     }
     .show-more-reviews-button{
         font-size: 60%;
