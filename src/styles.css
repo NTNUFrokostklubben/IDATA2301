@@ -111,6 +111,7 @@ input:disabled {
 
 footer {
     position: relative;
+    z-index: 10;
 }
 
 @media (max-width: 1250px) {
