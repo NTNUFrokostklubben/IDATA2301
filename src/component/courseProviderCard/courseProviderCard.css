@@ -48,6 +48,11 @@
     justify-items: center;
 }
 
+.provider-card .provider-card-text b {
+    font-size: 1.2rem;
+    /*background-color: orange;*/
+}
+
 .provider-card-text {
     display: flex;
     flex-direction: column;
