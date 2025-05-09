@@ -183,7 +183,7 @@ export default function Checkout() {
                             <label className={"checkout-final-price"}>
                                 {(courseData.price * (1 - courseData.discount)).toFixed(2)}
                             </label><p>,- nok</p>
-                            <button type="submit" id="purchase-button" onClick={handlePurchase} disabled={loading}>
+                            <button type="submit" className={"checkout-purchase-button"} onClick={handlePurchase} disabled={loading}>
                                 {loading ? 'Processing' : 'purchase'}
                             </button>
                         </div>

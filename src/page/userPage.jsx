@@ -8,28 +8,28 @@ import {useDispatch, useSelector} from "react-redux";
 import {createPortal} from "react-dom";
 import {uploadImage} from "../utils/commonRequests";
 import {setCourseObject, setUserImage, setUserObject} from "../dataSlice";
+import {Dialog} from "@mui/material";
+
+
 
 export function UserImageModal ({ close , uid}){
     const dispatch = useDispatch();
-    const [isChangeClicked, setIsChangeClicked] = useState(false);
-    const [isDeleteClicked, setIsDeleteClicked] = useState(false);
+    const [open, setOpen] = useState(false);
 
 
-    const handleClick =  async (setter) => {
-        setter(true);
+    function dialogChooser(){
+        setOpen(true)
 
-        setTimeout(() => {
-            setter(false);
-        }, 150); // change back after 150ms (you can adjust this)
-    };
-
-    function deletePfp(){
-        console.log("beep boop deleting fpf ")
-        handleClick(setIsDeleteClicked)
     }
 
+    function deletePfp(value){
+        if(value){
+            dispatch(setUserImage("http://localhost:8081/uploads/images/default_img.png"))
+        }
+        setOpen(false)
+        close();
+    }
     function changePfp(link){
-        handleClick(setIsChangeClicked)
         const finLink = {
             profilePicture: link.toString()
         };
@@ -45,6 +45,7 @@ export function UserImageModal ({ close , uid}){
         const imgLink = await uploadImage(file).then(r =>{ changePfp(r); dispatch(setUserImage(r))} )
 
     };
+
 
     function removeStyles(){
         return{
@@ -64,16 +65,33 @@ export function UserImageModal ({ close , uid}){
         <div className={"user-page-modal-background"}>
             <div className={"user-page-modal"}>
 
-                <div className={"user-page-modal-option-container"}
-                     style={{backgroundColor: isChangeClicked ? 'white' : 'var(--background)'}}>
+                <div className={`user-page-modal-option-container`}>
                     <label className="file-upload-button">
                         Change profile picture
                         <input className={"user-page-picture-picker"} type="file" style={{display: "none"}} onChange={handleFileChange}/>
                     </label>
                 </div>
-                <div className={"user-page-modal-option-container"}  onClick={deletePfp}
-                     style={{backgroundColor: isDeleteClicked ? 'white' : 'var(--background)'}} >
+                <div className={`user-page-modal-option-container`}  onClick={dialogChooser}>
                     <button style={removeStyles()}>
+                        <Dialog open={open}>
+                            <div className={"user-page-modal-delete-dialog"}>
+                                <p className={"user-page-modal-delete-dialog-confirmation-text"}>
+                                    Are you sure you want to delete your profile picture?
+                                </p>
+                                <div className={"user-page-modal-delete-dialog-all-buttons"}>
+                                <button className={"user-page-modal-delete-dialog-button"} onClick={() => {
+                                    deletePfp(true)
+                                }}>
+                                    Confirm
+                                </button>
+                                <button className={"user-page-modal-delete-dialog-button"} onClick={() => {
+                                    deletePfp(false)
+                                }}>
+                                    Cancel
+                                </button>
+                                </div>
+                            </div>
+                        </Dialog>
                         <p className={"user-page-modal-delete-pfp"}>
                             delete profile picture
                         </p>

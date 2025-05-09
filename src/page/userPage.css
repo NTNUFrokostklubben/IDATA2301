@@ -23,7 +23,7 @@
     align-items: center;
     height: 10rem;
     width: 15rem;
-    background-color:var(--background);
+    background-color:var(--textWhite);
 }
 .user-page-modal-cancel{
     color: red;
@@ -41,7 +41,31 @@
 
 .user-page-modal-option-container:hover{
     cursor: pointer;
+    background-color: var(--background);
 }
+.user-page-modal-delete-dialog{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 20rem;
+    height: 10rem;
+    background-color: white;
+}
+.user-page-modal-delete-dialog-all-buttons{
+    width: 80%  ;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-content: space-around;
+}
+
+.user-page-modal-delete-dialog-button{
+    font: inherit;
+    height: 3rem;
+    width: 6rem;
+}
+
 .file-upload-button:hover{
     cursor: pointer;
 }
@@ -49,11 +73,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1rem;
+    font:inherit;
    height: 100%;
     width: 100%;
 }
 
+.user-page-modal-clicked{
+    background-color: var(--textWhite);
+}
 
 
 .user-page{
