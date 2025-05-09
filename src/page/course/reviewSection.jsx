@@ -73,7 +73,6 @@ export function ReviewComponent({cid, uid, averageRating}) {
         setLoading(true);
         fetching()
 
-        console.log("finished loading")
         setLoading(false);
     }, [averageRating]);
 
@@ -95,7 +94,6 @@ export function ReviewComponent({cid, uid, averageRating}) {
 
         let starPercent = [];
         starCounts.forEach((number, index) => {
-            console.log(nrRatings)
             starPercent[index] = number / nrRatings * 100;
         })
         setStarBars(starPercent.reverse());
@@ -137,8 +135,8 @@ export function ReviewComponent({cid, uid, averageRating}) {
                 {stars !== [] && (
                     <div className={"review-component-aggregate-stars"}>
                         {
-                            stars.map(() =>
-                                <img className="review-component-star" src="/icons/star-sharp.svg" alt="review star"/>
+                            stars.map((value, index, array) =>
+                                <img key={index} className="review-component-star" src="/icons/star-sharp.svg" alt="review star"/>
                             )
                         } {halfStar && (
                         <img
