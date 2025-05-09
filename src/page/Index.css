@@ -180,12 +180,13 @@
     max-width: 15rem;
     height: auto;
 }
+
 .index-logo-two-img img {
     max-width: 7.5rem;
     height: auto;
 }
 .index-logo img:hover {
-    box-shadow: 0px 8px 16px 0px var(--shadow);
+    /*box-shadow: 0px 8px 16px 0px var(--shadow);*/
 }
 #index-testimonial{
     display: flex;
@@ -205,7 +206,7 @@
     padding: 2rem;
 }
 #index-testimonial_box:hover {
-    box-shadow: 0px 8px 16px 0px var(--shadow);
+    /*box-shadow: 0px 8px 16px 0px var(--shadow);*/
 }
 #index-testimonial_text{
     padding: 1rem;

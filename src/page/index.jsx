@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import "./Index.css";
 import Search from "./search/search";
 import {Link, Route} from "react-router-dom";
@@ -31,13 +31,13 @@ export default function Index() {
 
     useEffect(() => {
         const fetchData = async () => {
-            try{
+            try {
                 await Promise.all([
                     fetchProviders(),
                     fetchCourses()
                 ])
                 setLoading(false);
-            } catch (err){
+            } catch (err) {
                 throw new Error("Error fetching course cards: ", err);
             }
         }
@@ -47,6 +47,7 @@ export default function Index() {
     async function fetchProviders() {
         try {
             const data = await getProviders();
+            data.slice(0, 9)
             setProviders(data);
         } catch (err) {
             throw new Error("Error fetching providers: ", err);
@@ -116,7 +117,8 @@ export default function Index() {
                     <div className="index-hero-main-box">
                         <div className="index-hero-main-text">
                             <p>
-                                Learniverse offers courses that give you the competence you need to succeed in the workplace
+                                Learniverse offers courses that give you the competence you need to succeed in the
+                                workplace
                                 and beyond!
                             </p>
                         </div>
@@ -214,8 +216,8 @@ export default function Index() {
 
             <section id="index-hero2">
                 <div id="index-hero2-box">
-                      {/* The SVG Background and Pattern is by SVGBackgrounds.com*/}
-                      {/* Url: "https://www.svgbackgrounds.com/set/free-svg-backgrounds-and-patterns/"*/}
+                    {/* The SVG Background and Pattern is by SVGBackgrounds.com*/}
+                    {/* Url: "https://www.svgbackgrounds.com/set/free-svg-backgrounds-and-patterns/"*/}
 
 
                     {/*Slideshow container */}
@@ -224,9 +226,9 @@ export default function Index() {
                             <div
                                 key={index}
                                 className="index-mySlides index-fade"
-                                style={{ display: index === slideIndex ? "block" : "none" }}
+                                style={{display: index === slideIndex ? "block" : "none"}}
                             >
-                                <img className={"index-slideshow-img"} src={slide} alt={`Slide ${index + 1}`} />
+                                <img className={"index-slideshow-img"} src={slide} alt={`Slide ${index + 1}`}/>
                             </div>
                         ))}
                     </div>
@@ -237,7 +239,8 @@ export default function Index() {
                             <h6> xx% of learners learn something, which do this and this! Become one of the today</h6>
                         </div>
                         <div id="index-hero2-button">
-                            <button onClick={() => setShowSignupModal(true)} className="cta-button" id="index-join-for-free">
+                            <button onClick={() => setShowSignupModal(true)} className="cta-button"
+                                    id="index-join-for-free">
                                 <img className="filter-white" id="index-join" src=" /icons/person-add-sharp.svg"
                                      alt="Join"/> &nbsp;
                                 <p>Join for free!</p>
