@@ -180,61 +180,86 @@ export default function About (){
                         <div className="meet-our-team-person">
                             <img className="meet-our-team-person-img" src="/images/employees/anna.jpg"
                                  alt="a businesswoman"/>
-                            <h6 className="meet-our-team-person-name">Anna</h6>
-                            <p className="meet-our-team-person-job">Title</p>
-                            <p className="meet-our-team-contact">
-                                <a href="mailto::anna@learnivese.com">Contact Anna</a>
-                            </p>
+                            <h6 className="meet-our-team-person-name">Anna Patel</h6>
+                            <p className="meet-our-team-person-job">CEO & Head of Learning Experience</p>
+
+                            <button className="cta-button" id="meet-our-team-contact" onClick=
+                                {() => window.location.href = "mailto::anna_patel@learnivese.com"}>
+                                <p className="meet-our-team-btn-text"> Contact Anna</p>
+                                <img className="filter-white" id="employee_email" src="\icons\mail-sharp.svg"
+                                     alt="Contact Samuel"></img>
+                            </button>
                         </div>
 
                         <div className="meet-our-team-person">
                             <img className="meet-our-team-person-img" src="/images/employees/daniel.jpg"
                                  alt="a businesswoman"/>
-                            <h6 className="meet-our-team-person-name">Daniel</h6>
-                            <p className="meet-our-team-person-job">Title</p>
-                            <p className="meet-our-team-contact">
-                                <a href="mailto::daniel@learnivese.com">Contact Daniel</a>
-                            </p>
+                            <h6 className="meet-our-team-person-name">Daniel Osei</h6>
+                            <p className="meet-our-team-person-job">Certification & Compliance Lead</p>
+
+                            <button className="cta-button" id="meet-our-team-contact" onClick=
+                                {() => window.location.href = "mailto::daniel_osei@learnivese.com"}>
+                                <p className="meet-our-team-btn-text"> Contact Daniel</p>
+                                <img className="filter-white" id="employee_email" src="\icons\mail-sharp.svg"
+                                     alt="Contact Samuel"></img>
+                            </button>
+
                         </div>
 
                         <div className="meet-our-team-person">
                             <img className="meet-our-team-person-img" src="/images/employees/elizabeth.jpg"
                                  alt="a businesswoman"/>
-                            <h6 className="meet-our-team-person-name">Elizabeth</h6>
-                            <p className="meet-our-team-person-job">Title</p>
-                            <p className="meet-our-team-contact">
-                                <a href="mailto::elizabeth@learnivese.com">Contact Elizabeth</a>
-                            </p>
+                            <h6 className="meet-our-team-person-name">Elizabeth Wells</h6>
+                            <p className="meet-our-team-person-job">Creative Director</p>
+
+                            <button className="cta-button" id="meet-our-team-contact" onClick=
+                                {() => window.location.href = "mailto::elizabeth_wells@learnivese.com"}>
+                                <p className="meet-our-team-btn-text"> Contact Elizabeth</p>
+                                <img className="filter-white" id="employee_email" src="\icons\mail-sharp.svg"
+                                     alt="Contact Samuel"></img>
+                            </button>
                         </div>
 
                         <div className="meet-our-team-person">
                             <img className="meet-our-team-person-img" src="/images/employees/markus.jpg"
                                  alt="a businesswoman"/>
-                            <h6 className="meet-our-team-person-name">Markus</h6>
-                            <p className="meet-our-team-person-job">Title</p>
-                            <p className="meet-our-team-contact">
-                                <a href="mailto::markus@learnivese.com">Contact Markus</a>
-                            </p>
+                            <h6 className="meet-our-team-person-name">Markus Ruiz</h6>
+                            <p className="meet-our-team-person-job">Lead Software Engineer</p>
+
+                            <button className="cta-button" id="meet-our-team-contact" onClick=
+                                {() => window.location.href = "mailto:markus_ruiz@learnivese.com"}>
+                                <p className="meet-our-team-btn-text"> Contact Markus</p>
+                                <img className="filter-white" id="employee_email" src="\icons\mail-sharp.svg"
+                                     alt="Contact Samuel"></img>
+                            </button>
                         </div>
 
                         <div className="meet-our-team-person">
                             <img className="meet-our-team-person-img" src="/images/employees/samuel.jpg"
                                  alt="a businesswoman"/>
-                            <h6 className="meet-our-team-person-name">Samuel</h6>
-                            <p className="meet-our-team-person-job">Title</p>
-                            <p className="meet-our-team-contact">
-                                <a href="mailto::samuel@learnivese.com">Contact Samuel</a>
-                            </p>
+                            <h6 className="meet-our-team-person-name">Samuel Martins </h6>
+                            <p className="meet-our-team-person-job">Director of Educational Partnerships</p>
+
+                            <button className="cta-button" id="meet-our-team-contact" onClick=
+                                {() => window.location.href = "mailto:samuel_martins@learnivese.com"}>
+                                <p className="meet-our-team-btn-text"> Contact Samuel</p>
+                                <img className="filter-white" id="employee_email" src="\icons\mail-sharp.svg"
+                                     alt="Contact Samuel"></img>
+                            </button>
                         </div>
 
                         <div className="meet-our-team-person">
                             <img className="meet-our-team-person-img" src="/images/employees/sarah.jpg"
                                  alt="a businesswoman"/>
-                            <h6 className="meet-our-team-person-name">Sarah</h6>
-                            <p className="meet-our-team-person-job">Title</p>
-                            <p className="meet-our-team-contact">
-                                <a href="mailto::sarah@learnivese.com">Contact Sarah</a>
-                            </p>
+                            <h6 className="meet-our-team-person-name">Sarah Conly </h6>
+                            <p className="meet-our-team-person-job">Community & Support Manager</p>
+
+                            <button className="cta-button" id="meet-our-team-contact" onClick=
+                                {() => window.location.href = "mailto::sarah_conly@learnivese.comm"}>
+                                <p className="meet-our-team-btn-text">Contact Sarah </p>
+                                <img className="filter-white" id="employee_email" src="\icons\mail-sharp.svg"
+                                     alt="Contact Samuel"></img>
+                            </button>
                         </div>
 
                     </div>
