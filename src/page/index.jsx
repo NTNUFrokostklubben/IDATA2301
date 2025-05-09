@@ -1,8 +1,8 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "./Index.css";
 import Search from "./search/search";
 import {Link, Route} from "react-router-dom";
-import CourseCard from "../component/card/courseCard";
+import {CourseCard, CourseCardSkeleton} from "../component/card/courseCard";
 import Card from "../component/card/card";
 import Register from "../component/modals/auth/register";
 import {createPortal} from "react-dom";
@@ -17,12 +17,16 @@ export default function Index() {
     const [courseIndex, setCourseIndex] = useState(0);
     const [courseCards, setCourseCards] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [providers, setProviders] = useState([])
+    const [providers, setProviders] = useState([]);
+    const [overflow, setOverflow] = useState(false);
 
     // Use to resize the course shown based on window size
     useEffect(() => {
         const handleResize = () => {
             setCourseShown(calcSceneStart());
+            if (courseCards !== null){
+                calcCardsShown();
+            }
         };
         window.addEventListener("resize", handleResize);
         return () => window.removeEventListener("resize", handleResize);
@@ -30,13 +34,21 @@ export default function Index() {
 
 
     useEffect(() => {
+        if (!loading){
+            calcCardsShown();
+        }
+    },[courseCards]);
+
+    useEffect(() => {
         const fetchData = async () => {
-            try {
+            try{
+                await new Promise(r => setTimeout(r, 5000));
                 await Promise.all([
                     fetchProviders(),
-                    fetchCourses()
+                    fetchCourses(),
                 ])
                 setLoading(false);
+
             } catch (err) {
                 throw new Error("Error fetching course cards: ", err);
             }
@@ -58,6 +70,7 @@ export default function Index() {
      * Fetches all courseCards from the API
      */
     async function fetchCourses() {
+        console.log("Fetching courses");
         try {
             const data = await AsyncApiRequest("GET", "/courses/courseCard", null)
                 .then(response => response.json());
@@ -72,22 +85,35 @@ export default function Index() {
 
 
     function calcSceneStart() {
-        if (window.matchMedia("(max-width: 480px)").matches) {
-            return 3;
-        } else if (window.matchMedia("(max-width: 1250px)").matches) {
-            return 3;
+        let courseCardsShown;
+
+        if (window.matchMedia("(max-width: 1250px)").matches) {
+            courseCardsShown = 3;
         } else if (window.matchMedia("(max-width: 1600px)").matches) {
-            return 4;
+            courseCardsShown = 4;
         } else if (window.matchMedia("(max-width: 1900px)").matches) {
-            return 5;
+            courseCardsShown = 5;
         } else if (window.matchMedia("(max-width: 2350px)").matches) {
-            return 6;
+            courseCardsShown = 6;
         } else if (window.matchMedia("(max-width: 3000px)").matches) {
-            return 7;
+            courseCardsShown = 6;
         } else {
-            return 8;
+            courseCardsShown = 8;
+        }
+        return courseCardsShown;
+    }
+
+    function calcCardsShown(){
+        setCourseShown(calcSceneStart());
+        if (courseCards.length < courseShown - 1) {
+            setCourseShown(courseCards.length + 1);
+            setOverflow(false);
+        } else {
+            setOverflow(true);
         }
     }
+
+
 
     const [slideIndex, setSlideIndex] = useState(0);
 
@@ -144,38 +170,53 @@ export default function Index() {
                             labore et dolore magna aliqua.</h3>
                     </div>
 
-                    {loading ? <p>Loading</p> :
-                        <section id="index-course-cards-section">
+                <section id="index-course-cards-section">
 
-                            <section className="index-arrow">
-                                <button id="index-arrow-left-btn"
-                                        onClick={() => setCourseIndex((prevIndex) => (prevIndex - 1 + courseCards.length) % courseCards.length)}>
-                                    <img className={"index-arrow-icon"} src="/icons/arrow-back-circle-sharp.svg"
-                                         alt="Arrow Left"/>
-                                </button>
-                            </section>
+                    {overflow ?
+                        <section className="index-arrow">
+                            <button id="index-arrow-left-btn"
+                                    onClick={() => setCourseIndex((prevIndex) => (prevIndex - 1 + courseCards.length) % courseCards.length)}>
+                                <img className={"index-arrow-icon"} src="/icons/arrow-back-circle-sharp.svg"
+                                     alt="Arrow Left"/>
+                            </button>
+                        </section>
+                        : null
+                    }
 
-                            <section id="index-collection-cards">
-                                {courseCards.slice(courseIndex, courseIndex + courseShown - 1).map((courseCard) => (
-                                    <CourseCard key={courseCard.id} {...courseCard} />
-                                ))}
-                                {courseIndex + courseShown - 1 > courseCards.length
-                                    && courseCards.slice(0, (courseIndex + courseShown - 1) % courseCards.length)
-                                        .map((courseCard) => (
-                                            <CourseCard key={courseCard.id} {...courseCard}/>
-                                        ))}
-                            </section>
 
-                            <section className="index-arrow">
-                                <button id="index-arrow-right-btn"
-                                        onClick={() => setCourseIndex((prevIndex) =>
-                                            (prevIndex + 1 + courseCards.length) % courseCards.length)}>
-                                    <img className={"index-arrow-icon"} src="/icons/arrow-forward-circle-sharp.svg"
-                                         alt="Arrow Right"/>
-                                </button>
-                            </section>
+                    {loading ?
+                        <section id={"index-collection-cards"}>
+                            {Array.from({length: courseShown - 1}).map((_, index) => (
+                                <CourseCardSkeleton key={index}/>
+                            ))}
+                        </section>
+                        :
+                        <section id="index-collection-cards">
+                            {courseCards.slice(courseIndex, courseIndex + courseShown - 1).map((courseCard) => (
+                                <CourseCard key={courseCard.id} {...courseCard} />
+                            ))}
+                            {courseIndex + courseShown > courseCards.length - 1
+                                && courseCards.slice(0, (courseIndex + courseShown - 1) % courseCards.length)
+                                    .map((courseCard) => (
+                                        <CourseCard key={courseCard.id} {...courseCard}/>
+                                    ))}
                         </section>
                     }
+
+                    {overflow ?
+                        <section className="index-arrow">
+                            <button id="index-arrow-right-btn"
+                                    onClick={() => setCourseIndex((prevIndex) =>
+                                        (prevIndex + 1 + courseCards.length) % courseCards.length)}>
+                                <img className={"index-arrow-icon"} src="/icons/arrow-forward-circle-sharp.svg"
+                                     alt="Arrow Right"/>
+                            </button>
+                        </section>
+                        : null
+                    }
+
+
+                </section>
                 </section>
             </div>
             <div id={"index-collaborators-background"}>
@@ -249,7 +290,6 @@ export default function Index() {
                     </div>
                 </div>
             </section>
-
             {
                 showSignupModal && createPortal(
                     <Register changeMode={() => {
