@@ -1,13 +1,45 @@
 
 .course-page-review-component{
-    width: 60rem;
+    width: 100%;
     margin-bottom: 1rem;
     display: flex;
     flex-direction: row;
+    /*justify-content: space-between;*/
+
 }
 .course-page-review-component-left * {
+
 }
-.course-page-reviews-rating-bars{
+.course-page-reviews-rating-bars {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+    gap: 0.5rem;
+
+
+}
+
+.review-writer-section-writer button {
+
+}
+
+.course-page-reviews-rating-bars button {
+    height: 2rem;
+    border: transparent 1px solid;
+    transition: border 0.1s ease;
+    background-color: transparent;
+}
+
+.course-page-reviews-rating-bars button:hover {
+    border: solid 1px var(--textBlack);
+    transition: border 0.3s ease;
+
+}
+
+.course-page-reviews-rating-bars button.selected {
+    border: solid 1px var(--textBlack);
 
 }
 
@@ -24,8 +56,11 @@
 .course-page-review-component-text-and-bar{
     display: flex;
     flex-direction: row;
+    justify-content: center;
     align-items: center;
-    padding-top: 0.5rem;
+    width: 100%;
+
+    /*padding-top: 0.5rem;*/
 
 }
 .course-page-reviews-rating-bar-unit{
@@ -36,25 +71,36 @@
     border-radius: 3px;
     overflow: hidden;
 }
-.course-page-review-star-bar-clickable{
+.course-page-review-star-bar-clickable {
     background: none;
     border: none;
     align-self: flex-end;
     padding-right: 0.5rem;
 
 }
-.reviews-rating-bar-star{
+
+.reviews-rating-bar-star {
     height: 100%;
     background-color: #5da164   ; /* Green color */
     border-radius: 3px;
     transition: width 0.3s ease;
 }
 
-.review-component-average-rating{
+.review-component-average-rating {
     align-self: center;
     padding-left: 1.3rem;
     font-size: 1.2rem;
     font-weight: bold;
+}
+
+.review-text {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    font-size: 0.9rem;
 }
 
 @media (max-width: 800px) {

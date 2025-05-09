@@ -2,6 +2,7 @@ import "./reviewWriter.css"
 import {useEffect, useState} from "react";
 import {AsyncApiRequest} from "../../utils/requests";
 import {Rating} from "@mui/material";
+import {useNavigate} from "react-router-dom";
 
 //TODO make title and text go away on publish
 //TODO refresh review component on publish
@@ -10,6 +11,8 @@ export default function ReviewWriter({uid, cid, existingReview = null, callback 
     const [reviewTitle, setReviewTitle] = useState('');
     const [reviewStars, setReviewStars] = useState((1));
     const [isDisabled, setIsDisabled] = useState(true);
+
+    const navigate = useNavigate();
 
     function reviewToJson(){
         return{
@@ -31,10 +34,11 @@ export default function ReviewWriter({uid, cid, existingReview = null, callback 
         let payload = reviewToJson();
 
         const request = await AsyncApiRequest("PUT", `/userCourses/addRating/${uid}/${cid}`, payload);
-        console.log(request.status)
+
         if (callback != null){
             callback();
         }
+        navigate(0);
     }
 
     useEffect(() => {
@@ -53,7 +57,7 @@ export default function ReviewWriter({uid, cid, existingReview = null, callback 
     return(
         <section className={"review-writer-section"}>
             <div className={"review-writer-container"}>
-                <h6 className={"review-writer-heading"}>Write a review</h6>
+                <h4 className={"review-writer-heading"}>Write a review</h4>
                 <input className={"review-writer-container-title"}
                 value={reviewTitle}
                 onChange={handleTitleChange}
@@ -75,7 +79,7 @@ export default function ReviewWriter({uid, cid, existingReview = null, callback 
                             size="large"
                             defaultValue={1}
                     />
-                    <button className={"review-writer-container-publish"} disabled={isDisabled} onClick={sendReview}>Publish</button>
+                    <button className={"review-writer-container-publish secondary-button"} disabled={isDisabled} onClick={sendReview}>Publish</button>
                 </div>
 
             </div>

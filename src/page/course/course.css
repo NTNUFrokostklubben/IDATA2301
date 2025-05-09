@@ -8,13 +8,19 @@
     min-height: 100rem;
 }
 .course-page-content{
-    width: 60rem;
+    width: 80rem;
+    min-height: 100rem;
+    background-color: var(--textWhite);
 }
 #course-splash{
-    margin: 1.5rem;
+    padding: 2rem;
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 
 }
+
 #course-splash-right-side{
     position: relative;
     display: flex;
@@ -38,10 +44,18 @@
     height: 1.5rem;
 }
 
-#course-splash-image{
-
+.course-page #course-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 17rem;
-    width: 25rem;
+    width: 27rem;
+}
+
+#course-splash-image{
+    display: flex;
+    max-height: 100%;
+    max-width: 100%;
 }
 
 
@@ -78,10 +92,9 @@
 }
 #course-offerables{
     margin-top: 2rem;
-
     display: flex;
     flex-direction: row;
-
+    justify-content: center;
     padding-bottom: 2rem;
     padding-left: 1rem;
 }
@@ -99,6 +112,11 @@
 .course-splash-keyword{
     font-style: italic;
     padding-right: 1rem;
+}
+
+.course-page-reviews {
+
+    padding: 2rem;
 }
 
 @media (max-width: 950px) {
