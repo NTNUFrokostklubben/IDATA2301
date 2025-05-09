@@ -47,8 +47,8 @@ export default function Index() {
     async function fetchProviders() {
         try {
             const data = await getProviders();
-            data.slice(0, 9)
-            setProviders(data);
+            const sliced = data.slice(0, 10)
+            setProviders(sliced);
         } catch (err) {
             throw new Error("Error fetching providers: ", err);
         }
