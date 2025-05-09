@@ -145,7 +145,6 @@ export default function Search() {
     async function fetchFilteredCourses() {
         try {
             const p = await AsyncApiRequest("GET", "/search?" + searchParams,null ).then((p) => p.json());
-
             setOfferableCourses(p);
         } catch (e) {
             setError(true);

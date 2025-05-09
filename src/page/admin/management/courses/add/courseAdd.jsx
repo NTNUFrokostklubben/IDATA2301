@@ -11,32 +11,6 @@ function CourseAddForm() {
     const [courseImage, setCourseImage] = useState([])
 
     /**
-     * Handle API call for uploading images.
-     *
-     * @param image image to upload
-     * @returns {Promise<string|null>} Image URL if upload success or Null
-     */
-    async function handleImageUpload(image) {
-        // TODO: Refactor this into a "common utils" type file so users can upload images using same method
-        const formData = new FormData();
-        formData.append('file', image);
-
-        const imageOptions = {
-            method: "POST",
-            body: formData
-        }
-        const response = await fetch("http://localhost:8080/api/images/upload", imageOptions);
-
-        if (!response.ok) {
-            console.log("Error uploading image");
-            return null;
-        }
-
-        const imageUrl = await response.text();
-        return imageUrl;
-    }
-
-    /**
      * Handles form submission after successful Image Upload for Course
      *
      * @param data form data with correct image URL

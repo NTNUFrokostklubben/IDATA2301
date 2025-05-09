@@ -38,7 +38,7 @@ function CourseTableContent({courses}) {
             {courses.map((course) => (
                 <tr key={course.id}>
                     <td>
-                        <img src={course.imgLink}/>
+                        <img src={course.imgLink} alt={"image " + course.title}/>
                         <p>{course.title}</p>
                     </td>
                     <td className={"description"}><p>{course.description}</p></td>
@@ -50,14 +50,14 @@ function CourseTableContent({courses}) {
                     <td >
                         <div className={"button-group"}><Link to={`/admin/management/courses/edit/${course.id}`}>
                             <button>
-                                <img src={"/icons/pencil-sharp.svg"}/>
+                                <img src={"/icons/pencil-sharp.svg"} alt={"edit"}/>
                             </button>
                         </Link>
 
                             <button id={"delete" + course.id} onClick={() => {
                                 setFocusedId(course.id)
                                 setShowDeleteModal(true);
-                            }}><img src={"/icons/trash-sharp.svg"}/>
+                            }}><img src={"/icons/trash-sharp.svg"} alt={"delete"}/>
                             </button>
                         </div>
                     </td>
