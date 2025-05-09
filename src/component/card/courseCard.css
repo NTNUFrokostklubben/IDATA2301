@@ -18,9 +18,18 @@
     flex-direction: column;
     flex-grow: 1;
 }
+.index-course-card a{
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    height: 12rem;
+}
+
 .index-course-img{
-    width: 20rem;
-    height: 15rem;
+    display: flex;
+    max-width: 100%;
+    max-height: 100%;
 }
 
 .index-card:hover {
@@ -51,7 +60,7 @@
 }
 
 .index-course-content-heading{
-    padding: 0rem 1rem;
+    padding: 0.5rem 1rem;
 }
 @supports (-webkit-line-clamp: 3) {
     .index-card .index-card-desc {

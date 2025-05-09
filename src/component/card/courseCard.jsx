@@ -8,9 +8,10 @@ export default function CourseCard(courseCard) {
     const linkToCourse = "/course/" + courseCard.course.id;
 
     return (
-        <section className="index-card" id={courseCard.course.id} onClick={() => navigate(linkToCourse)}>
+        <section className="index-card" id={courseCard.course.id}>
             <div className="index-course-card">
-            <img className="index-course-img" src={courseCard.course.imgLink} alt="Course Card"/>
+                <Link to={linkToCourse}><img className="index-course-img" src={courseCard.course.imgLink}
+                                             alt="Course Card"/></Link>
                 <h6 className="index-course-content-heading">{courseCard.course.title}</h6>
 
                 <div className={"index-card-footer"}>

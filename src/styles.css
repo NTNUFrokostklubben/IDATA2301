@@ -9,7 +9,7 @@
     --textBlack: #242C2E;
     --textWhite: #F5F5F5;
     --primary: #86b6c2;
-    --contrast: #4D7E8A;
+    --contrast: #4A7782;
     --highlight: #D9E1F4;
     --cta: #455993;
     --danger: #BC2C2C;
@@ -37,35 +37,39 @@
 }
 
 h1 {
-    font-size: 2.986rem;
+    font-size: 2.027rem;
 }
 
 h2 {
-    font-size: 2.488rem;
+    font-size: 1.802rem;
 }
 
 h3 {
-    font-size: 2.074rem;
+    font-size: 1.602rem;
 }
 
 h4 {
-    font-size: 1.728rem;
+    font-size: 1.424rem;
 }
 
 h5 {
-    font-size: 1.44rem;
+    font-size: 1.266rem;
 }
 
 h6 {
-    font-size: 1.2rem;
+    font-size: 1.125rem;
 }
 
 p {
     font-size: 1rem;
 }
 
+a {
+    font-size: 1rem;
+}
+
 small {
-    font-size: 0.833rem;
+    font-size: 0.889rem;
 }
 
 .title-and-subtitle{
@@ -111,6 +115,7 @@ input:disabled {
 
 footer {
     position: relative;
+    z-index: 10;
 }
 
 @media (max-width: 1250px) {

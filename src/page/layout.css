@@ -26,7 +26,7 @@
     rotate: 180deg;
 }
 
-nav li {
+menu li {
     list-style-type: none;
     padding-inline-start: 0;
 }
@@ -46,9 +46,11 @@ nav li {
     margin-right: 4rem;
     width: auto;
 }
-.drop-btn h5 {
-    font-weight: normal;
+
+.drop-btn b {
+    font-size: 1.5rem;
 }
+
 .dropdown {
     position: relative;
     display: inline-block;
@@ -92,6 +94,7 @@ nav li {
 .search-container input[type=text] {
     all: unset;
     color: var(--textBlack);
+
     height: 100%;
     width: 100%;
     padding: 0.5rem 0.8rem;
@@ -144,19 +147,29 @@ nav li {
     align-items: center;
     justify-content: center;
     flex-wrap: nowrap;
+
 }
 
-#login-btn{
+
+#login-btn {
     background-color: var(--textWhite);
     margin-right: 1rem;
 }
-#login-btn h5{
-    font-weight: normal;
+
+#login-btn b {
+    font-size: 1.5rem;
 }
 
-#signup-btn, #logout-btn h5{
+
+
+#signup-btn, #logout-btn b {
+    font-size: 1.5rem;
     color: var(--textWhite);
-    font-weight: normal;
+}
+
+#signup-btn b {
+    font-size: 1.5rem;
+    color: var(--textWhite);
 }
 
 #login-btn, #signup-btn, #logout-btn{
@@ -196,6 +209,24 @@ footer{
     height: auto;
     padding: 1.5rem;
 }
+
+footer p {
+    color: var(--textWhite);
+}
+footer h3 {
+    color: var(--textWhite);
+    font-size: 1.5rem;
+}
+
+footer small {
+    color: var(--textWhite);
+}
+
+footer a {
+    color: var(--textWhite);
+    font-size: 1rem;
+}
+
 #footer-textbox{
     display: flex;
 }

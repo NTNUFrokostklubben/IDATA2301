@@ -22,6 +22,12 @@ export default function Search() {
     // Sets the default date to the end of the year
     const [endDate, setEndDate] = useState(new Date(new Date().getFullYear(), 11, 31));
 
+    const [isOpen, setIsOpen] = useState(false)
+
+    const toggleSidebar = () => {
+        setIsOpen(!isOpen)
+    }
+
 
     /**
      * Triggered once form is submitted, only changes Filter object, useEffect is called when filter object is changed
@@ -161,11 +167,37 @@ export default function Search() {
 
     };
 
+    function sortCourses(event) {
+        const value = event.target.value;
+        let sortedCourses = [...offerableCourses];
+
+        switch (value) {
+            case "Highest Reviewed":
+                sortedCourses.sort((a, b) => b.rating - a.rating);
+                break;
+            case "Price Ascending":
+                sortedCourses.sort((a, b) => a.minDiscountedPrice - b.minDiscountedPrice);
+                break;
+            case "Price Descending":
+                sortedCourses.sort((a, b) => b.minDiscountedPrice - a.minDiscountedPrice);
+                break;
+            case "Closest start date":
+                sortedCourses.sort((a, b) => new Date(a.closestDate) - new Date(b.closestDate));
+                break;
+            default:
+                break;
+        }
+
+        setOfferableCourses(sortedCourses);
+    }
 
 
     return (
         <div className="search-page">
-            <div className="filters">
+            <button className={"sidebar-toggle"} onClick={toggleSidebar}>
+                <img src="/icons/menu-sharp.svg" width={"24px"} alt="toggle sidebar"/>
+            </button>
+            <div className={`filters ${isOpen ? "open" : ""}`}>
                 <form onSubmit={handleSubmit}>
                     <Collapsable title={"Difficulty level"}>
                         <section id="difficulty">
@@ -258,7 +290,7 @@ export default function Search() {
                             <DatePicker selected={startDate} onChange={dateChanged} startDate={startDate}
                                         endDate={endDate} selectsRange={true}
                                         dateFormat={"dd/MM/yyyy"}
-                                        icon={<img src={"/icons/calendar-clear-sharp.svg"}/>} showIcon/>
+                                        icon={<img alt={"calendar icon"} src={"/icons/calendar-clear-sharp.svg"}/>} showIcon/>
 
                         </section>
                     </Collapsable>
@@ -270,13 +302,13 @@ export default function Search() {
             <div className="search-results">
                 <section id="resultsinfo">
                     <h2>{offerableCourses.length} results for "{searchValue}"</h2>
-                    <div className="input-wrapper">
-                        <select className="filter-dropdown" id="filter-ropdown" type="dropdown">
-                            <option>Most Relevant</option>
+                    <div className="input-wrapper filter-dropdown-container">
+                        <label htmlFor={"filter-ropdown"}>Sort by:</label>
+                        <select onChange={sortCourses} className="filter-dropdown" id="filter-ropdown" type="dropdown">
+                            <option>Highest Reviewed</option>
                             <option>Price Ascending</option>
                             <option>Price Descending</option>
-                            <option>Highest Reviewed</option>
-                            <option>Newest</option>
+                            <option>Closest start date</option>
                         </select>
                     </div>
                 </section>

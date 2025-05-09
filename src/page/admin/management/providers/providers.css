@@ -6,7 +6,9 @@
     width: 100%;
 }
 
-
+#providers-page button {
+    font-size: 1rem;
+}
 
 #providers-page #addProvider {
     color: var(--textWhite);

@@ -28,7 +28,7 @@ function OfferableCourseAddForm({providers, courses}) {
     }
 
     async function postOfferableCourse(offerableCourse) {
-        // console.log(offerableCourse)
+
         try {
             const p = await AsyncApiRequest("POST", "/offerableCourse", offerableCourse);
         } catch (e) {

@@ -40,7 +40,7 @@ function UserEditForm({user, roles}) {
     async function handleFormSubmission(data) {
         const value = Object.fromEntries(data.entries());
         value.role = buildRoleObject();
-        console.log(value)
+
         const response = await putUser(user.id, value);
         return response
     }
@@ -62,7 +62,7 @@ function UserEditForm({user, roles}) {
         checkboxes.forEach((checkbox) => {
             role.push(new Role(checkbox.id, checkbox.value));
         })
-        console.log(role)
+
         return role;
     }
 

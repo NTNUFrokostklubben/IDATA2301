@@ -68,7 +68,7 @@
     padding: 1rem 1rem;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 768px) {
     .admin-sidebar {
         display: none;
 
@@ -96,7 +96,7 @@
         min-width: 100%;
     }
 
-    /*TODO: Ensure sidebar overlays all courses but doesnt overlay navbar*/
+
     .admin-sidebar-container {
         display: flex;
         flex-flow: column;

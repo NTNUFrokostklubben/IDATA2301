@@ -40,6 +40,10 @@
     max-height: 6rem;
 }
 
+#courses-page button {
+    font-size: 1rem;
+}
+
 
 @supports (-webkit-line-clamp: 5) {
     #courses-page .description {
