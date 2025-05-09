@@ -9,7 +9,7 @@ import Index from "./index";
 import {deleteAuthorizationCookies, getAuthenticatedUser} from "../utils/authentication/authentication";
 import {AsyncApiRequest} from "../utils/requests";
 import ScrollRoute from "../component/routing/scrollRoute";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {clearCourseObject, clearUserObject} from "../dataSlice";
 import LearniverseLogo from "../component/icons/learniverseLogo";
 // import {Modal} from "react-native";
@@ -19,8 +19,9 @@ export default function Layout() {
     const [showLoginModal, setShowLoginModal] = useState();
     const [showSignupModal, setShowSignupModal] = useState();
     const [searchParams, setSearchParams] = useSearchParams();
+    const user = useSelector((state) => state.data.user)
     const searchValue = searchParams.get("search");
-    const [userPicture, setUserPicture] = useState([]);
+    const [userPicture, setUserPicture] = useState(String);
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -43,25 +44,23 @@ export default function Layout() {
             signedOutElements.forEach(element => element.style.display = "none");
             signedInElements.forEach(element => element.style.display = "flex");
             const email = user.email;
-            fetchUserProfilePic(email);
+            fetchUserProfilePic();
         }
     }, []);
 
 
     /**
-     * Fetches the total revenue from the API
+     * Fetches the user profile picture link
      */
-    async function fetchUserProfilePic(email) {
-        try {
+    async function fetchUserProfilePic() {
+        if (user) setUserPicture(user.profilePicture)
 
-            const data = await AsyncApiRequest("GET", /userProfilePicture/ + email, null)
-                .then(response => response.text());
-            setUserPicture(data);
-        } catch (err) {
-            setUserPicture("/icons/person-sharp.svg");
-            throw new Error("Error fetching user profile picture: " + err);
-        }
     }
+
+    useEffect(() => {
+        if (user) setUserPicture(user.profilePicture)
+
+    }, [user]);
 
     /**
      * Navigates to the search page.
@@ -78,17 +77,23 @@ export default function Layout() {
         navigate(`/userpage`);
     }
 
+    async function deleteUserRedux(){
+        dispatch(clearUserObject())
+    }
     /**
      * Logs out the user by deleting the authentication cookies and redirecting to the index page.
      */
     function logout() {
         // Clear the authentication cookies
         deleteAuthorizationCookies();
-        dispatch(clearUserObject)
+        deleteUserRedux().then(() =>{
+            console.log(user);
+            window.location.reload();
+        })
         // Redirect to the login page
         navigate("/");
         // Reload the page to update the UI
-        window.location.reload();
+
     }
 
     return (

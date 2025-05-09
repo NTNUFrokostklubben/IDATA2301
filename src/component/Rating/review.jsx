@@ -1,6 +1,9 @@
 import "./review.css"
 import {Link} from "react-router-dom";
+import {useSelector} from "react-redux";
 export default function Review ({rating: userCourse, title= false}){
+    const user = useSelector((state) => state.data.user)
+
     function formatDate(dateString) {
         const date = new Date(dateString);
         const options = { month: 'long', day: 'numeric', year: 'numeric' };
@@ -16,19 +19,19 @@ export default function Review ({rating: userCourse, title= false}){
     return (
         <div className="one-review">
             {title &&  ( <Link to={`/course/${userCourse.id}` }>
-                <h5 className="review-title">{userCourse.course.title}</h5>
+                <h3 className="review-title">{userCourse.course.title}</h3>
             </Link>)
             }
-            <h6 className="review-title">{userCourse.review?.title}</h6>
+            <h4 className="review-title">{userCourse.review?.title}</h4>
             <div className="user-review-section">
                 <picture>
-                    <img className="user-review-image" src={userCourse.user.profilePicture} alt="user"/>
+                    {user && ( <img className="user-review-image" src={user.profilePicture} alt="user"/>)}
                 </picture>
                 <p className="user-name-review">{userCourse.user.name}</p>
                 <div className="stars">
                     {
-                        array.map(() =>
-                            <img className="star" src="/icons/star-sharp.svg" alt="review star"/>
+                        array.map((value, index, array) =>
+                            <img key={index} className="star" src="/icons/star-sharp.svg" alt="review star"/>
                         )
                     }
                 </div>

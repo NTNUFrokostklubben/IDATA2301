@@ -11,8 +11,8 @@ export function ReviewComponent({cid, uid, averageRating}) {
     const [halfStar, setHalfStar] = useState(false)
     const [loading, setLoading] = useState(true);
     const [stars, setStars] = useState([]);
-    const[starBars, setStarBars] = useState([])
-    const[currentStar, setCurrentStar] = useState(5)
+    const [starBars, setStarBars] = useState([])
+    const [currentStar, setCurrentStar] = useState(0)
     const [filteredReviews, setFilteredReviews] = useState([]);
     const [editReview, setEditReview] = useState(false);
     const [allowEditReview, setAllowEditReview] = useState(false);
@@ -29,7 +29,8 @@ export function ReviewComponent({cid, uid, averageRating}) {
     };
 
     const fetchData = async () => {
-        if(averageRating !== undefined) {
+
+        if (averageRating !== undefined) {
 
             if (!Number.isInteger(averageRating)) {
                 setHalfStar(true)
@@ -39,15 +40,15 @@ export function ReviewComponent({cid, uid, averageRating}) {
     }
     const fetchRatingArray = async () => {
         const data = await AsyncApiRequest("GET", `/userCourses/course/${cid}`, null)
-            .then( response  => response.json());
+            .then(response => response.json());
         const filteredAndSorted = data
             .filter(item => item.review != null)
             .sort((a, b) => b.review?.rating - a.review?.rating);
         setUserCourseData(data)
-        setIsUserEnrolled(data.some(course =>  course.user?.id === uid))
+        setIsUserEnrolled(data.some(course => course.user?.id === uid))
         setFilteredReviews(filteredAndSorted)
-        calculateStarDistribution(data.map(item => item.review?.rating));
-        setAllowEditReview(filteredAndSorted.some(obj => obj.user?.id === uid ))
+        calculateStarDistribution(data.map(item => item.review?.rating), filteredAndSorted.length);
+        setAllowEditReview(filteredAndSorted.some(obj => obj.user?.id === uid))
 
     }
 
@@ -64,8 +65,8 @@ export function ReviewComponent({cid, uid, averageRating}) {
         }
     }
 
-    const getUserReview =(uid) =>{
-        return filteredReviews.find(review => review.user?.id === uid )
+    const getUserReview = (uid) => {
+        return filteredReviews.find(review => review.user?.id === uid)
     }
 
 
@@ -73,17 +74,16 @@ export function ReviewComponent({cid, uid, averageRating}) {
         setLoading(true);
         fetching()
 
-        console.log("finished loading")
         setLoading(false);
     }, [averageRating]);
 
-    const finishedEdits = () =>{
+    const finishedEdits = () => {
         setAllowEditReview(true);
         setEditReview(false)
         refresh();
     }
 
-    const calculateStarDistribution = (ratings) => {
+    const calculateStarDistribution = (ratings, nrRatings) => {
         const starCounts = [0, 0, 0, 0, 0]; // For 1-5 stars
 
         ratings.forEach(rating => {
@@ -93,9 +93,9 @@ export function ReviewComponent({cid, uid, averageRating}) {
             }
         });
 
-        let starPercent =[];
+        let starPercent = [];
         starCounts.forEach((number, index) => {
-            starPercent[index]= number/5*100;
+            starPercent[index] = number / nrRatings * 100;
         })
         setStarBars(starPercent.reverse());
 
@@ -104,18 +104,24 @@ export function ReviewComponent({cid, uid, averageRating}) {
     // Filter reviews when current changes
     useEffect(() => {
         if (userCourseData !== null) {
-        const filtered =[...userCourseData].sort((a, b)=>
-            (a.review?.rating % currentStar) - (b.review?.rating % currentStar)
-        );
-        setFilteredReviews(filtered);
-    }
+            if (currentStar === 0) {
+                setFilteredReviews(userCourseData);
+                return;
+            }
+            const filtered = userCourseData.filter(item => item.review?.rating === currentStar);
+            setFilteredReviews(filtered);
+        }
     }, [currentStar]);
 
-    const handleStarClick = (e) =>{
-        setCurrentStar(e.target.value)
+    const handleStarClick = (starValue) => {
+        if (starValue === currentStar) {
+            setCurrentStar(0);
+        } else {
+            setCurrentStar(starValue);
+        }
     }
 
-    const refresh = () =>{
+    const refresh = () => {
         setFilteredReviews(filteredReviews);
     }
 
@@ -130,8 +136,8 @@ export function ReviewComponent({cid, uid, averageRating}) {
                 {stars !== [] && (
                     <div className={"review-component-aggregate-stars"}>
                         {
-                            stars.map(() =>
-                                <img className="review-component-star" src="/icons/star-sharp.svg" alt="review star"/>
+                            stars.map((value, index, array) =>
+                                <img key={index} className="review-component-star" src="/icons/star-sharp.svg" alt="review star"/>
                             )
                         } {halfStar && (
                         <img
@@ -148,46 +154,48 @@ export function ReviewComponent({cid, uid, averageRating}) {
                 <div className={"course-page-reviews-rating-bars"}>
                     {
                         starBars.map((item, index) =>
-                            <div className={"course-page-review-component-text-and-bar"}>
-                                <button className={"course-page-review-star-bar-clickable"}
-                                onClick={handleStarClick}
-                                value={5-index}
-                                >
-                                    {5-index} star
-                                </button>
+                            <button key={5-index} className={`course-page-review-component-text-and-bar ${currentStar === 5-index ? "selected" : ""}`}
+                                    onClick={() => handleStarClick(5-index)}>
+                                <p className={"course-page-review-star-bar-clickable"}>
+                                    {5 - index} star
+                                </p>
                                 <div className={"course-page-reviews-rating-bar-unit"}>
-                                    <div className={"reviews-rating-bar-star"} style={{width:`${item}%`}}></div>
+                                    <div className={"reviews-rating-bar-star"} style={{width: `${item}%`}}></div>
                                 </div>
-                            </div>
+                            </button>
                         )
                     }
 
                 </div>
+                {uid && cid && (
+                    <div className={"review-writer-section-writer"}>
+                        {isUserEnrolled && !allowEditReview && (<ReviewWriter cid={cid} uid={uid}/>)}
+                        {isUserEnrolled && !editReview && allowEditReview && (<button className={"secondary-button"} onClick={() => {
+                            setEditReview(true)
+                        }}>Edit your review?</button>)}
+                        {editReview && ((<ReviewWriter cid={cid} uid={uid} existingReview={getUserReview(uid)}
+                                                       callback={finishedEdits}/>))}
+                    </div>)}
             </div>
 
 
-            { filteredReviews !== null && (
-                <div className={"course-page-review-component-right"}>
-                {
-                    filteredReviews.slice(0, visibleReviews)
-                        .map(item => <Review key={item.id} rating={item} title={false}/>)
 
-                }
-                {visibleReviews < filteredReviews.length && (
-                    <button
-                        onClick={loadMoreReviews}
-                        className="show-more-reviews-button"
-                    >
-                        Show More Reviews
-                    </button>
-                )}
-                    {uid && cid && (
-                    <div className={"review-writer-section-writer"}>
-                    {isUserEnrolled && !allowEditReview && ( <ReviewWriter cid={cid} uid={uid} />)}
-                    {isUserEnrolled && !editReview && allowEditReview && (<button onClick={()=> {setEditReview(true)}} >Edit your review?</button>)}
-                    {editReview && (( <ReviewWriter cid={cid} uid={uid} existingReview={getUserReview(uid)} callback={finishedEdits} />))}
-                    </div>)}
-            </div>)}
+            {filteredReviews !== null && (
+                <div className={"course-page-review-component-right"}>
+                    {
+                        filteredReviews.slice(0, visibleReviews)
+                            .map(item => <Review key={item.id} rating={item} title={false}/>)
+                    }
+                    {visibleReviews < filteredReviews.length && (
+                        <button
+                            onClick={loadMoreReviews}
+                            className="show-more-reviews-button"
+                        >
+                            Show More Reviews
+                        </button>
+                    )}
+
+                </div>)}
 
 
         </div>

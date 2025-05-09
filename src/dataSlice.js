@@ -21,6 +21,9 @@ const dataSlice = createSlice({
         setUserObject: (state, action) => {
             state.user = {...action.payload};
         },
+        setUserImage: (state, action) => {
+            state.user.profilePicture = action.payload
+        },
         clearUserObject: (state) =>{
             state.user = null;
         }
@@ -28,5 +31,6 @@ const dataSlice = createSlice({
 });
 
 export const { setCourseObject,
-    clearCourseObject,setUserObject, clearUserObject } = dataSlice.actions;
+    clearCourseObject,setUserObject,
+    clearUserObject , setUserImage} = dataSlice.actions;
 export default dataSlice.reducer;
