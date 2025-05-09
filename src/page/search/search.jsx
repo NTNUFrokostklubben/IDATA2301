@@ -145,7 +145,6 @@ export default function Search() {
     async function fetchFilteredCourses() {
         try {
             const p = await AsyncApiRequest("GET", "/search?" + searchParams,null ).then((p) => p.json());
-
             setOfferableCourses(p);
         } catch (e) {
             setError(true);
@@ -162,7 +161,7 @@ export default function Search() {
      */
     const dateChanged = (dates) => {
         const [start, end] = dates;
-
+        console.log("New dates:", start, end); // Debug
         setStartDate(start);
         setEndDate(end);
 
