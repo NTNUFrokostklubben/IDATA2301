@@ -9,6 +9,8 @@ import Index from "./index";
 import {deleteAuthorizationCookies, getAuthenticatedUser} from "../utils/authentication/authentication";
 import {AsyncApiRequest} from "../utils/requests";
 import ScrollRoute from "../component/routing/scrollRoute";
+import {useDispatch} from "react-redux";
+import {clearCourseObject, clearUserObject} from "../dataSlice";
 // import {Modal} from "react-native";
 
 export default function Layout() {
@@ -19,7 +21,7 @@ export default function Layout() {
     const searchValue = searchParams.get("search");
     const [userPicture, setUserPicture] = useState([]);
     const navigate = useNavigate();
-
+    const dispatch = useDispatch();
 
 
     /**
@@ -27,21 +29,21 @@ export default function Layout() {
      * It checks if the user is logged in and updates the UI accordingly.
      */
     useEffect(() => {
-      // Check if the user is logged in
-      const user = getAuthenticatedUser();
-      const signedOutElements = document.querySelectorAll(".signed-out");
-      const signedInElements = document.querySelectorAll(".signed-in");
-      if (!user) {
-          // Show login and signup buttons
-          signedOutElements.forEach(element => element.style.display = "flex");
-          signedInElements.forEach(element => element.style.display = "none");
-      } else {
-          // If logged in, show the logout button and user icon
-          signedOutElements.forEach(element => element.style.display = "none");
-          signedInElements.forEach(element => element.style.display = "flex");
-          const email = user.email;
-          fetchUserProfilePic(email);
-      }
+        // Check if the user is logged in
+        const user = getAuthenticatedUser();
+        const signedOutElements = document.querySelectorAll(".signed-out");
+        const signedInElements = document.querySelectorAll(".signed-in");
+        if (!user) {
+            // Show login and signup buttons
+            signedOutElements.forEach(element => element.style.display = "flex");
+            signedInElements.forEach(element => element.style.display = "none");
+        } else {
+            // If logged in, show the logout button and user icon
+            signedOutElements.forEach(element => element.style.display = "none");
+            signedInElements.forEach(element => element.style.display = "flex");
+            const email = user.email;
+            fetchUserProfilePic(email);
+        }
     }, []);
 
 
@@ -50,13 +52,13 @@ export default function Layout() {
      */
     async function fetchUserProfilePic(email) {
         try {
-            const fetchApiCall = `/userProfilePicture/${email}`;
-            const data = await AsyncApiRequest("GET", {fetchApiCall}, null)
-                .then(response => response.json());
+            console.log("FETHICN FMAGE")
+            const data = await AsyncApiRequest("GET", /userProfilePicture/ + email, null)
+                .then(response => response.text());
             setUserPicture(data);
         } catch (err) {
             setUserPicture("/icons/person-sharp.svg");
-            console.log("Error fetching total revenue: ", err);
+            console.log("Error fetching profile picture: ", err);
         }
     }
 
@@ -81,6 +83,7 @@ export default function Layout() {
     function logout() {
         // Clear the authentication cookies
         deleteAuthorizationCookies();
+        dispatch(clearUserObject)
         // Redirect to the login page
         navigate("/");
         // Reload the page to update the UI

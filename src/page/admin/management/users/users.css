@@ -1,0 +1,25 @@
+#users-page {
+    margin: 1rem 2rem;
+}
+
+#users-page .provider {
+    width: 100%;
+}
+
+
+
+#users-page #addUser {
+    color: var(--textWhite);
+    margin: 1rem 0;
+}
+
+#users-page #addUser a {
+    color: var(--textWhite);
+    text-decoration: none;
+}
+
+#users-page img {
+    height: 100%;
+    max-width: 6rem;
+    max-height: 6rem;
+}

@@ -1,23 +1,38 @@
 import "./courseProviderCard.css"
 import {Link} from "react-router-dom";
-import {setSharedObject} from "../../dataSlice";
+import {setCourseObject} from "../../dataSlice";
 import { useDispatch } from 'react-redux';
 export default function CourseProviderCard (offerableCourse ){
     const dispatch = useDispatch();
 
     const handleClick = () =>{
-        dispatch(setSharedObject(offerableCourse))
+        dispatch(setCourseObject(offerableCourse))
     }
+    const formattedDate = new Date(offerableCourse.date).toLocaleDateString('en-GB', {
+        day: '2-digit',
+        month: '2-digit',
+        year: '2-digit',
+    });
+    const hasDiscount = offerableCourse.discount > 0;
+    const discountedPrice = (offerableCourse.price * (1 - offerableCourse.discount)).toFixed(2);
     return(
 
         <Link to={`/checkout/${offerableCourse.id}`} onClick={handleClick} className="provider-card cta-button">
             <div className="provider-card-text">
-                <p className="provider-name">{offerableCourse.provider.name}</p>
-                <p className="provider-card-price">{offerableCourse.price},- nok</p>
+                <p className="provider-card-name">{offerableCourse.provider.name}</p>
+                <p className={"provider-card-date"} >start date: {formattedDate}</p>
+                <div className="provider-card-price-section">
+                    {hasDiscount ? (
+                        <div className={"provider-card-price-and-discount"}>
+
+                            <span className="original-price">{offerableCourse.price},- NOK</span>
+                            <span className="discounted-price">{discountedPrice},- NOK</span>
+                        </div>
+                    ) : (
+                        <span className="provider-card-price">{offerableCourse.price},- NOK</span>
+                    )}
+                </div>
             </div>
-            {// <img className="provider-logo-small" src={offerableCourse.provider.logoLink}/>
-                // <img className="provider-logo-placeholder" src="https://picsum.photos/300/300"/>
-            }
 
 
         </Link>

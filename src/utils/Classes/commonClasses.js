@@ -84,12 +84,18 @@ export class FilterQuery {
 
 export class User {
     constructor(id, name, email, role, profilePicture) {
-
         this.id = id;
         this.email = email;
         this.name = name;
         this.role = role;
         this.profilePicture = profilePicture;
+    }
+}
+
+export class Role {
+    constructor(id, name) {
+        this.id = id;
+        this.name = name;
     }
 }
 
@@ -104,3 +110,7 @@ export class reviewEntity {
         this.courseId = courseID;
     }
 }
+
+
+
+

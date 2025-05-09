@@ -5,6 +5,7 @@
     align-items:center;
     background-color: var(--background);
     padding-top: 4rem;
+    min-height: 100rem;
 }
 .course-page-content{
     width: 60rem;

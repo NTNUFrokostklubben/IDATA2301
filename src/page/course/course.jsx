@@ -1,23 +1,29 @@
 import {use, useEffect, useState} from "react";
 import "./course.css"
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {AsyncApiRequest} from "../../utils/requests";
 import CourseProviderCard from "../../component/courseProviderCard/courseProviderCard";
 import {ReviewComponent} from "./reviewSection";
 import FavoriteButton from "../../component/favorite/favoriteButton";
 import {getAuthenticatedUser} from "../../utils/authentication/authentication";
+import {useSelector} from "react-redux";
+
 
 
 export default function Course() {
     const [courseData, setCourseData] = useState([]);
+    const [uniqueCourses, setUniqueCourses] = useState([]);
     const [ratingData, setRatingData] = useState(0);
     const [user, setUser] = useState(null);
     const [offerableCourseData, setOfferableCourseData] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [isFavorite, setFavorite] = useState(false);
+    const [isFavorite, setFavorite] = useState(null);
+    const [isFavoriteLoaded, setIsFavoriteLoaded] = useState(false);
     const [keywords, setKeywords] = useState([])
     const [isUserEnrolled, setIsUserEnrolled] = useState(false);
     const {id} = useParams();
+    const userData = useSelector((state) => state.data.user)
+    const navigate = useNavigate();
 
     useEffect(() => {
         setLoading(true)
@@ -52,16 +58,36 @@ export default function Course() {
         checkFavorite()
     }, [user]);
 
+    useEffect(() => {
+        if (isFavorite === null) return;
 
-    async function handleUserData() {
-        try {
-            let tempUser = getAuthenticatedUser()
+        setIsFavoriteLoaded(true)
+    }, [isFavorite]);
 
-            const tempApiCall = `/UserByEmail/${tempUser.email}`;
-            const userData = await AsyncApiRequest("GET", tempApiCall, null)
-                .then(response => response.json())
-            setUser(userData)
-        }catch (e){console.error(e)}
+    useEffect(() => {
+        if (offerableCourseData === []) return;
+        const courseMap = new Map();
+        offerableCourseData.forEach(item => {
+            const existing = courseMap.get(item.provider.id); // or another field if courseId isn't there
+            const currentItemDate = new Date(item.date);
+
+            if (!existing) {
+                courseMap.set(item.provider.id, item);
+            } else {
+                const existingDate = new Date(existing.date);
+                if (currentItemDate < existingDate) {
+                    courseMap.set(item.provider.id, item);
+                }
+            }
+        });
+        setUniqueCourses( Array.from(courseMap.values()));
+        console.log(uniqueCourses)
+    }, [offerableCourseData]);
+
+
+
+    function handleUserData() {
+       setUser(userData)
     }
     /**
      * Fetches all course data from the API
@@ -75,6 +101,7 @@ export default function Course() {
             setLoading(false);
         } catch (error) {
             console.error("Error fetching course data:", error);
+            navigate("/notFound")
         }
     }
 
@@ -158,7 +185,7 @@ export default function Course() {
                 <section id="course-splash">
 
                     <div id="course-splash-right-side">
-                        {user && (
+                        {user && isFavoriteLoaded &&  (
                         <div id="course-page-add-favorite"><FavoriteButton uid={user.id} cid={id} isFav={isFavorite}/></div>)}
                         <h4 id="course-splash-title">{courseData.title} </h4>
 
@@ -205,10 +232,10 @@ export default function Course() {
                     <h4 id="course-description-heading"> Description</h4>
                     <p id="course-description-text">{courseData.description}</p>
                 </section>
-
+                {uniqueCourses?.length >0 && (
                 <section id="course-offerables">
-                    {offerableCourseData.map(item => <CourseProviderCard key={item.id} {...item}/>)}
-                </section>
+                    {uniqueCourses.map(item => <CourseProviderCard key={item.id} {...item}/>)}
+                </section>)}
                 {user && (
                 <section className={"course-page-reviews"}>
                     <div className={"course-page-review-aggregate"}>

@@ -215,7 +215,7 @@ export default function CourseEdit() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                await fetchCourses();
+                await fetchCourse();
                 setLoading(false);
             } catch (e) {
                 console.error(e)
@@ -230,7 +230,7 @@ export default function CourseEdit() {
      *
      * @returns {Promise<void>}
      */
-    async function fetchCourses() {
+    async function fetchCourse() {
         try {
             const p = await getCourse(id);
             setCourse(p);

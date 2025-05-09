@@ -16,25 +16,21 @@ import {getAuthenticatedUser} from "../utils/authentication/authentication";
 export default function Checkout() {
 
     const [loading, setLoading] = useState(false);
-    const [user, setUser] = useState(null);
     const [showLoginModal, setShowLoginModal] = useState(Boolean)
     const [showSignupModal, setShowSignupModal] = useState(Boolean)
     const courseData = useSelector((state) => state.data.sharedObject)
+    const userData = useSelector((state) => state.data.user)
     const [countrySelect, setCountrySelect] = useState('')
     const options = useMemo(() => countryList().getData(), [])
     const [cardNumber, setCardNumber] = useState('');
     const inputRef = useRef(null);
     const navigate = useNavigate();
-
-    const sendUserData = async () =>{
-
-        const status = AsyncApiRequest("POST", `/transaction/offerId/${courseData.id}/userid/${user.id}`, null);
-
+    const [selectedCountry, setSelectedCountry] = useState("");
+    const handlePurchase = async () =>{
+        console.log(courseData)
+        setLoading(true)
+        const status = await AsyncApiRequest("POST", `/transaction/offerId/${courseData.id}/userid/${userData.id}`, null);
         try {
-            if (status.status === 201){
-                const addUserCourse = AsyncApiRequest("POST" ,`/userCourses/add/${user.id}/${courseData.id}`, null)
-                    .then( response  => response.json());
-            }
 
             await new Promise((resolve) => setTimeout(resolve, 2000));
 
@@ -45,21 +41,6 @@ export default function Checkout() {
             navigate('/order-complete');
         }
     }
-
-    const handlePurchase =  async () => {
-        let user = getAuthenticatedUser();
-        setLoading(true);
-        const uid = AsyncApiRequest("GET",`/UserByEmail/${user.email}`, null )
-            .then( response  => response.json());
-        setUser(uid)
-
-    }
-
-    useEffect(() => {
-        if (user === null) return;
-        console.log(user)
-        sendUserData()
-    }, [user]);
 
 
         const handleExpiration = (e) => {
@@ -107,8 +88,9 @@ export default function Checkout() {
         <article id="page-layout-checkout" onLoad={loggedIn}>
             {loading && <SpinnerLoader/>}
             <div id="checkout-left-side">
+                <h4 className={"checkout-header"}>Checkout</h4>
                 <section id="express-checkout">
-                    <h4 className="checkout-headers">Express checkout</h4>
+                    <h5 className="checkout-headers">Express checkout</h5>
                     <div id="payment-options">
                         <div id="paypal">
                             <a onClick={openPaypal}
@@ -120,12 +102,12 @@ export default function Checkout() {
                                      alt="PayPal Logo"
                                 /></a>
                         </div>
-                        <div id="klarna">
+                        <div className={"express-checkout-klarna"}>
                             <a onClick={openKlarna}  rel="noopener noreferrer" >
                                 <img id="klarna-image" src="/images/klarnaXL.webp" alt="klarna"/></a>
                         </div>
-                        <div id="other">
-                            <button onClick="">Other</button>
+                        <div className={"express-checkout-other"}>
+                            <button className={"express-checkout-other-button"} onClick="">Other</button>
                         </div>
                     </div>
                 </section>
@@ -137,19 +119,18 @@ export default function Checkout() {
                     <label htmlFor="checkout-email"></label>
                     <input className="large-input-field"
                            type="text"
-
                            id="checkout-email"
                            name="email input"
                            pattern={"\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}\\b"}
                            placeholder="Email"/>
                     <h5 className="checkout-headers"> Billing</h5>
                     <form id="billing-input" onSubmit={e => e.preventDefault() }>
-                        <Select id={"country-select"}
-
+                        <Select className={"country-select"}
                                 required={false}
                                // styles={customSelectStyles}
                                 options={options}
                                 value={countrySelect}
+                                onChange={(selected) => setCountrySelect(selected.value) }
                                 unstyled={true}
                                 classNamePrefix={"country-select"}/>
                         <div className="small-input">
@@ -199,7 +180,7 @@ export default function Checkout() {
                         <label htmlFor="firstname"></label>
                         <div id="purchase">
                             <p>Total cost:</p> &nbsp;
-                            <label className="valuta">
+                            <label className={"checkout-final-price"}>
                                 {(courseData.price * (1 - courseData.discount)).toFixed(2)}
                             </label><p>,- nok</p>
                             <button type="submit" id="purchase-button" onClick={handlePurchase} disabled={loading}>
@@ -217,24 +198,24 @@ export default function Checkout() {
                     <div className="product">
                         <h6 className="checkout-headers">{courseData.course.title}</h6>
                         <div className="picture-and-text">
-                            <img className="product-checkout-image" width="200" height="100"
+                            <img className="product-checkout-image"
                                  src={courseData.course.imgLink} alt="product image"/>
                             <p className="product-desc">{courseData.course.description} </p>
                         </div>
                         <div className="product-price">
                             <div className="product-pricetag">
-                                <label>Price: </label>
+                                <label>Price:&nbsp; </label>
                                 <label>{courseData.price}</label>
                                 <label className="valuta">,- nok</label>
                             </div>
 
                             <div className="purchase-discount">
-                                <label className="discount-tag">Discount: </label>
+                                <label className="discount-tag">Discount: &nbsp;</label>
                                 <span>{(courseData.discount * 100).toFixed(0)}%</span>
                             </div>
 
                             <div className="purchase-total-cost">
-                                <label>Total cost: </label>
+                                <label>Total cost: &nbsp; </label>
                                 <label>{(courseData.price * (1 - courseData.discount)).toFixed(2)}</label>
                                 <label className="valuta">,- nok</label>
                             </div>

@@ -1,10 +1,10 @@
 import "./orderComplete.css"
 import {useDispatch} from "react-redux";
-import {clearSharedObject} from "../dataSlice";
+import {clearCourseObject} from "../dataSlice";
 
 export default function OrderComplete (){
     const dispatch = useDispatch();
-    dispatch(clearSharedObject)
+    dispatch(clearCourseObject)
     const Checkmark  = () => {
         return(
         <svg

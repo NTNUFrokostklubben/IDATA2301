@@ -248,6 +248,7 @@ export default function Index() {
                     </div>
                 </div>
             </section>
+
             {
                 showSignupModal && createPortal(
                     <Register changeMode={() => {

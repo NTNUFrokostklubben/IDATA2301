@@ -6,25 +6,16 @@ import {AsyncApiRequest} from "../utils/requests";
 import {Link, useParams} from "react-router-dom";
 import FavoriteCard from "../component/favoriteCard/favoriteCard";
 import {getAuthenticatedUser} from "../utils/authentication/authentication";
+import {useSelector} from "react-redux";
 
 export default function UserPage (){
     const [courses, setCourses] = useState([]);
-    const [user, setUser] = useState(null );
+    const user = useSelector((state) => state.data.user)
     const [loading, setLoading] = useState(true);
     const [ratings, setRatings] = useState([]);
     const [favorites, setFavorites] = useState([]);
 
-    useEffect( () => {
 
-        const fetchData = async () =>{
-            try {
-                await Promise.all([handleUserData()])
-                setLoading(false)
-            }catch (e){console.log(e)}
-        }
-        fetchData()
-        } , []
-    );
 
     useEffect(() => {
         if (!user) return;  // Don't fetch unless user is set
@@ -51,25 +42,11 @@ export default function UserPage (){
             }catch (e){console.error(e)}
         }
 
-        if (loading ){
-            return (<h5>loading...</h5>)
-        }
-
         handleFavoritesData();
         handleCourseData();
     }, [user]);
 
 
-    async function handleUserData() {
-        try {
-           let tempUser = getAuthenticatedUser()
-
-            const tempApiCall = `/UserByEmail/${tempUser.email}`;
-            const userData = await AsyncApiRequest("GET", tempApiCall, null)
-                .then(response => response.json())
-            setUser(userData)
-        }catch (e){console.error(e)}
-    }
     return (
 
 
@@ -77,11 +54,11 @@ export default function UserPage (){
             {user && (
             <section id="user-page-content">
                 <section id="user-page-caret">
-                    <a href=""><img id="edit" src="/icons/pencil-sharp.svg" alt="edit button"/></a>
+
                     <div id="user-caret">
 
                         <picture>
-                            <img id="user-image" src={user.profilePicture} alt="user"/>
+                            <img className={"user-page-user-image"} src={user.profilePicture} alt="user"/>
                         </picture>
                         <p id="user-name">
                             User1
@@ -94,7 +71,10 @@ export default function UserPage (){
                     <h5 id="previous-courses-heading">Previous courses</h5>
                     <ul>
                         {courses.map(item => (
-                            <li className="user-course-item" key={item.id}> <Link className={"user-page-course-hotlink"} to={`/course/${item.course.id}`}>{item.course.title}</Link></li>
+                            <li className="user-course-item" key={item.id}>
+                                <Link className={"user-page-course-hotlink"} to={`/course/${item.course.id}`}>
+                                    {item.course.title}
+                                </Link></li>
                             ))}
                     </ul>
                 </section>
