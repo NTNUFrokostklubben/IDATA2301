@@ -8,6 +8,7 @@ import {createPortal} from "react-dom";
 import {AsyncApiRequest} from "../utils/requests";
 import {CourseWithPrice} from "../utils/Classes/commonClasses";
 import {getCourses, getProviders} from "../utils/commonRequests";
+import {Skeleton} from "@mui/material";
 
 export default function Index() {
 
@@ -19,7 +20,10 @@ export default function Index() {
     const [providers, setProviders] = useState([]);
     const [overflow, setOverflow] = useState(false);
 
-    // Use to resize the course shown based on window size
+    /**
+     * Use to resize the course shown based on window size
+     */
+
     useEffect(() => {
         const handleResize = () => {
             setCourseShown(calcSceneStart());
@@ -32,12 +36,18 @@ export default function Index() {
     }, []);
 
 
+    /**
+     * Call on calcCardsShown when change in courseCards and loading
+     */
     useEffect(() => {
         if (!loading){
             calcCardsShown();
         }
     },[courseCards, loading]);
 
+    /**
+     * Fetches provides and courses from the backend using an API call.
+     */
     useEffect(() => {
         const fetchData = async () => {
             try{
@@ -55,6 +65,9 @@ export default function Index() {
         fetchData();
     }, []);
 
+    /**
+     * Fetches provides from the backend using an API call.
+     */
     async function fetchProviders() {
         try {
             const data = await getProviders();
@@ -82,6 +95,11 @@ export default function Index() {
         }
     }
 
+    /**
+     * Calculates the amount of cards that can be shown based on how many fit on screen.
+     *
+     * @returns {number} The amount of course card that can be shown
+     */
     function calcSceneStart() {
         let courseCardsShown;
 
@@ -101,21 +119,24 @@ export default function Index() {
         return courseCardsShown;
     }
 
+    /**
+     * Calculates the amount of cards that can be shown based on how many fit and how many we have
+     */
     function calcCardsShown(){
         const sceneStart = calcSceneStart();
         const adjustedShown = Math.min(sceneStart, courseCards.length || sceneStart);
         setCourseShown(adjustedShown);
-        setOverflow(courseCards.length >= adjustedShown);
+        setOverflow(courseCards.length > adjustedShown);
 
         if (courseIndex > courseCards.length - adjustedShown) {
             setCourseIndex(0);
         }
     }
 
-
-
+    /**
+     * Different slides in the photo gallery.
+     */
     const [slideIndex, setSlideIndex] = useState(0);
-
     const slides = [
         "https://picsum.photos/480/320?random=1",
         "https://picsum.photos/480/320?random=2",
@@ -234,7 +255,11 @@ export default function Index() {
                         <h3 className="section-subheading">Proud collaborator with over 200+ companies and
                             organizations</h3>
                     </div>
-                    {loading ? <p>Loading</p> :
+                    {loading ?
+                        <div className="index-collaborator-logos-skeleton">
+                            <Skeleton variant="rectangular" height="15rem" width="100%" />
+                        </div>
+                        :
                         <div id="index-collaborator-logos">
 
                             {providers.map((provider) => (
