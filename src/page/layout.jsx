@@ -16,6 +16,7 @@ import LearniverseLogo from "../component/icons/learniverseLogo";
 
 export default function Layout() {
 
+
     const [showLoginModal, setShowLoginModal] = useState();
     const [showSignupModal, setShowSignupModal] = useState();
     const [searchParams, setSearchParams] = useSearchParams();

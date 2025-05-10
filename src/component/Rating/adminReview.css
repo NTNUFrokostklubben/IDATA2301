@@ -43,10 +43,50 @@
     height: 1.5rem;
     width: 1.5rem;
     margin-right: 0.5rem;
+    filter: invert(32%) sepia(9%) saturate(3293%) hue-rotate(187deg) brightness(95%) contrast(81%);
 }
 .admin-dash-review-user-image{
     height: 2rem;
     width: 2rem;
     margin-right: 0.5rem;
     filter: invert(32%) sepia(9%) saturate(3293%) hue-rotate(187deg) brightness(95%) contrast(81%);
+}
+/* Skeleton CSS */
+
+.admin-dash-review-skeleton{
+    display: flex;
+    min-width: 30rem;
+    height: 2rem;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--textWhite);
+    padding: 0.5rem;
+}
+.admin-dash-review-text-skeleton{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 90%;
+}
+.admin-dash-review-user-image-skeleton{
+    height: 2rem;
+    width: 2rem;
+}
+.admin-dash-review-user-text-skeleton{
+    height: 2rem;
+    width: 100%;
+}
+.star-img-skeleton{
+    height: 1.5rem;
+    width: 1.5rem;
+    margin-right: 0.5rem;
+    filter: invert(100%) sepia(2%) saturate(902%) hue-rotate(307deg) brightness(111%) contrast(71%);
+}
+.admin-dash-review-rating-skeleton{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    width: 10%;
 }

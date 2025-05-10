@@ -1,30 +1,34 @@
 import * as React from 'react';
 import {useEffect, useState} from 'react';
 import {PieChart} from '@mui/x-charts/PieChart';
-import AdminReview from "../../component/Rating/adminReview";
+import {AdminReview, AdminReviewSkeleton} from "../../component/Rating/adminReview";
 import "./adminDashboard.css";
 import {AsyncApiRequest} from "../../utils/requests";
 import {useNavigate} from "react-router-dom";
 import {reviewEntity} from "../../utils/Classes/commonClasses";
+import {CourseCardSkeleton} from "../../component/card/courseCard";
+import {CircularProgress, circularProgressClasses, Skeleton, Typography} from "@mui/material";
 
 export default function AdminDashboard() {
     const navigate = useNavigate();
 
     // Stats in overview
     const [revenueData, setRevenueData]=useState([]);
-    const [totalCourses, setTotalCourses]=useState([]);
-    const [totalUsers, setTotalUsers]=useState([]);
-    const [totalRevenue, setTotalRevenue]=useState([]);
-    const [avgRevenue, setAvgRevenue]=useState([]);
-    const [reviews, setReviews]=useState([]);
-    const [revenueLast30Days, setRevenueLast30Days] = useState([]);
-    const [newUsers, setNewUsers] = useState([]);
+    const [totalCourses, setTotalCourses]=useState([0]);
+    const [totalUsers, setTotalUsers]=useState([0]);
+    const [totalRevenue, setTotalRevenue]=useState([0]);
+    const [avgRevenue, setAvgRevenue]=useState([0]);
+    const [reviews, setReviews]=useState([0]);
+    const [revenueLast30Days, setRevenueLast30Days] = useState([0]);
+    const [newUsers, setNewUsers] = useState([0]);
     const [loading, setLoading] = useState(true);
 
     const [size, setSize] = useState(screenSetSize());
     const [hidden, setHidden] = useState(screenSetHidden());
 
-    // Use to resize the course shown based on window size
+    /**
+     * Use to resize the course shown based on window size
+     */
     useEffect(() => {
         const handleResize=() => {
             setSize(screenSetSize());
@@ -34,10 +38,13 @@ export default function AdminDashboard() {
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
-    // Fetches all stats from the API
+    /**
+     * Fetches all stats from the API
+     */
     useEffect(() => {
         const fetchdata = async() => {
             try{
+                await new Promise(r => setTimeout(r, 5000));
                 await Promise.all([
                     fetchRevenueData(),
                     fetchReviews(),
@@ -196,19 +203,41 @@ export default function AdminDashboard() {
          return !!(window.matchMedia("(max-width: 700px)").matches);
     }
 
+    /**
+     * Creates a gradient circular progress bar
+     * From https://mui.com/material-ui/react-progress/
+     */
+    function GradientCircularProgress() {
+        return (
+            <React.Fragment>
+                <svg width={10} height={0}>
+                    <defs>
+                        <linearGradient id="my_gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stopColor="#e01cd5" />
+                            <stop offset="100%" stopColor="#1CB5E0" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <CircularProgress sx={{ 'svg circle': { stroke: 'url(#my_gradient)' } }} />
+            </React.Fragment>
+        );
+    }
+
     return (
         <div className={"admin-dash"}>
             {/*Css class and id name starts with "admin-dash" to avoid conflicts with other pages*/}
             <h2>Dashboard</h2>
             <p> On this page you will find the overview over your courses</p>
 
-            {loading ? null :
-                <div className={"admin-dash-content"}>
+            <div className={"admin-dash-content"}>
 
-                    <div className={"admin-dash-revenue"}>
-                        <h3>Revenue</h3>
-                        <p>Revenue overview</p>
-                        <div className={"admin-dash-revenue-graph"}>
+                <div className={"admin-dash-revenue"}>
+                    <h3>Revenue</h3>
+                    <p>Revenue overview</p>
+                    <div className={"admin-dash-revenue-graph"}>
+                        {loading ?
+                            <GradientCircularProgress {...size}/>
+                            :
                             <PieChart
                                 series={[
                                     {
@@ -222,10 +251,19 @@ export default function AdminDashboard() {
                                     legend: {hidden: hidden},
                                 }}
                             />
-                        </div>
-                        &nbsp; &nbsp;
-                        <hr className={"solid"}/>
+                        }
 
+                    </div>
+                    &nbsp; &nbsp;
+                    <hr className={"solid"}/>
+
+                    {loading ?
+                        <div className={"admin-dash-result"}>
+                            <Skeleton variant={"rectangular"} className={"loader"} height={"2rem"} width={"100%"} />
+                            &nbsp;
+                            <Skeleton variant={"rectangular"} className={"loader"} height={"2rem"} width={"100%"} />
+                        </div>
+                        :
                         <div className={"admin-dash-result"}>
                             <h5 className={"admin-dash-title"}>Total Revenue</h5>
                             <h6 className={"admin-dash-total"}>{totalRevenue} NOK</h6>
@@ -233,23 +271,40 @@ export default function AdminDashboard() {
                             <h5 className={"admin-dash-title"}>Total revenue last 30 days</h5>
                             <h6 className={"admin-dash-total"}>{revenueLast30Days} NOK</h6>
                         </div>
-                    </div>
+                    }
+                </div>
 
-
-                    <div className={"admin-dash-reviews"}>
-                        <h3>Recent Reviews</h3>
-                        <hr className={"solid"}/>
+                <div className={"admin-dash-reviews"}>
+                    <h3>Recent Reviews</h3>
+                    <hr className={"solid"}/>
+                    {loading ?
+                        <div className={"admin-dash-reviews-list"}>
+                            {Array.from({length: 10}).map((_, index) => (
+                                <AdminReviewSkeleton key={index}/>
+                            ))}
+                        </div>
+                        :
                         <div className={"admin-dash-reviews-list"}>
                             {reviews.map((review) => (
                                 <AdminReview key={review.id} {...review}/>
                             ))}
                         </div>
-                    </div>
+                    }
 
-                    <div className={"admin-dash-overview"}>
-                        <div className={"admin-dash-users"}>
-                            <h3>Users</h3>
-                            <hr className={"solid"}/>
+                </div>
+
+                <div className={"admin-dash-overview"}>
+                    <div className={"admin-dash-users"}>
+                        <h3>Users</h3>
+                        <hr className={"solid"}/>
+
+                        {loading ?
+                            <div className={"admin-dash-result"}>
+                                <Skeleton variant={"rectangular"} className={"loader"} height={"2rem"} width={"100%"}/>
+                                &nbsp;
+                                <Skeleton variant={"rectangular"} className={"loader"} height={"2rem"} width={"100%"}/>
+                            </div>
+                            :
                             <div className={"admin-dash-result"}>
                                 <h5 className={"admin-dash-title"}>Total registered users</h5>
                                 <h6 className={"admin-dash-total"}>{totalUsers}</h6>
@@ -257,11 +312,20 @@ export default function AdminDashboard() {
                                 <h5 className={"admin-dash-title"}>New users last 30 days</h5>
                                 <h6 className={"admin-dash-total"}> {newUsers} </h6>
                             </div>
-                        </div>
-                        <div className={"admin-dash-courses"}>
-                            <h3>Courses</h3>
-                            <hr className={"solid"}/>
+                        }
 
+                    </div>
+                    <div className={"admin-dash-courses"}>
+                        <h3>Courses</h3>
+                        <hr className={"solid"}/>
+
+                        {loading ?
+                            <div className={"admin-dash-result"}>
+                                <Skeleton variant={"rectangular"} className={"loader"} height={"2rem"} width={"100%"}/>
+                                &nbsp;
+                                <Skeleton variant={"rectangular"} className={"loader"} height={"2rem"} width={"100%"}/>
+                            </div>
+                            :
                             <div className={"admin-dash-result"}>
                                 <h5 className={"admin-dash-title"}>Total courses</h5>
                                 <h6 className={"admin-dash-total"}>{totalCourses}</h6>
@@ -269,14 +333,11 @@ export default function AdminDashboard() {
                                 <h5 className={"admin-dash-title"}>Average revenue</h5>
                                 <h6 className={"admin-dash-total"}> {avgRevenue} NOK</h6>
                             </div>
-                        </div>
+                        }
                     </div>
                 </div>
-            }
+            </div>
 
         </div>
     )
 }
-
-
-

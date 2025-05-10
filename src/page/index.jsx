@@ -82,7 +82,6 @@ export default function Index() {
      * Fetches all courseCards from the API
      */
     async function fetchCourses() {
-        console.log("Fetching courses");
         try {
             const data = await AsyncApiRequest("GET", "/courses/courseCard", null)
                 .then(response => response.json());
