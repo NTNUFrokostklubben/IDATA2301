@@ -245,3 +245,24 @@ export function getRoles() {
             throw error;
         });
 }
+
+/**
+ * Gets a keywords associated with a course
+ *
+ * @param cid Course ID
+ * @returns {Promise<*>}
+ */
+export function getKeywords(cid) {
+    return AsyncApiRequest("GET", "/keyword/" + cid, null)
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error("Error fetching keywords");
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            throw error;
+        });
+}
