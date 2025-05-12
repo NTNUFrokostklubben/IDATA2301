@@ -37,7 +37,6 @@ export default function Login({ onClose, changeMode, closable=true }) {
             window.location.reload()
         }
         )
-       // TODO - maybe find an other way to do this
         onClose();
     }
 
@@ -86,7 +85,6 @@ export default function Login({ onClose, changeMode, closable=true }) {
                     </section>
                     <section id="auth-CTA">
                         <button className="cta-button" type="submit" onClick={submitForm}>Log In</button>
-                        {/*TODO: Implement redirect to Signup modal (probably just build component again in react)*/}
                         <button onClick={changeMode} className="cta-button secondary-button" type="button">Sign up instead</button>
                     </section>
                 </form>

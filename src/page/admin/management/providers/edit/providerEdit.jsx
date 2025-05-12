@@ -20,13 +20,11 @@ export function ProviderFormSkeleton() {
 
 
             <div className="group-2">
-                {/*TODO: Add preview of uploaded image (javascript component)*/}
                 <div className="input-wrapper">
                     <label htmlFor="provider-image">Provider Image</label>
                     <Skeleton className={"loader"} variant={"rectangular"} height={"2.5rem"} width={"100%"}/>
                 </div>
 
-                {/*TODO: Add preview of uploaded image (javascript component)*/}
                 <div className="input-wrapper">
                     <label htmlFor="provider-alt-image">Alternative Provider Image</label>
                     <Skeleton className={"loader"} variant={"rectangular"} height={"2.5rem"} width={"100%"}/>

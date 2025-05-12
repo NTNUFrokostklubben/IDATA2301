@@ -56,7 +56,6 @@ function UserEditForm({user, roles}) {
 
     function buildRoleObject() {
 
-        // TODO: Change this to nest correctly. Need to change how it adds to formdata as well
         const role = [];
         const checkboxes = document.querySelectorAll("input[name='role']:checked");
         checkboxes.forEach((checkbox) => {
