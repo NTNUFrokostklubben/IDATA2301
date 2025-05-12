@@ -23,8 +23,7 @@ function OfferableCourseAddForm({providers, courses}) {
         const value = Object.fromEntries(data.entries());
         const offerableCourse = new OfferableCourse(null, new Date(startDate).getTime(), value.discount / 100, value.price, value.visibility, new courseEntity(value.courseId), new ProviderEntity(value.providerId));
 
-        postOfferableCourse(offerableCourse).then(navigate(-1))
-            .catch(alert("Error adding Offerable Course")).then(navigate(-1))
+        postOfferableCourse(offerableCourse).then(navigate(-1));
     }
 
     async function postOfferableCourse(offerableCourse) {

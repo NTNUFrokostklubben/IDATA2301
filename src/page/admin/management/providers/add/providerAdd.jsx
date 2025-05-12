@@ -31,8 +31,7 @@ function ProviderFormAdd() {
                 provider.altLogoLink = r;
             }).then(() => {
 
-                postProvider(provider).then(navigate(-1))
-                    .catch(alert("Failed to add Provider")).then(navigate(-1))
+                postProvider(provider).then(navigate(-1));
             })
         })
     }
