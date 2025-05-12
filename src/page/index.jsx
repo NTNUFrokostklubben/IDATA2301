@@ -79,6 +79,22 @@ export default function Index() {
     }
 
     /**
+     * Smooth things out when resizing.
+     */
+    useEffect(() => {
+        let resizeTimeout;
+        const handleResize = () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                calcCardsShown();
+            }, 150);
+        };
+
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, [courseCards]);
+
+    /**
      * Fetches all courseCards from the API
      */
     async function fetchCourses() {

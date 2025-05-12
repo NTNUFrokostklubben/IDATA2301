@@ -20,7 +20,7 @@ export default function CourseProviderCard (offerableCourse ){
         <Link to={`/checkout/${offerableCourse.id}`} onClick={handleClick} className="provider-card cta-button">
             <div className="provider-card-text">
                 <b className="provider-card-name">{offerableCourse.provider.name}</b>
-                <p className={"provider-card-date"} >start date: {formattedDate}</p>
+                <p className={"provider-card-date"} >Start date: {formattedDate}</p>
                 <div className="provider-card-price-section">
                     {hasDiscount ? (
                         <div className={"provider-card-price-and-discount"}>

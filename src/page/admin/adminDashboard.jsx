@@ -44,7 +44,7 @@ export default function AdminDashboard() {
     useEffect(() => {
         const fetchdata = async() => {
             try{
-                await new Promise(r => setTimeout(r, 5000));
+                await new Promise(r => setTimeout(r, 500));
                 await Promise.all([
                     fetchRevenueData(),
                     fetchReviews(),

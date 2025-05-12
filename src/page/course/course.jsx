@@ -125,9 +125,8 @@ export default function Course() {
                 .then(response => response.json());
             setRatingData(Math.round(data * 10) / 10);
 
-
         } catch (error) {
-            throw new Error("Error fetching rating data:", error);
+            throw new Error("Error fetching average rating data:", error);
         }
     }
 
@@ -139,7 +138,6 @@ export default function Course() {
             const fetchApiCall = `/keyword/${id}`;
             const data = await AsyncApiRequest("GET", fetchApiCall, null)
                 .then(response => response.json());
-            // console.log(data)
             setKeywords(data);
 
         } catch (error) {
@@ -150,8 +148,8 @@ export default function Course() {
     async function checkFavorite() {
         try {
             const favoriteState = await AsyncApiRequest("GET", `/isFavorited/${user.id}/${id}`, false)
-                .then(response => response.json())
-            setFavorite(favoriteState)
+                .then(response => response.json());
+            setFavorite(favoriteState);
 
         } catch (error) {
             console.error("Error fetching keywords:", error);
@@ -184,60 +182,87 @@ export default function Course() {
 
                     <div id="course-splash-right-side">
                         {user && isFavoriteLoaded && (
-                            <div id="course-page-add-favorite"><FavoriteButton uid={user.id} cid={id}
-                                                                               isFav={isFavorite}/></div>)}
-                        <h2 id="course-splash-title">{courseData.title} </h2>
+                            <div id="course-page-add-favorite">
+                                <FavoriteButton uid={user.id} cid={id} isFav={isFavorite}/>
+                            </div>)
+                        }
+                        <div className="course-slash-desc">
 
+                            <h2 id="course-splash-title">{courseData.title} </h2>
 
-                        <p id="course-splash-hrw">{courseData.hoursWeek} hours per week
-                            • {diffConvert(courseData.diffLevel)} • credits: {courseData.credits}</p>
+                            <p id="course-splash-hrw">
+                                {courseData.hoursWeek} hours per week • {diffConvert(courseData.diffLevel)} •
+                                Credits: {courseData.credits}
+                            </p>
 
-
-                        <div id="course-splash-offerability">
-                            <p id="course-splash-closest">Closest course
-                                session: {new Date(courseData.closestDate).toLocaleDateString("de-DE")}</p>
-                            <p id="course-splash-relatedcert">Related certificate: {courseData.relatedCert}</p>
+                            <p id="course-splash-closest">
+                                Closest course session: &nbsp;
+                                {new Date(courseData.closestCourse).toLocaleDateString("de-DE",{
+                                    year: "numeric",
+                                    month: "2-digit",
+                                    day: "2-digit"
+                                })}
+                            </p>
+                            &nbsp;
                         </div>
-
-                        <div id="course-splash-avgstars">
-                            <img id="course-splash-star" src="/icons/star-sharp.svg" alt={"rating star"}/>
-                            <p id="course-splash-rating">{ratingData}</p>
-                        </div>
-
-                        <div id="course-splash-keywords">
-                            {keywords.map(item => (
-                                <p className="course-splash-keyword" key={item.keyword}>{item.keyword}</p>
-
-                            ))}
-                        </div>
-
                     </div>
 
                     <picture>
-                        <div id={"course-image-container"}><img id="course-splash-image" src={courseData.imgLink}
-                                                                alt={"image " + courseData.title}/></div>
+                        <div id="course-image-container">
+                            <img id="course-splash-image" src={courseData.imgLink} alt={"image " + courseData.title}/>
+                        </div>
                     </picture>
 
                 </section>
 
-                <section id="course-description">
-                    <h3 id="course-description-heading"> Description</h3>
-                    <p id="course-description-text">{courseData.description}</p>
+                <section id="course-related-certificates">
+                    <h3 id="course-related-certificates-heading"> Related certificate</h3>
+                    <div id="course-certification-content">
+                        <img src="/icons/reader-sharp.svg" alt="Certificate icon" className="filter-white"
+                             id="certification-img"/>
+                        <p id="course-related-certificates-text">{courseData.relatedCert}</p>
+                    </div>
+
                 </section>
+
+                <section id="course-description">
+                    <div id="course-description-content">
+                        <h3 id="course-description-heading"> Description</h3>
+                        <p id="course-description-text">{courseData.description}</p>
+                    </div>
+                </section>
+
+                <section id="course-keywords-section">
+                    <h3 id="course-keywords-heading"> Covered topics</h3>
+                    <div id="course-keywords">
+                        {keywords.map(item => (
+                            <div className="course-keyword">
+                                <img className="keyword-checkmark" src="/icons/checkmark-sharp.svg"
+                                     alt="Checkmark"/>
+                                <p className="course-keyword-text" key={item.keyword}>{item.keyword}</p>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+
+
                 {uniqueCourses?.length > 0 && (
                     <section id="course-offerables">
-                        {uniqueCourses.map(item => <CourseProviderCard key={item.id} {...item}/>)}
-                    </section>)}
+                        <h3 id="course-offerables-heading"> Available courses</h3>
+                        <div id="course-offeables-content">
+                            {uniqueCourses.map(item => <CourseProviderCard key={item.id} {...item}/>)}
+                        </div>
+                    </section>)
+                }
+
                 {user && (
-                    <section className={"course-page-reviews"}>
-                        <div className={"course-page-review-aggregate"}>
+                    <section className="course-page-reviews">
+                        <div className="course-page-review-aggregate">
                             <h3> Customer reviews</h3>
                             <ReviewComponent cid={id} averageRating={ratingData} uid={user.id}/>
                         </div>
-                        <div className={"course-page-user-reviews"}>
-                        </div>
-
                     </section>)}
+
             </div>
         </div>
     )
