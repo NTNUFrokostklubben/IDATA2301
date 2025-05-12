@@ -1,42 +1,63 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "./Index.css";
 import Search from "./search/search";
 import {Link, Route} from "react-router-dom";
-import CourseCard from "../component/card/courseCard";
-import Card from "../component/card/card";
+import {CourseCard, CourseCardSkeleton} from "../component/card/courseCard";
 import Register from "../component/modals/auth/register";
 import {createPortal} from "react-dom";
 import {AsyncApiRequest} from "../utils/requests";
 import {CourseWithPrice} from "../utils/Classes/commonClasses";
 import {getCourses, getProviders} from "../utils/commonRequests";
+import {Skeleton} from "@mui/material";
 
 export default function Index() {
 
     const [showSignupModal, setShowSignupModal] = useState()
-    const [courseShown, setCourseShown] = useState(calcSceneStart());
+    const [courseShown, setCourseShown] = useState(calcSceneStart(0));
     const [courseIndex, setCourseIndex] = useState(0);
     const [courseCards, setCourseCards] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [providers, setProviders] = useState([])
+    const [providers, setProviders] = useState([]);
+    const [overflow, setOverflow] = useState(false);
 
-    // Use to resize the course shown based on window size
+    /**
+     * Use to resize the course shown based on window size
+     */
+
     useEffect(() => {
         const handleResize = () => {
             setCourseShown(calcSceneStart());
+            if (courseCards !== null){
+                calcCardsShown();
+            }
         };
         window.addEventListener("resize", handleResize);
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
 
+    /**
+     * Call on calcCardsShown when change in courseCards and loading
+     */
+    useEffect(() => {
+        if (!loading){
+            calcCardsShown();
+        }
+    },[courseCards, loading]);
+
+    /**
+     * Fetches provides and courses from the backend using an API call.
+     */
     useEffect(() => {
         const fetchData = async () => {
-            try {
+            try{
+                await new Promise(r => setTimeout(r, 5000));
                 await Promise.all([
                     fetchProviders(),
-                    fetchCourses()
+                    fetchCourses(),
                 ])
                 setLoading(false);
+
             } catch (err) {
                 throw new Error("Error fetching course cards: ", err);
             }
@@ -44,6 +65,9 @@ export default function Index() {
         fetchData();
     }, []);
 
+    /**
+     * Fetches provides from the backend using an API call.
+     */
     async function fetchProviders() {
         try {
             const data = await getProviders();
@@ -70,27 +94,48 @@ export default function Index() {
         }
     }
 
-
+    /**
+     * Calculates the amount of cards that can be shown based on how many fit on screen.
+     *
+     * @returns {number} The amount of course card that can be shown
+     */
     function calcSceneStart() {
-        if (window.matchMedia("(max-width: 480px)").matches) {
-            return 3;
-        } else if (window.matchMedia("(max-width: 1250px)").matches) {
-            return 3;
+        let courseCardsShown;
+
+        if (window.matchMedia("(max-width: 1250px)").matches) {
+            courseCardsShown = 2;
         } else if (window.matchMedia("(max-width: 1600px)").matches) {
-            return 4;
+            courseCardsShown = 3;
         } else if (window.matchMedia("(max-width: 1900px)").matches) {
-            return 5;
+            courseCardsShown = 4;
         } else if (window.matchMedia("(max-width: 2350px)").matches) {
-            return 6;
+            courseCardsShown = 5;
         } else if (window.matchMedia("(max-width: 3000px)").matches) {
-            return 7;
+            courseCardsShown = 5;
         } else {
-            return 8;
+            courseCardsShown = 6;
+        }
+        return courseCardsShown;
+    }
+
+    /**
+     * Calculates the amount of cards that can be shown based on how many fit and how many we have
+     */
+    function calcCardsShown(){
+        const sceneStart = calcSceneStart();
+        const adjustedShown = Math.min(sceneStart, courseCards.length || sceneStart);
+        setCourseShown(adjustedShown);
+        setOverflow(courseCards.length > adjustedShown);
+
+        if (courseIndex > courseCards.length - adjustedShown) {
+            setCourseIndex(0);
         }
     }
 
+    /**
+     * Different slides in the photo gallery.
+     */
     const [slideIndex, setSlideIndex] = useState(0);
-
     const slides = [
         "https://picsum.photos/480/320?random=1",
         "https://picsum.photos/480/320?random=2",
@@ -144,38 +189,62 @@ export default function Index() {
                             labore et dolore magna aliqua.</h3>
                     </div>
 
-                    {loading ? <p>Loading</p> :
-                        <section id="index-course-cards-section">
+                <section id="index-course-cards-section">
 
-                            <section className="index-arrow">
-                                <button id="index-arrow-left-btn"
-                                        onClick={() => setCourseIndex((prevIndex) => (prevIndex - 1 + courseCards.length) % courseCards.length)}>
-                                    <img className={"index-arrow-icon"} src="/icons/arrow-back-circle-sharp.svg"
-                                         alt="Arrow Left"/>
-                                </button>
-                            </section>
+                    {overflow ?
+                        <section className="index-arrow">
+                            <button id="index-arrow-left-btn"
+                                    onClick={() => setCourseIndex((prevIndex) => (prevIndex - 1 + courseCards.length) % courseCards.length)}>
+                                <img className={"index-arrow-icon"} src="/icons/arrow-back-circle-sharp.svg"
+                                     alt="Arrow Left"/>
+                            </button>
+                        </section>
+                        : null
+                    }
 
-                            <section id="index-collection-cards">
-                                {courseCards.slice(courseIndex, courseIndex + courseShown - 1).map((courseCard) => (
+
+                    {loading ?
+                        <section id={"index-collection-cards"}>
+                            {Array.from({length: courseShown}).map((_, index) => (
+                                <CourseCardSkeleton key={index}/>
+                            ))}
+                        </section>
+                        :
+                        <section id="index-collection-cards">
+                            {(() => {
+                                const visibleCards = [];
+                                const endIndex = courseIndex + courseShown;
+
+                                if (endIndex <= courseCards.length) {
+                                    visibleCards.push(...courseCards.slice(courseIndex, endIndex));
+                                } else {
+                                    visibleCards.push(...courseCards.slice(courseIndex));
+                                    if (overflow) {
+                                        visibleCards.push(...courseCards.slice(0, endIndex % courseCards.length));
+                                    }
+                                }
+
+                                return visibleCards.map((courseCard) => (
                                     <CourseCard key={courseCard.id} {...courseCard} />
-                                ))}
-                                {courseIndex + courseShown - 1 > courseCards.length
-                                    && courseCards.slice(0, (courseIndex + courseShown - 1) % courseCards.length)
-                                        .map((courseCard) => (
-                                            <CourseCard key={courseCard.id} {...courseCard}/>
-                                        ))}
-                            </section>
-
-                            <section className="index-arrow">
-                                <button id="index-arrow-right-btn"
-                                        onClick={() => setCourseIndex((prevIndex) =>
-                                            (prevIndex + 1 + courseCards.length) % courseCards.length)}>
-                                    <img className={"index-arrow-icon"} src="/icons/arrow-forward-circle-sharp.svg"
-                                         alt="Arrow Right"/>
-                                </button>
-                            </section>
+                                ));
+                            })()}
                         </section>
                     }
+
+                    {overflow ?
+                        <section className="index-arrow">
+                            <button id="index-arrow-right-btn"
+                                    onClick={() => setCourseIndex((prevIndex) =>
+                                        (prevIndex + 1 + courseCards.length) % courseCards.length)}>
+                                <img className={"index-arrow-icon"} src="/icons/arrow-forward-circle-sharp.svg"
+                                     alt="Arrow Right"/>
+                            </button>
+                        </section>
+                        : null
+                    }
+
+
+                </section>
                 </section>
             </div>
             <div id={"index-collaborators-background"}>
@@ -185,7 +254,11 @@ export default function Index() {
                         <h3 className="section-subheading">Proud collaborator with over 200+ companies and
                             organizations</h3>
                     </div>
-                    {loading ? <p>Loading</p> :
+                    {loading ?
+                        <div className="index-collaborator-logos-skeleton">
+                            <Skeleton variant="rectangular" height="15rem" width="100%" />
+                        </div>
+                        :
                         <div id="index-collaborator-logos">
 
                             {providers.map((provider) => (
@@ -219,15 +292,11 @@ export default function Index() {
                     {/* The SVG Background and Pattern is by SVGBackgrounds.com*/}
                     {/* Url: "https://www.svgbackgrounds.com/set/free-svg-backgrounds-and-patterns/"*/}
 
-
-                    {/*Slideshow container */}
                     <div className="index-slideshow-container">
                         {slides.map((slide, index) => (
-                            <div
-                                key={index}
-                                className="index-mySlides index-fade"
-                                style={{display: index === slideIndex ? "block" : "none"}}
-                            >
+                            <div key={index} className="index-mySlides index-fade"
+                                style={{display: index === slideIndex ? "block" : "none"}}>
+
                                 <img className={"index-slideshow-img"} src={slide} alt={`Slide ${index + 1}`}/>
                             </div>
                         ))}
@@ -249,7 +318,6 @@ export default function Index() {
                     </div>
                 </div>
             </section>
-
             {
                 showSignupModal && createPortal(
                     <Register changeMode={() => {

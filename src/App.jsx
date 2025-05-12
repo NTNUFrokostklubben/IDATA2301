@@ -31,8 +31,6 @@ import NotFound from "./page/notFound";
 
 function App() {
 
-    const [user, setUser] = useState({});
-
     return (
     <BrowserRouter>
         <Routes>
@@ -77,27 +75,6 @@ function App() {
 
     );
 
-    /**
-     * Logs the user out
-     */
-    function logoutUser(){
-        console.log("Logout User");
-        deleteAuthorizationCookies();
-        setUser(null);
-    }
-
-    /**
-     * Check cookies if is user logged in
-     */
-    function tryRestoreUserSession() {
-        if (!user) {
-            const loggedInUser = getAuthenticatedUser();
-            if (loggedInUser) {
-                console.log("User session found in cookies, restoring");
-                setUser(loggedInUser);
-            }
-        }
-    }
 }
 
 export default App;
