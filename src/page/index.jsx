@@ -51,7 +51,7 @@ export default function Index() {
     useEffect(() => {
         const fetchData = async () => {
             try{
-                await new Promise(r => setTimeout(r, 5000));
+                await new Promise(r => setTimeout(r, 500));
                 await Promise.all([
                     fetchProviders(),
                     fetchCourses(),
@@ -77,6 +77,22 @@ export default function Index() {
             throw new Error("Error fetching providers: ", err);
         }
     }
+
+    /**
+     * Smooth things out when resizing.
+     */
+    useEffect(() => {
+        let resizeTimeout;
+        const handleResize = () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                calcCardsShown();
+            }, 150);
+        };
+
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, [courseCards]);
 
     /**
      * Fetches all courseCards from the API
