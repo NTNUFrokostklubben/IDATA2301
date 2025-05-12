@@ -139,7 +139,7 @@ export default function Course() {
             const fetchApiCall = `/keyword/${id}`;
             const data = await AsyncApiRequest("GET", fetchApiCall, null)
                 .then(response => response.json());
-            console.log(data)
+            // console.log(data)
             setKeywords(data);
 
         } catch (error) {
