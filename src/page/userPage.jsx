@@ -33,7 +33,7 @@ export function UserImageModal ({ close , uid}){
         const finLink = {
             profilePicture: link.toString()
         };
-        const userDto =  AsyncApiRequest("PUT" ,`/user/image/${uid}`, finLink )
+        const userDto =  AsyncApiRequest("PUT" ,`/user/image/${uid}`, finLink.profilePicture )
             .then(response => response.json())
 
         close();
