@@ -28,6 +28,7 @@ import ProtectedRoute from "./component/routing/ProtectedRoute";
 import Users from "./page/admin/management/users/users";
 import UserEdit from "./page/admin/management/users/edit/editUser";
 import NotFound from "./page/notFound";
+import Transactions from "./page/admin/management/Transactions/transactions";
 
 function App() {
 
@@ -66,6 +67,7 @@ function App() {
                             <Route index element={<Users/>}/>
                             <Route path={"edit/:id"} element={<UserEdit/>}/>
                         </Route>
+                        <Route path={"transactions"} element={<Transactions/>}/>
 
                     </Route>
                 </Route>

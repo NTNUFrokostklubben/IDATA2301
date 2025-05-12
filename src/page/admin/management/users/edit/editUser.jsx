@@ -85,7 +85,7 @@ function UserEditForm({user, roles}) {
                 <div className={"imageUpload-wrapper"}>
                     <div className="input-wrapper">
                         <label htmlFor="user-image">Provider Image</label>
-                        <input type="file" id="user-image" name="profilePicture"
+                        <input type="file" id="user-image" name="profilePicture" accept={"image/png,image/jpeg,image/webp"}
                                onChange={(e) => handleChangeImage(e.target.files)} required={imageChanged}/>
                     </div>
                     <img className={"img-preview"} src={userImage.src}/>
