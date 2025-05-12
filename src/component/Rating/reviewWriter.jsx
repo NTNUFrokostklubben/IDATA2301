@@ -41,6 +41,15 @@ export default function ReviewWriter({uid, cid, existingReview = null, callback 
         navigate(0);
     }
 
+    const cancelReview = async () => {
+        setReviewText('');
+        setReviewTitle('');
+        setReviewStars(1);
+        if (callback != null){
+            callback();
+        }
+    }
+
     useEffect(() => {
         setIsDisabled(reviewText.trim() === '' && reviewTitle.trim() === '');
     }, [reviewText, reviewTitle]);
@@ -57,20 +66,15 @@ export default function ReviewWriter({uid, cid, existingReview = null, callback 
     return(
         <section className={"review-writer-section"}>
             <div className={"review-writer-container"}>
-                <h4 className={"review-writer-heading"}>Write a review</h4>
-                <input className={"review-writer-container-title"}
-                value={reviewTitle}
-                onChange={handleTitleChange}
-                placeholder={"Title for your review"}
-                />
 
-                <textarea className={"review-writer-container-input"}
-                    value={reviewText}
-                    onChange={handleTextChange}
-                    rows={5}
-                    cols={50}
-                    placeholder={"Tell us how you feel about this course..."}
-                    />
+                <h4 className={"review-writer-heading"}>Write a review</h4>
+
+                <input className={"review-writer-container-title"} value={reviewTitle} onChange={handleTitleChange}
+                       placeholder={"Title for your review"}/>
+
+                <textarea className={"review-writer-container-input"} value={reviewText} onChange={handleTextChange}
+                    rows={5} cols={50} placeholder={"Tell us how you feel about this course..."}/>
+
                 <div className={"review-writer-stars-and-publish"}>
 
                     <Rating className={"review-writer-container-stars"}
@@ -79,9 +83,20 @@ export default function ReviewWriter({uid, cid, existingReview = null, callback 
                             size="large"
                             defaultValue={1}
                     />
-                    <button className={"review-writer-container-publish secondary-button"} disabled={isDisabled} onClick={sendReview}>Publish</button>
-                </div>
 
+                    <div id={"review-writer-container-buttons"}>
+                        <button className={"cta-button"} id={"review-writer-button"} disabled={isDisabled}
+                                onClick={cancelReview}>
+                            <p> Cancel </p>
+                        </button>
+
+                        <button className={"cta-button"} id={"review-writer-button"} disabled={isDisabled}
+                                onClick={sendReview}>
+                            <p> Publish </p>
+                        </button>
+                    </div>
+
+                </div>
             </div>
 
         </section>

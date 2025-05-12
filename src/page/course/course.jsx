@@ -78,7 +78,6 @@ export default function Course() {
 
     }, [offerableCourseData]);
 
-
     function handleUserData() {
 
         setUser(userData)
@@ -179,7 +178,6 @@ export default function Course() {
         <div className="course-page">
             <div className="course-page-content">
                 <section id="course-splash">
-
                     <div id="course-splash-right-side">
                         {user && isFavoriteLoaded && (
                             <div id="course-page-add-favorite">
@@ -259,6 +257,7 @@ export default function Course() {
                     <section className="course-page-reviews">
                         <div className="course-page-review-aggregate">
                             <h3> Customer reviews</h3>
+                            &nbsp;
                             <ReviewComponent cid={id} averageRating={ratingData} uid={user.id}/>
                         </div>
                     </section>)}

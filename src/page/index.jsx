@@ -282,8 +282,6 @@ export default function Index() {
                                     <img src={provider.logoLink} alt={provider.name}/>
                                 </div>
                             ))}
-
-
                         </div>
                     }
                 </section>
