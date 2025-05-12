@@ -30,10 +30,8 @@ export function UserImageModal ({ close , uid}){
         close();
     }
     function changePfp(link){
-        const finLink = {
-            profilePicture: link.toString()
-        };
-        const userDto =  AsyncApiRequest("PUT" ,`/user/image/${uid}`, finLink.profilePicture )
+
+        const userDto =  AsyncApiRequest("PUT" ,`/user/image/${uid}`,link )
             .then(response => response.json())
 
         close();
