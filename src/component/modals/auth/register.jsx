@@ -72,7 +72,6 @@ export default function Register({onClose, changeMode, closable=true }) {
                     </section>
                     <section id="auth-CTA">
                     <button className="cta-button" type="submit" onClick={submitForm}>Sign up</button>
-                        {/*TODO: Implement redirect to Signup modal (probably just build component again in react)*/}
                         <button onClick={changeMode} className="cta-button secondary-button" type="button">Log in instead</button>
                     </section>
                 </form>

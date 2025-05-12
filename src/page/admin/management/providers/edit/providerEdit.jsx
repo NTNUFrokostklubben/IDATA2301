@@ -20,13 +20,11 @@ export function ProviderFormSkeleton() {
 
 
             <div className="group-2">
-                {/*TODO: Add preview of uploaded image (javascript component)*/}
                 <div className="input-wrapper">
                     <label htmlFor="provider-image">Provider Image</label>
                     <Skeleton className={"loader"} variant={"rectangular"} height={"2.5rem"} width={"100%"}/>
                 </div>
 
-                {/*TODO: Add preview of uploaded image (javascript component)*/}
                 <div className="input-wrapper">
                     <label htmlFor="provider-alt-image">Alternative Provider Image</label>
                     <Skeleton className={"loader"} variant={"rectangular"} height={"2.5rem"} width={"100%"}/>
@@ -77,7 +75,7 @@ function ProviderEditForm({provider}) {
                 uploadImage(altImg).then((r) => {
                     builtProvider.altLogoLink = r;
                 }).then(() => {
-                    postProvider(builtProvider).then(alert("Successfully added Provider")).then(navigate(-1))
+                    postProvider(builtProvider).then(navigate(-1));
                 })
             })
 
@@ -86,19 +84,19 @@ function ProviderEditForm({provider}) {
                 builtProvider.logoLink = r;
             }).then(() => {
                 builtProvider.altLogoLink = provider.altLogoLink;
-                postProvider(builtProvider).then(alert("Successfully added Provider")).then(navigate(-1))
+                postProvider(builtProvider).then(navigate(-1));
             })
         } else if (altImgChanged) {
             uploadImage(altImg).then((r) => {
                 builtProvider.altLogoLink = r;
             }).then(() => {
                 builtProvider.logoLink = provider.logoLink;
-                postProvider(builtProvider).then(alert("Successfully added Provider")).then(navigate(-1))
+                postProvider(builtProvider).then(navigate(-1));
             })
         } else {
             builtProvider.logoLink = provider.logoLink;
             builtProvider.altLogoLink = provider.altLogoLink;
-            postProvider(builtProvider).then(alert("Successfully added Provider")).then(navigate(-1))
+            postProvider(builtProvider).then(navigate(-1));
         }
 
 

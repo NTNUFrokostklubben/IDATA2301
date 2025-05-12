@@ -29,11 +29,11 @@ function UserEditForm({user, roles}) {
             uploadImage(image).then(r => {
                 data.set("profilePicture", r);
 
-                handleFormSubmission(data).then(alert("Submitted form")).then(navigate(-1));
+                handleFormSubmission(data).then(navigate(-1));
             })
         } else {
             data.set("profilePicture", user.profilePicture);
-            handleFormSubmission(data).then(alert("Submitted form")).then(navigate(-1));
+            handleFormSubmission(data).then(navigate(-1));
         }
     }
 
@@ -56,7 +56,6 @@ function UserEditForm({user, roles}) {
 
     function buildRoleObject() {
 
-        // TODO: Change this to nest correctly. Need to change how it adds to formdata as well
         const role = [];
         const checkboxes = document.querySelectorAll("input[name='role']:checked");
         checkboxes.forEach((checkbox) => {

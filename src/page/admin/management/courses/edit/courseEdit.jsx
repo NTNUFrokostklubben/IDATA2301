@@ -70,13 +70,12 @@ function CourseEditForm({course, keywords}) {
 
                 uploadImage(image).then(r => {
                     data.set("imgLink", r);
-                    // TODO: Change alert to something better. Check for success.
-                    handleFormSubmission(data).then(alert("Submitted Form")).then(navigate(-1));
+                    handleFormSubmission(data).then(navigate(-1));
                 });
             } else {
 
                 data.set("imgLink", course.imgLink);
-                handleFormSubmission(data).then(alert("Submitted Form")).then(navigate(-1));
+                handleFormSubmission(data).then(navigate(-1));
             }
 
         });
@@ -94,7 +93,6 @@ function CourseEditForm({course, keywords}) {
      * @returns {Promise<void>}
      */
     async function handleChangeImage(image) {
-        // TODO: Ensure image locally is updated once new image is uploaded on file, doesnt send to beckend before submit
 
         const img = new Image();
         img.src = URL.createObjectURL(image[0]);
@@ -215,7 +213,6 @@ export function CourseFormSkeleton() {
             </div>
 
 
-            {/*TODO: Add preview of uploaded image (javascript component)*/}
             <div className="input-wrapper">
                 <label htmlFor="course-image">Course Image</label>
                 <Skeleton className={"loader"} variant={"rectangular"} height={"2.5rem"} width={"100%"}/>
