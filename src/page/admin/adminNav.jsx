@@ -42,6 +42,9 @@ export default function AdminNav() {
                             <li>
                                 <Link to={"/admin/management/users"}>Users</Link>
                             </li>
+                            <li>
+                                <Link to={"/admin/management/transactions"}>Transactions</Link>
+                            </li>
 
                         </ul>
                     </nav>

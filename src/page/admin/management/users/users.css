@@ -2,11 +2,6 @@
     margin: 1rem 2rem;
 }
 
-#users-page .provider {
-    width: 100%;
-}
-
-
 
 #users-page #addUser {
     color: var(--textWhite);

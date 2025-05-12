@@ -73,7 +73,7 @@ function ProviderFormAdd() {
                 <div className={"imageUpload-wrapper"}>
                     <div className="input-wrapper">
                         <label htmlFor="provider-image">Provider Image</label>
-                        <input type="file" id="provider-image" name="imgLink"
+                        <input type="file" id="provider-image" name="imgLink" accept={"image/png,image/jpeg,image/webp"}
                                onChange={(e) => handleChangeImage(e.target.files, false)} required/>
                     </div>
                     <img className={"img-preview"} src={providerImage.src}/>
@@ -83,6 +83,7 @@ function ProviderFormAdd() {
                     <div className="input-wrapper">
                         <label htmlFor="provider-alt-image">Alternative Provider Image</label>
                         <input type="file" id="provider-alt-image" name="imgLinkAlt"
+                               accept={"image/png,image/jpeg,image/webp"}
                                onChange={(e) => handleChangeImage(e.target.files, true)} required/>
                     </div>
                     <img className={"img-preview"} src={providerImageAlt.src}/>
