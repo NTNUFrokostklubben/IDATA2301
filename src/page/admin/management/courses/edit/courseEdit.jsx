@@ -3,9 +3,16 @@ import {Form, useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {courseEntity} from "../../../../../utils/Classes/commonClasses";
 import {Skeleton} from "@mui/material";
-import {getCourse, getCourses, postCourse, uploadImage} from "../../../../../utils/commonRequests";
+import {
+    getCourse,
+    getCourses,
+    getKeywords,
+    postCourse,
+    setKeywords,
+    uploadImage
+} from "../../../../../utils/commonRequests";
 
-function CourseEditForm({course}) {
+function CourseEditForm({course, keywords}) {
 
     const navigate = useNavigate();
 
@@ -47,20 +54,36 @@ function CourseEditForm({course}) {
 
         const data = new FormData(event.target);
         const image = data.get("imgLink");
+        const keywords = data.get("keywords");
+
+        const processedKeywords = () => {
+            if (keywords === "") {
+                return [];
+            } else {
+                return keywords.split(",");
+            }
+        }
+
+
+        setKeywords(course.id, processedKeywords()).then(r => {
+            if (imageChanged) {
+
+                uploadImage(image).then(r => {
+                    data.set("imgLink", r);
+                    // TODO: Change alert to something better. Check for success.
+                    handleFormSubmission(data).then(alert("Submitted Form")).then(navigate(-1));
+                });
+            } else {
+
+                data.set("imgLink", course.imgLink);
+                handleFormSubmission(data).then(alert("Submitted Form")).then(navigate(-1));
+            }
+
+        });
+
 
         // Uploads image if it was changed
-        if (imageChanged) {
 
-            uploadImage(image).then(r => {
-                data.set("imgLink", r);
-                // TODO: Change alert to something better. Check for success.
-                handleFormSubmission(data).then(alert("Submitted Form")).then(navigate(-1));
-            });
-        } else {
-
-            data.set("imgLink", course.imgLink);
-            handleFormSubmission(data).then(alert("Submitted Form")).then(navigate(-1));
-        }
     }
 
     /**
@@ -80,6 +103,10 @@ function CourseEditForm({course}) {
         setImageChanged(true);
 
     }
+
+
+
+
 
     return (
         <form onSubmit={handleSubmit} action={"http://localhost:3000/course/" + course.id} method="PUT">
@@ -141,7 +168,7 @@ function CourseEditForm({course}) {
 
                 <div className="input-wrapper"><label htmlFor="course-keywords">Keywords separated by
                     comma</label>
-                    <input type="text" id="course-keywords" name="keywords" required/></div>
+                    <input defaultValue={keywords} type="text" id="course-keywords" name="keywords" required/></div>
 
                 <button className="cta-button" type="submit">Update Course</button>
             </section>
@@ -208,6 +235,7 @@ export default function CourseEdit() {
 
     const [loading, setLoading] = useState(true);
     const [course, setCourse] = useState([]);
+    const [keywords, setKeywords] = useState([])
 
     const {id} = useParams();
 
@@ -215,7 +243,10 @@ export default function CourseEdit() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                await fetchCourse();
+                await Promise.all([
+                    fetchCourse(),
+                    fetchKeywords()
+                ])
                 setLoading(false);
             } catch (e) {
                 console.error(e)
@@ -239,11 +270,24 @@ export default function CourseEdit() {
         }
     }
 
+    async function fetchKeywords() {
+        try {
+            const p = await getKeywords(id);
+            const keywords = p.map((keyword) => {
+                return keyword.keyword;
+            });
+
+            setKeywords(keywords);
+        } catch (e) {
+            throw new Error(e);
+        }
+    }
+
 
     return (
         <div className="courseInfo-page">
             <h2>Update Course</h2>
-            {loading ? <CourseFormSkeleton/> : <CourseEditForm course={course}/>}
+            {loading ? <CourseFormSkeleton/> : <CourseEditForm course={course} keywords={keywords}/>}
         </div>
     )
 }
