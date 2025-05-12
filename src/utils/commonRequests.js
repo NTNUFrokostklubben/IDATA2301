@@ -266,3 +266,25 @@ export function getKeywords(cid) {
             throw error;
         });
 }
+
+/**
+ * Posts keywords to a course
+ *
+ * @param cid
+ * @param keywords
+ * @returns {Promise<*>}
+ */
+export function setKeywords(cid, keywords) {
+    return AsyncApiRequest("POST", "/keyword/" + cid, keywords)
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error("Error posting keywords");
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            throw error;
+        });
+}

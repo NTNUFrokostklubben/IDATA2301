@@ -2,7 +2,7 @@ import "./courseAdd.css";
 import {Form, useNavigate} from "react-router-dom";
 import {useState} from "react";
 import {CourseFormSkeleton} from "../edit/courseEdit";
-import {postCourse, uploadImage} from "../../../../../utils/commonRequests";
+import {postCourse, setKeywords, uploadImage} from "../../../../../utils/commonRequests";
 
 function CourseAddForm() {
 
@@ -34,10 +34,21 @@ function CourseAddForm() {
         const data = new FormData(event.target);
         const image = data.get("imgLink")
 
+        const keywords = data.get("keywords");
+
+        const processedKeywords = () => {
+            if (keywords === "") {
+                return [];
+            } else {
+                return keywords.split(",");
+            }
+        }
+
+
         uploadImage(image).then(r => {
             data.set("imgLink", r);
             // TODO: Change alert to something better. Check for success.
-            handleFormSubmission(data).then(alert("Submitted Form")).then(navigate(-1));
+            handleFormSubmission(data).then((r) => setKeywords(r?.id, processedKeywords())).then(alert("Submitted Form")).then(navigate(-1));
         });
     }
 
@@ -56,6 +67,7 @@ function CourseAddForm() {
         setCourseImage(img);
 
     }
+
 
     return (
         <form onSubmit={handleSubmit} action="http://localhost:3000/course" method="POST">

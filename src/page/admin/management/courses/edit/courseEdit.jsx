@@ -3,7 +3,14 @@ import {Form, useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {courseEntity} from "../../../../../utils/Classes/commonClasses";
 import {Skeleton} from "@mui/material";
-import {getCourse, getCourses, getKeywords, postCourse, uploadImage} from "../../../../../utils/commonRequests";
+import {
+    getCourse,
+    getCourses,
+    getKeywords,
+    postCourse,
+    setKeywords,
+    uploadImage
+} from "../../../../../utils/commonRequests";
 
 function CourseEditForm({course, keywords}) {
 
@@ -47,20 +54,36 @@ function CourseEditForm({course, keywords}) {
 
         const data = new FormData(event.target);
         const image = data.get("imgLink");
+        const keywords = data.get("keywords");
+
+        const processedKeywords = () => {
+            if (keywords === "") {
+                return [];
+            } else {
+                return keywords.split(",");
+            }
+        }
+
+
+        setKeywords(course.id, processedKeywords()).then(r => {
+            if (imageChanged) {
+
+                uploadImage(image).then(r => {
+                    data.set("imgLink", r);
+                    // TODO: Change alert to something better. Check for success.
+                    handleFormSubmission(data).then(alert("Submitted Form")).then(navigate(-1));
+                });
+            } else {
+
+                data.set("imgLink", course.imgLink);
+                handleFormSubmission(data).then(alert("Submitted Form")).then(navigate(-1));
+            }
+
+        });
+
 
         // Uploads image if it was changed
-        if (imageChanged) {
 
-            uploadImage(image).then(r => {
-                data.set("imgLink", r);
-                // TODO: Change alert to something better. Check for success.
-                handleFormSubmission(data).then(alert("Submitted Form")).then(navigate(-1));
-            });
-        } else {
-
-            data.set("imgLink", course.imgLink);
-            handleFormSubmission(data).then(alert("Submitted Form")).then(navigate(-1));
-        }
     }
 
     /**
