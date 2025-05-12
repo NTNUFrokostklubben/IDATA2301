@@ -113,7 +113,7 @@ function CourseAddForm() {
                 <div className={"imageUpload-wrapper"}>
                     <div className="input-wrapper">
                         <label htmlFor="course-image">Course Image</label>
-                        <input type="file" id="course-image" name="imgLink"
+                        <input type="file" id="course-image" name="imgLink" accept={"image/png,image/jpeg,image/webp"}
                                onChange={(e) => handleChangeImage(e.target.files)} required/>
                     </div>
                     <img className={"img-preview"} src={courseImage.src} alt={""}/>

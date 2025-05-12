@@ -1,0 +1,15 @@
+#transactions-page {
+    margin: 1rem 2rem;
+}
+
+
+
+#transactions-page img {
+    height: 100%;
+    max-width: 6rem;
+    max-height: 6rem;
+}
+
+#transactions-page button {
+    font-size: 1rem;
+}

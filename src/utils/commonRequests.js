@@ -288,3 +288,23 @@ export function setKeywords(cid, keywords) {
             throw error;
         });
 }
+
+/**
+ * Gets all transactions from Server
+ *
+ * @returns {Promise<*>}
+ */
+export function getTransactions() {
+    return AsyncApiRequest("GET", "/transactions", null)
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error("Error fetching transactions");
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            throw error;
+        });
+}
