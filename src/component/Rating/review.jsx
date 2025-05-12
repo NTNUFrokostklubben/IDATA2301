@@ -18,7 +18,7 @@ export default function Review ({rating: userCourse, title= false}){
 
     return (
         <div className="one-review">
-            {title &&  ( <Link to={`/course/${userCourse.id}` }>
+            {title &&  ( <Link to={`/course/${userCourse.course.id}` }>
                 <h3 className="review-title">{userCourse.course.title}</h3>
             </Link>)
             }
