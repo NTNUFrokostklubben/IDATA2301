@@ -48,7 +48,8 @@ function CourseAddForm() {
         uploadImage(image).then(r => {
             data.set("imgLink", r);
             // TODO: Change alert to something better. Check for success.
-            handleFormSubmission(data).then((r) => setKeywords(r?.id, processedKeywords())).then(alert("Submitted Form")).then(navigate(-1));
+            handleFormSubmission(data).then((r) => setKeywords(r?.id, processedKeywords())).then(navigate(-1))
+                .catch(alert("Error adding course")).then(navigate(-1));
         });
     }
 

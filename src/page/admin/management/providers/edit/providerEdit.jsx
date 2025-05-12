@@ -77,7 +77,8 @@ function ProviderEditForm({provider}) {
                 uploadImage(altImg).then((r) => {
                     builtProvider.altLogoLink = r;
                 }).then(() => {
-                    postProvider(builtProvider).then(alert("Successfully added Provider")).then(navigate(-1))
+                    postProvider(builtProvider).then(navigate(-1))
+                        .catch(alert("Error editing provider")).then(navigate(-1));
                 })
             })
 
@@ -86,19 +87,22 @@ function ProviderEditForm({provider}) {
                 builtProvider.logoLink = r;
             }).then(() => {
                 builtProvider.altLogoLink = provider.altLogoLink;
-                postProvider(builtProvider).then(alert("Successfully added Provider")).then(navigate(-1))
+                postProvider(builtProvider).then(navigate(-1))
+                    .catch(alert("Error editing provider")).then(navigate(-1));
             })
         } else if (altImgChanged) {
             uploadImage(altImg).then((r) => {
                 builtProvider.altLogoLink = r;
             }).then(() => {
                 builtProvider.logoLink = provider.logoLink;
-                postProvider(builtProvider).then(alert("Successfully added Provider")).then(navigate(-1))
+                postProvider(builtProvider).then(navigate(-1))
+                    .catch(alert("Error editing provider")).then(navigate(-1));
             })
         } else {
             builtProvider.logoLink = provider.logoLink;
             builtProvider.altLogoLink = provider.altLogoLink;
-            postProvider(builtProvider).then(alert("Successfully added Provider")).then(navigate(-1))
+            postProvider(builtProvider).then(navigate(-1))
+                .catch(alert("Error editing provider")).then(navigate(-1));
         }
 
 
