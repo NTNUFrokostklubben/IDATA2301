@@ -6,6 +6,7 @@
     width: 100%;
     overflow-x: hidden;
     background-color: var(--textWhite);
+    min-height: 100rem;
 }
 .about-hero-worker{
     background-color: #d2f1f4;
