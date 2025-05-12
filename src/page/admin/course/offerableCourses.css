@@ -92,6 +92,20 @@
     max-height: 6rem;
 }
 
+#courseIndex button {
+    font-size: 1rem;
+}
+
+#courseIndex .filter-dropdown-container {
+    display: flex;
+    flex-flow: column;
+    justify-content: left;
+    align-items: flex-start;
+
+}
+
+
+
 
 
 

@@ -27,7 +27,7 @@ export default function Checkout() {
     const navigate = useNavigate();
     const [selectedCountry, setSelectedCountry] = useState("");
     const handlePurchase = async () =>{
-        console.log(courseData)
+
         setLoading(true)
         const status = await AsyncApiRequest("POST", `/transaction/offerId/${courseData.id}/userid/${userData.id}`, null);
         try {

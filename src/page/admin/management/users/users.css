@@ -23,3 +23,7 @@
     max-width: 6rem;
     max-height: 6rem;
 }
+
+#users-page button {
+    font-size: 1rem;
+}

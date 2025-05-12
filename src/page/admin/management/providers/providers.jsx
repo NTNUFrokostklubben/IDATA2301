@@ -18,18 +18,18 @@ function ProviderTableContent({providers}) {
                 <tr key={provider.id}>
                     <td>
                         <img src={provider.altLogoLink}
-                             alt={""}/>
+                             alt={"image" + provider.name}/>
                         <p>{provider.name}</p>
                     </td>
                     <td>
                         <div className={"button-group"}>
                             <Link to={`/admin/management/providers/edit/${provider.id}`}>
-                                <button><img src={"/icons/pencil-sharp.svg"}/></button>
+                                <button><img src={"/icons/pencil-sharp.svg"} alt={"edit"}/></button>
                             </Link>
                             <button id={"delete" + provider.id} onClick={() => {
                                 setFocusedId(provider.id)
                                 setShowDeleteModal(true);
-                            }}><img src={"/icons/trash-sharp.svg"}/>
+                            }}><img src={"/icons/trash-sharp.svg"} alt={"delete"}/>
                             </button>
                         </div>
                     </td>

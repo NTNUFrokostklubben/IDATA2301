@@ -22,7 +22,7 @@ function OfferableCoursesTableContent({filteredCourses}) {
     const [showDeleteModal, setShowDeleteModal] = useState();
     const [focusedId, setFocusedId] = useState()
 
-    console.log(filteredCourses)
+
 
     return (
         <>
@@ -30,12 +30,12 @@ function OfferableCoursesTableContent({filteredCourses}) {
                 <tr key={offerableCourse.id}>
                     <td>
                         <img src={offerableCourse.provider.altLogoLink}
-                             alt={""}/>
+                             alt={"image " + offerableCourse.provider.name}/>
                         <p>{offerableCourse.provider.name}</p>
                     </td>
                     <td>
                         <img src={offerableCourse.course.imgLink}
-                             alt={""}/>
+                             alt={"image " + offerableCourse.course.title}/>
                         <p>{offerableCourse.course.title}</p>
                     </td>
                     <td><p>{offerableCourse.price},- NOK</p></td>
@@ -52,13 +52,13 @@ function OfferableCoursesTableContent({filteredCourses}) {
                             to={`/admin/offerablecourses/edit/${offerableCourse.id}`}
                             id={"edit" + offerableCourse.id}
                         >
-                            <button><img src={"/icons/pencil-sharp.svg"}/></button>
+                            <button><img src={"/icons/pencil-sharp.svg"} alt={"edit"}/></button>
                         </Link>
 
                             <button id={"delete" + offerableCourse.id} onClick={() => {
                                 setFocusedId(offerableCourse.id)
                                 setShowDeleteModal(true);
-                            }}><img src={"/icons/trash-sharp.svg"}/>
+                            }}><img src={"/icons/trash-sharp.svg"} alt={"delete"}/>
                             </button>
                         </div>
                     </td>
@@ -159,17 +159,17 @@ export default function OfferableCourses() {
 
     function changeProvider(e) {
         const selectedCourseId = e.target.value;
-        console.log(selectedCourseId)
+
         if (selectedCourseId === "") {
             setFilteredCourses(offerableCourses);
         } else {
             const filteredCourses = offerableCourses.filter((offerableCourse) => {
 
-                console.log(offerableCourse.course.id)
+
                 return offerableCourse.course.id == selectedCourseId;
             });
             setFilteredCourses(filteredCourses);
-            console.log(filteredCourses)
+
         }
 
     }
@@ -185,14 +185,16 @@ export default function OfferableCourses() {
                     <button id={"addCourse"} className={"cta-button"}>Add Course</button>
                 </Link>
 
-                <select disabled={loading} id={"course"} onChange={changeProvider}>
-                    <option value={""}>{loading ? "Loading" : "All"}</option>
-                    {!loading && uniqueCourses.map((course) => (
-                        <option key={course.id} value={course.id}>
-                            {course.title}
-                        </option>
-                    ))}
-                </select>
+                <div className={"filter-dropdown-container"}>
+                    <label htmlFor={"course"}>Sort by:</label>
+                    <select disabled={loading} id={"course"} onChange={changeProvider}>
+                        <option value={""}>{loading ? "Loading" : "All"}</option>
+                        {!loading && uniqueCourses.map((course) => (
+                            <option key={course.id} value={course.id}>
+                                {course.title}
+                            </option>
+                        ))}
+                    </select></div>
             </div>
 
 

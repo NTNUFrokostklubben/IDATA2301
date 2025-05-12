@@ -21,9 +21,10 @@ export default function Card(offerableCourse) {
     return (
 
         <section className="card">
-            <Link to={"/course/" + offerableCourse.course.id}><img className="course-img"
-                                                                   src={offerableCourse.course.imgLink} alt=""/></Link>
-            <h6>{offerableCourse.course.title}</h6>
+            <div className={"card-top"}><Link to={"/course/" + offerableCourse.course.id}><img className="course-img"
+                                                                                               src={offerableCourse.course.imgLink}
+                                                                                               alt={"image: " + offerableCourse.course.title}/></Link>
+                <h2>{offerableCourse.course.title}</h2></div>
             <p className="card-desc">{offerableCourse.course.description}</p>
             <p className="infotext">{offerableCourse.course.hoursWeek} hr/w
                 • {getDifficulty(offerableCourse.course.diffLevel)} • {offerableCourse.course.credits} ECTS
@@ -34,7 +35,7 @@ export default function Card(offerableCourse) {
 
                     <img width="24" src="/icons/star-sharp.svg" alt=""/>
                     <b>{offerableCourse.rating}</b>
-                    ({offerableCourse.numberOfRatings})
+                    <p>({offerableCourse.numberOfRatings})</p>
 
                 </div>
                 <p id="price2">{offerableCourse.minDiscountedPrice} NOK</p>

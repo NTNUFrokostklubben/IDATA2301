@@ -18,12 +18,19 @@
     margin-left: 1.4rem;
 }
 
+.review-writer-container input {
+    border: 1px solid var(--shadow);
+    font-size: 1rem;
+}
 
 .review-writer-container-input::placeholder{
     font-size: 1rem;
 }
 .review-writer-container-input{
+    font-size: 1rem;
+    height: 20rem;
     resize: none;
+
 }
 .review-writer-stars-and-publish{
      display: flex;

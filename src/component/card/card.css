@@ -14,7 +14,7 @@
 }
 
 .card .infotext {
-    color: rgba(0, 0, 0, 0.5);
+    color: rgba(0, 0, 0, 0.6);
     font-size: 1rem;
 }
 
@@ -23,12 +23,13 @@
     flex-direction: column;
     justify-items: center;
     align-items: center;
+    height: 12rem;
 }
 
 .card .course-img {
     display: flex;
     max-width: 100%;
-    max-height: 12rem;
+    max-height: 100%;
     /*object-fit: cover;*/
 }
 
@@ -47,8 +48,9 @@
 
 }
 
-.card h6 {
+.card h2 {
     margin: 0.5rem 1rem;
+    font-size: 1.2rem;
 }
 
 .rating {
@@ -89,59 +91,77 @@
         position: absolute;
         bottom: 0;
         right: 0;
-        background: white; /* Match the background color */
-        padding-left: 5px; /* Add some spacing */
+        background: white;
+        padding-left: 5px;
     }
 }
 
 /* Responsive layout for smaller screens */
 @media (max-width: 768px) {
     .card {
-        display: grid;
-        grid-template-columns: 100px 1fr 1fr; /* Image on the left, text on the right */
-        grid-template-rows: 100px 1fr 1fr;
-        gap: 1rem;
-        width: 100%; /* Full width for smaller screens */
-        /*padding: 1rem;*/
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .card a {
+        display: flex;
+        flex-direction: column;
+        justify-items: center;
+        align-items: center;
+        height: 6rem;
+        width: 10rem;
     }
 
     .card .course-img {
-        width: 100px; /* Smaller image */
-        height: 100px; /* Smaller image */
-        object-fit: cover;
+        display: flex;
+        max-width: 100%;
+        max-height: 100%;
+        justify-self: left;
+        /*object-fit: cover;*/
     }
 
-    .card h6 {
-        margin: 0;
-        /*font-size: 1.2rem; !* Adjust font size for smaller screens *!*/
-        justify-self: center;
-        padding: 1rem 0rem;
-        grid-column-start: 2;
-        grid-column-end: -1;
-        grid-row: 1;
+    .card .card-top {
+        display: flex;
+        /*justify-content: space-around;*/
+        align-items: center;
+        padding: 0rem 0rem;
+    }
+
+    .card h2 {
+        justify-content: left;
+        padding-right: 1rem;
+    }
+
+    @supports (-webkit-line-clamp: 5) {
+        .card .card-desc {
+            display: -webkit-box; /* Required for line clamping */
+            -webkit-box-orient: vertical; /* Required for line clamping */
+            -webkit-line-clamp: 5; /* Limit to 3 lines */
+            overflow: hidden; /* Hide overflow */
+            text-overflow: ellipsis; /* Add ellipsis */
+        }
+    }
+
+    @supports not (-webkit-line-clamp: 5) {
+        .card .card-desc {
+            position: relative;
+            max-height: 5.5em; /* Adjust based on line height and number of lines */
+            line-height: 1.5em; /* Adjust based on your design */
+            overflow: hidden;
+        }
+
+        .card .card-desc::after {
+            content: '...';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: white;
+            padding-left: 5px;
+        }
     }
 
 
-    .card .card-desc {
-        -webkit-line-clamp: 4; /* Reduce to 2 lines for smaller screens */
-        max-height: 6em; /* Adjust height for smaller screens */
-        grid-column-start: 1;
-        grid-column-end: -1;
-        grid-row: 2;
-    }
 
-    .card .infotext {
-        grid-column-end: -1;
-        grid-column-start: 2;
-        grid-row: 1;
-        justify-self: center;
-        padding-top: 2rem;
-        text-align: left; /* Align text to the left */
-    }
-
-    .card .card-footer {
-        grid-column: 1 / -1; /* Span across both columns */
-        padding: 0;
-        /*margin-top: 0.5rem;*/
-    }
 }

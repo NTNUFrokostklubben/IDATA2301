@@ -9,7 +9,6 @@ import {getAuthenticatedUser} from "../../utils/authentication/authentication";
 import {useSelector} from "react-redux";
 
 
-
 export default function Course() {
     const [courseData, setCourseData] = useState([]);
     const [uniqueCourses, setUniqueCourses] = useState([]);
@@ -32,9 +31,9 @@ export default function Course() {
             try {
                 await Promise.all([handleUserData(), fetchCourseData()]).then(async () => {
                     try {
-                        await Promise.all([ fetchOfferableCourses(), fetchKeywords(), fetchRatingData()]);
+                        await Promise.all([fetchOfferableCourses(), fetchKeywords(), fetchRatingData()]);
                         setLoading(false);
-                    }catch (e) {
+                    } catch (e) {
                         console.error(e)
                     }
                 })
@@ -46,14 +45,7 @@ export default function Course() {
 
     }, []);
 
-    /*
-    const checkUserCourse = async () =>{
 
-        const enrolled = AsyncApiRequest("GET", `/userCourses/user/${user.id}/course/${id}`, null)
-            .then(response => response.json())
-        setIsUserEnrolled(enrolled);
-    }
-     */
     useEffect(() => {
         if (user === null) return;
         checkFavorite()
@@ -81,15 +73,18 @@ export default function Course() {
                 }
             }
         });
-        setUniqueCourses( Array.from(courseMap.values()));
+
+        setUniqueCourses(Array.from(courseMap.values()));
+
     }, [offerableCourseData]);
 
 
-
     function handleUserData() {
-       setUser(userData)
-        console.log(userData)
+
+        setUser(userData)
+
     }
+
     /**
      * Fetches all course data from the API
      */
@@ -130,8 +125,9 @@ export default function Course() {
                 .then(response => response.json());
             setRatingData(Math.round(data * 10) / 10);
 
+
         } catch (error) {
-            console.error("Error fetching rating value:", error);
+            throw new Error("Error fetching rating data:", error);
         }
     }
 
@@ -186,26 +182,19 @@ export default function Course() {
                 <section id="course-splash">
 
                     <div id="course-splash-right-side">
-                        {user && isFavoriteLoaded &&  (
-                        <div id="course-page-add-favorite"><FavoriteButton uid={user.id} cid={id} isFav={isFavorite}/></div>)}
-                        <h4 id="course-splash-title">{courseData.title} </h4>
+                        {user && isFavoriteLoaded && (
+                            <div id="course-page-add-favorite"><FavoriteButton uid={user.id} cid={id}
+                                                                               isFav={isFavorite}/></div>)}
+                        <h2 id="course-splash-title">{courseData.title} </h2>
 
-                        <div id="course-splash-details">
 
-                            <p id="course-splash-hrw">{courseData.hoursWeek} hours per week</p>
-                            <img className="course-splash-details-spacing"
-                                 src="/icons/ellipsis-horizontal-circle-sharp.svg"/>
+                        <p id="course-splash-hrw">{courseData.hoursWeek} hours per week
+                            • {diffConvert(courseData.diffLevel)} • credits: {courseData.credits}</p>
 
-                            <p id="course-splash-diff">{diffConvert(courseData.diffLevel)}</p>
-                            <img className="course-splash-details-spacing"
-                                 src="/icons/ellipsis-horizontal-circle-sharp.svg"/>
-
-                            <p id="course-splash-credits">credits: {courseData.credits}</p>
-                        </div>
 
                         <div id="course-splash-offerability">
                             <p id="course-splash-closest">Closest course
-                                session: {new Date(courseData.closestCourse).toLocaleDateString()}</p>
+                                session: {new Date(courseData.closestDate).toLocaleDateString("de-DE")}</p>
                             <p id="course-splash-relatedcert">Related certificate: {courseData.relatedCert}</p>
                         </div>
 
@@ -216,7 +205,7 @@ export default function Course() {
 
                         <div id="course-splash-keywords">
                             {keywords.map(item => (
-                                <p className="course-splash-keyword">{item.keyword}</p>
+                                <p className="course-splash-keyword" key={item.keyword}>{item.keyword}</p>
 
                             ))}
                         </div>
@@ -224,29 +213,30 @@ export default function Course() {
                     </div>
 
                     <picture>
-                        <img id="course-splash-image" src={courseData.imgLink} alt={"course image"}/>
+                        <div id={"course-image-container"}><img id="course-splash-image" src={courseData.imgLink}
+                                                                alt={"image " + courseData.title}/></div>
                     </picture>
 
                 </section>
 
                 <section id="course-description">
-                    <h4 id="course-description-heading"> Description</h4>
+                    <h3 id="course-description-heading"> Description</h3>
                     <p id="course-description-text">{courseData.description}</p>
                 </section>
-                {uniqueCourses?.length >0 && (
-                <section id="course-offerables">
-                    {uniqueCourses.map(item => <CourseProviderCard key={item.id} {...item}/>)}
-                </section>)}
+                {uniqueCourses?.length > 0 && (
+                    <section id="course-offerables">
+                        {uniqueCourses.map(item => <CourseProviderCard key={item.id} {...item}/>)}
+                    </section>)}
                 {user && (
-                <section className={"course-page-reviews"}>
-                    <div className={"course-page-review-aggregate"}>
-                        <h5> Customer reviews</h5>
-                        <ReviewComponent cid={id} averageRating={ratingData} uid={user.id}/>
-                    </div>
-                    <div className={"course-page-user-reviews"}>
-                    </div>
+                    <section className={"course-page-reviews"}>
+                        <div className={"course-page-review-aggregate"}>
+                            <h3> Customer reviews</h3>
+                            <ReviewComponent cid={id} averageRating={ratingData} uid={user.id}/>
+                        </div>
+                        <div className={"course-page-user-reviews"}>
+                        </div>
 
-                </section>)}
+                    </section>)}
             </div>
         </div>
     )

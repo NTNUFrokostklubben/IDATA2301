@@ -20,7 +20,7 @@ function ProviderFormAdd() {
         const value = Object.fromEntries(data.entries());
         const image = data.get("imgLink")
         const altImg = data.get("imgLinkAlt")
-        console.log(value)
+
         const provider = new ProviderEntity(null, value.name, value.imgLink, value.imgLinkAlt);
 
 
@@ -30,14 +30,13 @@ function ProviderFormAdd() {
             uploadImage(altImg).then((r) => {
                 provider.altLogoLink = r;
             }).then(() => {
-                console.log(provider)
+
                 postProvider(provider).then(alert("Successfully added Provider")).then(navigate(-1))
             })
         })
     }
 
     async function postProvider(provider) {
-        // console.log(offerableCourse)
         try {
             const p = await AsyncApiRequest("POST", "/provider", provider);
         } catch (e) {
