@@ -1,6 +1,8 @@
 
 .one-review{
-    padding-bottom: 1rem;
+    padding: 1rem;
+    margin: 1rem;
+    background-color: var(--textWhite);
 }
 
 .user-review-image{

@@ -9,11 +9,15 @@ import {createPortal} from "react-dom";
 import {uploadImage} from "../utils/commonRequests";
 import {setCourseObject, setUserImage, setUserObject} from "../dataSlice";
 import {Dialog} from "@mui/material";
+import {useFocusTrap} from "../utils/useFocusTrap";
 
 
 export function UserImageModal({close, uid}) {
     const dispatch = useDispatch();
     const [open, setOpen] = useState(false);
+
+    const modalRef = useRef(null)
+    useFocusTrap(modalRef, true, close) // Passes true to isOpen due to this modal only being open when it is rendered
 
 
     function dialogChooser() {
@@ -28,10 +32,10 @@ export function UserImageModal({close, uid}) {
         setOpen(false)
         close();
     }
-  
-    function changePfp(link){
 
-        const userDto =  AsyncApiRequest("PUT" ,`/user/image/${uid}`,link )
+    function changePfp(link) {
+
+        const userDto = AsyncApiRequest("PUT", `/user/image/${uid}`, link)
             .then(response => response.json())
         close();
     }
@@ -62,7 +66,13 @@ export function UserImageModal({close, uid}) {
     }
 
     return (
-        <div className={"user-page-modal-background"}>
+        <div className={"user-page-modal-background"}
+             ref={modalRef}
+             onClick={(c) => {
+                 if (c.target === modalRef.current) {
+                     close()
+                 }
+             }}>
             <div className={"user-page-modal"}>
 
                 <div className={`user-page-modal-option-container`}>
@@ -118,7 +128,6 @@ export default function UserPage() {
     const [loading, setLoading] = useState(true);
     const [ratings, setRatings] = useState([]);
     const [favorites, setFavorites] = useState([]);
-    const sacrificialDivRef = useRef(null);
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
@@ -168,35 +177,39 @@ export default function UserPage() {
 
 
         <div className="user-page">
-            {console.log(user)}
             {user && (
                 <section id="user-page-content">
-                    <section id="user-page-caret">
+                    <div id={"user-page-content-info"}>
+                        <section id="user-page-caret">
 
-                        <div id="user-caret">
+                            <div id="user-caret">
 
-                            <picture onClick={profileImageClickHandler}>
-                                <img className={"user-page-user-image"} src={user.profilePicture} alt="user"/>
-                            </picture>
-                            <p id="user-name">
-                                User1
-                            </p>
+                                <picture onClick={profileImageClickHandler}>
+                                    <img className={"user-page-user-image"} src={user.profilePicture} alt="user"/>
+                                </picture>
+                                <p id="user-name">
+                                    {user.name}
+                                </p>
 
-                        </div>
-                    </section>
+                            </div>
+                        </section>
 
-                    <section id="user-page-user-courses">
-                        <h5 id="previous-courses-heading">Previous courses</h5>
-                        <ul>
+                        <section id="user-page-user-courses">
+                            <h1 id="previous-courses-heading">Previous courses</h1>
+
                             {courses.map(item => (
-                                <li className="user-course-item" key={item.id}>
+                                <div className="user-course-item" key={item.id}>
                                     <Link className={"user-page-course-hotlink"} to={`/course/${item.course.id}`}>
-                                        {item.course.title}
-                                    </Link></li>
+                                        <div className={"image-wrapper"}><img className="user-page-course-image"
+                                                                              src={item.course.imgLink}
+                                                                              alt={"image " + item.course.title}/></div>
+                                        <p>{item.course.title}</p>
+                                    </Link></div>
                             ))}
-                        </ul>
-                    </section>
-                    <div id={"sacrificial-div-for-modal"} ref={sacrificialDivRef}></div>
+
+                        </section>
+                    </div>
+
                     <section className="users-reviews">
                         <h3 id={"review-heading"}>Your reviews</h3>
 
@@ -211,12 +224,14 @@ export default function UserPage() {
 
                     </section>
                 </section>)}
+
             {
-                mounted && sacrificialDivRef.current && showUserModal && createPortal(
+                mounted && showUserModal && createPortal(
                     <UserImageModal uid={user.id} close={() => setShowUserModal(false)}/>,
                     document.getElementById("sacrificial-div-for-modal")
                 )
             }
+            <div id={"sacrificial-div-for-modal"}/>
         </div>
 
     )
