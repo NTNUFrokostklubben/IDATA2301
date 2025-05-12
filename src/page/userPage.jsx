@@ -198,14 +198,14 @@ export default function UserPage() {
                     </section>
                     <div id={"sacrificial-div-for-modal"} ref={sacrificialDivRef}></div>
                     <section className="users-reviews">
-                        <h5 id={"review-heading"}>Your reviews</h5>
+                        <h3 id={"review-heading"}>Your reviews</h3>
 
                         {ratings.map(item => <Review key={item.id} rating={item} title={true}/>)}
 
                     </section>
 
                     <section id="users-favorites">
-                        <h5 id={"favorites-heading"}>Favorites</h5>
+                        <h3 id={"favorites-heading"}>Favorites</h3>
 
                         {favorites.map(item => <FavoriteCard key={item.id} {...item.course}/>)}
 

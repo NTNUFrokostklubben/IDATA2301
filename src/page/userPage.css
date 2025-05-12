@@ -183,24 +183,7 @@
     padding-bottom: 0.7rem;
 }
 
-.favorite-course-title{
-    padding-left: 0.7rem;
-}
 
-.favorite-image-and-text{
-    padding-left: 0.7rem;
-    display: flex;
-}
-.favorite-course-text{
-    padding-left:0.7rem;
-}
-
-
-.favorite-course-title{
-    font-size: 1rem;
-    padding-top: 1.6rem;
-    padding-bottom: 0.7rem;
-}
 
 @media (max-width: 1290px){
 

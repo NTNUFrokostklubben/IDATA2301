@@ -6,7 +6,7 @@ export default function FavoriteCard(item) {
     return (
         <div className="one-favorite">
             <Link to={`/course/${item.id}`}>
-                <h2 className="favorite-course-title">{item.title}</h2>
+                <h4 className="favorite-course-title">{item.title}</h4>
             </Link>
             <div className="favorite-image-and-text">
                 <Link to={`/course/${item.id}`} className={"image-wrapper"}>
@@ -17,6 +17,7 @@ export default function FavoriteCard(item) {
                     {item.description}
                 </p>
             </div>
+
         </div>
     )
 }
