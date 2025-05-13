@@ -1,5 +1,5 @@
 
-.user-page-modal-background{
+.user-page-modal-background {
     background-color: var(--textBlack);
     background-color: rgba(0, 0, 0, 0.5);
     position: fixed;
@@ -15,7 +15,7 @@
 }
 
 
-.user-page-modal{
+.user-page-modal {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -23,14 +23,15 @@
     align-items: center;
     height: 10rem;
     width: 15rem;
-    background-color:var(--textWhite);
+    background-color: var(--textWhite);
 }
-.user-page-modal-cancel{
+
+.user-page-modal-cancel {
     color: red;
 }
 
 
-.user-page-modal-option-container{
+.user-page-modal-option-container {
     display: flex;
     justify-items: center;
     justify-content: center;
@@ -39,11 +40,12 @@
     width: 100%;
 }
 
-.user-page-modal-option-container:hover{
+.user-page-modal-option-container:hover {
     cursor: pointer;
     background-color: var(--background);
 }
-.user-page-modal-delete-dialog{
+
+.user-page-modal-delete-dialog {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -52,79 +54,103 @@
     height: 10rem;
     background-color: white;
 }
-.user-page-modal-delete-dialog-all-buttons{
-    width: 80%  ;
+
+.user-page-modal-delete-dialog-all-buttons {
+    width: 80%;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-content: space-around;
 }
 
-.user-page-modal-delete-dialog-button{
+.user-page-modal-delete-dialog-button {
     font: inherit;
     height: 3rem;
     width: 6rem;
 }
 
-.file-upload-button:hover{
+.file-upload-button:hover {
     cursor: pointer;
 }
-.file-upload-button{
+
+.file-upload-button {
     display: flex;
     justify-content: center;
     align-items: center;
-    font:inherit;
-   height: 100%;
+    font: inherit;
+    height: 100%;
     width: 100%;
 }
 
-.user-page-modal-clicked{
+.user-page-modal-clicked {
     background-color: var(--textWhite);
 }
 
 
-.user-page{
+.user-page {
+    width: 100%;
     background-color: var(--background);
     display: flex;
     justify-content: center;
     min-height: 100rem;
+
 }
 
-#user-page-content{
+#user-page-content {
     display: flex;
-    flex-wrap: wrap;
-    max-width: 87.5rem;
-    justify-content: center;
-
+    flex-direction: column;
+    width: 100rem;
+    /*justify-content: center;*/
+    align-items: center;
+    margin-top: 1rem;
 }
 
 #user-page-caret {
-    margin-left: 1rem;
-    margin-top: 1rem;
-    display: flex;
-    background-color: white;
-    width: 15rem;
-    height: 20rem;
-    justify-content: center;
-    max-width: 15rem;
-    flex-direction: column;
+    margin: 1rem 0;
 
+    display: flex;
+    flex-shrink: 1;
+    background-color: white;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+
+}
+
+#user-page-content-info {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    min-height: 20rem;
+    justify-content: center;
+    align-items: center;
 }
 
 #user-caret {
     display: flex;
     flex-direction: column;
 
-    width: 15rem;
-    height: 18rem;
+    padding: 1rem;
+    gap: 1rem;
+    height: 100%;
+    flex-grow: 0;
+    flex-shrink: 1;
     justify-content: center;
     align-items: center;
 }
 
-.user-page-user-image {
-    border-radius: 2px;
+.user-caret picture {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 12rem;
     height: 12rem;
+}
+
+.user-page-user-image {
+    border-radius: 2px;
+    max-width: 100%;
+    height: 100%;
 }
 
 
@@ -142,88 +168,105 @@
 }
 
 #user-page-user-courses {
-    margin-top: 1rem;
-    margin-left: 1rem;
-    margin-right: 1rem;
+    margin: 0 0 0 1rem;
     background-color: white;
     justify-self: flex-start;
-    width: 46.7rem;
-    min-height: 18rem;
-    padding-bottom: 1rem;
+    flex-grow: 1;
+    flex-shrink: 0;
+    min-height: 100%;
+    min-width: 10rem;
+    padding: 0 1rem;
 }
-.user-course-item{
-    padding-top: 0.7rem;
+
+.user-course-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    margin: 1rem 0rem;
+    /*background-color: var(--textWhite);*/
 }
-#previous-courses-heading{
-   margin: 1rem;
+
+.user-course-item a {
+    display: flex;
+    align-items: center;
 }
-.star{
+
+.user-course-item .image-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 2rem;
+    width: 5rem;
+}
+
+.user-course-item .image-wrapper img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+#previous-courses-heading {
+    margin: 1rem;
+}
+
+.star {
     max-width: 1rem;
     max-height: 1rem;
 }
-#review-heading{
+
+#review-heading {
     padding: 1rem;
 }
-.users-reviews{
+
+.users-reviews {
     margin-top: 1rem;
     margin-left: 1rem;
     margin-right: 1rem;
     background-color: white;
-    width: 62.5rem;
+    width: 100%;
+    padding: 1rem 0;
 }
-#users-favorites{
-  margin: 1.3rem;
+
+#users-favorites {
+    margin: 1.3rem;
     background-color: white;
-    width: 62.5rem;
+    width: 100%;
+    padding: 1rem 0;
 }
-#favorites-heading{
+
+#favorites-heading {
     padding: 1rem;
 }
-.one-favorite{
+
+.one-favorite {
     padding-bottom: 0.7rem;
 }
 
-.favorite-course-title{
-    padding-left: 0.7rem;
-}
 
-.favorite-image-and-text{
-    padding-left: 0.7rem;
-    display: flex;
-}
-.favorite-course-text{
-    padding-left:0.7rem;
-}
-.favorite-course-image{
-    width: 10rem;
-    height: 4.7rem;
-}
-
-.favorite-course-title{
-    font-size: 1rem;
-    padding-top: 1.6rem;
-    padding-bottom: 0.7rem;
-}
-
-@media (max-width: 1290px){
+@media (max-width: 1290px) {
 
 }
-@media (max-width: 700px){
-    .users-reviews{
 
-        width: 46.7rem;
+@media (max-width: 700px) {
+    .users-reviews {
+
+        /*width: 46.7rem;*/
     }
-    #users-favorites{
 
-        width: 46.7rem;
+    #users-favorites {
+
+        /*width: 46.7rem;*/
     }
 }
-@media (max-width: 555px ){
 
-    #user-page-content{
-        width: 38rem;
+@media (max-width: 555px ) {
+
+    #user-page-content {
+        /*width: 38rem;*/
     }
-    .user-page-course-hotlink{
+
+    .user-page-course-hotlink {
         font-size: 80%;
     }
 }
