@@ -12,31 +12,34 @@ export default function Review ({rating: userCourse, title= false}){
 
     if (!userCourse) {
         return <div>data is missing.</div>;
-    };
-    let array =  Array(userCourse.review?.rating).fill(0);
+    }
+    let rating =  Array(userCourse.review?.rating).fill(0);
+
+    const userName = userCourse.user.name.charAt(0).toUpperCase() + userCourse.user.name.slice(1);
 
 
     return (
         <div className="one-review">
-            {title &&  ( <Link to={`/course/${userCourse.id}` }>
-                <h3 className="review-title">{userCourse.course.title}</h3>
-            </Link>)
-            }
-            <h4 className="review-title">{userCourse.review?.title}</h4>
+            {title && (
+                <Link to={`/course/${userCourse.id}`}>
+                    <p className="review-title">{userCourse.course.title}</p>
+                </Link>
+            )}
+            <h6 className="review-title">{userCourse.review?.title}</h6>
             <div className="user-review-section">
                 <picture>
-                    {user && ( <img className="user-review-image" src={user.profilePicture} alt="user"/>)}
+                    {user && (<img className="user-review-image" src={user.profilePicture} alt="user"/>)}
                 </picture>
-                <p className="user-name-review">{userCourse.user.name}</p>
-                <div className="stars">
+                <p className="user-name-review">{userName}</p>
+                <div className="review-stars">
                     {
-                        array.map((value, index, array) =>
+                        rating.map((value, index, array) =>
                             <img key={index} className="star" src="/icons/star-sharp.svg" alt="review star"/>
-                        )
-                    }
+                        )}
+                    &nbsp;<p className="review-rating"> {userCourse.review?.rating}</p>
                 </div>
-                <p className="review-date">Reviewed on {formatDate(userCourse.review?.date)} </p>
             </div>
+            <p className="review-date"> Reviewed on {formatDate(userCourse.review?.date)} </p>
             <p className="review-text">{userCourse.review?.comment}</p>
         </div>
     )
