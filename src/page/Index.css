@@ -141,7 +141,7 @@
     flex-wrap: nowrap;
     justify-content: center;
     align-items: center;
-    background-color: var(--background);
+    background-color: var(--highlight);
     width: 100%;
     height: auto;
     padding-bottom: 5rem;

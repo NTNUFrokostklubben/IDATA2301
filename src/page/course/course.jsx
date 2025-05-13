@@ -254,7 +254,7 @@ export default function Course() {
                     </section>)
                 }
 
-                {user && (
+                {user &&  (
                     <section className="course-page-reviews">
                         <div className="course-page-review-aggregate">
                             <h3> Customer reviews</h3>
