@@ -100,7 +100,7 @@
     display: flex;
     flex-direction: column;
     width: 100rem;
-    justify-content: center;
+    /*justify-content: center;*/
     align-items: center;
     margin-top: 1rem;
 }
