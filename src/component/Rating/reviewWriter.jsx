@@ -9,7 +9,7 @@ import {useNavigate} from "react-router-dom";
 export default function ReviewWriter({uid, cid, existingReview = null, callback = null}){
     const [reviewText, setReviewText] = useState('');
     const [reviewTitle, setReviewTitle] = useState('');
-    const [reviewStars, setReviewStars] = useState((1));
+    const [reviewStars, setReviewStars] = useState((5));
     const [isDisabled, setIsDisabled] = useState(true);
 
     const navigate = useNavigate();
@@ -22,12 +22,17 @@ export default function ReviewWriter({uid, cid, existingReview = null, callback 
         }
     }
 
-    useEffect( () => {
-        if(existingReview !== null){
-            setReviewTitle(existingReview.review?.title)
-            setReviewText(existingReview.review?.comment)
+    useEffect(() => {
+        if (existingReview) {
+            setReviewTitle(existingReview.review?.title || '');
+            setReviewText(existingReview.review?.comment || '');
+            setReviewStars(existingReview.review?.rating || 5);
+        } else {
+            setReviewTitle('');
+            setReviewText('');
+            setReviewStars(5);
         }
-    }, [existingReview])
+    }, [existingReview]);
 
 
     const sendReview = async () =>{
@@ -44,7 +49,7 @@ export default function ReviewWriter({uid, cid, existingReview = null, callback 
     const cancelReview = async () => {
         setReviewText('');
         setReviewTitle('');
-        setReviewStars(1);
+        setReviewStars(5);
         if (callback != null){
             callback();
         }
@@ -72,12 +77,13 @@ export default function ReviewWriter({uid, cid, existingReview = null, callback 
                 <input className={"review-writer-container-title"} value={reviewTitle} onChange={handleTitleChange}
                        placeholder={"Title for your review"}/>
 
-                <textarea className={"review-writer-container-input"} value={reviewText} onChange={handleTextChange}
-                    rows={5} cols={50} placeholder={"Tell us how you feel about this course..."}/>
+                <textarea className={"review-writer-container-input"} onChange={handleTextChange}
+                          style={{resize: "vertical", height: "10rem"}}
+                          placeholder={"Tell us how you feel about this course..."}/>
 
                 <div className={"review-writer-stars-and-publish"}>
 
-                    <Rating className={"review-writer-container-stars"}
+                <Rating className={"review-writer-container-stars"}
                             value={reviewStars}
                             onChange={(e, value) => setReviewStars(value)}
                             size="large"
@@ -85,12 +91,12 @@ export default function ReviewWriter({uid, cid, existingReview = null, callback 
                     />
 
                     <div id={"review-writer-container-buttons"}>
-                        <button className={"cta-button"} id={"review-writer-button"} disabled={isDisabled}
+                        <button className={"cta-button"} id={"review-writer-button-cancel"}
                                 onClick={cancelReview}>
                             <p> Cancel </p>
                         </button>
 
-                        <button className={"cta-button"} id={"review-writer-button"} disabled={isDisabled}
+                        <button className={"cta-button"} id={"review-writer-button-publish"} disabled={isDisabled}
                                 onClick={sendReview}>
                             <p> Publish </p>
                         </button>

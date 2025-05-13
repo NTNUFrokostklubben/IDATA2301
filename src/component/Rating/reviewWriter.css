@@ -1,11 +1,14 @@
 
 .review-writer-section{
-    padding-top: 3rem;
+    padding: 1rem;
+    width: 100%;
+    background-color: var(--textWhite);
 }
 
 .review-writer-container{
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
 }
 
 .review-writer-container-stars{
@@ -28,17 +31,15 @@
 }
 
 .review-writer-container-input{
-    font-size: 1rem;
-    height: 20rem;
+    /*font-size: 1rem;*/
+    /*height: 20rem;*/
     resize: none;
-
 }
 
 .review-writer-stars-and-publish{
-     display: flex;
-     flex-direction: row;
+    display: flex;
+    flex-direction: row;
     font-size: 1rem;
-
     align-items: center;
     align-content: center;
     justify-content: space-between;
@@ -53,7 +54,7 @@
     gap: 1rem;
 }
 
-#review-writer-button{
+#review-writer-button-publish, #review-writer-button-cancel{
     margin-top: 1rem;
     width: fit-content;
     height: fit-content;
@@ -62,7 +63,6 @@
 
 
 .review-writer-container-title{
-    width: 32rem;
     margin-bottom: 0.5rem;
     margin-top: 0.5rem;
 }
@@ -71,21 +71,3 @@
     font-size: 1rem;
 }
 
-
-@media (max-width: 800px) {
-    .review-writer-container-input{
-        width: 32rem;
-    }
-}
-
-@media (max-width: 600px) {
-    .review-writer-container,  .review-writer-container-input, .review-writer-container-title{
-        width: 28rem;
-    }
-}
-
-@media (max-width: 545px) {
-    .review-writer-container-stars{
-        margin-left: 3rem;
-    }
-}

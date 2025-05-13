@@ -3,7 +3,7 @@ import "./course.css"
 import {useNavigate, useParams} from "react-router-dom";
 import {AsyncApiRequest} from "../../utils/requests";
 import CourseProviderCard from "../../component/courseProviderCard/courseProviderCard";
-import {ReviewComponent} from "./reviewSection";
+import {ReviewSection} from "./reviewSection";
 import FavoriteButton from "../../component/favorite/favoriteButton";
 import {getAuthenticatedUser} from "../../utils/authentication/authentication";
 import {useSelector} from "react-redux";
@@ -230,19 +230,20 @@ export default function Course() {
                     </div>
                 </section>
 
-                <section id="course-keywords-section">
-                    <h3 id="course-keywords-heading"> Covered topics</h3>
-                    <div id="course-keywords">
-                        {keywords.map(item => (
-                            <div className="course-keyword">
-                                <img className="keyword-checkmark" src="/icons/checkmark-sharp.svg"
-                                     alt="Checkmark"/>
-                                <p className="course-keyword-text" key={item.keyword}>{item.keyword}</p>
-                            </div>
-                        ))}
-                    </div>
-                </section>
-
+                {keywords.length > 0 &&
+                    <section id="course-keywords-section">
+                        <h3 id="course-keywords-heading"> Covered topics</h3>
+                        <div id="course-keywords">
+                            {keywords.map(item => (
+                                <div className="course-keyword">
+                                    <img className="keyword-checkmark" src="/icons/checkmark-sharp.svg"
+                                         alt="Checkmark"/>
+                                    <p className="course-keyword-text" key={item.keyword}>{item.keyword}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+                }
 
                 {uniqueCourses?.length > 0 && (
                     <section id="course-offerables">
@@ -258,7 +259,7 @@ export default function Course() {
                         <div className="course-page-review-aggregate">
                             <h3> Customer reviews</h3>
                             &nbsp;
-                            <ReviewComponent cid={id} averageRating={ratingData} uid={user.id}/>
+                            <ReviewSection cid={id} averageRating={ratingData} uid={user.id}/>
                         </div>
                     </section>)}
 

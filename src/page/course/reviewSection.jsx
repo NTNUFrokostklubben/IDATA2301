@@ -6,7 +6,7 @@ import ReviewWriter from "../../component/Rating/reviewWriter";
 import {UserCourse} from "../../utils/Classes/commonClasses";
 
 
-export function ReviewComponent({cid, uid, averageRating}) {
+export function ReviewSection({cid, uid, averageRating}) {
     const [userCourseData, setUserCourseData] = useState([]);
     const [halfStar, setHalfStar] = useState(false)
     const [loading, setLoading] = useState(true);
@@ -15,18 +15,11 @@ export function ReviewComponent({cid, uid, averageRating}) {
     const [currentStar, setCurrentStar] = useState(0)
     const [filteredReviews, setFilteredReviews] = useState([]);
     const [editReview, setEditReview] = useState(false);
+    const [addReview, setAddReview] = useState(false);
     const [allowEditReview, setAllowEditReview] = useState(false);
-    const [isDisabled, setIsDisabled] = useState(true);
     const [isUserEnrolled, setIsUserEnrolled] = useState(false);
 
 
-    // Add state for visible items count
-    const [visibleReviews, setVisibleReviews] = useState(3); // Start with 3 reviews
-
-    // Function to load more reviews
-    const loadMoreReviews = () => {
-        setVisibleReviews(prev => prev + 3); // Increase by 3 each click
-    };
 
     const fetchData = async () => {
 
@@ -79,7 +72,13 @@ export function ReviewComponent({cid, uid, averageRating}) {
 
     const finishedEdits = () => {
         setAllowEditReview(true);
-        setEditReview(false)
+        setEditReview(false);
+        refresh();
+    }
+
+    const finishedAdd= () => {
+        setAllowEditReview(true);
+        setAddReview(false);
         refresh();
     }
 
@@ -132,72 +131,84 @@ export function ReviewComponent({cid, uid, averageRating}) {
 
     return (
         <div className={"course-page-review-component"}>
-            <div className={"course-page-review-component-left"}>
-                {stars !== [] && (
 
-                    <div className={"review-component-aggregate-stars"}>
-                        {stars.map((value, index, array) =>
-                            <img key={index} className="review-component-star"
-                                 src="/icons/star-sharp.svg" alt="review star"/>)}
-                        {halfStar && (
-                            <img className="review-component-star" src="/icons/star-half-sharp.svg" alt="half star"/>)}
-                        <p className={"review-component-average-rating"}>{averageRating} out of 5 </p>
+            <div className={"course-page-review-component-top"}>
+                <div className={"course-page-review-component-left"}>
+                    {stars !== [] && (
+
+                        <div className={"review-component-aggregate-stars"}>
+                            {stars.map((value, index, array) =>
+                                <img key={index} className="review-component-star"
+                                     src="/icons/star-sharp.svg" alt="review star"/>)}
+                            {halfStar && (
+                                <img className="review-component-star" src="/icons/star-half-sharp.svg" alt="half star"/>)}
+                            <p className={"review-component-average-rating"}>{averageRating} out of 5 </p>
+                        </div>
+                    )}
+
+                    <div className={"course-page-reviews-rating-bars"}>
+                        {
+                            starBars.map((item, index) =>
+                                <button key={5 - index}
+                                        className={`course-page-review-component-text-and-bar ${currentStar === 5 - index ? "selected" : ""}`}
+                                        onClick={() => handleStarClick(5 - index)}>
+                                    <p className={"course-page-review-star-bar-clickable"}>
+                                        {5 - index} star
+                                    </p>
+                                    <div className={"course-page-reviews-rating-bar-unit"}>
+                                        <div className={"reviews-rating-bar-star"} style={{width: `${item}%`}}></div>
+                                    </div>
+                                </button>
+                            )
+                        }
+
                     </div>
-                )}
+                    {uid && cid && (
+                        <div className={"review-writer-section-writer"}>
 
-                <div className={"course-page-reviews-rating-bars"}>
-                    {
-                        starBars.map((item, index) =>
-                            <button key={5-index} className={`course-page-review-component-text-and-bar ${currentStar === 5-index ? "selected" : ""}`}
-                                    onClick={() => handleStarClick(5-index)}>
-                                <p className={"course-page-review-star-bar-clickable"}>
-                                    {5 - index} star
-                                </p>
-                                <div className={"course-page-reviews-rating-bar-unit"}>
-                                    <div className={"reviews-rating-bar-star"} style={{width: `${item}%`}}></div>
-                                </div>
-                            </button>
-                        )
-                    }
+                            {isUserEnrolled && !allowEditReview &&  (
+                                <button className={"cta-button"} id={"add-review"}
+                                        onClick={() => {
+                                            setAddReview(true)
+                                        }}>
+                                    <p>Write a review?</p>
+                                </button>
+                            )}
 
+                            {isUserEnrolled && !editReview && allowEditReview && (
+                                <button className={"cta-button"} id={"edit-review"}
+                                        onClick={() => {
+                                            setEditReview(true)
+                                        }}>
+                                    <p>Edit your review?</p>
+                                </button>
+                            )}
+                        </div>
+                    )}
                 </div>
-                {uid && cid && (
-                    <div className={"review-writer-section-writer"}>
-                        {isUserEnrolled && !allowEditReview && (
-                            <ReviewWriter cid={cid} uid={uid}/>
-                        )}
 
-                        {isUserEnrolled && !editReview && allowEditReview && (
-                            <button className={"cta-button"} id={"edit-review"}
-                                    onClick={() => {setEditReview(true)}}>
-                                <p>Edit your review?</p>
-                            </button>
-                        )}
 
-                        {editReview && ((
-                            <ReviewWriter cid={cid} uid={uid} existingReview={getUserReview(uid)}
-                                          callback={finishedEdits}/>
-                        ))}
-
+                {filteredReviews !== null && (
+                    <div className={"course-page-review-component-right"}>
+                        {
+                            filteredReviews.map(item =>
+                                <Review key={item.id} rating={item} title={false}/>
+                            )
+                        }
                     </div>)}
             </div>
 
-
-
-            {filteredReviews !== null && (
-                <div className={"course-page-review-component-right"}>
-                    {
-                        filteredReviews.slice(0, visibleReviews)
-                            .map(item => <Review key={item.id} rating={item} title={false}/>)
-                    }
-                    {visibleReviews < filteredReviews.length && (
-                        <button onClick={loadMoreReviews} className="show-more-reviews-button">
-                            <p> Show More Reviews </p>
-                        </button>
+            {uid && cid && (
+                <div className={"course-page-review-component-bottom"}>
+                    {addReview && (
+                        <ReviewWriter cid={cid} uid={uid} callback={finishedAdd}/>
                     )}
-
-                </div>)}
-
+                    {editReview && ((
+                        <ReviewWriter cid={cid} uid={uid} existingReview={getUserReview(uid)}
+                                      callback={finishedEdits}/>
+                    ))}
+                </div>
+            )}
 
         </div>
 

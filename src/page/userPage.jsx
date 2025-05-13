@@ -195,15 +195,17 @@ export default function UserPage() {
                         <section id="user-page-user-courses">
                             <h1 id="previous-courses-heading">Previous courses</h1>
 
-                            {courses.map(item => (
-                                <div className="user-course-item" key={item.id}>
-                                    <Link className={"user-page-course-hotlink"} to={`/course/${item.course.id}`}>
-                                        <div className={"image-wrapper"}><img className="user-page-course-image"
-                                                                              src={item.course.imgLink}
-                                                                              alt={"image " + item.course.title}/></div>
-                                        <p>{item.course.title}</p>
-                                    </Link></div>
-                            ))}
+                            <div className="user-page-user-courses-content">
+                                {courses.map(item => (
+                                    <div className="user-course-item" key={item.id}>
+                                        <Link className={"user-page-course-hotlink"} to={`/course/${item.course.id}`}>
+                                            <div className={"image-wrapper"}><img className="user-page-course-image"
+                                                                                  src={item.course.imgLink}
+                                                                                  alt={"image " + item.course.title}/></div>
+                                            <p>{item.course.title}</p>
+                                        </Link></div>
+                                ))}
+                            </div>
 
                         </section>
                     </div>
@@ -219,8 +221,9 @@ export default function UserPage() {
 
                     <section id="users-favorites">
                         <h3 id={"favorites-heading"}>Favorites</h3>
-
-                        {favorites.map(item => <FavoriteCard key={item.id} {...item.course}/>)}
+                        <div id="user-page-favorites-content">
+                            {favorites.map(item => <FavoriteCard key={item.id} {...item.course}/>)}
+                        </div>
 
                     </section>
                 </section>)}
