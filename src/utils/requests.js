@@ -2,7 +2,7 @@ import {getCookie} from "./authentication/cookies";
 import {HttpResponseError} from "./authentication/HttpResponseError";
 
 
-const API_BASE_URL = "http://localhost:8080/api";
+const API_BASE_URL = "https://localhost:8080/api";
 
 /**
  * Create Async API request to the server
