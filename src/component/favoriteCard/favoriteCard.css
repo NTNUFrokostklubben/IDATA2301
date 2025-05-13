@@ -1,35 +1,44 @@
-#users-favorites{
-    margin: 1.3rem;
-    background-color: white;
-    width: 62.5rem;
-}
-#favorites-heading{
+
+#favorites-heading {
+    font-size: 2rem;
     padding: 1rem;
 }
-.one-favorite{
-    padding-bottom: 0.7rem;
+
+.one-favorite {
+    padding: 1rem;
+    margin: 1rem;
+    background-color: var(--textWhite);
 }
 
-.favorite-course-title{
-    padding-left: 0.7rem;
-}
 
-.favorite-image-and-text{
-    padding-left: 10px;
+.favorite-image-and-text {
     display: flex;
-}
-.favorite-course-text{
-    padding-left:0.7rem;
-}
-.favorite-course-image{
-    width: 10rem;
-    height: 4.7rem;
+    flex-direction: row;
 }
 
-.favorite-course-title{
-    font-size: 1rem;
-    padding-top: 1.6rem;
-    padding-bottom: 0.7rem;
+.favorite-image-and-text .image-wrapper {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 5rem;
+    width: 10rem;
+}
+
+
+.favorite-course-image {
+    display: flex;
+    max-width: 100%;
+
+    max-height: 100%;
+}
+
+.favorite-course-title {
+    /*font-size: 1rem;*/
+    /*padding-top: 1.6rem;*/
+    padding-left: 1rem;
+    padding-bottom: 1rem;
 }
 
 @supports (-webkit-line-clamp: 3) {
@@ -43,7 +52,7 @@
 }
 
 @supports not (-webkit-line-clamp: 3) {
-    .favorite-image-and-text .favorite-course-text{
+    .favorite-image-and-text .favorite-course-text {
         position: relative;
         max-height: 4.5rem; /* Adjust based on line height and number of lines */
         line-height: 1.5em; /* Adjust based on your design */
@@ -60,9 +69,4 @@
     }
 }
 
-@media (max-width: 700px){
-    #users-favorites{
 
-        width: 46.7rem;
-    }
-}

@@ -100,7 +100,7 @@
     hyphens: auto;
     padding-left: 1rem;
     padding-right: 1rem;
-    font-size: 0.9rem;
+    /*font-size: 0.9rem;*/
 }
 
 @media (max-width: 800px) {
