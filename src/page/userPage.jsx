@@ -187,9 +187,7 @@ export default function UserPage() {
                                 <picture onClick={profileImageClickHandler}>
                                     <img className={"user-page-user-image"} src={user.profilePicture} alt="user"/>
                                 </picture>
-                                <p id="user-name">
-                                    {user.name}
-                                </p>
+                                <p id="user-name"> {user.name} </p>
 
                             </div>
                         </section>

@@ -134,7 +134,7 @@
     flex-shrink: 1;
     justify-content: center;
     align-items: center;
-    background-color: var(--contrast);
+    background-color: var(--primary);
 }
 
 .user-caret picture {
@@ -149,7 +149,6 @@
     max-width: 100%;
     height: 100%;
 }
-
 
 #user-name {
     font-size: 1.5rem;
@@ -166,7 +165,7 @@
 
 #user-page-user-courses {
     margin: 0 0 0 1rem;
-    background-color: var(--contrast);
+    background-color: var(--highlight);
     justify-self: flex-start;
     flex-grow: 1;
     flex-shrink: 0;
@@ -174,9 +173,7 @@
     min-width: 10rem;
     padding: 1rem;
 }
-#previous-courses-heading, #user-name{
-    color: var(--textWhite);
-}
+
 
 .user-course-item {
     display: flex;
@@ -208,7 +205,7 @@
     max-height: 100%;
 }
 
-.star {
+#star {
     max-width: 1rem;
     max-height: 1rem;
 }
@@ -233,13 +230,10 @@
 }
 
 #users-favorites {
-    background-color: var(--contrast);
+    background-color: var(--highlight);
     width: 100%;
     padding: 1rem 0;
     margin-bottom: 2rem;
-}
-#users-favorites #favorites-heading{
-    color: var(--textWhite);
 }
 
 #favorites-heading {

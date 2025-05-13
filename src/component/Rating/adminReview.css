@@ -39,17 +39,15 @@
     justify-content: space-between;
     padding-top: 2rem;
 }
-.star-img{
+#star-img{
     height: 1.5rem;
     width: 1.5rem;
     margin-right: 0.5rem;
-    filter: invert(32%) sepia(9%) saturate(3293%) hue-rotate(187deg) brightness(95%) contrast(81%);
 }
-.admin-dash-review-user-image{
+#admin-dash-review-user-image{
     height: 2rem;
     width: 2rem;
     margin-right: 0.5rem;
-    filter: invert(32%) sepia(9%) saturate(3293%) hue-rotate(187deg) brightness(95%) contrast(81%);
 }
 /* Skeleton CSS */
 

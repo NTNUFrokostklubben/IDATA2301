@@ -18,12 +18,12 @@ export function AdminReview(review) {
     return (
             <div className={"admin-dash-review"} onClick={() => navigate(linkToCourse)}>
                 <div className={"admin-dash-review-text"}>
-                    <img className={"admin-dash-review-user-image"} src={userPicture} alt={review.name}/> &nbsp;
+                    <img id={"admin-dash-review-user-image"} className={"filter-cta"} src={userPicture} alt={review.name}/> &nbsp;
                     <p>{reviewComment}</p>
                 </div>
                 &nbsp;
                 <div className={"admin-dash-review-rating"}>
-                    <img className={"star-img"} src={"/icons/star-sharp.svg"} alt=""/>
+                    <img id={"star-img"} className={"filter-cta"} src={"/icons/star-sharp.svg"} alt=""/>
                     &nbsp;
                     <p>{review.rating}</p>
                 </div>
