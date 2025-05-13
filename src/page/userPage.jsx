@@ -210,10 +210,12 @@ export default function UserPage() {
                         </section>
                     </div>
 
-                    <section className="users-reviews">
+                    <section className={"users-reviews"}>
                         <h3 id={"review-heading"}>Your reviews</h3>
 
-                        {ratings.map(item => <Review key={item.id} rating={item} title={true}/>)}
+                        <div className={"user-page-reviews"}>
+                            {ratings.map(item => <Review key={item.id} rating={item} title={true}/>)}
+                        </div>
 
                     </section>
 

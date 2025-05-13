@@ -1,3 +1,10 @@
+.user-page {
+    width: 100%;
+    background-color: var(--textWhite);
+    display: flex;
+    justify-content: center;
+    min-height: 100rem;
+}
 
 .user-page-modal-background {
     background-color: var(--textBlack);
@@ -52,7 +59,7 @@
     align-items: center;
     width: 20rem;
     height: 10rem;
-    background-color: white;
+    background-color: var(--textWhite);
 }
 
 .user-page-modal-delete-dialog-all-buttons {
@@ -86,35 +93,15 @@
     background-color: var(--textWhite);
 }
 
-
-.user-page {
-    width: 100%;
-    background-color: var(--background);
-    display: flex;
-    justify-content: center;
-    min-height: 100rem;
-
-}
-
 #user-page-content {
     display: flex;
     flex-direction: column;
     width: 100rem;
-    /*justify-content: center;*/
+    justify-content: center;
     align-items: center;
     margin-top: 1rem;
-}
-
-#user-page-caret {
-    margin: 1rem 0;
-
-    display: flex;
-    flex-shrink: 1;
-    background-color: white;
-    justify-content: center;
-    flex-direction: column;
-    height: 100%;
-
+    padding: 1rem;
+    gap: 2rem;
 }
 
 #user-page-content-info {
@@ -124,12 +111,22 @@
     min-height: 20rem;
     justify-content: center;
     align-items: center;
+    gap: 1rem;
+}
+
+#user-page-caret {
+    margin: 1rem 0;
+    display: flex;
+    flex-shrink: 1;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 20%;
 }
 
 #user-caret {
     display: flex;
     flex-direction: column;
-
     padding: 1rem;
     gap: 1rem;
     height: 100%;
@@ -137,6 +134,7 @@
     flex-shrink: 1;
     justify-content: center;
     align-items: center;
+    background-color: var(--contrast);
 }
 
 .user-caret picture {
@@ -148,7 +146,6 @@
 }
 
 .user-page-user-image {
-    border-radius: 2px;
     max-width: 100%;
     height: 100%;
 }
@@ -169,23 +166,28 @@
 
 #user-page-user-courses {
     margin: 0 0 0 1rem;
-    background-color: white;
+    background-color: var(--contrast);
     justify-self: flex-start;
     flex-grow: 1;
     flex-shrink: 0;
     min-height: 100%;
     min-width: 10rem;
-    padding: 0 1rem;
+    padding: 1rem;
+}
+#previous-courses-heading, #user-name{
+    color: var(--textWhite);
 }
 
 .user-course-item {
     display: flex;
     flex-direction: row;
-    justify-content: left;
+    justify-content: flex-start;
     align-items: center;
     margin: 1rem 0rem;
-    /*background-color: var(--textWhite);*/
+    padding: 0.5rem;
+    background-color: var(--textWhite);
 }
+
 
 .user-course-item a {
     display: flex;
@@ -206,10 +208,6 @@
     max-height: 100%;
 }
 
-#previous-courses-heading {
-    margin: 1rem;
-}
-
 .star {
     max-width: 1rem;
     max-height: 1rem;
@@ -220,19 +218,28 @@
 }
 
 .users-reviews {
-    margin-top: 1rem;
-    margin-left: 1rem;
-    margin-right: 1rem;
-    background-color: white;
+    background-color: var(--highlight);
     width: 100%;
-    padding: 1rem 0;
+}
+
+.user-page-reviews{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 0.5rem;
+    width: 95%;
+    padding: 1rem;
 }
 
 #users-favorites {
-    margin: 1.3rem;
-    background-color: white;
+    background-color: var(--contrast);
     width: 100%;
     padding: 1rem 0;
+    margin-bottom: 2rem;
+}
+#users-favorites #favorites-heading{
+    color: var(--textWhite);
 }
 
 #favorites-heading {
