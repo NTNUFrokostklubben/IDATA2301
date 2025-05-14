@@ -25,7 +25,12 @@ export default function Checkout() {
     const [cardNumber, setCardNumber] = useState('');
     const inputRef = useRef(null);
     const navigate = useNavigate();
-    const [selectedCountry, setSelectedCountry] = useState("");
+
+    // TODO remove this - Only for development
+    const required = useState(true);
+
+
+
     const handlePurchase = async () =>{
 
         setLoading(true)
@@ -87,143 +92,156 @@ export default function Checkout() {
     return (
         <article id="page-layout-checkout" onLoad={loggedIn}>
             {loading && <SpinnerLoader/>}
-            <div id="checkout-left-side">
-                <h4 className={"checkout-header"}>Checkout</h4>
-                <section id="express-checkout">
-                    <h5 className="checkout-headers">Express checkout</h5>
-                    <div id="payment-options">
-                        <div id="paypal">
-                            <a onClick={openPaypal}
-                                title="Slik fungerer PayPal"
-                                rel="noopener noreferrer">
-                                <img id="paypal-image"
-                                     src="https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-100px.png"
-                                     border="0"
-                                     alt="PayPal Logo"
-                                /></a>
-                        </div>
-                        <div className={"express-checkout-klarna"}>
-                            <a onClick={openKlarna}  rel="noopener noreferrer" >
-                                <img id="klarna-image" src="/images/klarnaXL.webp" alt="klarna"/></a>
-                        </div>
-                        <div className={"express-checkout-other"}>
-                            <button className={"express-checkout-other-button"} onClick="">Other</button>
-                        </div>
-                    </div>
-                </section>
+            <div id={"checkout-content"}>
+                <div id="checkout-left-side">
 
-                <div className="separator">Continue below to pay with credit card</div>
-                <section id="billing">
-                    <h5 className="checkout-headers"> Additional Contact Information</h5>
-                    <p id="leave-empty-text">Leave empty if no other recipients</p>
-                    <label htmlFor="checkout-email"></label>
-                    <input className="large-input-field"
-                           type="text"
-                           id="checkout-email"
-                           name="email input"
-                           pattern={"\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}\\b"}
-                           placeholder="Email"/>
-                    <h5 className="checkout-headers"> Billing</h5>
-                    <form id="billing-input" onSubmit={e => e.preventDefault() }>
-                        <Select className={"country-select"}
-                                required={false}
-                               // styles={customSelectStyles}
-                                options={options}
-                                value={countrySelect}
-                                onChange={(selected) => setCountrySelect(selected.value) }
-                                unstyled={true}
-                                classNamePrefix={"country-select"}/>
-                        <div className="small-input">
-                            <input required={false}
-                                   className="small-input-field"
-                                   placeholder="First name"
-                                   type="text"
-                                   id="firstname"
-                                   name="username"/>
-                            <input required={false}
-                                   className="small-input-field"
-                                   type="text"
-                                   placeholder="Last name"
-                                   id="lastname"
-                                   name="lastname"/>
-                        </div>
-                        <input required={false}
-                               className="large-input-field"
-                               placeholder="Credit card number"
-                               type="text"
-                               name="Credit-card"
-                               value={cardNumber}
-                               ref={inputRef}
-                               maxLength={19}
-                               onInput={handleCardNr}
-                               id="credit-card"/>
-                        <div className="small-input">
-                            <input required={false}
-                                   className="small-input-field"
-                                   placeholder="Expiration date mm/yy"
-                                   type="text"
-                                   name="expiration date"
-                                   maxLength={5}
-                                   ref={inputRef}
-                                   onInput={handleExpiration}
-                                   id="exp-date"/>
-                            <input required={false}
-                                   className="small-input-field"
-                                   placeholder="Security code"
-                                   type="number"
-                                   name="expiration date"
-                                   maxLength={3}
-                                   id="sec-code"/>
-
-                        </div>
-                        <label htmlFor="lastname"></label>
-                        <label htmlFor="firstname"></label>
-                        <div id="purchase">
-                            <p>Total cost:</p> &nbsp;
-                            <label className={"checkout-final-price"}>
-                                {(courseData.price * (1 - courseData.discount)).toFixed(2)}
-                            </label><p>,- nok</p>
-                            <button type="submit" className={"checkout-purchase-button"} onClick={handlePurchase} disabled={loading}>
-                                {loading ? 'Processing' : 'purchase'}
-                            </button>
-                        </div>
-                    </form>
+                    <section id="checkout-left">
+                        {/*<h5 className="checkout-headers"> Additional Contact Information</h5>*/}
+                        {/*<p id="leave-empty-text">Leave empty if no other recipients</p>*/}
+                        {/*<label htmlFor="checkout-email"></label>*/}
+                        {/*<input className="large-input-field"*/}
+                        {/*       type="text"*/}
+                        {/*       id="checkout-email"*/}
+                        {/*       name="email input"*/}
+                        {/*       pattern={"\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}\\b"}*/}
+                        {/*       placeholder="Email"/>*/}
 
 
-                </section>
+                        <h1 id="checkout"> Checkout</h1>
+
+
+                        <form id="billing-input" onSubmit={e => e.preventDefault()}>
+
+
+                            <div className={"checkout-fill-out-form"}>
+                                <div className={"checkout-input-section"} id={"checkout-fullname"}>
+                                    <label htmlFor="fullname">Full Name *</label>
+                                    <input required={required}
+                                           className="input-field"
+                                           placeholder="Enter full name"
+                                           type="text"
+                                           id="fullname"
+                                           name="fullname"/>
+                                </div>
+
+                                <div className={"checkout-input-section"} id={"checkout-credit-card"}>
+                                    <label htmlFor="credit-card">Credit card number *</label>
+                                    <input required={required}
+                                           className="input-field"
+                                           placeholder="Credit card number"
+                                           type="text"
+                                           name="Credit-card"
+                                           value={cardNumber}
+                                           ref={inputRef}
+                                           maxLength={19}
+                                           onInput={handleCardNr}
+                                           id="credit-card"/>
+                                </div>
+
+
+                                <div className="two-inputs">
+
+                                    <div className={"checkout-input-section"} id={"checkout-exp-date"}>
+                                        <label htmlFor="exp-date">Expiration date *</label>
+                                        <input required={required}
+                                               className="input-field"
+                                               placeholder="Expiration date mm/yy"
+                                               type="text"
+                                               name="expiration date"
+                                               maxLength={5}
+                                               ref={inputRef}
+                                               onInput={handleExpiration}
+                                               id="exp-date"/>
+                                    </div>
+
+                                    <div className={"checkout-input-section"} id={"checkout-cvc"}>
+                                        <label htmlFor="sec-code">Security code *</label>
+                                        <input required={required}
+                                               className="input-field"
+                                               placeholder="Security code"
+                                               type="number"
+                                               name="expiration date"
+                                               maxLength={3}
+                                               id="sec-code"/>
+                                    </div>
+                                </div>
+
+                                <div className={"checkout-input-section"} id={"checkout-country"}>
+                                    <label htmlFor="country-select">Country * </label>
+                                    <Select className={"country-select"}
+                                            required={required}
+                                            options={options}
+                                            value={options.find(option => option.value == countrySelect)}
+                                            onChange={(selected) => setCountrySelect(selected)}
+                                            unstyled={true}
+                                            classNamePrefix={"country-select"}/>
+                                </div>
+                            </div>
+
+                            <div className="purchase-terms">
+                                <input type="checkbox" id="terms-and-conditions" required={required}/>
+                                <label htmlFor="terms-and-conditions">I accept the terms and conditions</label>
+                            </div>
+
+
+                        </form>
+
+
+                    </section>
+                </div>
+
+                <div id="checkout-right-side">
+                    <section id="checkout-right">
+
+                        <h3 className="checkout-headers">Your cart</h3>
+
+                        <div className="checkout-right-content">
+
+                            <div className="checkout-product-display">
+                                <img className="product-checkout-image" src={courseData.course.imgLink}
+                                     alt="product image"/>
+
+                                <div className="checkout-product-display-text">
+                                    <h6 className="checkout-headers">{courseData.course.title}</h6>
+                                    <p className="product-desc">{courseData.course.description} </p>
+                                </div>
+
+                            </div>
+
+                            <div className="product-price-overview">
+
+                                <div className="product-price-overview-line" id="product-pricetag">
+                                    <p className="product-price-title-grey">Subtotal</p>
+                                    <p className="product-price"> {courseData.price},- NOK</p>
+                                </div>
+
+                                <div className="product-price-overview-line" id="purchase-discount">
+                                    <p className="product-price-title-grey">Discount</p>
+                                    <p className="product-price"> {(courseData.discount * 100).toFixed(0)}%</p>
+                                </div>
+                                &nbsp;
+                                <div className="product-price-overview-line" id="purchase-total-cost">
+                                    <p className="product-price-title">Total</p>
+                                    <p className="product-price"> {(courseData.price * (1 - courseData.discount)).toFixed(2)},-
+                                        NOK</p>
+                                </div>
+                            </div>
+
+                            <div id="purchase">
+                                <button type="submit" className={"cta-button"} id={"checkout-purchase-button"}
+                                        onClick={handlePurchase} disabled={loading}>
+                                    {loading ? <p> Processing </p> : <p> Pay Now</p>}
+                                </button>
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                </div>
             </div>
-            <div id="checkout-right-side">
-                <section id="checkout">
-                    <h5 className="checkout-headers">Product</h5>
-                    <div className="product">
-                        <h6 className="checkout-headers">{courseData.course.title}</h6>
-                        <div className="picture-and-text">
-                            <img className="product-checkout-image"
-                                 src={courseData.course.imgLink} alt="product image"/>
-                            <p className="product-desc">{courseData.course.description} </p>
-                        </div>
-                        <div className="product-price">
-                            <div className="product-pricetag">
-                                <label>Price:&nbsp; </label>
-                                <label>{courseData.price}</label>
-                                <label className="valuta">,- nok</label>
-                            </div>
 
-                            <div className="purchase-discount">
-                                <label className="discount-tag">Discount: &nbsp;</label>
-                                <span>{(courseData.discount * 100).toFixed(0)}%</span>
-                            </div>
-
-                            <div className="purchase-total-cost">
-                                <label>Total cost: &nbsp; </label>
-                                <label>{(courseData.price * (1 - courseData.discount)).toFixed(2)}</label>
-                                <label className="valuta">,- nok</label>
-                            </div>
-
-                        </div>
-                    </div>
-                </section>
-            </div>
             {
                 showLoginModal && createPortal(
                     <Login changeMode={() => {
