@@ -119,11 +119,6 @@ input:disabled {
     min-height: 100vh;
 }
 
-footer {
-    position: relative;
-    z-index: 10;
-}
-
 @media (max-width: 1250px) {
     html{
         font-size: 15px;

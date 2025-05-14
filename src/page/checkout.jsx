@@ -95,19 +95,8 @@ export default function Checkout() {
                     <div id="checkout-left-side">
 
                         <section id="checkout-left">
-                            {/*<h5 className="checkout-headers"> Additional Contact Information</h5>*/}
-                            {/*<p id="leave-empty-text">Leave empty if no other recipients</p>*/}
-                            {/*<label htmlFor="checkout-email"></label>*/}
-                            {/*<input className="large-input-field"*/}
-                            {/*       type="text"*/}
-                            {/*       id="checkout-email"*/}
-                            {/*       name="email input"*/}
-                            {/*       pattern={"\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}\\b"}*/}
-                            {/*       placeholder="Email"/>*/}
 
-
-                            <h1 id="checkout"> Checkout</h1>
-
+                            <h2 id="checkout"> Checkout</h2>
 
                             <form id="billing-input" onSubmit={e => e.preventDefault()}>
 
@@ -182,7 +171,6 @@ export default function Checkout() {
                                     <label htmlFor="terms-and-conditions">I accept the terms and conditions</label>
                                 </div>
 
-
                             </form>
 
 
@@ -194,7 +182,7 @@ export default function Checkout() {
                         <div id="checkout-right-side">
                             <section id="checkout-right">
 
-                                <h3 className="checkout-headers">Your cart</h3>
+                                <h2 className="checkout-headers">Your cart</h2>
 
                                 <div className="checkout-right-content">
 

@@ -210,6 +210,7 @@ footer{
     font-size: 1rem;
     height: auto;
     padding: 1.5rem;
+    position: relative;
 }
 
 footer p {
