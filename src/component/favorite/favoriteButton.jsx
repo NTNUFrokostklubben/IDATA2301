@@ -14,9 +14,9 @@ export default function FavoriteButton ({uid, cid, isFav}){
 
         try{
        if (isFilled){
-           const RemoveFav = await AsyncApiRequest("DELETE", `/removeFavorite/${uid}/${cid}`, null )
+           const RemoveFav = await AsyncApiRequest("DELETE", `/favorite/remove/user/${uid}/course/${cid}`, null )
        }else {
-           const addFav = await AsyncApiRequest("POST", `/addFavorite/${uid}/${cid}`, null )
+           const addFav = await AsyncApiRequest("POST", `/favorite/add/user/${uid}/course/${cid}`, null )
        }
         }catch (e){console.error(e)}
 

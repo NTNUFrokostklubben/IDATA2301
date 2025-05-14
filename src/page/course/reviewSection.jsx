@@ -6,7 +6,7 @@ import ReviewWriter from "../../component/Rating/reviewWriter";
 import {UserCourse} from "../../utils/Classes/commonClasses";
 
 
-export function ReviewSection({cid, uid, averageRating}) {
+export function ReviewSection({cid, user, averageRating}) {
     const [userCourseData, setUserCourseData] = useState([]);
     const [halfStar, setHalfStar] = useState(false)
     const [loading, setLoading] = useState(true);
@@ -32,16 +32,25 @@ export function ReviewSection({cid, uid, averageRating}) {
         }
     }
     const fetchRatingArray = async () => {
-        const data = await AsyncApiRequest("GET", `/userCourses/course/${cid}`, null)
+        console.log("trying to get reviews")
+        const data = await AsyncApiRequest("GET", `/userCourses/reviews/course/${cid}`, null)
             .then(response => response.json());
         const filteredAndSorted = data
             .filter(item => item.review != null)
             .sort((a, b) => b.review?.rating - a.review?.rating);
         setUserCourseData(data)
-        setIsUserEnrolled(data.some(course => course.user?.id === uid))
         setFilteredReviews(filteredAndSorted)
+        if (user){
+            setIsUserEnrolled(data.some(course => course.user?.id === user))
+            setAllowEditReview(filteredAndSorted.some(obj => obj.user?.id === user))
+        }else
+        {
+            setIsUserEnrolled(false)
+            setAllowEditReview(false)
+            setEditReview(false)
+        }
         calculateStarDistribution(data.map(item => item.review?.rating), filteredAndSorted.length);
-        setAllowEditReview(filteredAndSorted.some(obj => obj.user?.id === uid))
+
 
     }
 
@@ -167,7 +176,7 @@ export function ReviewSection({cid, uid, averageRating}) {
                                 }
 
                             </div>
-                            {uid && cid && (
+                            {user && cid && (
                                 <div className={"review-writer-section-writer"}>
 
                                     {isUserEnrolled && !allowEditReview && (
@@ -202,13 +211,13 @@ export function ReviewSection({cid, uid, averageRating}) {
                             </div>)}
                     </div>
 
-                    {uid && cid && (
+                    {user && cid && (
                         <div className={"course-page-review-component-bottom"}>
                             {addReview && (
-                                <ReviewWriter cid={cid} uid={uid} callback={finishedAdd}/>
+                                <ReviewWriter cid={cid} uid={user} callback={finishedAdd}/>
                             )}
                             {editReview && ((
-                                <ReviewWriter cid={cid} uid={uid} existingReview={getUserReview(uid)}
+                                <ReviewWriter cid={cid} uid={user} existingReview={getUserReview(user)}
                                               callback={finishedEdits}/>
                             ))}
                         </div>
