@@ -1,16 +1,16 @@
 import "./checkout.css"
 import {useNavigate, useParams} from "react-router-dom";
 import React, {useContext, useEffect, useMemo, useRef, useState} from "react";
-import {UserContext} from "../userContext";
+import {UserContext} from "../../userContext";
 import {createPortal} from "react-dom";
-import Login from "../component/modals/auth/login";
-import Register from "../component/modals/auth/register";
+import Login from "../../component/modals/auth/login";
+import Register from "../../component/modals/auth/register";
 import {useSelector} from "react-redux";
 import Select from 'react-select'
 import countryList from "react-select-country-list";
-import {AsyncApiRequest} from "../utils/requests";
-import SpinnerLoader from "../component/modals/Spinner/spinnerLoader";
-import {getAuthenticatedUser} from "../utils/authentication/authentication";
+import {AsyncApiRequest} from "../../utils/requests";
+import SpinnerLoader from "../../component/modals/Spinner/spinnerLoader";
+import {getAuthenticatedUser} from "../../utils/authentication/authentication";
 
 
 export default function Checkout() {
@@ -27,7 +27,7 @@ export default function Checkout() {
     const navigate = useNavigate();
 
     // TODO remove this - Only for development
-    const required = useState(true);
+    const [required] = useState(true);
 
 
 
@@ -171,6 +171,14 @@ export default function Checkout() {
                                     <label htmlFor="terms-and-conditions">I accept the terms and conditions</label>
                                 </div>
 
+                                <div id="purchase">
+                                    <button type="submit" className={"cta-button"} id={"checkout-purchase-button"}
+                                            onClick={handlePurchase} disabled={loading}>
+                                        {loading ? <p> Processing </p> : <p> Pay Now</p>}
+                                    </button>
+                                </div>
+                            {/* TODO make sure the fields has to be filled out before paying*/}
+
                             </form>
 
 
@@ -178,15 +186,15 @@ export default function Checkout() {
                     </div>
                 </div>
 
-                    <div className={"checkout-split right"}>
-                        <div id="checkout-right-side">
-                            <section id="checkout-right">
+                <div className={"checkout-split right"}>
+                    <div id="checkout-right-side">
+                        <section id="checkout-right">
 
-                                <h2 className="checkout-headers">Your cart</h2>
+                            <h2 className="checkout-headers">Your Cart</h2>
 
-                                <div className="checkout-right-content">
+                            <div className="checkout-right-content">
 
-                                    <div className="checkout-product-display">
+                            <div className="checkout-product-display">
                                         <img className="product-checkout-image" src={courseData.course.imgLink}
                                              alt="product image"/>
 
@@ -214,13 +222,6 @@ export default function Checkout() {
                                             <p className="product-price"> {(courseData.price * (1 - courseData.discount)).toFixed(2)},-
                                                 NOK</p>
                                         </div>
-                                    </div>
-
-                                    <div id="purchase">
-                                        <button type="submit" className={"cta-button"} id={"checkout-purchase-button"}
-                                                onClick={handlePurchase} disabled={loading}>
-                                            {loading ? <p> Processing </p> : <p> Pay Now</p>}
-                                        </button>
                                     </div>
 
                                 </div>

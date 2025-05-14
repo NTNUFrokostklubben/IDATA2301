@@ -76,7 +76,8 @@
 .input-field{
     width: 100%;
     height: 2rem; /* 30px / 16 */
-    background-color: var(--textWhite)
+    background-color: var(--textWhite);
+    border: 1px solid black;
 }
 
 .input-field::placeholder{
@@ -86,7 +87,7 @@
 
 /* Country drop down*/
 .country-select{
-    border: 2px black;
+    border: 1px black;
     height: 2rem;
     width: 100%;
     background-color: var(--textWhite);
@@ -95,12 +96,13 @@
     font-size: 1rem;
 }
 .country-select__control{
-    border: 2px solid black;
+    border: 1px solid black;
     min-height: 1rem;
-    margin-bottom: 1rem;
 }
 .country-select__menu{
-    background-color: var(--textWhite);
+    background-color: var(--highlight);
+    color: var(--textBlack);
+    border: 1px solid black;
 }
 
 /*Purchase terms*/

@@ -17,7 +17,7 @@
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    height: 40rem;
+    height: 35rem;
     flex-wrap: wrap;
 
 }
@@ -120,17 +120,16 @@
 #index-arrow-left-btn, #index-arrow-right-btn:hover{
     box-shadow: var(--shadow);
 }
-#index-course-cards-section .index-arrow-icon{
+#index-course-cards-section #index-arrow-icon{
     border: none;
     width: 3rem;
     height: 3rem;
 }
+
 /* Collabrotators */
 #index-collaborators-section{
-
     display: flex;
     flex-direction: column;
-    /*background-color: var(--background);*/
     height: auto;
     padding-bottom: 5rem;
     width: 80vw;

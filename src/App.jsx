@@ -9,7 +9,7 @@ import CourseEdit from "./page/admin/management/courses/edit/courseEdit";
 import AdminDashboard from "./page/admin/adminDashboard";
 import UserPage from "./page/userPage";
 import About from "./page/about";
-import Checkout from "./page/checkout";
+import Checkout from "./page/checkout/checkout";
 import Course from "./page/course/course";
 
 import {UserContext} from "./userContext";
@@ -22,7 +22,7 @@ import OfferableCourseAdd from "./page/admin/course/add/offerableCourseAdd";
 import OfferableCourseEdit from "./page/admin/course/edit/offerableCourseEdit";
 import {useState} from "react";
 import {deleteAuthorizationCookies, getAuthenticatedUser} from "./utils/authentication/authentication";
-import OrderComplete from "./page/orderComplete";
+import OrderComplete from "./page/checkout/orderComplete";
 import NoAccess from "./page/noAccess";
 import ProtectedRoute from "./component/routing/ProtectedRoute";
 import Users from "./page/admin/management/users/users";
