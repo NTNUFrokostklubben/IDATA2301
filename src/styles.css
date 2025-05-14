@@ -116,7 +116,7 @@ input:disabled {
 
 .page-content {
     padding-top: 5rem;
-    min-height: 100rem;
+    min-height: 100vh;
 }
 
 footer {

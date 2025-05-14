@@ -48,13 +48,13 @@ export default function Checkout() {
     }
 
 
-        const handleExpiration = (e) => {
-            let value = e.target.value.replace(/\D/g, ""); // Remove non-digits
-            if (value.length >= 2) {
-                value = value.slice(0, 2) + '/' + value.slice(2, 4);
-            }
-            e.target.value = value;
-        };
+    const handleExpiration = (e) => {
+        let value = e.target.value.replace(/\D/g, ""); // Remove non-digits
+        if (value.length >= 2) {
+            value = value.slice(0, 2) + '/' + value.slice(2, 4);
+        }
+        e.target.value = value;
+    };
 
     const handleCardNr = (e) => {
         const input = e.target.value;
@@ -80,8 +80,6 @@ export default function Checkout() {
             `width=${width},height=${height},left=${left},top=${top},resizable=yes,scrollbars=yes`
         );
     };
-    const openPaypal = () => openPopup("https://www.paypal.com/no/webapps/mpp/paypal-popup")
-    const openKlarna = () => openPopup("https://docs.klarna.com/")
 
     function loggedIn(){
         let user = getAuthenticatedUser();
@@ -90,177 +88,181 @@ export default function Checkout() {
         }
     }
     return (
-        <article id="page-layout-checkout" onLoad={loggedIn}>
+        <div id="page-layout-checkout" onLoad={loggedIn}>
             {loading && <SpinnerLoader/>}
             <div id={"checkout-content"}>
-                <div id="checkout-left-side">
+                <div className={"checkout-split left"}>
+                    <div id="checkout-left-side">
 
-                    <section id="checkout-left">
-                        {/*<h5 className="checkout-headers"> Additional Contact Information</h5>*/}
-                        {/*<p id="leave-empty-text">Leave empty if no other recipients</p>*/}
-                        {/*<label htmlFor="checkout-email"></label>*/}
-                        {/*<input className="large-input-field"*/}
-                        {/*       type="text"*/}
-                        {/*       id="checkout-email"*/}
-                        {/*       name="email input"*/}
-                        {/*       pattern={"\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}\\b"}*/}
-                        {/*       placeholder="Email"/>*/}
-
-
-                        <h1 id="checkout"> Checkout</h1>
+                        <section id="checkout-left">
+                            {/*<h5 className="checkout-headers"> Additional Contact Information</h5>*/}
+                            {/*<p id="leave-empty-text">Leave empty if no other recipients</p>*/}
+                            {/*<label htmlFor="checkout-email"></label>*/}
+                            {/*<input className="large-input-field"*/}
+                            {/*       type="text"*/}
+                            {/*       id="checkout-email"*/}
+                            {/*       name="email input"*/}
+                            {/*       pattern={"\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}\\b"}*/}
+                            {/*       placeholder="Email"/>*/}
 
 
-                        <form id="billing-input" onSubmit={e => e.preventDefault()}>
+                            <h1 id="checkout"> Checkout</h1>
 
 
-                            <div className={"checkout-fill-out-form"}>
-                                <div className={"checkout-input-section"} id={"checkout-fullname"}>
-                                    <label htmlFor="fullname">Full Name *</label>
-                                    <input required={required}
-                                           className="input-field"
-                                           placeholder="Enter full name"
-                                           type="text"
-                                           id="fullname"
-                                           name="fullname"/>
-                                </div>
-
-                                <div className={"checkout-input-section"} id={"checkout-credit-card"}>
-                                    <label htmlFor="credit-card">Credit card number *</label>
-                                    <input required={required}
-                                           className="input-field"
-                                           placeholder="Credit card number"
-                                           type="text"
-                                           name="Credit-card"
-                                           value={cardNumber}
-                                           ref={inputRef}
-                                           maxLength={19}
-                                           onInput={handleCardNr}
-                                           id="credit-card"/>
-                                </div>
+                            <form id="billing-input" onSubmit={e => e.preventDefault()}>
 
 
-                                <div className="two-inputs">
-
-                                    <div className={"checkout-input-section"} id={"checkout-exp-date"}>
-                                        <label htmlFor="exp-date">Expiration date *</label>
+                                <div className={"checkout-fill-out-form"}>
+                                    <div className={"checkout-input-section"} id={"checkout-fullname"}>
+                                        <label htmlFor="fullname">Full Name *</label>
                                         <input required={required}
                                                className="input-field"
-                                               placeholder="Expiration date mm/yy"
+                                               placeholder="Enter full name"
                                                type="text"
-                                               name="expiration date"
-                                               maxLength={5}
-                                               ref={inputRef}
-                                               onInput={handleExpiration}
-                                               id="exp-date"/>
+                                               id="fullname"
+                                               name="fullname"/>
                                     </div>
 
-                                    <div className={"checkout-input-section"} id={"checkout-cvc"}>
-                                        <label htmlFor="sec-code">Security code *</label>
+                                    <div className={"checkout-input-section"} id={"checkout-credit-card"}>
+                                        <label htmlFor="credit-card">Credit card number *</label>
                                         <input required={required}
                                                className="input-field"
-                                               placeholder="Security code"
-                                               type="number"
-                                               name="expiration date"
-                                               maxLength={3}
-                                               id="sec-code"/>
+                                               placeholder="Credit card number"
+                                               type="text"
+                                               name="Credit-card"
+                                               value={cardNumber}
+                                               ref={inputRef}
+                                               maxLength={19}
+                                               onInput={handleCardNr}
+                                               id="credit-card"/>
+                                    </div>
+
+
+                                    <div className="two-inputs">
+
+                                        <div className={"checkout-input-section"} id={"checkout-exp-date"}>
+                                            <label htmlFor="exp-date">Expiration date *</label>
+                                            <input required={required}
+                                                   className="input-field"
+                                                   placeholder="Expiration date mm/yy"
+                                                   type="text"
+                                                   name="expiration date"
+                                                   maxLength={5}
+                                                   ref={inputRef}
+                                                   onInput={handleExpiration}
+                                                   id="exp-date"/>
+                                        </div>
+
+                                        <div className={"checkout-input-section"} id={"checkout-cvc"}>
+                                            <label htmlFor="sec-code">Security code *</label>
+                                            <input required={required}
+                                                   className="input-field"
+                                                   placeholder="Security code"
+                                                   type="number"
+                                                   name="expiration date"
+                                                   maxLength={3}
+                                                   id="sec-code"/>
+                                        </div>
+                                    </div>
+
+                                    <div className={"checkout-input-section"} id={"checkout-country"}>
+                                        <label htmlFor="country-select">Country * </label>
+                                        <Select className={"country-select"}
+                                                required={required}
+                                                options={options}
+                                                value={options.find(option => option.value == countrySelect)}
+                                                onChange={(selected) => setCountrySelect(selected)}
+                                                unstyled={true}
+                                                classNamePrefix={"country-select"}/>
                                     </div>
                                 </div>
 
-                                <div className={"checkout-input-section"} id={"checkout-country"}>
-                                    <label htmlFor="country-select">Country * </label>
-                                    <Select className={"country-select"}
-                                            required={required}
-                                            options={options}
-                                            value={options.find(option => option.value == countrySelect)}
-                                            onChange={(selected) => setCountrySelect(selected)}
-                                            unstyled={true}
-                                            classNamePrefix={"country-select"}/>
+                                <div className="purchase-terms">
+                                    <input type="checkbox" id="terms-and-conditions" required={required}/>
+                                    <label htmlFor="terms-and-conditions">I accept the terms and conditions</label>
                                 </div>
-                            </div>
-
-                            <div className="purchase-terms">
-                                <input type="checkbox" id="terms-and-conditions" required={required}/>
-                                <label htmlFor="terms-and-conditions">I accept the terms and conditions</label>
-                            </div>
 
 
-                        </form>
+                            </form>
 
 
-                    </section>
+                        </section>
+                    </div>
                 </div>
 
-                <div id="checkout-right-side">
-                    <section id="checkout-right">
+                    <div className={"checkout-split right"}>
+                        <div id="checkout-right-side">
+                            <section id="checkout-right">
 
-                        <h3 className="checkout-headers">Your cart</h3>
+                                <h3 className="checkout-headers">Your cart</h3>
 
-                        <div className="checkout-right-content">
+                                <div className="checkout-right-content">
 
-                            <div className="checkout-product-display">
-                                <img className="product-checkout-image" src={courseData.course.imgLink}
-                                     alt="product image"/>
+                                    <div className="checkout-product-display">
+                                        <img className="product-checkout-image" src={courseData.course.imgLink}
+                                             alt="product image"/>
 
-                                <div className="checkout-product-display-text">
-                                    <h6 className="checkout-headers">{courseData.course.title}</h6>
-                                    <p className="product-desc">{courseData.course.description} </p>
+                                        <div className="checkout-product-display-text">
+                                            <h6 className="checkout-headers">{courseData.course.title}</h6>
+                                            <p className="product-desc">{courseData.course.description} </p>
+                                        </div>
+
+                                    </div>
+
+                                    <div className="product-price-overview">
+
+                                        <div className="product-price-overview-line" id="product-pricetag">
+                                            <p className="product-price-title-grey">Subtotal</p>
+                                            <p className="product-price"> {courseData.price},- NOK</p>
+                                        </div>
+
+                                        <div className="product-price-overview-line" id="purchase-discount">
+                                            <p className="product-price-title-grey">Discount</p>
+                                            <p className="product-price"> {(courseData.discount * 100).toFixed(0)}%</p>
+                                        </div>
+                                        &nbsp;
+                                        <div className="product-price-overview-line" id="purchase-total-cost">
+                                            <p className="product-price-title">Total</p>
+                                            <p className="product-price"> {(courseData.price * (1 - courseData.discount)).toFixed(2)},-
+                                                NOK</p>
+                                        </div>
+                                    </div>
+
+                                    <div id="purchase">
+                                        <button type="submit" className={"cta-button"} id={"checkout-purchase-button"}
+                                                onClick={handlePurchase} disabled={loading}>
+                                            {loading ? <p> Processing </p> : <p> Pay Now</p>}
+                                        </button>
+                                    </div>
+
                                 </div>
 
-                            </div>
-
-                            <div className="product-price-overview">
-
-                                <div className="product-price-overview-line" id="product-pricetag">
-                                    <p className="product-price-title-grey">Subtotal</p>
-                                    <p className="product-price"> {courseData.price},- NOK</p>
-                                </div>
-
-                                <div className="product-price-overview-line" id="purchase-discount">
-                                    <p className="product-price-title-grey">Discount</p>
-                                    <p className="product-price"> {(courseData.discount * 100).toFixed(0)}%</p>
-                                </div>
-                                &nbsp;
-                                <div className="product-price-overview-line" id="purchase-total-cost">
-                                    <p className="product-price-title">Total</p>
-                                    <p className="product-price"> {(courseData.price * (1 - courseData.discount)).toFixed(2)},-
-                                        NOK</p>
-                                </div>
-                            </div>
-
-                            <div id="purchase">
-                                <button type="submit" className={"cta-button"} id={"checkout-purchase-button"}
-                                        onClick={handlePurchase} disabled={loading}>
-                                    {loading ? <p> Processing </p> : <p> Pay Now</p>}
-                                </button>
-                            </div>
-
+                            </section>
                         </div>
 
-                    </section>
+                    </div>
 
-
-                </div>
             </div>
 
-            {
-                showLoginModal && createPortal(
-                    <Login changeMode={() => {
-                        setShowSignupModal(true)
-                        setShowLoginModal(false)
-                    }} onClose={() => setShowLoginModal(false)} closable={false}/>,
-                    document.getElementById("auth-modal")
-                )
-            }
-            {
-                showSignupModal && createPortal(
-                    <Register changeMode={() => {
-                        setShowLoginModal(true)
-                        setShowSignupModal(false)
-                    }} onClose={() => setShowSignupModal(false)} closable={false}/>,
-                    document.getElementById("auth-modal")
-                )
-            }
-        </article>
-    )
+                    {
+                        showLoginModal && createPortal(
+                            <Login changeMode={() => {
+                                setShowSignupModal(true)
+                                setShowLoginModal(false)
+                            }} onClose={() => setShowLoginModal(false)} closable={false}/>,
+                            document.getElementById("auth-modal")
+                        )
+                    }
+                    {
+                        showSignupModal && createPortal(
+                            <Register changeMode={() => {
+                                setShowLoginModal(true)
+                                setShowSignupModal(false)
+                            }} onClose={() => setShowSignupModal(false)} closable={false}/>,
+                            document.getElementById("auth-modal")
+                        )
+                    }
+        </div>
+)
 
 }
