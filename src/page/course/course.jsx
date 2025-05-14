@@ -217,7 +217,6 @@ export default function Course() {
 
                 <section id="course-related-certificates">
                     <h3 id="course-related-certificates-heading"> Related certificate</h3>
-                    {console.log(courseData)}
                    <a href={courseData.certLink} target="_blank">
                     <div id="course-certification-content">
                         <img src="/icons/reader-sharp.svg" alt="Certificate icon" className="filter-white"
