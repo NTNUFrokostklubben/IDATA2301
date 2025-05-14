@@ -3,9 +3,11 @@ import {useRef} from "react";
 import {useFocusTrap} from "../../../utils/useFocusTrap";
 import {sendAuthenticationRequest, sendSignupRequest} from "../../../utils/authentication/authentication";
 import {showFormErrorSignup} from "../../../utils/tools";
+import {addUserToRedux} from "../../../utils/commonRequests";
+import {useDispatch} from "react-redux";
 
 export default function Register({onClose, changeMode, closable=true }) {
-
+    const dispatch = useDispatch()
     const modalRef = useRef(null)
     useFocusTrap(modalRef, true, onClose) // Passes true to isOpen due to this modal only being open when it is rendered
 
@@ -24,7 +26,10 @@ export default function Register({onClose, changeMode, closable=true }) {
     function onSignupSuccess(userData, password) {
         console.log("Successfully signed up for user: ", userData.email);
         sendAuthenticationRequest(userData.email, password, onSigninSuccess, showFormErrorSignup);
-        window.location.reload();
+        addUserToRedux(userData.email, dispatch).then( () =>{
+            window.location.reload();
+        })
+
         onClose();
     }
 
