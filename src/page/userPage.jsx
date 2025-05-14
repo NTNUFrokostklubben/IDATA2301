@@ -181,7 +181,6 @@ export default function UserPage() {
                 <section id="user-page-content">
                     <div id={"user-page-content-info"}>
                         <section id="user-page-caret">
-
                             <div id="user-caret">
 
                                 <picture onClick={profileImageClickHandler}>

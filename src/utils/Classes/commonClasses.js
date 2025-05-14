@@ -2,7 +2,7 @@
  * Class representing a course entity.
  */
 export class courseEntity {
-    constructor(id, category, closestCourse, credits, description, diffLevel, hoursWeek, imgLink, relatedCert, title) {
+    constructor(id, category, closestCourse, credits, description, diffLevel, hoursWeek, imgLink, relatedCert, title, certLink) {
         this.id = id;
         this.category = category;
         this.closestCourse = closestCourse;
@@ -12,6 +12,7 @@ export class courseEntity {
         this.hoursWeek = hoursWeek;
         this.imgLink = imgLink;
         this.relatedCert = relatedCert;
+        this.certLink = certLink
         this.title = title;
     }
 }
