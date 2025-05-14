@@ -34,5 +34,6 @@ jobs:
       - name: Deploy
         run: |
           cd /home/local/matthehu/IDATA2301  # Path to your docker-compose.yml
-          docker-compose pull app
-          docker-compose up -d --no-deps app
+          docker-compose pull frontend
+          docker-compose up -d --no-deps frontend nginx
+          docker exec learniverse-nginx-prod nginx -s reload
