@@ -143,7 +143,7 @@ export default function UserPage() {
         const fetchData = async () => {
             if (!user) return; // Don't fetch unless user is set
             try{
-                await new Promise(r => setTimeout(r, 15000));
+                await new Promise(r => setTimeout(r, 150));
                 await Promise.all([
                     handleFavoritesData(),
                     handleCourseData()

@@ -30,15 +30,12 @@ export default function Checkout() {
     const [required] = useState(true);
 
 
-
     const handlePurchase = async () =>{
 
         setLoading(true)
         const status = await AsyncApiRequest("POST", `/transaction/offerId/${courseData.id}/userid/${userData.id}`, null);
         try {
-
-            await new Promise((resolve) => setTimeout(resolve, 2000));
-
+            await new Promise((resolve) => setTimeout(resolve, 20000));
         } catch (err) {
             console.error(err);
         } finally {
@@ -46,7 +43,6 @@ export default function Checkout() {
             navigate('/order-complete');
         }
     }
-
 
     const handleExpiration = (e) => {
         let value = e.target.value.replace(/\D/g, ""); // Remove non-digits
@@ -68,18 +64,6 @@ export default function Checkout() {
 
         setCardNumber(formatted);
     }
-    const openPopup = (url) => {
-        const width = 700;
-        const height = 500;
-        const left = (window.innerWidth - width) / 2;
-        const top = (window.innerHeight - height) / 2;
-
-        window.open(
-            url, // URL
-            "_blank", // Target
-            `width=${width},height=${height},left=${left},top=${top},resizable=yes,scrollbars=yes`
-        );
-    };
 
     function loggedIn(){
         let user = getAuthenticatedUser();
@@ -193,65 +177,63 @@ export default function Checkout() {
                             <h2 className="checkout-headers">Your Cart</h2>
 
                             <div className="checkout-right-content">
+                                <div className="checkout-product-display">
 
-                            <div className="checkout-product-display">
-                                        <img className="product-checkout-image" src={courseData.course.imgLink}
-                                             alt="product image"/>
+                                    <img className="product-checkout-image" src={courseData.course.imgLink}
+                                         alt="product image"/>
 
-                                        <div className="checkout-product-display-text">
-                                            <h6 className="checkout-headers">{courseData.course.title}</h6>
-                                            <p className="product-desc">{courseData.course.description} </p>
-                                        </div>
-
-                                    </div>
-
-                                    <div className="product-price-overview">
-
-                                        <div className="product-price-overview-line" id="product-pricetag">
-                                            <p className="product-price-title-grey">Subtotal</p>
-                                            <p className="product-price"> {courseData.price},- NOK</p>
-                                        </div>
-
-                                        <div className="product-price-overview-line" id="purchase-discount">
-                                            <p className="product-price-title-grey">Discount</p>
-                                            <p className="product-price"> {(courseData.discount * 100).toFixed(0)}%</p>
-                                        </div>
-                                        &nbsp;
-                                        <div className="product-price-overview-line" id="purchase-total-cost">
-                                            <p className="product-price-title">Total</p>
-                                            <p className="product-price"> {(courseData.price * (1 - courseData.discount)).toFixed(2)},-
-                                                NOK</p>
-                                        </div>
+                                    <div className="checkout-product-display-text">
+                                        <h6 className="checkout-headers">{courseData.course.title}</h6>
+                                        <p className="product-desc">{courseData.course.description} </p>
                                     </div>
 
                                 </div>
 
-                            </section>
-                        </div>
+                                <div className="product-price-overview">
 
+                                    <div className="product-price-overview-line" id="product-pricetag">
+                                        <p className="product-price-title-grey">Subtotal</p>
+                                        <p className="product-price"> {courseData.price},- NOK</p>
+                                    </div>
+
+                                    <div className="product-price-overview-line" id="purchase-discount">
+                                        <p className="product-price-title-grey">Discount</p>
+                                        <p className="product-price">
+                                            {(courseData.discount * 100).toFixed(0)}%</p>
+                                    </div>
+                                    &nbsp;
+                                    <div className="product-price-overview-line" id="purchase-total-cost">
+                                        <p className="product-price-title">Total</p>
+                                        <p className="product-price">
+                                            {(courseData.price * (1 - courseData.discount)).toFixed(2)},-
+                                            NOK</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
                     </div>
-
+                </div>
             </div>
 
-                    {
-                        showLoginModal && createPortal(
-                            <Login changeMode={() => {
-                                setShowSignupModal(true)
-                                setShowLoginModal(false)
-                            }} onClose={() => setShowLoginModal(false)} closable={false}/>,
-                            document.getElementById("auth-modal")
-                        )
-                    }
-                    {
-                        showSignupModal && createPortal(
-                            <Register changeMode={() => {
-                                setShowLoginModal(true)
-                                setShowSignupModal(false)
-                            }} onClose={() => setShowSignupModal(false)} closable={false}/>,
-                            document.getElementById("auth-modal")
-                        )
-                    }
+            {
+                showLoginModal && createPortal(
+                    <Login changeMode={() => {
+                        setShowSignupModal(true)
+                        setShowLoginModal(false)
+                    }} onClose={() => setShowLoginModal(false)} closable={false}/>,
+                    document.getElementById("auth-modal")
+                )
+            }
+            {
+                showSignupModal && createPortal(
+                    <Register changeMode={() => {
+                        setShowLoginModal(true)
+                        setShowSignupModal(false)
+                    }} onClose={() => setShowSignupModal(false)} closable={false}/>,
+                    document.getElementById("auth-modal")
+                )
+            }
         </div>
-)
+    )
 
 }
