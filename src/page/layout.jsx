@@ -107,7 +107,6 @@ export default function Layout() {
             <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin/>
             <link href="https://fonts.googleapis.com/css2?family=Tienne:wght@400;700;900&display=swap"
                   rel="stylesheet"/>
-            {/*Navbar*/}
             <menu id="menu-navbar">
                 <li id="logo-image">
                     <Link to={"/"}><img id="logo-icon" src="/logo.svg" alt="Learniverse Logo"/></Link>

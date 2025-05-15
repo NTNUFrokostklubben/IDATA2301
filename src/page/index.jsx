@@ -176,14 +176,12 @@ export default function Index() {
      */
     const [slideIndex, setSlideIndex] = useState(0);
     const slides = [
-        "https://picsum.photos/480/320?random=1",
-        "https://picsum.photos/480/320?random=2",
-        "https://picsum.photos/480/320?random=3",
-        "https://picsum.photos/480/320?random=4",
-        "https://picsum.photos/480/320?random=5",
-        "https://picsum.photos/480/320?random=6",
-        "https://picsum.photos/480/320?random=7",
-        "https://picsum.photos/480/320?random=8",
+        "home-school",
+        "online",
+        "person-programming",
+        "student-online",
+        "teacher-explaining-math",
+        "teacher-planning"
     ];
 
     useEffect(() => {
@@ -354,9 +352,13 @@ export default function Index() {
                     <div id="index-slideshow-container">
                         {slides.map((slide, index) => (
                             <div key={index} className="index-mySlides index-fade"
-                                style={{display: index === slideIndex ? "block" : "none"}}>
+                                 style={{display: index === slideIndex ? "block" : "none"}}>
 
-                                <img className="index-slideshow-img" src={slide} alt={`Slide ${index + 1}`}/>
+                                {/*TODO style this and change the size on them*/}
+                                <picture>
+                                    <source srcSet={"/images/carusel/"+ slide + ".webp"} type="image/webp"/>
+                                    <img  height={"200rem"} src={"/images/carusel/" + slide + ".jpg"} alt="carusel image"/>
+                                </picture>
                             </div>
                         ))}
                     </div>
