@@ -204,14 +204,13 @@ export default function Index() {
     return (
         <div id={"index"}>
             <section id="index-hero-section">
-                <div className="index-hero">
+                <div id="index-hero">
 
-                    <div className="index-hero-main-box">
-                        <div className="index-hero-main-text">
+                    <div id="index-hero-main-box">
+                        <div id="index-hero-main-text">
                             <p>
                                 Learniverse offers courses that give you the competence you need to succeed in the
-                                workplace
-                                and beyond!
+                                workplace and beyond!
                             </p>
                         </div>
 
@@ -237,14 +236,13 @@ export default function Index() {
                 </div>
             </section>
 
-            <div id={"index-course-background"}>
+            <div id="index-course-background">
                 <section id="index-course-content">
                     <div className="title-and-subtitle">
-                        <h2 className="section-heading">Lorem ipsum dolor sit amet</h2>
-                        <h3 className="section-subheading">
-                            Consectetur adipiscing elit, sed do eiusmod tempor
-                            incididunt ut labore et dolore magna aliqua.
-                        </h3>
+                        <h2 className="section-heading">Preview some of our courses!</h2>
+                        <h5 className="section-subheading">
+                            At Learniverse Connect, we believe education should be flexible, practical, and inspiring
+                        </h5>
                     </div>
 
                 <section id="index-course-cards-section">
@@ -252,9 +250,11 @@ export default function Index() {
                     {overflow ?
                         <section className="index-arrow">
                             <button id="index-arrow-left-btn"
-                                    onClick={() => setCourseIndex((prevIndex) => (prevIndex - 1 + courseCards.length) % courseCards.length)}>
-                                <img className={"filter-cta"} id={"index-arrow-icon"} src="/icons/arrow-back-circle-sharp.svg"
-                                     alt="Arrow Left"/>
+                                    onClick={() =>
+                                        setCourseIndex((prevIndex) =>
+                                            (prevIndex - 1 + courseCards.length) % courseCards.length)}>
+                                <img className="filter-cta" id="index-arrow-icon"
+                                     src="/icons/arrow-back-circle-sharp.svg" alt="Arrow Left"/>
                             </button>
                         </section>
                         : null
@@ -262,7 +262,7 @@ export default function Index() {
 
 
                     {loading ?
-                        <section id={"index-collection-cards"}>
+                        <section id="index-collection-cards">
                             {Array.from({length: courseShown}).map((_, index) => (
                                 <CourseCardSkeleton key={index}/>
                             ))}
@@ -294,7 +294,7 @@ export default function Index() {
                             <button id="index-arrow-right-btn"
                                     onClick={() => setCourseIndex((prevIndex) =>
                                         (prevIndex + 1 + courseCards.length) % courseCards.length)}>
-                                <img className={"filter-cta"} id={"index-arrow-icon"} src="/icons/arrow-forward-circle-sharp.svg"
+                                <img className="filter-cta" id="index-arrow-icon" src="/icons/arrow-forward-circle-sharp.svg"
                                      alt="Arrow Right"/>
                             </button>
                         </section>
@@ -305,22 +305,22 @@ export default function Index() {
                 </section>
                 </section>
             </div>
-            <div id={"index-collaborators-background"}>
+            <div id="index-collaborators-background">
                 <section id="index-collaborators-section">
                     <div className="title-and-subtitle">
                         <h2 className="section-heading">Collaborators</h2>
-                        <h3 className="section-subheading">Proud collaborator with over 200+ companies and
-                            organizations</h3>
+                        <h5 className="section-subheading">Proud collaborator with over 200+ companies and
+                            organizations</h5>
                     </div>
                     {loading ?
-                        <div className="index-collaborator-logos-skeleton">
+                        <div>
                             <Skeleton variant="rectangular" height="15rem" width="100%" />
                         </div>
                         :
                         <div id="index-collaborator-logos">
 
                             {providers.map((provider) => (
-                                <div className={"index-logo"} id={"index-logo" + provider.id} key={provider.id}>
+                                <div className="index-logo" id={"index-logo" + provider.id} key={provider.id}>
                                     <img src={provider.logoLink} alt={provider.name}/>
                                 </div>
                             ))}
@@ -334,11 +334,14 @@ export default function Index() {
                 <div id="index-testimonial_box">
                     <img id="index-testimonial_photo" src="/images/testimonial.jpg" alt="testimonial"/>
                     <div id="index-testimonial_text">
-                        <h3>Navn Navnesen Namsos</h3>
-                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                            laudantium, totam rem
-                            aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta
-                            sunt explicabo.</p>
+                        <h3>Elena Martinez - Project Coordinator</h3>
+                        &nbsp;
+                        <p>
+                            “Learniverse completely changed how I approach learning. The courses were hands-on,
+                            the instructors were engaging, and the flexibility let me fit everything around my
+                            full-time job. I earned a certification that helped me land a promotion—worth every
+                            minute.”
+                        </p>
                     </div>
                 </div>
             </section>
@@ -348,20 +351,21 @@ export default function Index() {
                     {/* The SVG Background and Pattern is by SVGBackgrounds.com*/}
                     {/* Url: "https://www.svgbackgrounds.com/set/free-svg-backgrounds-and-patterns/"*/}
 
-                    <div className="index-slideshow-container">
+                    <div id="index-slideshow-container">
                         {slides.map((slide, index) => (
                             <div key={index} className="index-mySlides index-fade"
                                 style={{display: index === slideIndex ? "block" : "none"}}>
 
-                                <img className={"index-slideshow-img"} src={slide} alt={`Slide ${index + 1}`}/>
+                                <img className="index-slideshow-img" src={slide} alt={`Slide ${index + 1}`}/>
                             </div>
                         ))}
                     </div>
 
                     <div id="index-hero2-textbox">
-                        <div className="index-hero2-title-subtitle">
+                        <div>
                             <h3>Learn new skills with Learniverse</h3>
-                            <h6> xx% of learners learn something, which do this and this! Become one of the today</h6>
+                            <p id="index-hero2-discription"> Join thousands of learners transforming their careers through expert-led online
+                                courses. Learniverse helps you grow — anytime, anywhere.</p>
                         </div>
                         <div id="index-hero2-button">
                             <div className="index-signed-out">

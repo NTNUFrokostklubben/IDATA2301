@@ -12,7 +12,7 @@
     background-color: var(--background);
     width: 100%;
 }
-.index-hero{
+#index-hero{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -22,7 +22,7 @@
 
 }
 
-.index-hero-main-box{
+#index-hero-main-box{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -34,16 +34,16 @@
 
 }
 
-.index-hero-main-text{
+#index-hero-main-text{
     text-align: center;
 }
 
-.index-hero-main-box p {
+#index-hero-main-box p {
     font-size: 1.5rem;
     color: var(--textBlack);
 }
 
-.index-hero-main-box button p {
+#index-hero-main-box button p {
     font-size: 1rem;
     color: var(--textWhite);
 }
@@ -52,13 +52,11 @@
     display: flex;
     align-self: flex-end;
     justify-content: flex-start;
-
 }
 
 #index-hero-image{
     transform: scaleX(-1);
     width: 20rem;
-
 }
 
 .index-first-btn{
@@ -70,7 +68,7 @@
     padding: 0.4rem;
     width: fit-content;
 }
-#index-free-btn:hover{
+.index-first-btn:hover{
     box-shadow: var(--shadow);
 }
 #index-course-background {
@@ -240,7 +238,7 @@
 
 }
 /* Slideshow container */
-.index-slideshow-container {
+#index-slideshow-container {
     justify-content: center;
     padding: 2rem;
 }
@@ -285,15 +283,8 @@
 #index-hero2-textbox h3{
     padding-bottom: 1.5rem;
 }
-#index-hero2-textbox h6{
-    font-weight: normal;
-}
-#index-hero2-title-subtitle{
-    padding: 1rem;
-}
-#index-hero2-button p{
-    font-weight: normal;
-    color: var(--textWhite);
+#index-hero2-discription{
+    font-size: 1.1rem;
 }
 #index-hero2-button{
     display: flex;
