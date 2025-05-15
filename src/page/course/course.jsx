@@ -146,7 +146,7 @@ export default function Course() {
 
     async function checkFavorite() {
         try {
-            const favoriteState = await AsyncApiRequest("GET", `/isFavorited/${user.id}/${id}`, false)
+            const favoriteState = await AsyncApiRequest("GET", `/favorite/isFavorite/user/${user.id}/course/${id}`, false)
                 .then(response => response.json());
             setFavorite(favoriteState);
 
@@ -255,14 +255,14 @@ export default function Course() {
                     </section>)
                 }
 
-                {user &&  (
+
                     <section className="course-page-reviews">
                         <div className="course-page-review-aggregate">
                             <h3> Customer reviews</h3>
                             &nbsp;
-                            <ReviewSection cid={id} averageRating={ratingData} uid={user.id}/>
+                            <ReviewSection cid={id} averageRating={ratingData} user={user}/>
                         </div>
-                    </section>)}
+                    </section>
 
             </div>
         </div>
