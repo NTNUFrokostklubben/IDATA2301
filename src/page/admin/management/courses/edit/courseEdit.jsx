@@ -270,13 +270,15 @@ export default function CourseEdit() {
     async function fetchKeywords() {
         try {
             const p = await getKeywords(id);
+
+
             const keywords = p.map((keyword) => {
                 return keyword.keyword;
             });
 
             setKeywords(keywords);
         } catch (e) {
-            throw new Error(e);
+            setKeywords([]);
         }
     }
 
