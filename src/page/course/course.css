@@ -82,13 +82,13 @@
     align-items: center;
     height: 17rem;
     width: 27rem;
+    margin: 1rem;
 }
 
 
 #course-splash-image{
     display: flex;
-    height: 15rem;
-    width: 20rem;
+    height: 100%;
     box-shadow: 0px 8px 16px 0px var(--shadow);
 }
 
