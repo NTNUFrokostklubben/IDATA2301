@@ -147,7 +147,7 @@ export default function Course() {
 
     async function checkFavorite() {
         try {
-            const favoriteState = await AsyncApiRequest("GET", `/favorite/isFavorite/user/${user.id}/course/${id}`, false)
+            const favoriteState = await AsyncApiRequest("GET", `/favorite/isFavorite/course/${id}`, false)
                 .then(response => response.json());
             setFavorite(favoriteState);
 
@@ -177,7 +177,7 @@ export default function Course() {
     // }
     return (
         <div className="course-page">
-            <div className="course-page-content">
+            <button className="course-page-content">
                 <section id="course-splash">
                     <div id="course-splash-right-side">
                         {user && isFavoriteLoaded && (
@@ -236,7 +236,8 @@ export default function Course() {
                 <section id="course-related-certificates">
                     <h3 id="course-related-certificates-heading"> Related certificate</h3>
                    <a href={courseData.certLink} target="_blank">
-                    <div id="course-certification-content">
+
+                    <button className={"cta-button"} id="course-certification-content">
                         <img src="/icons/reader-sharp.svg" alt="Certificate icon" className="filter-white"
                              id="certification-img"/>
                         {loading ?
@@ -244,7 +245,7 @@ export default function Course() {
                             :
                             <p id="course-related-certificates-text">{courseData.relatedCert}</p>
                         }
-                    </div>
+                    </button>
                 </a>
                 </section>
 

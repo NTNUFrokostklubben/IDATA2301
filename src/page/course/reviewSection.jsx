@@ -22,13 +22,22 @@ export function ReviewSection({cid, user, averageRating}) {
 
 
     const fetchData = async () => {
-
         if (averageRating !== undefined) {
 
             if (!Number.isInteger(averageRating)) {
                 setHalfStar(true)
             }
             setStars(Array(Math.floor(averageRating)).fill(0))
+        }
+    }
+
+    const enrolledCheck = async () =>{
+        try {
+
+            return  await AsyncApiRequest("GET", `/userCourses/enrolled/${cid}`, null)
+                .then(response => response.json());
+        }catch (e){
+            console.error(e)
         }
     }
     const fetchRatingArray = async () => {
@@ -41,8 +50,12 @@ export function ReviewSection({cid, user, averageRating}) {
         setUserCourseData(data)
         setFilteredReviews(filteredAndSorted)
         if (user){
-            setIsUserEnrolled(data.some(course => course.user?.id === user))
-            setAllowEditReview(filteredAndSorted.some(obj => obj.user?.id === user))
+           let enrolled = enrolledCheck();
+               enrolled.then( item => {
+               setIsUserEnrolled(item)
+           })
+            setAllowEditReview(filteredAndSorted.some(obj => obj.user?.id === user.id))
+            console.log(allowEditReview)
         }else
         {
             setIsUserEnrolled(false)
@@ -50,7 +63,6 @@ export function ReviewSection({cid, user, averageRating}) {
             setEditReview(false)
         }
         calculateStarDistribution(data.map(item => item.review?.rating), filteredAndSorted.length);
-
 
     }
 
@@ -67,8 +79,8 @@ export function ReviewSection({cid, user, averageRating}) {
         }
     }
 
-    const getUserReview = (uid) => {
-        return filteredReviews.find(review => review.user?.id === uid)
+    const getUserReview = (user) => {
+        return filteredReviews.find(review => review.user?.id === user.id)
     }
 
 
@@ -85,8 +97,8 @@ export function ReviewSection({cid, user, averageRating}) {
         refresh();
     }
 
-    const finishedAdd= () => {
-        setAllowEditReview(true);
+    const finishedAdd= (value) => {
+        setAllowEditReview(value);
         setAddReview(false);
         refresh();
     }
@@ -140,10 +152,10 @@ export function ReviewSection({cid, user, averageRating}) {
 
     return (
         <div>
-            {filteredReviews.length > 0 ?
                 <div className={"course-page-review-component"}>
 
                     <div className={"course-page-review-component-top"}>
+                        {filteredReviews.length > 0 ? (
                         <div className={"course-page-review-component-left"}>
                             {stars !== [] && (
 
@@ -157,7 +169,7 @@ export function ReviewSection({cid, user, averageRating}) {
                                     <p className={"review-component-average-rating"}>{averageRating} out of 5 </p>
                                 </div>
                             )}
-
+                            {filteredReviews.length > 0 && (
                             <div className={"course-page-reviews-rating-bars"}>
                                 {
                                     starBars.map((item, index) =>
@@ -174,11 +186,9 @@ export function ReviewSection({cid, user, averageRating}) {
                                         </button>
                                     )
                                 }
-
-                            </div>
+                            </div>)}
                             {user && cid && (
                                 <div className={"review-writer-section-writer"}>
-
                                     {isUserEnrolled && !allowEditReview && (
                                         <button className={"cta-button"} id={"add-review"}
                                                 onClick={() => {
@@ -198,32 +208,47 @@ export function ReviewSection({cid, user, averageRating}) {
                                     )}
                                 </div>
                             )}
-                        </div>
+                        </div>) : (
+                            <div>
+                            {user && cid && (
+                            <div className={"review-writer-section-writer"}>
+                                {isUserEnrolled && !allowEditReview && (
+                                    <button className={"cta-button"} id={"add-review"}
+                                            onClick={() => {
+                                                setAddReview(true)
+                                            }}>
+                                        <p>Write a review?</p>
+                                    </button>
+                                )}
+                            </div>
+                            )}
+                            </div>
+                        )}
 
 
-                        {filteredReviews !== null && (
+                        {filteredReviews.length > 0 ? (
                             <div className={"course-page-review-component-right"}>
                                 {filteredReviews.map(item =>
                                         <Review key={item.id} rating={item} title={false}/>
-                                )}
-                            </div>)}
+                                    )
+                                }
+                            </div>  ) :
+                            <p>No reviews</p>
+                        }
                     </div>
 
                     {user && cid && (
                         <div className={"course-page-review-component-bottom"}>
                             {addReview && (
-                                <ReviewWriter cid={cid} uid={user} callback={finishedAdd}/>
+                                <ReviewWriter cid={cid} callback={finishedAdd}/>
                             )}
                             {editReview && ((
-                                <ReviewWriter cid={cid} uid={user} existingReview={getUserReview(user)}
+                                <ReviewWriter cid={cid} existingReview={getUserReview(user)}
                                               callback={finishedEdits}/>
                             ))}
                         </div>
                     )}
                 </div>
-            :
-            <p>No reviews</p>
-            }
 
         </div>
     )

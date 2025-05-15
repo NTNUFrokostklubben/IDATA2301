@@ -29,7 +29,7 @@ export function UserImageModal({close, uid}) {
         if (value) {
             let defImg = "https://localhost:8081/uploads/images/default_img.png"
             dispatch(setUserImage(defImg))
-            const userDto = AsyncApiRequest("PUT", `/user/image/${uid}`, defImg)
+            const userDto = AsyncApiRequest("PUT", `/user/image/`, defImg)
                 .then(response => response.json())
             close();
         }
@@ -40,7 +40,7 @@ export function UserImageModal({close, uid}) {
 
     function changePfp(link) {
 
-        const userDto = AsyncApiRequest("PUT", `/user/image/${uid}`, link)
+        const userDto = AsyncApiRequest("PUT", `/user/image/`, link)
             .then(response => response.json())
         close();
     }
@@ -157,10 +157,10 @@ export default function UserPage() {
         fetchData();
     }, [user]);
 
-    async function handleCourseData() {
-        try {
-            const courseData = await AsyncApiRequest("GET", `/userCourses/${user.id}`, null)
-                .then(response => response.json())
+        async function handleCourseData() {
+            try {
+                const courseData = await AsyncApiRequest("GET", `/userCourses/user`, null)
+                    .then(response => response.json())
 
             const filteredAndSorted = courseData
                 .filter(item => item.review?.rating > 0)
@@ -173,15 +173,16 @@ export default function UserPage() {
         }
     }
 
-    async function handleFavoritesData() {
-        try {
-            const favoritesData = await AsyncApiRequest("GET", `/favorite/user/${user.id}`, null)
-                .then(response => response.json())
-            setFavorites(favoritesData)
-        } catch (e) {
-            console.error(e)
+
+        async function handleFavoritesData() {
+            try {
+                const favoritesData = await AsyncApiRequest("GET", `/favorite/user`, null)
+                    .then(response => response.json())
+                setFavorites(favoritesData)
+            } catch (e) {
+                console.error(e)
+            }
         }
-    }
 
 
     function profileImageClickHandler() {
@@ -196,7 +197,6 @@ export default function UserPage() {
                     <div id="user-page-content-info">
                         <section id="user-page-caret">
                             <div id="user-caret">
-                                {console.log(user)}
                                 <picture onClick={profileImageClickHandler}>
                                     <img className="user-page-user-image" src={user.profilePicture} alt="user"/>
                                 </picture>
