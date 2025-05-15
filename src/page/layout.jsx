@@ -16,7 +16,6 @@ import LearniverseLogo from "../component/icons/learniverseLogo";
 
 export default function Layout() {
 
-
     const [showLoginModal, setShowLoginModal] = useState();
     const [showSignupModal, setShowSignupModal] = useState();
     const [searchParams, setSearchParams] = useSearchParams();
@@ -58,9 +57,11 @@ export default function Layout() {
 
     }
 
+    /**
+     * Fetches the user profile picture link
+     */
     useEffect(() => {
         if (user) setUserPicture(user.profilePicture)
-
     }, [user]);
 
     /**
@@ -70,7 +71,6 @@ export default function Layout() {
         navigate("/search");
     }
 
-
     /**
      * Navigates to the user page.
      */
@@ -78,6 +78,10 @@ export default function Layout() {
         navigate(`/userpage`);
     }
 
+    /**
+     * Deletes the user object from the Redux store.
+     * @returns {Promise<void>}
+     */
     async function deleteUserRedux(){
         dispatch(clearUserObject())
     }

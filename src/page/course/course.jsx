@@ -171,13 +171,10 @@ export default function Course() {
         }
         return value;
     }
-    //
-    // if (loading) {
-    //     return (<h1>loading</h1>)
-    // }
+
     return (
         <div className="course-page">
-            <button className="course-page-content">
+            <div className="course-page-content">
                 <section id="course-splash">
                     <div id="course-splash-right-side">
                         {user && isFavoriteLoaded && (

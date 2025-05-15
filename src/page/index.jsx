@@ -9,6 +9,8 @@ import {AsyncApiRequest} from "../utils/requests";
 import {CourseWithPrice} from "../utils/Classes/commonClasses";
 import {getCourses, getProviders} from "../utils/commonRequests";
 import {Skeleton} from "@mui/material";
+import {getAuthenticatedUser} from "../utils/authentication/authentication";
+import {useNavigate} from "react-router-dom";
 
 export default function Index() {
 
@@ -19,6 +21,7 @@ export default function Index() {
     const [loading, setLoading] = useState(true);
     const [providers, setProviders] = useState([]);
     const [overflow, setOverflow] = useState(false);
+    const navigate = useNavigate();
 
     /**
      * Use to resize the course shown based on window size
@@ -149,6 +152,26 @@ export default function Index() {
     }
 
     /**
+     * This function is called when the component mounts.
+     * It checks if the user is logged in and updates the UI accordingly.
+     */
+    useEffect(() => {
+        // Check if the user is logged in
+        const user = getAuthenticatedUser();
+        const signedOutElements = document.querySelectorAll(".index-signed-out");
+        const signedInElements = document.querySelectorAll(".index-signed-in");
+        if (!user) {
+            // Show login and signup buttons
+            signedOutElements.forEach(element => element.style.display = "flex");
+            signedInElements.forEach(element => element.style.display = "none");
+        } else {
+            // If logged in, show the logout button and user icon
+            signedOutElements.forEach(element => element.style.display = "none");
+            signedInElements.forEach(element => element.style.display = "flex");
+        }
+    }, []);
+
+    /**
      * Different slides in the photo gallery.
      */
     const [slideIndex, setSlideIndex] = useState(0);
@@ -170,6 +193,14 @@ export default function Index() {
         return () => clearInterval(interval);
     }, []);
 
+    const goToSearch = () => {
+        navigate("/search");
+    }
+
+    const goToAboutUs = () => {
+        navigate("/aboutUs");
+    }
+
     return (
         <div id={"index"}>
             <section id="index-hero-section">
@@ -183,9 +214,19 @@ export default function Index() {
                                 and beyond!
                             </p>
                         </div>
-                        <button onClick={() => setShowSignupModal(true)} className="cta-button" id="index-free-btn">
-                            <p>Try for free!</p>
-                        </button>
+
+                        <div className="index-signed-out">
+                            <button onClick={() => setShowSignupModal(true)}
+                                    className="cta-button index-first-btn">
+                                <p>Try for free!</p>
+                            </button>
+                        </div>
+                        <div className="index-signed-in">
+                            <button onClick={goToSearch} className="cta-button index-first-btn">
+                                <p>Discover our Courses</p>
+                            </button>
+                        </div>
+
                     </div>
 
                     <div id="index-hero-main-image">
@@ -200,9 +241,10 @@ export default function Index() {
                 <section id="index-course-content">
                     <div className="title-and-subtitle">
                         <h2 className="section-heading">Lorem ipsum dolor sit amet</h2>
-                        <h3 className="section-subheading">Consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                            ut
-                            labore et dolore magna aliqua.</h3>
+                        <h3 className="section-subheading">
+                            Consectetur adipiscing elit, sed do eiusmod tempor
+                            incididunt ut labore et dolore magna aliqua.
+                        </h3>
                     </div>
 
                 <section id="index-course-cards-section">
@@ -322,12 +364,20 @@ export default function Index() {
                             <h6> xx% of learners learn something, which do this and this! Become one of the today</h6>
                         </div>
                         <div id="index-hero2-button">
-                            <button onClick={() => setShowSignupModal(true)} className="cta-button"
-                                    id="index-join-for-free">
-                                <img className="filter-white" id="index-join" src=" /icons/person-add-sharp.svg"
-                                     alt="Join"/> &nbsp;
-                                <p>Join for free!</p>
-                            </button>
+                            <div className="index-signed-out">
+                                <button onClick={() => setShowSignupModal(true)} className="cta-button"
+                                        id="index-join-for-free">
+                                    <img className="filter-white" id="index-join" src=" /icons/person-add-sharp.svg"
+                                         alt="Join"/> &nbsp;
+                                    <p>Join for free!</p>
+                                </button>
+                            </div>
+                            <div className="index-signed-in">
+                                <button onClick={goToAboutUs} className="cta-button index-first-btn">
+                                    <p> About us</p>
+                                </button>
+                            </div>
+
                         </div>
                     </div>
                 </div>

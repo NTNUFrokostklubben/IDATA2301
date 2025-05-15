@@ -61,14 +61,14 @@
 
 }
 
-#index-free-btn{
+.index-first-btn{
     cursor: pointer;
     font-size: large;
     text-align: center;
     text-decoration: none;
     margin-top: 2rem;
     padding: 0.4rem;
-    width: 10rem;
+    width: fit-content;
 }
 #index-free-btn:hover{
     box-shadow: var(--shadow);
@@ -318,23 +318,6 @@
     height: 1rem;
 }
 
-
-@media (max-width: 3000px) {
-
-}
-@media (max-width: 2800px) {
-
-}
-@media (max-width: 2350px) {
-
-}
-@media (max-width: 1900px) {
-
-}
-
-@media (max-width: 1600px) {
-
-}
 @media (max-width: 1250px) {
     #index-hero-image{
         width: 18rem;
