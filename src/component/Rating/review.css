@@ -45,10 +45,12 @@
 }
 
 .review-text {
+    padding-right: 2rem;
     overflow-wrap: break-word;
     word-wrap: break-word;
     word-break: break-word;
     hyphens: auto;
+
 }
 #go-to-course-img{
     height: 2rem;

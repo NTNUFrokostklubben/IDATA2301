@@ -6,7 +6,7 @@ import {useNavigate} from "react-router-dom";
 
 //TODO make title and text go away on publish
 //TODO refresh review component on publish
-export default function ReviewWriter({uid, cid, existingReview = null, callback = null}){
+export default function ReviewWriter({ cid, existingReview = null, callback = null}){
     const [reviewText, setReviewText] = useState('');
     const [reviewTitle, setReviewTitle] = useState('');
     const [reviewStars, setReviewStars] = useState((5));
@@ -41,7 +41,7 @@ export default function ReviewWriter({uid, cid, existingReview = null, callback 
         const request = await AsyncApiRequest("PUT", `/userCourses/addRating/${cid}`, payload);
 
         if (callback != null){
-            callback();
+            callback(true);
         }
         navigate(0);
     }
@@ -51,7 +51,7 @@ export default function ReviewWriter({uid, cid, existingReview = null, callback 
         setReviewTitle('');
         setReviewStars(5);
         if (callback != null){
-            callback();
+            callback(false);
         }
     }
 
