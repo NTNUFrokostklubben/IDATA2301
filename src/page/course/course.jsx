@@ -147,7 +147,7 @@ export default function Course() {
 
     async function checkFavorite() {
         try {
-            const favoriteState = await AsyncApiRequest("GET", `/isFavorited/${user.id}/${id}`, false)
+            const favoriteState = await AsyncApiRequest("GET", `/favorite/isFavorite/user/${user.id}/course/${id}`, false)
                 .then(response => response.json());
             setFavorite(favoriteState);
 
@@ -235,6 +235,7 @@ export default function Course() {
 
                 <section id="course-related-certificates">
                     <h3 id="course-related-certificates-heading"> Related certificate</h3>
+                   <a href={courseData.certLink} target="_blank">
                     <div id="course-certification-content">
                         <img src="/icons/reader-sharp.svg" alt="Certificate icon" className="filter-white"
                              id="certification-img"/>
@@ -244,7 +245,7 @@ export default function Course() {
                             <p id="course-related-certificates-text">{courseData.relatedCert}</p>
                         }
                     </div>
-
+                </a>
                 </section>
 
                 <section id="course-description">
@@ -321,7 +322,7 @@ export default function Course() {
                                 <div className="course-page-review-aggregate">
                                     <h3> Customer reviews</h3>
                                     &nbsp;
-                                    <ReviewSection cid={id} averageRating={ratingData} uid={user.id}/>
+                                    <ReviewSection cid={id} averageRating={ratingData} user={user}/>
                                 </div>
                             </section>)
                         }

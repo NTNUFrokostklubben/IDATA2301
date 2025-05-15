@@ -27,8 +27,13 @@ export function UserImageModal({close, uid}) {
 
     function deletePfp(value) {
         if (value) {
-            dispatch(setUserImage("http://localhost:8081/uploads/images/default_img.png"))
+            let defImg = "https://localhost:8081/uploads/images/default_img.png"
+            dispatch(setUserImage(defImg))
+            const userDto = AsyncApiRequest("PUT", `/user/image/${uid}`, defImg)
+                .then(response => response.json())
+            close();
         }
+
         setOpen(false)
         close();
     }
@@ -155,7 +160,7 @@ export default function UserPage() {
 
         async function handleFavoritesData() {
             try {
-                const favoritesData = await AsyncApiRequest("GET", `/userFavorites/${user.id}`, null)
+                const favoritesData = await AsyncApiRequest("GET", `/favorite/user/${user.id}`, null)
                     .then(response => response.json())
                 setFavorites(favoritesData)
             } catch (e) {
@@ -179,8 +184,8 @@ export default function UserPage() {
                 <section id="user-page-content">
                     <div id="user-page-content-info">
                         <section id="user-page-caret">
-
                             <div id="user-caret">
+                                {console.log(user)}
                                 <picture onClick={profileImageClickHandler}>
                                     <img className="user-page-user-image" src={user.profilePicture} alt="user"/>
                                 </picture>
