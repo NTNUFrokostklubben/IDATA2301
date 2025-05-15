@@ -1,5 +1,7 @@
 import {getCookie} from "./authentication/cookies";
 import {HttpResponseError} from "./authentication/HttpResponseError";
+import {deleteAuthorizationCookies} from "./authentication/authentication";
+import {deleteUserRedux} from "./commonRequests";
 
 
 const API_BASE_URL = process.env.REACT_APP_API_URL;
@@ -40,6 +42,13 @@ export function AsyncApiRequest(method, url, requestBody) {
             return data;
         })
         .catch(error => {
+            if(error.statusCode === 403){
+                deleteAuthorizationCookies();
+                deleteUserRedux().then(() =>{
+                    window.location.href = "/";
+                })
+
+            }
             console.error('Error:', error);
             throw error;
         });
