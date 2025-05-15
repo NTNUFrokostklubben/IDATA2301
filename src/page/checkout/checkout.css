@@ -1,0 +1,265 @@
+#page-layout-checkout{
+    /*padding-left: 1rem;*/
+    height: 100vh;
+    background-color: var(--highlight);
+    position: relative;
+}
+
+#checkout-content{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    min-height: 100%;
+}
+
+.checkout-split {
+    width: 50%;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+.left {
+    background-color: var(--textWhite);
+}
+
+.right {
+    background-color: var(--highlight);
+}
+
+#checkout-left-side, #checkout-right-side{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
+    justify-self: center;
+    justify-content: center;
+    padding: 1rem;
+    max-width: 40rem;
+    width: 80%;
+    gap: 2rem;
+}
+
+#checkout-right-side{
+    margin-bottom: 10rem;
+}
+
+#billing{
+    display: flex;
+    flex-direction: column;
+}
+
+.checkout-fill-out-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 1rem;
+}
+.checkout-fill-out-form label{
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.two-inputs{
+    display: flex;
+    justify-content: space-between;
+    gap: 3rem;
+}
+
+.checkout-input-section{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.input-field{
+    width: 100%;
+    height: 2rem; /* 30px / 16 */
+    background-color: var(--textWhite);
+    border: 1px solid black;
+}
+
+.input-field::placeholder{
+    padding-left: 0.3rem;
+    font-size: 1rem;
+}
+
+/* Country drop down*/
+.country-select{
+    border: 1px black;
+    height: 2rem;
+    width: 100%;
+    background-color: var(--textWhite);
+}
+.country-select * {
+    font-size: 1rem;
+}
+.country-select__control{
+    border: 1px solid black;
+    min-height: 1rem;
+}
+.country-select__menu{
+    background-color: var(--highlight);
+    color: var(--textBlack);
+    border: 1px solid black;
+}
+
+/*Purchase terms*/
+.purchase-terms{
+    display: flex;
+    flex-direction: row;
+    padding: 1rem;
+    margin-top: 1rem;
+    gap: 1rem;
+}
+
+
+#checkout-right{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.checkout-right-content{
+    display:  flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 2rem;
+}
+
+.checkout-product-display{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.product-desc{
+    text-align: left;
+}
+
+@supports (-webkit-line-clamp: 3) {
+    .checkout-product-display .product-desc {
+        display: -webkit-box; /* Required for line clamping */
+        -webkit-box-orient: vertical; /* Required for line clamping */
+        -webkit-line-clamp: 4; /* Limit to 4 lines */
+        overflow: hidden; /* Hide overflow */
+        text-overflow: ellipsis; /* Add ellipsis */
+    }
+}
+
+@supports not (-webkit-line-clamp: 3) {
+    .checkout-product-display .product-desc{
+        position: relative;
+        max-height: 4.5rem; /* Adjust based on line height and number of lines */
+        line-height: 1.5em; /* Adjust based on your design */
+        overflow: hidden;
+    }
+
+    .checkout-product-display .product-desc::after {
+        content: '...';
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        background: var(--textWhite);
+        padding-left: 5px;
+    }
+}
+
+.product-price-overview{
+    display: flex;
+    flex-direction: column;
+}
+.product-checkout-image{
+    width: 16rem;
+    height: 10rem;
+    float: left;
+}
+.product-price-overview-line{
+    display: flex;
+    flex-direction: row;
+    justify-self: flex-start;
+    justify-content: space-between;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+.product-price-title-grey{
+    opacity: 70%;
+}
+.product-price{
+    font-weight: bold;
+}
+.product-price-title{
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+#checkout-purchase-button{
+    height: 3rem;
+    width: 100%;
+}
+
+
+/* For making the input field have the right separation*/
+/* For credit card number and expiration date*/
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    opacity: 50%;
+    font-variant: small-caps;
+    margin-top: 1.875rem;
+    margin-bottom: 1.875rem;
+}
+
+.separator::before,
+.separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #000;
+}
+
+.separator:not(:empty)::before {
+    margin-right: .25em;
+}
+
+.separator:not(:empty)::after {
+    margin-left: .25em;
+}
+
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    opacity: 50%;
+    font-variant: small-caps;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.separator::before,
+.separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #000;
+}
+
+.separator:not(:empty)::before {
+    margin-right: .25em;
+}
+
+.separator:not(:empty)::after {
+    margin-left: .25em;
+}
+
+
+@media screen and (max-width: 1024px) {
+    #checkout-content {
+        flex-direction: column;
+    }
+
+    .checkout-split {
+        width: 100%;
+    }
+}

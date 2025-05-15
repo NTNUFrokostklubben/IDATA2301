@@ -1,12 +1,12 @@
-import {use, useEffect, useState} from "react";
+import React, {use, useEffect, useState} from "react";
 import "./course.css"
 import {useNavigate, useParams} from "react-router-dom";
 import {AsyncApiRequest} from "../../utils/requests";
-import CourseProviderCard from "../../component/courseProviderCard/courseProviderCard";
+import {CourseProviderCard, CourseProviderCardSkeleton} from "../../component/courseProviderCard/courseProviderCard";
 import {ReviewSection} from "./reviewSection";
 import FavoriteButton from "../../component/favorite/favoriteButton";
-import {getAuthenticatedUser} from "../../utils/authentication/authentication";
 import {useSelector} from "react-redux";
+import {Skeleton} from "@mui/material";
 
 
 export default function Course() {
@@ -20,6 +20,7 @@ export default function Course() {
     const [isFavoriteLoaded, setIsFavoriteLoaded] = useState(false);
     const [keywords, setKeywords] = useState([])
     //const [isUserEnrolled, setIsUserEnrolled] = useState(false);
+
     const {id} = useParams();
     const userData = useSelector((state) => state.data.user)
     const navigate = useNavigate();
@@ -170,10 +171,10 @@ export default function Course() {
         }
         return value;
     }
-
-    if (loading) {
-        return (<h1>loading</h1>)
-    }
+    //
+    // if (loading) {
+    //     return (<h1>loading</h1>)
+    // }
     return (
         <div className="course-page">
             <div className="course-page-content">
@@ -184,32 +185,51 @@ export default function Course() {
                                 <FavoriteButton uid={user.id} cid={id} isFav={isFavorite}/>
                             </div>)
                         }
-                        <div className="course-slash-desc">
+                        {loading ?
+                            <div className={"course-splash-desc-skeleton"}>
+                                <Skeleton id="course-splash-title-skeleton" variant="text"/>
+                                <Skeleton variant="text" width={"25rem"} height={"2rem"} sx={{fontSize: '1rem'}}/>
+                                <Skeleton variant="text" width={"20rem"} height={"2rem"} sx={{fontSize: '1rem'}}/>
+                            </div>
+                            :
+                            <div className="course-slash-desc">
 
-                            <h2 id="course-splash-title">{courseData.title} </h2>
+                                <h2 id="course-splash-title">{courseData.title} </h2>
 
-                            <p id="course-splash-hrw">
-                                {courseData.hoursWeek} hours per week • {diffConvert(courseData.diffLevel)} •
-                                Credits: {courseData.credits}
-                            </p>
+                                <p id="course-splash-hrw">
+                                    {courseData.hoursWeek} hours per week • {diffConvert(courseData.diffLevel)} •
+                                    Credits: {courseData.credits}
+                                </p>
 
-                            <p id="course-splash-closest">
-                                Closest course session: &nbsp;
-                                {new Date(courseData.closestCourse).toLocaleDateString("de-DE",{
-                                    year: "numeric",
-                                    month: "2-digit",
-                                    day: "2-digit"
-                                })}
-                            </p>
-                            &nbsp;
-                        </div>
+                                <p id="course-splash-closest">
+                                    Closest course session: &nbsp;
+                                    {new Date(courseData.closestCourse).toLocaleDateString("de-DE", {
+                                        year: "numeric",
+                                        month: "2-digit",
+                                        day: "2-digit"
+                                    })}
+                                </p>
+                                &nbsp;
+                            </div>
+                        }
+
                     </div>
 
-                    <picture>
-                        <div id="course-image-container">
-                            <img id="course-splash-image" src={courseData.imgLink} alt={"image " + courseData.title}/>
+                    {loading ?
+                        <div id="course-splash-image-container-skeleton">
+                            &nbsp;
+                            <Skeleton variant="rectangular" width={"20rem"} height={"13rem"}/>
+                            &nbsp;
                         </div>
-                    </picture>
+                        :
+                        <picture>
+                            <div id="course-image-container">
+                                <img id="course-splash-image" src={courseData.imgLink}
+                                     alt={"image " + courseData.title}/>
+                            </div>
+                        </picture>
+                    }
+
 
                 </section>
 
@@ -219,50 +239,95 @@ export default function Course() {
                     <div id="course-certification-content">
                         <img src="/icons/reader-sharp.svg" alt="Certificate icon" className="filter-white"
                              id="certification-img"/>
-                        <p id="course-related-certificates-text">{courseData.relatedCert}</p>
+                        {loading ?
+                            <Skeleton variant="text" width={"15rem"} height={"2rem"}/>
+                            :
+                            <p id="course-related-certificates-text">{courseData.relatedCert}</p>
+                        }
                     </div>
                 </a>
                 </section>
 
                 <section id="course-description">
-                    <div id="course-description-content">
+                <div id="course-description-content">
                         <h3 id="course-description-heading"> Description</h3>
-                        <p id="course-description-text">{courseData.description}</p>
+                        {loading ?
+                            <Skeleton variant="text" width={"100%"} height={"20rem"}/>
+                            :
+                            <p id="course-description-text">{courseData.description}</p>
+                        }
                     </div>
                 </section>
 
-                {keywords.length > 0 &&
+                {loading ?
                     <section id="course-keywords-section">
                         <h3 id="course-keywords-heading"> Covered topics</h3>
                         <div id="course-keywords">
-                            {keywords.map(item => (
-                                <div className="course-keyword">
-                                    <img className="keyword-checkmark" src="/icons/checkmark-sharp.svg"
-                                         alt="Checkmark"/>
-                                    <p className="course-keyword-text" key={item.keyword}>{item.keyword}</p>
-                                </div>
-                            ))}
+                            <Skeleton variant="text" width={"100%"} height={"5rem"}/>
                         </div>
                     </section>
+                    :
+                    <div>
+                        {keywords.length > 0 &&
+                                <section id="course-keywords-section">
+                                    <h3 id="course-keywords-heading"> Covered topics</h3>
+                                    <div id="course-keywords">
+                                        {keywords.map(item => (
+                                            <div className="course-keyword">
+                                                <img className="keyword-checkmark" src="/icons/checkmark-sharp.svg"
+                                                     alt="Checkmark"/>
+                                                <p className="course-keyword-text" key={item.keyword}>{item.keyword}</p>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </section>
+                        }
+                    </div>
                 }
 
-                {uniqueCourses?.length > 0 && (
+                {loading ?
                     <section id="course-offerables">
                         <h3 id="course-offerables-heading"> Available courses</h3>
                         <div id="course-offeables-content">
-                            {uniqueCourses.map(item => <CourseProviderCard key={item.id} {...item}/>)}
+                            {Array.from({length: 4}).map((_, index) => (
+                                <CourseProviderCardSkeleton key={index}/>
+                            ))}
                         </div>
-                    </section>)
+                    </section>
+                    :
+                    <div>
+                        {uniqueCourses?.length > 0 && (
+                            <section id="course-offerables">
+                                <h3 id="course-offerables-heading"> Available courses</h3>
+                                <div id="course-offeables-content">
+                                    {uniqueCourses.map(item => <CourseProviderCard key={item.id} {...item}/>)}
+                                </div>
+                            </section>)
+                        }
+                    </div>
                 }
 
-
+                {loading ?
                     <section className="course-page-reviews">
                         <div className="course-page-review-aggregate">
                             <h3> Customer reviews</h3>
                             &nbsp;
-                            <ReviewSection cid={id} averageRating={ratingData} user={user}/>
+                            <Skeleton variant="text" width={"100%"} height={"10rem"}/>
                         </div>
                     </section>
+                    :
+                    <div>
+                        {user && (
+                            <section className="course-page-reviews">
+                                <div className="course-page-review-aggregate">
+                                    <h3> Customer reviews</h3>
+                                    &nbsp;
+                                    <ReviewSection cid={id} averageRating={ratingData} user={user}/>
+                                </div>
+                            </section>)
+                        }
+                    </div>
+                }
 
             </div>
         </div>
