@@ -27,6 +27,8 @@ jobs:
           context: .
           push: true
           tags: ghcr.io/ntnufrokostklubben/learniverse-frontend:latest
+          build-args: |
+            REACT_APP_API_URL=${{ secrets.REACT_APP_API_URL }}
 
   deploy:
     needs: build-and-push
