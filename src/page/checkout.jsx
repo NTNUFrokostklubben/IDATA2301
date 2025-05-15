@@ -29,7 +29,7 @@ export default function Checkout() {
     const handlePurchase = async () =>{
 
         setLoading(true)
-        const status = await AsyncApiRequest("POST", `/transaction/offerId/${courseData.id}/userid/${userData.id}`, null);
+        const status = await AsyncApiRequest("POST", `/transaction/offerId/${courseData.id}`, null);
         try {
 
             await new Promise((resolve) => setTimeout(resolve, 2000));

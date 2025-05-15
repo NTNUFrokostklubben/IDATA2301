@@ -38,7 +38,7 @@ export default function ReviewWriter({uid, cid, existingReview = null, callback 
     const sendReview = async () =>{
         let payload = reviewToJson();
 
-        const request = await AsyncApiRequest("PUT", `/userCourses/addRating/${uid}/${cid}`, payload);
+        const request = await AsyncApiRequest("PUT", `/userCourses/addRating/${cid}`, payload);
 
         if (callback != null){
             callback();

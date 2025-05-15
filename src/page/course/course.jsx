@@ -146,7 +146,7 @@ export default function Course() {
 
     async function checkFavorite() {
         try {
-            const favoriteState = await AsyncApiRequest("GET", `/favorite/isFavorite/user/${user.id}/course/${id}`, false)
+            const favoriteState = await AsyncApiRequest("GET", `/favorite/isFavorite/course/${id}`, false)
                 .then(response => response.json());
             setFavorite(favoriteState);
 
