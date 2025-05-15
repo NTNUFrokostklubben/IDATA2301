@@ -228,8 +228,7 @@ export function ReviewSection({cid, user, averageRating}) {
 
                         {filteredReviews.length > 0 ? (
                             <div className={"course-page-review-component-right"}>
-                                {
-                                    filteredReviews.map(item =>
+                                {filteredReviews.map(item =>
                                         <Review key={item.id} rating={item} title={false}/>
                                     )
                                 }

@@ -51,7 +51,7 @@ export default function Index() {
     useEffect(() => {
         const fetchData = async () => {
             try{
-                await new Promise(r => setTimeout(r, 500));
+                await new Promise(r => setTimeout(r, 150));
                 await Promise.all([
                     fetchProviders(),
                     fetchCourses(),
@@ -211,7 +211,7 @@ export default function Index() {
                         <section className="index-arrow">
                             <button id="index-arrow-left-btn"
                                     onClick={() => setCourseIndex((prevIndex) => (prevIndex - 1 + courseCards.length) % courseCards.length)}>
-                                <img className={"index-arrow-icon"} src="/icons/arrow-back-circle-sharp.svg"
+                                <img className={"filter-cta"} id={"index-arrow-icon"} src="/icons/arrow-back-circle-sharp.svg"
                                      alt="Arrow Left"/>
                             </button>
                         </section>
@@ -252,7 +252,7 @@ export default function Index() {
                             <button id="index-arrow-right-btn"
                                     onClick={() => setCourseIndex((prevIndex) =>
                                         (prevIndex + 1 + courseCards.length) % courseCards.length)}>
-                                <img className={"index-arrow-icon"} src="/icons/arrow-forward-circle-sharp.svg"
+                                <img className={"filter-cta"} id={"index-arrow-icon"} src="/icons/arrow-forward-circle-sharp.svg"
                                      alt="Arrow Right"/>
                             </button>
                         </section>

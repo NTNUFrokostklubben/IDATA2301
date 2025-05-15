@@ -116,7 +116,7 @@ export default function Layout() {
                         <div className="dropdown-content">
                             <a href={"/search"}>Search/filters</a>
                             <a href={"/admin"}>Admin</a>
-                            <a href={"/about"}>About</a>
+                            <a href={"/aboutUs"}>About</a>
                             <a href={"/checkout"}>Checkout</a>
                             <a href={"/noAccess"}>403 no access</a>
                             <Link to={`/course/${1}`}> course</Link>

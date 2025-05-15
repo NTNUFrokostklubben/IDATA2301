@@ -8,7 +8,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {createPortal} from "react-dom";
 import {uploadImage} from "../utils/commonRequests";
 import {setCourseObject, setUserImage, setUserObject} from "../dataSlice";
-import {Dialog} from "@mui/material";
+import {Dialog, Skeleton} from "@mui/material";
 import {useFocusTrap} from "../utils/useFocusTrap";
 
 
@@ -79,7 +79,6 @@ export function UserImageModal({close, uid}) {
                  }
              }}>
             <div className={"user-page-modal"}>
-
                 <div className={`user-page-modal-option-container`}>
                     <label className="file-upload-button">
                         Change profile picture
@@ -139,24 +138,40 @@ export default function UserPage() {
         setMounted(true); // after the DOM is ready
     }, []);
 
+
     useEffect(() => {
-        if (!user) return;  // Don't fetch unless user is set
+        const fetchData = async () => {
+            if (!user) return; // Don't fetch unless user is set
+            try{
+                await new Promise(r => setTimeout(r, 150));
+                await Promise.all([
+                    handleFavoritesData(),
+                    handleCourseData()
+                ])
+                setLoading(false);
+
+            } catch (err) {
+                throw new Error("Error fetching user: ", err);
+            }
+        }
+        fetchData();
+    }, [user]);
 
         async function handleCourseData() {
             try {
                 const courseData = await AsyncApiRequest("GET", `/userCourses/user`, null)
                     .then(response => response.json())
 
-                const filteredAndSorted = courseData
-                    .filter(item => item.review?.rating > 0)
-                    .sort((a, b) => b.review.rating - a.review.rating);
+            const filteredAndSorted = courseData
+                .filter(item => item.review?.rating > 0)
+                .sort((a, b) => b.review.rating - a.review.rating);
 
-                setCourses(courseData)
-                setRatings(filteredAndSorted)
-            } catch (e) {
-                console.error(e)
-            }
+            setCourses(courseData)
+            setRatings(filteredAndSorted)
+        } catch (e) {
+            console.error(e)
         }
+    }
 
 
         async function handleFavoritesData() {
@@ -169,10 +184,6 @@ export default function UserPage() {
             }
         }
 
-        handleFavoritesData();
-        handleCourseData();
-    }, [user]);
-
 
     function profileImageClickHandler() {
         setShowUserModal(true)
@@ -180,57 +191,69 @@ export default function UserPage() {
 
     return (
 
-
         <div className="user-page">
             {user && (
                 <section id="user-page-content">
-                    <div id={"user-page-content-info"}>
+                    <div id="user-page-content-info">
                         <section id="user-page-caret">
                             <div id="user-caret">
-                                {console.log(user)}
                                 <picture onClick={profileImageClickHandler}>
-                                    <img className={"user-page-user-image"} src={user.profilePicture} alt="user"/>
+                                    <img className="user-page-user-image" src={user.profilePicture} alt="user"/>
                                 </picture>
                                 <p id="user-name"> {user.name} </p>
-
                             </div>
                         </section>
 
                         <section id="user-page-user-courses">
-                            <h1 id="previous-courses-heading">Previous courses</h1>
+                            <h3 className="userpage-heading">Previous courses</h3>
 
-                            <div className="user-page-user-courses-content">
-                                {courses.map(item => (
-                                    <div className="user-course-item" key={item.id}>
-                                        <Link className={"user-page-course-hotlink"} to={`/course/${item.course.id}`}>
-                                            <div className={"image-wrapper"}><img className="user-page-course-image"
-                                                                                  src={item.course.imgLink}
-                                                                                  alt={"image " + item.course.title}/></div>
-                                            <p>{item.course.title}</p>
-                                        </Link></div>
-                                ))}
-                            </div>
+                            {loading ?
+                                <Skeleton variant={"rectangular"} width={"100%"} height={"80%"}/>
+                                :
+                                <div className="user-page-user-courses-content">
+                                    {courses.map(item => (
+                                        <div className="user-course-item" key={item.id}>
+                                            <Link className="user-page-course-hotlink" to={`/course/${item.course.id}`}>
+                                                <div className="image-wrapper">
+                                                    <img className="user-page-course-image" src={item.course.imgLink}
+                                                         alt={"image " + item.course.title}/>
+                                                </div>
+                                                <p>{item.course.title}</p>
+                                            </Link></div>
+                                    ))}
+                                </div>
+                            }
+
 
                         </section>
                     </div>
 
-                    <section className={"users-reviews"}>
-                        <h3 id={"review-heading"}>Your reviews</h3>
+                    <section className="users-reviews">
+                        <h3 className="userpage-heading">Your reviews</h3>
 
-                        <div className={"user-page-reviews"}>
-                            {ratings.map(item => <Review key={item.id} rating={item} title={true}/>)}
-                        </div>
-
+                        {loading ?
+                            <Skeleton variant={"rectangular"} width={"100%"} height={"60%"}/>
+                            :
+                            <div className="user-page-reviews">
+                                {ratings.map(item => <Review key={item.id} rating={item} title={true}/>)}
+                            </div>
+                        }
                     </section>
 
                     <section id="users-favorites">
-                        <h3 id={"favorites-heading"}>Favorites</h3>
-                        <div id="user-page-favorites-content">
-                            {favorites.map(item => <FavoriteCard key={item.id} {...item.course}/>)}
-                        </div>
+                        <h3 className="userpage-heading">Favorites</h3>
+
+                        {loading ?
+                            <Skeleton variant={"rectangular"} width={"100%"} height={"50%"}/>
+                            :
+                            <div id="user-page-favorites-content">
+                                {favorites.map(item => <FavoriteCard key={item.id} {...item.course}/>)}
+                            </div>
+                        }
 
                     </section>
-                </section>)}
+                </section>)
+            }
 
             {
                 mounted && showUserModal && createPortal(
@@ -238,7 +261,7 @@ export default function UserPage() {
                     document.getElementById("sacrificial-div-for-modal")
                 )
             }
-            <div id={"sacrificial-div-for-modal"}/>
+            <div id="sacrificial-div-for-modal"/>
         </div>
 
     )

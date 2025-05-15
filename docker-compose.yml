@@ -1,0 +1,30 @@
+services:
+  frontend:
+    image: ghcr.io/ntnufrokostklubben/learniverse-frontend:latest
+    container_name: learniverse-frontend-prod
+    restart: unless-stopped
+    networks:
+      - learniverse-network
+    environment:
+      - REACT_APP_API_URL=http://learniverse.no/api
+    expose:
+      - 80
+
+  nginx:
+    image: nginx:latest
+    container_name: learniverse-nginx-prod
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx.prod.conf:/etc/nginx/conf.d/default.conf:ro
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+      - ./saved/images:/usr/share/nginx/html/uploads/images
+    networks:
+      - learniverse-network
+
+networks:
+  learniverse-network:
+    external: true

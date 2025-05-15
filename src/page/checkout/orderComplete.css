@@ -6,8 +6,13 @@
     padding-top: 6rem;
     padding-bottom: 3rem;
 }
-
-#order-complete-checkmark{
-   fill: #5da164;
-
+#checkmark-order-complete{
+    width: 10rem;
+    height: 10rem;
+}
+#thank-you-text{
+    width: 40rem;
+}
+#go-to-userpage{
+    width: fit-content;
 }

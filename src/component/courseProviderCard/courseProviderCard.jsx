@@ -2,7 +2,8 @@ import "./courseProviderCard.css"
 import {Link} from "react-router-dom";
 import {setCourseObject} from "../../dataSlice";
 import { useDispatch } from 'react-redux';
-export default function CourseProviderCard (offerableCourse ){
+import {Skeleton} from "@mui/material";
+export function CourseProviderCard (offerableCourse ){
     const dispatch = useDispatch();
 
     const handleClick = () =>{
@@ -34,7 +35,23 @@ export default function CourseProviderCard (offerableCourse ){
                 </div>
             </div>
 
-
         </Link>
     )
+}
+
+export function CourseProviderCardSkeleton() {
+    return (
+        <div className="provider-card cta-button">
+            <div className="provider-card-text">
+                <Skeleton variant={"text"} width={"6rem"} height={"2.5rem"}/>
+                <Skeleton variant={"text"} width={"10rem"} height={"1.5rem"}/>
+                <div className="provider-card-price-section">
+                    <div className={"provider-card-price-and-discount"}>
+                        <Skeleton variant={"text"} width={"8rem"} height={"1.2rem"}/>
+                        <Skeleton variant={"text"} width={"10rem"} height={"1.5rem"}/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
 }
