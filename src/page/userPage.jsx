@@ -74,7 +74,6 @@ export function UserImageModal({close, uid}) {
                  }
              }}>
             <div className={"user-page-modal"}>
-
                 <div className={`user-page-modal-option-container`}>
                     <label className="file-upload-button">
                         Change profile picture
@@ -175,7 +174,6 @@ export default function UserPage() {
 
     return (
 
-
         <div className="user-page">
             {user && (
                 <section id="user-page-content">
@@ -183,7 +181,6 @@ export default function UserPage() {
                         <section id="user-page-caret">
 
                             <div id="user-caret">
-
                                 <picture onClick={profileImageClickHandler}>
                                     <img className={"user-page-user-image"} src={user.profilePicture} alt="user"/>
                                 </picture>
@@ -199,9 +196,10 @@ export default function UserPage() {
                                 {courses.map(item => (
                                     <div className="user-course-item" key={item.id}>
                                         <Link className={"user-page-course-hotlink"} to={`/course/${item.course.id}`}>
-                                            <div className={"image-wrapper"}><img className="user-page-course-image"
-                                                                                  src={item.course.imgLink}
-                                                                                  alt={"image " + item.course.title}/></div>
+                                            <div className={"image-wrapper"}>
+                                                <img className="user-page-course-image" src={item.course.imgLink}
+                                                     alt={"image " + item.course.title}/>
+                                            </div>
                                             <p>{item.course.title}</p>
                                         </Link></div>
                                 ))}

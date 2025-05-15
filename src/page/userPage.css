@@ -154,6 +154,7 @@
 
 #user-name {
     font-size: 1.5rem;
+    font-weight: bold;
 }
 
 #edit {
@@ -171,9 +172,9 @@
     justify-self: flex-start;
     flex-grow: 1;
     flex-shrink: 0;
-    min-height: 100%;
-    min-width: 10rem;
     padding: 1rem;
+    width: 70%;
+    height: 100%;
 }
 
 .user-page-user-courses-content{
@@ -262,29 +263,37 @@
 }
 
 
-@media (max-width: 1290px) {
+@media (max-width: 1024px) {
 
 }
 
 @media (max-width: 700px) {
-    .users-reviews {
 
-        /*width: 46.7rem;*/
-    }
-
-    #users-favorites {
-
-        /*width: 46.7rem;*/
-    }
 }
 
 @media (max-width: 555px ) {
-
-    #user-page-content {
-        /*width: 38rem;*/
-    }
-
     .user-page-course-hotlink {
         font-size: 80%;
     }
+    #user-page-content-info{
+        flex-direction: column;
+        width: 100%;
+        min-height: 20rem;
+        justify-content: center;
+        align-items: center;
+    }
+    #user-page-user-courses {
+        width: 95%;
+        margin: 0;
+        height: fit-content;
+    }
+    #user-page-caret {
+        display: flex;
+        flex-shrink: 1;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+    }
+
 }
