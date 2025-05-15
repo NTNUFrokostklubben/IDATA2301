@@ -51,7 +51,7 @@ export default function Index() {
     useEffect(() => {
         const fetchData = async () => {
             try{
-                await new Promise(r => setTimeout(r, 500));
+                await new Promise(r => setTimeout(r, 150));
                 await Promise.all([
                     fetchProviders(),
                     fetchCourses(),

@@ -93,11 +93,14 @@
     background-color: var(--textWhite);
 }
 
+.userpage-heading {
+    padding: 1rem;
+}
+
 #user-page-content {
     display: flex;
     flex-direction: column;
     width: 100rem;
-    justify-content: center;
     align-items: center;
     margin-top: 1rem;
     padding: 1rem;
@@ -175,6 +178,7 @@
     padding: 1rem;
     width: 70%;
     height: 100%;
+    min-height: 10rem;
 }
 
 .user-page-user-courses-content{
@@ -219,14 +223,17 @@
     max-height: 1rem;
 }
 
-#review-heading {
-    padding: 1rem;
-}
 
 .users-reviews {
     background-color: var(--highlight);
     width: 100%;
     padding-bottom: 1rem;
+    height: fit-content;
+    min-height: 10rem;
+}
+.userpage-skeleton-box{
+    margin-left: 1rem;
+    margin-right: 1rem;
 }
 
 .user-page-reviews{
@@ -247,15 +254,12 @@
     width: 100%;
     padding: 1rem 0;
     margin-bottom: 2rem;
+    min-height: 10rem;
 }
 .user-page-favorites-content{
     max-height: 35rem;
     overflow-y: auto;
     overflow-x: hidden;
-}
-
-#favorites-heading {
-    padding: 1rem;
 }
 
 .one-favorite {

@@ -41,7 +41,7 @@ function App() {
                 <Route path={"course/:id"} element={<Course/>}/>
                 <Route path={"userpage"} element={<UserPage/>}/>
                 <Route path={"order-complete"} element={<OrderComplete/>}/>
-                <Route path={"about"} element={<About/>}/>
+                <Route path={"aboutUs"} element={<About/>}/>
                 <Route path={"checkout/:id"} element={<Checkout/>}/>
                 <Route path={"noAccess"} element={<NoAccess/>}/>
                 <Route path={"notFound"} element={<NotFound/>}/>
