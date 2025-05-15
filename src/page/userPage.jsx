@@ -177,15 +177,14 @@ export default function UserPage() {
         <div className="user-page">
             {user && (
                 <section id="user-page-content">
-                    <div id={"user-page-content-info"}>
+                    <div id="user-page-content-info">
                         <section id="user-page-caret">
 
                             <div id="user-caret">
                                 <picture onClick={profileImageClickHandler}>
-                                    <img className={"user-page-user-image"} src={user.profilePicture} alt="user"/>
+                                    <img className="user-page-user-image" src={user.profilePicture} alt="user"/>
                                 </picture>
                                 <p id="user-name"> {user.name} </p>
-
                             </div>
                         </section>
 
@@ -195,8 +194,8 @@ export default function UserPage() {
                             <div className="user-page-user-courses-content">
                                 {courses.map(item => (
                                     <div className="user-course-item" key={item.id}>
-                                        <Link className={"user-page-course-hotlink"} to={`/course/${item.course.id}`}>
-                                            <div className={"image-wrapper"}>
+                                        <Link className="user-page-course-hotlink" to={`/course/${item.course.id}`}>
+                                            <div className="image-wrapper">
                                                 <img className="user-page-course-image" src={item.course.imgLink}
                                                      alt={"image " + item.course.title}/>
                                             </div>
@@ -208,23 +207,24 @@ export default function UserPage() {
                         </section>
                     </div>
 
-                    <section className={"users-reviews"}>
-                        <h3 id={"review-heading"}>Your reviews</h3>
+                    <section className="users-reviews">
+                        <h3 id="review-heading">Your reviews</h3>
 
-                        <div className={"user-page-reviews"}>
+                        <div className="user-page-reviews">
                             {ratings.map(item => <Review key={item.id} rating={item} title={true}/>)}
                         </div>
 
                     </section>
 
                     <section id="users-favorites">
-                        <h3 id={"favorites-heading"}>Favorites</h3>
+                        <h3 id="favorites-heading">Favorites</h3>
                         <div id="user-page-favorites-content">
                             {favorites.map(item => <FavoriteCard key={item.id} {...item.course}/>)}
                         </div>
 
                     </section>
-                </section>)}
+                </section>)
+            }
 
             {
                 mounted && showUserModal && createPortal(
@@ -232,7 +232,7 @@ export default function UserPage() {
                     document.getElementById("sacrificial-div-for-modal")
                 )
             }
-            <div id={"sacrificial-div-for-modal"}/>
+            <div id="sacrificial-div-for-modal"/>
         </div>
 
     )
