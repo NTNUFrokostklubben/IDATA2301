@@ -6,7 +6,7 @@ services:
     networks:
       - learniverse-network
     environment:
-      - REACT_APP_API_URL=https://learniverse.no/api
+      - REACT_APP_API_URL=http://learniverse.no/api
     expose:
       - 80
 
