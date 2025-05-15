@@ -114,13 +114,13 @@ export default function Layout() {
                             <img id="triangle-icon" width="12" height="12" src="/icons/triangle-sharp.svg" alt={""}/>
                         </button>
                         <div className="dropdown-content">
-                            <a href={"/search"}>Search/filters</a>
-                            <a href={"/admin"}>Admin</a>
-                            <a href={"/aboutUs"}>About</a>
-                            <a href={"/checkout"}>Checkout</a>
-                            <a href={"/noAccess"}>403 no access</a>
-                            <Link to={`/course/${1}`}> course</Link>
-                            <Link to={`/userpage/${1}`}> user page</Link>
+                            <Link to={"/search?search="}>All courses</Link>
+                            <hr/>
+                            <Link to={"/search?categories=it"}>Information Technologies</Link>
+                            <Link to={"/search?categories=dm"}>Digital Marketing</Link>
+                            <Link to={"/search?categories=be"}>Business and Entrepreneurship</Link>
+                            <Link to={"/search?categories=dsa"}>Data Science and Analytics</Link>
+
                         </div>
                     </div>
                 </li>
