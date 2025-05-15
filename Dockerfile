@@ -6,8 +6,9 @@ RUN npm install
 COPY . .
 RUN npm run build
 
-# Serve stage (optional: only if you want to test locally)
+# Serve stage
 FROM nginx:alpine
 COPY --from=builder /app/build /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/nginx.conf
 COPY nginx.prod.conf /etc/nginx/conf.d/default.conf
 EXPOSE 80
