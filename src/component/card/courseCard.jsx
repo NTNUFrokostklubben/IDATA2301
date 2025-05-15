@@ -1,18 +1,40 @@
 import "./courseCard.css"
 import {Link, useNavigate} from "react-router-dom";
-import React from "react";
+import React, {useEffect, useRef} from "react";
 import {Skeleton} from "@mui/material";
 
 export function CourseCard(courseCard) {
     const navigate = useNavigate();
+    const imgRef = useRef(null);
     const coursePrice = Math.round(courseCard.minDiscountedPrice * 100) / 100;
     const linkToCourse = "/course/" + courseCard.course.id;
+
+    useEffect(() => {
+        const img = imgRef.current;
+        if (!img) return;
+
+        const handleLoad = () => {
+            const isPortrait = img.naturalHeight > img.naturalWidth;
+            img.classList.toggle("portrait", isPortrait);
+            img.classList.toggle("landscape", !isPortrait);
+        };
+
+        if (img.complete) {
+            handleLoad();
+        } else {
+            img.addEventListener("load", handleLoad);
+        }
+
+        return () => {
+            img.removeEventListener("load", handleLoad);
+        };
+    }, [courseCard.course.imgLink]);
 
     return (
         <section className="index-card" id={courseCard.course.id}>
             <div className="index-course-card">
                 <Link to={linkToCourse}><img className="index-course-img" src={courseCard.course.imgLink}
-                                             alt="Course Card"/></Link>
+                                             alt="Course Card" ref={imgRef}/></Link>
                 <h6 className="index-course-content-heading">{courseCard.course.title}</h6>
 
                 <div className={"index-card-footer"}>
