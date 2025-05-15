@@ -29,7 +29,7 @@ export function UserImageModal({close, uid}) {
         if (value) {
             let defImg = "https://localhost:8081/uploads/images/default_img.png"
             dispatch(setUserImage(defImg))
-            const userDto = AsyncApiRequest("PUT", `/user/image/`, defImg)
+            const userDto = AsyncApiRequest("PUT", `/user/image`, defImg)
                 .then(response => response.json())
             close();
         }
@@ -40,7 +40,7 @@ export function UserImageModal({close, uid}) {
 
     function changePfp(link) {
 
-        const userDto = AsyncApiRequest("PUT", `/user/image/`, link)
+        const userDto = AsyncApiRequest("PUT", `/user/image`, link)
             .then(response => response.json())
         close();
     }

@@ -41,9 +41,10 @@ export function ReviewSection({cid, user, averageRating}) {
         }
     }
     const fetchRatingArray = async () => {
-        console.log("trying to get reviews")
+
         const data = await AsyncApiRequest("GET", `/userCourses/reviews/course/${cid}`, null)
             .then(response => response.json());
+        console.log(data)
         const filteredAndSorted = data
             .filter(item => item.review != null)
             .sort((a, b) => b.review?.rating - a.review?.rating);
