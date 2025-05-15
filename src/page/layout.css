@@ -104,7 +104,7 @@ menu li {
     all: unset;
     color: var(--textBlack);
 
-    height: 100%;
+    /*height: 100%;*/
     width: 100%;
     padding: 0.5rem 0.8rem;
 }
@@ -130,6 +130,7 @@ menu li {
     cursor: pointer;
     width: 2rem;
     height: 4rem;
+    z-index: 1;
 }
 
 .search-container #search_btn #searchIcon {
