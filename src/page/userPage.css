@@ -52,29 +52,10 @@
     background-color: var(--background);
 }
 
-.user-page-modal-delete-dialog {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    width: 20rem;
-    height: 10rem;
-    background-color: var(--textWhite);
-}
 
-.user-page-modal-delete-dialog-all-buttons {
-    width: 80%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-content: space-around;
-}
 
-.user-page-modal-delete-dialog-button {
-    font: inherit;
-    height: 3rem;
-    width: 6rem;
-}
+
+
 
 .file-upload-button:hover {
     cursor: pointer;

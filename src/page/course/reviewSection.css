@@ -125,11 +125,17 @@
     font-weight: bold;
 }
 
-#edit-review, #add-review{
+#edit-review, #add-review, #delete-review{
     width: fit-content;
     justify-items: center;
     height: fit-content;
     padding: 0.5rem;
+}
+.review-section-edit-delete{
+    display: flex;
+    flex-direction: row;
+    gap: 0.2rem;
+
 }
 
 
