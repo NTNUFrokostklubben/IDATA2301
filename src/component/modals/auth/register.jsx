@@ -1,17 +1,19 @@
 import "./auth.css"
 import {useRef} from "react";
 import {useFocusTrap} from "../../../utils/useFocusTrap";
-import {sendAuthenticationRequest, sendSignupRequest} from "../../../utils/authentication/authentication";
+import {oauthSignIn, sendAuthenticationRequest, sendSignupRequest} from "../../../utils/authentication/authentication";
 import {showFormErrorSignup} from "../../../utils/tools";
 import {addUserToRedux} from "../../../utils/commonRequests";
 import {useDispatch} from "react-redux";
+import GoogleCallback from "../../../page/Authentication/googleCallBack";
+import GoogleAuthButton from "../../Authentication/Google/googleAuthButton";
 
-export default function Register({onClose, changeMode, closable=true }) {
+export default function Register({onClose, changeMode, closable = true}) {
     const dispatch = useDispatch()
     const modalRef = useRef(null)
     useFocusTrap(modalRef, true, onClose) // Passes true to isOpen due to this modal only being open when it is rendered
 
-    function submitForm(event){
+    function submitForm(event) {
         event.preventDefault();
         const name = document.getElementById("name").value;
         const email = document.getElementById("email").value;
@@ -23,10 +25,11 @@ export default function Register({onClose, changeMode, closable=true }) {
         console.log("Submitting form");
     }
 
+
     function onSignupSuccess(userData, password) {
         console.log("Successfully signed up for user: ", userData.email);
         sendAuthenticationRequest(userData.email, password, onSigninSuccess, showFormErrorSignup);
-        addUserToRedux(userData.email, dispatch).then( () =>{
+        addUserToRedux(userData.email, dispatch).then(() => {
             window.location.reload();
         })
 
@@ -50,10 +53,10 @@ export default function Register({onClose, changeMode, closable=true }) {
                  }
              }}>
             <div className="authform">
-                { closable &&
+                {closable &&
                     <button id={"auth-close-button"} className={"secondary-button"} onClick={onClose}>
-                    <img alt={"X"} src={"/icons/close-sharp.svg"}/>
-                </button>
+                        <img alt={"X"} src={"/icons/close-sharp.svg"}/>
+                    </button>
                 }
                 <h2 className={"auth-h2"}>
                     Sign Up
@@ -76,10 +79,16 @@ export default function Register({onClose, changeMode, closable=true }) {
                         <p id="result-message" className="hidden"></p>
                     </section>
                     <section id="auth-CTA">
-                    <button className="cta-button" type="submit" onClick={submitForm}>Sign up</button>
-                        <button onClick={changeMode} className="cta-button secondary-button" type="button">Log in instead</button>
+                        <button className="cta-button" type="submit" onClick={submitForm}>Sign up</button>
+                        <button onClick={changeMode} className="cta-button secondary-button" type="button">Log in
+                            instead
+                        </button>
+
                     </section>
                 </form>
+                <hr/>
+                {/*Outside of form to prevent double signing*/}
+                <GoogleAuthButton/>
             </div>
         </div>
     )

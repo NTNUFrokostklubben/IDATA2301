@@ -6,6 +6,7 @@ import {sendAuthenticationRequest} from "../../../utils/authentication/authentic
 import {showFormErrorLogin} from "../../../utils/tools"
 import {useDispatch} from "react-redux";
 import {addUserToRedux} from "../../../utils/commonRequests";
+import GoogleAuthButton from "../../Authentication/Google/googleAuthButton";
 
 
 export default function Login({ onClose, changeMode, closable=true }) {
@@ -25,7 +26,7 @@ export default function Login({ onClose, changeMode, closable=true }) {
      * This function is called when login is successful
      */
     function onLoginSuccess(userData) {
-        console.log("Successfully logged in for user: ", userData.email);
+        // console.log("Successfully logged in for user: ", userData.email);
         addUserToRedux(userData.email, dispatch).then(() => {
             window.location.reload()
         }
@@ -81,6 +82,9 @@ export default function Login({ onClose, changeMode, closable=true }) {
                         <button onClick={changeMode} className="cta-button secondary-button" type="button">Sign up instead</button>
                     </section>
                 </form>
+                <hr/>
+                {/*Outside of form to prevent double signing*/}
+                <GoogleAuthButton/>
             </div>
         </div>
     )

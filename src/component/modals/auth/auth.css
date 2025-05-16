@@ -92,6 +92,7 @@
     align-self: flex-end;
 }
 
+
 @media (max-width: 600px) {
 
     .auth-background {
