@@ -1,5 +1,6 @@
 .admin-dash{
     padding: 1rem;
+    overflow-x: hidden;
 }
 .admin-dash-content{
     grid-template-columns: 1fr 1fr;
@@ -36,17 +37,15 @@
     margin-top: 2rem;
 }
 .admin-dash-users{
-    padding: 1rem;
+    padding: 1rem 0 1rem 1rem;
     display: block;
     background-color: var(--highlight);
     margin-right: 4rem;
-    width: 100%;
 }
 .admin-dash-courses{
     padding: 1rem;
     display: block;
     background-color: var(--highlight);
-    width: 100%;
 }
 .admin-dash-result{
     gap: 1rem;
@@ -56,6 +55,14 @@
     font-weight: lighter;
 }
 
+@media (min-width: 1025px){
+    .admin-dash-users{
+        width: 100%;
+    }
+    .admin-dash-courses{
+        width: 100%;
+    }
+}
 @media (max-width: 1024px) {
     .admin-dash-content{
         flex-direction: column;
@@ -68,8 +75,8 @@
         justify-content: space-evenly;
     }
     .admin-dash-users{
-        margin-right: 0rem;
         margin-bottom: 2rem;
+        margin-right: 0;
     }
 
 }

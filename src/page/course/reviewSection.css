@@ -145,4 +145,16 @@
         transition: border 0.1s ease;
         background-color: transparent;
     }
+    .course-page-review-component-top{
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+    }
+    .course-page-review-component-right{
+        width: 100%;
+        height: 25rem;
+        gap: 0.5rem;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
 }
