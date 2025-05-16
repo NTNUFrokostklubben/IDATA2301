@@ -179,6 +179,35 @@
     background-color: var(--textWhite);
 }
 
+.user-course-item.empty {
+    display: flex;
+    flex-direction: column;
+    /*justify-content: flex-start;*/
+    align-items: start;
+    margin: 1rem 0rem;
+    padding: 0.5rem;
+    width: 100%;
+    gap: 1rem;
+    background-color: var(--textWhite);
+}
+
+.user-favorite-item.empty {
+    display: flex;
+    flex-direction: column;
+    /*justify-content: flex-start;*/
+    align-items: start;
+    margin: 1rem 1rem;
+    padding: 0.5rem;
+    width: 95%;
+    gap: 1rem;
+    background-color: var(--textWhite);
+}
+
+.user-course-item.empty .cta-button, .user-favorite-item.empty .cta-button {
+    width: 20rem;
+
+}
+
 
 .user-course-item a {
     display: flex;

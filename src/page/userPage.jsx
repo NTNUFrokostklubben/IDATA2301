@@ -2,7 +2,7 @@ import "./userPage.css"
 import React, {useEffect, useRef, useState} from 'react';
 import Review from "../component/Rating/review";
 import {AsyncApiRequest} from "../utils/requests";
-import {Link, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import FavoriteCard from "../component/favoriteCard/favoriteCard";
 import {useDispatch, useSelector} from "react-redux";
 import {createPortal} from "react-dom";
@@ -17,6 +17,7 @@ import ConfirmChoiceDialog from "../component/modals/confirmChoice/confirmChoice
 export function UserImageModal({close, uid}) {
     const dispatch = useDispatch();
     const [open, setOpen] = useState(false);
+
 
     const modalRef = useRef(null)
     useFocusTrap(modalRef, true, close) // Passes true to isOpen due to this modal only being open when it is rendered
@@ -118,6 +119,7 @@ export default function UserPage() {
     const [ratings, setRatings] = useState([]);
     const [favorites, setFavorites] = useState([]);
     const [mounted, setMounted] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         setMounted(true); // after the DOM is ready
@@ -196,7 +198,7 @@ export default function UserPage() {
                                 <Skeleton variant={"rectangular"} width={"100%"} height={"80%"}/>
                                 :
                                 <div className="user-page-user-courses-content">
-                                    {courses.map(item => (
+                                    {courses.length > 0 ? courses.map(item => (
                                         <div className="user-course-item" key={item.id}>
                                             <Link className="user-page-course-hotlink" to={`/course/${item.course.id}`}>
                                                 <div className="image-wrapper">
@@ -205,7 +207,13 @@ export default function UserPage() {
                                                 </div>
                                                 <p>{item.course.title}</p>
                                             </Link></div>
-                                    ))}
+                                    )) :
+                                        <div className="user-course-item empty">
+                                            <h3>You have taken no courses so far</h3>
+                                            <p>Find a course to enroll?</p>
+                                            <button className={"cta-button"} onClick={() => navigate("/search")}>Click here to enroll</button>
+                                        </div>
+                                    }
                                 </div>
                             }
 
@@ -220,7 +228,14 @@ export default function UserPage() {
                             <Skeleton variant={"rectangular"} width={"100%"} height={"60%"}/>
                             :
                             <div className="user-page-reviews">
-                                {ratings.map(item => <Review key={item.id} rating={item} title={true}/>)}
+                                {ratings.length > 0 ? ratings.map(item => <Review key={item.id} rating={item} title={true}/>)
+                                    :
+                                    <div className={"user-course-item empty"}>
+                                        <h3>You have written no reviews yet</h3>
+                                        <p>Find a course to enroll?</p>
+                                        <button className={"cta-button"} onClick={() => navigate("/search")}>Click here to enroll</button>
+                                    </div>
+                                }
                             </div>
                         }
                     </section>
@@ -232,7 +247,14 @@ export default function UserPage() {
                             <Skeleton variant={"rectangular"} width={"100%"} height={"50%"}/>
                             :
                             <div id="user-page-favorites-content">
-                                {favorites.map(item => <FavoriteCard key={item.id} {...item.course}/>)}
+                                {favorites.length > 0 ? favorites.map(item => <FavoriteCard key={item.id} {...item.course}/>)
+                                :
+                                <div className={"user-favorite-item empty"}>
+                                    <h3>You have no favorites yet</h3>
+                                    <p>Find a course to favorite?</p>
+                                    <button className={"cta-button"} onClick={() => navigate("/search")}>Click here to enroll</button>
+                                </div>
+                                }
                             </div>
                         }
 

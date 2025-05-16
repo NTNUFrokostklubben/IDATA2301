@@ -82,6 +82,11 @@
     height: auto;
 }
 
+.index-first-btn.cta-button {
+    width: 10rem;
+    height: 4rem;
+}
+
 #index-course-content{
 
     height: auto;
