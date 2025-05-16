@@ -29,7 +29,7 @@ jobs:
           tags: ghcr.io/ntnufrokostklubben/learniverse-frontend:latest
           build-args: |
             REACT_APP_API_URL=${{ secrets.REACT_APP_API_URL }}
-            GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }}
+            REACT_APP_GOOGLE_CLIENT_ID=${{ secrets.REACT_APP_GOOGLE_CLIENT_ID }}
 
   deploy:
     needs: build-and-push

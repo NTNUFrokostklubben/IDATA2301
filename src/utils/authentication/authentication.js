@@ -154,7 +154,7 @@ export function oauthSignIn() {
     form.setAttribute('action', oauth2Endpoint);
 
     // Parameters to pass to OAuth 2.0 endpoint.
-    var params = {'client_id': process.env.GOOGLE_CLIENT_ID,
+    var params = {'client_id': process.env.REACT_APP_GOOGLE_CLIENT_ID,
         'redirect_uri': window.location.origin + '/auth/google/callback',
         'response_type': 'token',
         'scope': 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile',
