@@ -387,7 +387,7 @@ export default function Index() {
                             </div>
                             <div className="index-signed-in">
                                 <button onClick={goToAboutUs} className="cta-button index-first-btn">
-                                    <p> About us</p>
+                                    <p> About us </p>
                                 </button>
                             </div>
 
