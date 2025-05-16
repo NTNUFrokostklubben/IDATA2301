@@ -11,10 +11,12 @@ import {getCourses, getProviders} from "../utils/commonRequests";
 import {Skeleton} from "@mui/material";
 import {getAuthenticatedUser} from "../utils/authentication/authentication";
 import {useNavigate} from "react-router-dom";
+import Login from "../component/modals/auth/login";
 
 export default function Index() {
 
-    const [showSignupModal, setShowSignupModal] = useState()
+    const [showLoginModal, setShowLoginModal] = useState();
+    const [showSignupModal, setShowSignupModal] = useState();
     const [courseShown, setCourseShown] = useState(calcSceneStart(0));
     const [courseIndex, setCourseIndex] = useState(0);
     const [courseCards, setCourseCards] = useState([]);
@@ -354,15 +356,15 @@ export default function Index() {
                     {/* The SVG Background and Pattern is by SVGBackgrounds.com*/}
                     {/* Url: "https://www.svgbackgrounds.com/set/free-svg-backgrounds-and-patterns/"*/}
 
-                    <div id="index-slideshow-container">
+                    <div id="">
                         {slides.map((slide, index) => (
                             <div key={index} className="index-mySlides index-fade"
                                  style={{display: index === slideIndex ? "block" : "none"}}>
 
-                                {/*TODO style this and change the size on them*/}
                                 <picture>
                                     <source srcSet={"/images/carusel/"+ slide + ".webp"} type="image/webp"/>
-                                    <img  height={"200rem"} src={"/images/carusel/" + slide + ".jpg"} alt="carusel image"/>
+                                    <img className="index-slideshow-img" src={"/images/carusel/" + slide + ".jpg"}
+                                         alt="carusel image"/>
                                 </picture>
                             </div>
                         ))}
@@ -394,8 +396,21 @@ export default function Index() {
                 </div>
             </section>
             {
+                showLoginModal && createPortal(
+                    <Login
+                        changeMode={() => {
+                            setShowSignupModal(true)
+                            setShowLoginModal(false)
+                        }}
+                        onClose={() => setShowLoginModal(false)}
+                    />,
+                    document.getElementById("auth-modal")
+                )
+            }
+            {
                 showSignupModal && createPortal(
                     <Register changeMode={() => {
+                        setShowLoginModal(true)
                         setShowSignupModal(false)
                     }} onClose={() => setShowSignupModal(false)}/>,
                     document.getElementById("auth-modal")
