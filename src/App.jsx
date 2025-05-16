@@ -29,6 +29,7 @@ import Users from "./page/admin/management/users/users";
 import UserEdit from "./page/admin/management/users/edit/editUser";
 import NotFound from "./page/notFound";
 import Transactions from "./page/admin/management/Transactions/transactions";
+import GoogleCallback from "./page/Authentication/googleCallBack";
 
 function App() {
 
@@ -45,6 +46,7 @@ function App() {
                 <Route path={"checkout/:id"} element={<Checkout/>}/>
                 <Route path={"noAccess"} element={<NoAccess/>}/>
                 <Route path={"notFound"} element={<NotFound/>}/>
+                <Route path={"auth/google/callback"} element={<GoogleCallback />} />
                 <Route path={"/admin"} element={<AdminNav/>}>
                     <Route index element={<AdminDashboard/>}/>
                     <Route path={"/admin/offerableCourses"}>

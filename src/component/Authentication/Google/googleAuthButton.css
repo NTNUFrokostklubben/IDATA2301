@@ -1,0 +1,17 @@
+.google-login-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--textWhite);
+    /*border-radius: 0.5rem;*/
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--shadow);
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.google-login-btn img {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: 0.5rem;
+}
