@@ -150,35 +150,35 @@ export function ReviewSection({cid, user, averageRating}) {
 
     return (
         <div>
-                <div className={"course-page-review-component"}>
+                <div className="course-page-review-component">
 
-                    <div className={"course-page-review-component-top"}>
+                    <div className="course-page-review-component-top">
                         {filteredReviews.length > 0 ? (
-                        <div className={"course-page-review-component-left"}>
+                        <div className="course-page-review-component-left">
                             {stars !== [] && (
 
-                                <div className={"review-component-aggregate-stars"}>
+                                <div className="review-component-aggregate-stars">
                                     {stars.map((value, index, array) =>
                                         <img key={index} className="review-component-star"
                                              src="/icons/star-sharp.svg" alt="review star"/>)}
                                     {halfStar && (
                                         <img className="review-component-star" src="/icons/star-half-sharp.svg"
                                              alt="half star"/>)}
-                                    <p className={"review-component-average-rating"}>{averageRating} out of 5 </p>
+                                    <p className="review-component-average-rating">{averageRating} out of 5 </p>
                                 </div>
                             )}
                             {filteredReviews.length > 0 && (
-                            <div className={"course-page-reviews-rating-bars"}>
+                            <div className="course-page-reviews-rating-bars">
                                 {
                                     starBars.map((item, index) =>
                                         <button key={5 - index}
                                                 className={`course-page-review-component-text-and-bar ${currentStar === 5 - index ? "selected" : ""}`}
                                                 onClick={() => handleStarClick(5 - index)}>
-                                            <p className={"course-page-review-star-bar-clickable"}>
+                                            <p className="course-page-review-star-bar-clickable">
                                                 {5 - index} star
                                             </p>
-                                            <div className={"course-page-reviews-rating-bar-unit"}>
-                                                <div className={"reviews-rating-bar-star"}
+                                            <div className="course-page-reviews-rating-bar-unit">
+                                                <div className="reviews-rating-bar-star"
                                                      style={{width: `${item}%`}}></div>
                                             </div>
                                         </button>
@@ -186,9 +186,9 @@ export function ReviewSection({cid, user, averageRating}) {
                                 }
                             </div>)}
                             {user && cid && (
-                                <div className={"review-writer-section-writer"}>
+                                <div className="review-writer-section-writer">
                                     {isUserEnrolled && !allowEditReview && (
-                                        <button className={"cta-button"} id={"add-review"}
+                                        <button className="cta-button" id="add-review"
                                                 onClick={() => {
                                                     setAddReview(true)
                                                 }}>
@@ -197,7 +197,7 @@ export function ReviewSection({cid, user, averageRating}) {
                                     )}
 
                                     {isUserEnrolled && !editReview && allowEditReview && (
-                                        <button className={"cta-button"} id={"edit-review"}
+                                        <button className="cta-button" id="edit-review"
                                                 onClick={() => {
                                                     setEditReview(true)
                                                 }}>
@@ -209,9 +209,9 @@ export function ReviewSection({cid, user, averageRating}) {
                         </div>) : (
                             <div>
                             {user && cid && (
-                            <div className={"review-writer-section-writer"}>
+                            <div className="review-writer-section-writer">
                                 {isUserEnrolled && !allowEditReview && (
-                                    <button className={"cta-button"} id={"add-review"}
+                                    <button className="cta-button" id="add-review"
                                             onClick={() => {
                                                 setAddReview(true)
                                             }}>
@@ -225,7 +225,7 @@ export function ReviewSection({cid, user, averageRating}) {
 
 
                         {filteredReviews.length > 0 ? (
-                            <div className={"course-page-review-component-right"}>
+                            <div className="course-page-review-component-right">
                                 {filteredReviews.map(item =>
                                         <Review key={item.id} rating={item} title={false}/>
                                     )
@@ -235,7 +235,7 @@ export function ReviewSection({cid, user, averageRating}) {
                     </div>
 
                     {user && cid && (
-                        <div className={"course-page-review-component-bottom"}>
+                        <div className="course-page-review-component-bottom">
                             {addReview && (
                                 <ReviewWriter cid={cid} callback={finishedAdd}/>
                             )}

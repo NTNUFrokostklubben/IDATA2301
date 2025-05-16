@@ -116,123 +116,126 @@ export default function Layout() {
             <link href="https://fonts.googleapis.com/css2?family=Tienne:wght@400;700;900&display=swap"
                   rel="stylesheet"/>
             <menu id="menu-navbar">
-                <li id="logo-image">
-                    <Link to={"/"}><img id="logo-icon" src="/logo.svg" alt="Learniverse Logo"/></Link>
-                </li>
-                <li>
-                    <div className="dropdown" id="courses-dropdown">
-                        <button className="drop-btn"><b>Courses</b> &nbsp;
-                            <img id="triangle-icon" width="12" height="12" src="/icons/triangle-sharp.svg" alt={""}/>
-                        </button>
-                        <div className="dropdown-content">
-                            <Link to={"/search?search="}>All courses</Link>
-                            <hr/>
-                            <Link to={"/search?categories=it"}>Information Technologies</Link>
-                            <Link to={"/search?categories=dm"}>Digital Marketing</Link>
-                            <Link to={"/search?categories=be"}>Business and Entrepreneurship</Link>
-                            <Link to={"/search?categories=dsa"}>Data Science and Analytics</Link>
-
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div className="search-container">
-                        <form onSubmit={goToSearchPage} id="form_search" role="search">
-                            <button type="submit" id="search_btn">
-                                <img id="searchIcon" src="/icons/search-sharp.svg" alt="search icon"/>
+                <div className="navbar-container">
+                    <li id="logo-image">
+                        <Link to={"/"}><img id="logo-icon" src="/logo.svg" alt="Learniverse Logo"/></Link>
+                    </li>
+                    <li>
+                        <div className="dropdown" id="courses-dropdown">
+                            <button className="drop-btn"><b>Courses</b> &nbsp;
+                                <img id="triangle-icon" width="12" height="12" src="/icons/triangle-sharp.svg"
+                                     alt={""}/>
                             </button>
-                            <input type="text" placeholder="Search..." defaultValue={searchValue}  name="search"/>
+                            <div className="dropdown-content">
+                                <Link to={"/search?search="}>All courses</Link>
+                                <hr/>
+                                <Link to={"/search?categories=it"}>Information Technologies</Link>
+                                <Link to={"/search?categories=dm"}>Digital Marketing</Link>
+                                <Link to={"/search?categories=be"}>Business and Entrepreneurship</Link>
+                                <Link to={"/search?categories=dsa"}>Data Science and Analytics</Link>
 
-                        </form>
-                    </div>
-                </li>
-                <li>
-                    <div id="login-w-btn">
-                        <div id="login-signup-1">
-
-                            <div className="signed-in">
-
-                                <div className="nav-user">
-                                    <img className="nav-user-image" src={userPicture} alt="User profile"
-                                         onClick={() => goToUserPage()}/>
-                                </div>
-
-                                <div className="nav-admin">
-                                    <div className="dropdown" id="ls-dropdown">
-                                        <button className="admin-drop-down">
-                                            <img className="nav-user-image" src={userPicture} alt="User profile"/>
-                                        </button>
-                                        <div className="dropdown-content">
-                                            <a onClick={() => goToUserPage()}> Userpage </a>
-                                            <a onClick={() => goToAdminPage()}> Admin </a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <button onClick={() => logout()} className="cta-button" id="logout-btn"
-                                        alt="Log out" href="#">
-                                    <b>Log out</b>
-                                </button>
-
-                            </div>
-
-                            <div className="signed-out">
-                                <button onClick={() => {
-                                    setShowLoginModal(true)
-                                    setShowSignupModal(false)
-                                }} id="login-btn"
-                                        className="secondary-button" alt="Log in" href="#">
-                                    <b>Log in</b>
-                                </button>
-                                <button onClick={() => {
-                                    setShowSignupModal(true)
-                                    setShowLoginModal(false)
-                                }} className="cta-button" id="signup-btn"
-                                        alt="Sign up" href="#">
-                                    <b>Sign up</b>
-                                </button>
                             </div>
                         </div>
+                    </li>
+                    <li>
+                        <div className="search-container">
+                            <form onSubmit={goToSearchPage} id="form_search" role="search">
+                                <button type="submit" id="search_btn">
+                                    <img id="searchIcon" src="/icons/search-sharp.svg" alt="search icon"/>
+                                </button>
+                                <input type="text" placeholder="Search..." defaultValue={searchValue} name="search"/>
 
-                        <div id="login-signup-2">
-                            <div className="signed-in">
-                                <div className="dropdown" id="ls-dropdown">
+                            </form>
+                        </div>
+                    </li>
+                    <li>
+                        <div id="user-login-signup-container">
+                            <div id="login-signup-1">
+
+                                <div className="signed-in">
+
                                     <div className="nav-user">
-                                        <button className="login-signup-drop-down">
-                                            <img className="menu-icon" src="/icons/menu-sharp.svg" alt="menu"/>
-                                        </button>
-                                        <div className="dropdown-content">
-                                            <a onClick={() => goToUserPage()}>Userpage</a>
-                                            <a onClick={() => logout()}>Log Out</a>
-                                        </div>
+                                        <img className="nav-user-image" src={userPicture} alt="User profile"
+                                             onClick={() => goToUserPage()}/>
                                     </div>
+
                                     <div className="nav-admin">
-                                        <button className="login-signup-drop-down">
-                                            <img className="menu-icon" src="/icons/menu-sharp.svg" alt="menu"/>
-                                        </button>
-                                        <div className="dropdown-content">
-                                            <a onClick={() => goToUserPage()}>Userpage</a>
-                                            <a onClick={() => goToAdminPage()}>Admin</a>
-                                            <a onClick={() => logout()}>Log Out</a>
+                                        <div className="dropdown" id="ls-dropdown">
+                                            <button className="admin-drop-down">
+                                                <img className="nav-user-image" src={userPicture} alt="User profile"/>
+                                            </button>
+                                            <div className="dropdown-content">
+                                                <a onClick={() => goToUserPage()}> Userpage </a>
+                                                <a onClick={() => goToAdminPage()}> Admin </a>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div className="signed-out">
-                                <div className="dropdown" id="ls-dropdown">
-                                <button className="login-signup-drop-down">
-                                        <img className="menu-icon" src="/icons/menu-sharp.svg" alt="menu"/>
+
+                                    <button onClick={() => logout()} className="cta-button" id="logout-btn"
+                                            alt="Log out" href="#">
+                                        <b>Log out</b>
                                     </button>
-                                    <div className="dropdown-content">
-                                        <a onClick={() => setShowLoginModal(true)}>Log in</a>
-                                        <a onClick={() => setShowSignupModal(true)}>Sign Up</a>
-                                    </div>
+
+                                </div>
+
+                                <div className="signed-out">
+                                    <button onClick={() => {
+                                        setShowLoginModal(true)
+                                        setShowSignupModal(false)
+                                    }} id="login-btn"
+                                            className="secondary-button" alt="Log in" href="#">
+                                        <b>Log in</b>
+                                    </button>
+                                    <button onClick={() => {
+                                        setShowSignupModal(true)
+                                        setShowLoginModal(false)
+                                    }} className="cta-button" id="signup-btn"
+                                            alt="Sign up" href="#">
+                                        <b>Sign up</b>
+                                    </button>
                                 </div>
                             </div>
 
+                            <div id="login-signup-2">
+                                <div className="signed-in">
+                                    <div className="dropdown" id="ls-dropdown">
+                                        <div className="nav-user">
+                                            <button className="login-signup-drop-down">
+                                                <img className="menu-icon" src="/icons/menu-sharp.svg" alt="menu"/>
+                                            </button>
+                                            <div className="dropdown-content">
+                                                <a onClick={() => goToUserPage()}>Userpage</a>
+                                                <a onClick={() => logout()}>Log Out</a>
+                                            </div>
+                                        </div>
+                                        <div className="nav-admin">
+                                            <button className="login-signup-drop-down">
+                                                <img className="menu-icon" src="/icons/menu-sharp.svg" alt="menu"/>
+                                            </button>
+                                            <div className="dropdown-content">
+                                                <a onClick={() => goToUserPage()}>Userpage</a>
+                                                <a onClick={() => goToAdminPage()}>Admin</a>
+                                                <a onClick={() => logout()}>Log Out</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="signed-out">
+                                    <div className="dropdown" id="ls-dropdown">
+                                        <button className="login-signup-drop-down">
+                                            <img className="menu-icon" src="/icons/menu-sharp.svg" alt="menu"/>
+                                        </button>
+                                        <div className="dropdown-content">
+                                            <a onClick={() => setShowLoginModal(true)}>Log in</a>
+                                            <a onClick={() => setShowSignupModal(true)}>Sign Up</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
-                    </div>
-                </li>
+                    </li>
+                </div>
             </menu>
 
             <div className={"page-content"}>
@@ -251,7 +254,7 @@ export default function Layout() {
                         <p>Address: &nbsp;
                             <a href="https://maps.app.goo.gl/R53VDUQx8n6gL9tx8"
                                target="_blank">
-                                 Larsgårdsvegen 2, 6009 Ålesund
+                                Larsgårdsvegen 2, 6009 Ålesund
                             </a>
                         </p>
                         <p>Phone number: +47 735 95 000</p>
@@ -262,7 +265,7 @@ export default function Layout() {
 
                         <h3>Legal</h3>
                         <small>
-                        This website is a result of a university group project, performed in the course
+                            This website is a result of a university group project, performed in the course
                             <a href={"https://www.ntnu.edu/studies/courses/IDATA2301#tab=omEmnet"}> IDATA2301 </a>
                             Web technologies, at <a href={"https://www.ntnu.no/"}>NTNU</a>. All the information
                             provided here is a result of imagination. Any resemblance with real companies or
