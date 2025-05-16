@@ -42,13 +42,14 @@ export function AsyncApiRequest(method, url, requestBody) {
             return data;
         })
         .catch(error => {
-            // if(error.statusCode === 403 && getCookieForLogout("jwt")){
-            //     deleteAuthorizationCookies();
-            //     deleteUserRedux().then(() =>{
-            //         window.location.href = "/";
-            //     })
-            //
-            // }
+
+           /* if(error.statusCode === 403 && getCookieForLogout("jwt")){
+                deleteAuthorizationCookies();
+                deleteUserRedux().then(() =>{
+                    window.location.href = "/";
+                })
+
+            }*/
             console.error('Error:', error);
             throw error;
         });

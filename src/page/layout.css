@@ -58,7 +58,7 @@ menu li {
 }
 
 .dropdown-content {
-    width: 40rem;
+    width: fit-content;
     display: block;
     position: absolute;
     background-color: var(--highlight);
@@ -149,8 +149,8 @@ menu li {
 }
 
 .menu-icon{
-    width: 2rem;
-    height: 2rem;
+    width: 3rem;
+    height: 3rem;
 }
 
 #login-signup-btn{
@@ -200,6 +200,34 @@ menu li {
     width: 3rem;
     background-color: var(--textWhite);
 }
+.nav-admin{
+    display: flex;
+    height: 3rem;
+    width: 3rem;
+    background-color: var(--textWhite);
+}
+.nav-admin button{
+    background-color: var(--textWhite);
+    border: none;
+    cursor: pointer;
+    height: fit-content;
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+.login-signup-drop-down{
+    background-color: var(--textWhite);
+    border: none;
+    cursor: pointer;
+    height: 3rem;
+    width: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
 .nav-user-image{
     height: 3rem;
     width: 3rem;
@@ -220,6 +248,7 @@ footer{
     font-size: 1rem;
     height: auto;
     padding: 1.5rem;
+    padding: 1.5rem;
     position: relative;
 }
 
@@ -235,7 +264,11 @@ footer small {
     color: var(--textWhite);
 }
 
-footer a {
+footer small a {
+    color: var(--textWhite);
+    font-size: 0.889rem;
+}
+footer p a {
     color: var(--textWhite);
     font-size: 1rem;
 }
@@ -251,6 +284,7 @@ footer a {
     align-items: center;
     justify-content: flex-start;
 }
+
 @media (min-width: 2800px) {
     .search-container #form_search {
         max-width: 85rem;

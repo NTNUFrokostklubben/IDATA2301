@@ -171,10 +171,7 @@ export default function Course() {
         }
         return value;
     }
-    //
-    // if (loading) {
-    //     return (<h1>loading</h1>)
-    // }
+
     return (
         <div className="course-page">
             <div className="course-page-content">
