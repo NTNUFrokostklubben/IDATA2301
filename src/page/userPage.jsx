@@ -22,8 +22,8 @@ export function UserImageModal({close, uid}) {
     useFocusTrap(modalRef, true, close) // Passes true to isOpen due to this modal only being open when it is rendered
 
 
-    function dialogChooser() {
-        setOpen(true)
+    function dialogChooser(value) {
+        setOpen(value)
 
     }
 
@@ -88,10 +88,10 @@ export function UserImageModal({close, uid}) {
                                type="file" style={{display: "none"}} onChange={handleFileChange}/>
                     </label>
                 </div>
-                <div className={`user-page-modal-option-container`} onClick={dialogChooser}>
+                <div className={`user-page-modal-option-container`} onClick={ () => {dialogChooser(true)}}>
                     <button style={removeStyles()}>
                         <ConfirmChoiceDialog callback={deletePfp} choice={"Are you sure you want to delete your " +
-                            "profile picture?"} open={setOpen}/>
+                            "profile picture?"} open={open} setOpen={dialogChooser}/>
                         <p className={"user-page-modal-delete-pfp"}>
                             delete profile picture
                         </p>

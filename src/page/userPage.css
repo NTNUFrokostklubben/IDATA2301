@@ -34,7 +34,7 @@
 }
 
 .user-page-modal-cancel {
-    color: red;
+    color: var(--danger);
 }
 
 
@@ -47,7 +47,7 @@
     width: 100%;
 }
 
-.user-page-modal-option-container:hover {
+.user-page-modal-delete-pfp:hover {
     cursor: pointer;
     background-color: var(--background);
 }
