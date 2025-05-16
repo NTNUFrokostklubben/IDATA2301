@@ -1,5 +1,6 @@
 import {AsyncApiRequest} from "./requests";
-import {setUserObject} from "../dataSlice";
+import {clearUserObject, setUserObject} from "../dataSlice";
+import {persistor} from "../store";
 
 export function uploadImage(file) {
     const formData = new FormData();
@@ -310,9 +311,10 @@ export function getTransactions() {
         });
 }
 
+export async function deleteUserRedux(){
+    await persistor.purge()
+}
 export async function addUserToRedux(email, dispatch){
-
-
     const userDto = await AsyncApiRequest("GET", `/userDto/${email}`, null)
         .then(response => response.json())
     console.log(userDto)

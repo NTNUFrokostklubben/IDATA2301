@@ -12,6 +12,7 @@ import ScrollRoute from "../component/routing/scrollRoute";
 import {useDispatch, useSelector} from "react-redux";
 import {clearCourseObject, clearUserObject} from "../dataSlice";
 import LearniverseLogo from "../component/icons/learniverseLogo";
+import {deleteUserRedux} from "../utils/commonRequests";
 // import {Modal} from "react-native";
 
 export default function Layout() {
@@ -24,7 +25,6 @@ export default function Layout() {
     const searchValue = searchParams.get("search");
     const [userPicture, setUserPicture] = useState(String);
     const navigate = useNavigate();
-    const dispatch = useDispatch();
 
 
     /**
@@ -78,9 +78,7 @@ export default function Layout() {
         navigate(`/userpage`);
     }
 
-    async function deleteUserRedux(){
-        dispatch(clearUserObject())
-    }
+
     /**
      * Logs out the user by deleting the authentication cookies and redirecting to the index page.
      */
