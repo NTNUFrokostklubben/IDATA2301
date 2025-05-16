@@ -79,19 +79,6 @@ export default function Layout() {
         navigate("/search");
     }
 
-    /**
-     * Navigates to the user page.
-     */
-    function goToUserPage(){
-        navigate(`/userpage`);
-    }
-
-    /**
-     * Navigates to the admin page.
-     */
-    function goToAdminPage() {
-        navigate(`/admin`);
-    }
 
     /**
      * Logs out the user by deleting the authentication cookies and redirecting to the index page.
@@ -154,10 +141,9 @@ export default function Layout() {
 
                                 <div className="signed-in">
 
-                                    <div className="nav-user">
-                                        <img className="nav-user-image" src={userPicture} alt="User profile"
-                                             onClick={() => goToUserPage()}/>
-                                    </div>
+                                    <Link to={"/userpage"} className="nav-user">
+                                        <img className="nav-user-image" src={userPicture} alt="User profile"/>
+                                    </Link>
 
                                     <div className="nav-admin">
                                         <div className="dropdown" id="ls-dropdown">
@@ -165,8 +151,8 @@ export default function Layout() {
                                                 <img className="nav-user-image" src={userPicture} alt="User profile"/>
                                             </button>
                                             <div className="dropdown-content">
-                                                <a onClick={() => goToUserPage()}> Userpage </a>
-                                                <a onClick={() => goToAdminPage()}> Admin </a>
+                                                <Link to={"/userpage"}> Userpage </Link>
+                                                <Link to={"/admin"}> Admin </Link>
                                             </div>
                                         </div>
                                     </div>
@@ -204,7 +190,7 @@ export default function Layout() {
                                                 <img className="menu-icon" src="/icons/menu-sharp.svg" alt="menu"/>
                                             </button>
                                             <div className="dropdown-content">
-                                                <a onClick={() => goToUserPage()}>Userpage</a>
+                                                <Link to={"/userpage"}>Userpage</Link>
                                                 <a onClick={() => logout()}>Log Out</a>
                                             </div>
                                         </div>
@@ -213,8 +199,8 @@ export default function Layout() {
                                                 <img className="menu-icon" src="/icons/menu-sharp.svg" alt="menu"/>
                                             </button>
                                             <div className="dropdown-content">
-                                                <a onClick={() => goToUserPage()}>Userpage</a>
-                                                <a onClick={() => goToAdminPage()}>Admin</a>
+                                                <Link to={"/userpage"}>Userpage</Link>
+                                                <Link to={"/admin"}>Admin</Link>
                                                 <a onClick={() => logout()}>Log Out</a>
                                             </div>
                                         </div>
