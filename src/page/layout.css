@@ -235,7 +235,11 @@ footer small {
     color: var(--textWhite);
 }
 
-footer a {
+footer small a {
+    color: var(--textWhite);
+    font-size: 0.889rem;
+}
+footer p a {
     color: var(--textWhite);
     font-size: 1rem;
 }
@@ -251,6 +255,7 @@ footer a {
     align-items: center;
     justify-content: flex-start;
 }
+
 @media (min-width: 2800px) {
     .search-container #form_search {
         max-width: 85rem;

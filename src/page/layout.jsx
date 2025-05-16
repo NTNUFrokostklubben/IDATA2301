@@ -17,7 +17,6 @@ import {deleteUserRedux} from "../utils/commonRequests";
 
 export default function Layout() {
 
-
     const [showLoginModal, setShowLoginModal] = useState();
     const [showSignupModal, setShowSignupModal] = useState();
     const [searchParams, setSearchParams] = useSearchParams();
@@ -58,9 +57,11 @@ export default function Layout() {
 
     }
 
+    /**
+     * Fetches the user profile picture link
+     */
     useEffect(() => {
         if (user) setUserPicture(user.profilePicture)
-
     }, [user]);
 
     /**
@@ -70,14 +71,12 @@ export default function Layout() {
         navigate("/search");
     }
 
-
     /**
      * Navigates to the user page.
      */
     function goToUserPage(){
         navigate(`/userpage`);
     }
-
 
     /**
      * Logs out the user by deleting the authentication cookies and redirecting to the index page.
@@ -101,7 +100,6 @@ export default function Layout() {
             <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin/>
             <link href="https://fonts.googleapis.com/css2?family=Tienne:wght@400;700;900&display=swap"
                   rel="stylesheet"/>
-            {/*Navbar*/}
             <menu id="menu-navbar">
                 <li id="logo-image">
                     <Link to={"/"}><img id="logo-icon" src="/logo.svg" alt="Learniverse Logo"/></Link>
@@ -205,18 +203,27 @@ export default function Layout() {
 
                     <div className="textFooter" id="contact-us">
                         <h3>Contact us:</h3>
-                        <p>Address: 1234 Main Street, Lincoln, NE 685089</p>
-                        <p>Phone number: +47 123 45 678</p>
-                        <p>Email: learniverse@connect.com</p>
+
+                        <p>Address: &nbsp;
+                            <a href="https://maps.app.goo.gl/R53VDUQx8n6gL9tx8"
+                               target="_blank">
+                                 Larsgårdsvegen 2, 6009 Ålesund
+                            </a>
+                        </p>
+                        <p>Phone number: +47 735 95 000</p>
+                        <p>Email: <a href="mailto:support@learniverse.no">support@learniverse.no</a></p>
                     </div>
 
                     <div className="textFooter" id="legal">
 
                         <h3>Legal</h3>
-                        <small>This website is a result of a university group project, performed in the course
-                            <a href={"https://www.ntnu.edu/studies/courses/IDATA2301#tab=omEmnet"}> IDATA2301</a>&nbsp;
-                            Web technologies, at <a href={"https://www.ntnu.no/"}>NTNU</a>. All the information provided here is a result of
-                            imagination. Any resemblance with real companies or products is a coincidence.</small>
+                        <small>
+                        This website is a result of a university group project, performed in the course
+                            <a href={"https://www.ntnu.edu/studies/courses/IDATA2301#tab=omEmnet"}> IDATA2301 </a>
+                            Web technologies, at <a href={"https://www.ntnu.no/"}>NTNU</a>. All the information
+                            provided here is a result of imagination. Any resemblance with real companies or
+                            products is a coincidence.
+                        </small>
                     </div>
 
                 </div>

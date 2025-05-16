@@ -1,4 +1,5 @@
 import "./about.css"
+import React from "react";
 export default function About (){
 
     return(
@@ -6,15 +7,15 @@ export default function About (){
 
             <section className="about-hero-worker">
                 <div className="about-hero-container">
-                    <picture id="about-hero-img-box">
-                        <source srcSet="/images/businessWoman.png" type="image/png"/>
-                        <img width="286" height="419" src="/images/businessWoman.png"
-                             alt="a worker working on a computer" id="about-hero-img"/>
+                    <picture  id="about-hero-img-box">
+                        <source srcSet={"/images/businessWoman.webp"} type="image/webp"/>
+                        <img id="about-hero-img" width="286" height="419" src={"/images/businessWoman.png"}
+                             alt="about hero"/>
                     </picture>
                     <div className={"about-hero-text-box"}>
                         <p className="about-hero-text">
-                            Welcome to Learniverse Connect, your premier destination for unlocking a world of knowledge
-                            and skills through our dynamic online course marketplace!
+                            Welcome to Learniverse Connect, your premier destination for unlocking a
+                            world of knowledge and skills through our dynamic online course marketplace!
                         </p>
                     </div>
 
@@ -178,8 +179,11 @@ export default function About (){
                     <div className="meet-our-team-grid">
 
                         <div className="meet-our-team-person">
-                            <img className="meet-our-team-person-img" src="/images/employees/anna.jpg"
-                                 alt="a businesswoman"/>
+                            <picture>
+                                <source srcSet={"/images/employees/anna.webp"} type="image/webp"/>
+                                <img className="meet-our-team-person-img" src="/images/employees/anna.jpg"
+                                     alt="anna"/>
+                            </picture>
                             <h6 className="meet-our-team-person-name">Anna Patel</h6>
                             <p className="meet-our-team-person-job">CEO & Head of Learning Experience</p>
 
@@ -192,8 +196,11 @@ export default function About (){
                         </div>
 
                         <div className="meet-our-team-person">
-                            <img className="meet-our-team-person-img" src="/images/employees/daniel.jpg"
-                                 alt="a businesswoman"/>
+                            <picture>
+                                <source srcSet={"/images/employees/daniel.webp"} type="image/webp"/>
+                                <img className="meet-our-team-person-img" src="/images/employees/daniel.jpg"
+                                     alt="daniel"/>
+                            </picture>
                             <h6 className="meet-our-team-person-name">Daniel Osei</h6>
                             <p className="meet-our-team-person-job">Certification & Compliance Lead</p>
 
@@ -207,8 +214,11 @@ export default function About (){
                         </div>
 
                         <div className="meet-our-team-person">
-                            <img className="meet-our-team-person-img" src="/images/employees/elizabeth.jpg"
-                                 alt="a businesswoman"/>
+                            <picture>
+                                <source srcSet={"/images/employees/elizabeth.webp"} type="image/webp"/>
+                                <img className="meet-our-team-person-img" src="/images/employees/elizabeth.jpg"
+                                     alt="elizabeth"/>
+                            </picture>
                             <h6 className="meet-our-team-person-name">Elizabeth Wells</h6>
                             <p className="meet-our-team-person-job">Creative Director</p>
 
@@ -221,8 +231,11 @@ export default function About (){
                         </div>
 
                         <div className="meet-our-team-person">
-                            <img className="meet-our-team-person-img" src="/images/employees/markus.jpg"
-                                 alt="a businesswoman"/>
+                            <picture>
+                                <source srcSet={"/images/employees/markus.webp"} type="image/webp"/>
+                                <img className="meet-our-team-person-img" src="/images/employees/markus.jpg"
+                                     alt="markus"/>
+                            </picture>
                             <h6 className="meet-our-team-person-name">Markus Ruiz</h6>
                             <p className="meet-our-team-person-job">Lead Software Engineer</p>
 
@@ -235,8 +248,11 @@ export default function About (){
                         </div>
 
                         <div className="meet-our-team-person">
-                            <img className="meet-our-team-person-img" src="/images/employees/samuel.jpg"
-                                 alt="a businesswoman"/>
+                            <picture>
+                                <source srcSet={"/images/employees/samuel.webp"} type="image/webp"/>
+                                <img className="meet-our-team-person-img" src="/images/employees/samuel.jpg"
+                                     alt="samuel"/>
+                            </picture>
                             <h6 className="meet-our-team-person-name">Samuel Martins </h6>
                             <p className="meet-our-team-person-job">Director of Educational Partnerships</p>
 
@@ -249,8 +265,11 @@ export default function About (){
                         </div>
 
                         <div className="meet-our-team-person">
-                            <img className="meet-our-team-person-img" src="/images/employees/sarah.jpg"
-                                 alt="a businesswoman"/>
+                            <picture>
+                                <source srcSet={"/images/employees/sarah.webp"} type="image/webp"/>
+                                <img className="meet-our-team-person-img" src="/images/employees/sarah.jpg"
+                                     alt="sarah"/>
+                            </picture>
                             <h6 className="meet-our-team-person-name">Sarah Conly </h6>
                             <p className="meet-our-team-person-job">Community & Support Manager</p>
 
