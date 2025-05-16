@@ -36,14 +36,14 @@
 
 }
 
-#results {
+.search-page #results {
     display: flex;
     flex-flow: row;
     flex-wrap: wrap;
     justify-content: center;
 }
 
-#resultsinfo {
+.search-page #resultsinfo {
     display: flex;
     flex-flow: row;
     justify-content: space-between;

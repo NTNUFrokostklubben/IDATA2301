@@ -3,7 +3,6 @@ import {AsyncApiRequest} from "../../utils/requests";
 import Review from "../../component/Rating/review";
 import "./reviewSection.css"
 import ReviewWriter from "../../component/Rating/reviewWriter";
-import {UserCourse} from "../../utils/Classes/commonClasses";
 
 
 export function ReviewSection({cid, user, averageRating}) {
@@ -41,7 +40,7 @@ export function ReviewSection({cid, user, averageRating}) {
         }
     }
     const fetchRatingArray = async () => {
-        console.log("trying to get reviews")
+
         const data = await AsyncApiRequest("GET", `/userCourses/reviews/course/${cid}`, null)
             .then(response => response.json());
         const filteredAndSorted = data
@@ -55,7 +54,6 @@ export function ReviewSection({cid, user, averageRating}) {
                setIsUserEnrolled(item)
            })
             setAllowEditReview(filteredAndSorted.some(obj => obj.user?.id === user.id))
-            console.log(allowEditReview)
         }else
         {
             setIsUserEnrolled(false)
@@ -232,8 +230,7 @@ export function ReviewSection({cid, user, averageRating}) {
                                         <Review key={item.id} rating={item} title={false}/>
                                     )
                                 }
-                            </div>  ) :
-                            <p>No reviews</p>
+                            </div>) : <p>No reviews</p>
                         }
                     </div>
 

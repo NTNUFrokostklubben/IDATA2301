@@ -12,6 +12,7 @@ import ScrollRoute from "../component/routing/scrollRoute";
 import {useDispatch, useSelector} from "react-redux";
 import {clearCourseObject, clearUserObject} from "../dataSlice";
 import LearniverseLogo from "../component/icons/learniverseLogo";
+import {deleteUserRedux} from "../utils/commonRequests";
 // import {Modal} from "react-native";
 
 export default function Layout() {
@@ -23,7 +24,6 @@ export default function Layout() {
     const searchValue = searchParams.get("search");
     const [userPicture, setUserPicture] = useState(String);
     const navigate = useNavigate();
-    const dispatch = useDispatch();
 
 
     /**
@@ -79,13 +79,6 @@ export default function Layout() {
     }
 
     /**
-     * Deletes the user object from the Redux store.
-     * @returns {Promise<void>}
-     */
-    async function deleteUserRedux(){
-        dispatch(clearUserObject())
-    }
-    /**
      * Logs out the user by deleting the authentication cookies and redirecting to the index page.
      */
     function logout() {
@@ -117,13 +110,13 @@ export default function Layout() {
                             <img id="triangle-icon" width="12" height="12" src="/icons/triangle-sharp.svg" alt={""}/>
                         </button>
                         <div className="dropdown-content">
-                            <a href={"/search"}>Search/filters</a>
-                            <a href={"/admin"}>Admin</a>
-                            <a href={"/aboutUs"}>About</a>
-                            <a href={"/checkout"}>Checkout</a>
-                            <a href={"/noAccess"}>403 no access</a>
-                            <Link to={`/course/${1}`}> course</Link>
-                            <Link to={`/userpage/${1}`}> user page</Link>
+                            <Link to={"/search?search="}>All courses</Link>
+                            <hr/>
+                            <Link to={"/search?categories=it"}>Information Technologies</Link>
+                            <Link to={"/search?categories=dm"}>Digital Marketing</Link>
+                            <Link to={"/search?categories=be"}>Business and Entrepreneurship</Link>
+                            <Link to={"/search?categories=dsa"}>Data Science and Analytics</Link>
+
                         </div>
                     </div>
                 </li>

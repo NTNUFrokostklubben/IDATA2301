@@ -1,5 +1,7 @@
 import {getCookie} from "./authentication/cookies";
 import {HttpResponseError} from "./authentication/HttpResponseError";
+import {deleteAuthorizationCookies} from "./authentication/authentication";
+import {deleteUserRedux} from "./commonRequests";
 
 
 const API_BASE_URL = process.env.REACT_APP_API_URL;
@@ -40,11 +42,24 @@ export function AsyncApiRequest(method, url, requestBody) {
             return data;
         })
         .catch(error => {
+            if(error.statusCode === 403 && getCookieForLogout("jwt")){
+                deleteAuthorizationCookies();
+                deleteUserRedux().then(() =>{
+                    window.location.href = "/";
+                })
+
+            }
             console.error('Error:', error);
             throw error;
         });
 }
 
+export function getCookieForLogout(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+    return null;
+}
 /**
  * Check whether the HTTP response has a 200 OK status. If it does, return the
  * response. If it does not, throw an Error

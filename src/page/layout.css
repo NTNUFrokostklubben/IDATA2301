@@ -57,20 +57,29 @@ menu li {
     width: 100%;
 }
 
-/* (Hidden by Default) */
 .dropdown-content {
-    width: 9rem;
-    display: none;
+    width: 40rem;
+    display: block;
     position: absolute;
-    background-color: var(--primary);
+    background-color: var(--highlight);
     box-shadow: 0px 8px 16px 0px var(--shadow);
     z-index: 1;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, opacity 0.05s ease-out;
+    opacity: 0;
+}
+
+.dropdown:hover .dropdown-content {
+    max-height: 50rem;
+    opacity: 1;
 }
 
 /* Links inside the dropdown */
 .dropdown-content a {
     color: var(--textBlack);
-    padding: 12px 1rem;
+    transition: all 0.1s ease;
+    padding: 1rem;
     font-size: 1rem;
     text-decoration: none;
     display: block;
@@ -95,7 +104,7 @@ menu li {
     all: unset;
     color: var(--textBlack);
 
-    height: 100%;
+    /*height: 100%;*/
     width: 100%;
     padding: 0.5rem 0.8rem;
 }
@@ -121,6 +130,7 @@ menu li {
     cursor: pointer;
     width: 2rem;
     height: 4rem;
+    z-index: 1;
 }
 
 .search-container #search_btn #searchIcon {
