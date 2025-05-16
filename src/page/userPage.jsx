@@ -7,9 +7,11 @@ import FavoriteCard from "../component/favoriteCard/favoriteCard";
 import {useDispatch, useSelector} from "react-redux";
 import {createPortal} from "react-dom";
 import {uploadImage} from "../utils/commonRequests";
-import {setCourseObject, setUserImage, setUserObject} from "../dataSlice";
+import { setUserImage} from "../dataSlice";
 import {Dialog, Skeleton} from "@mui/material";
 import {useFocusTrap} from "../utils/useFocusTrap";
+import Course from "./course/course";
+import ConfirmChoiceDialog from "../component/modals/confirmChoice/confirmChoiceDialog";
 
 
 export function UserImageModal({close, uid}) {
@@ -20,8 +22,8 @@ export function UserImageModal({close, uid}) {
     useFocusTrap(modalRef, true, close) // Passes true to isOpen due to this modal only being open when it is rendered
 
 
-    function dialogChooser() {
-        setOpen(true)
+    function dialogChooser(value) {
+        setOpen(value)
 
     }
 
@@ -86,27 +88,10 @@ export function UserImageModal({close, uid}) {
                                type="file" style={{display: "none"}} onChange={handleFileChange}/>
                     </label>
                 </div>
-                <div className={`user-page-modal-option-container`} onClick={dialogChooser}>
+                <div className={`user-page-modal-option-container`} onClick={ () => {dialogChooser(true)}}>
                     <button style={removeStyles()}>
-                        <Dialog open={open}>
-                            <div className={"user-page-modal-delete-dialog"}>
-                                <p className={"user-page-modal-delete-dialog-confirmation-text"}>
-                                    Are you sure you want to delete your profile picture?
-                                </p>
-                                <div className={"user-page-modal-delete-dialog-all-buttons"}>
-                                    <button className={"user-page-modal-delete-dialog-button"} onClick={() => {
-                                        deletePfp(true)
-                                    }}>
-                                        Confirm
-                                    </button>
-                                    <button className={"user-page-modal-delete-dialog-button"} onClick={() => {
-                                        deletePfp(false)
-                                    }}>
-                                        Cancel
-                                    </button>
-                                </div>
-                            </div>
-                        </Dialog>
+                        <ConfirmChoiceDialog callback={deletePfp} choice={"Are you sure you want to delete your " +
+                            "profile picture?"} open={open} setOpen={dialogChooser}/>
                         <p className={"user-page-modal-delete-pfp"}>
                             delete profile picture
                         </p>
