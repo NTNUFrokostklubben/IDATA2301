@@ -42,6 +42,7 @@ export function AsyncApiRequest(method, url, requestBody) {
             return data;
         })
         .catch(error => {
+
            /* if(error.statusCode === 403 && getCookieForLogout("jwt")){
                 deleteAuthorizationCookies();
                 deleteUserRedux().then(() =>{

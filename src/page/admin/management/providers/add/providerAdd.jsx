@@ -31,7 +31,7 @@ function ProviderFormAdd() {
                 provider.altLogoLink = r;
             }).then(() => {
 
-                postProvider(provider).then(navigate(-1));
+                postProvider(provider).then(navigate("../"));
             })
         })
     }

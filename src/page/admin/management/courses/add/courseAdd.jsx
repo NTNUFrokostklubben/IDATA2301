@@ -49,7 +49,7 @@ function CourseAddForm() {
             data.set("imgLink", r);
             handleFormSubmission(data)
                 .then((r) => setKeywords(r?.id, processedKeywords()))
-                .then(navigate(-1));
+                .then(navigate("../"));
         });
     }
 
