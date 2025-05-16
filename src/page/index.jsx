@@ -227,8 +227,10 @@ export default function Index() {
                     </div>
 
                     <div id="index-hero-main-image">
-                        <img id="index-hero-image" src=" /images/hero_woman_original.png"
-                             alt="a person working on a ipad"/>
+                        <picture >
+                            <source srcSet={"/images/hero_woman_original.webp"} type="image/webp"/>
+                            <img  id="index-hero-image" src={"/images/hero_woman_original.jpg"} alt="index hero"/>
+                        </picture>
                     </div>
 
                 </div>
@@ -330,7 +332,10 @@ export default function Index() {
 
             <section id="index-testimonial">
                 <div id="index-testimonial_box">
-                    <img id="index-testimonial_photo" src="/images/testimonial.jpg" alt="testimonial"/>
+                    <picture>
+                        <source srcSet={"/images/testimonial.webp"} type="image/webp"/>
+                        <img id="index-testimonial_photo" src="/images/testimonial.jpg" alt="testimonial"/>
+                    </picture>
                     <div id="index-testimonial_text">
                         <h3>Elena Martinez - Project Coordinator</h3>
                         &nbsp;

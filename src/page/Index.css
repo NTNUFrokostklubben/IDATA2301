@@ -29,7 +29,8 @@
     background-color: var(--textWhite);
     box-shadow: 0 8 16 0 var(--shadow);
     padding: 2rem;
-    width: 30rem;
+    width: 40%;
+    max-width: 30rem;
     height: auto;
 
 }
@@ -39,7 +40,7 @@
 }
 
 #index-hero-main-box p {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     color: var(--textBlack);
 }
 
