@@ -275,10 +275,6 @@ footer small {
     color: var(--textWhite);
 }
 
-footer small a {
-    color: var(--textWhite);
-    font-size: 0.889rem;
-}
 footer p a {
     color: var(--textWhite);
     font-size: 1rem;
@@ -286,6 +282,9 @@ footer p a {
 
 #footer-textbox{
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
 #footer-textbox #contact-us{
     min-width: 40%;
@@ -452,5 +451,10 @@ footer p a {
     }
     .dropdown-content {
         width: 6rem;
+    }
+    .footer-textbox{
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: center;
     }
 }
