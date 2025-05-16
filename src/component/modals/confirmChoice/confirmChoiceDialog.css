@@ -1,0 +1,24 @@
+.confirm-choice-modal {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 20rem;
+    height: 10rem;
+    background-color: var(--textWhite);
+}
+.confirm-choice-modal-all-buttons {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-content: space-around;
+}
+
+.confirm-choice-delete-dialog-confirmation-text{
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+#confirm-choice-delete-button{
+    background-color: var(--danger);
+}

@@ -192,7 +192,7 @@ export function getUsers() {
  * @returns {Promise<*>}
  */
 export function getUser(uid) {
-    return AsyncApiRequest("GET", "/user/get", null)
+    return AsyncApiRequest("GET", "/user/get/" + uid, null)
         .then(response => {
             if (response.ok) {
                 return response.json();
@@ -214,7 +214,7 @@ export function getUser(uid) {
  * @returns {Promise<*>}
  */
 export function putUser(uid, user) {
-    return AsyncApiRequest("PUT", "/user/put", user)
+    return AsyncApiRequest("PUT", "/user/put/" + uid, user)
         .then(response => {
             if (response.ok) {
                 return response.json();

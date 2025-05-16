@@ -29,11 +29,11 @@ function UserEditForm({user, roles}) {
             uploadImage(image).then(r => {
                 data.set("profilePicture", r);
 
-                handleFormSubmission(data).then(navigate(-1));
+                handleFormSubmission(data).then(navigate("../"));
             })
         } else {
             data.set("profilePicture", user.profilePicture);
-            handleFormSubmission(data).then(navigate(-1));
+            handleFormSubmission(data).then(navigate("../"));
         }
     }
 

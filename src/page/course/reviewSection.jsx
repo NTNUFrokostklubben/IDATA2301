@@ -1,8 +1,11 @@
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {AsyncApiRequest} from "../../utils/requests";
 import Review from "../../component/Rating/review";
 import "./reviewSection.css"
 import ReviewWriter from "../../component/Rating/reviewWriter";
+import {Dialog} from "@mui/material";
+import ConfirmChoiceDialog from "../../component/modals/confirmChoice/confirmChoiceDialog";
+import {useNavigate} from "react-router-dom";
 
 
 export function ReviewSection({cid, user, averageRating}) {
@@ -14,9 +17,12 @@ export function ReviewSection({cid, user, averageRating}) {
     const [currentStar, setCurrentStar] = useState(0)
     const [filteredReviews, setFilteredReviews] = useState([]);
     const [editReview, setEditReview] = useState(false);
+    const [deleteReview, setDeleteReview] = useState(false);
+    const [open, setOpen] = useState(false);
     const [addReview, setAddReview] = useState(false);
     const [allowEditReview, setAllowEditReview] = useState(false);
     const [isUserEnrolled, setIsUserEnrolled] = useState(false);
+    const navigate = useNavigate();
 
 
 
@@ -89,16 +95,38 @@ export function ReviewSection({cid, user, averageRating}) {
         setLoading(false);
     }, [averageRating]);
 
+    useEffect(() => {
+        if(deleteReview){
+
+             const delReview = async () => {
+                 await AsyncApiRequest("DELETE", `/userCourses/removeRating/${cid}`, null)
+             }
+
+             delReview();
+             setDeleteReviewBool(false)
+            navigate(0)
+
+        }
+    }, [deleteReview]);
+
+
     const finishedEdits = () => {
         setAllowEditReview(true);
         setEditReview(false);
         refresh();
     }
 
-    const finishedAdd= (value) => {
+    const finishedAdd = (value) => {
         setAllowEditReview(value);
         setAddReview(false);
         refresh();
+    }
+    const setOpenBool = (value) =>{
+        setOpen(value)
+    }
+
+    const setDeleteReviewBool = (value) => {
+        setDeleteReview(value)
     }
 
     const calculateStarDistribution = (ratings, nrRatings) => {
@@ -197,21 +225,32 @@ export function ReviewSection({cid, user, averageRating}) {
                                     )}
 
                                     {isUserEnrolled && !editReview && allowEditReview && (
-                                        <button className="cta-button" id="edit-review"
-                                                onClick={() => {
-                                                    setEditReview(true)
-                                                }}>
-                                            <p>Edit your review?</p>
-                                        </button>
+                                        <div className={"review-section-edit-delete"}>
+                                            <button className={"cta-button"} id={"edit-review"}
+                                                    onClick={() => {
+                                                        setEditReview(true)
+                                                    }}>
+                                                <p>Edit review</p>
+                                            </button>
+                                           <ConfirmChoiceDialog open={open} setOpen={setOpenBool} choice={"Are you sure you want to delete" +
+                                               " your review?"} callback={setDeleteReviewBool}/>
+                                            <button className={"cta-button"} id={"delete-review"}
+                                                    onClick={() => {
+                                                        setOpen(true)
+                                                    }}>
+                                                <p>Delete review</p>
+                                            </button>
+                                        </div>
                                     )}
                                 </div>
                             )}
-                        </div>) : (
+                        </div>
+                        ) : (
                             <div>
-                            {user && cid && (
-                            <div className="review-writer-section-writer">
-                                {isUserEnrolled && !allowEditReview && (
-                                    <button className="cta-button" id="add-review"
+                                {user && cid && (
+                                    <div className={"review-writer-section-writer"}>
+                                        {isUserEnrolled && !allowEditReview && (
+                                    <button className={"cta-button"} id={"add-review"}
                                             onClick={() => {
                                                 setAddReview(true)
                                             }}>

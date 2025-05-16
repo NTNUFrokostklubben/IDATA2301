@@ -70,12 +70,12 @@ function CourseEditForm({course, keywords}) {
 
                 uploadImage(image).then(r => {
                     data.set("imgLink", r);
-                    handleFormSubmission(data).then(navigate(-1));
+                    handleFormSubmission(data).then(navigate("../"));
                 });
             } else {
 
                 data.set("imgLink", course.imgLink);
-                handleFormSubmission(data).then(navigate(-1));
+                handleFormSubmission(data).then(navigate("../"));
             }
 
         });
