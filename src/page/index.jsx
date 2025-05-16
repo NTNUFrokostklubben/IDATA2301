@@ -356,15 +356,15 @@ export default function Index() {
                     {/* The SVG Background and Pattern is by SVGBackgrounds.com*/}
                     {/* Url: "https://www.svgbackgrounds.com/set/free-svg-backgrounds-and-patterns/"*/}
 
-                    <div id="index-slideshow-container">
+                    <div id="">
                         {slides.map((slide, index) => (
                             <div key={index} className="index-mySlides index-fade"
                                  style={{display: index === slideIndex ? "block" : "none"}}>
 
-                                {/*TODO style this and change the size on them*/}
                                 <picture>
                                     <source srcSet={"/images/carusel/"+ slide + ".webp"} type="image/webp"/>
-                                    <img  height={"200rem"} src={"/images/carusel/" + slide + ".jpg"} alt="carusel image"/>
+                                    <img className="index-slideshow-img" src={"/images/carusel/" + slide + ".jpg"}
+                                         alt="carusel image"/>
                                 </picture>
                             </div>
                         ))}

@@ -248,12 +248,11 @@
 
 .index-mySlides {
     display: none;
+    padding: 1rem;
 }
 .index-slideshow-img{
-    width: 24rem;
-    height: 16rem;
+    max-width: 24rem;
 }
-
 
 /* Fading animation */
 .index-fade {
@@ -352,6 +351,22 @@
 
     #index-hero2-textbox {
         width: 80%;
+    }
+    #index-testimonial_box{
+        flex-direction: column;
+        align-items: center;
+        justify-items: center;
+        text-align: left;
+    }
+    #index-testimonial_photo {
+        width: 10rem;
+        height: 10rem;
+        object-fit: cover;
+        margin-right: 0rem;
+    }
+    #index-testimonial_text {
+        width: 80%;
+        padding: 0.5rem;
     }
     #index-hero2_textbox h3, #index-hero2_textbox p {
         padding: 0.5rem;
