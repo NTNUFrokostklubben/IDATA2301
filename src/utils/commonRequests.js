@@ -124,6 +124,21 @@ export function postCourse(course) {
         });
 }
 
+export function putCourse(cid, course) {
+    return AsyncApiRequest("PUT", "/course/" + cid, course)
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error("Error posting course");
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            throw error;
+        });
+}
+
 /**
  * Gets all offerable courses from Server
  *
