@@ -354,9 +354,10 @@
     }
     #index-testimonial_box{
         flex-direction: column;
-        align-items: center;
-        justify-items: center;
+        align-items: flex-start;
+        justify-items: flex-start;
         text-align: left;
+        padding: 2rem;
     }
     #index-testimonial_photo {
         width: 10rem;

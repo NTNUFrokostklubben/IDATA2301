@@ -13,7 +13,7 @@ export default function AdminDashboard() {
     const navigate = useNavigate();
 
     // Stats in overview
-    const [revenueData, setRevenueData]=useState([]);
+    const [providerStats, setProviderStats]=useState([]);
     const [totalCourses, setTotalCourses]=useState([0]);
     const [totalUsers, setTotalUsers]=useState([0]);
     const [totalRevenue, setTotalRevenue]=useState([0]);
@@ -46,7 +46,7 @@ export default function AdminDashboard() {
             try{
                 await new Promise(r => setTimeout(r, 500));
                 await Promise.all([
-                    fetchRevenueData(),
+                    fetchProviderStats(),
                     fetchReviews(),
                     fetchTotalRevenue(),
                     fetchTotalCourses(),
@@ -66,7 +66,7 @@ export default function AdminDashboard() {
     /**
      * Fetches all revenue data from the API
      */
-    async function fetchRevenueData() {
+    async function fetchProviderStats() {
         try{
             const data = await AsyncApiRequest("GET","/transaction/providersStats", null)
                 .then(response => response.json());
@@ -75,7 +75,7 @@ export default function AdminDashboard() {
                 value: providerStat.REVENUE,
                 label: providerStat.PROVIDER_NAME
             }));
-            setRevenueData(revenue);
+            setProviderStats(revenue);
         } catch (err){
             throw new Error("Error fetching revenue data: ", err);
         }
@@ -91,7 +91,8 @@ export default function AdminDashboard() {
             const reviews = data.map((userCourse) => new reviewEntity(userCourse.id, userCourse.review?.rating,
                 userCourse.review?.comment, userCourse.course?.title, userCourse.user?.name, userCourse.user?.profilePicture,
                 userCourse.course?.id));
-            setReviews(reviews);
+            // only show the last 10 reviews
+            setReviews(reviews.slice(0, 6));
         } catch (err){
             throw new Error("Error fetching reviews: ", err);
         }
@@ -194,13 +195,17 @@ export default function AdminDashboard() {
             };
         } else {
             return {
-                width: 1200,
+                width: 1220,
                 height: 300,
             }
         }
     }
     function screenSetHidden() {
-         return !!(window.matchMedia("(max-width: 700px)").matches);
+         if (window.matchMedia("(max-width: 1024px)").matches) {
+             return true;
+         } else if(providerStats.length >= 6){
+             return true;
+         }
     }
 
     /**
@@ -241,7 +246,7 @@ export default function AdminDashboard() {
                             <PieChart
                                 series={[
                                     {
-                                        data: revenueData,
+                                        data: providerStats,
                                         highlightScope: {fade: 'global', highlight: 'item'},
                                         faded: {innerRadius: 30, additionalRadius: -30, color: 'gray'}
                                     },
@@ -279,7 +284,7 @@ export default function AdminDashboard() {
                     <hr className={"solid"}/>
                     {loading ?
                         <div className={"admin-dash-reviews-list"}>
-                            {Array.from({length: 10}).map((_, index) => (
+                            {Array.from({length: 6}).map((_, index) => (
                                 <AdminReviewSkeleton key={index}/>
                             ))}
                         </div>
