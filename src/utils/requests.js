@@ -42,7 +42,7 @@ export function AsyncApiRequest(method, url, requestBody) {
             return data;
         })
         .catch(error => {
-            if(error.statusCode === 403){
+            if(error.statusCode === 403 && getCookieForLogout("jwt")){
                 deleteAuthorizationCookies();
                 deleteUserRedux().then(() =>{
                     window.location.href = "/";
@@ -54,6 +54,12 @@ export function AsyncApiRequest(method, url, requestBody) {
         });
 }
 
+export function getCookieForLogout(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+    return null;
+}
 /**
  * Check whether the HTTP response has a 200 OK status. If it does, return the
  * response. If it does not, throw an Error
