@@ -335,6 +335,10 @@ footer p a {
     justify-content: flex-start;
 }
 
+footer .learniverse-logo {
+    height: 3rem;
+}
+
 @media (min-width: 2800px) {
     .search-container #form_search {
         /*max-width: 85rem;*/

@@ -3,6 +3,7 @@ import * as React from "react"
 
 const LearniverseLogo = ({fill = "#231f20", props}) => (
     <svg
+        className={"learniverse-logo"}
         xmlns="http://www.w3.org/2000/svg"
         width={80}
         height={80}
