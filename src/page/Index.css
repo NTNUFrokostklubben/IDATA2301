@@ -102,6 +102,7 @@
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-evenly;
+    align-items: center;
 
 }
 
@@ -343,6 +344,7 @@
     #index-hero2-textbox {
         width: 60%;
     }
+
 }
 @media (max-width: 550px) {
     #index-hero-image{
@@ -382,6 +384,13 @@
 
     #index-hero2_button {
         margin-top: 1rem;
+    }
+}
+@media (max-width: 400px) {
+    #index-course-cards-section #index-arrow-icon{
+        border: none;
+        width: 2rem;
+        height: 2rem;
     }
 
 }

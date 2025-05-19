@@ -88,9 +88,11 @@
 /* Country drop down*/
 .country-select{
     border: 1px black;
-    height: 2rem;
     width: 100%;
     background-color: var(--textWhite);
+}
+.checkout-fill-out-form .css-cp01gg-control {
+    min-height: 2rem;
 }
 .country-select * {
     font-size: 1rem;
@@ -100,11 +102,18 @@
     min-height: 1rem;
 }
 .country-select__menu{
-    background-color: var(--highlight);
+    background-color: var(--textWhite);
     color: var(--textBlack);
     border: 1px solid black;
+    box-shadow: 0px 8px 16px 0px var(--shadow);
 }
-
+.country-select__option{
+    background-color: var(--textWhite);
+    color: var(--textBlack);
+}
+.country-select__option:hover{
+    background-color: var(--highlight);
+}
 /*Purchase terms*/
 .purchase-terms{
     display: flex;

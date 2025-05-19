@@ -7,7 +7,7 @@ import FavoriteCard from "../component/favoriteCard/favoriteCard";
 import {useDispatch, useSelector} from "react-redux";
 import {createPortal} from "react-dom";
 import {uploadImage} from "../utils/commonRequests";
-import { setUserImage} from "../dataSlice";
+import {setUserImage} from "../dataSlice";
 import {Dialog, Skeleton} from "@mui/material";
 import {useFocusTrap} from "../utils/useFocusTrap";
 import Course from "./course/course";
@@ -17,7 +17,6 @@ import ConfirmChoiceDialog from "../component/modals/confirmChoice/confirmChoice
 export function UserImageModal({close, uid}) {
     const dispatch = useDispatch();
     const [open, setOpen] = useState(false);
-
 
     const modalRef = useRef(null)
     useFocusTrap(modalRef, true, close) // Passes true to isOpen due to this modal only being open when it is rendered
@@ -84,17 +83,21 @@ export function UserImageModal({close, uid}) {
             <div className={"user-page-modal"}>
                 <div className={`user-page-modal-option-container`}>
                     <label className="file-upload-button">
-                        Change profile picture
+                        <p className={"user-page-modal-change"}>
+                            Change profile picture
+                        </p>
+
                         <input className={"user-page-picture-picker"} accept={"image/png,image/jpeg,image/webp"}
                                type="file" style={{display: "none"}} onChange={handleFileChange}/>
                     </label>
                 </div>
-                <div className={`user-page-modal-option-container`} onClick={ () => {dialogChooser(true)}}>
+                <div className={`user-page-modal-option-container`} onClick={() => {
+                    dialogChooser(true)}}>
                     <button style={removeStyles()}>
                         <ConfirmChoiceDialog callback={deletePfp} choice={"Are you sure you want to delete your " +
                             "profile picture?"} open={open} setOpen={dialogChooser}/>
                         <p className={"user-page-modal-delete-pfp"}>
-                            delete profile picture
+                            Delete profile picture
                         </p>
                     </button>
                 </div>

@@ -12,7 +12,6 @@
     border: var(--textBlack) 1px solid;
     border-radius: 3px;
     width: 20rem;
-    height: 100%;
 }
 
 .index-course-card {
@@ -115,7 +114,27 @@
 
 @media (max-width: 700px) {
     .index-card {
+        width: 14rem;
+    }
+
+    .index-course-img {
         width: 12rem;
+        height: 8rem;
+        object-fit: cover
+    }
+
+    .index-card .index-card-desc {
+        -webkit-line-clamp: 4; /* Reduce to 2 lines for smaller screens */
+        max-height: 6em; /* Adjust height for smaller screens */
+        grid-column-start: 1;
+        grid-column-end: -1;
+        grid-row: 2;
+    }
+
+}
+@media (max-width:450px) {
+    .index-card {
+        width: 13rem;
     }
 
     .index-course-img {
