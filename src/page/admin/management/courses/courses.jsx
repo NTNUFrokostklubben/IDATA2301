@@ -230,7 +230,7 @@ export default function Courses() {
                                 </div>
                                 <div className="card-row">
                                     <div className={"button-group"}>
-                                        <Link to={`/admin/management/course/edit/${course.id}`}>
+                                        <Link to={`/admin/management/courses/edit/${course.id}`}>
                                             <button>
                                                 <img src={"/icons/pencil-sharp.svg"} alt={"edit"}/>
                                             </button>

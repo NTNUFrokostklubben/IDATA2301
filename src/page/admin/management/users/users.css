@@ -22,3 +22,10 @@
 #users-page button {
     font-size: 1rem;
 }
+@media (max-width: 525px) {
+    #users-page img {
+        height: 100%;
+        max-width: 3rem;
+        max-height: 3rem;
+    }
+}
