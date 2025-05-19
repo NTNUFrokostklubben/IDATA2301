@@ -86,9 +86,11 @@ export default function Register({onClose, changeMode, closable = true}) {
 
                     </section>
                 </form>
-                <hr/>
-                {/*Outside of form to prevent double signing*/}
-                <GoogleAuthButton/>
+                <section className={"oauth-section"}>
+                    <hr/>
+                    {/*Outside of form to prevent double signing*/}
+                    <GoogleAuthButton/>
+                </section>
             </div>
         </div>
     )
