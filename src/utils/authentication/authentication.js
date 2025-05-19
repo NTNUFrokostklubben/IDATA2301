@@ -77,7 +77,7 @@ export async function sendSignupRequest(
     };
     try {
         const jwtResponse = await AsyncApiRequest("POST", "/signup", postData).then(response => response.json());
-        console.log("JWT response: ", jwtResponse);
+        // console.log("JWT response: ", jwtResponse);
         if (jwtResponse && jwtResponse.jwt) {
             setCookie("jwt", jwtResponse.jwt);
             const userData = parseJwtUser(jwtResponse.jwt);

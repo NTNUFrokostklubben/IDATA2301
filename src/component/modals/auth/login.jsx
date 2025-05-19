@@ -19,7 +19,7 @@ export default function Login({ onClose, changeMode, closable=true }) {
         event.preventDefault();
         const email = document.getElementById("email").value;
         const password = document.getElementById("password").value;
-        console.log("Submitting form");
+        // console.log("Submitting form");
         sendAuthenticationRequest(email, password, onLoginSuccess, showFormErrorLogin);
     }
     /**
