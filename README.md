@@ -10,7 +10,11 @@ JavaScript, and it communicates with the backend via REST API calls.
 
 ## Starting the application
 
-it is necessary to have a .env file for proper functionality. The .env file should contain the following variables for 
+The frontend application is dependent on the backend REST application.
+The backend application must be running for the frontend to work properly.
+Go to https://github.com/NTNUFrokostklubben/IDATA2306 to find the backend application and instructions on how to run it.
+
+It is necessary to have a .env file for proper functionality. The .env file should contain the following variables for 
 development:
 
 
@@ -20,6 +24,7 @@ HTTPS=true
 
 REACT_APP_API_URL=https://localhost:8080/api
 ```
+
 
 After cloning the repo locally, it is necessary to run `npm install` to install all the dependencies.
 
