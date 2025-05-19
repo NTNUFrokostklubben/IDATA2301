@@ -132,7 +132,7 @@ export function ReviewSection({cid, user, averageRating}) {
     const calculateStarDistribution = (ratings, nrRatings) => {
         const starCounts = [0, 0, 0, 0, 0]; // For 1-5 stars
 
-        if (!ratings.length === 0) {
+        if (ratings.length !== 0) {
             ratings.forEach(rating => {
                 const starIndex = Math.floor(rating) - 1;
                 if (starIndex >= 0 && starIndex < 5) {
