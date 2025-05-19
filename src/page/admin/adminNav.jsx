@@ -22,10 +22,10 @@ export default function AdminNav() {
                     <nav id="dashboard">
                         <ul>
                             <li>
-                                <Link to={"/admin"}>Overview</Link>
+                                <Link to={"/admin"} onClick={() => setIsOpen(false)}>Overview</Link>
                             </li>
                             <li>
-                                <Link to={"/admin/offerablecourses"}>Offerable Courses</Link>
+                                <Link to={"/admin/offerablecourses"} onClick={() => setIsOpen(false)}>Offerable Courses</Link>
                             </li>
                         </ul>
                     </nav>
@@ -34,16 +34,16 @@ export default function AdminNav() {
                     <nav id="Management">
                         <ul>
                             <li>
-                                <Link to={"/admin/management/providers"}>Providers</Link>
+                                <Link to={"/admin/management/providers"} onClick={() => setIsOpen(false)}>Providers</Link>
                             </li>
                             <li>
-                                <Link to={"/admin/management/courses"}>Courses</Link>
+                                <Link to={"/admin/management/courses"} onClick={() => setIsOpen(false)}>Courses</Link>
                             </li>
                             <li>
-                                <Link to={"/admin/management/users"}>Users</Link>
+                                <Link to={"/admin/management/users"} onClick={() => setIsOpen(false)}>Users</Link>
                             </li>
                             <li>
-                                <Link to={"/admin/management/transactions"}>Transactions</Link>
+                                <Link to={"/admin/management/transactions"} onClick={() => setIsOpen(false)}>Transactions</Link>
                             </li>
 
                         </ul>
