@@ -29,7 +29,8 @@
     align-content: center;
     align-items: center;
     height: 10rem;
-    width: 15rem;
+    width: 20rem;
+    padding: 4rem;
     background-color: var(--textWhite);
 }
 
@@ -43,19 +44,23 @@
     justify-items: center;
     justify-content: center;
     align-items: center;
-    height: 2rem;
+    height: 3rem;
     width: 100%;
 }
 
-.user-page-modal-delete-pfp:hover {
+.user-page-modal-delete-pfp:hover,
+.user-page-modal-change:hover,
+.user-page-modal-cancel:hover {
     cursor: pointer;
     background-color: var(--background);
+    padding: 1rem;
 }
 
 
-
-
-
+.user-page-modal-delete-dialog-button:hover {
+    cursor: pointer;
+    background-color: var(--background);
+}
 
 .file-upload-button:hover {
     cursor: pointer;
