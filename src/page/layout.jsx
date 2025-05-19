@@ -87,7 +87,7 @@ export default function Layout() {
         // Clear the authentication cookies
         deleteAuthorizationCookies();
         deleteUserRedux().then(() =>{
-            console.log(user);
+            // console.log(user);
             window.location.reload();
         })
         // Redirect to the login page

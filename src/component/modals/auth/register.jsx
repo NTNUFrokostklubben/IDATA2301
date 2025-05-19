@@ -22,12 +22,12 @@ export default function Register({onClose, changeMode, closable = true}) {
             (userData) => onSignupSuccess(userData, password), // pass password
             showFormErrorSignup
         );
-        console.log("Submitting form");
+        // console.log("Submitting form");
     }
 
 
     function onSignupSuccess(userData, password) {
-        console.log("Successfully signed up for user: ", userData.email);
+        // console.log("Successfully signed up for user: ", userData.email);
         sendAuthenticationRequest(userData.email, password, onSigninSuccess, showFormErrorSignup);
         addUserToRedux(userData.email, dispatch).then(() => {
             window.location.reload();
@@ -40,7 +40,7 @@ export default function Register({onClose, changeMode, closable = true}) {
      * This function is called when login is successful
      */
     function onSigninSuccess(userData) {
-        console.log("Successfully logged in for user: ", userData.email);
+        // console.log("Successfully logged in for user: ", userData.email);
         onClose();
     }
 

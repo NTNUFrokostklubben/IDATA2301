@@ -332,6 +332,6 @@ export async function deleteUserRedux(){
 export async function addUserToRedux(email, dispatch){
     const userDto = await AsyncApiRequest("GET", `/userDto/${email}`, null)
         .then(response => response.json())
-    console.log(userDto)
+    // console.log(userDto)
     dispatch(setUserObject(userDto));
 }
