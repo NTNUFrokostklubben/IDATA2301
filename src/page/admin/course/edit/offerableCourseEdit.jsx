@@ -37,7 +37,7 @@ function OfferableCourseEditForm({offerableCourse, providers, courses}) {
         const value = Object.fromEntries(data.entries());
         const offerableCourse = new OfferableCourse(value.id, new Date(startDate).getTime(), value.discount / 100, value.price, value.visibility, new courseEntity(value.courseId), new ProviderEntity(value.providerId));
 
-        postOfferableCourse(offerableCourse).then(navigate("../"));
+        postOfferableCourse(offerableCourse).then(navigate(-1));
     }
 
     return (
