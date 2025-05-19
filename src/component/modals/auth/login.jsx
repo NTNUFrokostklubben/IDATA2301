@@ -82,9 +82,11 @@ export default function Login({ onClose, changeMode, closable=true }) {
                         <button onClick={changeMode} className="cta-button secondary-button" type="button">Sign up instead</button>
                     </section>
                 </form>
-                <hr/>
-                {/*Outside of form to prevent double signing*/}
-                <GoogleAuthButton/>
+                <section className={"oauth-section"}>
+                    <hr/>
+                    {/*Outside of form to prevent double signing*/}
+                    <GoogleAuthButton/>
+                </section>
             </div>
         </div>
     )

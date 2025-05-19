@@ -101,22 +101,40 @@
     }
 
     .authform {
-        /*max-height: 100%;*/
-        /*height: 100%;*/
         position: absolute;
-        top: 0px;
         width: 100%;
         max-width: 100%;
         top: 5rem;
-        padding: 0;
-        margin: 0;
+        padding: 1rem;
+        margin: 1rem;
+    }
 
+    .authform h2 {
+        padding: 1rem 0;
     }
 
     .authform form {
         padding: 0 2rem;
     }
 
+    .authform input[type="text"],
+    .authform input[type="password"],
+    .authform button {
+        height: 4rem;
+    }
+
+    .authform .oauth-section {
+        margin: 2rem;
+    }
+
+    .authform .google-login-btn {
+        padding: 1rem 0;
+    }
+
+    .authform .oauth-section img {
+        width: 2rem;
+        height: 2rem;
+    }
 
 
 
