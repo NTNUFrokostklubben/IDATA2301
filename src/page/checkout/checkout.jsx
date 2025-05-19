@@ -1,7 +1,6 @@
 import "./checkout.css"
-import {useNavigate, useParams} from "react-router-dom";
-import React, {useContext, useEffect, useMemo, useRef, useState} from "react";
-import {UserContext} from "../../userContext";
+import {useNavigate} from "react-router-dom";
+import React, { useMemo, useRef, useState} from "react";
 import {createPortal} from "react-dom";
 import Login from "../../component/modals/auth/login";
 import Register from "../../component/modals/auth/register";
@@ -27,11 +26,11 @@ export default function Checkout() {
     const navigate = useNavigate();
 
     // TODO remove this - Only for development
-    const [required] = useState(true);
+    const required = true;
 
 
-    const handlePurchase = async () =>{
-
+    const handlePurchase = async (e) =>{
+        e.preventDefault()
         setLoading(true)
         const status = await AsyncApiRequest("POST", `/transaction/offerId/${courseData.id}`, null);
         try {
@@ -82,7 +81,7 @@ export default function Checkout() {
 
                             <h2 id="checkout"> Checkout</h2>
 
-                            <form id="billing-input" onSubmit={e => e.preventDefault()}>
+                            <form id="billing-input" onSubmit={handlePurchase}>
 
 
                                 <div className={"checkout-fill-out-form"}>
@@ -128,7 +127,8 @@ export default function Checkout() {
 
                                         <div className={"checkout-input-section"} id={"checkout-cvc"}>
                                             <label htmlFor="sec-code">Security code *</label>
-                                            <input required={required}
+                                            <input required={true}
+                                                   value={""}
                                                    className="input-field"
                                                    placeholder="Security code"
                                                    type="number"
@@ -158,8 +158,7 @@ export default function Checkout() {
                                 </div>
 
                                 <div id="purchase">
-                                    <button type="submit" className={"cta-button"} id={"checkout-purchase-button"}
-                                            onClick={handlePurchase} disabled={loading}>
+                                    <button type="submit" className={"cta-button"} id={"checkout-purchase-button"} disabled={loading}>
                                         {loading ? <p> Processing </p> : <p> Pay Now</p>}
                                     </button>
                                 </div>
