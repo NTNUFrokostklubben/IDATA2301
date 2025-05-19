@@ -65,14 +65,18 @@ export default function Course() {
             const existing = courseMap.get(item.provider.id); // or another field if courseId isn't there
             const currentItemDate = new Date(item.date);
 
-            if (!existing) {
-                courseMap.set(item.provider.id, item);
-            } else {
-                const existingDate = new Date(existing.date);
-                if (currentItemDate < existingDate) {
+            console.log(item)
+            if (item.visible) {
+                if (!existing ) {
                     courseMap.set(item.provider.id, item);
+                } else {
+                    const existingDate = new Date(existing.date);
+                    if (currentItemDate < existingDate) {
+                        courseMap.set(item.provider.id, item);
+                    }
                 }
             }
+
         });
 
         setUniqueCourses(Array.from(courseMap.values()));
