@@ -2,14 +2,9 @@
 #courseIndex {
     display: flex;
     flex-direction: column;
-    /*justify-content: center;*/
     margin: 1rem 2rem;
     max-width: 600rem;
 }
-
-
-
-
 
 #courseIndex li {
     background-color: var(--gray);
@@ -20,6 +15,7 @@
     max-height: 500rem;
 
 }
+
 #courseIndex .filter-header {
     height: 3rem;
 }
@@ -38,7 +34,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /*margin: 0rem 2rem;*/
 }
 
 #courseIndex #table-header select {
@@ -46,9 +41,7 @@
 }
 
 #courseIndex #course-table {
-
     table-layout: fixed;
-    /*margin: 0rem 2rem;*/
 }
 
 #courseIndex #course-table thead {
@@ -65,7 +58,6 @@
     text-align: center;
 }
 
-
 #courseIndex #course-table th:nth-child(2) {
     width: 20rem;
 }
@@ -73,7 +65,6 @@
 #courseIndex #course-table tr {
     border-bottom: #242C2E solid 1px;
     height: 4rem;
-
 }
 
 #courseIndex #course-table tr:hover {
@@ -101,9 +92,16 @@
     flex-flow: column;
     justify-content: left;
     align-items: flex-start;
-
 }
 
+@media (max-width: 525px) {
+    #courseIndex img {
+        height: 100%;
+        max-width: 3rem;
+        max-height: 3rem;
+    }
+
+}
 
 
 
