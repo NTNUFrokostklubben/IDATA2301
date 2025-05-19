@@ -20,5 +20,11 @@
         max-width: 3rem;
         max-height: 3rem;
     }
+    #transactions-page .admin-table {
+        display: none;
+    }
 
+    #transactions-page .admin-management-cards {
+        display: flex;
+    }
 }

@@ -33,3 +33,18 @@
 #addProvider {
     width: fit-content;
 }
+
+@media (max-width: 425px) {
+    #providers-page img {
+        height: 100%;
+        max-width: 3rem;
+        max-height: 3rem;
+    }
+    #providers-page .admin-table {
+        display: none;
+    }
+
+    #providers-page .admin-management-cards {
+        display: flex;
+    }
+}

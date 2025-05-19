@@ -74,3 +74,28 @@
         padding-left: 5px; /* Add some spacing */
     }
 }
+@media (max-width: 1500px) and (min-width: 900px) {
+    #courses-page .admin-table {
+        display: none;
+    }
+
+    #courses-page .admin-management-cards {
+        display: flex;
+    }
+}
+@media (max-width: 725px) {
+    #courses-page img {
+        height: 100%;
+        max-width: 3rem;
+        max-height: 3rem;
+    }
+    #courses-page .admin-table {
+        display: none;
+    }
+
+    #courses-page .admin-management-cards {
+        display: flex;
+    }
+}
+
+

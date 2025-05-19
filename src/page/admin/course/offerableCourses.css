@@ -37,7 +37,8 @@
 }
 
 #courseIndex #table-header select {
-    height: 4rem;
+    height: 3rem;
+    max-width: 20rem;
 }
 
 #courseIndex #course-table {
@@ -94,15 +95,30 @@
     align-items: flex-start;
 }
 
-@media (max-width: 525px) {
+@media (max-width: 1500px) and (min-width: 900px) {
+    #courseIndex .admin-table {
+        display: none;
+    }
+
+    #courseIndex .admin-management-cards {
+        display: flex;
+    }
+}
+
+@media (max-width: 725px) {
     #courseIndex img {
         height: 100%;
         max-width: 3rem;
         max-height: 3rem;
     }
+    #courseIndex .admin-table {
+        display: none;
+    }
 
+    #courseIndex .admin-management-cards {
+        display: flex;
+    }
 }
-
 
 
 

@@ -81,46 +81,35 @@
 
 .admin-management-cards {
     display: none;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin: 1rem;
 }
 
-@media (max-width: 525px) {
-    .admin-table {
-        display: none;
-    }
+.admin-management-card {
+    background-color: var(--textWhite);
+    border-radius: 3px;
+    padding: 1rem;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
 
-    .admin-management-cards {
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
-        margin: 1rem;
-    }
+.card-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
 
-    .admin-management-card {
-        background-color: var(--textWhite);
-        border-radius: 3px;
-        padding: 1rem;
-        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
-    }
+.card-row h6 {
+    font-size: 0.95rem;
+    font-weight: bold;
+    margin: 0;
+    min-width: 90px;
+}
 
-    .card-row {
-        display: flex;
-        align-items: center;
-        margin-bottom: 0.75rem;
-        gap: 0.75rem;
-        flex-wrap: wrap;
-    }
-
-    .card-row h6 {
-        font-size: 0.95rem;
-        font-weight: bold;
-        margin: 0;
-        min-width: 90px;
-    }
-    .button-group button {
-        height: 3rem;
-        border: 0;
-    }
-
-
+.button-group button {
+    height: 3rem;
+    border: 0;
 }
 
