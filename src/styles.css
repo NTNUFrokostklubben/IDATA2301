@@ -140,7 +140,7 @@ input:disabled {
 
 @media (max-width: 900px){
     html{
-        font-size: 12px;
+        font-size: 13px;
     }
     footer{
         font-size: 0.75rem;
@@ -149,7 +149,7 @@ input:disabled {
 
 @media (max-width: 720px){
     html{
-        font-size: 10px;
+        font-size: 12px;
     }
     footer{
         font-size: 0.7rem;
@@ -160,7 +160,7 @@ input:disabled {
 /* Tablet - 475px width*/
 @media (max-width: 475px) {
     html {
-        font-size: 8px; /* Adjust the base font size */
+        font-size: 10px;
     }
     footer{
         font-size: 0.625rem;

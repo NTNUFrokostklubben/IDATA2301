@@ -152,7 +152,9 @@ export default function Checkout() {
 
                                 <div className="purchase-terms">
                                     <input type="checkbox" id="terms-and-conditions" required={required}/>
-                                    <label htmlFor="terms-and-conditions">I accept the terms and conditions</label>
+                                    <label htmlFor="terms-and-conditions">
+                                        <p> I accept the terms and conditions </p>
+                                    </label>
                                 </div>
 
                                 <div id="purchase">
