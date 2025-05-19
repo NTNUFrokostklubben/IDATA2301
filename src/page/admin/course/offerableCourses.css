@@ -95,17 +95,7 @@
     align-items: flex-start;
 }
 
-@media (max-width: 1500px) and (min-width: 900px) {
-    #courseIndex .admin-table {
-        display: none;
-    }
-
-    #courseIndex .admin-management-cards {
-        display: flex;
-    }
-}
-
-@media (max-width: 725px) {
+@media (max-width: 1500px) {
     #courseIndex img {
         height: 100%;
         max-width: 3rem;
