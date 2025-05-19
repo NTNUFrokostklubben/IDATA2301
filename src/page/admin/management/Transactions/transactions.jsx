@@ -48,11 +48,15 @@ function TransactionTableContent({transactions}) {
                         <img src={transaction.offerableCourses.provider.altLogoLink} alt={"image " + transaction.offerableCourses.provider.name}/>
                         <p>{transaction.offerableCourses.provider.name}</p>
                     </td>
-                    <td>{new Date(transaction.timeOfTransaction).toLocaleDateString("de-DE",{
-                        hour: "2-digit",
-                        minute: "2-digit",
-                        second: "2-digit"
-                    })}</td>
+                    <td>
+                        <p>
+                            {new Date(transaction.timeOfTransaction).toLocaleDateString("de-DE",{
+                                hour: "2-digit",
+                                minute: "2-digit",
+                                second: "2-digit"
+                            })}
+                        </p>
+                    </td>
                     <td><p>{transaction.pricePaid} NOK</p></td>
 
                 </tr>
@@ -92,24 +96,59 @@ export default function Transactions() {
     return (
         <div id={"transactions-page"}>
             <h2>Transactions</h2>
-            <div id={"table-header"}>
+            <div id="table-header">
 
                 <table className={"admin-table"}>
                     <thead>
                     <tr>
-                        <th className={"User"}><p>User</p></th>
-                        <th className={"Course"}><p>Course</p></th>
-                        <th className={"Provider"}><p>Provider</p></th>
-                        <th className={"Timestamp"}><p>Timestamp</p></th>
-                        <th className={"Price paid"}><p>Price paid</p></th>
+                        <th data-label="User" className={"User"}><p>User</p></th>
+                        <th data-label="Course" className={"Course"}><p>Course</p></th>
+                        <th data-label="Provider" className={"Provider"}><p>Provider</p></th>
+                        <th data-label="Timestamp" className={"Timestamp"}><p>Timestamp</p></th>
+                        <th data-label="Price Paid" className={"Price paid"}><p>Price paid</p></th>
                     </tr>
                     </thead>
                     <tbody>
                     {loading ? <TransactionTableSkeleton/> : <TransactionTableContent transactions={transactions}/>}
                     </tbody>
                 </table>
-            </div>
 
+                {!loading && (
+                    <div className="mobile-cards">
+                        {transactions.map((transaction) => (
+                            <div className="transaction-card" key={transaction.id}>
+                                <div className="card-row">
+                                    <h6>User:</h6>
+                                    <img src={transaction.user.profilePicture} alt={transaction.user.name}/>
+                                    <p>{transaction.user.name}</p>
+                                </div>
+                                <div className="card-row">
+                                    <h6>Course:</h6>
+                                    <p>{transaction.offerableCourses.course.title}</p>
+                                    <img src={transaction.offerableCourses.course.imgLink} alt={transaction.offerableCourses.course.title}/>
+                                </div>
+                                <div className="card-row">
+                                    <h6>Provider:</h6>
+                                    <p>{transaction.offerableCourses.provider.name}</p>
+                                    <img src={transaction.offerableCourses.provider.altLogoLink} alt={transaction.offerableCourses.provider.name}/>
+                                </div>
+                                <div className="card-row">
+                                    <h6>Timestamp:</h6>
+                                    <p>{new Date(transaction.timeOfTransaction).toLocaleDateString("de-DE", {
+                                        hour: "2-digit",
+                                        minute: "2-digit",
+                                        second: "2-digit"
+                                    })}</p>
+                                </div>
+                                <div className="card-row">
+                                    <h6>Price Paid:</h6>
+                                    <p>{transaction.pricePaid} NOK</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </div>
 
             <div id={"delete-modal"}/>
         </div>
