@@ -110,7 +110,7 @@ export default function Layout() {
     }
 
     return (
-        <div>
+        <div className={"layout"}>
             <link rel="preconnect" href="https://fonts.googleapis.com"/>
             <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin/>
             <link href="https://fonts.googleapis.com/css2?family=Tienne:wght@400;700;900&display=swap"
@@ -138,15 +138,15 @@ export default function Layout() {
                         </div>
                     </li>
                     <li>
-                        <div className="search-container">
-                            <form onSubmit={goToSearchPage} id="form_search" role="search">
+                        {/*<div className="search-container">*/}
+                            <form onSubmit={goToSearchPage} className={"search-container"} id="form_search" role="search">
                                 <button type="submit" id="search_btn">
                                     <img id="searchIcon" src="/icons/search-sharp.svg" alt="search icon"/>
                                 </button>
                                 <input type="text" placeholder="Search..." defaultValue={searchValue} name="search"/>
 
                             </form>
-                        </div>
+                        {/*</div>*/}
                     </li>
                     <li>
                         <div id="user-login-signup-container">
