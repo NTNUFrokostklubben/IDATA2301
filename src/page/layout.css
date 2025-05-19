@@ -12,26 +12,38 @@
     top: 0;
     left: 0;
 }
+
 #menu-navbar li {
-    width: fit-content;
+    width: auto;
 }
+
 .navbar-container {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
     align-items: center;
     width: 100%;
-    padding: 0 2rem;
+    gap: 2rem;
+    padding: 0 4rem;
 }
+
+.navbar-container li:has(.search-container) {
+    flex: 1;
+}
+
 #logo-icon {
     height: 3rem;
     width: 4rem;
-}
-#logo-image{
-    margin-right: 2rem ;
-    margin-left: 0;
+    flex-grow: 0;
+    flex-shrink: 0;
 }
 
-#triangle-icon{
+#logo-image {
+    margin-left: 0;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+#triangle-icon {
     rotate: 180deg;
 }
 
@@ -39,10 +51,12 @@ menu li {
     list-style-type: none;
     padding-inline-start: 0;
 }
+
 .page {
     display: flex;
     flex-flow: row;
 }
+
 .drop-btn {
     display: flex;
     flex-direction: row;
@@ -109,21 +123,25 @@ menu li {
     background-color: var(--primary);
 }
 
+.search-container {
+    min-width: 10rem;
+    width: 100%;
+}
+
 .search-container input[type=text] {
     all: unset;
     color: var(--textBlack);
-
-    /*height: 100%;*/
+    flex: 1;
     width: 100%;
     padding: 0.5rem 0.8rem;
 }
 
-.search-container #form_search {
+#form_search {
     background-color: var(--textWhite);
-    width: 75rem;
+    flex: 1;
     height: 3rem;
     display: flex;
-    flex-direction: row;
+    /*flex-direction: row;*/
     align-items: center;
     margin-right: 2.5rem;
 }
@@ -131,13 +149,13 @@ menu li {
 ::placeholder {
     color: var(--textBlack);
     opacity: 0.7;
-    font-size: 1.44rem;
+    font-size: 1.0rem;
 }
 
 .search-container #search_btn {
     all: unset;
     cursor: pointer;
-    width: 2rem;
+    /*width: 2rem;*/
     height: 4rem;
     z-index: 1;
 }
@@ -148,23 +166,25 @@ menu li {
     padding: 0.5rem;
     width: 2rem;
 }
-#user-login-signup-container{
+
+#user-login-signup-container {
     padding-right: 2rem;
 }
+
 #login-signup-1 {
-   display: flex;
+    display: flex;
 }
 
 #login-signup-2 {
     display: none;
 }
 
-.menu-icon{
+.menu-icon {
     width: 3rem;
     height: 3rem;
 }
 
-#login-signup-btn{
+#login-signup-btn {
     align-items: center;
     justify-content: center;
     flex-wrap: nowrap;
@@ -182,7 +202,6 @@ menu li {
 }
 
 
-
 #signup-btn, #logout-btn b {
     font-size: 1.5rem;
     color: var(--textWhite);
@@ -193,7 +212,7 @@ menu li {
     color: var(--textWhite);
 }
 
-#login-btn, #signup-btn, #logout-btn{
+#login-btn, #signup-btn, #logout-btn {
     border: 1px solid var(--textBlack);
     cursor: pointer;
     font-size: large;
@@ -202,22 +221,26 @@ menu li {
     text-align: center;
     text-decoration: none;
 }
-#login-btn #signup-btn #logout-btn:hover{
+
+#login-btn #signup-btn #logout-btn:hover {
     box-shadow: 0px 8px 16px 0px var(--shadow)
 }
-.nav-user{
+
+.nav-user {
     display: flex;
     height: 3rem;
     width: 3rem;
     background-color: var(--textWhite);
 }
-.nav-admin{
+
+.nav-admin {
     display: flex;
     height: 3rem;
     width: 3rem;
     background-color: var(--textWhite);
 }
-.nav-admin button{
+
+.nav-admin button {
     background-color: var(--textWhite);
     border: none;
     cursor: pointer;
@@ -228,7 +251,8 @@ menu li {
     align-items: center;
     padding: 0;
 }
-.login-signup-drop-down{
+
+.login-signup-drop-down {
     background-color: var(--textWhite);
     border: none;
     cursor: pointer;
@@ -239,7 +263,8 @@ menu li {
     align-items: center;
     padding: 0;
 }
-.nav-user-image{
+
+.nav-user-image {
     height: 3rem;
     width: 3rem;
     justify-content: center;
@@ -247,14 +272,15 @@ menu li {
     /*filter: invert(32%) sepia(9%) saturate(3293%) hue-rotate(187deg) brightness(95%) contrast(81%);*/
 }
 
-.signed-in{
+.signed-in {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
 }
-footer{
+
+footer {
     background-color: var(--contrast);
     font-size: 1rem;
     height: auto;
@@ -266,6 +292,7 @@ footer{
 footer p {
     color: var(--textWhite);
 }
+
 footer h3 {
     color: var(--textWhite);
     font-size: 1.5rem;
@@ -280,16 +307,29 @@ footer p a {
     font-size: 1rem;
 }
 
-#footer-textbox{
+#footer-textbox {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
 }
-#footer-textbox #contact-us{
+
+#footer-textbox #contact-us {
     min-width: 40%;
 }
-.textFooter{
+
+.layout menu {
+    padding: 0rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    /*width: 100vw;*/
+    height: 5rem;
+    background-color: var(--primary);
+}
+
+.textFooter {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
@@ -297,144 +337,183 @@ footer p a {
 
 @media (min-width: 2800px) {
     .search-container #form_search {
-        max-width: 85rem;
+        /*max-width: 85rem;*/
     }
-    #login-btn, #signup-btn{
+
+    #login-btn, #signup-btn {
         width: 14rem;
     }
-    #login-btn{
+
+    #login-btn {
         margin-right: 1.5rem;
     }
-    #logo-image{
-        margin-right: 8rem ;
+
+    #logo-image {
+        /*margin-right: 8rem ;*/
     }
 
 }
+
 @media (max-width: 2800px) {
     .search-container #form_search {
-        max-width: 65rem;
+        /*max-width: 65rem;*/
     }
-    #login-btn, #signup-btn{
+
+    #login-btn, #signup-btn {
         width: 10rem;
     }
-    #login-btn{
+
+    #login-btn {
         margin-right: 1rem;
     }
-    #logo-image{
-        margin-right: 4rem ;
+
+    #logo-image {
+        /*margin-right: 4rem ;*/
     }
 }
+
 @media (max-width: 2350px) {
     .search-container #form_search {
-        max-width: 55rem;
+        /*max-width: 55rem;*/
     }
-    #login-btn, #signup-btn{
+
+    #login-btn, #signup-btn {
         width: 10rem;
     }
-    #login-btn{
+
+    #login-btn {
         margin-right: 0.7rem;
     }
-    #logo-image{
-        margin-right: 7rem ;
+
+    #logo-image {
+        /*margin-right: 7rem ;*/
     }
 }
+
 @media (max-width: 1900px) {
     .search-container #form_search {
-        max-width: 45rem;
+        /*max-width: 45rem;*/
     }
-    #login-btn, #signup-btn{
+
+    #login-btn, #signup-btn {
         width: 10rem;
     }
-    #login-btn{
+
+    #login-btn {
         margin-right: 0.5rem;
     }
-    #logo-image{
-        margin-right: 6rem ;
+
+    #logo-image {
+        /*margin-right: 6rem ;*/
     }
 }
+
 @media (max-width: 1500px) {
     .search-container #form_search {
-        max-width: 35rem;
-        margin-right: 0.5rem;
+        /*max-width: 35rem;*/
+        /*margin-right: 0.5rem;*/
     }
-    #login-btn, #signup-btn{
+
+    #login-btn, #signup-btn {
         width: 8rem;
     }
-    #login-btn{
+
+    #login-btn {
         margin-right: 0.3rem;
     }
-    #logo-image{
-        margin-right: 5rem ;
+
+    #logo-image {
+        margin-right: 5rem;
     }
+
     .drop-btn {
         margin-right: 3rem;
     }
 
 }
+
 @media (max-width: 1250px) {
     .search-container #form_search {
-        max-width: 25rem;
-        margin-right: 0.5rem;
+        /*max-width: 25rem;*/
+        /*margin-right: 0.5rem;*/
     }
-    #logo-image{
-        margin-right: 4rem ;
+
+    #logo-image {
+        margin-right: 4rem;
     }
+
     .drop-btn {
         margin-right: 2rem;
     }
-    #login-btn, #signup-btn{
+
+    #login-btn, #signup-btn {
         width: 8rem;
     }
-    html{
+
+    html {
         font-size: 15px;
     }
-    footer{
+
+    footer {
         font-size: 0.925rem;
     }
 }
+
 @media (max-width: 1024px) {
     .search-container #form_search {
-        max-width: 15rem;
+        /*max-width: 15rem;*/
     }
-    #login-btn, #signup-btn{
+
+    #login-btn, #signup-btn {
         width: 7rem;
     }
-    #login-btn{
+
+    #login-btn {
         margin-right: 0.1rem;
     }
-    #logo-image{
-        margin-right: 3rem ;
+
+    #logo-image {
+        margin-right: 3rem;
     }
+
     .drop-btn {
         margin-right: 1.5rem;
     }
-    html{
+
+    html {
         font-size: 14px;
     }
-    footer{
+
+    footer {
         font-size: 0.875rem;
     }
 }
-@media (max-width: 900px){
-    html{
+
+@media (max-width: 900px) {
+    html {
         font-size: 12px;
     }
-    footer{
+
+    footer {
         font-size: 0.75rem;
     }
 }
+
 /* Tablet - 768px width*/
 @media (max-width: 768px) {
     .search-container #form_search {
-        max-width: 15rem;
+        /*max-width: 15rem;*/
     }
+
     #courses-dropdown {
         display: none;
     }
-    html{
+
+    html {
         font-size: 11px;
     }
-    footer{
+
+    footer {
         font-size: 0.625rem;
     }
 }
@@ -443,16 +522,20 @@ footer p a {
     html {
         font-size: 8px; /* Adjust the base font size */
     }
+
     #login-signup-1 {
-         display: none;
+        display: none;
     }
+
     #login-signup-2 {
         display: flex;
     }
+
     .dropdown-content {
         width: 6rem;
     }
-    .footer-textbox{
+
+    .footer-textbox {
         flex-direction: column;
         align-items: flex-end;
         justify-content: center;

@@ -256,6 +256,8 @@
     padding: 1rem;
 }
 .index-slideshow-img{
+    object-fit: cover;
+    height: 14rem;
     max-width: 24rem;
 }
 
