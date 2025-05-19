@@ -6,6 +6,7 @@ import {createPortal} from "react-dom";
 import DeleteModal from "../../../../component/modals/deleteModal";
 import {getCourses} from "../../../../utils/commonRequests";
 import {Skeleton} from "@mui/material";
+import GradientCircularProgress from "../../../../component/loader/loader";
 
 /**
  * Builds table with courses
@@ -127,6 +128,8 @@ export default function Courses() {
 
         const fetchData = async () => {
             try {
+                //Sleep to simulate loading
+                await new Promise(resolve => setTimeout(resolve, 150));
                 await fetchCourses();
                 setLoading(false);
             } catch (e) {
@@ -193,69 +196,74 @@ export default function Courses() {
                     </tbody>
                 </table>
 
-                {!loading && (
-                    <div className="admin-management-cards">
-                        {courses.map((course) => (
-                            <div className="admin-management-card"  id="course" key={course.id}>
-                                <div className="card-row-left">
-                                    <div className="card-row">
-                                        <h6>Title:</h6>
-                                        <p>{course.title}</p>
-                                        <img src={course.imgLink} alt={"image " + course.title}/>
+                <div className="admin-management-cards" id="admin-management-cards">
+                    {loading ?
+                        <div className="admin-management-loader">
+                            <GradientCircularProgress/>
+                        </div>
+                        :
+                        <div>
+                            {courses.map((course) => (
+                                <div className="admin-management-card"  id="course" key={course.id}>
+                                    <div className="card-row-left">
+                                        <div className="card-row">
+                                            <h6>Title:</h6>
+                                            <p>{course.title}</p>
+                                            <img src={course.imgLink} alt={"image " + course.title}/>
+                                        </div>
+                                        <div className="card-row">
+                                            <h6>Description:</h6>
+                                            <p className="description" >{course.description}</p>
+                                        </div>
+                                        <div className="card-row">
+                                            <h6>Category:</h6>
+                                            <p>{course.category}</p>
+                                        </div>
+                                        <div className="card-row">
+                                            <h6>Diff. level:</h6>
+                                            <p>{getDifficultyLevel(course.diffLevel)}</p>
+                                        </div>
+                                        <div className="card-row">
+                                            <h6>Credits:</h6>
+                                            <p>{course.credits}</p>
+                                        </div>
+                                        <div className="card-row">
+                                            <h6>Hr/w:</h6>
+                                            <p>{course.hoursWeek}</p>
+                                        </div>
+                                        <div className="card-row">
+                                            <h6>Related Certification:</h6>
+                                            <p>{course.credits}</p>
+                                        </div>
                                     </div>
                                     <div className="card-row">
-                                        <h6>Description:</h6>
-                                        <p className="description" >{course.description}</p>
-                                    </div>
-                                    <div className="card-row">
-                                        <h6>Category:</h6>
-                                        <p>{course.category}</p>
-                                    </div>
-                                    <div className="card-row">
-                                        <h6>Diff. level:</h6>
-                                        <p>{getDifficultyLevel(course.diffLevel)}</p>
-                                    </div>
-                                    <div className="card-row">
-                                        <h6>Credits:</h6>
-                                        <p>{course.credits}</p>
-                                    </div>
-                                    <div className="card-row">
-                                        <h6>Hr/w:</h6>
-                                        <p>{course.hoursWeek}</p>
-                                    </div>
-                                    <div className="card-row">
-                                        <h6>Related Certification:</h6>
-                                        <p>{course.credits}</p>
-                                    </div>
-                                </div>
-                                <div className="card-row">
-                                    <div className={"button-group"}>
-                                        <Link to={`/admin/management/courses/edit/${course.id}`}>
-                                            <button>
-                                                <img src={"/icons/pencil-sharp.svg"} alt={"edit"}/>
+                                        <div className={"button-group"}>
+                                            <Link to={`/admin/management/courses/edit/${course.id}`}>
+                                                <button>
+                                                    <img src={"/icons/pencil-sharp.svg"} alt={"edit"}/>
+                                                </button>
+                                            </Link>
+                                            <button id={"delete" + course.id} onClick={() => {
+                                                setFocusedId(course.id)
+                                                setShowDeleteModal(true);
+                                            }}>
+                                                <img src={"/icons/trash-sharp.svg"} alt={"delete"}/>
                                             </button>
-                                        </Link>
-                                        <button id={"delete" + course.id} onClick={() => {
-                                            setFocusedId(course.id)
-                                            setShowDeleteModal(true);
-                                        }}>
-                                            <img src={"/icons/trash-sharp.svg"} alt={"delete"}/>
-                                        </button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        ))}
-                    </div>
-                )}
+                            ))}
+                        </div>
+                    }
+                </div>
             </div>
             {
                 showDeleteModal && createPortal(
                     <DeleteModal onClose={() => setShowDeleteModal(false)} deleteId={focusedId}
-                                 apiEndpoint={"/course/"}/>,
+                                 apiEndpoint={"/provider/"}/>,
                     document.getElementById("delete-modal")
                 )
             }
-
             <div id={"delete-modal"}/>
         </div>
     )

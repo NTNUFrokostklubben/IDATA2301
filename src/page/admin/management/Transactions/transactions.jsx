@@ -2,6 +2,10 @@ import React, {useEffect, useState} from "react";
 import {getTransactions} from "../../../../utils/commonRequests";
 import {Skeleton} from "@mui/material";
 import "./transactions.css"
+import GradientCircularProgress from "../../../../component/loader/loader";
+import {Link} from "react-router-dom";
+import {createPortal} from "react-dom";
+import DeleteModal from "../../../../component/modals/deleteModal";
 
 function TransactionTableSkeleton() {
 
@@ -113,44 +117,48 @@ export default function Transactions() {
                     </tbody>
                 </table>
 
-                {!loading && (
-                    <div className="admin-management-cards">
-                        {transactions.map((transaction) => (
-                            <div className="admin-management-card" key={transaction.id}>
-                                <div className="card-row">
-                                    <h6>User:</h6>
-                                    <img src={transaction.user.profilePicture} alt={transaction.user.name}/>
-                                    <p>{transaction.user.name}</p>
+                <div className="admin-management-cards">
+                    {loading ?
+                        <div className="admin-management-loader">
+                            <GradientCircularProgress/>
+                        </div>
+                        :
+                        <div>
+                            {transactions.map((transaction) => (
+                                <div className="admin-management-card" key={transaction.id}>
+                                    <div className="card-row">
+                                        <h6>User:</h6>
+                                        <img src={transaction.user.profilePicture} alt={transaction.user.name}/>
+                                        <p>{transaction.user.name}</p>
+                                    </div>
+                                    <div className="card-row">
+                                        <h6>Course:</h6>
+                                        <p>{transaction.offerableCourses.course.title}</p>
+                                        <img src={transaction.offerableCourses.course.imgLink} alt={transaction.offerableCourses.course.title}/>
+                                    </div>
+                                    <div className="card-row">
+                                        <h6>Provider:</h6>
+                                        <p>{transaction.offerableCourses.provider.name}</p>
+                                        <img src={transaction.offerableCourses.provider.altLogoLink} alt={transaction.offerableCourses.provider.name}/>
+                                    </div>
+                                    <div className="card-row">
+                                        <h6>Timestamp:</h6>
+                                        <p>{new Date(transaction.timeOfTransaction).toLocaleDateString("de-DE", {
+                                            hour: "2-digit",
+                                            minute: "2-digit",
+                                            second: "2-digit"
+                                        })}</p>
+                                    </div>
+                                    <div className="card-row">
+                                        <h6>Price Paid:</h6>
+                                        <p>{transaction.pricePaid} NOK</p>
+                                    </div>
                                 </div>
-                                <div className="card-row">
-                                    <h6>Course:</h6>
-                                    <p>{transaction.offerableCourses.course.title}</p>
-                                    <img src={transaction.offerableCourses.course.imgLink} alt={transaction.offerableCourses.course.title}/>
-                                </div>
-                                <div className="card-row">
-                                    <h6>Provider:</h6>
-                                    <p>{transaction.offerableCourses.provider.name}</p>
-                                    <img src={transaction.offerableCourses.provider.altLogoLink} alt={transaction.offerableCourses.provider.name}/>
-                                </div>
-                                <div className="card-row">
-                                    <h6>Timestamp:</h6>
-                                    <p>{new Date(transaction.timeOfTransaction).toLocaleDateString("de-DE", {
-                                        hour: "2-digit",
-                                        minute: "2-digit",
-                                        second: "2-digit"
-                                    })}</p>
-                                </div>
-                                <div className="card-row">
-                                    <h6>Price Paid:</h6>
-                                    <p>{transaction.pricePaid} NOK</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                )}
+                            ))}
+                        </div>
+                    }
+                </div>
             </div>
-
-            <div id={"delete-modal"}/>
         </div>
 
     )

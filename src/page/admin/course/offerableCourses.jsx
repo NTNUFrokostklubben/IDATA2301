@@ -9,6 +9,7 @@ import Login from "../../../component/modals/auth/login";
 import DeleteModal from "../../../component/modals/deleteModal";
 import {getOfferableCourses} from "../../../utils/commonRequests";
 import {Skeleton} from "@mui/material";
+import GradientCircularProgress from "../../../component/loader/loader";
 
 /**
  * Builds table with offerable courses
@@ -128,6 +129,7 @@ export default function OfferableCourses() {
     useEffect(() => {
         const fetchData = async () => {
             try {
+                await new Promise(resolve => setTimeout(resolve, 150));
                 await fetchOfferableCourses();
                 setLoading(false);
             } catch (e) {
@@ -219,68 +221,74 @@ export default function OfferableCourses() {
                     </tbody>
                 </table>
 
-                {!loading && (
-                    <div className="admin-management-cards">
-                        {filteredCourses.map((offerableCourse) => (
-                            <div className="admin-management-card" key={offerableCourse.id}>
-                                <div className="card-row">
-                                    <h6>Provider:</h6>
-                                    <p>{offerableCourse.provider.name}</p>
-                                    <img src={offerableCourse.provider.altLogoLink}
-                                         alt={"image " + offerableCourse.provider.name}/>
-                                </div>
-                                <div className="card-row">
-                                    <h6>Course:</h6>
-                                    <p>{offerableCourse.course.title}</p>
-                                    <img src={offerableCourse.course.imgLink}
-                                         alt={"image " + offerableCourse.course.title}/>
-                                </div>
-                                <div className="card-row">
-                                <h6>Price:</h6>
-                                    <p>{offerableCourse.price},- NOK</p>
-                                </div>
-                                <div className="card-row">
-                                    <h6>Discount:</h6>
-                                    <p>{parseInt(offerableCourse.discount * 100)} %</p>
-                                </div>
-                                <div className="card-row">
-                                    <h6>Start Date:</h6>
-                                    <p>
-                                        {new Date(offerableCourse.date).toLocaleDateString("no-NO", {
-                                            year: "numeric",
-                                            month: "2-digit",
-                                            day: "2-digit"
-                                        })}
-                                    </p>
-                                </div>
-                                <div className="card-row">
-                                    <h6>Visibility:</h6>
-                                    <p>{offerableCourse.visible ? "Visible" : "Hidden"}</p>
-                                </div>
-                                <div className="card-row">
-                                    <div className={"button-group"}>
-                                        <Link to={`/admin/management/offerableCourses/edit/${offerableCourse.id}`}>
-                                            <button>
-                                                <img src={"/icons/pencil-sharp.svg"} alt={"edit"}/>
+                <div className="admin-management-cards">
+                    {loading ?
+                        <div className="admin-management-loader">
+                            <GradientCircularProgress/>
+                        </div>
+                        :
+                        <div>
+                            {filteredCourses.map((offerableCourse) => (
+                                <div className="admin-management-card" key={offerableCourse.id}>
+                                    <div className="card-row">
+                                        <h6>Provider:</h6>
+                                        <p>{offerableCourse.provider.name}</p>
+                                        <img src={offerableCourse.provider.altLogoLink}
+                                             alt={"image " + offerableCourse.provider.name}/>
+                                    </div>
+                                    <div className="card-row">
+                                        <h6>Course:</h6>
+                                        <p>{offerableCourse.course.title}</p>
+                                        <img src={offerableCourse.course.imgLink}
+                                             alt={"image " + offerableCourse.course.title}/>
+                                    </div>
+                                    <div className="card-row">
+                                        <h6>Price:</h6>
+                                        <p>{offerableCourse.price},- NOK</p>
+                                    </div>
+                                    <div className="card-row">
+                                        <h6>Discount:</h6>
+                                        <p>{parseInt(offerableCourse.discount * 100)} %</p>
+                                    </div>
+                                    <div className="card-row">
+                                        <h6>Start Date:</h6>
+                                        <p>
+                                            {new Date(offerableCourse.date).toLocaleDateString("no-NO", {
+                                                year: "numeric",
+                                                month: "2-digit",
+                                                day: "2-digit"
+                                            })}
+                                        </p>
+                                    </div>
+                                    <div className="card-row">
+                                        <h6>Visibility:</h6>
+                                        <p>{offerableCourse.visible ? "Visible" : "Hidden"}</p>
+                                    </div>
+                                    <div className="card-row">
+                                        <div className={"button-group"}>
+                                            <Link to={`/admin/management/offerableCourses/edit/${offerableCourse.id}`}>
+                                                <button>
+                                                    <img src={"/icons/pencil-sharp.svg"} alt={"edit"}/>
+                                                </button>
+                                            </Link>
+                                            <button id={"delete" + offerableCourse.id} onClick={() => {
+                                                setFocusedId(offerableCourse.id)
+                                                setShowDeleteModal(true);
+                                            }}>
+                                                <img src={"/icons/trash-sharp.svg"} alt={"delete"}/>
                                             </button>
-                                        </Link>
-                                        <button id={"delete" + offerableCourse.id} onClick={() => {
-                                            setFocusedId(offerableCourse.id)
-                                            setShowDeleteModal(true);
-                                        }}>
-                                            <img src={"/icons/trash-sharp.svg"} alt={"delete"}/>
-                                        </button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        ))}
-                    </div>
-                )}
+                            ))}
+                        </div>
+                    }
+                </div>
             </div>
             {
                 showDeleteModal && createPortal(
                     <DeleteModal onClose={() => setShowDeleteModal(false)} deleteId={focusedId}
-                                 apiEndpoint={"/offerableCourses/"}/>,
+                                 apiEndpoint={"/user/"}/>,
                     document.getElementById("delete-modal")
                 )
             }

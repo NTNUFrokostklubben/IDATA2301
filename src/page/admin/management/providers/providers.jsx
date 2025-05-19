@@ -6,6 +6,7 @@ import {createPortal} from "react-dom";
 import DeleteModal from "../../../../component/modals/deleteModal";
 import {Skeleton} from "@mui/material";
 import {getProviders} from "../../../../utils/commonRequests";
+import GradientCircularProgress from "../../../../component/loader/loader";
 
 function ProviderTableContent({providers}) {
 
@@ -84,6 +85,8 @@ export default function Providers() {
     useEffect(() => {
         const fetchData = async () => {
             try {
+                //Sleep to simulate loading
+                await new Promise(resolve => setTimeout(resolve, 150));
                 await Promise.all([
                     fetchProviders()
                 ]);
@@ -130,43 +133,47 @@ export default function Providers() {
                         }
                     </tbody>
                 </table>
-
-                {!loading && (
-                    <div className="admin-management-cards">
-                        {providers.map((provider) => (
-                            <div className="admin-management-card"  id="providers" key={provider.id}>
-                                <div className="card-row">
-                                    <img src={provider.altLogoLink}
-                                         alt={"image" + provider.name}/>
-                                    <p>{provider.name}</p>
-                                </div>
-                                <div className="card-row">
-                                    <div className={"button-group"}>
-                                        <Link to={`/admin/management/providers/edit/${provider.id}`}>
-                                            <button>
-                                                <img src={"/icons/pencil-sharp.svg"} alt={"edit"}/>
+                <div className="admin-management-cards">
+                    {loading ?
+                        <div className="admin-management-loader">
+                            <GradientCircularProgress/>
+                        </div>
+                        :
+                        <div>
+                            {providers.map((provider) => (
+                                <div className="admin-management-card"  id="providers" key={provider.id}>
+                                    <div className="card-row">
+                                        <img src={provider.altLogoLink}
+                                             alt={"image" + provider.name}/>
+                                        <p>{provider.name}</p>
+                                    </div>
+                                    <div className="card-row">
+                                        <div className={"button-group"}>
+                                            <Link to={`/admin/management/providers/edit/${provider.id}`}>
+                                                <button>
+                                                    <img src={"/icons/pencil-sharp.svg"} alt={"edit"}/>
+                                                </button>
+                                            </Link>
+                                            <button id={"delete" + provider.id} onClick={() => {
+                                                setFocusedId(provider.id)
+                                                setShowDeleteModal(true);}}>
+                                                <img src={"/icons/trash-sharp.svg"} alt={"delete"}/>
                                             </button>
-                                        </Link>
-                                        <button id={"delete" + provider.id} onClick={() => {
-                                            setFocusedId(provider.id)
-                                            setShowDeleteModal(true);}}>
-                                            <img src={"/icons/trash-sharp.svg"} alt={"delete"}/>
-                                        </button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        ))}
-                    </div>
-                )}
-            </div>
-            {
-                showDeleteModal && createPortal(
-                    <DeleteModal onClose={() => setShowDeleteModal(false)} deleteId={focusedId}
-                                 apiEndpoint={"/provider/"}/>,
-                    document.getElementById("delete-modal")
-                )
-            }
-
+                            ))}
+                         </div>
+                    }
+                </div>
+        </div>
+        {
+            showDeleteModal && createPortal(
+                <DeleteModal onClose={() => setShowDeleteModal(false)} deleteId={focusedId}
+                             apiEndpoint={"/provider/"}/>,
+                document.getElementById("delete-modal")
+            )
+        }
         <div id={"delete-modal"}/>
     </div>
 

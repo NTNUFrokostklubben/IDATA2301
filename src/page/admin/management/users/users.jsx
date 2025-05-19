@@ -5,6 +5,7 @@ import "./users.css"
 import {Skeleton} from "@mui/material";
 import {createPortal} from "react-dom";
 import DeleteModal from "../../../../component/modals/deleteModal";
+import GradientCircularProgress from "../../../../component/loader/loader";
 
 function UserTableSkeleton() {
 
@@ -94,6 +95,8 @@ export default function Users() {
     useEffect(() => {
         const fetchData = async () => {
             try {
+                //Sleep to simulate loading
+                await new Promise(resolve => setTimeout(resolve, 150));
                 await Promise.all([
                     fetchUsers()
                 ]);
@@ -138,46 +141,52 @@ export default function Users() {
                     </tbody>
                 </table>
 
-                {!loading && (
-                    <div className="admin-management-cards">
-                        {users.map((user) => (
-                            <div className="admin-management-card" key={user.id}>
-                                <div className="card-row">
-                                    <h6>User:</h6>
-                                    <img src={user.profilePicture} alt={"image " + user.name}/>
-                                    <p>{user.email}</p>
-                                </div>
-                                <div className="card-row">
-                                    <h6>User roles:</h6>
-                                    <p>
-                                        {user.role.map((role) => (
-                                            <p key={role.id} className={"role"}>{role.name}</p>
-                                        ))}
-                                    </p>
-                                </div>
-                                <div className="card-row">
-                                    <h6>Active:</h6>
-                                    <p>{user.active ? "Yes" : "No"}</p>
-                                </div>
-                                <div className="card-row">
-                                    <div className={"button-group"}>
-                                        <Link to={`/admin/management/users/edit/${user.id}`}>
-                                            <button>
-                                                <img src={"/icons/pencil-sharp.svg"} alt={"edit"}/>
+                <div className="admin-management-cards">
+                    {loading ?
+                        <div className="admin-management-loader">
+                            <GradientCircularProgress/>
+                        </div>
+                        :
+                        <div>
+                            {users.map((user) => (
+                                <div className="admin-management-card" key={user.id}>
+                                    <div className="card-row">
+                                        <h6>User:</h6>
+                                        <img src={user.profilePicture} alt={"image " + user.name}/>
+                                        <p>{user.email}</p>
+                                    </div>
+                                    <div className="card-row">
+                                        <h6>User roles:</h6>
+                                        <p>
+                                            {user.role.map((role) => (
+                                                <p key={role.id} className={"role"}>{role.name}</p>
+                                            ))}
+                                        </p>
+                                    </div>
+                                    <div className="card-row">
+                                        <h6>Active:</h6>
+                                        <p>{user.active ? "Yes" : "No"}</p>
+                                    </div>
+                                    <div className="card-row">
+                                        <div className={"button-group"}>
+                                            <Link to={`/admin/management/users/edit/${user.id}`}>
+                                                <button>
+                                                    <img src={"/icons/pencil-sharp.svg"} alt={"edit"}/>
+                                                </button>
+                                            </Link>
+                                            <button id={"delete" + user.id} onClick={() => {
+                                                setFocusedId(user.id)
+                                                setShowDeleteModal(true);
+                                            }}>
+                                                <img src={"/icons/trash-sharp.svg"} alt={"delete"}/>
                                             </button>
-                                        </Link>
-                                        <button id={"delete" + user.id} onClick={() => {
-                                            setFocusedId(user.id)
-                                            setShowDeleteModal(true);
-                                        }}>
-                                            <img src={"/icons/trash-sharp.svg"} alt={"delete"}/>
-                                        </button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        ))}
-                    </div>
-                )}
+                            ))}
+                        </div>
+                    }
+                </div>
             </div>
             {
                 showDeleteModal && createPortal(
