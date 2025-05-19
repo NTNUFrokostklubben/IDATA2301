@@ -25,3 +25,11 @@
     max-width: 6rem;
     max-height: 6rem;
 }
+.admin-management-cards #providers {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+#addProvider {
+    width: fit-content;
+}

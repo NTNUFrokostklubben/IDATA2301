@@ -114,9 +114,9 @@ export default function Transactions() {
                 </table>
 
                 {!loading && (
-                    <div className="mobile-cards">
+                    <div className="admin-management-cards">
                         {transactions.map((transaction) => (
-                            <div className="transaction-card" key={transaction.id}>
+                            <div className="admin-management-card" key={transaction.id}>
                                 <div className="card-row">
                                     <h6>User:</h6>
                                     <img src={transaction.user.profilePicture} alt={transaction.user.name}/>

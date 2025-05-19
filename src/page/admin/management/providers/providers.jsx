@@ -24,7 +24,9 @@ function ProviderTableContent({providers}) {
                     <td>
                         <div className={"button-group"}>
                             <Link to={`/admin/management/providers/edit/${provider.id}`}>
-                                <button><img src={"/icons/pencil-sharp.svg"} alt={"edit"}/></button>
+                                <button>
+                                    <img src={"/icons/pencil-sharp.svg"} alt={"edit"}/>
+                                </button>
                             </Link>
                             <button id={"delete" + provider.id} onClick={() => {
                                 setFocusedId(provider.id)
@@ -75,6 +77,8 @@ export default function Providers() {
 
     const [providers, setProviders] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [showDeleteModal, setShowDeleteModal] = useState();
+    const [focusedId, setFocusedId] = useState()
 
 
     useEffect(() => {
@@ -113,20 +117,58 @@ export default function Providers() {
 
                 <table className={"admin-table"}>
                     <thead>
-                    <tr>
-                        <th className={"provider"}><p>Name</p></th>
-                        <th className={"actions"}><p>Actions</p></th>
-                    </tr>
+                        <tr>
+                            <th className={"provider"}><p>Name</p></th>
+                            <th className={"actions"}><p>Actions</p></th>
+                        </tr>
                     </thead>
                     <tbody>
-                    {loading ? <ProviderTableSkeleton/> : <ProviderTableContent providers={providers}/>}
+                        {loading ?
+                            <ProviderTableSkeleton/>
+                            :
+                            <ProviderTableContent providers={providers}/>
+                        }
                     </tbody>
                 </table>
+
+                {!loading && (
+                    <div className="admin-management-cards">
+                        {providers.map((provider) => (
+                            <div className="admin-management-card"  id="providers" key={provider.id}>
+                                <div className="card-row">
+                                    <img src={provider.altLogoLink}
+                                         alt={"image" + provider.name}/>
+                                    <p>{provider.name}</p>
+                                </div>
+                                <div className="card-row">
+                                    <div className={"button-group"}>
+                                        <Link to={`/admin/management/providers/edit/${provider.id}`}>
+                                            <button>
+                                                <img src={"/icons/pencil-sharp.svg"} alt={"edit"}/>
+                                            </button>
+                                        </Link>
+                                        <button id={"delete" + provider.id} onClick={() => {
+                                            setFocusedId(provider.id)
+                                            setShowDeleteModal(true);}}>
+                                            <img src={"/icons/trash-sharp.svg"} alt={"delete"}/>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                )}
             </div>
+            {
+                showDeleteModal && createPortal(
+                    <DeleteModal onClose={() => setShowDeleteModal(false)} deleteId={focusedId}
+                                 apiEndpoint={"/provider/"}/>,
+                    document.getElementById("delete-modal")
+                )
+            }
 
-
-            <div id={"delete-modal"}/>
-        </div>
+        <div id={"delete-modal"}/>
+    </div>
 
     )
 }
