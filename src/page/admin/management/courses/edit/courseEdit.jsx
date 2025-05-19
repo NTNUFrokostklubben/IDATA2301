@@ -7,7 +7,7 @@ import {
     getCourse,
     getCourses,
     getKeywords,
-    postCourse,
+    postCourse, putCourse,
     setKeywords,
     uploadImage
 } from "../../../../../utils/commonRequests";
@@ -40,7 +40,7 @@ function CourseEditForm({course, keywords}) {
         const value = Object.fromEntries(data.entries());
 
 
-        const response = await postCourse(value)
+        const response = await putCourse(course.id, value)
         return response;
     }
 
