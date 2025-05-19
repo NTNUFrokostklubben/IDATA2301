@@ -120,7 +120,8 @@ export default function Courses() {
 
     const [courses, setCourses] = useState([]);
     const [loading, setLoading] = useState(true);
-
+    const [showDeleteModal, setShowDeleteModal] = useState();
+    const [focusedId, setFocusedId] = useState();
 
     useEffect(() => {
 
@@ -146,6 +147,19 @@ export default function Courses() {
         }
     }
 
+    function getDifficultyLevel(level) {
+        switch (level) {
+            case 0:
+                return "Beginner";
+            case 1:
+                return "Intermediate";
+            case 2:
+                return "Expert";
+            default:
+                return "Unknown";
+        }
+    }
+
     return (
         <div id={"courses-page"}>
             <h2>Courses</h2>
@@ -159,23 +173,88 @@ export default function Courses() {
 
                 <table className={"admin-table"}>
                     <thead>
-                    <tr>
-                        <th><p>Title</p></th>
-                        <th><p>Description</p></th>
-                        <th><p>Cat.</p></th>
-                        <th><p>Diff. level</p></th>
-                        <th><p>ECTS</p></th>
-                        <th><p>Hr/w</p></th>
-                        <th><p>Related certification</p></th>
-                        <th><p>Actions</p></th>
-                    </tr>
+                        <tr>
+                            <th><p>Title</p></th>
+                            <th><p>Description</p></th>
+                            <th><p>Cat.</p></th>
+                            <th><p>Diff. level</p></th>
+                            <th><p>ECTS</p></th>
+                            <th><p>Hr/w</p></th>
+                            <th><p>Related certification</p></th>
+                            <th><p>Actions</p></th>
+                        </tr>
                     </thead>
                     <tbody>
-                    {loading ? <CoursesTableSkeleton/> : <CourseTableContent courses={courses}/>}
+                    {loading ?
+                        <CoursesTableSkeleton/>
+                        :
+                        <CourseTableContent courses={courses}/>
+                    }
                     </tbody>
                 </table>
-            </div>
 
+                {!loading && (
+                    <div className="admin-management-cards">
+                        {courses.map((course) => (
+                            <div className="admin-management-card"  id="course" key={course.id}>
+                                <div className="card-row-left">
+                                    <div className="card-row">
+                                        <h6>Title:</h6>
+                                        <p>{course.title}</p>
+                                        <img src={course.imgLink} alt={"image " + course.title}/>
+                                    </div>
+                                    <div className="card-row">
+                                        <h6>Description:</h6>
+                                        <p className="description" >{course.description}</p>
+                                    </div>
+                                    <div className="card-row">
+                                        <h6>Category:</h6>
+                                        <p>{course.category}</p>
+                                    </div>
+                                    <div className="card-row">
+                                        <h6>Diff. level:</h6>
+                                        <p>{getDifficultyLevel(course.diffLevel)}</p>
+                                    </div>
+                                    <div className="card-row">
+                                        <h6>Credits:</h6>
+                                        <p>{course.credits}</p>
+                                    </div>
+                                    <div className="card-row">
+                                        <h6>Hr/w:</h6>
+                                        <p>{course.hoursWeek}</p>
+                                    </div>
+                                    <div className="card-row">
+                                        <h6>Related Certification:</h6>
+                                        <p>{course.credits}</p>
+                                    </div>
+                                </div>
+                                <div className="card-row">
+                                    <div className={"button-group"}>
+                                        <Link to={`/admin/management/courses/edit/${course.id}`}>
+                                            <button>
+                                                <img src={"/icons/pencil-sharp.svg"} alt={"edit"}/>
+                                            </button>
+                                        </Link>
+                                        <button id={"delete" + course.id} onClick={() => {
+                                            setFocusedId(course.id)
+                                            setShowDeleteModal(true);
+                                        }}>
+                                            <img src={"/icons/trash-sharp.svg"} alt={"delete"}/>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </div>
+            {
+                showDeleteModal && createPortal(
+                    <DeleteModal onClose={() => setShowDeleteModal(false)} deleteId={focusedId}
+                                 apiEndpoint={"/course/"}/>,
+                    document.getElementById("delete-modal")
+                )
+            }
 
             <div id={"delete-modal"}/>
         </div>

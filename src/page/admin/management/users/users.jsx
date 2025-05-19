@@ -50,7 +50,8 @@ function UserTableContent({users}) {
                     <td ><p>{user.name}</p></td>
                     <td ><p>{user.role.map((role) => (
                         <p key={role.id} className={"role"}>{role.name}</p>
-                    ))}</p></td>
+                    ))}</p>
+                    </td>
                     <td><p>{user.active ? "Yes" : "No"}</p></td>
                     <td>
                         <div className={"button-group"}>
@@ -87,6 +88,8 @@ export default function Users() {
 
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [showDeleteModal, setShowDeleteModal] = useState();
+    const [focusedId, setFocusedId] = useState();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -134,8 +137,55 @@ export default function Users() {
                     {loading ? <UserTableSkeleton/> : <UserTableContent users={users}/>}
                     </tbody>
                 </table>
-            </div>
 
+                {!loading && (
+                    <div className="admin-management-cards">
+                        {users.map((user) => (
+                            <div className="admin-management-card" key={user.id}>
+                                <div className="card-row">
+                                    <h6>User:</h6>
+                                    <img src={user.profilePicture} alt={"image " + user.name}/>
+                                    <p>{user.email}</p>
+                                </div>
+                                <div className="card-row">
+                                    <h6>User roles:</h6>
+                                    <p>
+                                        {user.role.map((role) => (
+                                            <p key={role.id} className={"role"}>{role.name}</p>
+                                        ))}
+                                    </p>
+                                </div>
+                                <div className="card-row">
+                                    <h6>Active:</h6>
+                                    <p>{user.active ? "Yes" : "No"}</p>
+                                </div>
+                                <div className="card-row">
+                                    <div className={"button-group"}>
+                                        <Link to={`/admin/management/users/edit/${user.id}`}>
+                                            <button>
+                                                <img src={"/icons/pencil-sharp.svg"} alt={"edit"}/>
+                                            </button>
+                                        </Link>
+                                        <button id={"delete" + user.id} onClick={() => {
+                                            setFocusedId(user.id)
+                                            setShowDeleteModal(true);
+                                        }}>
+                                            <img src={"/icons/trash-sharp.svg"} alt={"delete"}/>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </div>
+            {
+                showDeleteModal && createPortal(
+                    <DeleteModal onClose={() => setShowDeleteModal(false)} deleteId={focusedId}
+                                 apiEndpoint={"/user/"}/>,
+                    document.getElementById("delete-modal")
+                )
+            }
 
             <div id={"delete-modal"}/>
         </div>

@@ -2,8 +2,6 @@
     margin: 1rem 2rem;
 }
 
-
-
 #transactions-page img {
     height: 100%;
     max-width: 6rem;
@@ -12,4 +10,21 @@
 
 #transactions-page button {
     font-size: 1rem;
+}
+
+
+@media (max-width: 525px) {
+
+    #transactions-page img {
+        height: 100%;
+        max-width: 3rem;
+        max-height: 3rem;
+    }
+    #transactions-page .admin-table {
+        display: none;
+    }
+
+    #transactions-page .admin-management-cards {
+        display: flex;
+    }
 }

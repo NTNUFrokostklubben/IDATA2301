@@ -13,13 +13,11 @@
 .admin-table  {
     table-layout: fixed;
     width: 100%;
-    /*margin: 0rem 2rem;*/
 }
 
 .admin-table img {
     width: 3rem;
     height: 3rem;
-    /*margin: 0rem 2rem;*/
 }
 
 /*Sets width of delete and edit button column*/
@@ -58,15 +56,12 @@
     margin: 1rem 0;
 }
 
-.admin-table .edit-button {
+.edit-button {
     height: 2rem;
     width: 6rem;
-
 }
 
-
-
-.admin-table .button-group {
+.button-group {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -75,12 +70,46 @@
     height: 100%;
 }
 
-.admin-table .button-group button {
+.button-group button {
     display: flex;
     justify-content: center;
     align-items: center;
     border: transparent;
     background-color: transparent;
-    height: 40px;
+    height: 2.5rem;
+}
+
+.admin-management-cards {
+    display: none;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin: 1rem;
+}
+
+.admin-management-card {
+    background-color: var(--textWhite);
+    border-radius: 3px;
+    padding: 1rem;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.card-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.card-row h6 {
+    font-size: 0.95rem;
+    font-weight: bold;
+    margin: 0;
+    min-width: 90px;
+}
+
+.button-group button {
+    height: 3rem;
+    border: 0;
 }
 
