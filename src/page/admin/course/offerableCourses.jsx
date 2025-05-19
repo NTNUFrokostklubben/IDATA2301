@@ -266,7 +266,7 @@ export default function OfferableCourses() {
                                     </div>
                                     <div className="card-row">
                                         <div className={"button-group"}>
-                                            <Link to={`/admin/management/offerableCourses/edit/${offerableCourse.id}`}>
+                                            <Link to={`/admin/offerableCourses/edit/${offerableCourse.id}`}>
                                                 <button>
                                                     <img src={"/icons/pencil-sharp.svg"} alt={"edit"}/>
                                                 </button>
