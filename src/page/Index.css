@@ -127,8 +127,8 @@
 }
 #index-course-cards-section #index-arrow-icon{
     border: none;
-    width: 3rem;
-    height: 3rem;
+    width: 4rem;
+    height: 4rem;
 }
 
 /* Collabrotators */
@@ -387,11 +387,11 @@
     }
 }
 @media (max-width: 400px) {
-    #index-course-cards-section #index-arrow-icon{
-        border: none;
-        width: 2rem;
-        height: 2rem;
-    }
+    /*#index-course-cards-section #index-arrow-icon{*/
+    /*    border: none;*/
+    /*    width: 2rem;*/
+    /*    height: 2rem;*/
+    /*}*/
 
 }
 
