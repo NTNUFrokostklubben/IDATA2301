@@ -92,7 +92,8 @@ export function UserImageModal({close, uid}) {
                     </label>
                 </div>
                 <div className={`user-page-modal-option-container`} onClick={() => {
-                    dialogChooser(true)}}>
+                    dialogChooser(true)
+                }}>
                     <button style={removeStyles()}>
                         <ConfirmChoiceDialog callback={deletePfp} choice={"Are you sure you want to delete your " +
                             "profile picture?"} open={open} setOpen={dialogChooser}/>
@@ -132,7 +133,7 @@ export default function UserPage() {
     useEffect(() => {
         const fetchData = async () => {
             if (!user) return; // Don't fetch unless user is set
-            try{
+            try {
                 await new Promise(r => setTimeout(r, 150));
                 await Promise.all([
                     handleFavoritesData(),
@@ -147,10 +148,10 @@ export default function UserPage() {
         fetchData();
     }, [user]);
 
-        async function handleCourseData() {
-            try {
-                const courseData = await AsyncApiRequest("GET", `/userCourses/user`, null)
-                    .then(response => response.json())
+    async function handleCourseData() {
+        try {
+            const courseData = await AsyncApiRequest("GET", `/userCourses/user`, null)
+                .then(response => response.json())
 
             const filteredAndSorted = courseData
                 .filter(item => item.review?.rating > 0)
@@ -164,15 +165,15 @@ export default function UserPage() {
     }
 
 
-        async function handleFavoritesData() {
-            try {
-                const favoritesData = await AsyncApiRequest("GET", `/favorite/user`, null)
-                    .then(response => response.json())
-                setFavorites(favoritesData)
-            } catch (e) {
-                console.error(e)
-            }
+    async function handleFavoritesData() {
+        try {
+            const favoritesData = await AsyncApiRequest("GET", `/favorite/user`, null)
+                .then(response => response.json())
+            setFavorites(favoritesData)
+        } catch (e) {
+            console.error(e)
         }
+    }
 
 
     function profileImageClickHandler() {
@@ -202,19 +203,23 @@ export default function UserPage() {
                                 :
                                 <div className="user-page-user-courses-content">
                                     {courses.length > 0 ? courses.map(item => (
-                                        <div className="user-course-item" key={item.id}>
-                                            <Link className="user-page-course-hotlink" to={`/course/${item.course.id}`}>
-                                                <div className="image-wrapper">
-                                                    <img className="user-page-course-image" src={item.course.imgLink}
-                                                         alt={"image " + item.course.title}/>
-                                                </div>
-                                                <p>{item.course.title}</p>
-                                            </Link></div>
-                                    )) :
+                                            <div className="user-course-item" key={item.id}>
+                                                <Link className="user-page-course-hotlink" to={`/course/${item.course.id}`}>
+                                                    <div className="image-wrapper">
+                                                        <img className="user-page-course-image" src={item.course.imgLink}
+                                                             alt={"image " + item.course.title}/>
+                                                    </div>
+                                                    <p>{item.course.title}</p>
+                                                </Link></div>
+                                        )) :
                                         <div className="user-course-item empty">
                                             <h3>You have taken no courses so far</h3>
                                             <p>Find a course to enroll?</p>
-                                            <button className={"cta-button"} onClick={() => navigate("/search")}>Click here to enroll</button>
+                                            <button className={"cta-button"} onClick={() => navigate("/search")}>
+                                                <p>
+                                                    Click here to enroll
+                                                </p>
+                                            </button>
                                         </div>
                                     }
                                 </div>
@@ -231,12 +236,15 @@ export default function UserPage() {
                             <Skeleton variant={"rectangular"} width={"100%"} height={"60%"}/>
                             :
                             <div className="user-page-reviews">
-                                {ratings.length > 0 ? ratings.map(item => <Review key={item.id} rating={item} title={true}/>)
+                                {ratings.length > 0 ? ratings.map(item => <Review key={item.id} rating={item}
+                                                                                  title={true}/>)
                                     :
                                     <div className={"user-course-item empty"}>
                                         <h3>You have written no reviews yet</h3>
                                         <p>Find a course to enroll?</p>
-                                        <button className={"cta-button"} onClick={() => navigate("/search")}>Click here to enroll</button>
+                                        <button className={"cta-button"} onClick={() => navigate("/search")}>
+                                            <p>Click here to enroll</p>
+                                        </button>
                                     </div>
                                 }
                             </div>
@@ -250,13 +258,16 @@ export default function UserPage() {
                             <Skeleton variant={"rectangular"} width={"100%"} height={"50%"}/>
                             :
                             <div id="user-page-favorites-content">
-                                {favorites.length > 0 ? favorites.map(item => <FavoriteCard key={item.id} {...item.course}/>)
-                                :
-                                <div className={"user-favorite-item empty"}>
-                                    <h3>You have no favorites yet</h3>
-                                    <p>Find a course to favorite?</p>
-                                    <button className={"cta-button"} onClick={() => navigate("/search")}>Click here to enroll</button>
-                                </div>
+                                {favorites.length > 0 ? favorites.map(item => <FavoriteCard
+                                        key={item.id} {...item.course}/>)
+                                    :
+                                    <div className={"user-favorite-item empty"}>
+                                        <h3>You have no favorites yet</h3>
+                                        <p>Find a course to favorite?</p>
+                                        <button className={"cta-button"} onClick={() => navigate("/search")}>
+                                            <p>Click here to enroll</p>
+                                        </button>
+                                    </div>
                                 }
                             </div>
                         }
