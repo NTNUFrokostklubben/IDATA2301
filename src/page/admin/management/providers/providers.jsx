@@ -78,7 +78,7 @@ export default function Providers() {
     const [providers, setProviders] = useState([]);
     const [loading, setLoading] = useState(true);
     const [showDeleteModal, setShowDeleteModal] = useState();
-    const [focusedId, setFocusedId] = useState()
+    const [focusedId, setFocusedId] = useState();
 
 
     useEffect(() => {
