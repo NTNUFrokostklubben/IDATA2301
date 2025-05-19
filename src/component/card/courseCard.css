@@ -114,11 +114,11 @@
 
 @media (max-width: 700px) {
     .index-card {
-        width: 14rem;
+        width: 18rem;
     }
 
     .index-course-img {
-        width: 12rem;
+        /*width: 12rem;*/
         height: 8rem;
         object-fit: cover
     }
@@ -134,11 +134,11 @@
 }
 @media (max-width:450px) {
     .index-card {
-        width: 13rem;
+        width: 15rem;
     }
 
     .index-course-img {
-        width: 12rem;
+        /*width: 12rem;*/
         height: 8rem;
         object-fit: cover
     }

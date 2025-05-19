@@ -123,14 +123,16 @@ export default function Index() {
     function calcSceneStart() {
         let courseCardsShown;
 
-        if (window.matchMedia("(max-width: 1250px)").matches) {
+        if (window.matchMedia("(max-width: 600px)").matches) {
+            courseCardsShown = 1;
+        } else if (window.matchMedia("(max-width: 700px)").matches) {
             courseCardsShown = 2;
         } else if (window.matchMedia("(max-width: 1600px)").matches) {
-            courseCardsShown = 3;
+            courseCardsShown = 2;
         } else if (window.matchMedia("(max-width: 1900px)").matches) {
-            courseCardsShown = 4;
+            courseCardsShown = 3;
         } else if (window.matchMedia("(max-width: 2350px)").matches) {
-            courseCardsShown = 5;
+            courseCardsShown = 4;
         } else if (window.matchMedia("(max-width: 3000px)").matches) {
             courseCardsShown = 5;
         } else {
