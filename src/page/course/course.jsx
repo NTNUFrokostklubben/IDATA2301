@@ -65,7 +65,6 @@ export default function Course() {
             const existing = courseMap.get(item.provider.id); // or another field if courseId isn't there
             const currentItemDate = new Date(item.date);
 
-            console.log(item)
             if (item.visible) {
                 if (!existing ) {
                     courseMap.set(item.provider.id, item);
