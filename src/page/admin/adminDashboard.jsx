@@ -8,6 +8,7 @@ import {useNavigate} from "react-router-dom";
 import {reviewEntity} from "../../utils/Classes/commonClasses";
 import {CourseCardSkeleton} from "../../component/card/courseCard";
 import {CircularProgress, circularProgressClasses, Skeleton, Typography} from "@mui/material";
+import GradientCircularProgress from "../../component/loader/loader";
 
 export default function AdminDashboard() {
     const navigate = useNavigate();
@@ -206,26 +207,6 @@ export default function AdminDashboard() {
          } else if(providerStats.length >= 6){
              return true;
          }
-    }
-
-    /**
-     * Creates a gradient circular progress bar
-     * From https://mui.com/material-ui/react-progress/
-     */
-    function GradientCircularProgress() {
-        return (
-            <React.Fragment>
-                <svg width={10} height={0}>
-                    <defs>
-                        <linearGradient id="my_gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" stopColor="#e01cd5" />
-                            <stop offset="100%" stopColor="#1CB5E0" />
-                        </linearGradient>
-                    </defs>
-                </svg>
-                <CircularProgress sx={{ 'svg circle': { stroke: 'url(#my_gradient)' } }} />
-            </React.Fragment>
-        );
     }
 
     return (
