@@ -82,7 +82,6 @@
 .admin-management-cards {
     display: none;
     flex-direction: column;
-    gap: 1.5rem;
     margin: 1rem;
 }
 
@@ -111,5 +110,12 @@
 .button-group button {
     height: 3rem;
     border: 0;
+}
+
+.admin-management-cards-loaded{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin: 1rem;
 }
 

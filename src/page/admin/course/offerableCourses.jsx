@@ -227,7 +227,7 @@ export default function OfferableCourses() {
                             <GradientCircularProgress/>
                         </div>
                         :
-                        <div>
+                        <div className="admin-management-cards-loaded">
                             {filteredCourses.map((offerableCourse) => (
                                 <div className="admin-management-card" key={offerableCourse.id}>
                                     <div className="card-row">
