@@ -12,8 +12,7 @@ export default function DeleteModal({onClose, deleteId, apiEndpoint}) {
     const navigate = useNavigate();
 
     function handleDelete() {
-        deleteObject().then(navigate(0))
-            .catch((e) => { alert(e)});
+        deleteObject().then(navigate(0));
 
     }
 
@@ -21,7 +20,6 @@ export default function DeleteModal({onClose, deleteId, apiEndpoint}) {
         try {
             await AsyncApiRequest("DELETE", apiEndpoint + deleteId, null);
         } catch (e) {
-            console.log(e)
             throw new Error(formatError(apiEndpoint));
         }
     }
