@@ -23,6 +23,18 @@ information should be available, the main focus is product search. The portal is
 easy to navigate, as well as give the impression of a serious learning portal meant for professionals. 
 
 
+## Users and login
+In this project the default users are:
+```
+admin:
+    email: Chuck@gmail.com
+    password: Nunchucks2024
+    
+user:
+    email: dave@gmail.com
+    password: Dangerous2024
+```
+
 ## Starting the application
 
 The frontend application is dependent on the backend REST application.
