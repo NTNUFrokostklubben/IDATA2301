@@ -126,4 +126,23 @@
     .admin-sidebar {
         display: none;
     }
+
+    #offerableCourse-info input[type="text"],
+    #offerableCourse-info input[type="number"],
+    #offerableCourse-info input[type="date"],
+    #offerableCourse-info select,
+    #offerableCourse-info textarea {
+
+        height: 4rem;
+    }
+
+    #offerableCourse-info input[type=checkbox] {
+        height: 4rem;
+        width: 4rem;
+    }
+
+    #offerableCourse-info .cta-button {
+        height: 4rem;
+        width: 8rem;
+    }
 }
