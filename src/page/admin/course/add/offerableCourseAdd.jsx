@@ -22,7 +22,6 @@ function OfferableCourseAddForm({providers, courses}) {
 
         const data = new FormData(event.target);
         const value = Object.fromEntries(data.entries());
-        console.log(startDate)
         const offerableCourse = new OfferableCourse(null, new Date(startDate).getTime(), value.discount / 100, value.price, value.visibility, new courseEntity(value.courseId), new ProviderEntity(value.providerId));
 
         postOfferableCourse(offerableCourse).then(navigate("../"));
