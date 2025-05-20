@@ -1,6 +1,6 @@
 import "./userPage.css"
 import React, {useEffect, useRef, useState} from 'react';
-import Review from "../component/Rating/review";
+import Review from "../component/Review/review";
 import {AsyncApiRequest} from "../utils/requests";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import FavoriteCard from "../component/favoriteCard/favoriteCard";

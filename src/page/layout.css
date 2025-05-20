@@ -335,6 +335,11 @@ footer p a {
     justify-content: flex-start;
 }
 
+#footer-go-to-about-img{
+    height: 1rem;
+    width: 1rem;
+}
+
 footer .learniverse-logo {
     height: 3rem;
 }

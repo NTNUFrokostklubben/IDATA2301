@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {useEffect, useState} from 'react';
 import {PieChart} from '@mui/x-charts/PieChart';
-import {AdminReview, AdminReviewSkeleton} from "../../component/Rating/adminReview";
+import {AdminReview, AdminReviewSkeleton} from "../../component/Review/adminReview";
 import "./adminDashboard.css";
 import {AsyncApiRequest} from "../../utils/requests";
 import {useNavigate} from "react-router-dom";

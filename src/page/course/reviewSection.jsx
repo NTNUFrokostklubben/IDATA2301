@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react";
 import {AsyncApiRequest} from "../../utils/requests";
-import Review from "../../component/Rating/review";
+import Review from "../../component/Review/review";
 import "./reviewSection.css"
-import ReviewWriter from "../../component/Rating/reviewWriter";
+import ReviewWriter from "../../component/Review/reviewWriter";
 import {Dialog} from "@mui/material";
 import ConfirmChoiceDialog from "../../component/modals/confirmChoice/confirmChoiceDialog";
 import {useNavigate} from "react-router-dom";

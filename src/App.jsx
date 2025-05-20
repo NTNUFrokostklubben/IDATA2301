@@ -23,11 +23,11 @@ import OfferableCourseEdit from "./page/admin/course/edit/offerableCourseEdit";
 import {useState} from "react";
 import {deleteAuthorizationCookies, getAuthenticatedUser} from "./utils/authentication/authentication";
 import OrderComplete from "./page/checkout/orderComplete";
-import NoAccess from "./page/noAccess";
+import NoAccess from "./errorpage/noAccess";
 import ProtectedRoute from "./component/routing/ProtectedRoute";
 import Users from "./page/admin/management/users/users";
 import UserEdit from "./page/admin/management/users/edit/editUser";
-import NotFound from "./page/notFound";
+import NotFound from "./errorpage/notFound";
 import Transactions from "./page/admin/management/Transactions/transactions";
 import GoogleCallback from "./page/Authentication/googleCallBack";
 
