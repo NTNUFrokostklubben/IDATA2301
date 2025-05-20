@@ -41,11 +41,14 @@ function TransactionTableContent({transactions}) {
             {transactions.map((transaction) => (
                 <tr key={transaction.id}>
                     <td>
-                        <img src={transaction.user.profilePicture} alt={"image " + transaction.user.name}/>
-                        <p>{transaction.user.name}</p>
+                        <img
+                            src={(transaction.user !== null ? transaction.user?.profilePicture : "https://localhost:8081/uploads/images/default_img.png")}
+                            alt={""}/>
+                        <p>{transaction.user?.name}</p>
                     </td>
                     <td>
-                        <img src={transaction.offerableCourses.course.imgLink} alt={"image " + transaction.offerableCourses.course.title}/>
+                        <img src={transaction.offerableCourses.course.imgLink}
+                             alt={"image " + transaction.offerableCourses.course.title}/>
                         <p>{transaction.offerableCourses.course.title}</p>
                     </td>
                     <td>
@@ -128,8 +131,8 @@ export default function Transactions() {
                                 <div className="admin-management-card" key={transaction.id}>
                                     <div className="card-row">
                                         <h6>User:</h6>
-                                        <img src={transaction.user.profilePicture} alt={transaction.user.name}/>
-                                        <p>{transaction.user.name}</p>
+                                        <img src={(transaction.user !== null ?  transaction.user?.profilePicture : "https://localhost:8081/uploads/images/default_img.png")} alt={""}/>
+                                        <p>{transaction.user?.name}</p>
                                     </div>
                                     <div className="card-row">
                                         <h6>Course:</h6>
