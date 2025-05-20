@@ -162,13 +162,13 @@ export default function Course() {
     function diffConvert(diff) {
         let value;
         switch (diff) {
-            case 1:
+            case 0:
                 value = "Beginner"
                 break;
-            case 2:
+            case 1:
                 value = "Intermediate"
                 break;
-            case 3:
+            case 2:
                 value = "Expert"
                 break;
         }

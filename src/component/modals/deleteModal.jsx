@@ -12,7 +12,8 @@ export default function DeleteModal({onClose, deleteId, apiEndpoint}) {
     const navigate = useNavigate();
 
     function handleDelete() {
-        deleteObject().then(navigate(0));
+        deleteObject().then(navigate(0))
+            .catch((e) => { alert(e)});
 
     }
 
@@ -20,7 +21,21 @@ export default function DeleteModal({onClose, deleteId, apiEndpoint}) {
         try {
             await AsyncApiRequest("DELETE", apiEndpoint + deleteId, null);
         } catch (e) {
-            console.error("Error fetching offerable courses:", e);
+            console.log(e)
+            throw new Error(formatError(apiEndpoint));
+        }
+    }
+
+    function formatError(apiEndpoint) {
+        switch (apiEndpoint) {
+            case "/offerableCourse/":
+                return "Cannot delete offerable course with id: " + deleteId;
+            case "/course/":
+                return "Cannot delete course with id: " + deleteId + ". It is used in offerable courses";
+            case "/provider/":
+                return "Cannot delete provider with id: " + deleteId;
+            default:
+                return "Cannot delete object with id: " + deleteId + " from endpoint: " + apiEndpoint + deleteId;
         }
     }
 
