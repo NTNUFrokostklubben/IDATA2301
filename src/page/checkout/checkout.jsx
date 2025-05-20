@@ -1,6 +1,6 @@
 import "./checkout.css"
 import {useNavigate} from "react-router-dom";
-import React, { useMemo, useRef, useState} from "react";
+import React, {useMemo, useRef, useState} from "react";
 import {createPortal} from "react-dom";
 import Login from "../../component/modals/auth/login";
 import Register from "../../component/modals/auth/register";
@@ -49,6 +49,11 @@ export default function Checkout() {
             value = value.slice(0, 2) + '/' + value.slice(2, 4);
         }
         e.target.value = value;
+    };
+
+    const handleCVC = (e) => {
+         // Remove non-digits
+        e.target.value = e.target.value.replace(/\D/g, "");
     };
 
     const handleCardNr = (e) => {
@@ -128,11 +133,11 @@ export default function Checkout() {
                                         <div className={"checkout-input-section"} id={"checkout-cvc"}>
                                             <label htmlFor="sec-code">Security code *</label>
                                             <input required={true}
-                                                   value={""}
                                                    className="input-field"
                                                    placeholder="Security code"
-                                                   type="number"
+                                                   type="text"
                                                    name="expiration date"
+                                                   onInput={handleCVC}
                                                    maxLength={3}
                                                    id="sec-code"/>
                                         </div>
@@ -143,7 +148,7 @@ export default function Checkout() {
                                         <Select className={"country-select"}
                                                 required={required}
                                                 options={options}
-                                                value={options.find(option => option.value == countrySelect)}
+                                                value={options.find(option => option.value === countrySelect)}
                                                 onChange={(selected) => setCountrySelect(selected)}
                                                 unstyled={true}
                                                 classNamePrefix={"country-select"}/>
@@ -162,7 +167,6 @@ export default function Checkout() {
                                         {loading ? <p> Processing </p> : <p> Pay Now</p>}
                                     </button>
                                 </div>
-                            {/* TODO make sure the fields has to be filled out before paying*/}
 
                             </form>
 
