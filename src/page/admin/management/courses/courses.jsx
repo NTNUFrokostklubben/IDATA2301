@@ -55,11 +55,7 @@ function CourseTableContent({courses}) {
                             </button>
                         </Link>
 
-                            <button id={"delete" + course.id} onClick={() => {
-                                setFocusedId(course.id)
-                                setShowDeleteModal(true);
-                            }}><img src={"/icons/trash-sharp.svg"} alt={"delete"}/>
-                            </button>
+
                         </div>
                     </td>
                 </tr>
@@ -243,12 +239,7 @@ export default function Courses() {
                                                     <img src={"/icons/pencil-sharp.svg"} alt={"edit"}/>
                                                 </button>
                                             </Link>
-                                            <button id={"delete" + course.id} onClick={() => {
-                                                setFocusedId(course.id)
-                                                setShowDeleteModal(true);
-                                            }}>
-                                                <img src={"/icons/trash-sharp.svg"} alt={"delete"}/>
-                                            </button>
+
                                         </div>
                                     </div>
                                 </div>
