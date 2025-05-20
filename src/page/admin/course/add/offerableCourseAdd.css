@@ -68,6 +68,7 @@
 #offerableCourse-info input[type="text"],
 #offerableCourse-info input[type="number"],
 #offerableCourse-info input[type="date"],
+#offerableCourse-info input[type="datetime-local"],
 #offerableCourse-info select,
 #offerableCourse-info textarea {
     width: 100%;
@@ -130,6 +131,7 @@
     #offerableCourse-info input[type="text"],
     #offerableCourse-info input[type="number"],
     #offerableCourse-info input[type="date"],
+    #offerableCourse-info input[type="datetime-local"],
     #offerableCourse-info select,
     #offerableCourse-info textarea {
 

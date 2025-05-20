@@ -61,7 +61,7 @@ function OfferableCourseAddForm({providers, courses}) {
                 <div className={"input-wrapper"}>
                     <label htmlFor={"date"}><p>Start date</p></label>
                     <ReactiveDatePicker setStartDate={setStartDate} startDate={startDate} mobileWidth={900}
-                                        id={"date"}/>
+                                        id={"date"} name={"date"}/>
                 </div>
 
                 <div className={"group-2"}>

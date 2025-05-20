@@ -6,6 +6,7 @@ import {courseEntity, OfferableCourse, ProviderEntity} from "../../../../utils/C
 import {useNavigate, useParams} from "react-router-dom";
 import {Skeleton} from "@mui/material";
 import {getCourses, getOfferableCourse, getProviders} from "../../../../utils/commonRequests";
+import ReactiveDatePicker from "../../../../component/date/reactiveDatePicker";
 
 /**
  * Builds the form for editing an offerable course
@@ -64,9 +65,8 @@ function OfferableCourseEditForm({offerableCourse, providers, courses}) {
 
                 <div className={"input-wrapper"}>
                     <label htmlFor={"date"}><p>Start date</p></label>
-                    <DatePicker id={"date"} name={"date"} onChange={(date) => setStartDate(date)}
-                                selected={startDate} dateFormat={"dd-MM-yyyy"} locale={"nb"}
-                                icon={<img src={"/icons/calendar-clear-sharp.svg"}/>} showIcon/>
+                    <ReactiveDatePicker setStartDate={setStartDate} name={"date"} id={"date"} startDate={startDate} mobileWidth={900} />
+
                 </div>
 
                 <div className={"group-2"}>
