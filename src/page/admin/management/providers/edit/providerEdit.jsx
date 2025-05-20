@@ -142,13 +142,13 @@ function ProviderEditForm({provider}) {
 
             <section id="provider-info">
                 <input id={"id"} name={"id"} type={"number"} hidden={true} value={provider.id}/>
-                <div className="input-wrapper"><label htmlFor="provider-name">Provider Name</label>
+                <div className="input-wrapper"><label htmlFor="provider-name"><p>Provider Name</p></label>
                     <input type="text" id="provider-name" name="name" defaultValue={provider.name} required/></div>
 
 
                 <div className={"imageUpload-wrapper"}>
                     <div className="input-wrapper">
-                        <label htmlFor="provider-image">Provider Image</label>
+                        <label htmlFor="provider-image"><p>Provider Image</p></label>
                         <input type="file" id="provider-image" name="imgLink" accept={"image/png,image/jpeg,image/webp"}
                                onChange={(e) => handleChangeImage(e.target.files, false)} required={imageChanged}/>
                     </div>
@@ -157,7 +157,7 @@ function ProviderEditForm({provider}) {
 
                 <div className={"imageUpload-wrapper"}>
                     <div className="input-wrapper">
-                        <label htmlFor="provider-alt-image">Alternative Provider Image</label>
+                        <label htmlFor="provider-alt-image"><p>Alternative Provider Image</p></label>
                         <input type="file" id="provider-alt-image" name="imgLinkAlt" accept={"image/png,image/jpeg,image/webp"}
                                onChange={(e) => handleChangeImage(e.target.files, true)} required={altImgChanged}/>
                     </div>
@@ -165,7 +165,7 @@ function ProviderEditForm({provider}) {
                 </div>
 
 
-                <button type="submit" className={"button cta-button"}>Update Provider</button>
+                <button type="submit" className={"button cta-button"}><p>Update Provider</p></button>
             </section>
 
         </form>

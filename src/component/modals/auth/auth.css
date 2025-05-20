@@ -18,9 +18,11 @@
     display: flex;
     position: absolute;
     flex-flow: column;
-    margin: 2rem 0rem;
+    top: 5rem;
+    /*margin-bottom: 50rem;*/
     padding: 2rem;
     max-width: 30rem;
+
     width: 30rem;
     background-color: var(--textWhite);
     gap: 1rem;
@@ -41,13 +43,22 @@
     font-size: 1rem;
 }
 
+.authform form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 40vh;
+}
 
 .auth-h2 {
     align-self: center;
 }
 
 #auth-CTA {
-    margin-top: 6rem;
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    /*justify-content: flex-end;*/
+    /*margin-top: auto;*/
 }
 
 .authform .cta-button {

@@ -6,6 +6,7 @@ import {courseEntity, OfferableCourse, ProviderEntity} from "../../../../utils/C
 import {useNavigate, useParams} from "react-router-dom";
 import {Skeleton} from "@mui/material";
 import {getCourses, getOfferableCourse, getProviders} from "../../../../utils/commonRequests";
+import ReactiveDatePicker from "../../../../component/date/reactiveDatePicker";
 
 /**
  * Builds the form for editing an offerable course
@@ -45,7 +46,7 @@ function OfferableCourseEditForm({offerableCourse, providers, courses}) {
             <section id="offerableCourse-info">
                 <input disabled={false} id={"id"} name={"id"} type={"number"} hidden={true} value={offerableCourse.id}/>
                 <div className="group-2">
-                    <div className="input-wrapper"><label htmlFor="provider-name">Provider Name</label>
+                    <div className="input-wrapper"><label htmlFor="provider-name"><p>Provider Name</p></label>
                         <select id={"provider-name"} name={"providerId"} defaultValue={offerableCourse.provider.id}
                                 required>
                             {providers.map((provider) => (
@@ -53,7 +54,7 @@ function OfferableCourseEditForm({offerableCourse, providers, courses}) {
                             ))}
                         </select>
                     </div>
-                    <div className="input-wrapper"><label htmlFor="course-name">Course Name</label>
+                    <div className="input-wrapper"><label htmlFor="course-name"><p>Course Name</p></label>
                         <select id={"course-name"} name={"courseId"} defaultValue={offerableCourse.course.id} required>
                             {courses.map((course) => (
                                 <option key={course.id} value={course.id}>{course.title}</option>
@@ -63,32 +64,31 @@ function OfferableCourseEditForm({offerableCourse, providers, courses}) {
                 </div>
 
                 <div className={"input-wrapper"}>
-                    <label htmlFor={"date"}>Start date</label>
-                    <DatePicker id={"date"} name={"date"} onChange={(date) => setStartDate(date)}
-                                selected={startDate} dateFormat={"dd-MM-yyyy"} locale={"nb"}
-                                icon={<img src={"/icons/calendar-clear-sharp.svg"}/>} showIcon/>
+                    <label htmlFor={"date"}><p>Start date</p></label>
+                    <ReactiveDatePicker setStartDate={setStartDate} name={"date"} id={"date"} startDate={startDate} mobileWidth={900} />
+
                 </div>
 
                 <div className={"group-2"}>
                     <div className={"input-wrapper"}>
-                        <label htmlFor={"price"}>Price of course</label>
+                        <label htmlFor={"price"}><p>Price of course</p></label>
                         <input min={0} type="number" id={"price"} name={"price"} defaultValue={offerableCourse.price}
                                required/>
                     </div>
                     <div className={"input-wrapper"}>
-                        <label htmlFor={"discount"}>Discount in percent</label>
+                        <label htmlFor={"discount"}><p>Discount in percent</p></label>
                         <input min={0} max={100} type="number" id={"discount"} name={"discount"}
                                defaultValue={offerableCourse.discount * 100} required/>
                     </div>
                 </div>
 
                 <div className={"input-wrapper"}>
-                    <label htmlFor={"visibility"}>Visibility</label>
+                    <label htmlFor={"visibility"}><p>Visibility</p></label>
                     <input type="checkbox" id={"visibility"} name={"visibility"}
                            defaultChecked={offerableCourse.visible} value={true}/>
                 </div>
 
-                <button type="submit" className={"button cta-button"}>Update Course</button>
+                <button type="submit" className={"button cta-button"}><p>Update Course</p></button>
 
             </section>
 

@@ -66,13 +66,13 @@ function ProviderFormAdd() {
     return (
         <form className="providerInfo-form" onSubmit={handleFormSubmission}>
             <section id="provider-info">
-                <div className="input-wrapper"><label htmlFor="provider-name">Provider Name</label>
+                <div className="input-wrapper"><label htmlFor="provider-name"><p>Provider Name</p></label>
                     <input type="text" id="provider-name" name="name" required/></div>
 
 
                 <div className={"imageUpload-wrapper"}>
                     <div className="input-wrapper">
-                        <label htmlFor="provider-image">Provider Image</label>
+                        <label htmlFor="provider-image"><p>Provider Image</p></label>
                         <input type="file" id="provider-image" name="imgLink" accept={"image/png,image/jpeg,image/webp"}
                                onChange={(e) => handleChangeImage(e.target.files, false)} required/>
                     </div>
@@ -81,7 +81,7 @@ function ProviderFormAdd() {
 
                 <div className={"imageUpload-wrapper"}>
                     <div className="input-wrapper">
-                        <label htmlFor="provider-alt-image">Alternative Provider Image</label>
+                        <label htmlFor="provider-alt-image"><p>Alternative Provider Image</p></label>
                         <input type="file" id="provider-alt-image" name="imgLinkAlt"
                                accept={"image/png,image/jpeg,image/webp"}
                                onChange={(e) => handleChangeImage(e.target.files, true)} required/>
@@ -90,7 +90,7 @@ function ProviderFormAdd() {
                 </div>
 
 
-                <button type="submit" className={"button cta-button"}>Add Provider</button>
+                <button type="submit" className={"button cta-button"}><p>Add Provider</p></button>
             </section>
 
         </form>

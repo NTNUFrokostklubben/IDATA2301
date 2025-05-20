@@ -70,12 +70,12 @@ function UserEditForm({user, roles}) {
         <form className="userInfo-form" action={"http://localhost:3000/user"} onSubmit={handleSubmit}>
             <section id="user-info">
                 <input id={"id"} name={"id"} type={"number"} hidden={true} value={user.id}/>
-                <div className="input-wrapper"><label htmlFor="user-email">Email</label>
+                <div className="input-wrapper"><label htmlFor="user-email"><p>Email</p></label>
                     <input disabled={true} type="text" id="user-email" name="email" defaultValue={user.email}
                            required/>
                 </div>
 
-                <div className="input-wrapper"><label htmlFor="user-name">Full Name</label>
+                <div className="input-wrapper"><label htmlFor="user-name"><p>Full Name</p></label>
                     <input disabled={true} type="text" id="user-name" name="name" defaultValue={user.name}
                            required/>
                 </div>
@@ -83,7 +83,7 @@ function UserEditForm({user, roles}) {
 
                 <div className={"imageUpload-wrapper"}>
                     <div className="input-wrapper">
-                        <label htmlFor="user-image">Provider Image</label>
+                        <label htmlFor="user-image"><p>Provider Image</p></label>
                         <input type="file" id="user-image" name="profilePicture" accept={"image/png,image/jpeg,image/webp"}
                                onChange={(e) => handleChangeImage(e.target.files)} required={imageChanged}/>
                     </div>
@@ -91,7 +91,7 @@ function UserEditForm({user, roles}) {
                 </div>
 
                 <div id={"user-roles"} name={"role"}>
-                    <label htmlFor="user-roles">User Roles</label>
+                    <label htmlFor="user-roles"><p>User Roles</p></label>
                     {/*    Multiple checkboxes, 1 for each role. Should pre-check the roles that the user already has. roles property has same structure as the role parameter on user*/}
 
                     {roles.map((role) =>
@@ -99,20 +99,20 @@ function UserEditForm({user, roles}) {
                             <div className={"role-checkbox"} key={role.id}>
                                 <input type="checkbox" id={role.id} name={"role"} value={role.name}
                                        defaultChecked={user.role.some(r => JSON.stringify(r) === JSON.stringify(role))}/>
-                                <label htmlFor={role}>{role.name}</label>
+                                <label htmlFor={role}><p>{role.name}</p></label>
                             </div>
                         )
                     )}
                 </div>
 
                 <div className={"input-wrapper"}>
-                    <label htmlFor={"active"}>Active</label>
+                    <label htmlFor={"active"}><p>Active</p></label>
                     <input type="checkbox" id={"active"} name={"active"}
                            defaultChecked={user.active} value={true}/>
                 </div>
 
 
-                <button type="submit" className={"button cta-button"}>Update User</button>
+                <button type="submit" className={"button cta-button"}><p>Update User</p></button>
             </section>
         </form>
 
