@@ -29,11 +29,6 @@ function ProviderTableContent({providers}) {
                                     <img src={"/icons/pencil-sharp.svg"} alt={"edit"}/>
                                 </button>
                             </Link>
-                            <button id={"delete" + provider.id} onClick={() => {
-                                setFocusedId(provider.id)
-                                setShowDeleteModal(true);
-                            }}><img src={"/icons/trash-sharp.svg"} alt={"delete"}/>
-                            </button>
                         </div>
                     </td>
                 </tr>

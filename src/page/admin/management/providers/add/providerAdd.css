@@ -3,7 +3,7 @@
     display: flex;
     flex-direction: column;
     margin: 1rem 2rem;
-    width: 50rem;
+    min-width: 50rem;
     gap: 1rem;
 }
 
@@ -87,6 +87,11 @@
 }
 
 @media (max-width: 900px) {
+    .providerInfo-page {
+        min-width: 20rem;
+    }
+
+
     .group-2 .input-wrapper,
     .group-3 .input-wrapper {
         flex: 1 1 100%;
@@ -94,5 +99,34 @@
 
     .admin-sidebar {
         display: none;
+    }
+
+    #provider-info input[type="text"],
+    #provider-info input[type="number"],
+    #provider-info input[type="date"],
+    #provider-info select,
+    #provider-info textarea {
+        height: 4rem;
+
+    }
+
+    #provider-info textarea {
+        height: 16rem;
+    }
+
+    #provider-info input[type="file"] {
+        height: 4rem;
+
+    }
+
+    #provider-info .cta-button {
+        height: 4rem;
+        width: 8rem;
+    }
+
+    #provider-info .img-preview {
+
+        justify-self: center;
+        max-height: 2rem;
     }
 }

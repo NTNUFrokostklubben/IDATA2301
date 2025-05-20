@@ -8,6 +8,7 @@ import {AsyncApiRequest} from "../../../../utils/requests";
 import {useNavigate} from "react-router-dom";
 import {getCourses, getProviders} from "../../../../utils/commonRequests";
 import {OfferableCourseFormSkeleton} from "../edit/offerableCourseEdit";
+import ReactiveDatePicker from "../../../../component/date/reactiveDatePicker";
 
 
 function OfferableCourseAddForm({providers, courses}) {
@@ -35,18 +36,19 @@ function OfferableCourseAddForm({providers, courses}) {
         }
     }
 
+
     return (
         <form onSubmit={handleFormSubmission}>
             <section id="offerableCourse-info">
                 <div className="group-2">
-                    <div className="input-wrapper"><label htmlFor="provider-name">Provider Name</label>
+                    <div className="input-wrapper"><label htmlFor="provider-name"><p>Provider Name</p></label>
                         <select id={"provider-name"} name={"providerId"} required>
                             {providers.map((provider) => (
                                 <option key={provider.id} value={provider.id}>{provider.name}</option>
                             ))}
                         </select>
                     </div>
-                    <div className="input-wrapper"><label htmlFor="course-name">Course Name</label>
+                    <div className="input-wrapper"><label htmlFor="course-name"><p>Course Name</p></label>
                         <select id={"course-name"} name={"courseId"} required>
                             {courses.map((course) => (
                                 <option key={course.id} value={course.id}>{course.title}</option>
@@ -56,29 +58,28 @@ function OfferableCourseAddForm({providers, courses}) {
                 </div>
 
                 <div className={"input-wrapper"}>
-                    <label htmlFor={"date"}>Start date</label>
-                    <DatePicker id={"date"} name={"date"} onChange={(date) => setStartDate(date)}
-                                selected={new Date(startDate)} dateFormat={"dd-MM-YYYY"} locale={"nb"}
-                                icon={<img src={"/icons/calendar-clear-sharp.svg"}/>} showIcon/>
+                    <label htmlFor={"date"}><p>Start date</p></label>
+                    <ReactiveDatePicker setStartDate={setStartDate} startDate={startDate} mobileWidth={900}
+                                        id={"date"} name={"date"}/>
                 </div>
 
                 <div className={"group-2"}>
                     <div className={"input-wrapper"}>
-                        <label htmlFor={"price"}>Price of course</label>
+                        <label htmlFor={"price"}><p>Price of course</p></label>
                         <input min={0} type="number" id={"price"} name={"price"} required/>
                     </div>
                     <div className={"input-wrapper"}>
-                        <label htmlFor={"discount"}>Discount in percent</label>
+                        <label htmlFor={"discount"}><p>Discount in percent</p></label>
                         <input min={0} max={100} type="number" id={"discount"} name={"discount"} required/>
                     </div>
                 </div>
 
                 <div className={"input-wrapper"}>
-                    <label htmlFor={"visibility"}>Visibility</label>
+                    <label htmlFor={"visibility"}><p>Visibility</p></label>
                     <input type="checkbox" id={"visibility"} name={"visibility"} value={true}/>
                 </div>
 
-                <button type="submit" className={"button cta-button"}>Add Course</button>
+                <button type="submit" className={"button cta-button"}><p>Add Course</p></button>
 
             </section>
 
@@ -148,7 +149,8 @@ export default function OfferableCourseAdd() {
     return (
         <div className="offerableCourse-page">
             <h2>Add Offerable Course</h2>
-            {loading ? <OfferableCourseFormSkeleton/> : <OfferableCourseAddForm providers={providers} courses={courses}/>}
+            {loading ? <OfferableCourseFormSkeleton/> :
+                <OfferableCourseAddForm providers={providers} courses={courses}/>}
         </div>
     )
 }
