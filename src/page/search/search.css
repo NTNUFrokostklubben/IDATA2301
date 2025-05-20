@@ -64,7 +64,7 @@
 
 #resultsinfo .input-wrapper label {
     position: absolute;
-
+    font-size: 1rem;
     top: -2rem;
     left: 0rem;
 }
