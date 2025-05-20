@@ -42,9 +42,9 @@ function TransactionTableContent({transactions}) {
                 <tr key={transaction.id}>
                     <td>
                         <img
-                            src={(transaction.user !== null ? transaction.user?.profilePicture : "https://localhost:8081/uploads/images/default_img.png")}
-                            alt={""}/>
-                        <p>{transaction.user?.name}</p>
+                            src={(transaction.user !== null ? transaction.user?.profilePicture : "https://learniverse.no/uploads/images/default_img.png")}
+                            alt={"Profile picture"}/>
+                        <p>{(transaction.user !== null ?  transaction.user?.name : "Deleted user")}</p>
                     </td>
                     <td>
                         <img src={transaction.offerableCourses.course.imgLink}
@@ -131,7 +131,7 @@ export default function Transactions() {
                                 <div className="admin-management-card" key={transaction.id}>
                                     <div className="card-row">
                                         <h6>User:</h6>
-                                        <img src={(transaction.user !== null ?  transaction.user?.profilePicture : "https://localhost:8081/uploads/images/default_img.png")} alt={""}/>
+                                        <img src={(transaction.user !== null ?  transaction.user?.profilePicture : "https://learniverse.no/uploads/images/default_img.png")} alt={""}/>
                                         <p>{transaction.user?.name}</p>
                                     </div>
                                     <div className="card-row">
