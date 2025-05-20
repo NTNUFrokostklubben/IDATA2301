@@ -7,6 +7,7 @@ import DatePicker from "react-datepicker";
 import {useParams, useSearchParams} from "react-router-dom";
 import {AsyncApiRequest} from "../../utils/requests";
 import SpinnerLoader from "../../component/modals/Spinner/spinnerLoader";
+import ReactiveDatePicker from "../../component/date/reactiveDatePicker";
 
 
 export default function Search() {
@@ -28,6 +29,26 @@ export default function Search() {
         setIsOpen(!isOpen)
     }
 
+    const [mobileView, setMobileView] = useState(false);
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth <= 900) {
+                setMobileView(true);
+            } else {
+                setMobileView(false);
+            }
+        };
+
+        window.addEventListener("resize", handleResize);
+
+        handleResize()
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
+
 
     /**
      * Triggered once form is submitted, only changes Filter object, useEffect is called when filter object is changed
@@ -44,8 +65,8 @@ export default function Search() {
         params.set("search", searchValue || "");
 
         // Date range
-        params.set("startDate", startDate.getTime());
-        params.set("endDate", endDate.getTime());
+        params.set("startDate", new Date(startDate).getTime());
+        params.set("endDate", new Date(endDate).getTime());
 
         // Difficulty levels (array)
         const levels = buildDifficultyLevel();
@@ -64,9 +85,10 @@ export default function Search() {
         if (value["max-price"]) params.set("max-price", value["max-price"]);
 
         setSearchParams(params);
+        // Closes the filter sidebar for mobile view once filtered
+        setIsOpen(false);
 
     }
-
 
 
     /**
@@ -144,14 +166,13 @@ export default function Search() {
      */
     async function fetchFilteredCourses() {
         try {
-            const p = await AsyncApiRequest("GET", "/search?" + searchParams,null ).then((p) => p.json());
+            const p = await AsyncApiRequest("GET", "/search?" + searchParams, null).then((p) => p.json());
             setOfferableCourses(p);
         } catch (e) {
             setError(true);
             console.error("Error fetching offerable courses:", e);
         }
     }
-
 
 
     /**
@@ -285,16 +306,27 @@ export default function Search() {
 
                     <Collapsable title={"Course Start"}>
                         <section id={"dates"}>
-                            <p>Date Range</p>
+                            <label htmlFor={"daterange"}><p>Date Range</p></label>
 
-                            <DatePicker selected={startDate} onChange={dateChanged} startDate={startDate}
-                                        endDate={endDate} selectsRange={true}
-                                        dateFormat={"dd/MM/yyyy"}
-                                        icon={<img alt={"calendar icon"} src={"/icons/calendar-clear-sharp.svg"}/>} showIcon/>
+                            {mobileView ? <>
+                                <ReactiveDatePicker startDate={startDate} name={"daterange"} setStartDate={setStartDate}
+                                                    mobileWidth={900}/> <span>-</span>
+                                <ReactiveDatePicker startDate={endDate} setStartDate={setEndDate} name={"daterange"}
+                                                    mobileWidth={900}/></>
+                                :
+                                <DatePicker name={"daterange"} selected={startDate} onChange={dateChanged}
+                                            startDate={startDate}
+                                            endDate={endDate} selectsRange={true}
+                                            dateFormat={"dd/MM/yyyy"}
+                                            icon={<img alt={"calendar icon"} src={"/icons/calendar-clear-sharp.svg"}/>}
+                                            showIcon/>
+                            }
+
+
 
                         </section>
                     </Collapsable>
-                    <button className="cta-button" type="submit">Filter</button>
+                    <button className="cta-button" type="submit"><p>Filter</p></button>
                 </form>
             </div>
 

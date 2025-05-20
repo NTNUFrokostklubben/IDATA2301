@@ -208,5 +208,23 @@
         min-height: 100%;
         min-width: 100%;
     }
+
+    .search-page .cta-button {
+        height: 4rem;
+    }
+
+    .search-page input[type="text"],
+    .search-page input[type="number"],
+    .search-page input[type="date"],
+    .search-page select,
+    .search-page textarea {
+        height: 4rem;
+        width: 10rem;
+    }
+
+    .search-page input[type=checkbox] {
+        height: 4rem;
+        width: 4rem;
+    }
 }
 

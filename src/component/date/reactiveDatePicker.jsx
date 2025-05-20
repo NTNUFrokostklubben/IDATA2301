@@ -17,6 +17,7 @@ export default function ReactiveDatePicker({setStartDate, startDate, mobileWidth
 
         window.addEventListener("resize", handleResize);
 
+        handleResize()
 
         return () => {
             window.removeEventListener("resize", handleResize);
