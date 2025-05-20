@@ -73,35 +73,35 @@ function CourseAddForm() {
     return (
         <form onSubmit={handleSubmit} action="http://localhost:3000/course" method="POST">
             <section id="course-info">
-                <div className="input-wrapper"><label htmlFor="course-name">Course Name</label>
+                <div className="input-wrapper"><label htmlFor="course-name"><p>Course Name</p></label>
                     <input type="text" id="course-name" name="title" required/></div>
 
-                <div className="input-wrapper"><label htmlFor="course-description">Course Description</label>
+                <div className="input-wrapper"><label htmlFor="course-description"><p>Course Description</p></label>
                     <textarea id="course-description" name="description" required></textarea></div>
 
                 <div className="group-3">
                     <div className="input-wrapper">
-                        <label htmlFor="difficulty-level">Difficulty Level</label>
+                        <label htmlFor="difficulty-level"><p>Difficulty Level</p></label>
                         <select name="diffLevel" id="difficulty-level" required>
                             <option value="0">Beginner</option>
                             <option value="1">Intermediate</option>
                             <option value="2">Expert</option>
                         </select></div>
 
-                    <div className="input-wrapper"><label htmlFor="course-credits">ECTS Credits</label>
+                    <div className="input-wrapper"><label htmlFor="course-credits"><p>ECTS Credits</p></label>
                         <input type="number" step={".5"} id="course-credits" name="credits" required/></div>
 
-                    <div className="input-wrapper"><label htmlFor="course-duration">Duration</label>
+                    <div className="input-wrapper"><label htmlFor="course-duration"><p>Duration</p></label>
                         <input type="number" id="course-duration" name="hoursWeek" required/></div>
                 </div>
 
                 <div className="group-2">
-                    <div className="input-wrapper"><label htmlFor="related-certification">Related
-                        Certification</label>
+                    <div className="input-wrapper"><label htmlFor="related-certification"><p>Related
+                        Certification</p></label>
                         <input type="text" id="related-certification" name="relatedCert" required/>
                     </div>
 
-                    <div className="input-wrapper"><label htmlFor="course-category">Category</label>
+                    <div className="input-wrapper"><label htmlFor="course-category"><p>Category</p></label>
                         <select name="category" id="course-category" required>
                             <option value="it">Information Technologies</option>
                             <option value="dm">Digital Marketing</option>
@@ -113,19 +113,19 @@ function CourseAddForm() {
 
                 <div className={"imageUpload-wrapper"}>
                     <div className="input-wrapper">
-                        <label htmlFor="course-image">Course Image</label>
+                        <label htmlFor="course-image"><p>Course Image</p></label>
                         <input type="file" id="course-image" name="imgLink" accept={"image/png,image/jpeg,image/webp"}
                                onChange={(e) => handleChangeImage(e.target.files)} required/>
                     </div>
                     <img className={"img-preview"} src={courseImage.src} alt={""}/>
                 </div>
 
-                <div className="input-wrapper"><label htmlFor="course-keywords">Keywords separated by
-                    comma</label>
+                <div className="input-wrapper"><label htmlFor="course-keywords"><p>Keywords separated by
+                    comma</p></label>
                     <input type="text" id="course-keywords" name="keywords"
                            required/></div>
 
-                <button className="cta-button courseAdmin-button" type="submit">Add Course</button>
+                <button className="cta-button courseAdmin-button" type="submit"><p>Add Course</p></button>
             </section>
         </form>
     )
