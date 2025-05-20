@@ -126,7 +126,7 @@ export default function Transactions() {
                             <GradientCircularProgress/>
                         </div>
                         :
-                        <div>
+                        <div className="admin-management-cards-loaded">
                             {transactions.map((transaction) => (
                                 <div className="admin-management-card" key={transaction.id}>
                                     <div className="card-row">
@@ -137,12 +137,14 @@ export default function Transactions() {
                                     <div className="card-row">
                                         <h6>Course:</h6>
                                         <p>{transaction.offerableCourses.course.title}</p>
-                                        <img src={transaction.offerableCourses.course.imgLink} alt={transaction.offerableCourses.course.title}/>
+                                        <img src={transaction.offerableCourses.course.imgLink}
+                                             alt={transaction.offerableCourses.course.title}/>
                                     </div>
                                     <div className="card-row">
                                         <h6>Provider:</h6>
                                         <p>{transaction.offerableCourses.provider.name}</p>
-                                        <img src={transaction.offerableCourses.provider.altLogoLink} alt={transaction.offerableCourses.provider.name}/>
+                                        <img src={transaction.offerableCourses.provider.altLogoLink}
+                                             alt={transaction.offerableCourses.provider.name}/>
                                     </div>
                                     <div className="card-row">
                                         <h6>Timestamp:</h6>

@@ -134,9 +134,9 @@ export default function Providers() {
                             <GradientCircularProgress/>
                         </div>
                         :
-                        <div>
+                        <div className="admin-management-cards-loaded">
                             {providers.map((provider) => (
-                                <div className="admin-management-card"  id="providers" key={provider.id}>
+                                <div className="admin-management-card" id="providers" key={provider.id}>
                                     <div className="card-row">
                                         <img src={provider.altLogoLink}
                                              alt={"image" + provider.name}/>
@@ -153,10 +153,10 @@ export default function Providers() {
                                     </div>
                                 </div>
                             ))}
-                         </div>
+                        </div>
                     }
                 </div>
-        </div>
+            </div>
         {
             showDeleteModal && createPortal(
                 <DeleteModal onClose={() => setShowDeleteModal(false)} deleteId={focusedId}

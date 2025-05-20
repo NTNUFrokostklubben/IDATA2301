@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {useEffect, useState} from 'react';
 import {PieChart} from '@mui/x-charts/PieChart';
-import {AdminReview, AdminReviewSkeleton} from "../../component/Rating/adminReview";
+import {AdminReview, AdminReviewSkeleton} from "../../component/Review/adminReview";
 import "./adminDashboard.css";
 import {AsyncApiRequest} from "../../utils/requests";
 import {useNavigate} from "react-router-dom";
@@ -45,7 +45,7 @@ export default function AdminDashboard() {
     useEffect(() => {
         const fetchdata = async() => {
             try{
-                await new Promise(r => setTimeout(r, 500));
+                await new Promise(r => setTimeout(r, 150));
                 await Promise.all([
                     fetchProviderStats(),
                     fetchReviews(),

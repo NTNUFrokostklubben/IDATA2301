@@ -147,7 +147,7 @@ export default function Users() {
                             <GradientCircularProgress/>
                         </div>
                         :
-                        <div>
+                        <div className="admin-management-cards-loaded">
                             {users.map((user) => (
                                 <div className="admin-management-card" key={user.id}>
                                     <div className="card-row">

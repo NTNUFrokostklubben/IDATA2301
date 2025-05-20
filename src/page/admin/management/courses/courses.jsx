@@ -198,9 +198,9 @@ export default function Courses() {
                             <GradientCircularProgress/>
                         </div>
                         :
-                        <div>
+                        <div className="admin-management-cards-loaded">
                             {courses.map((course) => (
-                                <div className="admin-management-card"  id="course" key={course.id}>
+                                <div className="admin-management-card" id="course" key={course.id}>
                                     <div className="card-row-left">
                                         <div className="card-row">
                                             <h6>Title:</h6>
@@ -209,7 +209,7 @@ export default function Courses() {
                                         </div>
                                         <div className="card-row">
                                             <h6>Description:</h6>
-                                            <p className="description" >{course.description}</p>
+                                            <p className="description">{course.description}</p>
                                         </div>
                                         <div className="card-row">
                                             <h6>Category:</h6>

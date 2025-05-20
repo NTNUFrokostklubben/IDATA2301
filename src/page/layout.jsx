@@ -75,8 +75,15 @@ export default function Layout() {
     /**
      * Navigates to the search page.
      */
-    function goToSearchPage() {
+    const goToSearchPage = () => {
         navigate("/search");
+    }
+
+    /**
+     * Navigates to the search page.
+     */
+    const goToAboutUs = () => {
+        navigate("/aboutUs");
     }
 
 
@@ -245,13 +252,20 @@ export default function Layout() {
                         </p>
                         <p>Phone number: +47 735 95 000</p>
                         <p>Email: <a href="mailto:support@learniverse.no">support@learniverse.no</a></p>
+                        <p>
+                            <a href="#" onClick={goToAboutUs}>
+                                About us &nbsp;
+                                <img className="filter-white" id="footer-go-to-about-img"
+                                     src="/icons/arrow-up-right-box-sharp.svg" alt="Go to about us"/>
+                            </a>
+                        </p>
                     </div>
 
                     <div className="textFooter" id="legal">
 
                         <h3>Legal</h3>
                         <p>
-                            This website is a result of a university group project, performed in the course
+                        This website is a result of a university group project, performed in the course
                             <a href={"https://www.ntnu.edu/studies/courses/IDATA2301#tab=omEmnet"}> IDATA2301 </a>
                             Web technologies, at <a href={"https://www.ntnu.no/"}>NTNU</a>. All the information
                             provided here is a result of imagination. Any resemblance with real companies or
