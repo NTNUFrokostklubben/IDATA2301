@@ -184,7 +184,7 @@ export default function About (){
                                 <img className="meet-our-team-person-img" src="/images/employees/anna.jpg"
                                      alt="anna"/>
                             </picture>
-                            <h6 className="meet-our-team-person-name">Anna Patel</h6>
+                            <h3 className="meet-our-team-person-name">Anna Patel</h3>
                             <p className="meet-our-team-person-job">CEO & Head of Learning Experience</p>
 
                             <button className="cta-button" id="meet-our-team-contact" onClick=
@@ -201,7 +201,7 @@ export default function About (){
                                 <img className="meet-our-team-person-img" src="/images/employees/daniel.jpg"
                                      alt="daniel"/>
                             </picture>
-                            <h6 className="meet-our-team-person-name">Daniel Osei</h6>
+                            <h3 className="meet-our-team-person-name">Daniel Osei</h3>
                             <p className="meet-our-team-person-job">Certification & Compliance Lead</p>
 
                             <button className="cta-button" id="meet-our-team-contact" onClick=
@@ -219,7 +219,7 @@ export default function About (){
                                 <img className="meet-our-team-person-img" src="/images/employees/elizabeth.jpg"
                                      alt="elizabeth"/>
                             </picture>
-                            <h6 className="meet-our-team-person-name">Elizabeth Wells</h6>
+                            <h3 className="meet-our-team-person-name">Elizabeth Wells</h3>
                             <p className="meet-our-team-person-job">Creative Director</p>
 
                             <button className="cta-button" id="meet-our-team-contact" onClick=
@@ -236,7 +236,7 @@ export default function About (){
                                 <img className="meet-our-team-person-img" src="/images/employees/markus.jpg"
                                      alt="markus"/>
                             </picture>
-                            <h6 className="meet-our-team-person-name">Markus Ruiz</h6>
+                            <h3 className="meet-our-team-person-name">Markus Ruiz</h3>
                             <p className="meet-our-team-person-job">Lead Software Engineer</p>
 
                             <button className="cta-button" id="meet-our-team-contact" onClick=
@@ -253,7 +253,7 @@ export default function About (){
                                 <img className="meet-our-team-person-img" src="/images/employees/samuel.jpg"
                                      alt="samuel"/>
                             </picture>
-                            <h6 className="meet-our-team-person-name">Samuel Martins </h6>
+                            <h3 className="meet-our-team-person-name">Samuel Martins </h3>
                             <p className="meet-our-team-person-job">Director of Educational Partnerships</p>
 
                             <button className="cta-button" id="meet-our-team-contact" onClick=
@@ -270,7 +270,7 @@ export default function About (){
                                 <img className="meet-our-team-person-img" src="/images/employees/sarah.jpg"
                                      alt="sarah"/>
                             </picture>
-                            <h6 className="meet-our-team-person-name">Sarah Conly </h6>
+                            <h3 className="meet-our-team-person-name">Sarah Conly </h3>
                             <p className="meet-our-team-person-job">Community & Support Manager</p>
 
                             <button className="cta-button" id="meet-our-team-contact" onClick=

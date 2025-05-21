@@ -208,7 +208,9 @@
     height: 3rem;
     width: 100%;
 }
-
+.checkout-course-headers{
+    font-size: 1.125rem;
+}
 
 /* For making the input field have the right separation*/
 /* For credit card number and expiration date*/

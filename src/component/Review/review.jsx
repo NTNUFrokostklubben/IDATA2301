@@ -19,7 +19,7 @@ export default function Review ({rating: userCourse, title= false}){
     return (
         <div className="one-review">
             <div className="review-content">
-                <h5 className="review-title">{userCourse.review?.title}</h5>
+                <h4 className="review-title">{userCourse.review?.title}</h4>
                 <div className="user-review-section">
                     <picture>
                         {userCourse.user && (<img className="user-review-image" src={userCourse.user.profilePicture} alt="user"/>)}

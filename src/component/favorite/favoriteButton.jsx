@@ -45,7 +45,9 @@ export default function FavoriteButton ({uid, cid, isFav}){
 
     return (
         <div className={"favorites-button-container"}>
-            <button onClick={handleFavorite} disabled={isDisabled} className="favorite-component"><FavoriteHeart/></button>
+            <button onClick={handleFavorite} disabled={isDisabled} className="favorite-component"
+            id="favoritte-button" name="favoritte-button"><FavoriteHeart/>
+            </button>
         </div>
     )
 
