@@ -226,11 +226,17 @@ menu li {
     box-shadow: 0px 8px 16px 0px var(--shadow)
 }
 
-.nav-user {
+.nav-user,
+.admin-drop-down {
     display: flex;
     height: 3rem;
     width: 3rem;
     background-color: var(--textWhite);
+}
+
+.nav-user img,
+.admin-drop-down img{
+    object-fit: cover;
 }
 
 .nav-admin {

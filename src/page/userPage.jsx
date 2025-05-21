@@ -29,7 +29,7 @@ export function UserImageModal({close, uid}) {
 
     function deletePfp(value) {
         if (value) {
-            let defImg = "https://localhost:8081/uploads/images/default_img.png"
+            let defImg = "https://learniverse.no/uploads/images/default_img.png"
             dispatch(setUserImage(defImg))
             const userDto = AsyncApiRequest("PUT", `/user/image`, defImg)
                 .then(response => response.json())
