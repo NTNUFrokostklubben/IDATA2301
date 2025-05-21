@@ -127,13 +127,21 @@
     background-color: var(--primary);
 }
 
-.user-caret picture {
+#user-caret picture {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 12rem;
     height: 12rem;
 }
+
+#user-caret picture img {
+    object-fit: cover;
+}
+
+
+
+
 
 .user-page-user-image {
     width: 12rem;
