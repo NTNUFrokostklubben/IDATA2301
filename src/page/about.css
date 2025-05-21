@@ -252,6 +252,9 @@
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
+.meet-our-team-person-name{
+    font-size: 1.125rem;
+}
 .meet-our-team-person-img{
     width: 10rem;
     height: auto;

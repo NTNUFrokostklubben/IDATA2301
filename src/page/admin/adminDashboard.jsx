@@ -202,11 +202,13 @@ export default function AdminDashboard() {
         }
     }
     function screenSetHidden() {
+        let hidden = false;
          if (window.matchMedia("(max-width: 1024px)").matches) {
-             return true;
+             hidden = true;
          } else if(providerStats.length >= 6){
-             return true;
+             hidden = true;
          }
+         return hidden;
     }
 
     return (

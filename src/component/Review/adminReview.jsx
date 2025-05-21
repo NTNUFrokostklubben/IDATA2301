@@ -18,7 +18,7 @@ export function AdminReview(review) {
     return (
             <div className={"admin-dash-review"} onClick={() => navigate(linkToCourse)}>
                 <div className={"admin-dash-review-text"}>
-                    <img id={"admin-dash-review-user-image"} src={userPicture} alt={review.name}/> &nbsp;
+                    <img id={"admin-dash-review-user-image"} src={userPicture} alt="User profile img"/> &nbsp;
                     <p>{reviewComment}</p>
                 </div>
                 &nbsp;

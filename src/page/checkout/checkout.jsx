@@ -188,7 +188,7 @@ export default function Checkout() {
                                          alt="product image"/>
 
                                     <div className="checkout-product-display-text">
-                                        <h6 className="checkout-headers">{courseData.course.title}</h6>
+                                        <h3 className="checkout-course-headers">{courseData.course.title}</h3>
                                         <p className="product-desc">{courseData.course.description} </p>
                                     </div>
 

@@ -62,10 +62,11 @@ function UserTableContent({users}) {
                                 </button>
                             </Link>
 
-                            <button id={"delete" + user.id} onClick={() => {
+                            <button name={"delete" + user.id}
+                                    id={"delete" + user.id} onClick={() => {
                                 setFocusedId(user.id)
                                 setShowDeleteModal(true);
-                            }}><img src={"/icons/trash-sharp.svg"} id={"delete"}/>
+                            }}><img src={"/icons/trash-sharp.svg"} id={"delete"} alt={"delete"}/>
                             </button>
                         </div>
                     </td>
@@ -174,7 +175,8 @@ export default function Users() {
                                                     <img src={"/icons/pencil-sharp.svg"} alt={"edit"}/>
                                                 </button>
                                             </Link>
-                                            <button id={"delete" + user.id} onClick={() => {
+                                            <button name={"delete" + user.id}
+                                                    id={"delete" + user.id} onClick={() => {
                                                 setFocusedId(user.id)
                                                 setShowDeleteModal(true);
                                             }}>
